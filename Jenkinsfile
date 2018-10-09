@@ -7,4 +7,9 @@ pipeline {
             }
         }
     }
+    stage('Test') {
+        steps {
+            sh './test/unit/gen_libs/file_2_lists'
+        }
+    }
 }
