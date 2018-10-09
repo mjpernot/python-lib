@@ -12,7 +12,6 @@ pipeline {
                 sh './test/unit/gen_libs/chk_crt_file.py'
                 sh './test/unit/gen_libs/clear_file.py'
                 sh './test/unit/gen_libs/cp_file.py'
-                sh './test/unit/gen_libs/data_multi_out.py'
                 sh './test/unit/gen_libs/display_data.py'
                 sh './test/unit/gen_libs/file_2_list.py'
                 sh './test/unit/gen_libs/file_search_cnt.py'
