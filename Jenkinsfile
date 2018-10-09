@@ -6,10 +6,10 @@ pipeline {
                 sh 'python --version'
             }
         }
-    }
-    stage('Test') {
-        steps {
-            sh './test/unit/gen_libs/file_2_lists'
+        stage('Test') {
+            steps {
+                sh './test/unit/gen_libs/file_2_list.py'
+            }
         }
     }
 }
