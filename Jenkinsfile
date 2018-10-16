@@ -30,7 +30,7 @@ pipeline {
         }
         stage('SCM') {
             steps {
-                git 'https://gitlab.dicelab.net/JAC-IDM/python-lib.git'
+                git 'git@gitlab.dicelab.net:JAC-IDM/python-lib.git'
             }
         }
         stage('SonarQube analysis') {
