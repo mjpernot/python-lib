@@ -28,11 +28,6 @@ pipeline {
                 sh './test/unit/gen_libs/write_file.py'
             }
         }
-        stage('SCM') {
-            steps {
-                git 'git@gitlab.dicelab.net:JAC-IDM/python-lib.git'
-            }
-        }
         stage('SonarQube analysis') {
             steps {
                 script {
