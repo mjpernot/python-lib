@@ -29,12 +29,17 @@ pipeline {
             }
         }
         stage('SCM') {
-            git 'https://gitlab.dicelab.net/JAC-IDM/python-lib.git'
+            steps {
+                git 'https://gitlab.dicelab.net/JAC-IDM/python-lib.git'
+            }
         }
         stage('SonarQube analysis') {
-            def scannerHome = tool 'SonarQube Scanner';
-            withSonarQubeEnv('My SonarQube Server') {
-                sh "${scannerHome}/bin/sonar-scanner"
+            steps {
+                def scannerHome = tool 'SonarQube Scanner';
+                withSonarQubeEnv('My SonarQube Server') {
+                    sh "${scannerHome}/bin/sonar-scanner"
+                }
+            
             }
         }
     }
