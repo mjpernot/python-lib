@@ -44,10 +44,12 @@ pipeline {
                 script {
                     server = Artifactory.server 'Artifactory'
                     uploadSpec = {
-                        "files": [{
-                            "pattern": "python-lib/*.py",
-                            "target": "python-lib"
-                        }]
+                        "files": [
+                            {
+                                "pattern": "python-lib/*.py",
+                                "target": "python-lib"
+                            }
+                        ]
                     }
                     server.upload(uploadSpec)
                 }
