@@ -46,7 +46,7 @@ pipeline {
                     uploadSpec = """{
                         "files": [{
                             "pattern": "python-lib/*.py",
-                            "target": "python-lib/"
+                            "target": "python-lib"
                         }]
                     }"""
                     server.upload(uploadSpec)
