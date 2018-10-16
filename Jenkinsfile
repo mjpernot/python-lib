@@ -28,5 +28,14 @@ pipeline {
                 sh './test/unit/gen_libs/write_file.py'
             }
         }
+        stage('SCM') {
+            git 'https://gitlab.dicelab.net/JAC-IDM/python-lib.git'
+        }
+        stage('SonarQube analysis') {
+            def scannerHome = tool 'SonarQube Scanner';
+            withSonarQubeEnv('My SonarQube Server') {
+                sh "${scannerHome}/bin/sonar-scanner"
+            }
+        }
     }
 }
