@@ -47,7 +47,7 @@ pipeline {
                         "files": [
                             {
                                 "pattern": "python-lib/*.py",
-                                "target": "python-lib"
+                                "target": "python-lib/"
                             }
                         ]
                     }"""
