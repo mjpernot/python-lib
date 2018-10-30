@@ -90,7 +90,6 @@
         write_file2
         write_to_log
 
-        Chk_Crt_File (Deprecated)
         Close_File (deprecated)
         List_Filter_Files (deprecated)
         Load_Module (deprecated)
@@ -2155,63 +2154,6 @@ def Print_Data(data, **kwargs):
 
     if "ofile" in kwargs and kwargs["ofile"]:
         outfile.close()
-
-
-def Chk_Crt_File(f_name=None, create=False, write=False, read=False,
-                 log_hldr=sys.stdout, **kwargs):
-
-    """Function:  Chk_Crt_File
-
-    Warning:  Function has been deprecated, replaced by gen_libs.chk_crt_file.
-
-    Description:  Check for the existence of a file and see if the file is
-        writeable and/or readable depending on the arguments passed.  Will
-        create the file if the file does not exist and has the 'create' option
-        turned on.
-
-    Arguments:
-        (input) f_name -> File name with directory path.
-        (input) create -> True|False - Create file if not present.
-        (input) write -> True|False - Is Writable on file.
-        (input) read -> True|False - Is Readable on file.
-        (input) log_hldr -> File handler to write messages to or stdout.
-        (input) **kwargs:
-            None
-        (output) f_flag -> True|False - False if one of the checks fails.
-
-    """
-
-    f_flag = True
-
-    if not f_name.strip():
-        print("Error:  No value passed for filename.", file=log_hldr)
-        f_flag = False
-
-    else:
-        # Create flag set and file not exist.
-        if create and not os.path.isfile(f_name):
-            f_hdlr = Open_File(f_name, "w")
-            Close_File(f_hdlr)
-
-        # File not exist.
-        elif not os.path.isfile(f_name):
-            print("Error:  File {0} does not exist.".format(f_name),
-                  file=log_hldr)
-            f_flag = False
-
-        # Write flag set and file not writeable.
-        if write and not os.access(f_name, os.W_OK):
-            print("Error: File {0} is not writable.".format(f_name),
-                  file=log_hldr)
-            f_flag = False
-
-        # Read flag set and file not readable.
-        if read and not os.access(f_name, os.R_OK):
-            print("Error: File {0} is not readable.".format(f_name),
-                  file=log_hldr)
-            f_flag = False
-
-    return f_flag
 
 
 def Open_File(fname, mode, **kwargs):
