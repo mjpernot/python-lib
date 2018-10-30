@@ -90,7 +90,6 @@
         write_file2
         write_to_log
 
-        Load_Module (deprecated)
         Open_File (deprecated)
         Print_Data (deprecated)
         Prt_Lvl (deprecated)
@@ -2072,23 +2071,6 @@ def write_to_log(f_hldr, text, **kwargs):
     """
 
     write_file2(f_hldr, get_date() + "T" + get_time() + "Z" + text)
-
-
-def Load_Module(mod_name, mod_path):
-
-    """Function:  Load_Module (deprecated)
-
-    Description:  Load a Python module dynamically.
-
-    Arguments:
-        (input) mod_name -> Name of the module to load.
-        (input) mod_path -> Directory path to the module to load.
-        (output) Returns the module handler.
-
-    """
-
-    sys.path.append(mod_path)
-    return __import__(mod_name)
 
 
 def Prt_Lvl(lvl=1):
