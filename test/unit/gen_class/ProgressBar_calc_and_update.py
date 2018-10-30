@@ -66,7 +66,6 @@ class UnitTest(unittest.TestCase):
         test_zero_percent -> Test with zero percent completed.
         test_fifty_percent -> Test with 50 percent completed.
         test_hundred_percent -> Test with 100 percent completed.
-        tearDown -> Clean up of testing environment.
 
     """
 
@@ -161,19 +160,6 @@ class UnitTest(unittest.TestCase):
                                     self.empty_sym)
 
         self.assertTrue(BAR.calc_and_update(100, 100))
-
-    def tearDown(self):
-
-        """Function:  tearDown
-
-        Description:  Clean up of unit testing.
-
-        Arguments:
-            None
-
-        """
-
-        BAR = None
 
 
 if __name__ == "__main__":
