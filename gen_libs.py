@@ -90,7 +90,6 @@
         write_file2
         write_to_log
 
-        Open_File (deprecated)
         Print_Data (deprecated)
         Prt_Lvl (deprecated)
         Prt_Msg (deprecated)
@@ -2134,21 +2133,3 @@ def Print_Data(data, **kwargs):
 
     if "ofile" in kwargs and kwargs["ofile"]:
         outfile.close()
-
-
-def Open_File(fname, mode, **kwargs):
-
-    """Function:  Open_File (deprecated)
-
-    Description:  Open a file in read, write, or append mode.
-
-    Arguments:
-        (input) fname -> Full directory path and file name.
-        (input) mode -> r|w|a: Read, write, or append mode.
-        (input) **kwargs:
-            None
-        (output) Return file handler.
-
-    """
-
-    return open(fname, mode)

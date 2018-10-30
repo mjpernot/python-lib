@@ -6,6 +6,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 ## [2.6.0] - 2018-09-13
 ### Removed
+- gen_libs.Open_File:  Function was previously deprecated.
 - gen_libs.Load_Module:  Function was previously deprecated.
 - gen_libs.List_Filter_Files:  Function was previously deprecated.
 - gen_libs.Close_File:  Function was previously deprecated.
