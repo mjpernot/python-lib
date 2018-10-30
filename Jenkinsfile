@@ -8,6 +8,7 @@ pipeline {
         }
         stage('Test') {
             steps {
+                pip install mock
                 sh './test/unit/gen_libs/chk_crt_dir.py'
                 sh './test/unit/gen_libs/chk_crt_file.py'
                 sh './test/unit/gen_libs/clear_file.py'
