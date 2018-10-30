@@ -90,7 +90,6 @@
         write_file2
         write_to_log
 
-        Chk_Crt_Dir (Deprecated)
         Chk_Crt_File (Deprecated)
         Close_File (deprecated)
         List_Filter_Files (deprecated)
@@ -2156,67 +2155,6 @@ def Print_Data(data, **kwargs):
 
     if "ofile" in kwargs and kwargs["ofile"]:
         outfile.close()
-
-
-def Chk_Crt_Dir(dir_name=None, create=False, write=False, read=False,
-                log_hldr=sys.stdout, **kwargs):
-
-    """Function:  Chk_Crt_Dir
-
-    Warning:  Function has been deprecated, replaced by gen_libs.chk_crt_dir.
-
-    Description:  Check for the existence of a directory and whether to create
-        one if not present.  If present, checks the read and write permissions
-        on the directory as determined by the arguments.
-
-    Arguments:
-        (input) dir_name -> Directory name.
-        (input) create -> True|False - Create directory if not present.
-        (input) write -> True|False - Is Writable on directory.
-        (input) read -> True|False - Is Readable on directory.
-        (input) log_hldr -> File handler to write messages to or stdout.
-        (input) **kwargs:
-            None
-        (output) d_flag -> True|False - False if one of the checks fails.
-
-    """
-
-    d_flag = True
-
-    if not dir_name.strip():
-        print("Error:  No value passed for filename.", file=log_hldr)
-        d_flag = False
-
-    else:
-        # Directory not exist and create flag set.
-        if not os.path.isdir(dir_name) and create:
-            try:
-                os.makedirs(dir_name)
-
-            except:
-                print("Error: Unable to create directory {0}".format(dir_name),
-                      file=log_hldr)
-                d_flag = False
-
-        # Directory not exist.
-        elif not os.path.isdir(dir_name):
-            print("Error: Directory {0} does not exist.".format(dir_name),
-                  file=log_hldr)
-            d_flag = False
-
-        # Write flag set and directory not writeable.
-        elif write and not os.access(dir_name, os.W_OK):
-            print("Error: Directory {0} is not writeable.".format(dir_name),
-                  file=log_hldr)
-            d_flag = False
-
-        # Read flag set and directory not readable.
-        elif read and not os.access(dir_name, os.R_OK):
-            print("Error: Directory {0} is not readable.".format(dir_name),
-                  file=log_hldr)
-            d_flag = False
-
-    return d_flag
 
 
 def Chk_Crt_File(f_name=None, create=False, write=False, read=False,
