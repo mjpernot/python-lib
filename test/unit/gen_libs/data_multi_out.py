@@ -167,8 +167,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        # Set mock values.
-        mock_json = self.data
+        mock_json.return_value = self.data
 
         with gen_libs.no_std_out():
             self.assertEqual(gen_libs.data_multi_out(self.data, json_fmt=True),
@@ -202,8 +201,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        # Set mock values.
-        mock_json = self.data
+        mock_json.return_value = self.data
 
         with gen_libs.no_std_out():
             gen_libs.data_multi_out(self.data, json_fmt=True, MAIL=self.MAIL)
@@ -222,8 +220,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        # Set mock values.
-        mock_json = self.data
+        mock_json.return_value = self.data
 
         with gen_libs.no_std_out():
             gen_libs.data_multi_out(self.data, json_fmt=True, MAIL=None)
@@ -316,8 +313,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        # Set mock values.
-        mock_write = True
+        mock_write.return_value = True
 
         self.assertEqual(gen_libs.data_multi_out(self.data, o_file="File_Name",
                                                  sup_std=True), (False, None))
