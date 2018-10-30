@@ -43,11 +43,12 @@ pipeline {
             steps {
                 script {
                     server = Artifactory.server('Artifactory')
+                    server.credentialsId = 'svc-highpoint-artifactory'
                     uploadSpec = """{
                         "files": [
                             {
                                 "pattern": "python-lib/*.py",
-                                "target": "python-lib/"
+                                "target": "generic-local/highpoint/python-lib/"
                             }
                         ]
                     }"""
