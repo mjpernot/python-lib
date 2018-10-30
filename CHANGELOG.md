@@ -4,6 +4,23 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [2.6.0] - 2018-09-13
+### Removed
+- gen_libs.Prt_Msg:  Function was previously deprecated.
+- gen_libs.Prt_Lvl:  Function was previously deprecated.
+- gen_libs.Print_Data:  Function was previously deprecated.
+- gen_libs.Open_File:  Function was previously deprecated.
+- gen_libs.Load_Module:  Function was previously deprecated.
+- gen_libs.List_Filter_Files:  Function was previously deprecated.
+- gen_libs.Close_File:  Function was previously deprecated.
+- gen_libs.Chk_Crt_File:  Function was previously deprecated.
+- gen_libs.Chk_Crt_Dir:  Function was previously deprecated.
+- cmds_gen.Add_Cmd:  Function was previously deprecated.
+- cmds_gen.Is_Add_Cmd:  Function was previously deprecated.
+- cmds_gen.Disconnect:  Function was previously deprecated.
+- arg_parser.Arg_Set_Path:  Function was previously deprecated.
+
+
 ## [2.5.0] - 2018-09-10
 ### Updated
 - arg_parser.arg_parse2:  Replaced "gen_libs.Chk_Int" with "gen_libs.chk_int" call.
