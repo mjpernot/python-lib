@@ -47,7 +47,7 @@ pipeline {
                     uploadSpec = """{
                         "files": [
                             {
-                                "pattern": "*.py",
+                                "pattern": "./*.py",
                                 "target": "generic-local/highpoint/python-lib/"
                             }
                         ]
