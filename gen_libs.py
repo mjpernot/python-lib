@@ -90,7 +90,6 @@
         write_file2
         write_to_log
 
-        Print_Data (deprecated)
         Prt_Lvl (deprecated)
         Prt_Msg (deprecated)
 
@@ -2107,29 +2106,3 @@ def Prt_Msg(hdr, msg, prt_lvl=0):
 
     Prt_Lvl(prt_lvl)
     print("{0}:  {1}".format(hdr, msg))
-
-
-def Print_Data(data, **kwargs):
-
-    """Function:  Print_Data (deprecated)
-
-    Description:  Opens a file to print or print to standard output
-        (i.e. screen).
-
-    Arguments:
-        (input) data -> Data to be printed.
-        (input) **kwargs:
-            ofile -> Name of file to print to.
-
-    """
-
-    if "ofile" in kwargs and kwargs["ofile"]:
-        outfile = open(kwargs.get("ofile"), "w")
-
-    else:
-        outfile = sys.stdout
-
-    print(data, file=outfile)
-
-    if "ofile" in kwargs and kwargs["ofile"]:
-        outfile.close()
