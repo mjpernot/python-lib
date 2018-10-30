@@ -30,6 +30,7 @@ pipeline {
         }
         stage('SonarQube analysis') {
             steps {
+                sh './test/unit/gen_libs/code_coverage.sh'
                 script {
                     scannerHome = tool 'sonar-scanner';
                 }
