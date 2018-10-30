@@ -90,7 +90,6 @@
         write_file2
         write_to_log
 
-        List_Filter_Files (deprecated)
         Load_Module (deprecated)
         Open_File (deprecated)
         Print_Data (deprecated)
@@ -2171,25 +2170,3 @@ def Open_File(fname, mode, **kwargs):
     """
 
     return open(fname, mode)
-
-
-def List_Filter_Files(dir_path, file_filter, **kwargs):
-
-    """Function:  List_Filter_Files (deprecated)
-
-    Description:  Return a list of files from a directory folder with a file
-        filter that will contain a file name or wildcard expansion file name.
-
-    Arguments:
-        (input) dir_path -> Directory path.
-        (input) file_filter -> File name or wildcard expansion file name.
-        (input) **kwargs:
-            None
-        (output) List of files that meet the criteria.
-
-    """
-
-    if not dir_path.endswith(os.path.sep):
-        dir_path = dir_path + os.path.sep
-
-    return glob.glob(dir_path + file_filter)
