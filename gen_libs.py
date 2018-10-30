@@ -90,8 +90,6 @@
         write_file2
         write_to_log
 
-        Prt_Msg (deprecated)
-
     Tuple:
         _ntuple_diskusage
 
@@ -2068,21 +2066,3 @@ def write_to_log(f_hldr, text, **kwargs):
     """
 
     write_file2(f_hldr, get_date() + "T" + get_time() + "Z" + text)
-
-
-def Prt_Msg(hdr, msg, prt_lvl=0):
-
-    """Function:  Prt_Msg (deprecated)
-
-    Description:  Prints a message with a Header followed by the Message.  Will
-        also start printing at a certain printing level.
-
-    Arguments:
-        (input) hdr -> Header to print.
-        (input) msg -> Message to print.
-        (input) prt_lvl -> Integer - Tab level to start printing at.
-
-    """
-
-    Prt_Lvl(prt_lvl)
-    print("{0}:  {1}".format(hdr, msg))
