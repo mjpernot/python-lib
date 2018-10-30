@@ -90,7 +90,6 @@
         write_file2
         write_to_log
 
-        Close_File (deprecated)
         List_Filter_Files (deprecated)
         Load_Module (deprecated)
         Open_File (deprecated)
@@ -2172,22 +2171,6 @@ def Open_File(fname, mode, **kwargs):
     """
 
     return open(fname, mode)
-
-
-def Close_File(f_handle, **kwargs):
-
-    """Function:  Close_File (deprecated)
-
-    Description:  Close a file handler.
-
-    Arguments:
-        (input) f_handle -> Name of file handler.
-        (input) **kwargs:
-            None.
-
-    """
-
-    f_handle.close()
 
 
 def List_Filter_Files(dir_path, file_filter, **kwargs):

@@ -6,6 +6,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 ## [2.6.0] - 2018-09-13
 ### Removed
+- gen_libs.Close_File:  Function was previously deprecated.
 - gen_libs.Chk_Crt_File:  Function was previously deprecated.
 - gen_libs.Chk_Crt_Dir:  Function was previously deprecated.
 - cmds_gen.Add_Cmd:  Function was previously deprecated.
