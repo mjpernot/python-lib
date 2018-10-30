@@ -32,4 +32,5 @@ echo ""
 echo "Producing code coverage report"
 coverage combine
 coverage report -m
+coverage xml -i
  
