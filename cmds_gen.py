@@ -25,8 +25,6 @@
         is_add_cmd
         run_prog
 
-        Add_Cmd (deprecated)
-
 """
 
 ###############################################################################
@@ -217,29 +215,3 @@ def run_prog(cmd, **kwargs):
     else:
         P1 = subprocess.Popen(cmd)
         P1.wait()
-
-
-def Add_Cmd(cmd, **kwargs):
-
-    """Function:  Add_Cmd (deprecated)
-
-    Description:  Append name of argument and possibly value for the argument
-        to the command line list array.
-
-    Arguments:
-        (input) cmd -> List array containing the program setup.
-        (input) **kwargs:
-            arg -> Name of argument being added.
-            val -> Value for argument being added.
-        (output) cmd -> List array containing the program setup.
-
-    """
-
-    # Append before returning, appending on return does not make the change.
-    if "val" in kwargs:
-        cmd.append(kwargs["arg"] + kwargs["val"])
-
-    else:
-        cmd.append(kwargs["arg"])
-
-    return cmd
