@@ -25,7 +25,6 @@
         is_add_cmd
         run_prog
 
-        Disconnect (deprecated)
         Is_Add_Cmd (deprecated)
         Add_Cmd (deprecated)
 
@@ -219,30 +218,6 @@ def run_prog(cmd, **kwargs):
     else:
         P1 = subprocess.Popen(cmd)
         P1.wait()
-
-
-def Disconnect(*args):
-
-    """Function:  Disconnect (deprecated)
-
-    Description:  Disconnects a class database connection.  Will check to see
-        if an argument is an array; if so will loop on the array to disconnect
-        all connections.  Will require a disconnect method within the class.
-        The disconnect method will be particular to that class.
-
-    Arguments:
-        (input) *arg -> One or more connection instances.
-
-    """
-
-    for x in args:
-
-        if isinstance(x, list):
-            for y in x:
-                y.disconnect()
-
-        else:
-            x.disconnect()
 
 
 def Is_Add_Cmd(args_array, cmd, opt_arg_list, **kwargs):
