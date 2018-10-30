@@ -25,7 +25,6 @@
         is_add_cmd
         run_prog
 
-        Is_Add_Cmd (deprecated)
         Add_Cmd (deprecated)
 
 """
@@ -218,43 +217,6 @@ def run_prog(cmd, **kwargs):
     else:
         P1 = subprocess.Popen(cmd)
         P1.wait()
-
-
-def Is_Add_Cmd(args_array, cmd, opt_arg_list, **kwargs):
-
-    """Function:  Is_Add_Cmd (deprecated)
-
-    Description:  Determine if any additional options need to be added to the
-        command line.
-
-    Arguments:
-        (input) args_array -> Array of command line options and values.
-        (input) cmd -> List array containing the program arguments.
-        (input) opt_arg_list -> Dictionary of additional options.
-        (input) **kwargs:
-            None
-        (output) cmd -> List array containing the program arguments.
-
-    """
-
-    for x in opt_arg_list:
-
-        # Is option in array and is set to True.
-        if x in args_array and args_array[x] and isinstance(args_array[x],
-                                                            bool):
-
-            if isinstance(opt_arg_list[x], list):
-
-                for y in opt_arg_list[x]:
-                    cmd = Add_Cmd(cmd, arg=y)
-
-            else:
-                cmd = Add_Cmd(cmd, arg=opt_arg_list[x])
-
-        elif x in args_array:
-            cmd = Add_Cmd(cmd, arg=opt_arg_list[x], val=args_array[x])
-
-    return cmd
 
 
 def Add_Cmd(cmd, **kwargs):
