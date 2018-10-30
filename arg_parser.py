@@ -35,8 +35,6 @@
         arg_wildcard
         arg_xor_dict
 
-        Arg_Set_Path (deprecated)
-
 """
 
 ###############################################################################
@@ -601,22 +599,3 @@ def arg_xor_dict(args_array, opt_xor_dict):
 
     return xor_flag
 
-
-def Arg_Set_Path(args_array, arg_opt):
-
-    """Function:  Arg_Set_Path (deprecated)
-
-    Description:  Return dir path from argument list or return empty string.
-
-    Arguments:
-        (input) args_array -> Array of command line options and values.
-        (input) arg_opt -> Argument option holding directory path.
-        (output) Directory path.
-
-    """
-
-    if arg_opt in args_array:
-        return args_array[arg_opt] + "/"
-
-    else:
-        return ""

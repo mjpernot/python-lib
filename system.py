@@ -20,7 +20,6 @@
         FGraph
         System
             Graph
-        Yum (deprecated)
 
 """
 
