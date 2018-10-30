@@ -285,9 +285,6 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        # Set mock values.
-        mock_json = json.dumps(self.data, indent=4)
-
         with gen_libs.no_std_out():
             gen_libs.data_multi_out(self.data, json_fmt=True, MAIL=self.MAIL)
 
