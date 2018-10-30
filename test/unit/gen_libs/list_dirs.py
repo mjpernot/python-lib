@@ -113,8 +113,10 @@ class UnitTest(unittest.TestCase):
         os.makedirs(self.dir_1)
         os.makedirs(self.dir_2)
 
-        self.assertEqual(gen_libs.list_dirs(self.base_path),
-                         ["list_dir_1", "list_dir_2"])
+        data_list = gen_libs.list_dirs(self.base_path)
+
+        self.assertTrue(data_list == ["list_dir_1", "list_dir_2"] or
+                        data_list == ["list_dir_2", "list_dir_1"])
 
     def test_no_dirs(self):
 
