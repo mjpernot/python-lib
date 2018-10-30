@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [2.6.0] - 2018-09-13
+### Removed
+- arg_parser.Arg_Set_Path:  Function was previously deprecated.
+
+
 ## [2.5.0] - 2018-09-10
 ### Updated
 - arg_parser.arg_parse2:  Replaced "gen_libs.Chk_Int" with "gen_libs.chk_int" call.
