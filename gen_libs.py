@@ -90,7 +90,6 @@
         write_file2
         write_to_log
 
-        Prt_Lvl (deprecated)
         Prt_Msg (deprecated)
 
     Tuple:
@@ -2069,25 +2068,6 @@ def write_to_log(f_hldr, text, **kwargs):
     """
 
     write_file2(f_hldr, get_date() + "T" + get_time() + "Z" + text)
-
-
-def Prt_Lvl(lvl=1):
-
-    """Function:  Prt_Lvl (deprecated)
-
-    Description:  Setup a print command to start printing at a specified tab
-        level.
-
-    Arguments:
-        (input) lvl -> Tab level to print to.
-
-    """
-
-    cnt = 0
-
-    while (cnt < lvl):
-        print("\t", end="")
-        cnt += 1
 
 
 def Prt_Msg(hdr, msg, prt_lvl=0):
