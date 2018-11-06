@@ -40,11 +40,12 @@ else:
 #sys.path.append("/var/jenkins/.local/lib/python3.4/site-packages")
 #for i in sys.path:
 #    print(i)
-import mock
+#import mock
 import json
 
 # Local
 sys.path.append(os.getcwd())
+import mock
 import gen_libs
 import version
 
