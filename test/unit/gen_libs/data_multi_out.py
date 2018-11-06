@@ -37,7 +37,7 @@ else:
     import unittest
 
 # Third-party
-import unittest.mock as mock
+import unittest.mock
 import json
 
 # Local
@@ -155,7 +155,7 @@ class UnitTest(unittest.TestCase):
                                                  sup_std=True),
                          (True, self.err_msg))
 
-    @mock.patch("json.dump")
+    @unittest.mock.patch("json.dump")
     def test_data_is_dict(self, mock_json):
 
         """Function:  test_data_is_dict
@@ -189,7 +189,7 @@ class UnitTest(unittest.TestCase):
                                                      json_fmt=True),
                              (True, self.err_msg))
 
-    @mock.patch("json.dump")
+    @unittest.mock.patch("json.dump")
     def test_data_to_mail(self, mock_json):
 
         """Function:  test_data_to_mail
@@ -208,7 +208,7 @@ class UnitTest(unittest.TestCase):
 
         self.assertEqual(self.MAIL.msg, self.mail_data)
 
-    @mock.patch("json.dump")
+    @unittest.mock.patch("json.dump")
     def test_data_not_to_mail(self, mock_json):
 
         """Function:  test_data_not_to_mail
@@ -301,7 +301,7 @@ class UnitTest(unittest.TestCase):
         self.assertEqual(gen_libs.data_multi_out(self.data, o_file=None,
                                                  sup_std=True), (False, None))
 
-    @mock.patch("gen_libs.write_file")
+    @unittest.mock.patch("gen_libs.write_file")
     def test_data_to_file(self, mock_write):
 
         """Function:  test_data_to_file
