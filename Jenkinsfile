@@ -10,7 +10,7 @@ pipeline {
             steps {
                 sh """
                 cd /var/jenkins/workspace/Highpoint/python-lib
-                pip install mock --install-option="--root /var/jenkins/workspace/Highpoint/python-lib/mock_lib"
+                pip install mock --target /var/jenkins/workspace/Highpoint/python-lib/test
                 ./test/unit/gen_libs/chk_crt_dir.py
                 ./test/unit/gen_libs/chk_crt_file.py
                 ./test/unit/gen_libs/clear_file.py
