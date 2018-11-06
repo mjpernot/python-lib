@@ -37,10 +37,7 @@ else:
     import unittest
 
 # Third-party
-#sys.path.append("/var/jenkins/.local/lib/python3.4/site-packages")
-#for i in sys.path:
-#    print(i)
-sys.path.append("/var/jenkins/workspace/Highpoint/python-lib")
+sys.path.append("/var/jenkins/.local/lib/python3.4/site-packages")
 import mock
 import json
 
