@@ -10,7 +10,6 @@ pipeline {
             steps {
                 sh """
                 echo $PATH
-                echo $PYTHONPATH
                 ./test/unit/gen_libs/chk_crt_dir.py
                 ./test/unit/gen_libs/chk_crt_file.py
                 ./test/unit/gen_libs/clear_file.py
