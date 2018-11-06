@@ -10,8 +10,8 @@ pipeline {
             steps {
                 sh """
                 cd /var/jenkins/workspace/Highpoint/python-lib
-                pip install --install-option="--prefix=." --ignore-installed --user mock
-                pip install --install-option="--prefix=." --ignore-installed --user funcsigs
+                pip install --install-option="--prefix=/var/jenkins/workspace/Highpoint/python-lib" --ignore-installed --user mock
+                pip install --install-option="--prefix=/var/jenkins/workspace/Highpoint/python-lib" --ignore-installed --user funcsigs
                 python --version
                 ls -ltr
                 ./test/unit/gen_libs/chk_crt_dir.py
