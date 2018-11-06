@@ -11,6 +11,7 @@ pipeline {
                 sh """
                 cd /var/jenkins/workspace/Highpoint/python-lib
                 pip install mock --target /var/jenkins/workspace/Highpoint/python-lib/test
+                ls -ltr test
                 ./test/unit/gen_libs/chk_crt_dir.py
                 ./test/unit/gen_libs/chk_crt_file.py
                 ./test/unit/gen_libs/clear_file.py
