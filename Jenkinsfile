@@ -9,7 +9,7 @@ pipeline {
         stage('Test') {
             steps {
                 sh """
-                pwd
+                cd /var/jenkins/workspace/Highpoint/python-lib
                 pip install --user mock
                 ./test/unit/gen_libs/chk_crt_dir.py
                 ./test/unit/gen_libs/chk_crt_file.py
