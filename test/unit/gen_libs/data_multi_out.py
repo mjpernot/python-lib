@@ -37,7 +37,7 @@ else:
     import unittest
 
 # Third-party
-import mock
+import unittest.mock
 import json
 
 # Local
