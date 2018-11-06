@@ -9,11 +9,12 @@ pipeline {
         stage('Test') {
             steps {
                 sh """
-                pip install --user mock
+                cd /var/jenkins/workspace/Highpoint/python-lib
                 ./test/unit/gen_libs/chk_crt_dir.py
                 ./test/unit/gen_libs/chk_crt_file.py
                 ./test/unit/gen_libs/clear_file.py
                 ./test/unit/gen_libs/cp_file.py
+                ./test/unit/gen_libs/data_multi_out.py
                 ./test/unit/gen_libs/display_data.py
                 ./test/unit/gen_libs/file_2_list.py
                 ./test/unit/gen_libs/file_search_cnt.py
@@ -52,6 +53,8 @@ pipeline {
                         "files": [
                             {
                                 "pattern": "./*.py",
+                                "recursive": false,
+                                "excludePatterns": ["test/unit/gen_libs/*.py","test/unit/gen_class/*.py"],
                                 "target": "generic-local/highpoint/python-lib/"
                             }
                         ]
