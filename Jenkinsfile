@@ -13,6 +13,7 @@ pipeline {
                 pip install --install-option="--prefix=." --ignore-installed --user mock
                 pip install --install-option="--prefix=." --ignore-installed --user funcsigs
                 python --version
+                ls -ltr
                 ./test/unit/gen_libs/chk_crt_dir.py
                 ./test/unit/gen_libs/chk_crt_file.py
                 ./test/unit/gen_libs/clear_file.py
