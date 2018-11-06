@@ -11,6 +11,8 @@ pipeline {
                 sh """
                 cd /var/jenkins/workspace/Highpoint/python-lib
                 ls -ltr
+                rm -rf lib
+                rm -rf mock_lib
                 ./test/unit/gen_libs/chk_crt_dir.py
                 ./test/unit/gen_libs/chk_crt_file.py
                 ./test/unit/gen_libs/clear_file.py
