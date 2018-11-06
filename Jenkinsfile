@@ -52,7 +52,7 @@ pipeline {
                         "files": [
                             {
                                 "pattern": "./*.py",
-                                "excludePatterns": ["test/unit/gen_libs/*.py","test/unit/gen_class/*.py"]
+                                "recursive": false
                                 "target": "generic-local/highpoint/python-lib/"
                             }
                         ]
