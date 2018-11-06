@@ -10,7 +10,8 @@ pipeline {
             steps {
                 sh """
                 cd /var/jenkins/workspace/Highpoint/python-lib
-                ls -tlr /var/jenkins/workspace/Highpoint
+                mkdir lib
+                pip install mock --target /var/jenkins/workspace/Highpoint/python-lib/lib
                 ./test/unit/gen_libs/chk_crt_dir.py
                 ./test/unit/gen_libs/chk_crt_file.py
                 ./test/unit/gen_libs/clear_file.py
@@ -55,7 +56,7 @@ pipeline {
                             {
                                 "pattern": "./*.py",
                                 "recursive": false,
-                                "excludePatterns": ["test/unit/gen_libs/*.py","test/unit/gen_class/*.py"],
+                                "excludePatterns": ["test/unit/gen_libs/*.py","test/unit/gen_class/*.py",lib/*],
                                 "target": "generic-local/highpoint/python-lib/"
                             }
                         ]
