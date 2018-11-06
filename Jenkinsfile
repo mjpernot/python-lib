@@ -9,7 +9,9 @@ pipeline {
         stage('Test') {
             steps {
                 sh """
-                pip install --user funcsigs
+                cd /var/jenkins/workspace/Highpoint/python-lib
+                pip install --install-option="--prefix=." --ignore-installed mock
+                pip install --install-option="--prefix=." --ignore-installed funcsigs
                 python --version
                 ./test/unit/gen_libs/chk_crt_dir.py
                 ./test/unit/gen_libs/chk_crt_file.py
