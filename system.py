@@ -1,17 +1,5 @@
 # Classification (U)
 
-###############################################################################
-#
-# Filename:     system.py
-#
-# Class Dependencies:
-#               None
-#
-# Library Dependenices:
-#               gen_libs        => v2.0.0 or higher
-#
-###############################################################################
-
 """Program:  system.py
 
     Description:  Class holding server system definitions.
@@ -23,7 +11,6 @@
 
 """
 
-###############################################################################
 # Libraries and Global Variables
 
 # Standard
@@ -39,7 +26,7 @@ import re
 import gen_libs
 import version
 
-# Version Information
+# Version
 __version__ = version.__version__
 
 

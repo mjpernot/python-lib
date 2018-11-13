@@ -1,17 +1,5 @@
 # Classification (U)
 
-###############################################################################
-#
-# Filename:     gen_class.py
-#
-# Class Dependencies:
-#               None
-#
-# Library Dependenices:
-#               None
-#
-###############################################################################
-
 """Program:  gen_class.py
 
     Description:  Class that has class definitions for general use.
@@ -28,7 +16,6 @@
 
 """
 
-###############################################################################
 # Libraries and Global Variables
 
 # Standard
@@ -50,7 +37,7 @@ import yum
 # Local
 import version
 
-# Version Information
+# Version
 __version__ = version.__version__
 
 

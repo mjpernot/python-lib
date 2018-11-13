@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [2.7.0] - 2018-11-13
+### Changed
+- Documentation update.
+
+
 ## [2.6.0] - 2018-09-13
 ### Removed
 - gen_libs.Prt_Msg:  Function was previously deprecated.
@@ -22,35 +27,11 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 
 ## [2.5.0] - 2018-09-10
-### Updated
+### Changed
 - arg_parser.arg_parse2:  Replaced "gen_libs.Chk_Int" with "gen_libs.chk_int" call.
 - system.FGraph.__init__:  Replaced "gen_libs.file_search" with "gen_libs.file_search".
 - gen_libs.file_search:  Refactored the code in the function.
 - gen_libs.file_2_list:  Remove any newlines from the end of each line.
-- test/unit/gen_libs/chk_crt_dir.py:  Updated to use unittest2 under Python 2.7.
-- test/unit/gen_libs/write_file.py:  Updated to use unittest2 under Python 2.7.
-- test/unit/gen_libs/no_std_out.py:  Updated to use unittest2 under Python 2.7.
-- test/unit/gen_libs/month_delta.py:  Updated to use unittest2 under Python 2.7.
-- test/unit/gen_libs/merge_two_dicts.py:  Updated to use unittest2 under Python 2.7.
-- test/unit/gen_libs/merge_data_types.py:  Updated to use unittest2 under Python 2.7.
-- test/unit/gen_libs/get_data.py:  Updated to use unittest2 under Python 2.7.
-- test/unit/gen_libs/get_base_dir.py:  Updated to use unittest2 under Python 2.7.
-- test/unit/gen_libs/file_search_cnt.py:  Updated to use unittest2 under Python 2.7.
-- test/unit/gen_libs/display_data.py:  Updated to use unittest2 under Python 2.7.
-- test/unit/gen_libs/data_multi_out.py:  Updated to use unittest2 under Python 2.7.
-- test/unit/gen_libs/data_multi_out.py:  Added new test to check JSON conversion to write to file.
-- test/unit/gen_libs/clear_file.py:  Updated to use unittest2 under Python 2.7.
-- test/unit/gen_libs/chk_crt_file.py:  Updated to use unittest2 under Python 2.7.
-- test/unit/gen_class/Yum_init.py:  Updated to use unittest2 under Python 2.7.
-- test/unit/gen_class/Yum_get_release.py:  Updated to use unittest2 under Python 2.7.
-- test/unit/gen_class/Yum_get_os.py:  Updated to use unittest2 under Python 2.7.
-- test/unit/gen_class/Yum_get_distro.py:  Updated to use unittest2 under Python 2.7.
-- test/unit/gen_class/SingleInstanceException.py:  Updated to use unittest2 under Python 2.7.
-- test/unit/gen_class/ProgressBar_update.py:  Updated to use unittest2 under Python 2.7.
-- test/unit/gen_class/ProgressBar_init.py:  Updated to use unittest2 under Python 2.7.
-- test/unit/gen_class/ProgressBar_calc_and_update.py:  Updated to use unittest2 under Python 2.7.
-- test/unit/gen_class/ProgramLock_init.py:  Updated to use unittest2 under Python 2.7.
-- test/unit/gen_class/ProgramLock_del.py:  Updated to use unittest2 under Python 2.7.
 
 ### Fixed
 - gen_libs.data_multi_out:  If requesting JSON, but unable to convert, do not write to file.
@@ -63,16 +44,8 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - gen_libs.list_dirs:  Returns a list of directories within a directory.
 - gen_libs.touch:  Implements the Linux "touch" command.
 - gen_libs.is_empty_file:  Checks if a file is empty.
-- test/unit/gen_libs/code_coverage.sh: Code coverage run program.
-- test/unit/gen_class/code_coverage.sh: Code coverage run program.
-- test/unit/gen_libs/cp_file.py:  Unit test for gen_libs.cp_file function.
-- test/unit/gen_libs/list_dirs.py:  Unit test for gen_libs.list_dirs function.
-- test/unit/gen_libs/touch.py:  Unit test for gen_libs.touch function.
-- test/unit/gen_libs/is_empty_file.py:  Unit test for gen_libs.is_empty_file function.
-- test/unit/gen_libs/file_search.py:  Unit test for gen_libs.file_search function.
-- test/unit/gen_libs/file_2_list.py:  Unit test for gen_libs.file_2_list function.
 
-### Remove
+### Removed
 - gen_libs.Milli_2_Readadble:  Function was previously deprecated.
 - gen_libs.File_Search:  Function was previously deprecated.
 - gen_libs.Chk_Int:  Function was previously deprecated.
@@ -155,14 +128,9 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 ## [2.4.0] - 2018-05-28
 ### Changed
 - gen_class.Yum.__init__:  Added self.distro attribute to class.
-- test/unit/gen_class/Yum_init.py:  Updated with platform.linux_distribution attribute.
-- test/unit/gen_class/Yum_get_release.py:  Updated with platform.linux_distribution attribute.
-- test/unit/gen_class/Yum_get_os.py:  Updated with platform.linux_distribution attribute.
-- requirements.txt:  Removed psutil as not required.
 
 ### Added
 - gen_class.Yum.get_disto:  Method - Return class linux_distribution.
-- test/unit/gen_class/Yum_get_distro.py:  Test returning Linux distribution data.
 
 ### Removed
 - gen_class.Program_Lock:  Removed class and associated methods.
@@ -191,9 +159,6 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 ### Added
 - gen_class.Yum.get_os:  Return the class OS platform.
 - gen_class.Yum.get_release:  Return the class OS release version.
-- test/unit/gen_class/Yum_init.py:  Unit test of gen_class.Yum.__init__ method.
-- test/unit/gen_class/Yum_get_os.py:  Unit test of gen_class.Yum.get_os method.
-- test/unit/gen_class/Yum_get_release.py:  Unit test of gen_class.Yum.get_release method.
 
 ### Changed
 - gen_class.Yum.__init__:  Added new attributes for OS version information.
@@ -299,23 +264,11 @@ Breaking Change
 - gen_libs.py:  Changed "from subprocess" to "import subprocess".
 - gen_libs.py:  Qualified all calls to functions in subprocess module.
 - arg_parser.py:  Setup single-source version control.
-- arg_parser.py:  Made program PEP-8 compliant.
-- test/unit/gen_class/SingleInstanceException.py:  Made program PEP-8 compliant.
-- test/unit/gen_class/ProgressBar_update.py:  Made program PEP-8 compliant.
-- test/unit/gen_class/ProgressBar_init.py:  Made program PEP-8 compliant.
-- test/unit/gen_class/ProgressBar_calc_and_update.py:  Made program PEP-8 compliant.
-- test/unit/gen_class/ProgramLock_init.py:  Made program PEP-8 compliant.
-- test/unit/gen_class/ProgramLock_del.py:  Made program PEP-8 compliant.
-- gen_class.py:  Made program PEP-8 compliant.
 - system.py:  Setup single-source version control.
-- system.py:  Made program PEP-8 compliant.
 - cmds_gen.is_add_cmd:  Replaced Add_Cmd with add_cmd function call.
 - cmds_gen.py:  Setup single-source version control.
-- cmds_gen.py:  Made program PEP-8 compliant.
 - machine.py:  Setup single-source version control.
-- machine.py:  Made program PEP-8 compliant.
 - errors.py:  Setup single-source version control.
-- errors.py:  Made program PEP-8 compliant.
 
 ### Deprecated
 - gen_libs.Validate_Int:  Replaced by validate_int function.
@@ -410,7 +363,6 @@ Breaking Change
 ## [1.36.0] - 2018-03-09
 ### Added
 - gen_libs.data_multi_out:  Send data to multiple outputs options.
-- test/unit/gen_libs/data_multi_out.py:  Unit testing of data_multi_out function.
 
 
 ## [1.35.1] - 2018-02-15
@@ -427,8 +379,6 @@ Breaking Change
 ### Added
 - gen_libs.chk_crt_dir:  Check directory permission and create directory if requested.
 - gen_libs.chk_crt_file:  Check file permission and create file if requested.
-- test/unit/gen_libs/chk_crt_dir.py:  Unit testing of chk_crt_dir function.
-- test/unit/gen_libs/chk_crt_file.py:  Unit testing of chk_crt_file function.
 
 ### Changed
 - gen_libs.py:  Setup single-source version control.
@@ -439,18 +389,11 @@ Breaking Change
 
 
 ## [1.33.2] - 2018-01-26
-### Fixed
-- Error:  Pip is unable to install/upgrade the python-lib package.
-- setup.py:  Removed encoding option from the open command reading a file.
-- setup.py:  Removed install_requires setting as it errors out during pip installs.
+### Changed
+- Documentation update.
 
 
 ## [1.33.1] - 2018-01-25
-### Added
-- test/unit/gen_class/SingleInstanceException.py:  Unit test of SingleInstanceException class.
-- test/unit/gen_class/ProgramLock_init.py:  Unit test of ProgramLock.__init__ method.
-- test/unit/gen_class/ProgramLock_del.py:  Unit test of ProgramLock.__del__ method.
-
 ### Changed
 - gen_class/ProgressBar_calc_and_update.py:  Changed format of mock.patch statements.
 
@@ -462,13 +405,8 @@ Breaking Change
 - gen_class.ProgramLock:  Creates a file lock instance for a program.
 - gen_class.System:  Class which is a representation of a Linux server.
 - gen_class.Mail:  Class which is a representation of an email.
-- test/unit/gen_class/ProgressBar_init.py:  Unit test of ProgressBar.__init__ method.
-- test/unit/gen_class/ProgressBar_update.py:  Unit test of ProgressBar.update method.
-- test/unit/gen_class/ProgressBar_calc_and_update.py:  Unit test of ProgressBar.calc_and_update method.
 
 ### Changed
-- gen_class.py:  Moved internal version control to CHANGELOG file.
-- gen_class.py:  Made program PEP-8 compliant.
 - gen_class.py:  Setup single-source version control.
 
 ### Deprecated
@@ -483,19 +421,9 @@ Breaking Change
 - gen_libs.display_data:  Print dictionary in readable format.
 - gen_libs.get_data:  Read a file into a list.
 - gen_libs.clear_file:  Clear contents of an existing file.
-- test/unit/gen_libs/write_file.py:  Unit testing of write_file function.
-- test/unit/gen_libs/display_data.py:  Unit testing of display_data function.
-- test/unit/gen_libs/get_data.py:  Unit testing of get_data function.
-- test/unit/gen_libs/clear_file.py:  Unit testing of clear_file function.
 
 ### Changed
-- gen_libs:  Updated to be PEP-8 compliant.  Ignored E722 in gen_libs.Chk_Crt_Dir function
 - gen_libs.get_base_dir:  Added **kwargs to argument list for future use.
-- test/unit/gen_libs/month_delta.py:  Updated to be PEP-8 compliant.
-- test/unit/gen_libs/file_search_cnt.py:  Updated to be PEP-8 compliant.
-- test/unit/gen_libs/merge_two_dicts.py:  Updated to be PEP-8 compliant.
-- test/unit/gen_libs/merge_data_types.py:  Updated to be PEP-8 compliant.
-- test/unit/gen_libs/no_std_out.py:  Updated to be PEP-8 compliant.
 
 ### Deprecated
 - gen_libs.Write_File2:  Replaced by gen_libs.write_file.
@@ -508,9 +436,6 @@ Breaking Change
 - gen_libs.merge_data_types:  Merge two similar data types (e.g. string, dictionary, list, tuple).
 - gen_libs.merge_two_dicts:  Merge two dictionaries.
 - gen_libs.no_std_out:  Suppresses standard output of a function.
-- test/unit/gen_libs/merge_data_types.py:  Unit testing of merge_data_types function.
-- test/unit/gen_libs/merge_two_dicts.py:  Unit testing of merge_two_dicts function.
-- test/unit/gen_libs/no_std_out.py:  Unit testing of no_std_out function.
 
 ### Deprecated
 - gen_libs.Merge_2_Dicts:  Replaced by gen_libs.merge_two_dicts.
@@ -521,16 +446,11 @@ Breaking Change
 - gen_libs.month_delta:  Produces a month delta based on date passed to function.
 - gen_libs.file_search_cnt:  Find number of lines in a file that match a pattern.
 - gen_libs.get_base_dir:  Return the base directory path of the file name.
-- test/unit/gen_libs/month_delta.py:  Unit testing of month_delta function.
-- test/unit/gen_libs/file_search_cnt.py:  Unit testing of file_search_cnt function.
-- test/unit/gen_libs/get_base_dir.py: Unit testing of get_base_dir function.
-- test/unit/gen_libs/unit_test_run.sh:  Full unit testing of gen_libs module.
 
 
 ## [1.29.1] - 2017-12-13
-### Added
-- version.py:  Created single-source version control program.
-- setup.py:  To allow Python general libraries to be installed via pip.
+### Changed
+- Documentation update.
 
 
 ## [1.29.0] - 2017-10-06
@@ -541,7 +461,7 @@ Breaking Change
 
 ## [1.28.1] - 2017-09-26
 ### Error
-- gen_libs.Make_MD5_Hash:  Is overwriting hash files if file names are same, but extensions are different.
+- gen_libs.Make_MD5_Hash:  It's overwriting hash files if file names are same, but extensions are different.
 
 ### Fixed
 - gen_libs.Make_MD5_Hash:  Retain extension in hash file name to prevent overwriting.
@@ -586,10 +506,7 @@ Breaking Change
 
 ### Changed
 - system.py:  Convert comments/documentation to docstrings.
-- system.py:  Change order of library sequence to be PEP-8 compliant.
-- system.py:  Change versioning information to be PEP-440 compliant.
-- system.py:  Add classification line for Sunspear use.
-- system.py:  Change single quotes to double quotes to be PEP-8 compliant.
+- system.py:  Change single quotes to double quotes.
 
 ### Deprecated
 - gen_libs.Dict_Out
@@ -601,29 +518,14 @@ Breaking Change
 ## [1.22.0] - 2017-08-03
 ### Changed
 - arg_parser.py:  Convert comments/documentation to docstrings.
-- arg_parser.py:  Change order of library sequence to be PEP-8 compliant.
-- arg_parser.py:  Change versioning information to be PEP-440 compliant.
-- arg_parser.py:  Add classification line for Sunspear use.
-- arg_parser.py:  Change single quotes to double quotes to be PEP-8 compliant.
+- arg_parser.py:  Change single quotes to double quotes.
 - arg_parser.py:  Convert comments/documentation to docstrings.
-- cmds_gen.py:  Change order of library sequence to be PEP-8 compliant.
-- cmds_gen.py:  Change versioning information to be PEP-440 compliant.
-- cmds_gen.py:  Add classification line for Sunspear use.
-- cmds_gen.py:  Change single quotes to double quotes to be PEP-8 compliant.
+- cmds_gen.py:  Change single quotes to double quotes.
 - machine.py:  Convert comments/documentation to docstrings.
-- machine.py:  Change order of library sequence to be PEP-8 compliant.
-- machine.py:  Change versioning information to be PEP-440 compliant.
-- machine.py:  Add classification line for Sunspear use.
 - errors.py:  Convert comments/documentation to docstrings.
-- errors.py:  Change order of library sequence to be PEP-8 compliant.
-- errors.py:  Change versioning information to be PEP-440 compliant.
-- errors.py:  Add classification line for Sunspear use.
 - errors.Error:  Remove version information and replaced with pass.
 - gen_libs:  Convert comments/documentation to docstrings.
-- gen_libs:  Change order of library sequence to be PEP-8 compliant.
-- gen_libs:  Change versioning information to be PEP-440 compliant.
-- gen_libs:  Change single quotes to double quotes to be PEP-8 compliant.
-- gen_libs.Help_Func:  Change verion print command to be PEP-440 compliant.
+- gen_libs:  Change single quotes to double quotes.
 
 ### Removed
 - cmds_gen.Key_Cleaner:  Moved to gen_libs.py module.
@@ -634,12 +536,11 @@ Breaking Change
 - gen_libs:  List_Files function listed twice.
 
 ### Fixed
-- gen_libs:  Rename List_Files created on 2017-07-17 to List_Filter_Files.
+- gen_libs:  Rename List_Files created on 2017-07-17 to List_Filter_Files due to naming conflict.
 
 
 ## [1.21.4] - 2017-08-02
 ### Changed
-- gen_class.py:  Made program PEP-440 and PEP-8 compliant and added classification line.
 - gen_class.py:  Converted comments and documentation to docstrings.
 
 
@@ -685,11 +586,7 @@ Breaking Change
 - gen_libs.Key_Cleaner
 
 ### Changed
-- gen_libs:  Change to meet Python PEP 257 requirement - using docstrings to display programs usage/help message.
-- gen_libs:  Change to meet Python PEP 8 requirement - import library order of sequence.
-- gen_libs:  Import Library section:  Change import order sequence.
-- gen_libs:  Add classification line for Sunspear use.
-- gen_libs:  Standardize function naming convention.
+- gen_libs:  Updated docstrings to display programs usage/help message.
 - gen_libs.Help_Func:  Call func_name to print programs docstring.
 
 ### Deprecated
@@ -735,7 +632,6 @@ Breaking Change
 ## [1.15.0] - 2016-12-06
 ### Added
 - arg_parser.Arg_Wildcard
-- arg_parser.py:  Library section:  Added glob library.
 - gen_libs.Str_2_Type
 - gen_libs.Rm_Newline_List
 - gen_libs.File_2_List
@@ -772,14 +668,12 @@ Breaking Change
 
 ## [1.13.0] - 2016-08-09
 ### Added
-- system.Server:  Added method: set_host_name.
-- system.py:  Added Graph class.
-- system.py:  Added F_Graph class.
-- system.py:  Added new module libraries.
-- cmds_gen.py:  Added os and subprocess libraries.
-- cmds_gen.py:  Is_Add_Cmd function.
-- cmds_gen.py:  Add_Cmd function.
-- cmds_gen.py:  Run_Prog function.
+- system.Serverset_host_name
+- system.Graph
+- system.F_Graph
+- cmds_gen.Is_Add_Cmd
+- cmds_gen.Add_Cmd
+- cmds_gen.Run_Prog
 - gen_libs.Root_Run
 - gen_libs.File_Cleanup
 - gen_libs.Mv_File
@@ -816,12 +710,11 @@ Breaking Change
 - gen_libs.Dict_Out
 - gen_libs.Dict_2_Std
 - gen_libs.Prt_Dict
-- gen_libs:  Added a number of modules.
 
 ### Changed
 - arg_parser.Arg_Parse2:  Modified the function to handle options that can have multiple values assigned to the option.  Also replaced code with calls to Arg_Default function.
 - arg_parser.Arg_File_Chk:  Changed the first for and if statments into for loop intersect.  Modified function to handle multiple files for an option.
-- system.Mail:  Change to documentation header.
+- system.Mail:  Documentation update.
 
 ### Deprecated
 - arg_parser.Arg_NoReq_Xor:  Replaced by Arg_Xor_Dict function.
@@ -869,7 +762,6 @@ Breaking Change
 - gen_libs:  added comments to explain some of the more unclear code.
 
 ### Changed
-- arg_parser.Arg_Reg_Xor:  Fixed incorrect documentation.
 - arg_parser.Arg_Req_Xor:  Converted function to using the operator.xor function to check xor operations.
 
 ### Fixed
@@ -885,9 +777,6 @@ Breaking Change
 ### Deprecated
 - gen_libs.Del_Or_List
 
-### Changed
-- gen_libs:  Modified documentation for Del_Not_And_List function.
-
 
 ## [1.6.0] - 2015-12-09
 ### Added
@@ -899,7 +788,6 @@ Breaking Change
 
 ### Changed
 - gen_libs.Rename_File
-- gen_libs:  Updated documentation to include class & library dependencies.
 
 
 ## [1.5.0] - 2015-12-04

@@ -1,17 +1,5 @@
 # Classification (U)
 
-###############################################################################
-#
-# Filename:     arg_parser.py
-#
-# Class Dependencies:
-#               None
-#
-# Library Dependenices:
-#               gen_libs        => v2.0.0 or higher
-#
-###############################################################################
-
 """Program:  arg_parser.py
 
     Description:  A library program that contains a number of modules that
@@ -37,7 +25,6 @@
 
 """
 
-###############################################################################
 # Libraries and Global Variables
 
 # Standard
@@ -50,7 +37,7 @@ import glob
 import gen_libs
 import version
 
-# Version Information
+# Version
 __version__ = version.__version__
 
 
