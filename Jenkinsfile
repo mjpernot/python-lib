@@ -10,8 +10,11 @@ pipeline {
             steps {
                 sh """
                 cd /var/jenkins/workspace/Highpoint/python-lib
+                ls -ltr /var/jenkins/workspace/Highpoint/python-lib/test
                 rm -rf  /var/jenkins/workspace/Highpoint/python-lib/test/bin
                 rm -rf /var/jenkins/workspace/Highpoint/python-lib/test/pbr
+                echo "BREAK BREAK BREAK"
+                ls -ltr /var/jenkins/workspace/Highpoint/python-lib/test
                 ./test/unit/gen_libs/chk_crt_dir.py
                 ./test/unit/gen_libs/chk_crt_file.py
                 ./test/unit/gen_libs/clear_file.py
