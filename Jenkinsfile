@@ -10,9 +10,7 @@ pipeline {
             steps {
                 sh """
                 cd /var/jenkins/workspace/Highpoint/python-lib
-                which pip
-                which pip2
-                which pip3
+                pip2 install mock
                 ./test/unit/gen_libs/chk_crt_dir.py
                 ./test/unit/gen_libs/chk_crt_file.py
                 ./test/unit/gen_libs/clear_file.py
