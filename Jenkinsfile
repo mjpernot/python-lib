@@ -9,7 +9,7 @@ pipeline {
         stage('Test') {
             steps {
                 sh """
-                cd /var/jenkins/workspace/Highpoint/python-lib
+                pip2 install mock --user
                 ./test/unit/gen_libs/chk_crt_dir.py
                 ./test/unit/gen_libs/chk_crt_file.py
                 ./test/unit/gen_libs/clear_file.py
@@ -29,12 +29,22 @@ pipeline {
                 ./test/unit/gen_libs/no_std_out.py
                 ./test/unit/gen_libs/touch.py
                 ./test/unit/gen_libs/write_file.py
+                ./test/unit/gen_class/ProgramLock_init.py
+                ./test/unit/gen_class/ProgramLock_del.py
+                ./test/unit/gen_class/ProgressBar_init.py
+                ./test/unit/gen_class/SingleInstanceException.py
+                ./test/unit/gen_class/Yum_init.py
+                ./test/unit/gen_class/Yum_get_release.py
+                ./test/unit/gen_class/Yum_get_os.py
+                ./test/unit/gen_class/Yum_get_distro.py
+                ./test/unit/gen_class/ProgressBar_update.py
+                ./test/unit/gen_class/ProgressBar_calc_and_update.py
                 """
             }
         }
         stage('SonarQube analysis') {
             steps {
-                sh './test/unit/gen_libs/code_coverage.sh'
+                sh './test/unit/sonarqube_code_coverage.sh'
                 script {
                     scannerHome = tool 'sonar-scanner';
                 }

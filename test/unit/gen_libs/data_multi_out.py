@@ -37,7 +37,6 @@ else:
     import unittest
 
 # Third-party
-sys.path.append("/var/jenkins/.local/lib/python3.4/site-packages")
 import mock
 import json
 
