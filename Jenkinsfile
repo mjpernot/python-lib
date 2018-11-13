@@ -10,6 +10,8 @@ pipeline {
             steps {
                 sh """
                 cd /var/jenkins/workspace/Highpoint/python-lib
+                rm -rf  /var/jenkins/workspace/Highpoint/python-lib/test/bin
+                rm -rf /var/jenkins/workspace/Highpoint/python-lib/test/pbr
                 ./test/unit/gen_libs/chk_crt_dir.py
                 ./test/unit/gen_libs/chk_crt_file.py
                 ./test/unit/gen_libs/clear_file.py
