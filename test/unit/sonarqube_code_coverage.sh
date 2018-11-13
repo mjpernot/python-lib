@@ -27,7 +27,6 @@ coverage run -a --source=gen_libs test/unit/gen_libs/month_delta.py
 coverage run -a --source=gen_libs test/unit/gen_libs/no_std_out.py
 coverage run -a --source=gen_libs test/unit/gen_libs/touch.py
 coverage run -a --source=gen_libs test/unit/gen_libs/write_file.py
-
 coverage run -a --source=gen_class test/unit/gen_class/ProgramLock_del.py
 coverage run -a --source=gen_class test/unit/gen_class/ProgramLock_init.py
 coverage run -a --source=gen_class test/unit/gen_class/ProgressBar_calc_and_update.py
