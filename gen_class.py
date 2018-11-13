@@ -65,7 +65,7 @@ class Daemon:
     """
 
     def __init__(self, pidfile, stdin="/dev/null", stdout="/dev/null",
-                 stderr="/dev/null", argv_list=[]):
+                 stderr="/dev/null", argv_list=None):
 
         """Method:  __init__
 
@@ -80,11 +80,16 @@ class Daemon:
 
         """
 
+        if argv_list is None:
+            self.argv_list = []
+
+        else:
+            self.argv_list = argv_list
+
         self.stdin = stdin
         self.stdout = stdout
         self.stderr = stderr
         self.pidfile = pidfile
-        self.argv_list = argv_list
 
     def daemonize(self):
 
