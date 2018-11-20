@@ -1,18 +1,6 @@
 #!/usr/bin/python
 # Classification (U)
 
-###############################################################################
-#
-# Program:      merge_two_dicts.py
-#
-# Class Dependencies:
-#               None
-#
-# Library Dependenices:
-#               gen_libs        => v1.31.0 or higher
-#
-###############################################################################
-
 """Program:  merge_two_dicts.py
 
     Description:  Unit testing of merge_two_dicts in gen_libs.py.
@@ -43,7 +31,7 @@ sys.path.append(os.getcwd())
 import gen_libs
 import version
 
-# Version Information
+# Version
 __version__ = version.__version__
 
 

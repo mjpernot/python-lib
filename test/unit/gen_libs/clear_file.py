@@ -1,18 +1,6 @@
 #!/usr/bin/python
 # Classification (U)
 
-###############################################################################
-#
-# Program:      clear_file.py
-#
-# Class Dependencies:
-#               None
-#
-# Library Dependenices:
-#               gen_libs        => v1.32.0 or higher
-#
-###############################################################################
-
 """Program:  clear_file.py
 
     Description:  Unit testing of clear_file in gen_libs.py.
@@ -43,7 +31,7 @@ sys.path.append(os.getcwd())
 import gen_libs
 import version
 
-# Version Information
+# Version
 __version__ = version.__version__
 
 

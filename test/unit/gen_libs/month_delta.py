@@ -1,18 +1,6 @@
 #!/usr/bin/python
 # Classification (U)
 
-###############################################################################
-#
-# Program:      month_delta.py
-#
-# Class Dependencies:
-#               None
-#
-# Library Dependenices:
-#               gen_libs        => v1.32.0 or higher
-#
-###############################################################################
-
 """Program:  month_delta.py
 
     Description:  Unit testing of month_delta in gen_libs.py.
@@ -44,7 +32,7 @@ sys.path.append(os.getcwd())
 import gen_libs
 import version
 
-# Version Information
+# Version
 __version__ = version.__version__
 
 
