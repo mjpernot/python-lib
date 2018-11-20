@@ -56,3 +56,7 @@ echo ""
 echo "Unit test:  Mail.create_body"
 test/unit/gen_class/Mail_create_body.py
 
+echo ""
+echo "Unit test:  Mail.create_subject"
+test/unit/gen_class/Mail_create_subject.py
+
