@@ -292,7 +292,7 @@ def arg_noreq_xor(args_array, xor_noreq_list):
     return xor_flag
 
 
-def arg_parse2(argv, opt_val_list, opt_def_dict={}, **kwargs):
+def arg_parse2(argv, opt_val_list, opt_def_dict=None, **kwargs):
 
     """Function:  arg_parse2
 
@@ -318,6 +318,9 @@ def arg_parse2(argv, opt_val_list, opt_def_dict={}, **kwargs):
         (output) args_array -> Array of command line options and values.
 
     """
+
+    if opt_def_dict is None:
+        opt_def_dict = {}
 
     multi_list = kwargs.get("multi_val", [])
     opt_val = kwargs.get("opt_val", [])
