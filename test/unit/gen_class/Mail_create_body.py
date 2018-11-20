@@ -47,6 +47,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_with_subject -> Test creating body with subject line in place.
         test_create_body -> Test creating body.
 
     """
@@ -63,6 +64,28 @@ class UnitTest(unittest.TestCase):
         """
 
         self.to = ["mail_address@domain.name"]
+
+    def test_with_subject(self):
+
+        """Function:  test_with_subject
+
+        Description:  Test creating body with subject line in place.
+
+        Arguments:
+            None
+
+        """
+
+        msg = "Test email line"
+        subj = "Test subject"
+
+        email = gen_class.Mail(self.to, subj=subj)
+        email.add_2_msg(msg)
+
+        email.create_body()
+
+        self.assertEqual(email.create_body(),
+                         ("Subject: %s\n\n%s" % (subj, msg)))
 
     def test_create_body(self):
 
