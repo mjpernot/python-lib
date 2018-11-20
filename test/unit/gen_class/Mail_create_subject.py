@@ -47,6 +47,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_subj_overwrite -> Test overwriting existing subject.
         test_subject_none -> Test with no subject passed.
         test_no_subject -> Test creating subject.
 
@@ -64,6 +65,26 @@ class UnitTest(unittest.TestCase):
         """
 
         self.to = ["mail_address@domain.name"]
+
+    def test_subj_overwrite(self):
+
+        """Function:  test_subj_overwrite
+
+        Description:  Test overwriting existing subject.
+
+        Arguments:
+            None
+
+        """
+
+        subj = "Test subject"
+        subj2 = "Test subject2"
+
+        email = gen_class.Mail(self.to, subj=subj)
+
+        email.create_subject(subj=subj2)
+
+        self.assertEqual(email.subj, subj2)
 
     def test_subject_none(self):
 
