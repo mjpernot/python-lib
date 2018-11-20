@@ -1,17 +1,5 @@
 # Classification (U)
 
-###############################################################################
-#
-# Filename:     gen_libs.py
-#
-# Class Dependencies:
-#               None
-#
-# Library Dependenices:
-#               None
-#
-###############################################################################
-
 """Program:  gen_libs.py
 
     Description:  A library program that contains a number of modules for
@@ -95,7 +83,6 @@
 
 """
 
-###############################################################################
 # Libraries and Global Variables
 
 # Standard
@@ -122,7 +109,7 @@ import ast
 # Local
 import version
 
-# Version Information
+# Version
 __version__ = version.__version__
 
 

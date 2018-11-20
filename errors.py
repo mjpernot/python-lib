@@ -1,17 +1,5 @@
 # Classification (U)
 
-###############################################################################
-#
-# Filename:     errors.py
-#
-# Class Dependencies:
-#               None
-#
-# Library Dependenices:
-#               None
-#
-###############################################################################
-
 """Program:  errors.py
 
     Description:  Base class for the server class exception errors.
@@ -27,7 +15,6 @@
 
 """
 
-###############################################################################
 # Libraries and Global Variables
 
 # Standard
@@ -35,7 +22,7 @@
 # Local
 import version
 
-# Version Information
+# Version
 __version__ = version.__version__
 
 

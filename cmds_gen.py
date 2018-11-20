@@ -1,17 +1,5 @@
 # Classification (U)
 
-###############################################################################
-#
-# Filename:     cmds_gen.py
-#
-# Class Dependencies:
-#               None
-#
-# Library Dependenices:
-#               None
-#
-###############################################################################
-
 """Program:  cmds_gen.py
 
     Description:  Library of general function calls that can be used by
@@ -27,7 +15,6 @@
 
 """
 
-###############################################################################
 # Libraries and Global Variables
 
 # Standard
@@ -37,7 +24,7 @@ import subprocess
 # Local
 import version
 
-# Version Information
+# Version
 __version__ = version.__version__
 
 
