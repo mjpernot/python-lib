@@ -205,7 +205,7 @@ def arg_dir_chk_crt(args_array, dir_chk_list, dir_crt_list=None):
     return exit_flag
 
 
-def arg_file_chk(args_array, file_chk_list, file_crt_list=[]):
+def arg_file_chk(args_array, file_chk_list, file_crt_list=None):
 
     """Function:  arg_file_chk
 
@@ -218,6 +218,9 @@ def arg_file_chk(args_array, file_chk_list, file_crt_list=[]):
         (output) exit_flag -> If files are unavailable.
 
     """
+
+    if file_crt_list is None:
+        file_crt_list = []
 
     exit_flag = False
 
