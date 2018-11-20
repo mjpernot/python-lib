@@ -9,6 +9,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - gen_class.Mail.create_subject:  Set the subject line of the email.
 
 ### Fixed
+- arg_parser.arg_dir_chk_crt:  Changed function parameter mutable argument default to immutable argument default.
 - gen_class.Mail.__init__:  Shallow copied assignment of "to" to "self.to" if it is a list.
 - gen_class.Daemon.__init__:  Shallow copied assignment of "argv_list" list to "self.argv_list".
 - gen_class.Daemon.__init__:  Changed function parameter mutable argument default to immutable argument default.

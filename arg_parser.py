@@ -161,7 +161,7 @@ def arg_default(arg, args_array, opt_def_dict, **kwargs):
         sys.exit("Error: Arg {0} missing value".format(arg))
 
 
-def arg_dir_chk_crt(args_array, dir_chk_list, dir_crt_list=[]):
+def arg_dir_chk_crt(args_array, dir_chk_list, dir_crt_list=None):
 
     """Function:  arg_dir_chk_crt
 
@@ -175,6 +175,9 @@ def arg_dir_chk_crt(args_array, dir_chk_list, dir_crt_list=[]):
         (output) exit_flag -> If directories are unavailable.
 
     """
+
+    if dir_crt_list is None:
+        dir_crt_list = []
 
     exit_flag = False
 
