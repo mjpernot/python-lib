@@ -47,6 +47,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_with_data -> Test other attributes with data.
         test_to_string -> Test to line with a string.
         test_to_list -> Test to line with a list.
         test_default -> Test with minimum number of arguments.
@@ -69,6 +70,25 @@ class UnitTest(unittest.TestCase):
         self.frm = None
         self.host_name = None
         self.host = None
+
+    def test_with_data(self):
+
+        """Function:  test_with_data
+
+        Description:  Test other attributes with data.
+
+        Arguments:
+            None
+
+        """
+
+        subj = "Test_Subj"
+        frm = "mail_address@domain.name"
+
+        email = gen_class.Mail(self.to, subj=subj, frm=frm)
+
+        self.assertEqual((email.to, email.subj, email.frm, email.host_name,
+                          email.host), (email.to, subj, frm, None, None))
 
     def test_to_string(self):
 
