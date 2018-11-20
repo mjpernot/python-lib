@@ -39,6 +39,11 @@ pipeline {
                 ./test/unit/gen_class/Yum_get_distro.py
                 ./test/unit/gen_class/ProgressBar_update.py
                 ./test/unit/gen_class/ProgressBar_calc_and_update.py
+                ./test/unit/gen_class/Mail_init.py
+                ./test/unit/gen_class/Mail_add_2_msg.py
+                ./test/unit/gen_class/Mail_create_body.py
+                ./test/unit/gen_class/Mail_create_subject.py
+                ./test/unit/gen_class/Mail_print_email.py
                 """
             }
         }
