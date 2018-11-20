@@ -17,6 +17,9 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - gen_class.Daemon.__init__:  Shallow copied assignment of "argv_list" list to "self.argv_list".
 - gen_class.Daemon.__init__:  Changed function parameter mutable argument default to immutable argument default.
 
+### Deprecated
+- system.py:  Module has been deprecated.
+
 ### Changed
 - Documentation update.
 

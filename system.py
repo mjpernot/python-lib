@@ -4,6 +4,8 @@
 
     Description:  Class holding server system definitions.
 
+    NOTE:  This module has been deprecated.
+
     Classes:
         FGraph
         System
