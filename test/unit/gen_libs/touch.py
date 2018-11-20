@@ -1,18 +1,6 @@
 #!/usr/bin/python
 # Classification (U)
 
-###############################################################################
-#
-# Program:      touch.py
-#
-# Class Dependencies:
-#               None
-#
-# Library Dependenices:
-#               gen_libs            => v2.5.0 or higher
-#
-###############################################################################
-
 """Program:  touch.py
 
     Description:  Unit testing of touch in gen_libs.py.
@@ -44,7 +32,7 @@ sys.path.append(os.getcwd())
 import gen_libs
 import version
 
-# Version Information
+# Version
 __version__ = version.__version__
 
 

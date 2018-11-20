@@ -83,7 +83,8 @@ class UnitTest(unittest.TestCase):
         email.add_2_msg(txt_ln=self.body)
 
         self.assertEqual(email.print_email(),
-            "To: %s\nFrom: %s\n%s" % (self.to, self.frm, email.create_body()))
+                         "To: %s\nFrom: %s\n%s" % (self.to, self.frm,
+                                                   email.create_body()))
 
 
 if __name__ == "__main__":

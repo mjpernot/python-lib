@@ -1,18 +1,6 @@
 #!/usr/bin/python
 # Classification (U)
 
-###############################################################################
-#
-# Program:      data_multi_out.py
-#
-# Class Dependencies:
-#               None
-#
-# Library Dependenices:
-#               gen_libs        => v1.36.0 or higher
-#
-###############################################################################
-
 """Program:  data_multi_out.py
 
     Description:  Unit testing of data_multi_out in gen_libs.py.
@@ -45,7 +33,7 @@ sys.path.append(os.getcwd())
 import gen_libs
 import version
 
-# Version Information
+# Version
 __version__ = version.__version__
 
 

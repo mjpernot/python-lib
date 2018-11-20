@@ -1,18 +1,6 @@
 #!/usr/bin/python
 # Classification (U)
 
-###############################################################################
-#
-# Program:      list_dirs.py
-#
-# Class Dependencies:
-#               None
-#
-# Library Dependenices:
-#               gen_libs            => v2.5.0 or higher
-#
-###############################################################################
-
 """Program:  list_dirs.py
 
     Description:  Unit testing of list_dirs in gen_libs.py.
@@ -44,7 +32,7 @@ sys.path.append(os.getcwd())
 import gen_libs
 import version
 
-# Version Information
+# Version
 __version__ = version.__version__
 
 
@@ -115,8 +103,10 @@ class UnitTest(unittest.TestCase):
 
         data_list = gen_libs.list_dirs(self.base_path)
 
-        self.assertTrue(data_list == ["list_dir_1", "list_dir_2"] or
-                        data_list == ["list_dir_2", "list_dir_1"])
+        self.assertTrue(
+            data_list == ["list_dir_1",
+                          "list_dir_2"] or data_list == ["list_dir_2",
+                                                         "list_dir_1"])
 
     def test_no_dirs(self):
 

@@ -1,18 +1,6 @@
 #!/usr/bin/python
 # Classification (U)
 
-###############################################################################
-#
-# Program:      file_2_list.py
-#
-# Class Dependencies:
-#               None
-#
-# Library Dependenices:
-#               gen_libs            => v2.5.0 or higher
-#
-###############################################################################
-
 """Program:  file_2_list.py
 
     Description:  Unit testing of file_2_list in gen_libs.py.
@@ -43,7 +31,7 @@ sys.path.append(os.getcwd())
 import gen_libs
 import version
 
-# Version Information
+# Version
 __version__ = version.__version__
 
 

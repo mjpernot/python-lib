@@ -1,18 +1,6 @@
 #!/usr/bin/python
 # Classification (U)
 
-###############################################################################
-#
-# Program:      cp_file.py
-#
-# Class Dependencies:
-#               None
-#
-# Library Dependenices:
-#               gen_libs            => v2.5.0 or higher
-#
-###############################################################################
-
 """Program:  cp_file.py
 
     Description:  Unit testing of cp_file in gen_libs.py.
@@ -44,7 +32,7 @@ sys.path.append(os.getcwd())
 import gen_libs
 import version
 
-# Version Information
+# Version
 __version__ = version.__version__
 
 
