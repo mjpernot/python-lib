@@ -161,7 +161,7 @@ def arg_default(arg, args_array, opt_def_dict, **kwargs):
         sys.exit("Error: Arg {0} missing value".format(arg))
 
 
-def arg_dir_chk_crt(args_array, dir_chk_list, dir_crt_list=[]):
+def arg_dir_chk_crt(args_array, dir_chk_list, dir_crt_list=None):
 
     """Function:  arg_dir_chk_crt
 
@@ -174,12 +174,10 @@ def arg_dir_chk_crt(args_array, dir_chk_list, dir_crt_list=[]):
         (input) dir_crt_list -> Options to create directories if not present.
         (output) exit_flag -> If directories are unavailable.
 
-    #def arg_dir_chk_crt(args_array, dir_chk_list, dir_crt_list=None):
-
-    #if dir_crt_list is None:
-    #    dir_crt_list = []
-
     """
+
+    if dir_crt_list is None:
+        dir_crt_list = []
 
     exit_flag = False
 
@@ -207,7 +205,7 @@ def arg_dir_chk_crt(args_array, dir_chk_list, dir_crt_list=[]):
     return exit_flag
 
 
-def arg_file_chk(args_array, file_chk_list, file_crt_list=[]):
+def arg_file_chk(args_array, file_chk_list, file_crt_list=None):
 
     """Function:  arg_file_chk
 
@@ -219,12 +217,10 @@ def arg_file_chk(args_array, file_chk_list, file_crt_list=[]):
         (input) file_crt_list -> Options require files to be created.
         (output) exit_flag -> If files are unavailable.
 
-    #def arg_file_chk(args_array, file_chk_list, file_crt_list=None):
-
-    #if file_crt_list is None:
-    #    file_crt_list = []
-
     """
+
+    if file_crt_list is None:
+        file_crt_list = []
 
     exit_flag = False
 
@@ -296,7 +292,7 @@ def arg_noreq_xor(args_array, xor_noreq_list):
     return xor_flag
 
 
-def arg_parse2(argv, opt_val_list, opt_def_dict={}, **kwargs):
+def arg_parse2(argv, opt_val_list, opt_def_dict=None, **kwargs):
 
     """Function:  arg_parse2
 
@@ -320,19 +316,14 @@ def arg_parse2(argv, opt_val_list, opt_def_dict={}, **kwargs):
             multi_val - List of options that may contain multiple values
             opt_val - List of options that may allow 0 or 1 value for option.
         (output) args_array -> Array of command line options and values.
-    
-    #def arg_parse2(argv, opt_val_list, opt_def_dict=None, **kwargs):
-
-    #if opt_def_dict is None:
-    #    opt_def_dict = {}
-
-    #multi_list = list(kwargs.get("multi_val", []))
-    #opt_val = list(kwargs.get("opt_val", []))
 
     """
 
-    multi_list = kwargs.get("multi_val", [])
-    opt_val = kwargs.get("opt_val", [])
+    if opt_def_dict is None:
+        opt_def_dict = {}
+
+    multi_list = list(kwargs.get("multi_val", []))
+    opt_val = list(kwargs.get("opt_val", []))
 
     args_array = {}
 
