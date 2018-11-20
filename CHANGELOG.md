@@ -9,6 +9,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - gen_class.Mail.create_subject:  Set the subject line of the email.
 
 ### Fixed
+- arg_parser.arg_parse2:  Shallow copied assignments of "multi_val" and "opt_val".
 - arg_parser.arg_parse2:  Changed function parameter mutable argument default to immutable argument default.
 - arg_parser.arg_dir_chk_crt:  Changed function parameter mutable argument default to immutable argument default.
 - arg_parser.arg_file_chk:  Changed function parameter mutable argument default to immutable argument default.

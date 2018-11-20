@@ -322,8 +322,8 @@ def arg_parse2(argv, opt_val_list, opt_def_dict=None, **kwargs):
     if opt_def_dict is None:
         opt_def_dict = {}
 
-    multi_list = kwargs.get("multi_val", [])
-    opt_val = kwargs.get("opt_val", [])
+    multi_list = list(kwargs.get("multi_val", []))
+    opt_val = list(kwargs.get("opt_val", []))
 
     args_array = {}
 
