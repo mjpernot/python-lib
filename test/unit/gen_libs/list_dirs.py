@@ -115,8 +115,10 @@ class UnitTest(unittest.TestCase):
 
         data_list = gen_libs.list_dirs(self.base_path)
 
-        self.assertTrue(data_list == ["list_dir_1", "list_dir_2"] or
-                        data_list == ["list_dir_2", "list_dir_1"])
+        self.assertTrue(
+            data_list == ["list_dir_1",
+                          "list_dir_2"] or data_list == ["list_dir_2",
+                                                         "list_dir_1"])
 
     def test_no_dirs(self):
 
