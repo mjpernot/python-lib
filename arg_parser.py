@@ -594,4 +594,3 @@ def arg_xor_dict(args_array, opt_xor_dict):
             break
 
     return xor_flag
-
