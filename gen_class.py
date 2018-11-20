@@ -518,6 +518,7 @@ class Mail(System):
         add_2_msg -> Add text to text string if data is present.
         read_stdin -> Add standard in to mail message.
         create_body -> Combines subject line & message into a single entity.
+        create_subject -> Creates or overwrites a subject to the email.
         send_mail -> Emails message out via smtp connection.
         print_email -> Print email to standard out.
 
@@ -599,6 +600,20 @@ class Mail(System):
             self.subj = self.msg[:30]
 
         return "Subject: %s\n\n%s" % (self.subj, self.msg)
+
+    def create_subject(self, subj=None):
+
+        """Method:  create_subject
+
+        Description:  Creates or overwrites a subject to the email.
+
+        Arguments:
+            (input) subj -> Subject line.
+
+        """
+
+        if subj:
+            self.subj = subj
 
     def send_mail(self):
 
