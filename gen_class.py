@@ -543,7 +543,13 @@ class Mail(System):
         super(Mail, self).__init__(host, host_name)
 
         self.subj = subj
-        self.to = to
+
+        if isinstance(to, list):
+            self.to = list(to)
+
+        else:
+            self.to = to
+
         self.frm = frm
         self.msg_type = msg_type
         self.msg = ""
