@@ -1,19 +1,6 @@
 #!/usr/bin/python
 # Classification (U)
 
-###############################################################################
-#
-# Program:      ProgressBar_update.py
-#
-# Class Dependencies:
-#               None
-#
-# Library Dependenices:
-#               gen_class       => 1.33.0 or higher
-#               gen_libs        => 1.33.0 or higher
-#
-###############################################################################
-
 """Program:  ProgressBar_update.py
 
     Description:  Unit testing of ProgressBar.update in gen_class.py.
@@ -45,7 +32,7 @@ import gen_class
 import gen_libs
 import version
 
-# Version Information
+# Version
 __version__ = version.__version__
 
 

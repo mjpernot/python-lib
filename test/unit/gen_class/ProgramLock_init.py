@@ -1,18 +1,6 @@
 #!/usr/bin/python
 # Classification (U)
 
-###############################################################################
-#
-# Program:      ProgramLock_init.py
-#
-# Class Dependencies:
-#               None
-#
-# Library Dependenices:
-#               gen_class       => 1.33.0 or higher
-#
-###############################################################################
-
 """Program:  ProgramLock_init.py
 
     Description:  Unit testing of ProgramLock.__init__ in gen_class.py.
@@ -44,7 +32,7 @@ sys.path.append(os.getcwd())
 import gen_class
 import version
 
-# Version Information
+# Version
 __version__ = version.__version__
 
 

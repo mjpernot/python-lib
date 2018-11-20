@@ -18,6 +18,7 @@ coverage run -a --source=gen_class test/unit/gen_class/Yum_get_distro.py
 coverage run -a --source=gen_class test/unit/gen_class/Yum_get_os.py
 coverage run -a --source=gen_class test/unit/gen_class/Yum_get_release.py
 coverage run -a --source=gen_class test/unit/gen_class/Yum_init.py
+coverage run -a --source=gen_class test/unit/gen_class/Mail_init.py
 
 echo ""
 echo "Producing code coverage report"
