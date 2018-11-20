@@ -47,6 +47,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_long_subject -> Test with subject line to maximum.
         test_with_subject -> Test creating body with subject line in place.
         test_create_body -> Test creating body.
 
@@ -64,6 +65,27 @@ class UnitTest(unittest.TestCase):
         """
 
         self.to = ["mail_address@domain.name"]
+
+    def test_long_subject(self):
+
+        """Function:  test_long_subject
+
+        Description:  Test with subject line to maximum.
+
+        Arguments:
+            None
+
+        """
+
+        msg = "Test email line with a line greater than thirty characters"
+
+        email = gen_class.Mail(self.to)
+        email.add_2_msg(msg)
+
+        email.create_body()
+
+        self.assertEqual(email.create_body(),
+                         ("Subject: %s\n\n%s" % (msg[:30], msg)))
 
     def test_with_subject(self):
 
