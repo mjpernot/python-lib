@@ -47,7 +47,8 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
-        test_no_subject -> Test creating body with subject line in place.
+        test_subject_none -> Test with no subject passed.
+        test_no_subject -> Test creating subject.
 
     """
 
@@ -64,27 +65,43 @@ class UnitTest(unittest.TestCase):
 
         self.to = ["mail_address@domain.name"]
 
-    def test_no_subject(self):
+    def test_subject_none(self):
 
-        """Function:  test_no_subject
+        """Function:  test_subject_none
 
-        Description:  Test creating body with subject line in place.
+        Description:  Test with no subject passed.
 
         Arguments:
             None
 
         """
 
-        msg = "Test email line"
         subj = "Test subject"
 
         email = gen_class.Mail(self.to, subj=subj)
-        email.add_2_msg(msg)
 
-        email.create_body()
+        email.create_subject(subj=None)
 
-        self.assertEqual(email.create_body(),
-                         ("Subject: %s\n\n%s" % (subj, msg)))
+        self.assertEqual(email.subj, subj)
+
+    def test_no_subject(self):
+
+        """Function:  test_no_subject
+
+        Description:  Test creating subject.
+
+        Arguments:
+            None
+
+        """
+
+        subj = "Test subject"
+
+        email = gen_class.Mail(self.to)
+
+        email.create_subject(subj=subj)
+
+        self.assertEqual(email.subj, subj)
 
 
 if __name__ == "__main__":
