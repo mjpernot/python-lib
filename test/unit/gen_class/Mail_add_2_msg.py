@@ -47,6 +47,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_add_exist -> Test with adding data to existing message.
         test_initial_add -> Test with adding data to empty message.
 
     """
@@ -63,6 +64,27 @@ class UnitTest(unittest.TestCase):
         """
 
         self.to = ["mail_address@domain.name"]
+
+    def test_add_exist(self):
+
+        """Function:  test_add_exist
+
+        Description:  Test with adding data to existing message.
+
+        Arguments:
+            None
+
+        """
+
+        msg = "Test email line"
+        msg2 = "Test email line2"
+
+        email = gen_class.Mail(self.to)
+
+        email.add_2_msg(msg)
+        email.add_2_msg(msg2)
+
+        self.assertEqual((email.to, email.msg), (self.to, msg + msg2))
 
     def test_initial_add(self):
 
