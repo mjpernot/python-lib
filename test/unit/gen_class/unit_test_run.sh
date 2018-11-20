@@ -48,3 +48,11 @@ echo ""
 echo "Unit test:  Mail.__init__"
 test/unit/gen_class/Mail_init.py
 
+echo ""
+echo "Unit test:  Mail.add_2_msg"
+test/unit/gen_class/Mail_add_2_msg.py
+
+echo ""
+echo "Unit test:  Mail.create_body"
+test/unit/gen_class/Mail_create_body.py
+
