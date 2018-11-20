@@ -6,6 +6,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 ## [2.6.1] - 2018-11-13
 ### Fixed
+- gen_class.Daemon.__init__:  Shallow copied assignment of argv_list list to self.argv_list.
 - gen_class.Daemon.__init__:  Changed mutable argument default to immutable argument default.
 
 ### Changed

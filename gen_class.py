@@ -84,7 +84,7 @@ class Daemon:
             self.argv_list = []
 
         else:
-            self.argv_list = argv_list
+            self.argv_list = list(argv_list)
 
         self.stdin = stdin
         self.stdout = stdout
