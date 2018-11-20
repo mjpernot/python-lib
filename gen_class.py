@@ -1,17 +1,5 @@
 # Classification (U)
 
-###############################################################################
-#
-# Filename:     gen_class.py
-#
-# Class Dependencies:
-#               None
-#
-# Library Dependenices:
-#               None
-#
-###############################################################################
-
 """Program:  gen_class.py
 
     Description:  Class that has class definitions for general use.
@@ -28,7 +16,6 @@
 
 """
 
-###############################################################################
 # Libraries and Global Variables
 
 # Standard
@@ -50,7 +37,7 @@ import yum
 # Local
 import version
 
-# Version Information
+# Version
 __version__ = version.__version__
 
 
@@ -78,7 +65,7 @@ class Daemon:
     """
 
     def __init__(self, pidfile, stdin="/dev/null", stdout="/dev/null",
-                 stderr="/dev/null", argv_list=[]):
+                 stderr="/dev/null", argv_list=None):
 
         """Method:  __init__
 
@@ -93,11 +80,16 @@ class Daemon:
 
         """
 
+        if argv_list is None:
+            self.argv_list = []
+
+        else:
+            self.argv_list = list(argv_list)
+
         self.stdin = stdin
         self.stdout = stdout
         self.stderr = stderr
         self.pidfile = pidfile
-        self.argv_list = argv_list
 
     def daemonize(self):
 
@@ -526,6 +518,7 @@ class Mail(System):
         add_2_msg -> Add text to text string if data is present.
         read_stdin -> Add standard in to mail message.
         create_body -> Combines subject line & message into a single entity.
+        create_subject -> Creates or overwrites a subject to the email.
         send_mail -> Emails message out via smtp connection.
         print_email -> Print email to standard out.
 
@@ -551,7 +544,13 @@ class Mail(System):
         super(Mail, self).__init__(host, host_name)
 
         self.subj = subj
-        self.to = to
+
+        if isinstance(to, list):
+            self.to = list(to)
+
+        else:
+            self.to = to
+
         self.frm = frm
         self.msg_type = msg_type
         self.msg = ""
@@ -601,6 +600,20 @@ class Mail(System):
             self.subj = self.msg[:30]
 
         return "Subject: %s\n\n%s" % (self.subj, self.msg)
+
+    def create_subject(self, subj=None):
+
+        """Method:  create_subject
+
+        Description:  Creates or overwrites a subject to the email.
+
+        Arguments:
+            (input) subj -> Subject line.
+
+        """
+
+        if subj:
+            self.subj = subj
 
     def send_mail(self):
 

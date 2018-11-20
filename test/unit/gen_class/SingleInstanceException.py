@@ -1,18 +1,6 @@
 #!/usr/bin/python
 # Classification (U)
 
-###############################################################################
-#
-# Program:      SingleInstanceException.py
-#
-# Class Dependencies:
-#               None
-#
-# Library Dependenices:
-#               gen_class       => 1.33.0 or higher
-#
-###############################################################################
-
 """Program:  SingleInstanceException.py
 
     Description:  Unit testing of SingleInstanceException in gen_class.py.
@@ -43,7 +31,7 @@ sys.path.append(os.getcwd())
 import gen_class
 import version
 
-# Version Information
+# Version
 __version__ = version.__version__
 
 

@@ -1,24 +1,11 @@
 # Classification (U)
 
-###############################################################################
-#
-# Program:      setup.py
-#
-# Class Dependencies:
-#               None
-#
-# Library Dependenices:
-#               version         => N/A
-#
-###############################################################################
-
 """Program:  setup.py
 
     Description:  A setuptools based setup module.
 
 """
 
-###############################################################################
 # Libraries and Global Variables
 
 # Standard
@@ -68,4 +55,5 @@ setuptools.setup(
         "Operating System :: Linux",
         "Operating System :: Linux :: Centos",
         "Programming Language :: Python",
-        "Programming Language :: Python :: 2.6"])
+        "Programming Language :: Python :: 2.6",
+        "Programming Language :: Python :: 2.7"])

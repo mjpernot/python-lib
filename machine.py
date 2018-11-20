@@ -1,17 +1,5 @@
 # Classification (U)
 
-###############################################################################
-#
-# Filename:     machine.py
-#
-# Class Dependencies:
-#               None
-#
-# Library Dependenices:
-#               None
-#
-###############################################################################
-
 """Program:  machine.py
 
     Description:  Base class for all machines.  This class has the methods for
@@ -24,7 +12,6 @@
 
 """
 
-###############################################################################
 # Libraries and Global Variables
 
 # Standard
@@ -32,7 +19,7 @@
 # Local
 import version
 
-# Version Information
+# Version
 __version__ = version.__version__
 
 
