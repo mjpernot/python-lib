@@ -1,18 +1,6 @@
 #!/usr/bin/python
 # Classification (U)
 
-###############################################################################
-#
-# Program:      Yum_get_distro.py
-#
-# Class Dependencies:
-#               None
-#
-# Library Dependenices:
-#               gen_class       => 2.4.0 or higher
-#
-###############################################################################
-
 """Program:  Yum_get_distro.py
 
     Description:  Unit testing of Yum.get_distro in gen_class.py.
@@ -44,7 +32,7 @@ sys.path.append(os.getcwd())
 import gen_class
 import version
 
-# Version Information
+# Version
 __version__ = version.__version__
 
 
