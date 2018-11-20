@@ -20,9 +20,6 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 ### Deprecated
 - system.py:  Module has been deprecated.
 
-### Changed
-- Documentation update.
-
 
 ## [2.6.0] - 2018-09-13
 ### Removed
