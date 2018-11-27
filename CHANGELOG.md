@@ -6,9 +6,11 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 ## [2.7.0] - 2018-11-27
 ### Updated
+- gen_libs.display_data:  Refactored function to reduce complexity rating.
 - gen_libs.data_multi_out:  Changed "MAIL" to "mail" - code convention change.
 
 ### Added
+- gen_libs.display_data.print_level:  Print the number of levels (i.e. tabs) required for line.
 - gen_class.Mail.create_subject:  Set the subject line of the email.
 
 ### Fixed

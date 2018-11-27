@@ -724,30 +724,40 @@ def display_data(data, level=0, f_hdlr=sys.stdout, **kwargs):
 
     """
 
+    def print_level(level, f_hdlr):
+
+        """Function:  print_level
+
+        Description:  Print the number of levels (i.e. tabs) required for line.
+
+        Arguments:
+            (input)  level -> Number of tabs to print.
+            (input) f_hdlr -> File handler (e.g. file or standard out).
+            (input) **kwargs:
+                None
+
+        """
+
+        cnt = 0
+
+        while (cnt < level):
+            print("\t", end="", file=f_hdlr)
+            cnt += 1
+
     if isinstance(data, dict):
 
         for item in data:
 
             # Recursive call for specific data types.
             if isinstance(data[item], (dict, list)):
-                cnt = 0
-
-                # Tab out.
-                while (cnt < level):
-                    print("\t", end="", file=f_hdlr)
-                    cnt += 1
+                print_level(level, f_hdlr)
 
                 print("%s =>" % item, file=f_hdlr)
 
                 display_data(data[item], level + 1, f_hdlr=f_hdlr)
 
             else:
-                cnt = 0
-
-                # Tab out.
-                while (cnt < level):
-                    print("\t", end="", file=f_hdlr)
-                    cnt += 1
+                print_level(level, f_hdlr)
 
                 print("%s :  %s" % (item, data[item]), file=f_hdlr)
 
@@ -758,12 +768,7 @@ def display_data(data, level=0, f_hdlr=sys.stdout, **kwargs):
             display_data(item, level, f_hdlr=f_hdlr)
 
     else:
-        cnt = 0
-
-        # Tab out.
-        while (cnt < level):
-            print("\t", end="", file=f_hdlr)
-            cnt += 1
+        print_level(level, f_hdlr)
 
         print("%s" % data, file=f_hdlr)
 
