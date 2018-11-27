@@ -192,7 +192,7 @@ class UnitTest(unittest.TestCase):
         mock_json.return_value = self.data
 
         with gen_libs.no_std_out():
-            gen_libs.data_multi_out(self.data, json_fmt=True, MAIL=self.MAIL)
+            gen_libs.data_multi_out(self.data, json_fmt=True, mail=self.MAIL)
 
         self.assertEqual(self.MAIL.msg, self.mail_data)
 
@@ -211,7 +211,7 @@ class UnitTest(unittest.TestCase):
         mock_json.return_value = self.data
 
         with gen_libs.no_std_out():
-            gen_libs.data_multi_out(self.data, json_fmt=True, MAIL=None)
+            gen_libs.data_multi_out(self.data, json_fmt=True, mail=None)
 
         self.assertEqual(self.MAIL.msg, "")
 
@@ -255,7 +255,7 @@ class UnitTest(unittest.TestCase):
         """
 
         with gen_libs.no_std_out():
-            gen_libs.data_multi_out(self.data, MAIL=self.MAIL)
+            gen_libs.data_multi_out(self.data, mail=self.MAIL)
 
         self.assertEqual(self.MAIL.msg, self.mail_data2)
 
@@ -271,7 +271,7 @@ class UnitTest(unittest.TestCase):
         """
 
         with gen_libs.no_std_out():
-            gen_libs.data_multi_out(self.data, json_fmt=True, MAIL=self.MAIL)
+            gen_libs.data_multi_out(self.data, json_fmt=True, mail=self.MAIL)
 
         self.assertEqual(self.MAIL.msg, self.mail_data)
 
