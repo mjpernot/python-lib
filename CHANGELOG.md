@@ -4,7 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
-## [2.7.0] - 2018-11-13
+## [2.7.0] - 2018-11-27
+### Updated
+- gen_libs.data_multi_out:  Changed "MAIL" to "mail" - code convention change.
+
 ### Added
 - gen_class.Mail.create_subject:  Set the subject line of the email.
 
