@@ -522,7 +522,7 @@ def crt_file_time(fname, path, ext, **kwargs):
     return path + fname + "." + time.strftime("%Y%m%d_%I%M") + ext
 
 
-def data_multi_out(data, o_file=None, json_fmt=False, sup_std=False, MAIL=None,
+def data_multi_out(data, o_file=None, json_fmt=False, sup_std=False, mail=None,
                    **kwargs):
 
     """Function:  data_multi_out
@@ -536,7 +536,7 @@ def data_multi_out(data, o_file=None, json_fmt=False, sup_std=False, MAIL=None,
         (input) o_file -> Directory_path/File_name|None: File name to write to.
         (input) json_fmt -> True|False - Convert data to JSON format.
         (input) sup_std -> True|False - Suppress printing to standard out.
-        (input) MAIL -> Mail_class|None - Mail class instance.
+        (input) mail -> Mail_class|None - Mail class instance.
         (input) **kwargs:
             None
         (output) err_flag -> True|False - Status of process.
@@ -554,11 +554,11 @@ def data_multi_out(data, o_file=None, json_fmt=False, sup_std=False, MAIL=None,
         err_flag = True
         err_msg = "Error:  Unable to convert to JSON format, not a dictionary"
 
-    if MAIL and isinstance(data, dict):
-        MAIL.add_2_msg(json.dumps(data, indent=4) + '\n')
+    if mail and isinstance(data, dict):
+        mail.add_2_msg(json.dumps(data, indent=4) + '\n')
 
-    elif MAIL:
-        MAIL.add_2_msg(data)
+    elif mail:
+        mail.add_2_msg(data)
 
     if o_file and not err_flag:
         write_file(o_file, "w", data)
