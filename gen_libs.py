@@ -1727,7 +1727,7 @@ def prt_lvl(lvl=1, **kwargs):
         cnt += 1
 
 
-def prt_msg(hdr, msg, prt_lvl=0, **kwargs):
+def prt_msg(hdr, msg, lvl=0, **kwargs):
 
     """Function:  prt_msg
 
@@ -1737,13 +1737,13 @@ def prt_msg(hdr, msg, prt_lvl=0, **kwargs):
     Arguments:
         (input) hdr -> Header to print.
         (input) msg -> Message to print.
-        (input) prt_lvl -> Integer - Tab level to start printing at.
+        (input) lvl -> Integer - Tab level to start printing at.
         (input) **kwargs:
             None
 
     """
 
-    prt_lvl(prt_lvl)
+    prt_lvl(lvl)
     print("{0}:  {1}".format(hdr, msg))
 
 
