@@ -2,7 +2,7 @@
 # Classification (U)
 
 # Description:
-  This project consists of a number of common local Python library, functions, and classes that are available for python programs to utilize.
+  This project consists of a number of common local python functions and classes that are available for use.
 
 
 ### This README file is broken down into the following sections:
@@ -22,7 +22,7 @@
 
 
 # Installation
-  There are two types of installs: pip and git.  Pip will only install the program modules and classes, whereas git will install all modules and classes including testing programs along with README and CHANGELOG files.  The Pip installation will be modifying another program's project to install these supporting librarues via pip.
+  There are two types of installs: pip and git.  Pip will only install the program modules and classes, whereas git will install all modules and classes including testing programs along with README.md and CHANGELOG.md files.  The Pip installation will be modifying another program's project to install these supporting librarues via pip.
 
 ### Pip Installation:
   * Replace **{Other_Python_Project}** with the baseline path of another python program.
