@@ -47,6 +47,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Unit testing initilization.
+        test_no_yes -> Test with no and yes value.
         test_yes_no -> Test with yes and no value.
 
     """
@@ -64,6 +65,19 @@ class UnitTest(unittest.TestCase):
 
         self.yes = "Yes"
         self.no = "No"
+
+    def test_no_yes(self):
+
+        """Function:  test_no_yes
+
+        Description:  Test with data of no and yes.
+
+        Arguments:
+            None
+
+        """
+
+        self.assertFalse(gen_libs.and_is_true(self.no, self.yes))
 
     def test_yes_no(self):
 
