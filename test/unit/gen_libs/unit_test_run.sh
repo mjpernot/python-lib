@@ -5,6 +5,10 @@
 #   is located at.
 
 echo ""
+echo "Unit test:  and_is_true"
+test/unit/gen_libs/and_is_true.py
+
+echo ""
 echo "Unit test:  chk_crt_dir"
 test/unit/gen_libs/chk_crt_dir.py
 
