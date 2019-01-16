@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [2.7.1] - 2018-12-11
+### Fixed
+- gen_libs.prt_msg:  Changed prt_lvl variable to lvl, due to naming conflict within function.
+
+
 ## [2.7.0] - 2018-11-27
 ### Updated
 - gen_libs.display_data:  Refactored function to reduce complexity rating.
