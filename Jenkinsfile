@@ -9,6 +9,8 @@ pipeline {
         stage('Test') {
             steps {
                 sh """
+                virtualenv test_env
+                source test_env/bin/activate
                 pip2 install mock --user
                 ./test/unit/gen_libs/and_is_true.py
                 ./test/unit/gen_libs/chk_crt_dir.py
@@ -45,6 +47,8 @@ pipeline {
                 ./test/unit/gen_class/Mail_create_body.py
                 ./test/unit/gen_class/Mail_create_subject.py
                 ./test/unit/gen_class/Mail_print_email.py
+                deactivate
+                rm -rf test_env
                 """
             }
         }
