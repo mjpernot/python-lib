@@ -40,7 +40,6 @@ pipeline {
                 ./test/unit/gen_class/Yum_get_release.py
                 ./test/unit/gen_class/Yum_get_os.py
                 ./test/unit/gen_class/Yum_get_distro.py
-                ./test/unit/gen_class/Yum_fetch_install_pkgs.py
                 ./test/unit/gen_class/ProgressBar_update.py
                 ./test/unit/gen_class/ProgressBar_calc_and_update.py
                 ./test/unit/gen_class/Mail_init.py
