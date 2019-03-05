@@ -45,7 +45,8 @@ class Daemon:
 
     """Class:  Daemon
 
-    Description:
+    Description:  Class that creates and runs a Python program as a daemon
+        program in include starting, stopping and restarting the process.
 
     Super-Class:
         None
