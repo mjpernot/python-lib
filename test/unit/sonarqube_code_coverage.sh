@@ -34,7 +34,6 @@ coverage run -a --source=gen_class test/unit/gen_class/ProgressBar_calc_and_upda
 coverage run -a --source=gen_class test/unit/gen_class/ProgressBar_init.py
 coverage run -a --source=gen_class test/unit/gen_class/ProgressBar_update.py
 coverage run -a --source=gen_class test/unit/gen_class/SingleInstanceException.py
-coverage run -a --source=gen_class test/unit/gen_class/Yum_fetch_install_pkgs.py
 coverage run -a --source=gen_class test/unit/gen_class/Yum_get_distro.py
 coverage run -a --source=gen_class test/unit/gen_class/Yum_get_os.py
 coverage run -a --source=gen_class test/unit/gen_class/Yum_get_release.py

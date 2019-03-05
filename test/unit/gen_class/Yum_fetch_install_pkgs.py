@@ -67,36 +67,35 @@ class UnitTest(unittest.TestCase):
         self.os = "Linux"
         self.release = "2.6"
         self.distro = ("Centos", "7.5.1804", "Core")
-        self.rpmdb = [{"Package": "Name", "Ver": "1.0", "Arch": "Linux"}]
         self.fetch_pkgs = [{"Package": "Name", "Ver": "1.0", "Arch": "Linux"}]
 
-    @mock.patch("gen_class.Yum.fetch_install_pkgs")
+    @mock.patch("gen_class.Yum.rpmdb")
     @mock.patch("platform.linux_distribution")
     @mock.patch("platform.release")
     @mock.patch("platform.system")
-    def test_fetch_install_pkgs(self, mock_system, mock_release, mock_distro,
-                                mock_fetch):
+    def test_get_release(self, mock_system, mock_release, mock_distro,
+                         mock_fetch):
 
-        """Function:  test_fetch_install_pkgs
+        """Function:  test_get_release
 
-        Description:  Test fetch_install_pkgs method.
+        Description:  Test get_release method.
 
         Arguments:
             mock_system -> Mock Ref:  platform.system
             mock_release -> Mock Ref:  platform.release
             mock_distro -> Mock Ref:  platform.linux_distribution
-            mock_fetch -> Mock Ref:  gen_class.Yum.fetch_install_pkgs
 
         """
 
         mock_system.return_value = "Linux"
         mock_release.return_value = "2.6"
         mock_distro.return_value = ("Centos", "7.5.1804", "Core")
-        mock_fetch.return_value = self.rpmdb
+        mock_fetch.return_value = [{"name": "Name", "version": "1.0",
+                                    "arch": "Linux"}]
 
-        YUM = gen_class.Yum(self.host_name)
+        yum = gen_class.Yum(self.host_name)
 
-        self.assertEqual(YUM.fetch_install_pkgs(), self.fetch_pkgs)
+        self.assertEqual(yum.fetch_install_pkgs(), self.fetch_pkgs)
 
 
 if __name__ == "__main__":
