@@ -953,8 +953,8 @@ class Yum(yum.YumBase):
 
         """
 
-        return [{"Package": pkg.name, "Ver": pkg.version, "Arch": pkg.arch,
-                 "Repo": str(getattr(pkg, "repo"))}
+        return [{"package": pkg.name, "ver": pkg.version, "arch": pkg.arch,
+                 "repo": str(getattr(pkg, "repo"))}
                 for pkg in self.doPackageLists(pkgnarrow="updates",
                                                patterns="",
                                                ignore_case=True)]

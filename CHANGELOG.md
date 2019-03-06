@@ -6,6 +6,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 ## [2.7.2] - 2019-03-06
 ### Changed
+- gen_class.Yum.fetch_update_pkgs:  Changed output to camelCase.
 - gen_class.Yum.fetch_install_pkgs:  Changed output to camelCase.
 
 
