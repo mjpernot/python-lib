@@ -84,6 +84,10 @@ exit
 
  * Mail => Class which is a representation of an email.  An email object is used as a proxy for creating an email.  The basic methods and attributes include reading in the message, creating the message body, and sending the email.
 
+ * Yum => Class which is a representation for YumBase system class.  A yum object is used as a proxy for using the yum command.  The basic methods and attributes include listing current repos, display current list of installed packages.
+
+ * Daemon =>  Class that creates and runs a Python program as a daemon program in include starting, stopping and restarting the process.
+
 
 ### Program:  gen_libs.py
 ##### Description:  A library program that contains a number of modules for general use.
@@ -93,10 +97,6 @@ exit
 ##### Description:  Class holding server system definitions.
 ##### Classes:
  * System => Class which is a representation of a Linux server.  A server object is used as a proxy for operating with the system.  The basic methods and attributes to contain information about the physical server.
-
- * Mail => Class which is a representation of an email.  An email object is used as a proxy for creating an email.  The basic methods and attributes include reading in the message, creating the message body, and sending the email.
-
- * Yum => Class which is a representation for YumBase system class.  A yum object is used as a proxy for using the yum command.  The basic methods and attributes include listing current repos, display current list of installed packages.
 
  * Graph => Class which is a representation of a graph plot process.  A graph plot object is used as a proxy for processing graph plots.  The basic methods and attributes include file and directory information and settings.
 
@@ -152,158 +152,54 @@ exit
 
 ```
 cd {Python_Project}/python-lib
-```
-
-### Unit:  month_delta
-```
 test/unit/gen_libs/month_delta.py
-```
-
-### Unit:  file_search_cnt
-```
 test/unit/gen_libs/file_search_cnt.py
-```
-
-### Unit:  get_base_dir
-```
 test/unit/gen_libs/get_base_dir.py
-```
-
-### Unit:  no_std_out
-```
 test/unit/gen_libs/no_std_out.py
-```
-
-### Unit:  merge_two_dicts
-```
 test/unit/gen_libs/merge_two_dicts.py
-```
-
-### Unit:  merge_data_types
-```
 test/unit/gen_libs/merge_data_types.py
-```
-
-### Unit:  write_file
-```
 test/unit/gen_libs/write_file.py
-```
-
-### Unit:  display_data
-```
 test/unit/gen_libs/display_data.py
-```
-
-### Unit:  get_data
-```
 test/unit/gen_libs/get_data.py
-```
-
-### Unit:  clear_file
-```
 test/unit/gen_libs/clear_file.py
-```
-
-### Unit:  chk_crt_dir
-```
 test/unit/gen_libs/chk_crt_dir.py
-```
-
-### Unit:  chk_crt_file
-```
 test/unit/gen_libs/chk_crt_file.py
-```
-
-### Unit:  data_multi_out
-```
 test/unit/gen_libs/data_multi_out.py
-```
-
-### Unit:  file_search
-```
 test/unit/gen_libs/file_search.py
-```
-
-### Unit:  file_2_list
-```
 test/unit/gen_libs/file_2_list.py
-```
-
-### Unit:  is_empty_file
-```
 test/unit/gen_libs/is_empty_file.py
-```
-
-### Unit:  touch
-```
 test/unit/gen_libs/touch.py
-```
-
-### Unit:  list_dirs
-```
 test/unit/gen_libs/list_dirs.py
-```
-
-### Unit:  cp_file
-```
 test/unit/gen_libs/cp_file.py
 ```
 
 ### All unit testing for gen_libs.py:
 ```
+cd {Python_Project}/python-lib
 test/unit/gen_libs/unit_test_run.sh
 ```
 
 
 # Unit test runs for gen_class.py:
 
-### Unit:  ProgressBar.__init__
 ```
+cd {Python_Project}/python-lib
 test/unit/gen_class/ProgressBar_init.py
-```
-
-### Unit:  ProgressBar.update
-```
 test/unit/gen_class/ProgressBar_update.py
-```
-
-### Unit:  ProgressBar.calc_and_update
-```
 test/unit/gen_class/ProgressBar_calc_and_update.py
-```
-
-### Unit:  SingleInstanceException
-```
 test/unit/gen_class/SingleInstanceException.py
-```
-
-### Unit:  ProgramLock.__init__
-```
 test/unit/gen_class/ProgramLock_init.py
-```
-
-### Unit:  Yum.__init__
-```
 test/unit/gen_class/Yum_init.py
-```
-
-### Unit:  Yum.get_os
-```
 test/unit/gen_class/Yum_get_os.py
-```
-
-### Unit:  Yum.get_release
-```
 test/unit/gen_class/Yum_get_release.py
-```
-
-### Unit:  Yum.get_distro
-```
 test/unit/gen_class/Yum_get_distro.py
+test/unit/gen_class/Yum_fetch_install_pkgs.py
+test/unit/gen_class/Yum_fetch_update_pkgs.py
 ```
 
 ### All unit testing for gen_class.py:
 ```
+cd {Python_Project}/python-lib
 test/unit/gen_class/unit_test_run.sh
 ```
 
