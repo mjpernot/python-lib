@@ -939,7 +939,7 @@ class Yum(yum.YumBase):
 
         """
 
-        return [{"Package": pkg.name, "Ver": pkg.version, "Arch": pkg.arch}
+        return [{"package": pkg.name, "ver": pkg.version, "arch": pkg.arch}
                 for pkg in self.rpmdb]
 
     def fetch_update_pkgs(self):
