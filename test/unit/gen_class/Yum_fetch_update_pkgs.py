@@ -57,7 +57,7 @@ class UnitTest(unittest.TestCase):
         rpmdb1 = collections.namedtuple('Rpmdb', 'name version arch repo')
         return [rpmdb1(name="Name", version="1.0", arch="Linux",
                        repo="RepoName")]
-        
+
     def setUp(self):
 
         """Function:  setUp
