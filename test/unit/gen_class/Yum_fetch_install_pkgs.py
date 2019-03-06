@@ -26,6 +26,7 @@ else:
 
 # Third-party
 import mock
+import collections
 
 # Local
 sys.path.append(os.getcwd())
@@ -48,7 +49,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
-        test_get_release -> Test returning OS platform name.
+        test_fetch_install_pkgs -> Test returning installed packages.
 
     """
 
@@ -67,18 +68,18 @@ class UnitTest(unittest.TestCase):
         self.os = "Linux"
         self.release = "2.6"
         self.distro = ("Centos", "7.5.1804", "Core")
+        self.rpmdb = collections.namedtuple('Rpmdb', 'name version arch')
+
         self.fetch_pkgs = [{"Package": "Name", "Ver": "1.0", "Arch": "Linux"}]
 
-    @mock.patch("gen_class.Yum.rpmdb")
     @mock.patch("platform.linux_distribution")
     @mock.patch("platform.release")
     @mock.patch("platform.system")
-    def test_get_release(self, mock_system, mock_release, mock_distro,
-                         mock_fetch):
+    def test_fetch_install_pkgs(self, mock_system, mock_release, mock_distro):
 
-        """Function:  test_get_release
+        """Function:  test_fetch_install_pkgs
 
-        Description:  Test get_release method.
+        Description:  Test returning installed packages.
 
         Arguments:
             mock_system -> Mock Ref:  platform.system
@@ -90,10 +91,9 @@ class UnitTest(unittest.TestCase):
         mock_system.return_value = "Linux"
         mock_release.return_value = "2.6"
         mock_distro.return_value = ("Centos", "7.5.1804", "Core")
-        mock_fetch.return_value = [{"name": "Name", "version": "1.0",
-                                    "arch": "Linux"}]
 
         yum = gen_class.Yum(self.host_name)
+        yum.rpmdb = [self.rpmdb(name="Name", version="1.0", arch="Linux")]
 
         self.assertEqual(yum.fetch_install_pkgs(), self.fetch_pkgs)
 
