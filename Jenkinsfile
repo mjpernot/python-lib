@@ -9,6 +9,8 @@ pipeline {
         stage('Test') {
             steps {
                 sh """
+                virtualenv test_env
+                source test_env/bin/activate
                 pip2 install mock --user
                 ./test/unit/gen_libs/and_is_true.py
                 ./test/unit/gen_libs/chk_crt_dir.py
@@ -38,6 +40,8 @@ pipeline {
                 ./test/unit/gen_class/Yum_get_release.py
                 ./test/unit/gen_class/Yum_get_os.py
                 ./test/unit/gen_class/Yum_get_distro.py
+                ./test/unit/gen_class/Yum_fetch_install_pkgs.py
+                ./test/unit/gen_class/Yum_fetch_update_pkgs.py
                 ./test/unit/gen_class/ProgressBar_update.py
                 ./test/unit/gen_class/ProgressBar_calc_and_update.py
                 ./test/unit/gen_class/Mail_init.py
@@ -45,6 +49,8 @@ pipeline {
                 ./test/unit/gen_class/Mail_create_body.py
                 ./test/unit/gen_class/Mail_create_subject.py
                 ./test/unit/gen_class/Mail_print_email.py
+                deactivate
+                rm -rf test_env
                 """
             }
         }
@@ -55,7 +61,7 @@ pipeline {
                     scannerHome = tool 'sonar-scanner';
                 }
                 withSonarQubeEnv('Sonar') {
-                    sh "${scannerHome}/bin/sonar-scanner"
+                    sh "${scannerHome}/bin/sonar-scanner -Dproject.settings=sonar-project.JACIDM.properties"
                 }
             
             }

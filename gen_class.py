@@ -45,7 +45,8 @@ class Daemon:
 
     """Class:  Daemon
 
-    Description:
+    Description:  Class that creates and runs a Python program as a daemon
+        program in include starting, stopping and restarting the process.
 
     Super-Class:
         None
@@ -938,7 +939,7 @@ class Yum(yum.YumBase):
 
         """
 
-        return [{"Package": pkg.name, "Ver": pkg.version, "Arch": pkg.arch}
+        return [{"package": pkg.name, "ver": pkg.version, "arch": pkg.arch}
                 for pkg in self.rpmdb]
 
     def fetch_update_pkgs(self):
@@ -952,8 +953,8 @@ class Yum(yum.YumBase):
 
         """
 
-        return [{"Package": pkg.name, "Ver": pkg.version, "Arch": pkg.arch,
-                 "Repo": str(getattr(pkg, "repo"))}
+        return [{"package": pkg.name, "ver": pkg.version, "arch": pkg.arch,
+                 "repo": str(getattr(pkg, "repo"))}
                 for pkg in self.doPackageLists(pkgnarrow="updates",
                                                patterns="",
                                                ignore_case=True)]
