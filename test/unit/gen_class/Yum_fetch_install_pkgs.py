@@ -70,7 +70,7 @@ class UnitTest(unittest.TestCase):
         self.distro = ("Centos", "7.5.1804", "Core")
         self.rpmdb = collections.namedtuple('Rpmdb', 'name version arch')
 
-        self.fetch_pkgs = [{"Package": "Name", "Ver": "1.0", "Arch": "Linux"}]
+        self.fetch_pkgs = [{"package": "Name", "ver": "1.0", "arch": "Linux"}]
 
     @mock.patch("platform.linux_distribution")
     @mock.patch("platform.release")
