@@ -45,6 +45,10 @@ echo "Unit test:  Yum.get_release"
 test/unit/gen_class/Yum_get_release.py
 
 echo ""
+echo "Unit test:  Yum.fetch_install_pkgs"
+test/unit/gen_class/Yum_fetch_install_pkgs.py
+
+echo ""
 echo "Unit test:  Mail.__init__"
 test/unit/gen_class/Mail_init.py
 

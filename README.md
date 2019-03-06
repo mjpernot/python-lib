@@ -193,6 +193,7 @@ test/unit/gen_class/Yum_init.py
 test/unit/gen_class/Yum_get_os.py
 test/unit/gen_class/Yum_get_release.py
 test/unit/gen_class/Yum_get_distro.py
+test/unit/gen_class/Yum_fetch_install_pkgs.py
 ```
 
 ### All unit testing for gen_class.py:
