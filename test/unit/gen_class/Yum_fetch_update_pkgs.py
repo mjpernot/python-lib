@@ -73,8 +73,8 @@ class UnitTest(unittest.TestCase):
         self.os = "Linux"
         self.release = "2.6"
         self.distro = ("Centos", "7.5.1804", "Core")
-        self.update_pkgs = [{"Package": "Name", "Ver": "1.0", "Arch": "Linux",
-                             "Repo": "RepoName"}]
+        self.update_pkgs = [{"package": "Name", "ver": "1.0", "arch": "Linux",
+                             "repo": "RepoName"}]
 
     @mock.patch("gen_class.Yum.doPackageLists", mock_get_update)
     @mock.patch("platform.linux_distribution")
