@@ -5,7 +5,8 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 
 ## [2.7.3] - 2019-03-27
-### Changed
+### Deprecated
+- gen_libs.copy_tree:  Function replaced by shutil.copytree.
 
 
 ## [2.7.2] - 2019-03-06
