@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [2.7.3] - 2019-03-27
+### Changed
+
+
 ## [2.7.2] - 2019-03-06
 ### Changed
 - gen_class.Yum.fetch_update_pkgs:  Changed output to camelCase.
