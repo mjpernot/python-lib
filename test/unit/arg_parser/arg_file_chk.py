@@ -93,7 +93,7 @@ class UnitTest(unittest.TestCase):
 
         self.file_chk_list = ["-f"]
         self.args_array = {"-f": "test/file1", "-m": "Marker"}
-        self.open = Open()
+        self.open = FileOpen()
 
     @mock.patch("arg_parser.open")
     def test_no_match_between_lists(self, mock_open):
