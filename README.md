@@ -171,6 +171,7 @@ test/unit/gen_libs/is_empty_file.py
 test/unit/gen_libs/touch.py
 test/unit/gen_libs/list_dirs.py
 test/unit/gen_libs/cp_file.py
+test/unit/gen_libs/rotate_files.py
 ```
 
 ### All unit testing for gen_libs.py:
