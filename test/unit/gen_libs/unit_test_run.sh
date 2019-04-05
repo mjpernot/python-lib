@@ -77,6 +77,10 @@ echo "Unit test:  no_std_out"
 test/unit/gen_libs/no_std_out.py
 
 echo ""
+echo "Unit test:  rotate_files"
+test/unit/gen_libs/rotate_files.py
+
+echo ""
 echo "Unit test:  touch"
 test/unit/gen_libs/touch.py
 
