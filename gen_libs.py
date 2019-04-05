@@ -13,7 +13,7 @@
         chk_int
         clear_file
         compress
-        copy_tree
+        copy_tree (deprecated)
         cp_file
         cp_file2
         crt_file_time
@@ -352,7 +352,7 @@ def compress(fname, **kwargs):
 
 def copy_tree(src, dst, symlinks=False, ignore=None, **kwargs):
 
-    """Function:  copy_tree
+    """Function:  copy_tree (deprecated)
 
     Description:  Copies a directory tree recursively.  Will create the
         destination directory if not present.

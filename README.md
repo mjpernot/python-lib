@@ -171,12 +171,28 @@ test/unit/gen_libs/is_empty_file.py
 test/unit/gen_libs/touch.py
 test/unit/gen_libs/list_dirs.py
 test/unit/gen_libs/cp_file.py
+test/unit/gen_libs/rotate_files.py
 ```
 
 ### All unit testing for gen_libs.py:
 ```
 cd {Python_Project}/python-lib
 test/unit/gen_libs/unit_test_run.sh
+```
+
+
+# Unit test runs for arg_parser.py:
+  * Replace **{Python_Project}** with the baseline path of the python program.
+
+```
+cd {Python_Project}/python-lib
+test/unit/arg_parser/arg_file_chk.py
+```
+
+### All unit testing for arg_parser.py:
+```
+cd {Python_Project}/python-lib
+test/unit/arg_parser/unit_test_run.sh
 ```
 
 

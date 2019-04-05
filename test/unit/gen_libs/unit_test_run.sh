@@ -84,3 +84,7 @@ echo ""
 echo "Unit test:  write_file"
 test/unit/gen_libs/write_file.py
 
+echo ""
+echo "Unit test:  rotate_files"
+test/unit/gen_libs/rotate_files.py
+
