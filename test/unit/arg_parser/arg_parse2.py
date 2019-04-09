@@ -48,7 +48,10 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Unit testing initilization.
-        test_multilist_one_val -> 
+        test_all_together -> Test with all options together.
+        test_multi_defdict_set -> Test with multi_list and opt_def_dict set.
+        test_multilist_two_val -> Test with multi_list set to two values.
+        test_multilist_one_val -> Test with multi_list set to one value.
         test_multilist_def_arg -> Test with multi_list set to 1 arg using def.
         test_multilist_two_args -> Test multi_list set to 1 arg & 1 other arg.
         test_multilist_one_arg -> Test with multi_list set to one argument.
@@ -77,11 +80,75 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.argv = ["./merge_repo.py", "-c", "merge", "-d", "config", "-M"]
-        self.opt_val_list = ["-c", "-d", "-f"]
-        self.opt_def_dict = None
-        self.multi_list = ["-f"]
+        self.argv = ["./merge_repo.py", "-c", "merge", "-d", "-M", "-f",
+                     "file1", "file2"]
+        self.opt_val_list = ["-c", "-d", "-f", "-g"]
+        self.opt_def_dict = {"-g": "def_val"}
+        self.multi_list = ["-f", "-g"]
         self.opt_val = ["-d"]
+
+    @mock.patch("arg_parser.gen_libs.chk_int")
+    def test_all_together(self, mock_int):
+
+        """Function:  test_all_together
+
+        Description:  Test with all options together.
+
+        Arguments:
+            None
+
+        """
+
+        mock_int.return_value = False
+
+        self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list,
+                                               multi_val=self.multi_list,
+                                               opt_val=self.opt_val),
+                         {"-c": "merge", "-d": None, "-M": True,
+                          "-f": ["file1", "file2"]})
+
+    @mock.patch("arg_parser.arg_default")
+    @mock.patch("arg_parser.gen_libs.chk_int")
+    def test_multi_defdict_set(self, mock_int, mock_def):
+
+        """Function:  test_multi_defdict_set
+
+        Description:  Test with multi_list and opt_def_dict set.
+
+        Arguments:
+            None
+
+        """
+
+        mock_int.return_value = False
+        mock_def.return_value = {"-g": "def_val"}
+
+        self.argv = ["./merge_repo.py", "-g"]
+
+        self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list,
+                                               self.opt_def_dict,
+                                               multi_val=self.multi_list),
+                         {"-g": "def_val"})
+
+    @mock.patch("arg_parser.gen_libs.chk_int")
+    def test_multilist_two_val(self, mock_int):
+
+        """Function:  test_multilist_one_val
+
+        Description:  Test with multi_list set to two values.
+
+        Arguments:
+            None
+
+        """
+
+        mock_int.return_value = False
+
+        self.argv = ["./merge_repo.py", "-f", "file1", "file2"]
+
+        self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list,
+                                               multi_val=self.multi_list),
+                         {"-f": ["file1", "file2"]})
 
     @mock.patch("arg_parser.gen_libs.chk_int")
     def test_multilist_one_val(self, mock_int):
@@ -103,7 +170,6 @@ class UnitTest(unittest.TestCase):
                                                multi_val=self.multi_list),
                          {"-f": ["file1"]})
 
-    @unittest.skip("Done")
     @mock.patch("arg_parser.arg_default")
     @mock.patch("arg_parser.gen_libs.chk_int")
     def test_multilist_def_arg(self, mock_int, mock_def):
@@ -126,7 +192,6 @@ class UnitTest(unittest.TestCase):
                                                multi_val=self.multi_list),
                          "SystemExit: Error: Arg -f missing value")
 
-    @unittest.skip("Done")
     @mock.patch("arg_parser.gen_libs.chk_int")
     def test_multilist_two_args(self, mock_int):
 
@@ -147,7 +212,6 @@ class UnitTest(unittest.TestCase):
                                                multi_val=self.multi_list),
                          {"-f": ["file1", "file2"], "-M": True})
 
-    @unittest.skip("Done")
     @mock.patch("arg_parser.gen_libs.chk_int")
     def test_multilist_one_arg(self, mock_int):
 
@@ -168,7 +232,6 @@ class UnitTest(unittest.TestCase):
                                                multi_val=self.multi_list),
                          {"-f": ["file1", "file2"]})
 
-    @unittest.skip("Done")
     @mock.patch("arg_parser.gen_libs.chk_int")
     def test_optvalset_arg_int(self, mock_int):
 
@@ -188,7 +251,6 @@ class UnitTest(unittest.TestCase):
         self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list),
                          {"-c": "-1"})
 
-    @unittest.skip("Done")
     @mock.patch("arg_parser.gen_libs.chk_int")
     def test_optval_set(self, mock_int):
 
@@ -209,7 +271,6 @@ class UnitTest(unittest.TestCase):
                                                opt_val=self.opt_val),
                          {"-c": "merge", "-d": None})
 
-    @unittest.skip("Done")
     @mock.patch("arg_parser.gen_libs.chk_int")
     @mock.patch("arg_parser.arg_default")
     def test_optvalset_no_val(self, mock_def, mock_int):
@@ -231,7 +292,6 @@ class UnitTest(unittest.TestCase):
         self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list),
                          "SystemExit: Error: Arg -d missing value")
 
-    @unittest.skip("Done")
     def test_optvalset_two_arg(self):
 
         """Function:  test_optvalset_two_arg
@@ -248,7 +308,6 @@ class UnitTest(unittest.TestCase):
         self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list),
                          {"-c": "merge", "-d": "config"})
 
-    @unittest.skip("Done")
     def test_optvalset_one_arg(self):
 
         """Function:  test_optvalset_one_arg
@@ -265,7 +324,6 @@ class UnitTest(unittest.TestCase):
         self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list),
                          {"-c": "merge"})
 
-    @unittest.skip("Done")
     def test_arg_value_not_set(self):
 
         """Function:  test_arg_value_not_set
@@ -281,7 +339,6 @@ class UnitTest(unittest.TestCase):
 
         self.assertEqual(arg_parser.arg_parse2(self.argv, []), {"-c": True})
 
-    @unittest.skip("Done")
     def test_prog_with_arg(self):
 
         """Function:  test_prog_with_arg
@@ -297,7 +354,6 @@ class UnitTest(unittest.TestCase):
 
         self.assertEqual(arg_parser.arg_parse2(self.argv, []), {"-M": True})
 
-    @unittest.skip("Done")
     def test_with_two_args(self):
 
         """Function:  test_with_two_args
@@ -313,7 +369,6 @@ class UnitTest(unittest.TestCase):
 
         self.assertEqual(arg_parser.arg_parse2(self.argv, []), {"-M": True})
 
-    @unittest.skip("Done")
     def test_with_one_arg(self):
 
         """Function:  test_with_one_arg
@@ -329,7 +384,6 @@ class UnitTest(unittest.TestCase):
 
         self.assertEqual(arg_parser.arg_parse2(self.argv, []), {"-M": True})
 
-    @unittest.skip("Done")
     def test_argv_no_args(self):
 
         """Function:  test_argv_no_args
@@ -345,7 +399,6 @@ class UnitTest(unittest.TestCase):
 
         self.assertEqual(arg_parser.arg_parse2(self.argv, []), {})
 
-    @unittest.skip("Done")
     def test_empty_argv_list(self):
 
         """Function:  test_empty_argv_list
