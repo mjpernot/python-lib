@@ -49,6 +49,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Unit testing initilization.
+        test_empty_argv_list -> Test with argv as empty list.
 
     """
 
@@ -63,24 +64,27 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.argv = []
+        self.argv = ["./merge_repo.py", "-c", "merge", "-d", "config", "-M"]
         self.opt_val_list = []
         self.opt_def_dict = None
         self.multi_list = []
         self.opt_val = []
 
-    def test_second_open_no_error(self):
+    def test_empty_argv_list(self):
 
-        """Function:  test_second_open_no_error
+        """Function:  test_empty_argv_list
 
-        Description:  Test with second open no error.
+        Description:  Test with argv as empty list.
 
         Arguments:
             None
 
         """
 
-        self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list))
+        self.argv = ["./merge_repo.py"]
+
+        self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list),
+                         {})
 
 
 
