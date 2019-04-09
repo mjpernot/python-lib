@@ -48,6 +48,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Unit testing initilization.
+        test_optvalset_one_arg -> Test with opt_val_set set to one argument.
         test_arg_value_not_set -> Test argument value, but not set in opt_val.
         test_prog_with_arg -> Test with program name with argument.
         test_with_two_args -> Test with two arguments, no values.
@@ -74,11 +75,11 @@ class UnitTest(unittest.TestCase):
         self.multi_list = []
         self.opt_val = []
 
-    def test_arg_value_not_set(self):
+    def test_optvalset_one_arg(self):
 
-        """Function:  test_arg_value_not_set
+        """Function:  test_optvalset_one_arg
 
-        Description:  Test with argument with value, but not set in opt_val.
+        Description:  Test with opt_val_set set to one argument.
 
         Arguments:
             None
@@ -86,9 +87,10 @@ class UnitTest(unittest.TestCase):
         """
 
         self.argv = ["./merge_repo.py", "-c", "merge"]
+        self.opt_val_list = ["-c"]
 
         self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list),
-                         {"-c": True})
+                         {"-c": "merge"})
 
     def test_arg_value_not_set(self):
 
