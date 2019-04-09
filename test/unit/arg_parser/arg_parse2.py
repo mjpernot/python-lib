@@ -48,6 +48,8 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Unit testing initilization.
+        test_arg_value_not_set -> Test argument value, but not set in opt_val.
+        test_prog_with_arg -> Test with program name with argument.
         test_with_two_args -> Test with two arguments, no values.
         test_with_one_arg -> Test with one argument, no values.
         test_argv_no_args -> Test with argv with no arguments.
@@ -71,6 +73,54 @@ class UnitTest(unittest.TestCase):
         self.opt_def_dict = None
         self.multi_list = []
         self.opt_val = []
+
+    def test_arg_value_not_set(self):
+
+        """Function:  test_arg_value_not_set
+
+        Description:  Test with argument with value, but not set in opt_val.
+
+        Arguments:
+            None
+
+        """
+
+        self.argv = ["./merge_repo.py", "-c", "merge"]
+
+        self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list),
+                         {"-c": True})
+
+    def test_arg_value_not_set(self):
+
+        """Function:  test_arg_value_not_set
+
+        Description:  Test with argument with value, but not set in opt_val.
+
+        Arguments:
+            None
+
+        """
+
+        self.argv = ["./merge_repo.py", "-c", "merge"]
+
+        self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list),
+                         {"-c": True})
+
+    def test_prog_with_arg(self):
+
+        """Function:  test_prog_with_arg
+
+        Description:  Test with program name with argument.
+
+        Arguments:
+            None
+
+        """
+
+        self.argv = ["./merge_repo.py", "-M"]
+
+        self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list),
+                         {"-M": True})
 
     def test_with_two_args(self):
 
