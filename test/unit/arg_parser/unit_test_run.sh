@@ -8,3 +8,7 @@ echo ""
 echo "Unit test:  arg_file_chk"
 test/unit/arg_parser/arg_file_chk.py
 
+echo ""
+echo "Unit test:  arg_parse2"
+test/unit/arg_parser/arg_parse2.py
+
