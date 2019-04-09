@@ -48,6 +48,10 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Unit testing initilization.
+        test_multilist_one_val -> 
+        test_multilist_def_arg -> Test with multi_list set to 1 arg using def.
+        test_multilist_two_args -> Test multi_list set to 1 arg & 1 other arg.
+        test_multilist_one_arg -> Test with multi_list set to one argument.
         test_optvalset_arg_int -> Test opt_val_set set to integer value.
         test_optval_set -> Test with opt_val set with no value in arg.
         test_optvalset_no_val -> Test opt_val_set set with no value in arg.
@@ -79,6 +83,71 @@ class UnitTest(unittest.TestCase):
         self.multi_list = ["-f"]
         self.opt_val = ["-d"]
 
+    @mock.patch("arg_parser.gen_libs.chk_int")
+    def test_multilist_one_val(self, mock_int):
+
+        """Function:  test_multilist_one_val
+
+        Description:  Test with multi_list set to one value.
+
+        Arguments:
+            None
+
+        """
+
+        mock_int.return_value = False
+
+        self.argv = ["./merge_repo.py", "-f", "file1"]
+
+        self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list,
+                                               multi_val=self.multi_list),
+                         {"-f": ["file1"]})
+
+    @unittest.skip("Done")
+    @mock.patch("arg_parser.arg_default")
+    @mock.patch("arg_parser.gen_libs.chk_int")
+    def test_multilist_def_arg(self, mock_int, mock_def):
+
+        """Function:  test_multilist_def_arg
+
+        Description:  Test with multi_list set to one arg using default.
+
+        Arguments:
+            None
+
+        """
+
+        mock_int.return_value = False
+        mock_def.return_value = "SystemExit: Error: Arg -f missing value"
+
+        self.argv = ["./merge_repo.py", "-f"]
+
+        self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list,
+                                               multi_val=self.multi_list),
+                         "SystemExit: Error: Arg -f missing value")
+
+    @unittest.skip("Done")
+    @mock.patch("arg_parser.gen_libs.chk_int")
+    def test_multilist_two_args(self, mock_int):
+
+        """Function:  test_multilist_two_args
+
+        Description:  Test with multi_list set to one arg and one other arg.
+
+        Arguments:
+            None
+
+        """
+
+        mock_int.return_value = False
+
+        self.argv = ["./merge_repo.py", "-f", "file1", "file2", "-M"]
+
+        self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list,
+                                               multi_val=self.multi_list),
+                         {"-f": ["file1", "file2"], "-M": True})
+
+    @unittest.skip("Done")
     @mock.patch("arg_parser.gen_libs.chk_int")
     def test_multilist_one_arg(self, mock_int):
 
