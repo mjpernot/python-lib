@@ -337,13 +337,11 @@ def arg_parse2(argv, opt_val_list, opt_def_dict=None, **kwargs):
                 # If no value in argv for option and it is not an integer.
                 if len(argv) < 2 \
                    or (argv[1][0] == "-" and not gen_libs.chk_int(argv[1])):
-                    print("HERE")
 
                     # See if default value is available for argument.
                     args_array = arg_default(argv[0], args_array, opt_def_dict)
 
                 else:
-                    print("HERE2")
                     # Handle multiple values for argument.
                     args_array[argv[0]] = []
                     x = 0
