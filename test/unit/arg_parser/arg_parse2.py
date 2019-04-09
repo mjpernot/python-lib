@@ -48,6 +48,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Unit testing initilization.
+        test_with_two_args -> Test with two arguments, no values.
         test_with_one_arg -> Test with one argument, no values.
         test_argv_no_args -> Test with argv with no arguments.
         test_empty_argv_list -> Test with argv as empty list.
@@ -70,6 +71,22 @@ class UnitTest(unittest.TestCase):
         self.opt_def_dict = None
         self.multi_list = []
         self.opt_val = []
+
+    def test_with_two_args(self):
+
+        """Function:  test_with_two_args
+
+        Description:  Test with two arguments, no values.
+
+        Arguments:
+            None
+
+        """
+
+        self.argv = ["-M"]
+
+        self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list),
+                         {"-M": True})
 
     def test_with_one_arg(self):
 
