@@ -142,6 +142,7 @@ class UnitTest(unittest.TestCase):
         test_filecrtlist_not_in_list -> Test file_crt_list option not in list.
         test_filecrtlist_empty_list -> Test file_crt_list passed empty list.
         test_filecrtlist_not_passed -> Test file_crt_list not being passed.
+        test_first_open_error_two -> Test with first open & error 2 returned.
         test_first_open_error_ten -> Test with first open & error 10 returned.
         test_first_open_no_errors -> Test with first open and no errors.
         test_name_loop_zero_items -> Test with name loop on zero items.
@@ -286,6 +287,24 @@ class UnitTest(unittest.TestCase):
         with gen_libs.no_std_out():
             self.assertTrue(arg_parser.arg_file_chk(self.args_array,
                                                     self.file_chk_list))
+
+    @mock.patch("arg_parser.open")
+    def test_first_open_error_two(self, mock_open):
+
+        """Function:  test_first_open_error_two
+
+        Description:  Test with first open and error 2 returned.
+
+        Arguments:
+            None
+
+        """
+
+        mock_open.side_effect = [self.open3, self.open]
+
+        self.assertFalse(arg_parser.arg_file_chk(self.args_array,
+                                                 self.file_chk_list,
+                                                 self.file_crt_list))
 
     @mock.patch("arg_parser.open")
     def test_first_open_error_ten(self, mock_open):
