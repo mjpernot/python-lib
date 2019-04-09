@@ -76,6 +76,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Unit testing initilization.
+        test_one_match_between_sets -> Test with one match between sets.
         test_one_match_empty_list -> Test 1 match between sets but empty list.
         test_no_match_between_sets -> Test with no match between sets passed.
 
@@ -96,7 +97,20 @@ class UnitTest(unittest.TestCase):
         self.args_array = {"-f": "test/file1", "-m": "Marker"}
         self.open = FileOpen()
 
-    #@mock.patch("arg_parser.open")
+    @mock.patch("arg_parser.open")
+    def test_one_match_between_sets(self, mock_open):
+
+        """Function:  test_one_match_between_sets
+
+        Description:  Test with one match between sets.
+
+        Arguments:
+            None
+
+        """
+
+        self.assertFalse(arg_parser.arg_file_chk(self.args_array,
+                                                 self.file_chk_list))
 
     def test_one_match_empty_list(self):
 
