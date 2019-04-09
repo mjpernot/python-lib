@@ -4,8 +4,8 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
-## [2.7.3] - 2019-03-27
-### Deprecated
+## [2.7.3] - 2019-04-09
+### Removed
 - gen_libs.copy_tree:  Function replaced by shutil.copytree.
 
 
