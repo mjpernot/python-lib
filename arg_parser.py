@@ -610,7 +610,7 @@ def _file_create(name, option, file_crt_list, errno, exit_flag):
         (input) option -> Option being checked.
         (input) file_crt_list -> Options that require files to be created.
         (input) errno -> Current error status from file_crt_list function.
-        (input) exit_flag -> Current status of file_crt_list function. 
+        (input) exit_flag -> Current status of file_crt_list function.
         (output) exit_flag -> True|False - if file creation fails.
 
     """
