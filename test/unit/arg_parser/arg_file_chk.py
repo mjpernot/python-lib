@@ -76,6 +76,8 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Unit testing initilization.
+        test_isinstance_is_string -> Test with isinstance against a string.
+        test_isinstance_is_list -> Test with isinstance against a list.
         test_two_match_between_sets -> Test with two matches between sets.
         test_one_match_between_sets -> Test with one match between sets.
         test_one_match_empty_list -> Test 1 match between sets but empty list.
@@ -95,8 +97,57 @@ class UnitTest(unittest.TestCase):
         """
 
         self.file_chk_list = ["-f"]
-        self.args_array = {"-f": "test/file1", "-m": "Marker"}
+        self.args_array = {"-f": ["test/file1"], "-m": "Marker"}
         self.open = FileOpen()
+
+    @mock.patch("arg_parser.open")
+    def test_isinstance_is_set(self, mock_open):
+
+        """Function:  test_isinstance_is_set
+
+        Description:  Test with isinstance against a set.
+
+        Arguments:
+            None
+
+        """
+
+        self.args_array = {"-f": {"test/file1"}, "-m": "Marker"}
+
+        self.assertFalse(arg_parser.arg_file_chk(self.args_array,
+                                                 self.file_chk_list))
+
+    @mock.patch("arg_parser.open")
+    def test_isinstance_is_string(self, mock_open):
+
+        """Function:  test_isinstance_is_string
+
+        Description:  Test with isinstance against a string.
+
+        Arguments:
+            None
+
+        """
+
+        self.args_array = {"-f": "test/file1", "-m": "Marker"}
+
+        self.assertFalse(arg_parser.arg_file_chk(self.args_array,
+                                                 self.file_chk_list))
+
+    @mock.patch("arg_parser.open")
+    def test_isinstance_is_list(self, mock_open):
+
+        """Function:  test_isinstance_is_list
+
+        Description:  Test with isinstance against a list.
+
+        Arguments:
+            None
+
+        """
+
+        self.assertFalse(arg_parser.arg_file_chk(self.args_array,
+                                                 self.file_chk_list))
 
     @mock.patch("arg_parser.open")
     def test_two_match_between_sets(self, mock_open):
