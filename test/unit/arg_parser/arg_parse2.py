@@ -30,7 +30,6 @@ import mock
 # Local
 sys.path.append(os.getcwd())
 import arg_parser
-import gen_libs
 import version
 
 # Version
@@ -49,6 +48,8 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Unit testing initilization.
+        test_with_one_arg -> Test with one argument, no values.
+        test_argv_no_args -> Test with argv with no arguments.
         test_empty_argv_list -> Test with argv as empty list.
 
     """
@@ -70,6 +71,38 @@ class UnitTest(unittest.TestCase):
         self.multi_list = []
         self.opt_val = []
 
+    def test_with_one_arg(self):
+
+        """Function:  test_with_one_arg
+
+        Description:  Test with one argument, no values.
+
+        Arguments:
+            None
+
+        """
+
+        self.argv = ["./merge_repo.py"]
+
+        self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list),
+                         {})
+
+    def test_argv_no_args(self):
+
+        """Function:  test_argv_no_args
+
+        Description:  Test with argv with no arguments.
+
+        Arguments:
+            None
+
+        """
+
+        self.argv = ["./merge_repo.py"]
+
+        self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list),
+                         {})
+
     def test_empty_argv_list(self):
 
         """Function:  test_empty_argv_list
@@ -81,7 +114,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.argv = ["./merge_repo.py"]
+        self.argv = []
 
         self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list),
                          {})
