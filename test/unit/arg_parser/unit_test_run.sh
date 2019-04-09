@@ -12,3 +12,7 @@ echo ""
 echo "Unit test:  arg_parse2"
 test/unit/arg_parser/arg_parse2.py
 
+echo ""
+echo "Unit test:  file_create"
+test/unit/arg_parser/file_create.py
+

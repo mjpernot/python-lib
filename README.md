@@ -188,6 +188,7 @@ test/unit/gen_libs/unit_test_run.sh
 cd {Python_Project}/python-lib
 test/unit/arg_parser/arg_file_chk.py
 test/unit/arg_parser/arg_parse2.py
+test/unit/arg_parser/file_create.py
 ```
 
 ### All unit testing for arg_parser.py:
