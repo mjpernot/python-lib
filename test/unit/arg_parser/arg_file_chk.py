@@ -104,8 +104,7 @@ class UnitTest(unittest.TestCase):
         self.args_array = {"-f": ["test/file1"], "-m": "Marker"}
         self.open = FileOpen()
 
-    @mock.patch("arg_parser.open")
-    def test_name_loop_zero_items(self, mock_open):
+    def test_name_loop_zero_items(self):
 
         """Function:  test_name_loop_zero_items
 
