@@ -415,6 +415,5 @@ class UnitTest(unittest.TestCase):
         self.assertEqual(arg_parser.arg_parse2(self.argv, []), {})
 
 
-
 if __name__ == "__main__":
     unittest.main()
