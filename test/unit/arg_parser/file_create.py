@@ -106,8 +106,8 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Unit testing initilization.
-        test_option_not_in_list -> Test with option not being in file_crt_list.
         test_errno_not_two -> Test with errno not set to two.
+        test_option_not_in_list -> Test with option not being in file_crt_list.
 
     """
 
@@ -129,6 +129,24 @@ class UnitTest(unittest.TestCase):
         self.exit_flag = False
         self.open = FileOpen()
         self.open2 = FileOpen2()
+
+    @mock.patch("arg_parser.open")
+    def test_open_success(self, mock_open):
+
+        """Function:  test_open_success
+
+        Description:  Test with file open returning successful.
+
+        Arguments:
+            None
+
+        """
+
+        mock_open.return_value = self.open
+
+        self.assertFalse(arg_parser._file_create(self.name, self.option,
+                                                 self.file_crt_list,
+                                                 self.errno, self.exit_flag))
 
     def test_errno_not_two(self):
 
