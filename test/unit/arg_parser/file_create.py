@@ -50,7 +50,7 @@ class FileOpen2(object):
     Methods:
         close -> Stub holder for close function.
 
-    """       
+    """
 
     def close(self):
 
