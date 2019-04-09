@@ -13,6 +13,7 @@ pipeline {
                 source test_env/bin/activate
                 pip2 install mock --user
                 ./test/unit/arg_parser/arg_file_chk.py
+                ./test/unit/arg_parser/arg_parse2.py
                 ./test/unit/gen_libs/and_is_true.py
                 ./test/unit/gen_libs/chk_crt_dir.py
                 ./test/unit/gen_libs/chk_crt_file.py
