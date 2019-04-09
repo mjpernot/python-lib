@@ -49,6 +49,7 @@ class UnitTest(unittest.TestCase):
     Methods:
         setUp -> Unit testing initilization.
         test_optvalset_arg_int -> Test opt_val_set set to integer value.
+        test_optval_set -> Test with opt_val set with no value in arg.
         test_optvalset_no_val -> Test opt_val_set set with no value in arg.
         test_optvalset_two_arg -> Test with opt_val_set set to two arguments.
         test_optvalset_one_arg -> Test with opt_val_set set to one argument.
@@ -73,11 +74,32 @@ class UnitTest(unittest.TestCase):
         """
 
         self.argv = ["./merge_repo.py", "-c", "merge", "-d", "config", "-M"]
-        self.opt_val_list = ["-c", "-d"]
+        self.opt_val_list = ["-c", "-d", "-f"]
         self.opt_def_dict = None
-        self.multi_list = []
+        self.multi_list = ["-f"]
         self.opt_val = ["-d"]
 
+    @mock.patch("arg_parser.gen_libs.chk_int")
+    def test_multilist_one_arg(self, mock_int):
+
+        """Function:  test_multilist_one_arg
+
+        Description:  Test with multi_list set to one argument.
+
+        Arguments:
+            None
+
+        """
+
+        mock_int.return_value = False
+
+        self.argv = ["./merge_repo.py", "-f", "file1", "file2"]
+
+        self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list,
+                                               multi_val=self.multi_list),
+                         {"-f": ["file1", "file2"]})
+
+    @unittest.skip("Done")
     @mock.patch("arg_parser.gen_libs.chk_int")
     def test_optvalset_arg_int(self, mock_int):
 
