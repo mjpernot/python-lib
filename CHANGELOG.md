@@ -5,6 +5,9 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 
 ## [2.7.3] - 2019-04-09
+### Added
+- arg_parser._file_create:  Private function for use by arg_file_chk function.
+
 ### Removed
 - gen_libs.copy_tree:  Function replaced by shutil.copytree.
 

@@ -594,3 +594,38 @@ def arg_xor_dict(args_array, opt_xor_dict):
             break
 
     return xor_flag
+
+
+def _file_create(name, option, file_crt_list, errno, exit_flag):
+
+    """Function:  _file_create
+
+    Description:  Used to create a file if in file_crt_list and previously
+        determined was not present.
+
+    NOTE:  Used by the arg_file_chk() to reduce the complexity rating.
+
+    Arguments:
+        (input) name -> File path and name.
+        (input) option -> Option being checked.
+        (input) file_crt_list -> Options that require files to be created.
+        (input) errno -> Current error status from file_crt_list function.
+        (input) exit_flag -> Current status of file_crt_list function. 
+        (output) exit_flag -> True|False - if file creation fails.
+
+    """
+
+    if option in file_crt_list and errno == 2:
+
+        try:
+            fname = open(name, "w")
+            fname.close()
+
+        except IOError as (errno, strerror):
+            # Unable to create file.
+            print("I/O Error: ({0}): {1}".format(errno, strerror))
+            print("Check option: '{0}', file: '{1}'".
+                  format(x, name))
+            exit_flag = True
+
+    return exit_flag
