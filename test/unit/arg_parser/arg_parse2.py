@@ -48,6 +48,9 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Unit testing initilization.
+        test_optvalset_arg_int -> Test opt_val_set set to integer value.
+        test_optvalset_no_val -> Test opt_val_set set with no value in arg.
+        test_optvalset_two_arg -> Test with opt_val_set set to two arguments.
         test_optvalset_one_arg -> Test with opt_val_set set to one argument.
         test_arg_value_not_set -> Test argument value, but not set in opt_val.
         test_prog_with_arg -> Test with program name with argument.
@@ -73,8 +76,71 @@ class UnitTest(unittest.TestCase):
         self.opt_val_list = ["-c", "-d"]
         self.opt_def_dict = None
         self.multi_list = []
-        self.opt_val = []
+        self.opt_val = ["-d"]
 
+    @mock.patch("arg_parser.gen_libs.chk_int")
+    def test_optvalset_arg_int(self, mock_int):
+
+        """Function:  test_optvalset_arg_int
+
+        Description:  Test with opt_val_set set to integer value.
+
+        Arguments:
+            None
+
+        """
+
+        mock_int.return_value = True
+
+        self.argv = ["./merge_repo.py", "-c", "-1"]
+
+        self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list),
+                         {"-c": "-1"})
+
+    @unittest.skip("Done")
+    @mock.patch("arg_parser.gen_libs.chk_int")
+    def test_optval_set(self, mock_int):
+
+        """Function:  test_optval_set
+
+        Description:  Test with opt_val set with no value in arg.
+
+        Arguments:
+            None
+
+        """
+
+        mock_int.return_value = False
+
+        self.argv = ["./merge_repo.py", "-c", "merge", "-d"]
+
+        self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list,
+                                               opt_val=self.opt_val),
+                         {"-c": "merge", "-d": None})
+
+    @unittest.skip("Done")
+    @mock.patch("arg_parser.gen_libs.chk_int")
+    @mock.patch("arg_parser.arg_default")
+    def test_optvalset_no_val(self, mock_def, mock_int):
+
+        """Function:  test_optvalset_no_val
+
+        Description:  Test with opt_val_set set with no value in arg.
+
+        Arguments:
+            None
+
+        """
+
+        mock_def.return_value = "SystemExit: Error: Arg -d missing value"
+        mock_int.return_value = False
+
+        self.argv = ["./merge_repo.py", "-c", "merge", "-d"]
+
+        self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list),
+                         "SystemExit: Error: Arg -d missing value")
+
+    @unittest.skip("Done")
     def test_optvalset_two_arg(self):
 
         """Function:  test_optvalset_two_arg
@@ -91,6 +157,7 @@ class UnitTest(unittest.TestCase):
         self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list),
                          {"-c": "merge", "-d": "config"})
 
+    @unittest.skip("Done")
     def test_optvalset_one_arg(self):
 
         """Function:  test_optvalset_one_arg
@@ -107,6 +174,7 @@ class UnitTest(unittest.TestCase):
         self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list),
                          {"-c": "merge"})
 
+    @unittest.skip("Done")
     def test_arg_value_not_set(self):
 
         """Function:  test_arg_value_not_set
@@ -122,6 +190,7 @@ class UnitTest(unittest.TestCase):
 
         self.assertEqual(arg_parser.arg_parse2(self.argv, []), {"-c": True})
 
+    @unittest.skip("Done")
     def test_prog_with_arg(self):
 
         """Function:  test_prog_with_arg
@@ -137,6 +206,7 @@ class UnitTest(unittest.TestCase):
 
         self.assertEqual(arg_parser.arg_parse2(self.argv, []), {"-M": True})
 
+    @unittest.skip("Done")
     def test_with_two_args(self):
 
         """Function:  test_with_two_args
@@ -152,6 +222,7 @@ class UnitTest(unittest.TestCase):
 
         self.assertEqual(arg_parser.arg_parse2(self.argv, []), {"-M": True})
 
+    @unittest.skip("Done")
     def test_with_one_arg(self):
 
         """Function:  test_with_one_arg
@@ -167,6 +238,7 @@ class UnitTest(unittest.TestCase):
 
         self.assertEqual(arg_parser.arg_parse2(self.argv, []), {"-M": True})
 
+    @unittest.skip("Done")
     def test_argv_no_args(self):
 
         """Function:  test_argv_no_args
@@ -182,6 +254,7 @@ class UnitTest(unittest.TestCase):
 
         self.assertEqual(arg_parser.arg_parse2(self.argv, []), {})
 
+    @unittest.skip("Done")
     def test_empty_argv_list(self):
 
         """Function:  test_empty_argv_list
