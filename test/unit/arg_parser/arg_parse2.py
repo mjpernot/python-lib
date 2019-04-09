@@ -82,10 +82,10 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.argv = ["./merge_repo.py"]
+        self.argv = ["-M"]
 
         self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list),
-                         {})
+                         {"-M": True})
 
     def test_argv_no_args(self):
 
