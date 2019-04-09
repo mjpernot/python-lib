@@ -128,6 +128,7 @@ class UnitTest(unittest.TestCase):
         self.option = "-f"
         self.file_crt_list = ["-f", "-g"]
         self.errno = 2
+        self.strerror = "No file"
         self.name = "/dir_path/file1"
         self.exit_flag = False
         self.open = FileOpen()
@@ -150,7 +151,7 @@ class UnitTest(unittest.TestCase):
         with gen_libs.no_std_out():
             self.assertTrue(arg_parser._file_create(self.name, self.option,
                                                     self.file_crt_list,
-                                                    self.errno,
+                                                    self.errno, self.strerror,
                                                     self.exit_flag))
 
     @mock.patch("arg_parser.open")
@@ -169,7 +170,8 @@ class UnitTest(unittest.TestCase):
 
         self.assertFalse(arg_parser._file_create(self.name, self.option,
                                                  self.file_crt_list,
-                                                 self.errno, self.exit_flag))
+                                                 self.errno, self.strerror,
+                                                 self.exit_flag))
 
     def test_errno_not_two(self):
 
@@ -182,11 +184,13 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.errno = 0
+        self.errno = 10
 
-        self.assertFalse(arg_parser._file_create(self.name, self.option,
-                                                 self.file_crt_list,
-                                                 self.errno, self.exit_flag))
+        with gen_libs.no_std_out():
+            self.assertTrue(arg_parser._file_create(self.name, self.option,
+                                                    self.file_crt_list,
+                                                    self.errno, self.strerror,
+                                                    self.exit_flag))
 
     def test_option_not_in_list(self):
 
@@ -201,9 +205,11 @@ class UnitTest(unittest.TestCase):
 
         self.option = "-a"
 
-        self.assertFalse(arg_parser._file_create(self.name, self.option,
-                                                 self.file_crt_list,
-                                                 self.errno, self.exit_flag))
+        with gen_libs.no_std_out():
+            self.assertTrue(arg_parser._file_create(self.name, self.option,
+                                                    self.file_crt_list,
+                                                    self.errno, self.strerror,
+                                                    self.exit_flag))
 
 
 if __name__ == "__main__":
