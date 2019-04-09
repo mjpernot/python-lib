@@ -107,6 +107,7 @@ class UnitTest(unittest.TestCase):
     Methods:
         setUp -> Unit testing initilization.
         test_option_not_in_list -> Test with option not being in file_crt_list.
+        test_errno_not_two -> Test with errno not set to two.
 
     """
 
@@ -128,6 +129,23 @@ class UnitTest(unittest.TestCase):
         self.exit_flag = False
         self.open = FileOpen()
         self.open2 = FileOpen2()
+
+    def test_errno_not_two(self):
+
+        """Function:  test_errno_not_two
+
+        Description:  Test with errno not set to two.
+
+        Arguments:
+            None
+
+        """
+
+        self.errno = 0
+
+        self.assertFalse(arg_parser._file_create(self.name, self.option,
+                                                 self.file_crt_list,
+                                                 self.errno, self.exit_flag))
 
     def test_option_not_in_list(self):
 
