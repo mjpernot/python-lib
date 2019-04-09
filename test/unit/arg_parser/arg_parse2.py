@@ -75,6 +75,22 @@ class UnitTest(unittest.TestCase):
         self.multi_list = []
         self.opt_val = []
 
+    def test_optvalset_two_arg(self):
+
+        """Function:  test_optvalset_two_arg
+
+        Description:  Test with opt_val_set set to two arguments.
+
+        Arguments:
+            None
+
+        """
+
+        self.argv = ["./merge_repo.py", "-c", "merge", "-d", "config"]
+
+        self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list),
+                         {"-c": "merge", "-d": "config"})
+
     def test_optvalset_one_arg(self):
 
         """Function:  test_optvalset_one_arg
