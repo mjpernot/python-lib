@@ -625,7 +625,7 @@ def _file_create(name, option, file_crt_list, errno, exit_flag):
             # Unable to create file.
             print("I/O Error: ({0}): {1}".format(errno, strerror))
             print("Check option: '{0}', file: '{1}'".
-                  format(x, name))
+                  format(option, name))
             exit_flag = True
 
     return exit_flag

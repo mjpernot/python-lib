@@ -30,6 +30,7 @@ import mock
 # Local
 sys.path.append(os.getcwd())
 import arg_parser
+import gen_libs
 import version
 
 # Version
@@ -106,6 +107,8 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Unit testing initilization.
+        test_open_fail -> Test with file open returning failure.
+        test_open_success -> Test with file open returning successful.
         test_errno_not_two -> Test with errno not set to two.
         test_option_not_in_list -> Test with option not being in file_crt_list.
 
@@ -129,6 +132,26 @@ class UnitTest(unittest.TestCase):
         self.exit_flag = False
         self.open = FileOpen()
         self.open2 = FileOpen2()
+
+    @mock.patch("arg_parser.open")
+    def test_open_fail(self, mock_open):
+
+        """Function:  test_open_fail
+
+        Description:  Test with file open returning failure.
+
+        Arguments:
+            None
+
+        """
+
+        mock_open.return_value = self.open2
+
+        with gen_libs.no_std_out():
+            self.assertTrue(arg_parser._file_create(self.name, self.option,
+                                                    self.file_crt_list,
+                                                    self.errno,
+                                                    self.exit_flag))
 
     @mock.patch("arg_parser.open")
     def test_open_success(self, mock_open):
