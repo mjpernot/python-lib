@@ -70,7 +70,7 @@ class UnitTest(unittest.TestCase):
         """
 
         self.argv = ["./merge_repo.py", "-c", "merge", "-d", "config", "-M"]
-        self.opt_val_list = []
+        self.opt_val_list = ["-c", "-d"]
         self.opt_def_dict = None
         self.multi_list = []
         self.opt_val = []
@@ -87,7 +87,6 @@ class UnitTest(unittest.TestCase):
         """
 
         self.argv = ["./merge_repo.py", "-c", "merge"]
-        self.opt_val_list = ["-c"]
 
         self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list),
                          {"-c": "merge"})
@@ -105,8 +104,7 @@ class UnitTest(unittest.TestCase):
 
         self.argv = ["./merge_repo.py", "-c", "merge"]
 
-        self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list),
-                         {"-c": True})
+        self.assertEqual(arg_parser.arg_parse2(self.argv, []), {"-c": True})
 
     def test_prog_with_arg(self):
 
@@ -121,8 +119,7 @@ class UnitTest(unittest.TestCase):
 
         self.argv = ["./merge_repo.py", "-M"]
 
-        self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list),
-                         {"-M": True})
+        self.assertEqual(arg_parser.arg_parse2(self.argv, []), {"-M": True})
 
     def test_with_two_args(self):
 
@@ -137,8 +134,7 @@ class UnitTest(unittest.TestCase):
 
         self.argv = ["-M"]
 
-        self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list),
-                         {"-M": True})
+        self.assertEqual(arg_parser.arg_parse2(self.argv, []), {"-M": True})
 
     def test_with_one_arg(self):
 
@@ -153,8 +149,7 @@ class UnitTest(unittest.TestCase):
 
         self.argv = ["-M"]
 
-        self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list),
-                         {"-M": True})
+        self.assertEqual(arg_parser.arg_parse2(self.argv, []), {"-M": True})
 
     def test_argv_no_args(self):
 
@@ -169,8 +164,7 @@ class UnitTest(unittest.TestCase):
 
         self.argv = ["./merge_repo.py"]
 
-        self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list),
-                         {})
+        self.assertEqual(arg_parser.arg_parse2(self.argv, []), {})
 
     def test_empty_argv_list(self):
 
@@ -185,8 +179,7 @@ class UnitTest(unittest.TestCase):
 
         self.argv = []
 
-        self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list),
-                         {})
+        self.assertEqual(arg_parser.arg_parse2(self.argv, []), {})
 
 
 
