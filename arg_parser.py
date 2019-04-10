@@ -241,7 +241,8 @@ def arg_file_chk(args_array, file_chk_list, file_crt_list=None):
 
             except IOError as (errno, strerror):
 
-                testme()
+                _file_create(name, x, file_crt_list, errno, strerror,
+                             exit_flag)
                 # If in create list and not present.
                 #if x in file_crt_list and errno == 2:
 
