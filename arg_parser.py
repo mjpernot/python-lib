@@ -622,6 +622,8 @@ def _file_create(name, option, file_crt_list, errno, strerror, exit_flag,
         (output) exit_flag -> True|False - if file creation fails.
 
     """
+    
+    file_crt_list = list(file_crt_list)
 
     if option in file_crt_list and errno == 2:
 
