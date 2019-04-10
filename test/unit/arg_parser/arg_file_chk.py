@@ -252,8 +252,9 @@ class UnitTest(unittest.TestCase):
                                                     self.file_chk_list,
                                                     self.file_crt_list))
 
+    @mock.patch("arg_parser._file_create")
     @mock.patch("arg_parser.open")
-    def test_filecrtlist_empty_list(self, mock_open):
+    def test_filecrtlist_empty_list(self, mock_open, mock_crt):
 
         """Function:  test_filecrtlist_empty_list
 
@@ -265,6 +266,7 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_open.return_value = self.open3
+        mock_crt.return_value = True
 
         with gen_libs.no_std_out():
             self.assertTrue(arg_parser.arg_file_chk(self.args_array,
