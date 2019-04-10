@@ -667,6 +667,10 @@ def _parse_multi(argv, args_array, opt_def_dict, **kwargs):
 
     """
     
+    argv = list(argv)
+    args_array = dict(args_array)
+    opt_def_dict = dict(opt_def_dict)
+    
     # If no value in argv for option and it's not an integer.
     if len(argv) < 2 \
        or (argv[1][0] == "-" and not gen_libs.chk_int(argv[1])):
