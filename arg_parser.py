@@ -597,7 +597,8 @@ def arg_xor_dict(args_array, opt_xor_dict):
     return xor_flag
 
 
-def _file_create(name, option, file_crt_list, errno, strerror, exit_flag):
+def _file_create(name, option, file_crt_list, errno, strerror, exit_flag,
+                 **kwargs):
 
     """Function:  _file_create
 
@@ -613,6 +614,8 @@ def _file_create(name, option, file_crt_list, errno, strerror, exit_flag):
         (input) errno -> Current error status from file_crt_list function.
         (input) strerror -> Current error message from file_crt_list function.
         (input) exit_flag -> Current status of file_crt_list function.
+        (input) **kwargs:
+            None
         (output) exit_flag -> True|False - if file creation fails.
 
     """
