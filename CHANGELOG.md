@@ -10,6 +10,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 ### Added
 - arg_parser._file_create:  Private function for use by arg_file_chk function.
+- arg_parser._parse_multi:  Private function for use by arg_parser2 function.
 
 ### Removed
 - gen_libs.copy_tree:  Function replaced by shutil.copytree.
