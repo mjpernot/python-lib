@@ -5,6 +5,9 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 
 ## [2.7.3] - 2019-04-09
+### Changed
+- arg_parser.arg_file_chk:  Replaced exception code with call to _create_file function.
+
 ### Added
 - arg_parser._file_create:  Private function for use by arg_file_chk function.
 
