@@ -176,8 +176,9 @@ class UnitTest(unittest.TestCase):
         self.open2 = FileOpen2()
         self.open3 = FileOpen3()
 
+    @mock.patch("arg_parser._file_create")
     @mock.patch("arg_parser.open")
-    def test_second_open_no_error(self, mock_open):
+    def test_second_open_no_error(self, mock_open, mock_crt):
 
         """Function:  test_second_open_no_error
 
@@ -189,13 +190,15 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_open.side_effect = [self.open3, self.open]
+        mock_crt.return_value = False
 
         self.assertFalse(arg_parser.arg_file_chk(self.args_array,
                                                  self.file_chk_list,
                                                  self.file_crt_list))
 
+    @mock.patch("arg_parser._file_create")
     @mock.patch("arg_parser.open")
-    def test_second_open_error(self, mock_open):
+    def test_second_open_error(self, mock_open, mock_crt):
 
         """Function:  test_second_open_error
 
@@ -207,14 +210,16 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_open.side_effect = [self.open3, self.open2]
+        mock_crt.return_value = True
 
         with gen_libs.no_std_out():
             self.assertTrue(arg_parser.arg_file_chk(self.args_array,
                                                     self.file_chk_list,
                                                     self.file_crt_list))
 
+    @mock.patch("arg_parser._file_create")
     @mock.patch("arg_parser.open")
-    def test_filecrtlist_in_list(self, mock_open):
+    def test_filecrtlist_in_list(self, mock_open, mock_crt):
 
         """Function:  test_filecrtlist_in_list
 
@@ -226,13 +231,15 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_open.side_effect = [self.open3, self.open]
+        mock_crt.return_value = False
 
         self.assertFalse(arg_parser.arg_file_chk(self.args_array,
                                                  self.file_chk_list,
                                                  self.file_crt_list))
 
+    @mock.patch("arg_parser._file_create")
     @mock.patch("arg_parser.open")
-    def test_filecrtlist_not_in_list(self, mock_open):
+    def test_filecrtlist_not_in_list(self, mock_open, mock_crt):
 
         """Function:  test_filecrtlist_not_in_list
 
@@ -244,6 +251,7 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_open.return_value = self.open3
+        mock_crt.return_value = True
 
         self.file_crt_list = ["-g"]
 
@@ -252,8 +260,9 @@ class UnitTest(unittest.TestCase):
                                                     self.file_chk_list,
                                                     self.file_crt_list))
 
+    @mock.patch("arg_parser._file_create")
     @mock.patch("arg_parser.open")
-    def test_filecrtlist_empty_list(self, mock_open):
+    def test_filecrtlist_empty_list(self, mock_open, mock_crt):
 
         """Function:  test_filecrtlist_empty_list
 
@@ -265,13 +274,15 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_open.return_value = self.open3
+        mock_crt.return_value = True
 
         with gen_libs.no_std_out():
             self.assertTrue(arg_parser.arg_file_chk(self.args_array,
                                                     self.file_chk_list, []))
 
+    @mock.patch("arg_parser._file_create")
     @mock.patch("arg_parser.open")
-    def test_filecrtlist_not_passed(self, mock_open):
+    def test_filecrtlist_not_passed(self, mock_open, mock_crt):
 
         """Function:  test_filecrtlist_not_passed
 
@@ -283,13 +294,15 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_open.return_value = self.open3
+        mock_crt.return_value = True
 
         with gen_libs.no_std_out():
             self.assertTrue(arg_parser.arg_file_chk(self.args_array,
                                                     self.file_chk_list))
 
+    @mock.patch("arg_parser._file_create")
     @mock.patch("arg_parser.open")
-    def test_first_open_error_two(self, mock_open):
+    def test_first_open_error_two(self, mock_open, mock_crt):
 
         """Function:  test_first_open_error_two
 
@@ -301,13 +314,15 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_open.side_effect = [self.open3, self.open]
+        mock_crt.return_value = False
 
         self.assertFalse(arg_parser.arg_file_chk(self.args_array,
                                                  self.file_chk_list,
                                                  self.file_crt_list))
 
+    @mock.patch("arg_parser._file_create")
     @mock.patch("arg_parser.open")
-    def test_first_open_error_ten(self, mock_open):
+    def test_first_open_error_ten(self, mock_open, mock_crt):
 
         """Function:  test_first_open_error_ten
 
@@ -319,6 +334,7 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_open.return_value = self.open2
+        mock_crt.return_value = True
 
         with gen_libs.no_std_out():
             self.assertTrue(arg_parser.arg_file_chk(self.args_array,
