@@ -23,6 +23,7 @@
         arg_wildcard
         arg_xor_dict
         _file_create
+        _parse_multi
 
 """
 
@@ -621,6 +622,8 @@ def _file_create(name, option, file_crt_list, errno, strerror, exit_flag,
         (output) exit_flag -> True|False - if file creation fails.
 
     """
+    
+    file_crt_list = list(file_crt_list)
 
     if option in file_crt_list and errno == 2:
 
@@ -641,3 +644,59 @@ def _file_create(name, option, file_crt_list, errno, strerror, exit_flag,
         exit_flag = True
 
     return exit_flag
+
+
+def _parse_multi(argv, args_array, opt_def_dict, **kwargs):
+
+    """Function:  _parse_multi
+
+    Description:  Processes a multi-value argument in command line
+        arguments.  Modifys the args_array by adding a dictionary key and a
+        list of values.
+
+    NOTE:  Used by the arg_parse2() to reduce the complexity rating.
+
+    Arguments:
+        (input) argv -> Arguments from the command line.
+        (input) args_array -> Array of command line options and values.
+        (input) opt_def_dict -> Dict with options and default values.
+        (input) **kwargs:
+            None.
+        (output) argv -> Arguments from the command line.
+        (output) args_array -> Array of command line options and values.
+
+    """
+    
+    argv = list(argv)
+    args_array = dict(args_array)
+    opt_def_dict = dict(opt_def_dict)
+    
+    # If no value in argv for option and it's not an integer.
+    if len(argv) < 2 \
+       or (argv[1][0] == "-" and not gen_libs.chk_int(argv[1])):
+
+        # See if default value is available for argument.
+        args_array = arg_default(argv[0], args_array, opt_def_dict)
+
+    else:
+        # Handle multiple values for argument.
+        args_array[argv[0]] = []
+        x = 0
+        tmp_argv = argv[1:]
+
+        # Process values until next argument.
+        while tmp_argv:
+
+            if tmp_argv[0][0] == "-":
+                break
+
+            else:
+                args_array[argv[0]].append(tmp_argv[0])
+
+            x = x + 1
+            tmp_argv = tmp_argv[1:]
+
+        # Move to argument after the multiple values.
+        argv = argv[x:]
+
+    return argv, args_array
