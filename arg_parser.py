@@ -24,6 +24,7 @@
         arg_xor_dict
         _file_create
         _parse_multi
+        _parse_single
 
 """
 
@@ -643,8 +644,7 @@ def _parse_multi(argv, args_array, opt_def_dict, **kwargs):
     opt_def_dict = dict(opt_def_dict)
     
     # If no value in argv for option and it's not an integer.
-    if len(argv) < 2 \
-       or (argv[1][0] == "-" and not gen_libs.chk_int(argv[1])):
+    if len(argv) < 2 or (argv[1][0] == "-" and not gen_libs.chk_int(argv[1])):
 
         # See if default value is available for argument.
         args_array = arg_default(argv[0], args_array, opt_def_dict)
@@ -657,7 +657,6 @@ def _parse_multi(argv, args_array, opt_def_dict, **kwargs):
 
         # Process values until next argument.
         while tmp_argv:
-
             if tmp_argv[0][0] == "-":
                 break
 
@@ -669,5 +668,48 @@ def _parse_multi(argv, args_array, opt_def_dict, **kwargs):
 
         # Move to argument after the multiple values.
         argv = argv[x:]
+
+    return argv, args_array
+
+
+def _parse_single(argv, args_array, opt_def_dict, opt_val, **kwargs):
+
+    """Function:  _parse_single
+
+    Description:  Processes a single-value argument in command line
+        arguments.  Modifys the args_array by adding a dictionary key and a
+        value.
+
+    NOTE:  Used by the arg_parse2() to reduce the complexity rating.
+
+    Arguments:
+        (input) argv -> Arguments from the command line.
+        (input) args_array -> Array of command line options and values.
+        (input) opt_def_dict -> Dict with options and default values.
+        (input) opt_val -> List of options that may allow 0|1 value for option.
+        (input) **kwargs:
+            None.
+        (output) argv -> Arguments from the command line.
+        (output) args_array -> Array of command line options and values.
+
+    """
+
+    argv = list(argv)
+    args_array = dict(args_array)
+    opt_def_dict = dict(opt_def_dict)
+    opt_val = list(opt_val)
+    
+    # If no value in argv for option and it is not an integer.
+    if len(argv) < 2 or (argv[1][0] == "-" and not gen_libs.chk_int(argv[1])):
+        if argv[0] in opt_val:
+            args_array[argv[0]] = None
+
+        else:
+            # See if default value is available for argument.
+            args_array = arg_default(argv[0], args_array, opt_def_dict)
+
+    else:
+        args_array[argv[0]] = argv[1]
+        argv = argv[1:]
 
     return argv, args_array
