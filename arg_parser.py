@@ -328,43 +328,14 @@ def arg_parse2(argv, opt_val_list, opt_def_dict=None, **kwargs):
 
     multi_list = list(kwargs.get("multi_val", []))
     opt_val = list(kwargs.get("opt_val", []))
-
     args_array = {}
 
     while argv:
 
         # Look for new option, always begin with "-".
         if argv[0][0] == "-":
-
             if argv[0] in multi_list:
-
-                # If no value in argv for option and it is not an integer.
-                if len(argv) < 2 \
-                   or (argv[1][0] == "-" and not gen_libs.chk_int(argv[1])):
-
-                    # See if default value is available for argument.
-                    args_array = arg_default(argv[0], args_array, opt_def_dict)
-
-                else:
-                    # Handle multiple values for argument.
-                    args_array[argv[0]] = []
-                    x = 0
-                    tmp_argv = argv[1:]
-
-                    # Process values until next argument.
-                    while tmp_argv:
-
-                        if tmp_argv[0][0] == "-":
-                            break
-
-                        else:
-                            args_array[argv[0]].append(tmp_argv[0])
-
-                        x = x + 1
-                        tmp_argv = tmp_argv[1:]
-
-                    # Move to argument after the multiple values.
-                    argv = argv[x:]
+                argv, args_array = _parse_multi(argv, args_array, opt_def_dict)
 
             elif argv[0] in opt_val_list or argv[0] in opt_val:
 
