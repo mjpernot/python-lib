@@ -686,7 +686,7 @@ def _parse_single(argv, args_array, opt_def_dict, opt_val, **kwargs):
         (input) argv -> Arguments from the command line.
         (input) args_array -> Array of command line options and values.
         (input) opt_def_dict -> Dict with options and default values.
-        (input) opt_val -> List of options that may allow 0|1 value for option.
+        (input) opt_val -> List of options allow None or 1 value for option.
         (input) **kwargs:
             None.
         (output) argv -> Arguments from the command line.
