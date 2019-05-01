@@ -17,6 +17,10 @@ echo "Unit test:  parse_multi"
 test/unit/arg_parser/parse_multi.py
 
 echo ""
+echo "Unit test:  parse_single"
+test/unit/arg_parser/parse_single.py
+
+echo ""
 echo "Unit test:  file_create"
 test/unit/arg_parser/file_create.py
 

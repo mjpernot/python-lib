@@ -189,6 +189,7 @@ cd {Python_Project}/python-lib
 test/unit/arg_parser/arg_file_chk.py
 test/unit/arg_parser/arg_parse2.py
 test/unit/arg_parser/parse_multi.py
+test/unit/arg_parser/parse_single.py
 test/unit/arg_parser/file_create.py
 ```
 
