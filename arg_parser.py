@@ -339,22 +339,8 @@ def arg_parse2(argv, opt_val_list, opt_def_dict=None, **kwargs):
                 argv, args_array = _parse_multi(argv, args_array, opt_def_dict)
 
             elif argv[0] in opt_val_list or argv[0] in opt_val:
-
-                # If no value in argv for option and it is not an integer.
-                if len(argv) < 2 \
-                   or (argv[1][0] == "-" and not gen_libs.chk_int(argv[1])):
-
-                    if argv[0] in opt_val:
-                        args_array[argv[0]] = None
-
-                    else:
-                        # See if default value is available for argument.
-                        args_array = arg_default(argv[0], args_array,
-                                                 opt_def_dict)
-
-                else:
-                    args_array[argv[0]] = argv[1]
-                    argv = argv[1:]
+                argv, args_array = _parse_single(argv, args_array,
+                                                 opt_def_dict, opt_val)
 
             else:
                 args_array[argv[0]] = True
