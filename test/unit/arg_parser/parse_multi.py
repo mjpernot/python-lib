@@ -67,12 +67,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.argv = ["./merge_repo.py", "-c", "merge", "-d", "-M", "-f",
-                     "file1", "file2"]
-        self.opt_val_list = ["-c", "-d", "-f", "-g"]
+        self.argv = ["-f", "file1", "file2"]
         self.opt_def_dict = {"-g": "def_val"}
-        self.multi_list = ["-f", "-g"]
-        self.opt_val = ["-d"]
 
     @mock.patch("arg_parser.gen_libs.chk_int")
     def test_multilist_two_val(self, mock_int):
@@ -87,8 +83,6 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_int.return_value = False
-
-        self.argv = ["-f", "file1", "file2"]
 
         self.assertEqual(arg_parser._parse_multi(self.argv, {}, {}),
                          (["file2"], {"-f": ["file1", "file2"]}))
@@ -167,8 +161,6 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_int.return_value = False
-
-        self.argv = ["-f", "file1", "file2"]
 
         argv, args_array = arg_parser._parse_multi(self.argv, {}, {})
         self.assertEqual((argv, args_array),
