@@ -245,25 +245,6 @@ def arg_file_chk(args_array, file_chk_list, file_crt_list=None):
 
                 exit_flag = _file_create(name, x, file_crt_list, errno,
                                          strerror, exit_flag)
-                # If in create list and not present.
-                #if x in file_crt_list and errno == 2:
-
-                #    try:
-                #        fname = open(name, "w")
-                #        fname.close()
-
-                #    except IOError as (errno, strerror):
-                #        # Unable to create file.
-                #        print("I/O Error: ({0}): {1}".format(errno, strerror))
-                #        print("Check option: '{0}', file: '{1}'".
-                #              format(x, name))
-                #        exit_flag = True
-
-                # File not present.
-                #else:
-                #    print("I/O Error: ({0}): {1}".format(errno, strerror))
-                #    print("Check option: '{0}', file: '{1}'".format(x, name))
-                #    exit_flag = True
 
     return exit_flag
 
