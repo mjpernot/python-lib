@@ -561,7 +561,7 @@ def _file_create(name, option, file_crt_list, errno, strerror, exit_flag,
         (output) exit_flag -> True|False - if file creation fails.
 
     """
-    
+
     file_crt_list = list(file_crt_list)
 
     if option in file_crt_list and errno == 2:
@@ -605,11 +605,11 @@ def _parse_multi(argv, args_array, opt_def_dict, **kwargs):
         (output) args_array -> Array of command line options and values.
 
     """
-    
+
     argv = list(argv)
     args_array = dict(args_array)
     opt_def_dict = dict(opt_def_dict)
-    
+
     # If no value in argv for option and it's not an integer.
     if len(argv) < 2 or (argv[1][0] == "-" and not gen_libs.chk_int(argv[1])):
 
@@ -665,7 +665,7 @@ def _parse_single(argv, args_array, opt_def_dict, opt_val, **kwargs):
     args_array = dict(args_array)
     opt_def_dict = dict(opt_def_dict)
     opt_val = list(opt_val)
-    
+
     # If no value in argv for option and it is not an integer.
     if len(argv) < 2 or (argv[1][0] == "-" and not gen_libs.chk_int(argv[1])):
         if argv[0] in opt_val:
