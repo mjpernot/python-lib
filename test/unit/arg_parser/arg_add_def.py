@@ -49,7 +49,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Unit testing initilization.
-        test_optreqlist_two_args -> 
+        test_optreqlist_two_args -> Test adding two args from opt_req_list.
         test_optreqlist_zero_arg -> Test adding zero args from opt_req_list.
         test_optreqlist_one_arg -> Test with adding one arg from opt_req_list.
         test_argsarray_only -> Test with args_array passed only.
