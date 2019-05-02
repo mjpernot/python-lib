@@ -12,6 +12,7 @@ pipeline {
                 virtualenv test_env
                 source test_env/bin/activate
                 pip2 install mock --user
+                ./test/unit/arg_parser/arg_add_def.py
                 ./test/unit/arg_parser/arg_file_chk.py
                 ./test/unit/arg_parser/arg_parse2.py
                 ./test/unit/arg_parser/parse_multi.py

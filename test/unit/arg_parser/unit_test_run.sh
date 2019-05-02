@@ -5,6 +5,10 @@
 #   is located at.
 
 echo ""
+echo "Unit test:  arg_add_def"
+test/unit/arg_parser/arg_add_def.py
+
+echo ""
 echo "Unit test:  arg_file_chk"
 test/unit/arg_parser/arg_file_chk.py
 

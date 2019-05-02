@@ -186,6 +186,7 @@ test/unit/gen_libs/unit_test_run.sh
 
 ```
 cd {Python_Project}/python-lib
+test/unit/arg_parser/arg_add_def.py
 test/unit/arg_parser/arg_file_chk.py
 test/unit/arg_parser/arg_parse2.py
 test/unit/arg_parser/parse_multi.py
