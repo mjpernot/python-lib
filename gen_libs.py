@@ -1794,13 +1794,11 @@ def rotate_files(fname, cnt=0, max_cnt=5, **kwargs):
 
     """
 
-    if cnt < max_cnt:
+    if cnt < max_cnt and os.path.isfile(fname + "." + str(cnt)):
+        rotate_files(fname, cnt + 1, max_cnt)
 
-        if os.path.isfile(fname + "." + str(cnt)):
-            rotate_files(fname, cnt + 1, max_cnt)
-
-            # Rename file to + 1.
-            os.rename(fname + "." + str(cnt), fname + "." + str(cnt + 1))
+        # Rename file to + 1.
+        os.rename(fname + "." + str(cnt), fname + "." + str(cnt + 1))
 
 
 def str_2_list(del_str, fld_del, **kwargs):

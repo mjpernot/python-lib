@@ -4,8 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
-## [2.7.3] - 2019-05-01
+## [2.7.3] - 2019-05-02
 ### Changed
+- gen_libs.rotate_files:  Refactored code in function to be more stream-line.
 - arg_parser.arg_parse2:  Replaced multi-list code section with call to _parse_multi function.
 - arg_parser.arg_parse2:  Replaced single-list code section with call to _parse_single function.
 - arg_parser.arg_file_chk:  Replaced exception code with call to _create_file function.
