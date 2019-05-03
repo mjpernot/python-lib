@@ -93,7 +93,7 @@ class UnitTest(unittest.TestCase):
             status = arg_parser.arg_cond_req(self.args_array2,
                                              self.opt_con_req_list4)
 
-        self.assertTrue(status)
+        self.assertFalse(status)
 
     def test_one_arg_missing(self):
 
@@ -110,7 +110,7 @@ class UnitTest(unittest.TestCase):
             status = arg_parser.arg_cond_req(self.args_array2,
                                              self.opt_con_req_list3)
 
-        self.assertTrue(status)
+        self.assertFalse(status)
 
     def test_two_args_required(self):
 
@@ -169,7 +169,7 @@ class UnitTest(unittest.TestCase):
             status = arg_parser.arg_cond_req(self.args_array,
                                              self.opt_con_req_list2)
 
-        self.assertTrue(status)
+        self.assertFalse(status)
 
 
 if __name__ == "__main__":
