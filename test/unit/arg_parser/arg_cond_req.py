@@ -165,8 +165,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertTrue(arg_parser.arg_cond_req(self.args_array,
-                                                self.opt_con_req_list2))
+        with gen_libs.no_std_out():
+            status = arg_parser.arg_cond_req(self.args_array,
+                                             self.opt_con_req_list2)
+
+        self.assertTrue(status)
 
 
 if __name__ == "__main__":
