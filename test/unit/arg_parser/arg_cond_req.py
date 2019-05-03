@@ -89,8 +89,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertTrue(arg_parser.arg_cond_req(self.args_array2,
-                                                self.opt_con_req_list4))
+        with gen_libs.no_std_out():
+            status = arg_parser.arg_cond_req(self.args_array2,
+                                             self.opt_con_req_list4)
+
+        self.assertTrue(status)
 
     def test_one_arg_missing(self):
 
@@ -102,9 +105,12 @@ class UnitTest(unittest.TestCase):
             None
 
         """
+        
+        with gen_libs.no_std_out():
+            status = arg_parser.arg_cond_req(self.args_array2,
+                                             self.opt_con_req_list3)
 
-        self.assertTrue(arg_parser.arg_cond_req(self.args_array2,
-                                                self.opt_con_req_list3))
+        self.assertTrue(status)
 
     def test_two_args_required(self):
 
