@@ -49,6 +49,9 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Unit testing initilization.
+        test_arg_in_argsarray -> Test with arg already in args_array.
+        test_arg_in_optdefdict -> Test with arg in opt_def_dict.
+        test_not_in_optdefdict -> Test with arg not in opt_def_dict.
         test_empty_optdefdict -> Test adding two args from opt_req_list.
 
     """
@@ -64,15 +67,64 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.args_array = {}
-        self.args_array2 = {"-c": "config"}
+        self.args_array = {"-c": "config"}
+        self.args_array2 = {"-c": "config", "-f": "new_file"}
 
         self.opt_def_dict = {}
-        self.opt_def_dict2 = {"-f": "file1"}
-        self.opt_def_dict3 = {"-f": "file1", "-i": "sysmon"}
+        self.opt_def_dict2 = {"-f": "file1", "-i": "sysmon"}
 
         self.arg = "-f"
-        self.arg2 = "-i"
+        self.arg2 = "-g"
+
+    def test_arg_in_argsarray(self):
+
+        """Function:  test_arg_in_argsarray
+
+        Description:  Test with arg already in args_array.
+
+        Arguments:
+            None
+
+        """
+        
+        self.assertEqual(arg_parser.arg_default(self.arg, self.args_array2,
+                                                self.opt_def_dict2),
+                         self.args_array2)
+
+    def test_arg_in_optdefdict(self):
+
+        """Function:  test_arg_in_optdefdict
+
+        Description:  Test with arg in opt_def_dict.
+
+        Arguments:
+            None
+
+        """
+        
+        test_array = dict(self.args_array)
+        test_array[self.arg] = self.opt_def_dict2[self.arg]
+        
+        self.assertEqual(arg_parser.arg_default(self.arg, self.args_array,
+                                                self.opt_def_dict2),
+                         test_array)
+
+    @mock.patch("arg_parser.sys.exit")
+    def test_not_in_optdefdict(self, mock_exit):
+
+        """Function:  test_not_in_optdefdict
+
+        Description:  Test with arg not in opt_def_dict.
+
+        Arguments:
+            None
+
+        """
+        
+        mock_exit.return_value = False
+
+        self.assertFalse(arg_parser.arg_default(self.arg2, self.args_array,
+                                                self.opt_def_dict2))
 
     @mock.patch("arg_parser.sys.exit")
     def test_empty_optdefdict(self, mock_exit):
