@@ -50,11 +50,11 @@ class UnitTest(unittest.TestCase):
     Methods:
         setUp -> Unit testing initilization.
         test_optreqlist_two_args -> Test adding two args from opt_req_list.
-        test_optreqlist_zero_arg -> Test adding zero args from opt_req_list.
-        test_optreqlist_one_arg -> Test with adding one arg from opt_req_list.
-        test_argsarray_only -> Test with args_array passed only.
-        test_defarray_two_args -> Test with adding two args from def_array.
 
+        test_two_args_missing -> Test with two arguments required, but missing.
+        test_one_arg_missing -> Test with one argument required, but missing.
+        test_two_args_required -> Test with 2 arguments required & are present.
+        test_one_arg_required -> Test with 1 argument required and is present.
         test_empty_optconreqlist -> Test with empty list for opt_con_req_list.
         test_empty_arsarray -> Test with empty args_array.
 
@@ -72,8 +72,9 @@ class UnitTest(unittest.TestCase):
         """
 
         self.args_array = {}
-        self.args_array2 = {"-f": "file1"}
+        self.args_array2 = {"-c": "config"}
         self.args_array3 = {"-c": "config", "-f": "file1"}
+
         self.opt_con_req_list = []
         self.opt_con_req_list2 = ["-c"]
         self.opt_con_req_list3 = ["-c", "-f"]
@@ -91,88 +92,64 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.opt_req_list = ["-n", "-i"]
-        self.def_array = {"-n": "1", "-i": "sysmon", "-g": "no"}
-        self.args_array["-n"] = "1"
-        self.args_array["-i"] = "sysmon"
+        self.assertTrue(arg_parser.arg_cond_req(self.args_array2,
+                                                self.opt_con_req_list))
 
-        self.assertEqual(arg_parser.arg_cond_req(self.args_array,
-                                                 self.def_array,
-                                                 self.opt_req_list),
-                         self.args_array)
+    def test_two_args_missing(self):
 
-    def test_optreqlist_zero_arg(self):
+        """Function:  test_two_args_missing
 
-        """Function:  test_optreqlist_zero_arg
-
-        Description:  Test with adding zero args from opt_req_list.
+        Description:  Test with two arguments required, but missing.
 
         Arguments:
             None
 
         """
 
-        self.opt_req_list = ["-m"]
-        self.def_array = {"-n": "1", "-i": "sysmon"}
+        self.assertTrue(arg_parser.arg_cond_req(self.args_array2,
+                                                self.opt_con_req_list5))
 
-        self.assertEqual(arg_parser.arg_cond_req(self.args_array,
-                                                 self.def_array,
-                                                 self.opt_req_list),
-                         self.args_array)
+    def test_one_arg_missing(self):
 
-    def test_optreqlist_one_arg(self):
+        """Function:  test_one_arg_missing
 
-        """Function:  test_optreqlist_one_arg
-
-        Description:  Test with adding one arg from opt_req_list.
+        Description:  Test with one argument required, but missing.
 
         Arguments:
             None
 
         """
 
-        self.opt_req_list = ["-n"]
-        self.def_array = {"-n": "1", "-i": "sysmon"}
-        self.args_array["-n"] = "1"
+        self.assertTrue(arg_parser.arg_cond_req(self.args_array2,
+                                                self.opt_con_req_list3))
 
-        self.assertEqual(arg_parser.arg_cond_req(self.args_array,
-                                                 self.def_array,
-                                                 self.opt_req_list),
-                         self.args_array)
+    def test_two_args_required(self):
 
-    def test_argsarray_only(self):
+        """Function:  test_two_args_required
 
-        """Function:  test_argsarray_only
-
-        Description:  Test with args_array passed only.
+        Description:  Test with two arguments required and are present.
 
         Arguments:
             None
 
         """
 
-        self.assertEqual(arg_parser.arg_cond_req(self.args_array),
-                         self.args_array)
+        self.assertTrue(arg_parser.arg_cond_req(self.args_array3,
+                                                self.opt_con_req_lis3))
 
-    def test_defarray_two_args(self):
+    def test_one_arg_required(self):
 
-        """Function:  test_defarray_two_args
+        """Function:  test_one_arg_required
 
-        Description:  Test with adding two args from def_array.
+        Description:  Test with one argument required and is present.
 
         Arguments:
             None
 
         """
 
-        self.def_array = {"-n": "1", "-i": "sysmon"}
-        self.args_array["-n"] = "1"
-        self.args_array["-i"] = "sysmon"
-
-        self.assertEqual(arg_parser.arg_cond_req(self.args_array,
-                                                 self.def_array,
-                                                 self.opt_req_list),
-                         self.args_array)
+        self.assertTrue(arg_parser.arg_cond_req(self.args_array2,
+                                                self.opt_con_req_list2))
 
     def test_empty_optconreqlist(self):
 
@@ -186,7 +163,7 @@ class UnitTest(unittest.TestCase):
         """
 
         self.assertTrue(arg_parser.arg_cond_req(self.args_array2,
-                                                 self.opt_con_req_list))
+                                                self.opt_con_req_list))
 
     def test_empty_arsarray(self):
 
@@ -200,7 +177,7 @@ class UnitTest(unittest.TestCase):
         """
 
         self.assertTrue(arg_parser.arg_cond_req(self.args_array,
-                                                 self.opt_con_req_list2))
+                                                self.opt_con_req_list2))
 
 
 if __name__ == "__main__":
