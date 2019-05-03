@@ -55,7 +55,7 @@ class UnitTest(unittest.TestCase):
         test_argsarray_only -> Test with args_array passed only.
         test_defarray_two_args -> Test with adding two args from def_array.
         test_defarray_one_arg -> Test with adding one arg from def_array.
-        test_second_open_no_error -> Test with second open no error.
+        test_empty_defarray -> Test with empty list for def_array.
 
     """
 
