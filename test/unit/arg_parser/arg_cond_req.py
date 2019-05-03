@@ -55,7 +55,7 @@ class UnitTest(unittest.TestCase):
         test_argsarray_only -> Test with args_array passed only.
         test_defarray_two_args -> Test with adding two args from def_array.
         test_defarray_one_arg -> Test with adding one arg from def_array.
-        test_second_open_no_error -> Test with second open no error.
+        test_empty_arsarray -> Test with empty args_array.
 
     """
 
@@ -70,9 +70,14 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.args_array = {"-f": "file1"}
-        self.def_array = {}
-        self.opt_req_list = []
+        self.args_array = {}
+        self.args_array2 = {"-f": "file1"}
+        self.args_array3 = {"-c": "config", "-f": "file1"}
+        self.opt_con_req_list = []
+        self.opt_con_req_list2 = ["-c"]
+        self.opt_con_req_list3 = ["-c", "-f"]
+        self.opt_con_req_list4 = ["-c", "-f", "-m"]
+        self.opt_con_req_list5 = ["-c", "-f", "-m", "-d"]
 
     def test_optreqlist_two_args(self):
 
@@ -187,9 +192,9 @@ class UnitTest(unittest.TestCase):
                                                  self.opt_req_list),
                          self.args_array)
 
-    def test_empty_defarray(self):
+    def test_empty_arsarray(self):
 
-        """Function:  test_empty_defarray
+        """Function:  test_empty_arsarray
 
         Description:  Test with empty list for def_array.
 
@@ -199,9 +204,8 @@ class UnitTest(unittest.TestCase):
         """
 
         self.assertEqual(arg_parser.arg_cond_req(self.args_array,
-                                                 self.def_array,
-                                                 self.opt_req_list),
-                         self.args_array)
+                                                 self.opt_con_req_list2),
+                         True)
 
 
 if __name__ == "__main__":
