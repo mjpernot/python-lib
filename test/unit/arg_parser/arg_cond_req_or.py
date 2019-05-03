@@ -52,8 +52,8 @@ class UnitTest(unittest.TestCase):
         test_two_args_missing -> Test with two arguments required, but missing.
         test_one_arg_missing -> Test with one argument required, but missing.
         test_two_args_required -> Test with 2 arguments required & are present.
-        test_one_arg_required -> Test with 1 argument required and is present.
 
+        test_one_arg_present -> Test with one argument is present.
         test_empty_optconreqdict -> Test with empty dict for opt_con_req_dict.
         test_empty_argsarray -> Test with empty args_array.
 
@@ -131,19 +131,19 @@ class UnitTest(unittest.TestCase):
         self.assertTrue(arg_parser.arg_cond_req_or(self.args_array3,
                                                 self.opt_con_req_dict3))
 
-    def test_one_arg_required(self):
+    def test_one_arg_present(self):
 
-        """Function:  test_one_arg_required
+        """Function:  test_one_arg_present
 
-        Description:  Test with one argument required and is present.
+        Description:  Test with one argument is present.
 
         Arguments:
             None
 
         """
 
-        self.assertTrue(arg_parser.arg_cond_req_or(self.args_array2,
-                                                self.opt_con_req_dict2))
+        self.assertTrue(arg_parser.arg_cond_req_or(self.args_array3,
+                                                   self.opt_con_req_dict2))
 
     def test_empty_optconreqlist(self):
 
@@ -157,7 +157,7 @@ class UnitTest(unittest.TestCase):
         """
 
         self.assertTrue(arg_parser.arg_cond_req_or(self.args_array2,
-                                                self.opt_con_req_dict))
+                                                   self.opt_con_req_dict))
 
     def test_empty_argsarray(self):
 
@@ -172,7 +172,7 @@ class UnitTest(unittest.TestCase):
 
         with gen_libs.no_std_out():
             status = arg_parser.arg_cond_req_or(self.args_array,
-                                             self.opt_con_req_dict2)
+                                                self.opt_con_req_dict2)
 
         self.assertFalse(status)
 
