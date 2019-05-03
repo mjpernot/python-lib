@@ -49,8 +49,6 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Unit testing initilization.
-        test_optreqlist_two_args -> Test adding two args from opt_req_list.
-
         test_two_args_missing -> Test with two arguments required, but missing.
         test_one_arg_missing -> Test with one argument required, but missing.
         test_two_args_required -> Test with 2 arguments required & are present.
@@ -78,22 +76,7 @@ class UnitTest(unittest.TestCase):
         self.opt_con_req_list = []
         self.opt_con_req_list2 = ["-c"]
         self.opt_con_req_list3 = ["-c", "-f"]
-        self.opt_con_req_list4 = ["-c", "-f", "-m"]
-        self.opt_con_req_list5 = ["-c", "-f", "-m", "-d"]
-
-    def test_optreqlist_two_args(self):
-
-        """Function:  test_optreqlist_two_args
-
-        Description:  Test with adding two args from opt_req_list.
-
-        Arguments:
-            None
-
-        """
-
-        self.assertTrue(arg_parser.arg_cond_req(self.args_array2,
-                                                self.opt_con_req_list))
+        self.opt_con_req_list4 = ["-c", "-f", "-m", "-d"]
 
     def test_two_args_missing(self):
 
@@ -107,7 +90,7 @@ class UnitTest(unittest.TestCase):
         """
 
         self.assertTrue(arg_parser.arg_cond_req(self.args_array2,
-                                                self.opt_con_req_list5))
+                                                self.opt_con_req_list4))
 
     def test_one_arg_missing(self):
 
