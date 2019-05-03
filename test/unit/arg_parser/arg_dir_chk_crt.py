@@ -65,10 +65,11 @@ class UnitTest(unittest.TestCase):
         test_isinstance_is_string -> Test with isinstance against a string.
         test_isinstance_is_list -> Test with isinstance against a list.
         test_two_match_between_sets -> Test with two matches between sets.
-        test_one_match_between_sets -> Test with one match between sets.
-        test_one_match_empty_list -> Test 1 match between sets but empty list.
-        test_no_match_between_sets -> Test with no match between sets passed.
 
+        test_match_no_access -> Test match between sets, but no access to dir.
+        test_one_match_between_sets -> Test one match between sets and is dir.
+        test_no_match_between_sets -> Test no match between arguments passed.
+        test_empty_argsarray -> Test with args_array is empty.
         test_empty_dirchklist -> Test with dir_chk_list is empty.
 
     """
@@ -85,15 +86,18 @@ class UnitTest(unittest.TestCase):
         """
 
         self.args_array = {}
-        self.args_array2 = {"-f": ["/test_path/dir1"]}
-        self.args_array3 = {}
+        self.args_array2 = {"-d": "/test_path/dir1"}
+        self.args_array3 = {"-d": "/test_path/dir1", "-g": "/test_path/dir2"}
 
         self.dir_chk_list = []
-        self.dir_chk_list2 = []
-        self.dir_chk_list3 = []
+        self.dir_chk_list2 = ["-d"]
+        self.dir_chk_list3 = ["-d", "-g"]
+        self.dir_chk_list4 = ["-d", "-i"]
+        self.dir_chk_list5 = ["-g"]
 
         self.dir_crt_list = []
-        self.dir_crt_list2 = ["-f"]
+        self.dir_crt_list2 = ["-d"]
+        self.dir_crt_list3 = ["-d", "-g"]
 
     @mock.patch("arg_parser._file_create")
     @mock.patch("arg_parser.open")
@@ -401,54 +405,69 @@ class UnitTest(unittest.TestCase):
         self.assertFalse(arg_parser.arg_dir_chk_crt(self.args_array,
                                                  self.file_chk_list))
 
-    @mock.patch("arg_parser.open")
-    def test_one_match_between_sets(self, mock_open):
+    @mock.patch("arg_parser.os")
+    def test_match_no_access(self, mock_os):
+
+        """Function:  test_match_no_access
+
+        Description:  Test with match between sets, but no access to directory.
+
+        Arguments:
+            None
+
+        """
+        
+        mock_os.path.isdir.return_value = True
+        mock_os.access.return_value = False
+
+        self.assertFalse(arg_parser.arg_dir_chk_crt(self.args_array2,
+                                                    self.dir_chk_list2))
+
+    @mock.patch("arg_parser.os")
+    def test_one_match_between_sets(self, mock_os):
 
         """Function:  test_one_match_between_sets
 
-        Description:  Test with one match between sets.
+        Description:  Test with one match between sets and is directory.
 
         Arguments:
             None
 
         """
+        
+        mock_os.path.isdir.return_value = True
+        mock_os.access.return_value = True
 
-        mock_open.return_value = self.open
-
-        self.assertFalse(arg_parser.arg_dir_chk_crt(self.args_array,
-                                                 self.file_chk_list))
-
-    def test_one_match_empty_list(self):
-
-        """Function:  test_one_match_empty_list
-
-        Description:  Test with one match between sets but empty list.
-
-        Arguments:
-            None
-
-        """
-
-        self.args_array = {"-f": [], "-m": "Marker"}
-
-        self.assertFalse(arg_parser.arg_dir_chk_crt(self.args_array,
-                                                 self.file_chk_list))
+        self.assertFalse(arg_parser.arg_dir_chk_crt(self.args_array2,
+                                                    self.dir_chk_list2))
 
     def test_no_match_between_sets(self):
 
         """Function:  test_no_match_between_sets
 
-        Description:  Test with no match between sets passed.
+        Description:  Test with no match between arguments passed.
 
         Arguments:
             None
 
         """
 
-        self.file_chk_list = ["-a"]
+        self.assertFalse(arg_parser.arg_dir_chk_crt(self.args_array2,
+                                                    self.dir_chk_list5))
+
+    def test_empty_argsarray(self):
+
+        """Function:  test_empty_argsarray
+
+        Description:  Test with args_array is empty.
+
+        Arguments:
+            None
+
+        """
 
         self.assertFalse(arg_parser.arg_dir_chk_crt(self.args_array,
-                                                 self.file_chk_list))
+                                                    self.dir_chk_list2))
 
     def test_empty_dirchklist(self):
 
@@ -461,8 +480,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertFalse(arg_parser.arg_dir_chk_crt(self.args_array,
-                                                 self.file_chk_list))
+        self.assertFalse(arg_parser.arg_dir_chk_crt(self.args_array2,
+                                                    self.dir_chk_list))
 
 
 if __name__ == "__main__":
