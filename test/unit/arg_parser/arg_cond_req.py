@@ -54,7 +54,7 @@ class UnitTest(unittest.TestCase):
         test_two_args_required -> Test with 2 arguments required & are present.
         test_one_arg_required -> Test with 1 argument required and is present.
         test_empty_optconreqlist -> Test with empty list for opt_con_req_list.
-        test_empty_arsarray -> Test with empty args_array.
+        test_empty_argsarray -> Test with empty args_array.
 
     """
 
@@ -154,9 +154,9 @@ class UnitTest(unittest.TestCase):
         self.assertTrue(arg_parser.arg_cond_req(self.args_array2,
                                                 self.opt_con_req_list))
 
-    def test_empty_arsarray(self):
+    def test_empty_argsarray(self):
 
-        """Function:  test_empty_arsarray
+        """Function:  test_empty_argsarray
 
         Description:  Test with empty list for def_array.
 
