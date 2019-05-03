@@ -70,9 +70,18 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.args_array = {"-f": "file1"}
+        self.args_array = {}
+        self.args_array2 = {"-f": "file1"}
+
         self.def_array = {}
+        self.def_array2 = {"-n": "1"}
+        self.def_array3 = {"-n": "1", "-i": "sysmon"}
+        self.def_array4 = {"-n": "1", "-i": "sysmon", "-g": "no"}
+
         self.opt_req_list = []
+        self.opt_req_list2 = ["-m"]
+        self.opt_req_list3 = ["-n"]
+        self.opt_req_list4 = ["-n", "-i"]
 
     def test_optreqlist_two_args(self):
 
@@ -85,15 +94,14 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.opt_req_list = ["-n", "-i"]
-        self.def_array = {"-n": "1", "-i": "sysmon", "-g": "no"}
-        self.args_array["-n"] = "1"
-        self.args_array["-i"] = "sysmon"
+        test_array = dict(self.args_array)
+        test_array["-n"] = "1"
+        test_array["-i"] = "sysmon"
 
         self.assertEqual(arg_parser.arg_add_def(self.args_array,
-                                                self.def_array,
-                                                self.opt_req_list),
-                         self.args_array)
+                                                self.def_array4,
+                                                self.opt_req_list4),
+                         test_array)
 
     def test_optreqlist_zero_arg(self):
 
@@ -106,13 +114,12 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.opt_req_list = ["-m"]
-        self.def_array = {"-n": "1", "-i": "sysmon"}
+        test_array = dict(self.args_array)
 
         self.assertEqual(arg_parser.arg_add_def(self.args_array,
-                                                self.def_array,
-                                                self.opt_req_list),
-                         self.args_array)
+                                                self.def_array3,
+                                                self.opt_req_list2),
+                         test_array)
 
     def test_optreqlist_one_arg(self):
 
@@ -125,14 +132,13 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.opt_req_list = ["-n"]
-        self.def_array = {"-n": "1", "-i": "sysmon"}
-        self.args_array["-n"] = "1"
+        test_array = dict(self.args_array)
+        test_array["-n"] = "1"
 
         self.assertEqual(arg_parser.arg_add_def(self.args_array,
-                                                self.def_array,
-                                                self.opt_req_list),
-                         self.args_array)
+                                                self.def_array3,
+                                                self.opt_req_list3),
+                         test_array)
 
     def test_argsarray_only(self):
 
@@ -145,8 +151,9 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertEqual(arg_parser.arg_add_def(self.args_array),
-                         self.args_array)
+        test_array = dict(self.args_array)
+
+        self.assertEqual(arg_parser.arg_add_def(self.args_array), test_array)
 
     def test_defarray_two_args(self):
 
@@ -159,14 +166,14 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.def_array = {"-n": "1", "-i": "sysmon"}
-        self.args_array["-n"] = "1"
-        self.args_array["-i"] = "sysmon"
+        test_array = dict(self.args_array)
+        test_array["-n"] = "1"
+        test_array["-i"] = "sysmon"
 
         self.assertEqual(arg_parser.arg_add_def(self.args_array,
-                                                self.def_array,
+                                                self.def_array3,
                                                 self.opt_req_list),
-                         self.args_array)
+                         test_array)
 
     def test_defarray_one_arg(self):
 
@@ -179,13 +186,13 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.def_array = {"-n": "1"}
-        self.args_array["-n"] = "1"
+        test_array = dict(self.args_array)
+        test_array["-n"] = "1"
 
         self.assertEqual(arg_parser.arg_add_def(self.args_array,
-                                                self.def_array,
+                                                self.def_array2,
                                                 self.opt_req_list),
-                         self.args_array)
+                         test_array)
 
     def test_empty_defarray(self):
 
@@ -198,10 +205,12 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        test_array = dict(self.args_array)
+
         self.assertEqual(arg_parser.arg_add_def(self.args_array,
                                                 self.def_array,
                                                 self.opt_req_list),
-                         self.args_array)
+                         test_array)
 
 
 if __name__ == "__main__":
