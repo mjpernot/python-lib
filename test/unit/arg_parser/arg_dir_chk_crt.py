@@ -37,93 +37,6 @@ import version
 __version__ = version.__version__
 
 
-class FileOpen3(object):
-
-    """Class:  FileOpen3
-
-    Description:  Class stub holder for file open class.
-
-    Super-Class:  None
-
-    Sub-Classes:  None
-
-    Methods:
-        close -> Stub holder for close function.
-
-    """
-
-    def close(self):
-
-        """Function:  close
-
-        Description:  Stub holder for close function.
-
-        Arguments:
-            None
-
-        """
-
-        raise IOError(2, "No File")
-
-
-class FileOpen2(object):
-
-    """Class:  FileOpen2
-
-    Description:  Class stub holder for file open class.
-
-    Super-Class:  None
-
-    Sub-Classes:  None
-
-    Methods:
-        close -> Stub holder for close function.
-
-    """
-
-    def close(self):
-
-        """Function:  close
-
-        Description:  Stub holder for close function.
-
-        Arguments:
-            None
-
-        """
-
-        raise IOError(10, "Some Error")
-
-
-class FileOpen(object):
-
-    """Class:  FileOpen
-
-    Description:  Class stub holder for file open class.
-
-    Super-Class:  None
-
-    Sub-Classes:  None
-
-    Methods:
-        close -> Stub holder for close function.
-
-    """
-
-    def close(self):
-
-        """Function:  close
-
-        Description:  Stub holder for close function.
-
-        Arguments:
-            None
-
-        """
-
-        return True
-
-
 class UnitTest(unittest.TestCase):
 
     """Class:  UnitTest
@@ -156,6 +69,8 @@ class UnitTest(unittest.TestCase):
         test_one_match_empty_list -> Test 1 match between sets but empty list.
         test_no_match_between_sets -> Test with no match between sets passed.
 
+        test_empty_dirchklist -> Test with dir_chk_list is empty.
+
     """
 
     def setUp(self):
@@ -169,12 +84,16 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.file_chk_list = ["-f"]
-        self.args_array = {"-f": ["test/file1"], "-m": "Marker"}
-        self.file_crt_list = ["-f"]
-        self.open = FileOpen()
-        self.open2 = FileOpen2()
-        self.open3 = FileOpen3()
+        self.args_array = {}
+        self.args_array2 = {"-f": ["/test_path/dir1"]}
+        self.args_array3 = {}
+
+        self.dir_chk_list = []
+        self.dir_chk_list2 = []
+        self.dir_chk_list3 = []
+
+        self.dir_crt_list = []
+        self.dir_crt_list2 = ["-f"]
 
     @mock.patch("arg_parser._file_create")
     @mock.patch("arg_parser.open")
@@ -527,6 +446,20 @@ class UnitTest(unittest.TestCase):
         """
 
         self.file_chk_list = ["-a"]
+
+        self.assertFalse(arg_parser.arg_dir_chk_crt(self.args_array,
+                                                 self.file_chk_list))
+
+    def test_empty_dirchklist(self):
+
+        """Function:  test_empty_dirchklist
+
+        Description:  Test with dir_chk_list is empty.
+
+        Arguments:
+            None
+
+        """
 
         self.assertFalse(arg_parser.arg_dir_chk_crt(self.args_array,
                                                  self.file_chk_list))
