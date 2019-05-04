@@ -72,11 +72,12 @@ class UnitTest(unittest.TestCase):
         self.args_array = {}
         self.args_array2 = {"-c": "config"}
         self.args_array3 = {"-c": "config", "-f": "file1"}
+        self.args_array4 = {"-c": "config", "-f": "file1", "-g": True}
 
-        self.opt_con_req_list = []
-        self.opt_con_req_list2 = ["-c"]
-        self.opt_con_req_list3 = ["-c", "-f"]
-        self.opt_con_req_list4 = ["-c", "-f", "-m", "-d"]
+        self.opt_con_req_list = {}
+        self.opt_con_req_list2 = {"-c": ["-f"]}
+        self.opt_con_req_list3 = {"-c": ["-f", "-g"]}
+        #self.opt_con_req_list4 = {"-c": ["-f"], "-f": [], "-m": [], "-d": []}
 
     def test_two_args_missing(self):
 
@@ -91,7 +92,7 @@ class UnitTest(unittest.TestCase):
 
         with gen_libs.no_std_out():
             status = arg_parser.arg_cond_req(self.args_array2,
-                                             self.opt_con_req_list4)
+                                             self.opt_con_req_list3)
 
         self.assertFalse(status)
 
@@ -108,7 +109,7 @@ class UnitTest(unittest.TestCase):
         
         with gen_libs.no_std_out():
             status = arg_parser.arg_cond_req(self.args_array2,
-                                             self.opt_con_req_list3)
+                                             self.opt_con_req_list2)
 
         self.assertFalse(status)
 
@@ -123,8 +124,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertTrue(arg_parser.arg_cond_req(self.args_array3,
-                                                self.opt_con_req_lis3))
+        self.assertTrue(arg_parser.arg_cond_req(self.args_array4,
+                                                self.opt_con_req_list3))
 
     def test_one_arg_required(self):
 
@@ -137,7 +138,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertTrue(arg_parser.arg_cond_req(self.args_array2,
+        self.assertTrue(arg_parser.arg_cond_req(self.args_array3,
                                                 self.opt_con_req_list2))
 
     def test_empty_optconreqlist(self):
@@ -169,7 +170,7 @@ class UnitTest(unittest.TestCase):
             status = arg_parser.arg_cond_req(self.args_array,
                                              self.opt_con_req_list2)
 
-        self.assertFalse(status)
+        self.assertTrue(status)
 
 
 if __name__ == "__main__":
