@@ -77,7 +77,6 @@ class UnitTest(unittest.TestCase):
         self.opt_con_req_list = {}
         self.opt_con_req_list2 = {"-c": ["-f"]}
         self.opt_con_req_list3 = {"-c": ["-f", "-g"]}
-        #self.opt_con_req_list4 = {"-c": ["-f"], "-f": [], "-m": [], "-d": []}
 
     def test_two_args_missing(self):
 
