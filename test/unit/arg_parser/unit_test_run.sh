@@ -9,6 +9,22 @@ echo "Unit test:  arg_add_def"
 test/unit/arg_parser/arg_add_def.py
 
 echo ""
+echo "Unit test:  arg_cond_req"
+test/unit/arg_parser/arg_cond_req.py
+
+echo ""
+echo "Unit test:  arg_cond_req_or"
+test/unit/arg_parser/arg_cond_req_or.py
+
+echo ""
+echo "Unit test:  arg_default"
+test/unit/arg_parser/arg_default.py
+
+echo ""
+echo "Unit test:  arg_dir_chk_crt"
+test/unit/arg_parser/arg_dir_chk_crt.py
+
+echo ""
 echo "Unit test:  arg_file_chk"
 test/unit/arg_parser/arg_file_chk.py
 

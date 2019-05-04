@@ -9,6 +9,10 @@ coverage erase
 echo ""
 echo "Running unit test modules in conjunction with coverage"
 coverage run -a --source=arg_parser test/unit/arg_parser/arg_add_def.py
+coverage run -a --source=arg_parser test/unit/arg_parser/arg_cond_req.py
+coverage run -a --source=arg_parser test/unit/arg_parser/arg_cond_req_or.py
+coverage run -a --source=arg_parser test/unit/arg_parser/arg_default.py
+coverage run -a --source=arg_parser test/unit/arg_parser/arg_dir_chk_crt.py
 coverage run -a --source=arg_parser test/unit/arg_parser/arg_file_chk.py
 coverage run -a --source=arg_parser test/unit/arg_parser/arg_parse2.py
 coverage run -a --source=arg_parser test/unit/arg_parser/parse_multi.py
