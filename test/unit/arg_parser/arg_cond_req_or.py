@@ -84,6 +84,7 @@ class UnitTest(unittest.TestCase):
         self.opt_con_req_dict3 = {"-c": ["-f", "-m"]}
         self.opt_con_req_dict4 = {"-c": ["-f"] , "-f": ["-m"]}
         self.opt_con_req_dict5 = {"-c": ["-f", "-m"] , "-d": ["-c"]}
+        self.opt_con_req_dict6 = {"-c": ["-f", "-m"] , "-d": ["-g"]}
 
     def test_multi_cond_req2(self):
 
@@ -98,7 +99,7 @@ class UnitTest(unittest.TestCase):
 
         with gen_libs.no_std_out():
             status = arg_parser.arg_cond_req_or(self.args_array6,
-                                                self.opt_con_req_dict5)
+                                                self.opt_con_req_dict6)
 
         self.assertFalse(status)
 
@@ -114,7 +115,7 @@ class UnitTest(unittest.TestCase):
         """
         
         self.assertTrue(arg_parser.arg_cond_req_or(self.args_array5,
-                                                   self.opt_con_req_dict5)
+                                                   self.opt_con_req_dict5))
 
     def test_two_cond_req2(self):
 
@@ -145,7 +146,7 @@ class UnitTest(unittest.TestCase):
         """
         
         self.assertTrue(arg_parser.arg_cond_req_or(self.args_array4,
-                                                   self.opt_con_req_dict4)
+                                                   self.opt_con_req_dict4))
 
     def test_two_args_present(self):
 
@@ -204,7 +205,7 @@ class UnitTest(unittest.TestCase):
             status = arg_parser.arg_cond_req_or(self.args_array,
                                                 self.opt_con_req_dict2)
 
-        self.assertFalse(status)
+        self.assertTrue(status)
 
 
 if __name__ == "__main__":
