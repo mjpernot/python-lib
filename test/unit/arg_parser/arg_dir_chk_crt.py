@@ -36,11 +36,18 @@ import version
 # Version
 __version__ = version.__version__
 
-def testme2():
-    raise os.OSError()
+def raise_oserror():
 
-def testme():
-    return testme2()
+    """Function:  raise_oserror
+
+    Description:  Stub holder to return a raised OSError exception.
+
+    Arguments:
+        None
+
+    """
+
+    raise OSError
 
 class UnitTest(unittest.TestCase):
 
@@ -54,6 +61,8 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Unit testing initilization.
+        test_chk_good_crt_fail -> Test check dir good, but create dir failed.
+        test_match_create_dir_fail -> Test with failing to create directory.
         test_match_create_dir -> Test with creating directory.
         test_match_no_dir -> Test with directory does not exist.
         test_match_no_access -> Test match between sets, but no access to dir.
@@ -87,7 +96,27 @@ class UnitTest(unittest.TestCase):
 
         self.dir_crt_list = []
         self.dir_crt_list2 = ["-d"]
-        self.dir_crt_list3 = ["-d", "-g"]
+        self.dir_crt_list3 = ["-g"]
+
+    @mock.patch("arg_parser.os")
+    def test_chk_good_crt_fail(self, mock_os):
+
+        """Function:  test_chk_good_crt_fail
+
+        Description:  Test with checking dir good, but creating dir failed.
+
+        Arguments:
+            None
+
+        """
+        
+        mock_os.path.isdir.side_effect = [True, False]
+        mock_os.makedirs = raise_oserror
+
+        with gen_libs.no_std_out():
+            self.assertTrue(arg_parser.arg_dir_chk_crt(self.args_array3,
+                                                       self.dir_chk_list3,
+                                                       self.dir_crt_list3))
 
     @mock.patch("arg_parser.os")
     def test_match_create_dir_fail(self, mock_os):
@@ -102,11 +131,12 @@ class UnitTest(unittest.TestCase):
         """
         
         mock_os.path.isdir.return_value = False
-        mock_os.makedirs.return_value = testme()
+        mock_os.makedirs = raise_oserror
 
-        self.assertFalse(arg_parser.arg_dir_chk_crt(self.args_array2,
-                                                    self.dir_chk_list2,
-                                                    self.dir_crt_list2))
+        with gen_libs.no_std_out():
+            self.assertTrue(arg_parser.arg_dir_chk_crt(self.args_array2,
+                                                       self.dir_chk_list2,
+                                                       self.dir_crt_list2))
 
     @mock.patch("arg_parser.os")
     def test_match_create_dir(self, mock_os):
