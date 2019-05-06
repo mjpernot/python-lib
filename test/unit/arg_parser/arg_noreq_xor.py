@@ -74,8 +74,8 @@ class UnitTest(unittest.TestCase):
         self.args_array2 = {"-a": True}
         self.args_array3 = {"-a": True, "-b": True}
         self.args_array4 = {"-a": True, "-c": True}
-        self.args_array5 = {"-a": True, "-c": Truem "-d": True}
-        self.args_array6 = {"-a": True, "-b": True, "-c": Truem "-d": True}
+        self.args_array5 = {"-a": True, "-c": True, "-d": True}
+        self.args_array6 = {"-a": True, "-b": True, "-c": True, "-d": True}
 
         self.xor_noreq_list = {}
         self.xor_noreq_list2 = {"-a": "-b"}
