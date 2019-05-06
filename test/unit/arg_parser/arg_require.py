@@ -90,8 +90,8 @@ class UnitTest(unittest.TestCase):
         """
 
         with gen_libs.no_std_out():
-            self.assertFalse(arg_parser.arg_require(self.args_array4,
-                                                    self.opt_req_list3))
+            self.assertTrue(arg_parser.arg_require(self.args_array4,
+                                                   self.opt_req_list3))
 
     def test_two_require(self):
 
@@ -104,8 +104,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertTrue(arg_parser.arg_require(self.args_array3,
-                                               self.opt_req_list3))
+        self.assertFalse(arg_parser.arg_require(self.args_array3,
+                                                self.opt_req_list3))
 
     def test_one_require(self):
 
@@ -118,8 +118,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertTrue(arg_parser.arg_require(self.args_array2,
-                                               self.opt_req_list2))
+        self.assertFalse(arg_parser.arg_require(self.args_array2,
+                                                self.opt_req_list2))
 
     def test_empty_argsarray(self):
 
@@ -133,8 +133,8 @@ class UnitTest(unittest.TestCase):
         """
 
         with gen_libs.no_std_out():
-            self.assertFalse(arg_parser.arg_require(self.args_array,
-                                                    self.opt_req_list2))
+            self.assertTrue(arg_parser.arg_require(self.args_array,
+                                                   self.opt_req_list2))
 
     def test_empty_optreqlist(self):
 
@@ -147,8 +147,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertTrue(arg_parser.arg_require(self.args_array2,
-                                               self.opt_req_list))
+        self.assertFalse(arg_parser.arg_require(self.args_array2,
+                                                self.opt_req_list))
 
     def test_both_empty(self):
 
@@ -161,7 +161,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertTrue(arg_parser.arg_require(self.args_array,
+        self.assertFalse(arg_parser.arg_require(self.args_array,
                                                self.opt_req_list))
 
 
