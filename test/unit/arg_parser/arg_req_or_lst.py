@@ -49,7 +49,8 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Unit testing initilization.
-        test_multiple_miss2 -> Test with multiple key/list present.
+        test_multiple_miss2 -> Test with multiple keys with one not present.
+        test_multiple_miss -> Test with multiple keys with one not present.
         test_multiple_mix -> Test with multiple key/list present.
         test_multiple_lists -> Test with multiple lists present.
         test_multiple_keys -> Test with multiple keys present.
