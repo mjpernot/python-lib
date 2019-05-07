@@ -162,7 +162,7 @@ class UnitTest(unittest.TestCase):
         """
 
         self.assertFalse(arg_parser.arg_require(self.args_array,
-                                               self.opt_req_list))
+                                                self.opt_req_list))
 
 
 if __name__ == "__main__":
