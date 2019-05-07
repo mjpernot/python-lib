@@ -41,6 +41,10 @@ echo "Unit test:  arg_require"
 test/unit/arg_parser/arg_require.py
 
 echo ""
+echo "Unit test:  arg_req_or_lst"
+test/unit/arg_parser/arg_req_or_lst.py
+
+echo ""
 echo "Unit test:  parse_multi"
 test/unit/arg_parser/parse_multi.py
 

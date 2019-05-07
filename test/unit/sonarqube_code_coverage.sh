@@ -17,6 +17,7 @@ coverage run -a --source=arg_parser test/unit/arg_parser/arg_file_chk.py
 coverage run -a --source=arg_parser test/unit/arg_parser/arg_noreq_xor.py
 coverage run -a --source=arg_parser test/unit/arg_parser/arg_parse2.py
 coverage run -a --source=arg_parser test/unit/arg_parser/arg_require.py
+coverage run -a --source=arg_parser test/unit/arg_parser/arg_req_or_lst.py
 coverage run -a --source=arg_parser test/unit/arg_parser/parse_multi.py
 coverage run -a --source=arg_parser test/unit/arg_parser/parse_single.py
 coverage run -a --source=arg_parser test/unit/arg_parser/file_create.py
