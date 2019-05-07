@@ -18,7 +18,9 @@ pipeline {
                 ./test/unit/arg_parser/arg_default.py
                 ./test/unit/arg_parser/arg_dir_chk_crt.py
                 ./test/unit/arg_parser/arg_file_chk.py
+                ./test/unit/arg_parser/arg_noreq_xor.py
                 ./test/unit/arg_parser/arg_parse2.py
+                ./test/unit/arg_parser/arg_require.py
                 ./test/unit/arg_parser/parse_multi.py
                 ./test/unit/arg_parser/parse_single.py
                 ./test/unit/arg_parser/file_create.py

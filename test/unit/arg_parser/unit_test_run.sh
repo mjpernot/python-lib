@@ -29,8 +29,16 @@ echo "Unit test:  arg_file_chk"
 test/unit/arg_parser/arg_file_chk.py
 
 echo ""
+echo "Unit test:  arg_noreq_xor"
+test/unit/arg_parser/arg_noreq_xor.py
+
+echo ""
 echo "Unit test:  arg_parse2"
 test/unit/arg_parser/arg_parse2.py
+
+echo ""
+echo "Unit test:  arg_require"
+test/unit/arg_parser/arg_require.py
 
 echo ""
 echo "Unit test:  parse_multi"
