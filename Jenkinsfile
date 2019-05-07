@@ -27,6 +27,7 @@ pipeline {
                 ./test/unit/arg_parser/arg_validate.py
                 ./test/unit/arg_parser/arg_valid_val.py
                 ./test/unit/arg_parser/arg_wildcard.py
+                ./test/unit/arg_parser/arg_xor_dict.py
                 ./test/unit/arg_parser/parse_multi.py
                 ./test/unit/arg_parser/parse_single.py
                 ./test/unit/arg_parser/file_create.py

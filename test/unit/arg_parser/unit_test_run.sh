@@ -65,6 +65,10 @@ echo "Unit test:  arg_wildcard"
 test/unit/arg_parser/arg_wildcard.py
 
 echo ""
+echo "Unit test:  arg_xor_dict"
+test/unit/arg_parser/arg_xor_dict.py
+
+echo ""
 echo "Unit test:  parse_multi"
 test/unit/arg_parser/parse_multi.py
 
