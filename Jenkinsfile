@@ -12,6 +12,25 @@ pipeline {
                 virtualenv test_env
                 source test_env/bin/activate
                 pip2 install mock --user
+                ./test/unit/arg_parser/arg_add_def.py
+                ./test/unit/arg_parser/arg_cond_req.py
+                ./test/unit/arg_parser/arg_cond_req_or.py
+                ./test/unit/arg_parser/arg_default.py
+                ./test/unit/arg_parser/arg_dir_chk_crt.py
+                ./test/unit/arg_parser/arg_file_chk.py
+                ./test/unit/arg_parser/arg_noreq_xor.py
+                ./test/unit/arg_parser/arg_parse2.py
+                ./test/unit/arg_parser/arg_require.py
+                ./test/unit/arg_parser/arg_req_or_lst.py
+                ./test/unit/arg_parser/arg_req_xor.py
+                ./test/unit/arg_parser/arg_set_path.py
+                ./test/unit/arg_parser/arg_validate.py
+                ./test/unit/arg_parser/arg_valid_val.py
+                ./test/unit/arg_parser/arg_wildcard.py
+                ./test/unit/arg_parser/arg_xor_dict.py
+                ./test/unit/arg_parser/parse_multi.py
+                ./test/unit/arg_parser/parse_single.py
+                ./test/unit/arg_parser/file_create.py
                 ./test/unit/gen_libs/and_is_true.py
                 ./test/unit/gen_libs/chk_crt_dir.py
                 ./test/unit/gen_libs/chk_crt_file.py
@@ -30,6 +49,7 @@ pipeline {
                 ./test/unit/gen_libs/merge_two_dicts.py
                 ./test/unit/gen_libs/month_delta.py
                 ./test/unit/gen_libs/no_std_out.py
+                ./test/unit/gen_libs/rotate_files.py
                 ./test/unit/gen_libs/touch.py
                 ./test/unit/gen_libs/write_file.py
                 ./test/unit/gen_class/ProgramLock_init.py

@@ -13,7 +13,6 @@
         chk_int
         clear_file
         compress
-        copy_tree
         cp_file
         cp_file2
         crt_file_time
@@ -348,77 +347,6 @@ def compress(fname, **kwargs):
 
     P1 = subprocess.Popen(["gzip", fname])
     P1.wait()
-
-
-def copy_tree(src, dst, symlinks=False, ignore=None, **kwargs):
-
-    """Function:  copy_tree
-
-    Description:  Copies a directory tree recursively.  Will create the
-        destination directory if not present.
-
-    Arguments:
-        (input) src -> Source directory.
-        (input) dst -> Destination directory.
-        (input) symlinks -> True|False is symbolic links are included.
-        (input) ignore -> Function call with entries to be ignored.
-        (input) **kwargs:
-            None
-
-    """
-
-    # Source directory files.
-    names = os.listdir(src)
-
-    # Create ignore list if exists.
-    if ignore is not None:
-        ignored_names = ignore(src, names)
-
-    else:
-        ignored_names = set()
-
-    if not os.path.isdir(dst):
-        os.makedirs(dst)
-
-    errors = []
-
-    # Process items in directory.
-    for name in names:
-
-        if name in ignored_names:
-            continue
-
-        srcname = os.path.join(src, name)
-        dstname = os.path.join(dst, name)
-
-        try:
-            # Symlink set and source name is link.
-            if symlinks and os.path.islink(srcname):
-                linkto = os.readlink(srcname)
-                os.symlink(linkto, dstname)
-
-            # Source is directory.
-            elif os.path.isdir(srcname):
-                copy_tree(srcname, dstname, symlinks, ignore)
-
-            else:
-                shutil.copy2(srcname, dstname)
-
-        except (IOError, os.error) as msg:
-            errors.append((srcname, dstname, str(msg)))
-
-        except EnvironmentError as err:
-            errors.append((srcname, dstname, str(err)))
-
-        try:
-            # File's statistics.
-            shutil.copystat(src, dst)
-
-        except OSError as msg:
-            errors.append((src, dst, str(msg)))
-
-        if errors:
-            print(errors)
 
 
 def cp_file(fname, src_dir, dest_dir, new_fname=None, **kwargs):
@@ -1866,13 +1794,11 @@ def rotate_files(fname, cnt=0, max_cnt=5, **kwargs):
 
     """
 
-    if cnt < max_cnt:
+    if cnt < max_cnt and os.path.isfile(fname + "." + str(cnt)):
+        rotate_files(fname, cnt + 1, max_cnt)
 
-        if os.path.isfile(fname + "." + str(cnt)):
-            rotate_files(fname, cnt + 1, max_cnt)
-
-            # Rename file to + 1.
-            os.rename(fname + "." + str(cnt), fname + "." + str(cnt + 1))
+        # Rename file to + 1.
+        os.rename(fname + "." + str(cnt), fname + "." + str(cnt + 1))
 
 
 def str_2_list(del_str, fld_del, **kwargs):

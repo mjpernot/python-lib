@@ -22,6 +22,9 @@
         arg_valid_val
         arg_wildcard
         arg_xor_dict
+        _file_create
+        _parse_multi
+        _parse_single
 
 """
 
@@ -240,25 +243,8 @@ def arg_file_chk(args_array, file_chk_list, file_crt_list=None):
 
             except IOError as (errno, strerror):
 
-                # If in create list and not present.
-                if x in file_crt_list and errno == 2:
-
-                    try:
-                        fname = open(name, "w")
-                        fname.close()
-
-                    except IOError as (errno, strerror):
-                        # Unable to create file.
-                        print("I/O Error: ({0}): {1}".format(errno, strerror))
-                        print("Check option: '{0}', file: '{1}'".
-                              format(x, name))
-                        exit_flag = True
-
-                # File not present.
-                else:
-                    print("I/O Error: ({0}): {1}".format(errno, strerror))
-                    print("Check option: '{0}', file: '{1}'".format(x, name))
-                    exit_flag = True
+                exit_flag = _file_create(name, x, file_crt_list, errno,
+                                         strerror, exit_flag)
 
     return exit_flag
 
@@ -324,61 +310,18 @@ def arg_parse2(argv, opt_val_list, opt_def_dict=None, **kwargs):
 
     multi_list = list(kwargs.get("multi_val", []))
     opt_val = list(kwargs.get("opt_val", []))
-
     args_array = {}
 
     while argv:
 
         # Look for new option, always begin with "-".
         if argv[0][0] == "-":
-
             if argv[0] in multi_list:
-
-                # If no value in argv for option and it is not an integer.
-                if len(argv) < 2 \
-                   or (argv[1][0] == "-" and not gen_libs.chk_int(argv[1])):
-
-                    # See if default value is available for argument.
-                    args_array = arg_default(argv[0], args_array, opt_def_dict)
-
-                else:
-                    # Handle multiple values for argument.
-                    args_array[argv[0]] = []
-                    x = 0
-                    tmp_argv = argv[1:]
-
-                    # Process values until next argument.
-                    while tmp_argv:
-
-                        if tmp_argv[0][0] == "-":
-                            break
-
-                        else:
-                            args_array[argv[0]].append(tmp_argv[0])
-
-                        x = x + 1
-                        tmp_argv = tmp_argv[1:]
-
-                    # Move to argument after the multiple values.
-                    argv = argv[x:]
+                argv, args_array = _parse_multi(argv, args_array, opt_def_dict)
 
             elif argv[0] in opt_val_list or argv[0] in opt_val:
-
-                # If no value in argv for option and it is not an integer.
-                if len(argv) < 2 \
-                   or (argv[1][0] == "-" and not gen_libs.chk_int(argv[1])):
-
-                    if argv[0] in opt_val:
-                        args_array[argv[0]] = None
-
-                    else:
-                        # See if default value is available for argument.
-                        args_array = arg_default(argv[0], args_array,
-                                                 opt_def_dict)
-
-                else:
-                    args_array[argv[0]] = argv[1]
-                    argv = argv[1:]
+                argv, args_array = _parse_single(argv, args_array,
+                                                 opt_def_dict, opt_val)
 
             else:
                 args_array[argv[0]] = True
@@ -594,3 +537,146 @@ def arg_xor_dict(args_array, opt_xor_dict):
             break
 
     return xor_flag
+
+
+def _file_create(name, option, file_crt_list, errno, strerror, exit_flag,
+                 **kwargs):
+
+    """Function:  _file_create
+
+    Description:  Used to create a file if in file_crt_list and previously
+        determined was not present.
+
+    NOTE:  Used by the arg_file_chk() to reduce the complexity rating.
+
+    Arguments:
+        (input) name -> File path and name.
+        (input) option -> Option being checked.
+        (input) file_crt_list -> Options that require files to be created.
+        (input) errno -> Current error status from file_crt_list function.
+        (input) strerror -> Current error message from file_crt_list function.
+        (input) exit_flag -> Current status of file_crt_list function.
+        (input) **kwargs:
+            None
+        (output) exit_flag -> True|False - if file creation fails.
+
+    """
+
+    file_crt_list = list(file_crt_list)
+
+    if option in file_crt_list and errno == 2:
+
+        try:
+            fname = open(name, "w")
+            fname.close()
+
+        except IOError as (errno, strerror):
+            # Unable to create file.
+            print("I/O Error: ({0}): {1}".format(errno, strerror))
+            print("Check option: '{0}', file: '{1}'".format(option, name))
+            exit_flag = True
+
+    # File not present.
+    else:
+        print("I/O Error: ({0}): {1}".format(errno, strerror))
+        print("Check option: '{0}', file: '{1}'".format(option, name))
+        exit_flag = True
+
+    return exit_flag
+
+
+def _parse_multi(argv, args_array, opt_def_dict, **kwargs):
+
+    """Function:  _parse_multi
+
+    Description:  Processes a multi-value argument in command line
+        arguments.  Modifys the args_array by adding a dictionary key and a
+        list of values.
+
+    NOTE:  Used by the arg_parse2() to reduce the complexity rating.
+
+    Arguments:
+        (input) argv -> Arguments from the command line.
+        (input) args_array -> Array of command line options and values.
+        (input) opt_def_dict -> Dict with options and default values.
+        (input) **kwargs:
+            None.
+        (output) argv -> Arguments from the command line.
+        (output) args_array -> Array of command line options and values.
+
+    """
+
+    argv = list(argv)
+    args_array = dict(args_array)
+    opt_def_dict = dict(opt_def_dict)
+
+    # If no value in argv for option and it's not an integer.
+    if len(argv) < 2 or (argv[1][0] == "-" and not gen_libs.chk_int(argv[1])):
+
+        # See if default value is available for argument.
+        args_array = arg_default(argv[0], args_array, opt_def_dict)
+
+    else:
+        # Handle multiple values for argument.
+        args_array[argv[0]] = []
+        x = 0
+        tmp_argv = argv[1:]
+
+        # Process values until next argument.
+        while tmp_argv:
+            if tmp_argv[0][0] == "-":
+                break
+
+            else:
+                args_array[argv[0]].append(tmp_argv[0])
+
+            x = x + 1
+            tmp_argv = tmp_argv[1:]
+
+        # Move to argument after the multiple values.
+        argv = argv[x:]
+
+    return argv, args_array
+
+
+def _parse_single(argv, args_array, opt_def_dict, opt_val, **kwargs):
+
+    """Function:  _parse_single
+
+    Description:  Processes a single-value argument in command line
+        arguments.  Modifys the args_array by adding a dictionary key and a
+        value.
+
+    NOTE:  Used by the arg_parse2() to reduce the complexity rating.
+
+    Arguments:
+        (input) argv -> Arguments from the command line.
+        (input) args_array -> Array of command line options and values.
+        (input) opt_def_dict -> Dict with options and default values.
+        (input) opt_val -> List of options allow None or 1 value for option.
+        (input) **kwargs:
+            None.
+        (output) argv -> Arguments from the command line.
+        (output) args_array -> Array of command line options and values.
+
+    """
+
+    argv = list(argv)
+    args_array = dict(args_array)
+    opt_def_dict = dict(opt_def_dict)
+    opt_val = list(opt_val)
+
+    # If no value in argv for option and it is not an integer.
+    if len(argv) < 2 or (argv[1][0] == "-" and not gen_libs.chk_int(argv[1])):
+        if argv[0] in opt_val:
+            args_array[argv[0]] = None
+
+        else:
+            # See if default value is available for argument.
+            args_array = arg_default(argv[0], args_array, opt_def_dict)
+
+    else:
+        args_array[argv[0]] = argv[1]
+        argv = argv[1:]
+
+    return argv, args_array
