@@ -198,6 +198,7 @@ test/unit/arg_parser/arg_require.py
 test/unit/arg_parser/arg_req_or_lst.py
 test/unit/arg_parser/arg_req_xor.py
 test/unit/arg_parser/arg_set_path.py
+test/unit/arg_parser/arg_validate.py
 test/unit/arg_parser/parse_multi.py
 test/unit/arg_parser/parse_single.py
 test/unit/arg_parser/file_create.py

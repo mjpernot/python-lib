@@ -53,6 +53,10 @@ echo "Unit test:  arg_set_path"
 test/unit/arg_parser/arg_set_path.py
 
 echo ""
+echo "Unit test:  arg_validate"
+test/unit/arg_parser/arg_validate.py
+
+echo ""
 echo "Unit test:  parse_multi"
 test/unit/arg_parser/parse_multi.py
 
