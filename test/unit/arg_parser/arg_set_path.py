@@ -90,7 +90,7 @@ class UnitTest(unittest.TestCase):
         """
 
         self.assertEqual(arg_parser.arg_set_path(self.args_array2,
-                                                self.arg_opt3), self.ret)
+                                                 self.arg_opt3), self.ret)
 
     def test_arg_present(self):
 
@@ -104,7 +104,7 @@ class UnitTest(unittest.TestCase):
         """
 
         self.assertEqual(arg_parser.arg_set_path(self.args_array2,
-                                                self.arg_opt2), self.ret2)
+                                                 self.arg_opt2), self.ret2)
 
     def test_empty_both(self):
 
@@ -118,7 +118,7 @@ class UnitTest(unittest.TestCase):
         """
 
         self.assertEqual(arg_parser.arg_set_path(self.args_array2,
-                                                self.arg_opt), self.ret)
+                                                 self.arg_opt), self.ret)
 
     def test_empty_argopt(self):
 
@@ -132,7 +132,7 @@ class UnitTest(unittest.TestCase):
         """
 
         self.assertEqual(arg_parser.arg_set_path(self.args_array2,
-                                                self.arg_opt), self.ret)
+                                                 self.arg_opt), self.ret)
 
     def test_empty_argsarray(self):
 
