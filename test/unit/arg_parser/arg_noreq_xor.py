@@ -138,7 +138,7 @@ class UnitTest(unittest.TestCase):
 
         with gen_libs.no_std_out():
             self.assertFalse(arg_parser.arg_noreq_xor(self.args_array3,
-                                                       self.xor_noreq_list2))
+                                                      self.xor_noreq_list2))
 
     def test_one_match_success(self):
 
