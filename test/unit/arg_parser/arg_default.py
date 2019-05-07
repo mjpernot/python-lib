@@ -91,7 +91,7 @@ class UnitTest(unittest.TestCase):
         """
 
         test_array = dict(self.args_array2)
-        
+
         self.assertEqual(arg_parser.arg_default(self.arg, self.args_array2,
                                                 self.opt_def_dict2),
                          test_array)
@@ -106,10 +106,10 @@ class UnitTest(unittest.TestCase):
             None
 
         """
-        
+
         test_array = dict(self.args_array)
         test_array[self.arg] = self.opt_def_dict2[self.arg]
-        
+
         self.assertEqual(arg_parser.arg_default(self.arg, self.args_array,
                                                 self.opt_def_dict2),
                          test_array)
@@ -125,7 +125,7 @@ class UnitTest(unittest.TestCase):
             None
 
         """
-        
+
         mock_exit.return_value = False
 
         self.assertFalse(arg_parser.arg_default(self.arg2, self.args_array,
@@ -142,7 +142,7 @@ class UnitTest(unittest.TestCase):
             None
 
         """
-        
+
         mock_exit.return_value = False
 
         self.assertFalse(arg_parser.arg_default(self.arg, self.args_array,
