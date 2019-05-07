@@ -171,12 +171,46 @@ test/unit/gen_libs/is_empty_file.py
 test/unit/gen_libs/touch.py
 test/unit/gen_libs/list_dirs.py
 test/unit/gen_libs/cp_file.py
+test/unit/gen_libs/rotate_files.py
 ```
 
 ### All unit testing for gen_libs.py:
 ```
 cd {Python_Project}/python-lib
 test/unit/gen_libs/unit_test_run.sh
+```
+
+
+# Unit test runs for arg_parser.py:
+  * Replace **{Python_Project}** with the baseline path of the python program.
+
+```
+cd {Python_Project}/python-lib
+test/unit/arg_parser/arg_add_def.py
+test/unit/arg_parser/arg_cond_req.py
+test/unit/arg_parser/arg_cond_req_or.py
+test/unit/arg_parser/arg_default.py
+test/unit/arg_parser/arg_dir_chk_crt.py
+test/unit/arg_parser/arg_file_chk.py
+test/unit/arg_parser/arg_noreq_xor.py
+test/unit/arg_parser/arg_parse2.py
+test/unit/arg_parser/arg_require.py
+test/unit/arg_parser/arg_req_or_lst.py
+test/unit/arg_parser/arg_req_xor.py
+test/unit/arg_parser/arg_set_path.py
+test/unit/arg_parser/arg_validate.py
+test/unit/arg_parser/arg_valid_val.py
+test/unit/arg_parser/arg_wildcard.py
+test/unit/arg_parser/arg_xor_dict.py
+test/unit/arg_parser/parse_multi.py
+test/unit/arg_parser/parse_single.py
+test/unit/arg_parser/file_create.py
+```
+
+### All unit testing for arg_parser.py:
+```
+cd {Python_Project}/python-lib
+test/unit/arg_parser/unit_test_run.sh
 ```
 
 
