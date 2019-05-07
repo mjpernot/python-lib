@@ -38,6 +38,16 @@ __version__ = version.__version__
 
 
 def validate_value(arg):
+
+    """Function:  validate_value
+
+    Description:  Test function.
+
+    Arguments:
+        (input) arg -> Test value being tested.
+
+    """
+
     if arg == "value":
         return True
 
@@ -46,6 +56,16 @@ def validate_value(arg):
 
 
 def validate_value2(arg):
+
+    """Function:  validate_value2
+
+    Description:  Test function.
+
+    Arguments:
+        (input) arg -> Test value being tested.
+
+    """
+
     if arg == "value2":
         return True
 
