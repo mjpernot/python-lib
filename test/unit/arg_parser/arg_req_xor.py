@@ -51,7 +51,7 @@ class UnitTest(unittest.TestCase):
         setUp -> Unit testing initilization.
         test_two_match_fail -> Test with one match and is failure.
         test_one_match_success -> Test with one match and is successful.
-        test_empty_xornoreqlist -> Test with empty dict for opt_xor_list.
+        test_empty_optxorlist -> Test with empty dict for opt_xor_list.
         test_empty_argsarray -> Test with empty dictionary for args_array.
 
     """
@@ -103,9 +103,9 @@ class UnitTest(unittest.TestCase):
         self.assertTrue(arg_parser.arg_req_xor(self.args_array2,
                                                self.opt_xor_list2))
 
-    def test_empty_xornoreqlist(self):
+    def test_empty_optxorlist(self):
 
-        """Function:  test_empty_xornoreqlist
+        """Function:  test_empty_optxorlist
 
         Description:  Test with empty dictionary for opt_xor_list.
 
