@@ -105,7 +105,7 @@ class UnitTest(unittest.TestCase):
             None
 
         """
-        
+
         with gen_libs.no_std_out():
             status = arg_parser.arg_cond_req(self.args_array2,
                                              self.opt_con_req_list2)
