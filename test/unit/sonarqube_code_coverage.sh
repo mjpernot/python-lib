@@ -21,6 +21,7 @@ coverage run -a --source=arg_parser test/unit/arg_parser/arg_req_or_lst.py
 coverage run -a --source=arg_parser test/unit/arg_parser/arg_req_xor.py
 coverage run -a --source=arg_parser test/unit/arg_parser/arg_set_path.py
 coverage run -a --source=arg_parser test/unit/arg_parser/arg_validate.py
+coverage run -a --source=arg_parser test/unit/arg_parser/arg_valid_val.py
 coverage run -a --source=arg_parser test/unit/arg_parser/parse_multi.py
 coverage run -a --source=arg_parser test/unit/arg_parser/parse_single.py
 coverage run -a --source=arg_parser test/unit/arg_parser/file_create.py
