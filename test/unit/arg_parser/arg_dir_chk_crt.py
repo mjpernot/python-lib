@@ -36,6 +36,7 @@ import version
 # Version
 __version__ = version.__version__
 
+
 def raise_oserror():
 
     """Function:  raise_oserror
@@ -48,6 +49,7 @@ def raise_oserror():
     """
 
     raise OSError
+
 
 class UnitTest(unittest.TestCase):
 
@@ -109,7 +111,7 @@ class UnitTest(unittest.TestCase):
             None
 
         """
-        
+
         mock_os.path.isdir.side_effect = [True, False]
         mock_os.makedirs = raise_oserror
 
@@ -129,7 +131,7 @@ class UnitTest(unittest.TestCase):
             None
 
         """
-        
+
         mock_os.path.isdir.return_value = False
         mock_os.makedirs = raise_oserror
 
@@ -149,7 +151,7 @@ class UnitTest(unittest.TestCase):
             None
 
         """
-        
+
         mock_os.path.isdir.return_value = False
         mock_os.makedirs.return_value = True
 
@@ -168,7 +170,7 @@ class UnitTest(unittest.TestCase):
             None
 
         """
-        
+
         mock_os.path.isdir.return_value = False
 
         with gen_libs.no_std_out():
@@ -196,7 +198,7 @@ class UnitTest(unittest.TestCase):
             None
 
         """
-        
+
         mock_os.path.isdir.return_value = True
         mock_os.access.return_value = False
 
@@ -214,7 +216,7 @@ class UnitTest(unittest.TestCase):
             None
 
         """
-        
+
         mock_os.path.isdir.return_value = True
         mock_os.access.return_value = True
 
