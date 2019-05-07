@@ -199,7 +199,7 @@ class UnitTest(unittest.TestCase):
         """
 
         self.assertTrue(arg_parser.arg_validate(self.args_array2,
-                                               self.valid_func))
+                                                self.valid_func))
 
     def test_empty_argsarray(self):
 
