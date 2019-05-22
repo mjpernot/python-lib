@@ -47,6 +47,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Unit testing initilization.
+        test_with_all_present -> Test with all items present.
         test_with_two_items -> Test with two items removed.
         test_with_one_item -> Test with one item removed.
         test_with_list2_empty -> Test with list2 empty.
@@ -67,6 +68,19 @@ class UnitTest(unittest.TestCase):
         """
 
         pass
+
+    def test_with_all_present(self):
+
+        """Function:  test_with_all_present
+
+        Description:  Test with all items present.
+
+        Arguments:
+            None
+
+        """
+
+        self.assertEqual(gen_libs.del_not_in_list([1,2,3], [1,2,3,4]), [1,2,3])
 
     def test_with_two_items(self):
 
