@@ -32,11 +32,14 @@ pipeline {
                 ./test/unit/arg_parser/parse_single.py
                 ./test/unit/arg_parser/file_create.py
                 ./test/unit/gen_libs/and_is_true.py
+                ./test/unit/gen_libs/bytes_2_readable.py
                 ./test/unit/gen_libs/chk_crt_dir.py
                 ./test/unit/gen_libs/chk_crt_file.py
+                ./test/unit/gen_libs/chk_int.py
                 ./test/unit/gen_libs/clear_file.py
                 ./test/unit/gen_libs/cp_file.py
                 ./test/unit/gen_libs/data_multi_out.py
+                ./test/unit/gen_libs/del_not_in_list.py
                 ./test/unit/gen_libs/display_data.py
                 ./test/unit/gen_libs/file_2_list.py
                 ./test/unit/gen_libs/file_search_cnt.py

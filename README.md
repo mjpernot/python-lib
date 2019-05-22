@@ -172,6 +172,9 @@ test/unit/gen_libs/touch.py
 test/unit/gen_libs/list_dirs.py
 test/unit/gen_libs/cp_file.py
 test/unit/gen_libs/rotate_files.py
+test/unit/gen_libs/bytes_2_readable.py
+test/unit/gen_libs/chk_int.py
+test/unit/gen_libs/del_not_in_list.py
 ```
 
 ### All unit testing for gen_libs.py:
