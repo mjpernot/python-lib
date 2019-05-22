@@ -1,0 +1,138 @@
+#!/usr/bin/python
+# Classification (U)
+
+"""Program:  del_not_in_list.py
+
+    Description:  Unit testing of del_not_in_list in gen_libs.py.
+
+    Usage:
+        test/unit/gen_libs/del_not_in_list.py
+
+    Arguments:
+        None
+
+"""
+
+# Libraries and Global Variables
+
+# Standard
+import sys
+import os
+
+if sys.version_info < (2, 7):
+    import unittest2 as unittest
+else:
+    import unittest
+
+# Third-party
+
+# Local
+sys.path.append(os.getcwd())
+import gen_libs
+import version
+
+# Version
+__version__ = version.__version__
+
+
+class UnitTest(unittest.TestCase):
+
+    """Class:  UnitTest
+
+    Description:  Class which is a representation of a unit testing.
+
+    Super-Class:  unittest.TestCase
+
+    Sub-Classes:  None
+
+    Methods:
+        setUp -> Unit testing initilization.
+        test_with_two_items -> Test with two items removed.
+        test_with_one_item -> Test with one item removed.
+        test_with_list2_empty -> Test with list2 empty.
+        test_with_list1_empty -> Test with list1 empty.
+        test_with_empty_lists -> Test with both lists empty.
+
+    """
+
+    def setUp(self):
+
+        """Function:  setUp
+
+        Description:  Initialization for unit testing.
+
+        Arguments:
+            None
+
+        """
+
+        pass
+
+    def test_with_two_items(self):
+
+        """Function:  test_with_two_items
+
+        Description:  Test with two items removed.
+
+        Arguments:
+            None
+
+        """
+
+        self.assertEqual(gen_libs.del_not_in_list([1,2,3], [2,4]), [2])
+
+    def test_with_one_item(self):
+
+        """Function:  test_with_one_item
+
+        Description:  Test with one item removed.
+
+        Arguments:
+            None
+
+        """
+
+        self.assertEqual(gen_libs.del_not_in_list([1,2,3], [1,3,4]), [1,3])
+
+    def test_with_list2_empty(self):
+
+        """Function:  test_with_list2_empty
+
+        Description:  Test with list2 empty.
+
+        Arguments:
+            None
+
+        """
+
+        self.assertEqual(gen_libs.del_not_in_list([1,2,3], []), [])
+
+    def test_with_list1_empty(self):
+
+        """Function:  test_with_list1_empty
+
+        Description:  Test with list1 empty.
+
+        Arguments:
+            None
+
+        """
+
+        self.assertEqual(gen_libs.del_not_in_list([], [1]), [])
+
+    def test_with_empty_lists(self):
+
+        """Function:  test_with_empty_lists
+
+        Description:  Test with both lists empty.
+
+        Arguments:
+            None
+
+        """
+
+        self.assertEqual(gen_libs.del_not_in_list([], []), [])
+
+
+if __name__ == "__main__":
+    unittest.main()
