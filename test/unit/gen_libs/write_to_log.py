@@ -48,7 +48,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Unit testing initilization.
-        test_write_to_log -> 
+        test_write_to_log -> Test write_to_log function.
 
     """
 
