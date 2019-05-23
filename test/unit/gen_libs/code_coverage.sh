@@ -30,6 +30,7 @@ coverage run -a --source=gen_libs test/unit/gen_libs/merge_two_dicts.py
 coverage run -a --source=gen_libs test/unit/gen_libs/month_delta.py
 coverage run -a --source=gen_libs test/unit/gen_libs/no_std_out.py
 coverage run -a --source=gen_libs test/unit/gen_libs/rotate_files.py
+coverage run -a --source=gen_libs test/unit/gen_libs/str_2_list.py
 coverage run -a --source=gen_libs test/unit/gen_libs/str_2_type.py
 coverage run -a --source=gen_libs test/unit/gen_libs/touch.py
 coverage run -a --source=gen_libs test/unit/gen_libs/validate_date.py
