@@ -29,6 +29,7 @@ test/unit/gen_libs/month_delta.py
 test/unit/gen_libs/no_std_out.py
 test/unit/gen_libs/rotate_files.py
 test/unit/gen_libs/touch.py
+test/unit/gen_libs/validate_date.py
 test/unit/gen_libs/validate_int.py
 test/unit/gen_libs/write_file.py
 test/unit/gen_libs/write_file2.py
