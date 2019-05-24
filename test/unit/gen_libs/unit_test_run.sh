@@ -27,6 +27,7 @@ test/unit/gen_libs/merge_data_types.py
 test/unit/gen_libs/merge_two_dicts.py
 test/unit/gen_libs/month_delta.py
 test/unit/gen_libs/no_std_out.py
+test/unit/gen_libs/rm_newline_list.py
 test/unit/gen_libs/root_run.py
 test/unit/gen_libs/rotate_files.py
 test/unit/gen_libs/str_2_list.py
