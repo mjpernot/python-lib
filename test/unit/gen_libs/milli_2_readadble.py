@@ -9,7 +9,6 @@
         test/unit/gen_libs/milli_2_readadble.py
 
     Arguments:
-        None
 
 """
 

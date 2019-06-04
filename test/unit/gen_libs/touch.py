@@ -9,7 +9,6 @@
         test/unit/gen_libs/touch.py
 
     Arguments:
-        None
 
 """
 
@@ -32,7 +31,6 @@ sys.path.append(os.getcwd())
 import gen_libs
 import version
 
-# Version
 __version__ = version.__version__
 
 
@@ -44,7 +42,7 @@ class UnitTest(unittest.TestCase):
 
     Super-Class:  unittest.TestCase
 
-    Sub-Classes:  None
+    Sub-Classes:
 
     Methods:
         setUp -> Unit testing initilization.
@@ -64,7 +62,6 @@ class UnitTest(unittest.TestCase):
         Description:  Initialization for unit testing.
 
         Arguments:
-            None
 
         """
 
@@ -87,7 +84,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test creating file.
 
         Arguments:
-            None
 
         """
 
@@ -102,7 +98,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test on existing file.
 
         Arguments:
-            None
 
         """
 
@@ -117,7 +112,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test creating part of path to file.
 
         Arguments:
-            None
 
         """
 
@@ -130,7 +124,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test failure to create direcory path.
 
         Arguments:
-            None
 
         """
 
@@ -147,7 +140,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test failure to create file.
 
         Arguments:
-            None
 
         """
 
@@ -164,7 +156,6 @@ class UnitTest(unittest.TestCase):
         Description:  Clean up of unit testing.
 
         Arguments:
-            None
 
         """
 
