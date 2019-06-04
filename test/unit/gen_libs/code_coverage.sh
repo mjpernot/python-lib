@@ -29,6 +29,7 @@ coverage run -a --source=gen_libs test/unit/gen_libs/merge_data_types.py
 coverage run -a --source=gen_libs test/unit/gen_libs/merge_two_dicts.py
 coverage run -a --source=gen_libs test/unit/gen_libs/month_delta.py
 coverage run -a --source=gen_libs test/unit/gen_libs/no_std_out.py
+coverage run -a --source=gen_libs test/unit/gen_libs/print_dict.py
 coverage run -a --source=gen_libs test/unit/gen_libs/prt_dict.py
 coverage run -a --source=gen_libs test/unit/gen_libs/prt_lvl.py
 coverage run -a --source=gen_libs test/unit/gen_libs/prt_msg.py
