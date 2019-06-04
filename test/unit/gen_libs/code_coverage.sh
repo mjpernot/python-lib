@@ -27,6 +27,7 @@ coverage run -a --source=gen_libs test/unit/gen_libs/is_empty_file.py
 coverage run -a --source=gen_libs test/unit/gen_libs/list_dirs.py
 coverage run -a --source=gen_libs test/unit/gen_libs/merge_data_types.py
 coverage run -a --source=gen_libs test/unit/gen_libs/merge_two_dicts.py
+coverage run -a --source=gen_libs test/unit/gen_libs/milli_2_readadble.py
 coverage run -a --source=gen_libs test/unit/gen_libs/month_delta.py
 coverage run -a --source=gen_libs test/unit/gen_libs/mv_file.py
 coverage run -a --source=gen_libs test/unit/gen_libs/mv_file2.py
