@@ -36,7 +36,7 @@ __version__ = version.__version__
 
 class ZipFile(object):
 
-    """Class:  Mail
+    """Class:  ZipFile
 
     Description:  Class which is a representation of the zipfile class.
 
