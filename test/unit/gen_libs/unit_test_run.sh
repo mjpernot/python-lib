@@ -22,6 +22,7 @@ test/unit/gen_libs/file_search.py
 test/unit/gen_libs/get_base_dir.py
 test/unit/gen_libs/get_data.py
 test/unit/gen_libs/is_empty_file.py
+test/unit/gen_libs/list_2_dict.py
 test/unit/gen_libs/list_dirs.py
 test/unit/gen_libs/load_module.py
 test/unit/gen_libs/make_md5_hash.py
