@@ -9,7 +9,6 @@
         test/unit/gen_libs/not_in_list.py
 
     Arguments:
-        None
 
 """
 

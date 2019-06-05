@@ -9,7 +9,6 @@
         test/unit/gen_libs/mv_file.py
 
     Arguments:
-        None
 
 """
 

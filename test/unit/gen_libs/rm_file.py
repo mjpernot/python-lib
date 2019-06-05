@@ -9,7 +9,6 @@
         test/unit/gen_libs/rm_file.py
 
     Arguments:
-        None
 
 """
 
@@ -43,7 +42,7 @@ class UnitTest(unittest.TestCase):
 
     Super-Class:  unittest.TestCase
 
-    Sub-Classes:  None
+    Sub-Classes:
 
     Methods:
         setUp -> Unit testing initilization.
@@ -59,7 +58,6 @@ class UnitTest(unittest.TestCase):
         Description:  Initialization for unit testing.
 
         Arguments:
-            None
 
         """
 
@@ -74,7 +72,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with removing file.
 
         Arguments:
-            None
 
         """
 
@@ -90,7 +87,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test raising exception.
 
         Arguments:
-            None
 
         """
 

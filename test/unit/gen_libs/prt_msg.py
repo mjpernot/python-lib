@@ -9,7 +9,6 @@
         test/unit/gen_libs/prt_msg.py
 
     Arguments:
-        None
 
 """
 

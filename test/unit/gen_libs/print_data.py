@@ -9,7 +9,6 @@
         test/unit/gen_libs/print_data.py
 
     Arguments:
-        None
 
 """
 
@@ -108,7 +107,6 @@ class UnitTest(unittest.TestCase):
         Description:  Clean up of unit testing.
 
         Arguments:
-            None
 
         """
 
