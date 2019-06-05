@@ -98,7 +98,7 @@ class UnitTest(unittest.TestCase):
 
     Super-Class:  unittest.TestCase
 
-    Sub-Classes:  None
+    Sub-Classes:
 
     Methods:
         setUp -> Unit testing initilization.
@@ -115,7 +115,6 @@ class UnitTest(unittest.TestCase):
         Description:  Initialization for unit testing.
 
         Arguments:
-            None
 
         """
 
@@ -133,7 +132,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test missing path seperator.
 
         Arguments:
-            None
 
         """
 
@@ -152,7 +150,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test the relative path way.
 
         Arguments:
-            None
 
         """
 
@@ -171,7 +168,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test the absolute path way.
 
         Arguments:
-            None
 
         """
 
