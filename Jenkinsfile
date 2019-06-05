@@ -48,6 +48,7 @@ pipeline {
                 ./test/unit/gen_libs/get_data.py
                 ./test/unit/gen_libs/is_empty_file.py
                 ./test/unit/gen_libs/list_dirs.py
+                ./test/unit/gen_libs/load_module.py
                 ./test/unit/gen_libs/make_md5_hash.py
                 ./test/unit/gen_libs/make_zip.py
                 ./test/unit/gen_libs/merge_data_types.py

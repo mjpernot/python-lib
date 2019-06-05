@@ -175,6 +175,7 @@ test/unit/gen_libs/rotate_files.py
 test/unit/gen_libs/bytes_2_readable.py
 test/unit/gen_libs/chk_int.py
 test/unit/gen_libs/del_not_in_list.py
+test/unit/gen_libs/load_module.py
 test/unit/gen_libs/make_md5_hash.py
 test/unit/gen_libs/make_zip.py
 test/unit/gen_libs/milli_2_readadble.py
