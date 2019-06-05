@@ -88,8 +88,6 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        #with gen_libs.no_std_out():
-
         gen_libs.print_data(self.data, ofile=self.ofile)
 
         if os.path.isfile(self.ofile):
