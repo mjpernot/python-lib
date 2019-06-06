@@ -24,6 +24,7 @@ coverage run -a --source=gen_libs test/unit/gen_libs/file_search.py
 coverage run -a --source=gen_libs test/unit/gen_libs/get_base_dir.py
 coverage run -a --source=gen_libs test/unit/gen_libs/get_data.py
 coverage run -a --source=gen_libs test/unit/gen_libs/is_empty_file.py
+coverage run -a --source=gen_libs test/unit/gen_libs/key_cleaner.py
 coverage run -a --source=gen_libs test/unit/gen_libs/list_2_dict.py
 coverage run -a --source=gen_libs test/unit/gen_libs/list_dirs.py
 coverage run -a --source=gen_libs test/unit/gen_libs/list_files.py
