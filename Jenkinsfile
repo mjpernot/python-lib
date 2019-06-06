@@ -49,6 +49,7 @@ pipeline {
                 ./test/unit/gen_libs/is_empty_file.py
                 ./test/unit/gen_libs/list_2_dict.py
                 ./test/unit/gen_libs/list_dirs.py
+                ./test/unit/gen_libs/list_files.py
                 ./test/unit/gen_libs/list_filter_files.py
                 ./test/unit/gen_libs/load_module.py
                 ./test/unit/gen_libs/make_md5_hash.py
