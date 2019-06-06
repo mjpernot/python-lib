@@ -65,6 +65,7 @@ class UnitTest(unittest.TestCase):
         self.mod_name = "test_load_module"
         self.mod_path = "test/unit/gen_libs/tmp"
         self.fname = os.path.join(self.mod_path, self.mod_name + ".py")
+        self.fname2 = os.path.join(self.mod_path, self.mod_name + ".pyc")
         data = "entry=True"
 
         with open(self.fname, "w") as f_hdlr:
@@ -96,6 +97,9 @@ class UnitTest(unittest.TestCase):
 
         if os.path.isfile(self.fname):
             os.remove(self.fname)
+
+        if os.path.isfile(self.fname2):
+            os.remove(self.fname2)
 
 
 if __name__ == "__main__":
