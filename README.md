@@ -175,6 +175,7 @@ test/unit/gen_libs/rotate_files.py
 test/unit/gen_libs/bytes_2_readable.py
 test/unit/gen_libs/chk_int.py
 test/unit/gen_libs/del_not_in_list.py
+test/unit/gen_libs/disk_usage.py
 test/unit/gen_libs/file_cleanup.py
 test/unit/gen_libs/float_div.py
 test/unit/gen_libs/get_date.py
