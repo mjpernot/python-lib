@@ -21,6 +21,7 @@ test/unit/gen_libs/file_search_cnt.py
 test/unit/gen_libs/file_search.py
 test/unit/gen_libs/get_base_dir.py
 test/unit/gen_libs/get_data.py
+test/unit/gen_libs/get_time.py
 test/unit/gen_libs/help_func.py
 test/unit/gen_libs/in_list.py
 test/unit/gen_libs/is_empty_file.py
