@@ -17,6 +17,7 @@ test/unit/gen_libs/data_multi_out.py
 test/unit/gen_libs/del_not_in_list.py
 test/unit/gen_libs/display_data.py
 test/unit/gen_libs/file_2_list.py
+test/unit/gen_libs/file_cleanup.py
 test/unit/gen_libs/file_search_cnt.py
 test/unit/gen_libs/file_search.py
 test/unit/gen_libs/float_div.py
