@@ -34,19 +34,6 @@ import version
 
 __version__ = version.__version__
 
-def holder():
-
-    """Function:  holder
-
-    Description:  Stub holder for func_name in get_time.
-
-    Arguments:
-
-    """
-
-    pass
-
-
 class UnitTest(unittest.TestCase):
 
     """Class:  UnitTest
