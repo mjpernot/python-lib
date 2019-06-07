@@ -40,6 +40,7 @@ coverage run -a --source=gen_libs test/unit/gen_libs/display_data.py
 coverage run -a --source=gen_libs test/unit/gen_libs/file_2_list.py
 coverage run -a --source=gen_libs test/unit/gen_libs/file_search_cnt.py
 coverage run -a --source=gen_libs test/unit/gen_libs/file_search.py
+coverage run -a --source=gen_libs test/unit/gen_libs/float_div.py
 coverage run -a --source=gen_libs test/unit/gen_libs/get_base_dir.py
 coverage run -a --source=gen_libs test/unit/gen_libs/get_data.py
 coverage run -a --source=gen_libs test/unit/gen_libs/get_date.py
