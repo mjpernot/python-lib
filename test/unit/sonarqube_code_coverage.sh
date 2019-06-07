@@ -42,6 +42,7 @@ coverage run -a --source=gen_libs test/unit/gen_libs/file_search_cnt.py
 coverage run -a --source=gen_libs test/unit/gen_libs/file_search.py
 coverage run -a --source=gen_libs test/unit/gen_libs/get_base_dir.py
 coverage run -a --source=gen_libs test/unit/gen_libs/get_data.py
+coverage run -a --source=gen_libs test/unit/gen_libs/in_list.py
 coverage run -a --source=gen_libs test/unit/gen_libs/is_empty_file.py
 coverage run -a --source=gen_libs test/unit/gen_libs/is_missing_lists.py
 coverage run -a --source=gen_libs test/unit/gen_libs/is_true.py
