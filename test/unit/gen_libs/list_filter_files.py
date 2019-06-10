@@ -91,6 +91,9 @@ class UnitTest(unittest.TestCase):
         self.results2 = ["test/unit/gen_libs/tmp/file1.py"]
         self.results3 = ["test/unit/gen_libs/tmp/file3.txt",
                          "test/unit/gen_libs/tmp/file2.txt"]
+        self.results4 = ["test/unit/gen_libs/tmp/file2.txt",
+                         "test/unit/gen_libs/tmp/file3.txt"]
+
 
     def test_multi_files(self):
 
@@ -102,9 +105,16 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertEqual(gen_libs.list_filter_files(self.dir_path,
-                                                    self.file_filter3),
-                         self.results3)
+        file_list = gen_libs.list_filter_files(self.dir_path,
+                                               self.file_filter3)
+
+        if file_list == self.results3 or file_list == self.results4:
+            status = True
+
+        else:
+            status = False
+
+        self.assertTrue(status)
 
     def test_one_file_select(self):
 
