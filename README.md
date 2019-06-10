@@ -174,6 +174,7 @@ test/unit/gen_libs/cp_file.py
 test/unit/gen_libs/rotate_files.py
 test/unit/gen_libs/bytes_2_readable.py
 test/unit/gen_libs/chk_int.py
+test/unit/gen_libs/crt_file_time.py
 test/unit/gen_libs/del_not_and_list.py
 test/unit/gen_libs/del_not_in_list.py
 test/unit/gen_libs/dict_2_list.py

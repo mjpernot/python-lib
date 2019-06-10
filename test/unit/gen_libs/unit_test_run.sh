@@ -13,6 +13,7 @@ test/unit/gen_libs/chk_crt_file.py
 test/unit/gen_libs/chk_int.py
 test/unit/gen_libs/clear_file.py
 test/unit/gen_libs/cp_file.py
+test/unit/gen_libs/crt_file_time.py
 test/unit/gen_libs/data_multi_out.py
 test/unit/gen_libs/del_not_and_list.py
 test/unit/gen_libs/del_not_in_list.py
