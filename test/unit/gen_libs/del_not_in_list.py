@@ -9,7 +9,6 @@
         test/unit/gen_libs/del_not_in_list.py
 
     Arguments:
-        None
 
 """
 
@@ -31,7 +30,6 @@ sys.path.append(os.getcwd())
 import gen_libs
 import version
 
-# Version
 __version__ = version.__version__
 
 
@@ -43,7 +41,7 @@ class UnitTest(unittest.TestCase):
 
     Super-Class:  unittest.TestCase
 
-    Sub-Classes:  None
+    Sub-Classes:
 
     Methods:
         setUp -> Unit testing initilization.
@@ -63,7 +61,6 @@ class UnitTest(unittest.TestCase):
         Description:  Initialization for unit testing.
 
         Arguments:
-            None
 
         """
 
@@ -76,7 +73,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with all items present.
 
         Arguments:
-            None
 
         """
 
@@ -89,7 +85,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with two items removed.
 
         Arguments:
-            None
 
         """
 
@@ -102,7 +97,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with one item removed.
 
         Arguments:
-            None
 
         """
 
@@ -115,7 +109,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with list2 empty.
 
         Arguments:
-            None
 
         """
 
@@ -128,7 +121,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with list1 empty.
 
         Arguments:
-            None
 
         """
 
@@ -141,7 +133,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with both lists empty.
 
         Arguments:
-            None
 
         """
 
