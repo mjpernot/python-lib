@@ -95,7 +95,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertEqual(gen_libs.list_2_dict(self.list2), self.dict2)
+        self.assertEqual(gen_libs.list_2_dict(self.list3), self.dict3)
 
     def test_multi_item(self):
 
