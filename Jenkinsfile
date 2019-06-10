@@ -40,6 +40,7 @@ pipeline {
                 ./test/unit/gen_libs/cp_file.py
                 ./test/unit/gen_libs/data_multi_out.py
                 ./test/unit/gen_libs/del_not_in_list.py
+                ./test/unit/gen_libs/dict_2_list.py
                 ./test/unit/gen_libs/dict_2_std.py
                 ./test/unit/gen_libs/dir_file_match.py
                 ./test/unit/gen_libs/disk_usage.py
