@@ -76,7 +76,8 @@ class UnitTest(unittest.TestCase):
 
         os.makedirs(self.dname)
 
-        self.results = ["file.txt", "file.py"]
+        self.results1 = ["file.txt", "file.py"]
+        self.results2 = ["file.py", "file.txt"]
 
     def test_list_files(self):
 
@@ -88,7 +89,15 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertEqual(gen_libs.list_files(self.dir_path), self.results)
+        file_list = gen_libs.list_files(self.dir_path)
+
+        if file_list == self.results1 or file_list == self.results2:
+            status = True
+
+        else:
+            status = False
+
+        self.assertTrue(status)
 
     def tearDown(self):
 
