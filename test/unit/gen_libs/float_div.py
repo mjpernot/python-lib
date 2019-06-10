@@ -77,7 +77,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertEqual(gen_libs.float_div(self.num, self.num2), self.out)
+        self.assertEqual(gen_libs.float_div(self.num2, self.num), self.out)
 
     def test_float_div(self):
 
