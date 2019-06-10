@@ -60,8 +60,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.indate = "2019:12:16"
-        self.outdate = "2019:12:16"
+        self.indate = "2019/12/16"
+        self.outdate = "2019/12/16"
 
     @mock.patch("gen_libs.datetime.datetime")
     def test_get_date(self, mock_date):
