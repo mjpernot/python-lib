@@ -14,6 +14,7 @@ coverage run -a --source=gen_libs test/unit/gen_libs/chk_crt_dir.py
 coverage run -a --source=gen_libs test/unit/gen_libs/chk_crt_file.py
 coverage run -a --source=gen_libs test/unit/gen_libs/chk_int.py
 coverage run -a --source=gen_libs test/unit/gen_libs/clear_file.py
+coverage run -a --source=gen_libs test/unit/gen_libs/cp_file2.py
 coverage run -a --source=gen_libs test/unit/gen_libs/cp_file.py
 coverage run -a --source=gen_libs test/unit/gen_libs/crt_file_time.py
 coverage run -a --source=gen_libs test/unit/gen_libs/data_multi_out.py
