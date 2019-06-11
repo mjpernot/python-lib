@@ -120,8 +120,9 @@ class UnitTest(unittest.TestCase):
         self.frm = "From_Address"
         self.to = "To_Address"
 
+    @mock.patch("gen_class.Mail.create_body")
     @mock.patch("gen_class.smtplib.SMTP")
-    def test_send_mail(self, mock_smtp):
+    def test_send_mail(self, mock_smtp, mock_body):
 
         """Function:  test_send_mail
 
@@ -132,6 +133,7 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_smtp.return_value = Smtplib()
+        mock_body.return_value = True
         email = gen_class.Mail(self.to)
 
         self.assertFalse(email.send_mail())
