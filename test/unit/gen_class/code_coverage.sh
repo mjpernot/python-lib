@@ -23,6 +23,7 @@ coverage run -a --source=gen_class test/unit/gen_class/Mail_add_2_msg.py
 coverage run -a --source=gen_class test/unit/gen_class/Mail_create_body.py
 coverage run -a --source=gen_class test/unit/gen_class/Mail_create_subject.py
 coverage run -a --source=gen_class test/unit/gen_class/Mail_print_email.py
+coverage run -a --source=gen_class test/unit/gen_class/Mail_send_mail.py
 
 echo ""
 echo "Producing code coverage report"

@@ -277,6 +277,11 @@ test/unit/gen_class/Yum_get_release.py
 test/unit/gen_class/Yum_get_distro.py
 test/unit/gen_class/Yum_fetch_install_pkgs.py
 test/unit/gen_class/Yum_fetch_update_pkgs.py
+test/unit/gen_class/Mail_add_2_msg.py
+test/unit/gen_class/Mail_create_body.py
+test/unit/gen_class/Mail_create_subject.py
+test/unit/gen_class/Mail_print_email.py
+test/unit/gen_class/Mail_send_mail.py
 ```
 
 ### All unit testing for gen_class.py:
