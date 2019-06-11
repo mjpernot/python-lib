@@ -281,6 +281,7 @@ test/unit/gen_class/Mail_add_2_msg.py
 test/unit/gen_class/Mail_create_body.py
 test/unit/gen_class/Mail_create_subject.py
 test/unit/gen_class/Mail_print_email.py
+test/unit/gen_class/Mail_read_stdin.py
 test/unit/gen_class/Mail_send_mail.py
 ```
 
