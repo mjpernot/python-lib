@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  send_mail.py
+"""Program:  Mail_send_mail.py
 
     Description:  Unit testing of send_mail in gen_libs.py.
 
     Usage:
-        test/unit/gen_libs/send_mail.py
+        test/unit/gen_libs/Mail_send_mail.py
 
     Arguments:
 
