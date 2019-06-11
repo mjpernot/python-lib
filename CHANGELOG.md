@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [2.7.4] - 2019-06-11
+### Removed
+- system:  Removed deprecated system module.
+
+
 ## [2.7.3] - 2019-05-02
 ### Changed
 - gen_libs.rotate_files:  Refactored code in function to be more stream-line.
