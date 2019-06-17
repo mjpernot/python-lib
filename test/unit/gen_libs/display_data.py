@@ -9,7 +9,6 @@
         test/unit/gen_libs/display_data.py
 
     Arguments:
-        None
 
 """
 
@@ -32,7 +31,6 @@ sys.path.append(os.getcwd())
 import gen_libs
 import version
 
-# Version
 __version__ = version.__version__
 
 
@@ -66,7 +64,7 @@ class UnitTest(unittest.TestCase):
 
     Super-Class:  unittest.TestCase
 
-    Sub-Classes:  None
+    Sub-Classes:
 
     Methods:
         setUp -> Initialize testing environment.
@@ -88,7 +86,6 @@ class UnitTest(unittest.TestCase):
         Description:  Initialization for unit testing.
 
         Arguments:
-            None
 
         """
 
@@ -138,7 +135,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with non-dictionary structure.
 
         Arguments:
-            None
 
         """
 
@@ -166,7 +162,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with an empty list structure.
 
         Arguments:
-            None
 
         """
 
@@ -180,7 +175,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with only a dictionary structure.
 
         Arguments:
-            None
 
         """
 
@@ -194,7 +188,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with a list within a dictionary structure.
 
         Arguments:
-            None
 
         """
 
@@ -222,7 +215,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with a level setting of one.
 
         Arguments:
-            None
 
         """
 
@@ -236,7 +228,6 @@ class UnitTest(unittest.TestCase):
         Description:  Clean up of unit testing.
 
         Arguments:
-            None
 
         """
 
