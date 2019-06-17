@@ -56,6 +56,7 @@
         normalize
         not_in_list
         no_std_out
+        openfile
         pct_int
         print_data
         print_dict
@@ -104,11 +105,11 @@ import io
 # Third party
 import json
 import ast
+import gzip
 
 # Local
 import version
 
-# Version
 __version__ = version.__version__
 
 
@@ -1521,6 +1522,27 @@ def no_std_out():
     sys.stdout = io.BytesIO()
     yield
     sys.stdout = save_stdout
+
+
+def openfile(filename, mode="r", **kwargs):
+
+    """Function:  openfile
+
+    Description:  Opens a normal file or compressed file and returns a file
+        handler.
+
+    Arguments:
+        (input) filename -> Directory path and file name.
+        (input) mode -> Type of operation allowed on the file (e.g. a, r, w).
+        (output) File handler.
+
+    """
+
+    if filename.endswith(".gz"):
+        return gzip.open(filename, mode)
+
+    else:
+        return open(filename, mode)
 
 
 def pct_int(num1, num2, **kwargs):

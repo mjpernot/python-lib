@@ -4,7 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
-## [2.7.4] - 2019-06-11
+## [2.7.4] - 2019-06-17
+### Added
+- gen_libs.openfile:  Opens a normal or compressed file based on filename extension.
+
 ### Removed
 - system:  Removed deprecated system module.
 
