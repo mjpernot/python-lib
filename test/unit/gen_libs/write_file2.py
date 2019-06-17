@@ -9,7 +9,6 @@
         test/unit/gen_libs/write_file2.py
 
     Arguments:
-        None
 
 """
 
@@ -32,7 +31,6 @@ sys.path.append(os.getcwd())
 import gen_libs
 import version
 
-# Version
 __version__ = version.__version__
 
 
@@ -62,7 +60,6 @@ class UnitTest(unittest.TestCase):
         Description:  Initialization for unit testing.
 
         Arguments:
-            None
 
         """
 
@@ -89,7 +86,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with f_handle set to None.
 
         Arguments:
-            None
 
         """
 
@@ -102,7 +98,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with line set to None.
 
         Arguments:
-            None
 
         """
 
@@ -116,7 +111,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with data passed.
 
         Arguments:
-            None
 
         """
 
