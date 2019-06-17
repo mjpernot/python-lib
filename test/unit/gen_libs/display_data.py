@@ -148,7 +148,7 @@ class UnitTest(unittest.TestCase):
         Description:  Test with only a list structure.
 
         Arguments:
-            None
+
 
         """
 
@@ -201,7 +201,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with a dictionary within a dictionary structure.
 
         Arguments:
-            None
 
         """
 

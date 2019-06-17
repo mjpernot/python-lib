@@ -9,7 +9,6 @@
         test/unit/gen_libs/str_2_list.py
 
     Arguments:
-        None
 
 """
 
@@ -42,7 +41,7 @@ class UnitTest(unittest.TestCase):
 
     Super-Class:  unittest.TestCase
 
-    Sub-Classes:  None
+    Sub-Classes:
 
     Methods:
         setUp -> Unit testing initilization.
@@ -59,7 +58,6 @@ class UnitTest(unittest.TestCase):
         Description:  Initialization for unit testing.
 
         Arguments:
-            None
 
         """
 
@@ -78,7 +76,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with space delimited string.
 
         Arguments:
-            None
 
         """
 
@@ -91,7 +88,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with colon delimited string.
 
         Arguments:
-            None
 
         """
 
@@ -104,7 +100,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with comma delimited string.
 
         Arguments:
-            None
 
         """
 

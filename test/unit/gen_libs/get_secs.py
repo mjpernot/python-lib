@@ -43,7 +43,7 @@ class TD(object):
 
     Super-Class:  object
 
-    Sub-Classes:  None
+    Sub-Classes:
 
     Methods:
         __init__ -> Initialize configuration environment.
@@ -57,7 +57,6 @@ class TD(object):
         Description:  Initialization instance of the Mail class.
 
         Arguments:
-                None
 
         """
 

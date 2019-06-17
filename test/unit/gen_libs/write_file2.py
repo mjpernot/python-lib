@@ -42,7 +42,7 @@ class UnitTest(unittest.TestCase):
 
     Super-Class:  unittest.TestCase
 
-    Sub-Classes:  None
+    Sub-Classes:
 
     Methods:
         setUp -> Unit testing initilization.
@@ -73,7 +73,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with no arguments passed.
 
         Arguments:
-            None
 
         """
 

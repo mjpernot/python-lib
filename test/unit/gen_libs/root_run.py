@@ -9,7 +9,6 @@
         test/unit/gen_libs/root_run.py
 
     Arguments:
-        None
 
 """
 
@@ -43,7 +42,7 @@ class UnitTest(unittest.TestCase):
 
     Super-Class:  unittest.TestCase
 
-    Sub-Classes:  None
+    Sub-Classes:
 
     Methods:
         setUp -> Unit testing initilization.
@@ -59,7 +58,6 @@ class UnitTest(unittest.TestCase):
         Description:  Initialization for unit testing.
 
         Arguments:
-            None
 
         """
 
@@ -73,7 +71,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with non-root user.
 
         Arguments:
-            None
 
         """
 
@@ -89,7 +86,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with root user.
 
         Arguments:
-            None
 
         """
 
