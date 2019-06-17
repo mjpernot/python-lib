@@ -9,7 +9,6 @@
         test/unit/gen_libs/file_search_cnt.py
 
     Arguments:
-        None
 
 """
 
@@ -32,7 +31,6 @@ sys.path.append(os.getcwd())
 import gen_libs
 import version
 
-# Version
 __version__ = version.__version__
 
 
@@ -63,7 +61,6 @@ class UnitTest(unittest.TestCase):
         Description:  Initialization for unit testing.
 
         Arguments:
-            None
 
         """
 
@@ -84,7 +81,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test file_search_cnt function with 0 pattern found.
 
         Arguments:
-            None
 
         """
 
@@ -98,7 +94,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test file_search_cnt function with 1 pattern found.
 
         Arguments:
-            None
 
         """
 
@@ -113,7 +108,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test file_search_cnt function with 2 pattern found.
 
         Arguments:
-            None
 
         """
 
@@ -128,7 +122,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test file_search_cnt function with an empty file.
 
         Arguments:
-            None
 
         """
 
@@ -142,7 +135,6 @@ class UnitTest(unittest.TestCase):
         Description:  Clean up of unit testing.
 
         Arguments:
-            None
 
         """
 
