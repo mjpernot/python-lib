@@ -30,6 +30,7 @@ coverage run -a --source=arg_parser test/unit/arg_parser/file_create.py
 coverage run -a --source=cmds_gen test/unit/cmds_gen/add_cmd.py
 coverage run -a --source=cmds_gen test/unit/cmds_gen/create_cfg_array.py
 coverage run -a --source=cmds_gen test/unit/cmds_gen/disconnect.py
+coverage run -a --source=cmds_gen test/unit/cmds_gen/is_add_cmd.py
 coverage run -a --source=gen_libs test/unit/gen_libs/and_is_true.py
 coverage run -a --source=gen_libs test/unit/gen_libs/bytes_2_readable.py
 coverage run -a --source=gen_libs test/unit/gen_libs/chk_crt_dir.py

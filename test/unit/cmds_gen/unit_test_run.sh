@@ -9,4 +9,5 @@ echo "Unit test"
 test/unit/cmds_gen/add_cmd.py
 test/unit/cmds_gen/create_cfg_array.py
 test/unit/cmds_gen/disconnect.py
+test/unit/cmds_gen/is_add_cmd.py
 
