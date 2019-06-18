@@ -40,7 +40,6 @@ import glob
 import gen_libs
 import version
 
-# Version
 __version__ = version.__version__
 
 
@@ -58,8 +57,6 @@ def arg_add_def(args_array, def_array=None, opt_req_list=None, **kwargs):
         (input) args_array -> Array of command line options and values.
         (input) def_array -> List of options with their default values.
         (input) opt_req_list -> Options that are required.
-        (input) **kwargs:
-            None
         (output) args_array -> Array of command line options and values.
 
     """
@@ -150,8 +147,6 @@ def arg_default(arg, args_array, opt_def_dict, **kwargs):
         (input) arg -> Argument option.
         (input) args_array -> Array of command line options and values.
         (input) opt_def_dict -> Dict with options and default values.
-        (input) **kwargs:
-            None
         (output) args_array -> Array of command line options and values.
 
     """
@@ -468,8 +463,6 @@ def arg_valid_val(args_array, opt_valid_val, **kwargs):
     Arguments:
         (input) args_array -> Array of command line options and values.
         (input) opt_valid_val -> Dictionary of options & their valid values
-        (input) **kwargs:
-            None
         (output) status_flag -> True or False on validity of data.
 
     """
@@ -498,8 +491,6 @@ def arg_wildcard(args_array, opt_wildcard, **kwargs):
     Arguments:
         (input) args_array -> Array of command line options and values.
         (input) opt_wildcard -> List of wildcard options.
-        (input) **kwargs:
-            None
         (output) args_array -> Array of command line options and values.
 
     """
@@ -556,8 +547,6 @@ def _file_create(name, option, file_crt_list, errno, strerror, exit_flag,
         (input) errno -> Current error status from file_crt_list function.
         (input) strerror -> Current error message from file_crt_list function.
         (input) exit_flag -> Current status of file_crt_list function.
-        (input) **kwargs:
-            None
         (output) exit_flag -> True|False - if file creation fails.
 
     """
@@ -599,8 +588,6 @@ def _parse_multi(argv, args_array, opt_def_dict, **kwargs):
         (input) argv -> Arguments from the command line.
         (input) args_array -> Array of command line options and values.
         (input) opt_def_dict -> Dict with options and default values.
-        (input) **kwargs:
-            None.
         (output) argv -> Arguments from the command line.
         (output) args_array -> Array of command line options and values.
 
@@ -654,8 +641,6 @@ def _parse_single(argv, args_array, opt_def_dict, opt_val, **kwargs):
         (input) args_array -> Array of command line options and values.
         (input) opt_def_dict -> Dict with options and default values.
         (input) opt_val -> List of options allow None or 1 value for option.
-        (input) **kwargs:
-            None.
         (output) argv -> Arguments from the command line.
         (output) args_array -> Array of command line options and values.
 

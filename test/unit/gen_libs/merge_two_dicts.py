@@ -9,7 +9,6 @@
         test/unit/gen_libs/merge_two_dicts.py
 
     Arguments:
-        None
 
 """
 
@@ -31,7 +30,6 @@ sys.path.append(os.getcwd())
 import gen_libs
 import version
 
-# Version
 __version__ = version.__version__
 
 
@@ -43,7 +41,7 @@ class UnitTest(unittest.TestCase):
 
     Super-Class:  unittest.TestCase
 
-    Sub-Classes:  None
+    Sub-Classes:
 
     Methods:
         setUp -> Unit testing initilization.
@@ -67,7 +65,6 @@ class UnitTest(unittest.TestCase):
         Description:  Initialization for unit testing.
 
         Arguments:
-            None
 
         """
 
@@ -90,7 +87,6 @@ class UnitTest(unittest.TestCase):
             non-dictionary.
 
         Arguments:
-            None
 
         """
 
@@ -105,7 +101,6 @@ class UnitTest(unittest.TestCase):
             dictionary.
 
         Arguments:
-            None
 
         """
 
@@ -120,7 +115,6 @@ class UnitTest(unittest.TestCase):
             non-dictionary and data2 is non-dictionary.
 
         Arguments:
-            None
 
         """
 
@@ -135,7 +129,6 @@ class UnitTest(unittest.TestCase):
             and data2 is non-dictionary.
 
         Arguments:
-            None
 
         """
 
@@ -150,7 +143,6 @@ class UnitTest(unittest.TestCase):
             non-dictionary and data2 is dictionary.
 
         Arguments:
-            None
 
         """
 
@@ -165,7 +157,6 @@ class UnitTest(unittest.TestCase):
             and data2 is dictionary.
 
         Arguments:
-            None
 
         """
 

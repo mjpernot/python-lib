@@ -9,7 +9,6 @@
         test/unit/arg_parser/arg_dir_chk_crt.py
 
     Arguments:
-        None
 
 """
 
@@ -33,8 +32,8 @@ import arg_parser
 import gen_libs
 import version
 
-# Version
 __version__ = version.__version__
+
 
 def raise_oserror():
 
@@ -43,11 +42,11 @@ def raise_oserror():
     Description:  Stub holder to return a raised OSError exception.
 
     Arguments:
-        None
 
     """
 
     raise OSError
+
 
 class UnitTest(unittest.TestCase):
 
@@ -57,7 +56,7 @@ class UnitTest(unittest.TestCase):
 
     Super-Class:  unittest.TestCase
 
-    Sub-Classes:  None
+    Sub-Classes:
 
     Methods:
         setUp -> Unit testing initilization.
@@ -80,7 +79,6 @@ class UnitTest(unittest.TestCase):
         Description:  Initialization for unit testing.
 
         Arguments:
-            None
 
         """
 
@@ -106,10 +104,9 @@ class UnitTest(unittest.TestCase):
         Description:  Test with checking dir good, but creating dir failed.
 
         Arguments:
-            None
 
         """
-        
+
         mock_os.path.isdir.side_effect = [True, False]
         mock_os.makedirs = raise_oserror
 
@@ -126,10 +123,9 @@ class UnitTest(unittest.TestCase):
         Description:  Test with failing to create directory.
 
         Arguments:
-            None
 
         """
-        
+
         mock_os.path.isdir.return_value = False
         mock_os.makedirs = raise_oserror
 
@@ -146,10 +142,9 @@ class UnitTest(unittest.TestCase):
         Description:  Test with creating directory.
 
         Arguments:
-            None
 
         """
-        
+
         mock_os.path.isdir.return_value = False
         mock_os.makedirs.return_value = True
 
@@ -165,10 +160,9 @@ class UnitTest(unittest.TestCase):
         Description:  Test with directory does not exist.
 
         Arguments:
-            None
 
         """
-        
+
         mock_os.path.isdir.return_value = False
 
         with gen_libs.no_std_out():
@@ -193,10 +187,9 @@ class UnitTest(unittest.TestCase):
         Description:  Test with match between sets, but no access to directory.
 
         Arguments:
-            None
 
         """
-        
+
         mock_os.path.isdir.return_value = True
         mock_os.access.return_value = False
 
@@ -211,10 +204,9 @@ class UnitTest(unittest.TestCase):
         Description:  Test with one match between sets and is directory.
 
         Arguments:
-            None
 
         """
-        
+
         mock_os.path.isdir.return_value = True
         mock_os.access.return_value = True
 
@@ -228,7 +220,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with no match between arguments passed.
 
         Arguments:
-            None
 
         """
 
@@ -242,7 +233,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with args_array is empty.
 
         Arguments:
-            None
 
         """
 
@@ -256,7 +246,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with dir_chk_list is empty.
 
         Arguments:
-            None
 
         """
 

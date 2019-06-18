@@ -9,7 +9,6 @@
         test/unit/gen_libs/cp_file.py
 
     Arguments:
-        None
 
 """
 
@@ -32,7 +31,6 @@ sys.path.append(os.getcwd())
 import gen_libs
 import version
 
-# Version
 __version__ = version.__version__
 
 
@@ -44,7 +42,7 @@ class UnitTest(unittest.TestCase):
 
     Super-Class:  unittest.TestCase
 
-    Sub-Classes:  None
+    Sub-Classes:
 
     Methods:
         setUp -> Unit testing initilization.
@@ -67,7 +65,6 @@ class UnitTest(unittest.TestCase):
         Description:  Initialization for unit testing.
 
         Arguments:
-            None
 
         """
 
@@ -88,7 +85,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test copy of file in same directory.
 
         Arguments:
-            None
 
         """
 
@@ -103,7 +99,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test copy of file in different directory.
 
         Arguments:
-            None
 
         """
 
@@ -120,7 +115,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test copy of file to same name.
 
         Arguments:
-            None
 
         """
 
@@ -136,7 +130,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test copy of file to different name.
 
         Arguments:
-            None
 
         """
 
@@ -151,7 +144,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test failure on missing source directory.
 
         Arguments:
-            None
 
         """
 
@@ -167,7 +159,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test failure on missing source file.
 
         Arguments:
-            None
 
         """
 
@@ -183,7 +174,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test failure on missing destination directory.
 
         Arguments:
-            None
 
         """
 
@@ -199,7 +189,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test failure on directory permission.
 
         Arguments:
-            None
 
         """
 
@@ -217,7 +206,6 @@ class UnitTest(unittest.TestCase):
         Description:  Clean up of unit testing.
 
         Arguments:
-            None
 
         """
 

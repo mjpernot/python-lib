@@ -9,7 +9,6 @@
         test/unit/arg_parser/arg_add_def.py
 
     Arguments:
-        None
 
 """
 
@@ -33,7 +32,6 @@ import arg_parser
 import gen_libs
 import version
 
-# Version
 __version__ = version.__version__
 
 
@@ -45,7 +43,7 @@ class UnitTest(unittest.TestCase):
 
     Super-Class:  unittest.TestCase
 
-    Sub-Classes:  None
+    Sub-Classes:
 
     Methods:
         setUp -> Unit testing initilization.
@@ -66,7 +64,6 @@ class UnitTest(unittest.TestCase):
         Description:  Initialization for unit testing.
 
         Arguments:
-            None
 
         """
 
@@ -90,7 +87,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with adding two args from opt_req_list.
 
         Arguments:
-            None
 
         """
 
@@ -110,7 +106,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with adding zero args from opt_req_list.
 
         Arguments:
-            None
 
         """
 
@@ -128,7 +123,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with adding one arg from opt_req_list.
 
         Arguments:
-            None
 
         """
 
@@ -147,7 +141,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with args_array passed only.
 
         Arguments:
-            None
 
         """
 
@@ -162,7 +155,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with adding two args from def_array.
 
         Arguments:
-            None
 
         """
 
@@ -182,7 +174,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with adding one arg from def_array.
 
         Arguments:
-            None
 
         """
 
@@ -201,7 +192,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with empty list for def_array.
 
         Arguments:
-            None
 
         """
 

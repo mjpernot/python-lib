@@ -9,7 +9,6 @@
         test/unit/arg_parser/arg_file_chk.py
 
     Arguments:
-        None
 
 """
 
@@ -33,7 +32,6 @@ import arg_parser
 import gen_libs
 import version
 
-# Version
 __version__ = version.__version__
 
 
@@ -43,9 +41,9 @@ class FileOpen3(object):
 
     Description:  Class stub holder for file open class.
 
-    Super-Class:  None
+    Super-Class:
 
-    Sub-Classes:  None
+    Sub-Classes:
 
     Methods:
         close -> Stub holder for close function.
@@ -59,7 +57,6 @@ class FileOpen3(object):
         Description:  Stub holder for close function.
 
         Arguments:
-            None
 
         """
 
@@ -72,9 +69,9 @@ class FileOpen2(object):
 
     Description:  Class stub holder for file open class.
 
-    Super-Class:  None
+    Super-Class:
 
-    Sub-Classes:  None
+    Sub-Classes:
 
     Methods:
         close -> Stub holder for close function.
@@ -88,7 +85,6 @@ class FileOpen2(object):
         Description:  Stub holder for close function.
 
         Arguments:
-            None
 
         """
 
@@ -101,9 +97,9 @@ class FileOpen(object):
 
     Description:  Class stub holder for file open class.
 
-    Super-Class:  None
+    Super-Class:
 
-    Sub-Classes:  None
+    Sub-Classes:
 
     Methods:
         close -> Stub holder for close function.
@@ -117,7 +113,6 @@ class FileOpen(object):
         Description:  Stub holder for close function.
 
         Arguments:
-            None
 
         """
 
@@ -132,7 +127,7 @@ class UnitTest(unittest.TestCase):
 
     Super-Class:  unittest.TestCase
 
-    Sub-Classes:  None
+    Sub-Classes:
 
     Methods:
         setUp -> Unit testing initilization.
@@ -165,7 +160,6 @@ class UnitTest(unittest.TestCase):
         Description:  Initialization for unit testing.
 
         Arguments:
-            None
 
         """
 
@@ -185,7 +179,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with second open no error.
 
         Arguments:
-            None
 
         """
 
@@ -205,7 +198,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with second open but returns error.
 
         Arguments:
-            None
 
         """
 
@@ -226,7 +218,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with file_crt_list with option in list.
 
         Arguments:
-            None
 
         """
 
@@ -246,7 +237,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with file_crt_list with option not in list.
 
         Arguments:
-            None
 
         """
 
@@ -269,7 +259,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with file_crt_list passed with empty list.
 
         Arguments:
-            None
 
         """
 
@@ -289,7 +278,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with file_crt_list not being passed.
 
         Arguments:
-            None
 
         """
 
@@ -309,7 +297,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with first open and error 2 returned.
 
         Arguments:
-            None
 
         """
 
@@ -329,7 +316,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with first open and error 10 returned.
 
         Arguments:
-            None
 
         """
 
@@ -348,7 +334,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with first open and no errors.
 
         Arguments:
-            None
 
         """
 
@@ -364,7 +349,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with name loop on zero items.
 
         Arguments:
-            None
 
         """
 
@@ -381,7 +365,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with name loop on two items.
 
         Arguments:
-            None
 
         """
 
@@ -398,7 +381,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with name loop on one item.
 
         Arguments:
-            None
 
         """
 
@@ -415,7 +397,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with isinstance against a set.
 
         Arguments:
-            None
 
         """
 
@@ -434,7 +415,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with isinstance against a string.
 
         Arguments:
-            None
 
         """
 
@@ -453,7 +433,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with isinstance against a list.
 
         Arguments:
-            None
 
         """
 
@@ -470,7 +449,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with two matches between sets.
 
         Arguments:
-            None
 
         """
 
@@ -490,7 +468,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with one match between sets.
 
         Arguments:
-            None
 
         """
 
@@ -506,7 +483,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with one match between sets but empty list.
 
         Arguments:
-            None
 
         """
 
@@ -522,7 +498,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with no match between sets passed.
 
         Arguments:
-            None
 
         """
 

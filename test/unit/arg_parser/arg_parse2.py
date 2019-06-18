@@ -9,7 +9,6 @@
         test/unit/arg_parser/arg_parse2.py
 
     Arguments:
-        None
 
 """
 
@@ -32,7 +31,6 @@ sys.path.append(os.getcwd())
 import arg_parser
 import version
 
-# Version
 __version__ = version.__version__
 
 
@@ -44,7 +42,7 @@ class UnitTest(unittest.TestCase):
 
     Super-Class:  unittest.TestCase
 
-    Sub-Classes:  None
+    Sub-Classes:
 
     Methods:
         setUp -> Unit testing initilization.
@@ -76,7 +74,6 @@ class UnitTest(unittest.TestCase):
         Description:  Initialization for unit testing.
 
         Arguments:
-            None
 
         """
 
@@ -95,7 +92,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with all options together.
 
         Arguments:
-            None
 
         """
 
@@ -116,7 +112,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with multi_list and opt_def_dict set.
 
         Arguments:
-            None
 
         """
 
@@ -138,7 +133,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with multi_list set to two values.
 
         Arguments:
-            None
 
         """
 
@@ -158,7 +152,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with multi_list set to one value.
 
         Arguments:
-            None
 
         """
 
@@ -179,7 +172,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with multi_list set to one arg using default.
 
         Arguments:
-            None
 
         """
 
@@ -200,7 +192,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with multi_list set to one arg and one other arg.
 
         Arguments:
-            None
 
         """
 
@@ -220,7 +211,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with multi_list set to one argument.
 
         Arguments:
-            None
 
         """
 
@@ -240,7 +230,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with opt_val_set set to integer value.
 
         Arguments:
-            None
 
         """
 
@@ -259,7 +248,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with opt_val set with no value in arg.
 
         Arguments:
-            None
 
         """
 
@@ -280,7 +268,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with opt_val_set set with no value in arg.
 
         Arguments:
-            None
 
         """
 
@@ -299,7 +286,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with opt_val_set set to two arguments.
 
         Arguments:
-            None
 
         """
 
@@ -315,7 +301,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with opt_val_set set to one argument.
 
         Arguments:
-            None
 
         """
 
@@ -331,7 +316,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with argument with value, but not set in opt_val.
 
         Arguments:
-            None
 
         """
 
@@ -346,7 +330,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with program name with argument.
 
         Arguments:
-            None
 
         """
 
@@ -361,7 +344,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with two arguments, no values.
 
         Arguments:
-            None
 
         """
 
@@ -376,7 +358,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with one argument, no values.
 
         Arguments:
-            None
 
         """
 
@@ -391,7 +372,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with argv with no arguments.
 
         Arguments:
-            None
 
         """
 
@@ -406,7 +386,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with argv as empty list.
 
         Arguments:
-            None
 
         """
 

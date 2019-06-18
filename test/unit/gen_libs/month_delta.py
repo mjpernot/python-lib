@@ -9,7 +9,6 @@
         test/unit/gen_libs/month_delta.py
 
     Arguments:
-        None
 
 """
 
@@ -32,7 +31,6 @@ sys.path.append(os.getcwd())
 import gen_libs
 import version
 
-# Version
 __version__ = version.__version__
 
 
@@ -44,7 +42,7 @@ class UnitTest(unittest.TestCase):
 
     Super-Class:  unittest.TestCase
 
-    Sub-Classes:  None
+    Sub-Classes:
 
     Methods:
         setUp -> Unit testing initilization.
@@ -66,7 +64,6 @@ class UnitTest(unittest.TestCase):
         Description:  Initialization for unit testing.
 
         Arguments:
-            None
 
         """
 
@@ -80,7 +77,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test month_delta function with a delta of zero.
 
         Arguments:
-            None
 
         """
 
@@ -94,7 +90,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test month_delta function for previous month.
 
         Arguments:
-            None
 
         """
 
@@ -110,7 +105,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test month_delta function for next month.
 
         Arguments:
-            None
 
         """
 
@@ -126,7 +120,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test month_delta function for 11 months past.
 
         Arguments:
-            None
 
         """
 
@@ -142,7 +135,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test month_delta function for 12 months past.
 
         Arguments:
-            None
 
         """
 
@@ -158,7 +150,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test month_delta function for 11 months future.
 
         Arguments:
-            None
 
         """
 
@@ -174,7 +165,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test month_delta function for 12 months future.
 
         Arguments:
-            None
 
         """
 
@@ -190,7 +180,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test month_delta function for 13 months future.
 
         Arguments:
-            None
 
         """
 

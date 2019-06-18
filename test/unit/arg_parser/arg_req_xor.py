@@ -9,7 +9,6 @@
         test/unit/arg_parser/arg_req_xor.py
 
     Arguments:
-        None
 
 """
 
@@ -33,7 +32,6 @@ import arg_parser
 import gen_libs
 import version
 
-# Version
 __version__ = version.__version__
 
 
@@ -45,7 +43,7 @@ class UnitTest(unittest.TestCase):
 
     Super-Class:  unittest.TestCase
 
-    Sub-Classes:  None
+    Sub-Classes:
 
     Methods:
         setUp -> Unit testing initilization.
@@ -63,7 +61,6 @@ class UnitTest(unittest.TestCase):
         Description:  Initialization for unit testing.
 
         Arguments:
-            None
 
         """
 
@@ -81,7 +78,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with two matches and is failure.
 
         Arguments:
-            None
 
         """
 
@@ -96,7 +92,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with one match and is successful.
 
         Arguments:
-            None
 
         """
 
@@ -110,7 +105,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with empty dictionary for opt_xor_list.
 
         Arguments:
-            None
 
         """
 
@@ -124,7 +118,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with empty dictionary for args_array.
 
         Arguments:
-            None
 
         """
 

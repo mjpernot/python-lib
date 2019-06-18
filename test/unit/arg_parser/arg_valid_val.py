@@ -9,7 +9,6 @@
         test/unit/arg_parser/arg_valid_val.py
 
     Arguments:
-        None
 
 """
 
@@ -33,7 +32,6 @@ import arg_parser
 import gen_libs
 import version
 
-# Version
 __version__ = version.__version__
 
 
@@ -45,7 +43,7 @@ class UnitTest(unittest.TestCase):
 
     Super-Class:  unittest.TestCase
 
-    Sub-Classes:  None
+    Sub-Classes:
 
     Methods:
         setUp -> Unit testing initilization.
@@ -67,7 +65,6 @@ class UnitTest(unittest.TestCase):
         Description:  Initialization for unit testing.
 
         Arguments:
-            None
 
         """
 
@@ -89,7 +86,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with two values and two failures.
 
         Arguments:
-            None
 
         """
 
@@ -104,7 +100,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with two values and one failure.
 
         Arguments:
-            None
 
         """
 
@@ -119,7 +114,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with two values and is successful.
 
         Arguments:
-            None
 
         """
 
@@ -133,7 +127,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with one value and is failure.
 
         Arguments:
-            None
 
         """
 
@@ -148,7 +141,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with one value and is successful.
 
         Arguments:
-            None
 
         """
 
@@ -162,7 +154,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with empty dictionary for both arguments.
 
         Arguments:
-            None
 
         """
 
@@ -176,7 +167,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with empty dictionary for opt_valid_val.
 
         Arguments:
-            None
 
         """
 
@@ -190,7 +180,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with empty dictionary for args_array.
 
         Arguments:
-            None
 
         """
 
