@@ -297,6 +297,7 @@ test/unit/gen_class/unit_test_run.sh
 ```
 cd {Python_Project}/python-lib
 test/unit/cmds_gen/add_cmd.py
+test/unit/cmds_gen/create_cfg_array.py
 ```
 
 ### All unit testing for cmds_gen.py:

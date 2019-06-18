@@ -9,6 +9,7 @@ coverage erase
 echo ""
 echo "Running unit test modules in conjunction with coverage"
 coverage run -a --source=cmds_gen test/unit/cmds_gen/add_cmd.py
+coverage run -a --source=cmds_gen test/unit/cmds_gen/create_cfg_array.py
 
 echo ""
 echo "Producing code coverage report"
