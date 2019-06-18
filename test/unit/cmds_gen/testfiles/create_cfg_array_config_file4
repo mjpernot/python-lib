@@ -1,0 +1,11 @@
+# Slave Configuration file
+# Slave 1 Configuration
+user = root
+# MySQL DB host information
+host = SERVER_IP
+port = 3306
+# Slave 2 Configuration
+user = root
+# MySQL DB host information
+host = SERVER_IP2
+port = 3307
