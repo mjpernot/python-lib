@@ -140,7 +140,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with empty list for opt_con_req_list.
 
         Arguments:
-            None
 
         """
 

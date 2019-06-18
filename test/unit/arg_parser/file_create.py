@@ -57,7 +57,6 @@ class FileOpen2(object):
         Description:  Stub holder for close function.
 
         Arguments:
-            None
 
         """
 
