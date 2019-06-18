@@ -91,7 +91,7 @@ class UnitTest(unittest.TestCase):
         Arguments:
 
         """
-        
+
         with gen_libs.no_std_out():
             self.assertFalse(gen_libs.prt_dict(self.data3, self.f_hldr))
 

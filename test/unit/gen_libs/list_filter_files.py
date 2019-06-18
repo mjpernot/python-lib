@@ -94,7 +94,6 @@ class UnitTest(unittest.TestCase):
         self.results4 = ["test/unit/gen_libs/tmp/file2.txt",
                          "test/unit/gen_libs/tmp/file3.txt"]
 
-
     def test_multi_files(self):
 
         """Function:  test_multi_files
