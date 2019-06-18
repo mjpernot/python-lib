@@ -35,6 +35,7 @@ pipeline {
                 ./test/unit/cmds_gen/create_cfg_array.py
                 ./test/unit/cmds_gen/disconnect.py
                 ./test/unit/cmds_gen/is_add_cmd.py
+                ./test/unit/cmds_gen/run_prog.py
                 ./test/unit/gen_libs/and_is_true.py
                 ./test/unit/gen_libs/bytes_2_readable.py
                 ./test/unit/gen_libs/chk_crt_dir.py
