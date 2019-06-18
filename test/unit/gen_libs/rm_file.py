@@ -62,8 +62,8 @@ class UnitTest(unittest.TestCase):
         """
 
         self.f_name = "test/unit/gen_libs/tmp/test_rm_file.txt"
-        self.err_msg = "Error: test/unit/gen_libs/tmp/test_rm_file.txt" + \
-             " - No such file or directory"
+        self.err_msg = "Error: test/unit/gen_libs/tmp/test_rm_file.txt" \
+                       + " - No such file or directory"
 
     def test_with_rm_file(self):
 

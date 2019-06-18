@@ -63,9 +63,9 @@ class UnitTest(unittest.TestCase):
         self.str1 = "100"
         self.int = 100
         self.str2 = "(1,2,3)"
-        self.tuple = (1,2,3)
+        self.tuple = (1, 2, 3)
         self.str3 = "[1,2,3]"
-        self.list = [1,2,3]
+        self.list = [1, 2, 3]
 
     def test_with_list(self):
 
