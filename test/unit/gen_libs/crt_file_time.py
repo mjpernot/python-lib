@@ -80,7 +80,8 @@ class UnitTest(unittest.TestCase):
 
         mock_date.strftime.return_value = self.indate
 
-        self.assertEqual(gen_libs.crt_file_time(self.fname, self.path, self.ext), self.result)
+        self.assertEqual(gen_libs.crt_file_time(self.fname, self.path,
+                                                self.ext), self.result)
 
 
 if __name__ == "__main__":
