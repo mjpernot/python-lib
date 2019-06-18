@@ -9,7 +9,6 @@
         test/unit/arg_parser/file_create.py
 
     Arguments:
-        None
 
 """
 
@@ -33,7 +32,6 @@ import arg_parser
 import gen_libs
 import version
 
-# Version
 __version__ = version.__version__
 
 
@@ -43,9 +41,9 @@ class FileOpen2(object):
 
     Description:  Class stub holder for file open class.
 
-    Super-Class:  None
+    Super-Class:
 
-    Sub-Classes:  None
+    Sub-Classes:
 
     Methods:
         close -> Stub holder for close function.
@@ -72,9 +70,9 @@ class FileOpen(object):
 
     Description:  Class stub holder for file open class.
 
-    Super-Class:  None
+    Super-Class:
 
-    Sub-Classes:  None
+    Sub-Classes:
 
     Methods:
         close -> Stub holder for close function.
@@ -88,7 +86,6 @@ class FileOpen(object):
         Description:  Stub holder for close function.
 
         Arguments:
-            None
 
         """
 
@@ -103,7 +100,7 @@ class UnitTest(unittest.TestCase):
 
     Super-Class:  unittest.TestCase
 
-    Sub-Classes:  None
+    Sub-Classes:
 
     Methods:
         setUp -> Unit testing initilization.
@@ -121,7 +118,6 @@ class UnitTest(unittest.TestCase):
         Description:  Initialization for unit testing.
 
         Arguments:
-            None
 
         """
 
@@ -142,7 +138,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with file open returning failure.
 
         Arguments:
-            None
 
         """
 
@@ -162,7 +157,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with file open returning successful.
 
         Arguments:
-            None
 
         """
 
@@ -180,7 +174,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with errno not set to two.
 
         Arguments:
-            None
 
         """
 
@@ -199,7 +192,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with option not being in file_crt_list.
 
         Arguments:
-            None
 
         """
 
