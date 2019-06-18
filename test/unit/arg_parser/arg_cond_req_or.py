@@ -9,7 +9,6 @@
         test/unit/arg_parser/arg_cond_req_or.py
 
     Arguments:
-        None
 
 """
 
@@ -33,7 +32,6 @@ import arg_parser
 import gen_libs
 import version
 
-# Version
 __version__ = version.__version__
 
 
@@ -45,7 +43,7 @@ class UnitTest(unittest.TestCase):
 
     Super-Class:  unittest.TestCase
 
-    Sub-Classes:  None
+    Sub-Classes:
 
     Methods:
         setUp -> Unit testing initilization.
@@ -67,7 +65,6 @@ class UnitTest(unittest.TestCase):
         Description:  Initialization for unit testing.
 
         Arguments:
-            None
 
         """
 
@@ -82,9 +79,9 @@ class UnitTest(unittest.TestCase):
         self.opt_con_req_dict = {}
         self.opt_con_req_dict2 = {"-c": ["-f"]}
         self.opt_con_req_dict3 = {"-c": ["-f", "-m"]}
-        self.opt_con_req_dict4 = {"-c": ["-f"] , "-f": ["-m"]}
-        self.opt_con_req_dict5 = {"-c": ["-f", "-m"] , "-d": ["-c"]}
-        self.opt_con_req_dict6 = {"-c": ["-f", "-m"] , "-d": ["-g"]}
+        self.opt_con_req_dict4 = {"-c": ["-f"], "-f": ["-m"]}
+        self.opt_con_req_dict5 = {"-c": ["-f", "-m"], "-d": ["-c"]}
+        self.opt_con_req_dict6 = {"-c": ["-f", "-m"], "-d": ["-g"]}
 
     def test_multi_cond_req2(self):
 
@@ -93,7 +90,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with multiple conditional requirements, one missing.
 
         Arguments:
-            None
 
         """
 
@@ -110,10 +106,9 @@ class UnitTest(unittest.TestCase):
         Description:  Test with multiple conditional requirements present.
 
         Arguments:
-            None
 
         """
-        
+
         self.assertTrue(arg_parser.arg_cond_req_or(self.args_array5,
                                                    self.opt_con_req_dict5))
 
@@ -124,7 +119,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with two conditional requirements, one missing.
 
         Arguments:
-            None
 
         """
 
@@ -141,10 +135,9 @@ class UnitTest(unittest.TestCase):
         Description:  Test with two conditional requirements.
 
         Arguments:
-            None
 
         """
-        
+
         self.assertTrue(arg_parser.arg_cond_req_or(self.args_array4,
                                                    self.opt_con_req_dict4))
 
@@ -155,7 +148,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with two arguments are present.
 
         Arguments:
-            None
 
         """
 
@@ -169,7 +161,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with one argument is present.
 
         Arguments:
-            None
 
         """
 
@@ -183,7 +174,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with empty list for opt_con_req_list.
 
         Arguments:
-            None
 
         """
 
@@ -197,7 +187,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with empty list for def_array.
 
         Arguments:
-            None
 
         """
 

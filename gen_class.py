@@ -37,7 +37,6 @@ import yum
 # Local
 import version
 
-# Version
 __version__ = version.__version__
 
 
@@ -49,10 +48,8 @@ class Daemon:
         program in include starting, stopping and restarting the process.
 
     Super-Class:
-        None
 
     Sub-Classes:
-        None
 
     Methods:
         __init__ -> Class instance initilization.
@@ -103,7 +100,6 @@ class Daemon:
             Programming in the UNIX Environment" for details.
 
         Arguments:
-            None
 
         """
 
@@ -160,7 +156,6 @@ class Daemon:
         Description:  Remove pidfile from the file system.
 
         Arguments:
-            None
 
         """
 
@@ -173,7 +168,6 @@ class Daemon:
         Description:  Start the daemon process.
 
         Arguments:
-            None
 
         """
 
@@ -202,7 +196,6 @@ class Daemon:
         Description:  Kill the daemon process.
 
         Arguments:
-            None
 
         """
 
@@ -245,7 +238,6 @@ class Daemon:
         Description:  Stop and restart the daemon process.
 
         Arguments:
-            None
 
         """
 
@@ -261,7 +253,6 @@ class Daemon:
             after the process has been daemonized by start() or restart().
 
         Arguments:
-            None
 
         """
 
@@ -276,7 +267,6 @@ class ProgressBar(object):
     Super-Class:  object
 
     Sub-Classes:
-        None
 
     Methods:
         __init__ -> Class instance initilization.
@@ -364,10 +354,8 @@ class SingleInstanceException(BaseException):
     Super-Class:  BaseException
 
     Sub-Classes:
-        None
 
     Methods:
-        None
 
     """
 
@@ -433,7 +421,6 @@ class ProgramLock(object):
         Description:  Deletion of the ProgramLock instance.
 
         Arguments:
-            None
 
         """
 
@@ -512,7 +499,6 @@ class Mail(System):
     Super-Class:  System
 
     Sub-Classes:
-        None
 
     Methods:
         __init__ -> Class instance initilization.
@@ -578,7 +564,6 @@ class Mail(System):
             to the message.
 
         Arguments:
-            None
 
         """
 
@@ -592,7 +577,6 @@ class Mail(System):
         Description:  Combines subject line and message into a single entity.
 
         Arguments:
-            None
 
         """
 
@@ -625,7 +609,6 @@ class Mail(System):
             message which is required for sendmail.
 
         Arguments:
-            None
 
         """
 
@@ -640,7 +623,6 @@ class Mail(System):
         Description:  Prints email message to standard out.
 
         Arguments:
-            None
 
         """
 
@@ -658,7 +640,6 @@ class Logger(object):
     Super-Class:  object
 
     Sub-Classes:
-        None
 
     Methods:
         __init__ -> Class instance initilization.
@@ -686,8 +667,6 @@ class Logger(object):
             (input) date_fmt -> Format of date and time for a log file entry.
             (input) mode -> a|w - Write mode to log file (append, write)
                 NOTE:  Mode is not yet implemented.
-            (input)  **kwargs:
-                None
 
         """
 
@@ -730,8 +709,6 @@ class Logger(object):
 
         Arguments:
             (input) msg -> Message to be written to log.
-            (input)  **kwargs:
-                None
 
         """
 
@@ -745,8 +722,6 @@ class Logger(object):
 
         Arguments:
             (input) msg -> Message to be written to log.
-            (input)  **kwargs:
-                None
 
         """
 
@@ -760,8 +735,6 @@ class Logger(object):
 
         Arguments:
             (input) msg -> Message to be written to log.
-            (input)  **kwargs:
-                None
 
         """
 
@@ -775,8 +748,6 @@ class Logger(object):
 
         Arguments:
             (input) msg -> Message to be written to log.
-            (input)  **kwargs:
-                None
 
         """
 
@@ -790,8 +761,6 @@ class Logger(object):
 
         Arguments:
             (input) msg -> Message to be written to log.
-            (input)  **kwargs:
-                None
 
         """
 
@@ -805,8 +774,6 @@ class Logger(object):
 
         Arguments:
             (input) msg -> Message to be written to log.
-            (input)  **kwargs:
-                None
 
         """
 

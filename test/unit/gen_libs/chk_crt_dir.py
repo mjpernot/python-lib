@@ -9,7 +9,6 @@
         test/unit/gen_libs/chk_crt_dir.py
 
     Arguments:
-        None
 
 """
 
@@ -31,7 +30,6 @@ sys.path.append(os.getcwd())
 import gen_libs
 import version
 
-# Version
 __version__ = version.__version__
 
 
@@ -43,7 +41,7 @@ class UnitTest(unittest.TestCase):
 
     Super-Class:  unittest.TestCase
 
-    Sub-Classes:  None
+    Sub-Classes:
 
     Methods:
         setUp -> Initialize testing environment.
@@ -67,7 +65,6 @@ class UnitTest(unittest.TestCase):
         Description:  Initialization for unit testing.
 
         Arguments:
-            None
 
         """
 
@@ -85,7 +82,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with no directory name passed.
 
         Arguments:
-            None
 
         """
 
@@ -103,7 +99,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with directory does not exist.
 
         Arguments:
-            None
 
         """
 
@@ -121,7 +116,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with creating directory.
 
         Arguments:
-            None
 
         """
 
@@ -140,7 +134,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with checking write permission on directory.
 
         Arguments:
-            None
 
         """
 
@@ -161,7 +154,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with checking no write permission on directory.
 
         Arguments:
-            None
 
         """
 
@@ -183,7 +175,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with checking read permission on directory.
 
         Arguments:
-            None
 
         """
 
@@ -204,7 +195,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with checking no read permission on directory.
 
         Arguments:
-            None
 
         """
 
@@ -226,7 +216,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with no_print option set.
 
         Arguments:
-            None
 
         """
 
@@ -244,7 +233,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with printing error messages to file.
 
         Arguments:
-            None
 
         """
 
@@ -273,7 +261,6 @@ class UnitTest(unittest.TestCase):
         Description:  Clean up of unit testing.
 
         Arguments:
-            None
 
         """
 

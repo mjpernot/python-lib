@@ -9,7 +9,6 @@
         test/unit/arg_parser/arg_cond_req.py
 
     Arguments:
-        None
 
 """
 
@@ -33,7 +32,6 @@ import arg_parser
 import gen_libs
 import version
 
-# Version
 __version__ = version.__version__
 
 
@@ -45,7 +43,7 @@ class UnitTest(unittest.TestCase):
 
     Super-Class:  unittest.TestCase
 
-    Sub-Classes:  None
+    Sub-Classes:
 
     Methods:
         setUp -> Unit testing initilization.
@@ -65,7 +63,6 @@ class UnitTest(unittest.TestCase):
         Description:  Initialization for unit testing.
 
         Arguments:
-            None
 
         """
 
@@ -85,7 +82,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with two arguments required, but missing.
 
         Arguments:
-            None
 
         """
 
@@ -102,10 +98,9 @@ class UnitTest(unittest.TestCase):
         Description:  Test with one argument required, but missing.
 
         Arguments:
-            None
 
         """
-        
+
         with gen_libs.no_std_out():
             status = arg_parser.arg_cond_req(self.args_array2,
                                              self.opt_con_req_list2)
@@ -119,7 +114,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with two arguments required and are present.
 
         Arguments:
-            None
 
         """
 
@@ -133,7 +127,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with one argument required and is present.
 
         Arguments:
-            None
 
         """
 
@@ -147,7 +140,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with empty list for opt_con_req_list.
 
         Arguments:
-            None
 
         """
 
@@ -161,7 +153,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with empty list for def_array.
 
         Arguments:
-            None
 
         """
 

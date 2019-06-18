@@ -9,7 +9,6 @@
         test/unit/arg_parser/parse_single.py
 
     Arguments:
-        None
 
 """
 
@@ -32,7 +31,6 @@ sys.path.append(os.getcwd())
 import arg_parser
 import version
 
-# Version
 __version__ = version.__version__
 
 
@@ -44,7 +42,7 @@ class UnitTest(unittest.TestCase):
 
     Super-Class:  unittest.TestCase
 
-    Sub-Classes:  None
+    Sub-Classes:
 
     Methods:
         setUp -> Unit testing initilization.
@@ -62,7 +60,6 @@ class UnitTest(unittest.TestCase):
         Description:  Initialization for unit testing.
 
         Arguments:
-            None
 
         """
 
@@ -79,7 +76,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with opt_val_set set to integer value.
 
         Arguments:
-            None
 
         """
 
@@ -99,7 +95,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with opt_val set with no value in arg.
 
         Arguments:
-            None
 
         """
 
@@ -119,7 +114,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with opt_val_set set to two arguments.
 
         Arguments:
-            None
 
         """
 
@@ -136,7 +130,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with opt_val_set set to one argument.
 
         Arguments:
-            None
 
         """
 

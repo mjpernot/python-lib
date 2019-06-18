@@ -9,7 +9,6 @@
         test/unit/gen_class/Mail_create_body.py
 
     Arguments:
-        None
 
 """
 
@@ -31,7 +30,6 @@ sys.path.append(os.getcwd())
 import gen_class
 import version
 
-# Version
 __version__ = version.__version__
 
 
@@ -43,7 +41,7 @@ class UnitTest(unittest.TestCase):
 
     Super-Class:  unittest.TestCase
 
-    Sub-Classes:  None
+    Sub-Classes:
 
     Methods:
         setUp -> Initialize testing environment.
@@ -60,7 +58,6 @@ class UnitTest(unittest.TestCase):
         Description:  Initialization for unit testing.
 
         Arguments:
-            None
 
         """
 
@@ -73,7 +70,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with subject line to maximum.
 
         Arguments:
-            None
 
         """
 
@@ -94,7 +90,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test creating body with subject line in place.
 
         Arguments:
-            None
 
         """
 
@@ -116,7 +111,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test creating body.
 
         Arguments:
-            None
 
         """
 

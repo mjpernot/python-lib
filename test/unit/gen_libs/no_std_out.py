@@ -9,7 +9,6 @@
         test/unit/gen_libs/no_std_out.py
 
     Arguments:
-        None
 
 """
 
@@ -31,7 +30,6 @@ sys.path.append(os.getcwd())
 import gen_libs
 import version
 
-# Version
 __version__ = version.__version__
 
 
@@ -42,7 +40,6 @@ def test_no_print_out():
     Description:  Used as stub test function for test_no_std_out function..
 
     Arguments:
-        None
 
     """
 
@@ -58,7 +55,7 @@ class UnitTest(unittest.TestCase):
 
     Super-Class:  unittest.TestCase
 
-    Sub-Classes:  None
+    Sub-Classes:
 
     Methods:
         test_get_base_dir -> Test no_std_out function.
@@ -72,7 +69,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test no_std_out function.
 
         Arguments:
-            None
 
         """
 

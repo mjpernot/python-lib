@@ -9,7 +9,6 @@
         test/unit/gen_class/Mail_init.py
 
     Arguments:
-        None
 
 """
 
@@ -31,7 +30,6 @@ sys.path.append(os.getcwd())
 import gen_class
 import version
 
-# Version
 __version__ = version.__version__
 
 
@@ -43,7 +41,7 @@ class UnitTest(unittest.TestCase):
 
     Super-Class:  unittest.TestCase
 
-    Sub-Classes:  None
+    Sub-Classes:
 
     Methods:
         setUp -> Initialize testing environment.
@@ -61,7 +59,6 @@ class UnitTest(unittest.TestCase):
         Description:  Initialization for unit testing.
 
         Arguments:
-            None
 
         """
 
@@ -78,7 +75,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test other attributes with data.
 
         Arguments:
-            None
 
         """
 
@@ -97,7 +93,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test to line with a string.
 
         Arguments:
-            None
 
         """
 
@@ -114,7 +109,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test to line with a list.
 
         Arguments:
-            None
 
         """
 
@@ -130,7 +124,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test __init__ method with default arguments.
 
         Arguments:
-            None
 
         """
 

@@ -5,90 +5,75 @@
 #   is located at.
 
 echo ""
-echo "Unit test:  and_is_true"
+echo "Unit test:  gen_libs.py"
 test/unit/gen_libs/and_is_true.py
-
-echo ""
-echo "Unit test:  chk_crt_dir"
+test/unit/gen_libs/bytes_2_readable.py
 test/unit/gen_libs/chk_crt_dir.py
-
-echo ""
-echo "Unit test:  chk_crt_file"
 test/unit/gen_libs/chk_crt_file.py
-
-echo ""
-echo "Unit test:  clear_file"
+test/unit/gen_libs/chk_int.py
 test/unit/gen_libs/clear_file.py
-
-echo ""
-echo "Unit test:  cp_file"
+test/unit/gen_libs/compress.py
+test/unit/gen_libs/cp_file2.py
 test/unit/gen_libs/cp_file.py
-
-echo ""
-echo "Unit test:  data_multi_out"
+test/unit/gen_libs/crt_file_time.py
 test/unit/gen_libs/data_multi_out.py
-
-echo ""
-echo "Unit test:  display_data"
+test/unit/gen_libs/del_not_and_list.py
+test/unit/gen_libs/del_not_in_list.py
+test/unit/gen_libs/dict_2_list.py
+test/unit/gen_libs/dict_2_std.py
+test/unit/gen_libs/dir_file_match.py
+test/unit/gen_libs/disk_usage.py
 test/unit/gen_libs/display_data.py
-
-echo ""
-echo "Unit test:  file_2_list"
 test/unit/gen_libs/file_2_list.py
-
-echo ""
-echo "Unit test:  file_search_cnt"
+test/unit/gen_libs/file_cleanup.py
 test/unit/gen_libs/file_search_cnt.py
-
-echo ""
-echo "Unit test:  file_search"
 test/unit/gen_libs/file_search.py
-
-echo ""
-echo "Unit test:  get_base_dir"
+test/unit/gen_libs/float_div.py
 test/unit/gen_libs/get_base_dir.py
-
-echo ""
-echo "Unit test:  get_data"
 test/unit/gen_libs/get_data.py
-
-echo ""
-echo "Unit test:  is_empty_file"
+test/unit/gen_libs/get_date.py
+test/unit/gen_libs/get_secs.py
+test/unit/gen_libs/get_time.py
+test/unit/gen_libs/help_func.py
+test/unit/gen_libs/in_list.py
 test/unit/gen_libs/is_empty_file.py
-
-echo ""
-echo "Unit test:  list_dirs"
+test/unit/gen_libs/is_missing_lists.py
+test/unit/gen_libs/is_true.py
+test/unit/gen_libs/key_cleaner.py
+test/unit/gen_libs/list_2_dict.py
 test/unit/gen_libs/list_dirs.py
-
-echo ""
-echo "Unit test:  merge_data_types"
+test/unit/gen_libs/list_files.py
+test/unit/gen_libs/list_filter_files.py
+test/unit/gen_libs/load_module.py
+test/unit/gen_libs/make_md5_hash.py
+test/unit/gen_libs/make_zip.py
 test/unit/gen_libs/merge_data_types.py
-
-echo ""
-echo "Unit test:  merge_two_dicts"
 test/unit/gen_libs/merge_two_dicts.py
-
-echo ""
-echo "Unit test:  month_delta"
+test/unit/gen_libs/milli_2_readadble.py
 test/unit/gen_libs/month_delta.py
-
-echo ""
-echo "Unit test:  no_std_out"
+test/unit/gen_libs/mv_file.py
+test/unit/gen_libs/mv_file2.py
+test/unit/gen_libs/not_in_list.py
 test/unit/gen_libs/no_std_out.py
-
-echo ""
-echo "Unit test:  rotate_files"
+test/unit/gen_libs/openfile.py
+test/unit/gen_libs/pct_int.py
+test/unit/gen_libs/print_data.py
+test/unit/gen_libs/print_dict.py
+test/unit/gen_libs/prt_dict.py
+test/unit/gen_libs/prt_lvl.py
+test/unit/gen_libs/prt_msg.py
+test/unit/gen_libs/rename_file.py
+test/unit/gen_libs/rm_dup_list.py
+test/unit/gen_libs/rm_file.py
+test/unit/gen_libs/rm_newline_list.py
+test/unit/gen_libs/root_run.py
 test/unit/gen_libs/rotate_files.py
-
-echo ""
-echo "Unit test:  touch"
+test/unit/gen_libs/str_2_list.py
+test/unit/gen_libs/str_2_type.py
 test/unit/gen_libs/touch.py
-
-echo ""
-echo "Unit test:  write_file"
+test/unit/gen_libs/validate_date.py
+test/unit/gen_libs/validate_int.py
 test/unit/gen_libs/write_file.py
-
-echo ""
-echo "Unit test:  rotate_files"
-test/unit/gen_libs/rotate_files.py
+test/unit/gen_libs/write_file2.py
+test/unit/gen_libs/write_to_log.py
 

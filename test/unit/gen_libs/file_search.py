@@ -9,7 +9,6 @@
         test/unit/gen_libs/file_search.py
 
     Arguments:
-        None
 
 """
 
@@ -31,7 +30,6 @@ sys.path.append(os.getcwd())
 import gen_libs
 import version
 
-# Version
 __version__ = version.__version__
 
 
@@ -43,7 +41,7 @@ class UnitTest(unittest.TestCase):
 
     Super-Class:  unittest.TestCase
 
-    Sub-Classes:  None
+    Sub-Classes:
 
     Methods:
         setUp -> Unit testing initilization.
@@ -62,7 +60,6 @@ class UnitTest(unittest.TestCase):
         Description:  Initialization for unit testing.
 
         Arguments:
-            None
 
         """
 
@@ -86,7 +83,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with no string found.
 
         Arguments:
-            None
 
         """
 
@@ -99,7 +95,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test string found in first line.
 
         Arguments:
-            None
 
         """
 
@@ -113,7 +108,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test string found in last line.
 
         Arguments:
-            None
 
         """
 
@@ -127,7 +121,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test found with multiple matches.
 
         Arguments:
-            None
 
         """
 
@@ -141,7 +134,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test string found in middle line.
 
         Arguments:
-            None
 
         """
 

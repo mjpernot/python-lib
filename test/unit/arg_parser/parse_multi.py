@@ -9,7 +9,6 @@
         test/unit/arg_parser/parse_multi.py
 
     Arguments:
-        None
 
 """
 
@@ -32,7 +31,6 @@ sys.path.append(os.getcwd())
 import arg_parser
 import version
 
-# Version
 __version__ = version.__version__
 
 
@@ -44,7 +42,7 @@ class UnitTest(unittest.TestCase):
 
     Super-Class:  unittest.TestCase
 
-    Sub-Classes:  None
+    Sub-Classes:
 
     Methods:
         setUp -> Unit testing initilization.
@@ -63,7 +61,6 @@ class UnitTest(unittest.TestCase):
         Description:  Initialization for unit testing.
 
         Arguments:
-            None
 
         """
 
@@ -78,7 +75,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with multi_list set to two values.
 
         Arguments:
-            None
 
         """
 
@@ -95,7 +91,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with multi_list set to one value.
 
         Arguments:
-            None
 
         """
 
@@ -115,7 +110,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with multi_list set to one arg using default.
 
         Arguments:
-            None
 
         """
 
@@ -136,7 +130,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with multi_list set to one arg and one other arg.
 
         Arguments:
-            None
 
         """
 
@@ -156,7 +149,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with multi_list set to one argument.
 
         Arguments:
-            None
 
         """
 

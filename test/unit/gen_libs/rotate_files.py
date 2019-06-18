@@ -9,7 +9,6 @@
         test/unit/gen_libs/rotate_files.py
 
     Arguments:
-        None
 
 """
 
@@ -32,7 +31,6 @@ sys.path.append(os.getcwd())
 import gen_libs
 import version
 
-# Version
 __version__ = version.__version__
 
 
@@ -44,7 +42,7 @@ class UnitTest(unittest.TestCase):
 
     Super-Class:  unittest.TestCase
 
-    Sub-Classes:  None
+    Sub-Classes:
 
     Methods:
         setUp -> Unit testing initilization.
@@ -64,7 +62,6 @@ class UnitTest(unittest.TestCase):
         Description:  Initialization for unit testing.
 
         Arguments:
-            None
 
         """
 
@@ -80,7 +77,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with multiple recursion calls.
 
         Arguments:
-            mock_os -> Mock Ref:  gen_libs.os
 
         """
 
@@ -97,7 +93,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with all default values.
 
         Arguments:
-            mock_os -> Mock Ref:  gen_libs.os
 
         """
 
@@ -114,7 +109,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with no max_cnt argument passed.
 
         Arguments:
-            mock_os -> Mock Ref:  gen_libs.os
 
         """
 
@@ -131,7 +125,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with no cnt argument passed.
 
         Arguments:
-            mock_os -> Mock Ref:  gen_libs.os
 
         """
 
@@ -149,7 +142,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with cnt less than max_cnt less one.
 
         Arguments:
-            mock_os -> Mock Ref:  gen_libs.os
 
         """
 
@@ -166,7 +158,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with cnt equal to max_cnt.
 
         Arguments:
-            None
 
         """
 
@@ -179,7 +170,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with cnt greater than max_cnt.
 
         Arguments:
-            None
 
         """
 

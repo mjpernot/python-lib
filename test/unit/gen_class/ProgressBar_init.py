@@ -9,7 +9,6 @@
         test/unit/gen_class/ProgressBar_init.py
 
     Arguments:
-        None
 
 """
 
@@ -31,7 +30,6 @@ sys.path.append(os.getcwd())
 import gen_class
 import version
 
-# Version
 __version__ = version.__version__
 
 
@@ -43,7 +41,7 @@ class UnitTest(unittest.TestCase):
 
     Super-Class:  unittest.TestCase
 
-    Sub-Classes:  None
+    Sub-Classes:
 
     Methods:
         setUp -> Initialize testing environment.
@@ -61,7 +59,6 @@ class UnitTest(unittest.TestCase):
         Description:  Initialization for unit testing.
 
         Arguments:
-            None
 
         """
 
@@ -77,7 +74,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test __init__ method with default arguments.
 
         Arguments:
-            None
 
         """
 
@@ -94,7 +90,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test __init__ method with user values for arguments.
 
         Arguments:
-            None
 
         """
 
@@ -110,7 +105,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test __init__ method with zero for width argument.
 
         Arguments:
-            None
 
         """
 
@@ -126,7 +120,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test __init__ method with less than zero width argument.
 
         Arguments:
-            None
 
         """
 

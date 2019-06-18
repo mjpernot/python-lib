@@ -9,7 +9,6 @@
         test/unit/arg_parser/arg_xor_dict.py
 
     Arguments:
-        None
 
 """
 
@@ -33,7 +32,6 @@ import arg_parser
 import gen_libs
 import version
 
-# Version
 __version__ = version.__version__
 
 
@@ -45,7 +43,7 @@ class UnitTest(unittest.TestCase):
 
     Super-Class:  unittest.TestCase
 
-    Sub-Classes:  None
+    Sub-Classes:
 
     Methods:
         setUp -> Unit testing initilization.
@@ -70,7 +68,6 @@ class UnitTest(unittest.TestCase):
         Description:  Initialization for unit testing.
 
         Arguments:
-            None
 
         """
 
@@ -94,7 +91,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with multiple keys with one failure.
 
         Arguments:
-            None
 
         """
 
@@ -109,7 +105,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with multiple keys with one not present.
 
         Arguments:
-            None
 
         """
 
@@ -123,7 +118,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with multiple key/list present.
 
         Arguments:
-            None
 
         """
 
@@ -137,7 +131,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with multiple lists present.
 
         Arguments:
-            None
 
         """
 
@@ -151,7 +144,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with multiple keys present.
 
         Arguments:
-            None
 
         """
 
@@ -165,7 +157,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with both key and list options present.
 
         Arguments:
-            None
 
         """
 
@@ -180,7 +171,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with list option present.
 
         Arguments:
-            None
 
         """
 
@@ -194,7 +184,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with key option present.
 
         Arguments:
-            None
 
         """
 
@@ -208,7 +197,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with empty args_array.
 
         Arguments:
-            None
 
         """
 
@@ -222,7 +210,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with empty list for opt_xor_dict.
 
         Arguments:
-            None
 
         """
 
@@ -236,7 +223,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with both args with empty sets.
 
         Arguments:
-            None
 
         """
 

@@ -9,7 +9,6 @@
         test/unit/gen_class/ProgramLock_del.py
 
     Arguments:
-        None
 
 """
 
@@ -32,7 +31,6 @@ sys.path.append(os.getcwd())
 import gen_class
 import version
 
-# Version
 __version__ = version.__version__
 
 
@@ -44,7 +42,7 @@ class UnitTest(unittest.TestCase):
 
     Super-Class:  unittest.TestCase
 
-    Sub-Classes:  None
+    Sub-Classes:
 
     Methods:
         setUp -> Initialize testing environment.
@@ -62,7 +60,6 @@ class UnitTest(unittest.TestCase):
         Description:  Initialization for unit testing.
 
         Arguments:
-            None
 
         """
 
@@ -88,12 +85,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test __del__ method with unlock successful.
 
         Arguments:
-            mock_path -> Mock Ref:  gen_class.os.path.abspath
-            mock_open -> Mock Ref:  gen_class.open
-            mock_lock -> Mock Ref:  gen_class.fcntl.lockf
-            mock_tmp -> Mock Ref:  gen_class.tempfile.gettempdir
-            mock_file -> Mock Ref:  gen_class.os.path.isfile
-            mock_link -> Mock Ref:  gen_class.os.unlink
 
         """
 
@@ -128,11 +119,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test __del__ method with no file to unlink.
 
         Arguments:
-            mock_path -> Mock Ref:  gen_class.os.path.abspath
-            mock_open -> Mock Ref:  gen_class.open
-            mock_lock -> Mock Ref:  gen_class.fcntl.lockf
-            mock_tmp -> Mock Ref:  gen_class.tempfile.gettempdir
-            mock_file -> Mock Ref:  gen_class.os.path.isfile
 
         """
 
@@ -164,10 +150,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test __del__ method with lock set to false in class.
 
         Arguments:
-            mock_path -> Mock Ref:  gen_class.os.path.abspath
-            mock_open -> Mock Ref:  gen_class.open
-            mock_lock -> Mock Ref:  gen_class.fcntl.lockf
-            mock_tmp -> Mock Ref:  gen_class.tempfile.gettempdir
 
         """
 
@@ -196,7 +178,6 @@ class UnitTest(unittest.TestCase):
         Description:  Clean up of unit testing.
 
         Arguments:
-            None
 
         """
 

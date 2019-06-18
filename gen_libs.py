@@ -56,6 +56,7 @@
         normalize
         not_in_list
         no_std_out
+        openfile
         pct_int
         print_data
         print_dict
@@ -104,11 +105,11 @@ import io
 # Third party
 import json
 import ast
+import gzip
 
 # Local
 import version
 
-# Version
 __version__ = version.__version__
 
 
@@ -126,8 +127,6 @@ def and_is_true(x, y, **kwargs):
     Arguments:
         (input) x -> Yes or No value.
         (input) y -> Yes or No value.
-        (input) **kwargs:
-            None
         (output) Return True | False based on AND comparsion.
 
     """
@@ -147,8 +146,6 @@ def bytes_2_readable(size, precision=2, **kwargs):
     Arguments:
         (input) size -> Size in bytes to convert.
         (input) precision -> Percision after decimal.
-        (input) **kwargs:
-            None
 
     """
 
@@ -302,8 +299,6 @@ def chk_int(x, **kwargs):
 
     Arguments:
         (input) x -> String containing an integer.
-        (input) **kwargs:
-            None
         (output) True|False -> Whether the string is an integer.
 
     """
@@ -323,8 +318,6 @@ def clear_file(f_name, **kwargs):
 
     Arguments:
         (input) f_name -> File name along with directory path.
-        (input) **kwargs:
-            None
 
     """
 
@@ -340,8 +333,6 @@ def compress(fname, **kwargs):
 
     Arguments:
         (input) fname -> File name.
-        (input) **kwargs:
-            None
 
     """
 
@@ -364,8 +355,6 @@ def cp_file(fname, src_dir, dest_dir, new_fname=None, **kwargs):
         (input) src_dir -> Source directory.
         (input) dest_dir -> Destination directory.
         (input) new_fname -> New file name or None if staying the same.
-        (input) **kwargs:
-            None
         (output) status -> True|False - True if copy was successful.
         (output) err_msg -> Error message from shutil.copy2 exception or None.
 
@@ -420,8 +409,6 @@ def cp_file2(fname, src_dir, dest_dir, new_fname=None, **kwargs):
         (input) src_dir -> Source directory.
         (input) dest_dir -> Destination directory.
         (input) new_fname -> New file name or None if staying the same.
-        (input) **kwargs:
-            None
 
     """
 
@@ -441,8 +428,6 @@ def crt_file_time(fname, path, ext, **kwargs):
         (input) fname -> File name.
         (input) path -> Directory path.
         (input) ext -> Extension of file.
-        (input) **kwargs:
-            None
         (output) -> Directory path/file_name.time.extension.
 
     """
@@ -465,8 +450,6 @@ def data_multi_out(data, o_file=None, json_fmt=False, sup_std=False, mail=None,
         (input) json_fmt -> True|False - Convert data to JSON format.
         (input) sup_std -> True|False - Suppress printing to standard out.
         (input) mail -> Mail_class|None - Mail class instance.
-        (input) **kwargs:
-            None
         (output) err_flag -> True|False - Status of process.
         (output) err_msg -> Error message.
 
@@ -506,8 +489,6 @@ def del_not_and_list(list1, list2, **kwargs):
     Arguments:
         (input) list1 -> List array 1.
         (input) list2 -> List array 2 - items to be removed.
-        (input) **kwargs:
-            None
         (output) list1 -> List array 1 minus items from list array 2.
 
     """
@@ -533,8 +514,6 @@ def del_not_in_list(list1, list2, **kwargs):
     Arguments:
         (input) list1 -> List 1.
         (input) list2 -> List 2.
-        (input) **kwargs:
-            None
         (output) list1 -> List 1 minus items not in list 2.
 
     """
@@ -556,8 +535,6 @@ def dict_2_list(dict_list, key_val, **kwargs):
     Arguments:
         (input) dict_list -> Dictionary array list.
         (input) key_val -> Key value in the dictionary key.
-        (input) **kwargs:
-            None
         (output) arry_list -> Array list of values for key value.
 
     """
@@ -575,8 +552,6 @@ def dict_2_std(data, ofile=False, **kwargs):
     Arguments:
         (input) data -> Dict document.
         (input) ofile -> Name of file to print to.
-        (input) **kwargs:
-            None.
 
     """
 
@@ -602,8 +577,6 @@ def dir_file_match(dir_path, file_str, **kwargs):
     Arguments:
         (input) dir_path -> Directory path to search in.
         (input) file_str -> Name of search string.
-        (input) **kwargs:
-            None
         (output) Return a list of file names matching search string.
 
     """
@@ -619,8 +592,6 @@ def disk_usage(path, **kwargs):
 
     Arguments:
         (input) path -> Directory path of the partition
-        (input) **kwargs:
-            None
         (output) _ntuple_diskusage (named tuple):
             total -> Total space in bytes
             used -> Used space in bytes
@@ -647,8 +618,6 @@ def display_data(data, level=0, f_hdlr=sys.stdout, **kwargs):
         (input) data -> Dictionary data document.
         (input) level -> Number of tabs to print.
         (input) f_hdlr -> File handler (e.g. file or standard out).
-        (input) **kwargs:
-            None
 
     """
 
@@ -661,8 +630,6 @@ def display_data(data, level=0, f_hdlr=sys.stdout, **kwargs):
         Arguments:
             (input)  level -> Number of tabs to print.
             (input) f_hdlr -> File handler (e.g. file or standard out).
-            (input) **kwargs:
-                None
 
         """
 
@@ -711,8 +678,6 @@ def file_cleanup(dir_path, days, **kwargs):
     Arguments:
         (input) dir_path -> Directory path.
         (input) days -> Number of days to be retained for.
-        (input) **kwargs:
-            None
 
     """
 
@@ -738,8 +703,6 @@ def file_search(f_name, string, **kwargs):
     Arguments:
         (input) f_name -> File name searching.
         (input) string -> Search string.
-        (input) **kwargs:
-            None
         (output) line - > Full line string was found in or None, if not found.
 
     """
@@ -765,8 +728,6 @@ def file_search_cnt(f_name, pattern, **kwargs):
     Arguments:
         (input) f_name -> File name.
         (input) pattern -> Pattern searching for.
-        (input) **kwargs:
-            None
         (output) Number of lines found with the pattern in it.
 
     """
@@ -783,8 +744,6 @@ def file_2_list(filename, **kwargs):
 
     Arguments:
         (input) filename -> File name to be read.
-        (input) **kwargs:
-            None
         (output) lines -> The file lines in a list.
 
     """
@@ -805,8 +764,6 @@ def float_div(num1, num2, **kwargs):
     Arguments:
         (input) num1 number -> First number.
         (input) num2 number -> Second number.
-        (input) **kwargs:
-            None
         (output) Return results of division or 0.
 
     """
@@ -826,8 +783,6 @@ def get_base_dir(f_name, **kwargs):
 
     Arguments:
         (input) f_name -> File name.
-        (input) **kwargs:
-            None
         (output) Base directory path.
 
     """
@@ -843,8 +798,6 @@ def get_data(f_hdlr, **kwargs):
 
     Arguments:
         (input) f_hdlr -> File handler.
-        (input) **kwargs:
-            None
         (output) List of all file entries.
 
     """
@@ -859,8 +812,6 @@ def get_date(**kwargs):
     Description:  Return the current date in the YYYY-MM-DD format.
 
     Arguments:
-        (input) **kwargs:
-            None
         (output) Current system date.
 
     """
@@ -876,8 +827,6 @@ def get_secs(td, **kwargs):
 
     Arguments:
         (input) td -> Datetime Delta.
-        (input) **kwargs:
-            None
         (output) -> Returns total number of seconds for datetime delta.
 
     """
@@ -892,8 +841,6 @@ def get_time(**kwargs):
     Description:  Return the current time in the HH:MM:SS format.
 
     Arguments:
-        (input) **kwargs:
-            None
         (output) Current system time.
 
     """
@@ -915,8 +862,6 @@ def help_func(args_array, version, func_name=None, **kwargs):
         (input) args_array -> Array of command line options and values.
         (input) version -> Version information on the calling program.
         (input) func_name -> Function that will contain help message.
-        (input) **kwargs:
-            None
         (output) Return True or False whether an option is detected.
 
     """
@@ -944,8 +889,6 @@ def in_list(name, array_list, **kwargs):
     Arguments:
         (input) name -> Value.
         (input) array_list -> Array List.
-        (input) **kwargs:
-            None
         (output) Return name in a list or empty list.
 
     """
@@ -966,8 +909,6 @@ def is_empty_file(f_name, **kwargs):
 
     Arguments:
         (input) f_name -> File being checked.
-        (input) **kwargs:
-            None
         (output) status -> True|False|None -> True if file is empty.
 
     """
@@ -991,8 +932,6 @@ def is_missing_lists(list1, list2, **kwargs):
     Arguments:
         (input) list1 -> List 1.
         (input) list2 -> List 2.
-        (input) **kwargs:
-            None
         (output) Return list of missing values.
 
     """
@@ -1009,8 +948,6 @@ def is_true(x, **kwargs):
 
     Arguments:
         (input) x -> Yes or No value.
-        (input) **kwargs:
-            None
         (output) Return True | False based on truth_tbl.
 
     """
@@ -1035,8 +972,6 @@ def key_cleaner(data, char, repl, **kwargs):
         (input) data -> A dictionary object.
         (input) char -> Character to be replaced.
         (input) repl -> Replacement character.
-        (input) **kwargs:
-            None
         (output) data -> Modified dictionary object.
 
     """
@@ -1072,8 +1007,6 @@ def list_dirs(dir_path, **kwargs):
 
     Arguments:
         (input) dir_path -> Directory path.
-        (input) **kwargs:
-            None
         (output) dir_list -> List of directory names.
 
     """
@@ -1097,8 +1030,6 @@ def list_files(dir_path, **kwargs):
 
     Arguments:
         (input) dir_path -> Directory path.
-        (input) **kwargs:
-            None
         (output) file_names -> List of file names.
 
     """
@@ -1120,8 +1051,6 @@ def list_filter_files(dir_path, file_filter, **kwargs):
     Arguments:
         (input) dir_path -> Directory path.
         (input) file_filter -> File name or wildcard expansion file name.
-        (input) **kwargs:
-            None
         (output) List of files that meet the criteria.
 
     """
@@ -1143,8 +1072,6 @@ def list_2_dict(kv_list, fld_del=".", **kwargs):
     Arguments:
         (input) kv_list -> Key_Value list.
         (input) fld_del -> Field delimiter for the split.
-        (input) **kwargs:
-            None
         (output) dict_list -> Dictionary list.
 
     """
@@ -1172,8 +1099,6 @@ def load_module(mod_name, mod_path, **kwargs):
     Arguments:
         (input) mod_name -> Name of the module to load.
         (input) mod_path -> Directory path to the module to load.
-        (input) **kwargs:
-            None
         (output) Returns the module handler.
 
     """
@@ -1194,8 +1119,6 @@ def make_md5_hash(file_path, to_file=True, **kwargs):
     Arguments:
         (input) file_path -> Full path and file name being hashed.
         (input) to_file -> True|False -> To write hash to a file?
-        (input) **kwargs:
-            None
         (output) hash_results | hash_file -> Hash of the file/Hash file name.
 
     """
@@ -1227,8 +1150,6 @@ def make_zip(zip_file_path, cur_file_dir, files_to_zip, is_rel_path=False,
         (input) cur_file_dir -> Directory path to the source files.
         (input) files_to_zip -> List of files to be zipped.
         (input) is_rel_path -> True|False - Use relative paths in zip file.
-        (input) **kwargs:
-            None
 
     """
 
@@ -1265,8 +1186,6 @@ def merge_data_types(data_1, data_2, **kwargs):
     Arguments:
         (input) data_1 -> Data item.
         (input) data_2 -> Data item.
-        (input) **kwargs:
-            None
         (output) data -> Merged data.
         (output) status -> True|False - Status of the merge.
         (output) err_msg -> Error message if merge fails.
@@ -1308,8 +1227,6 @@ def merge_two_dicts(data_1, data_2, **kwargs):
     Arguments:
         (input) data_1 -> Dictionary.
         (input) data_2 -> Dictionary.
-        (input) **kwargs:
-            None
         (output) data -> Merged dictionary.
         (output) status -> True|False - Status of the merge.
         (output) err_msg -> Error message if merge fails.
@@ -1340,8 +1257,6 @@ def milli_2_readadble(ms, **kwargs):
 
     Arguments:
         (input) ms -> Milliseconds.
-        (input) **kwargs:
-            None
 
     """
 
@@ -1367,8 +1282,6 @@ def month_delta(date, delta, **kwargs):
     Arguments:
         (input) date -> Date time.
         (input) delta -> Delta on date time (i.e. -n...0...n).
-        (input) **kwargs:
-            None
         (output) month = Numeric month of the year.
         (outout) year = Numeric year in 4-digit format.
 
@@ -1399,8 +1312,6 @@ def mv_file(fname, src_dir, dest_dir, new_fname=None, **kwargs):
         (input) src_dir -> Source directory.
         (input) dest_dir -> Destination directory.
         (input) new_fname -> New file name or None if staying the same.
-        (input) **kwargs:
-            None
 
     """
 
@@ -1426,8 +1337,6 @@ def mv_file2(src_file_path, des_path, new_fname=None, **kwargs):
         (input) src_file_path -> Source directory path and file name.
         (input) des_path -> Destination directory path.
         (input) new_fname -> New file name/existing file name, if overwriting.
-        (input) **kwargs:
-            None
 
     """
 
@@ -1448,8 +1357,6 @@ def normalize(rngs, **kwargs):
 
     Arguments:
         (input) rng -> List of range sets.
-        (input) **kwargs:
-            None
         (output) result -> List of ordered range sets.
 
     """
@@ -1489,8 +1396,6 @@ def not_in_list(name, array_list, **kwargs):
     Arguments:
         (input) name -> Value.
         (input) array_list -> Array List.
-        (input) **kwargs:
-            None
         (output) Return name in a list or empty list.
 
     """
@@ -1523,6 +1428,27 @@ def no_std_out():
     sys.stdout = save_stdout
 
 
+def openfile(filename, mode="r", **kwargs):
+
+    """Function:  openfile
+
+    Description:  Opens a normal file or compressed file and returns a file
+        handler.
+
+    Arguments:
+        (input) filename -> Directory path and file name.
+        (input) mode -> Type of operation allowed on the file (e.g. a, r, w).
+        (output) File handler.
+
+    """
+
+    if filename.endswith(".gz"):
+        return gzip.open(filename, mode)
+
+    else:
+        return open(filename, mode)
+
+
 def pct_int(num1, num2, **kwargs):
 
     """Function:  pct_int
@@ -1533,8 +1459,6 @@ def pct_int(num1, num2, **kwargs):
     Arguments:
         (input) num1 number -> First number.
         (input) num2 number -> Second number.
-        (input) **kwargs:
-            None
         (output) Return percentage.
 
     """
@@ -1580,8 +1504,6 @@ def print_dict(data, ofile=None, json_fmt=False, no_std=False, **kwargs):
         (input) ofile -> Name of output file name.
         (input) json_fmt -> True|False - Print in JSON format.
         (input) no_std -> True|False - Do not print to standard out.
-        (input) **kwargs:
-            None
         (output) err_flag -> True|False - If error has occurred.
         (output) err_msg -> None or error message.
 
@@ -1620,8 +1542,6 @@ def prt_dict(data, fhandler=sys.stdout, **kwargs):
     Arguments:
         (input) data -> JSON document.
         (input) outhldr -> File handler to standard out or a file.
-        (input) **kwargs:
-            None.
 
     """
 
@@ -1643,8 +1563,6 @@ def prt_lvl(lvl=1, **kwargs):
 
     Arguments:
         (input) lvl -> Tab level to print to.
-        (input) **kwargs:
-            None
 
     """
 
@@ -1666,8 +1584,6 @@ def prt_msg(hdr, msg, lvl=0, **kwargs):
         (input) hdr -> Header to print.
         (input) msg -> Message to print.
         (input) lvl -> Integer - Tab level to start printing at.
-        (input) **kwargs:
-            None
 
     """
 
@@ -1685,8 +1601,6 @@ def rename_file(fname, new_fname, dir_path, **kwargs):
         (input) fname -> Current file name.
         (input) new_fname -> New file name.
         (input) dir_path -> Directory path.
-        (input) **kwargs:
-            None
 
     """
 
@@ -1701,8 +1615,6 @@ def rm_dup_list(orig_list, **kwargs):
 
     Arguments:
         (input) orig_list -> List of elements to be processed.
-        (input) **kwargs:
-            None
         (output) Returns an unique list.
 
     """
@@ -1718,8 +1630,6 @@ def rm_file(file_path, **kwargs):
 
     Arguments:
         (input) file_path -> Full path and file name being hashed.
-        (input) **kwargs:
-            None
         (output) err_flag -> True|False - An error has occurred during remove.
         (output) err_msg -> Error message if an error has occurred.
 
@@ -1746,8 +1656,6 @@ def rm_newline_list(orig_list, **kwargs):
 
     Arguments:
         (input) orig_list -> List of elements to be processed.
-        (input) **kwargs:
-            None
         (output) Returns a list minus any newlines.
 
     """
@@ -1763,8 +1671,6 @@ def root_run(**kwargs):
         effective user id for the check.
 
     Arguments:
-        (input) **kwargs:
-            None
         (output) True|False -> Returns True if running as root.
 
     """
@@ -1789,8 +1695,6 @@ def rotate_files(fname, cnt=0, max_cnt=5, **kwargs):
         (input) fname -> File name.
         (input) cnt -> Current sequence count.
         (input) max_cnt -> Largest sequence of files to use.
-        (input) **kwargs:
-            None
 
     """
 
@@ -1810,8 +1714,6 @@ def str_2_list(del_str, fld_del, **kwargs):
     Arguments:
         (input) del_str -> Delimited string.
         (input) fld_del -> Field delimiter.
-        (input) **kwargs:
-            None
         (output) new_list -> List of values from the string.
 
     """
@@ -1831,8 +1733,6 @@ def str_2_type(lit_str, **kwargs):
 
     Arguments:
         (input) lit_str -> Literal string to be converted.
-        (input) **kwargs:
-            None
         (output) new_struct -> Structure the string was converted to.
 
     """
@@ -1848,8 +1748,6 @@ def touch(f_name, **kwargs):
 
     Arguments:
         (input) f_name -> File name, can include path name.
-        (input) **kwargs:
-            None
         (output) status -> True|False -> True if successful.
         (output) err_msg -> Error message or None.
 
@@ -1915,8 +1813,6 @@ def validate_int(num, **kwargs):
 
     Arguments:
         (input) num -> Integer value for testing.
-        (input) **kwargs:
-            None
         (output) Return True|False.  False if value is not an integer.
 
     """
@@ -1939,8 +1835,6 @@ def write_file(fname=None, mode="a", data=None, **kwargs):
         (input) fname -> File name.
         (input) mode -> w|a => Write or append mode.
         (input) data -> Data to be written.
-        (input) **kwargs:
-            None
 
     """
 
@@ -1958,8 +1852,6 @@ def write_file2(f_handle=None, line=None, **kwargs):
     Arguments:
         (input) f_handle -> Name of file handler.
         (input) line -> Data to be written to file.
-        (input) **kwargs:
-            None
 
     """
 
@@ -1978,8 +1870,6 @@ def write_to_log(f_hldr, text, **kwargs):
     Arguments:
         (input) f_hldr -> File handler.
         (input) text -> Message text to write to log.
-        (input) **kwargs:
-            None
 
     """
 

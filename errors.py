@@ -22,7 +22,6 @@
 # Local
 import version
 
-# Version
 __version__ = version.__version__
 
 

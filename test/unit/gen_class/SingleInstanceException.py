@@ -9,7 +9,6 @@
         test/unit/gen_class/SingleInstanceException.py
 
     Arguments:
-        None
 
 """
 
@@ -31,7 +30,6 @@ sys.path.append(os.getcwd())
 import gen_class
 import version
 
-# Version
 __version__ = version.__version__
 
 
@@ -43,7 +41,7 @@ class UnitTest(unittest.TestCase):
 
     Super-Class:  unittest.TestCase
 
-    Sub-Classes:  None
+    Sub-Classes:
 
     Methods:
         test_SingleInstanceException -> Test with no arguments.
@@ -57,7 +55,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with no arguments.
 
         Arguments:
-            None
 
         """
 

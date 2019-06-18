@@ -24,7 +24,6 @@ import subprocess
 # Local
 import version
 
-# Version
 __version__ = version.__version__
 
 
@@ -144,8 +143,6 @@ def is_add_cmd(args_array, cmd, opt_arg_list, **kwargs):
         (input) args_array -> Array of command line options and values.
         (input) cmd -> List array containing the program arguments.
         (input) opt_arg_list -> Dictionary of additional options.
-        (input) **kwargs:
-            None
         (output) cmd -> List array containing the program arguments.
 
     """

@@ -9,7 +9,6 @@
         test/unit/gen_libs/data_multi_out.py
 
     Arguments:
-        None
 
 """
 
@@ -33,7 +32,6 @@ sys.path.append(os.getcwd())
 import gen_libs
 import version
 
-# Version
 __version__ = version.__version__
 
 
@@ -45,7 +43,7 @@ class UnitTest(unittest.TestCase):
 
     Super-Class:  unittest.TestCase
 
-    Sub-Classes:  None
+    Sub-Classes:
 
     Methods:
         setUp -> Unit testing initilization.
@@ -69,7 +67,6 @@ class UnitTest(unittest.TestCase):
         Description:  Initialization for unit testing.
 
         Arguments:
-            None
 
         """
 
@@ -81,7 +78,7 @@ class UnitTest(unittest.TestCase):
 
             Super-Class:  object
 
-            Sub-Classes:  None
+            Sub-Classes:
 
             Methods:
                 __init__ -> Initialize configuration environment.
@@ -95,7 +92,6 @@ class UnitTest(unittest.TestCase):
                 Description:  Initialization instance of the Mail class.
 
                 Arguments:
-                        None
 
                 """
 
@@ -133,7 +129,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test data is not written to file due to error.
 
         Arguments:
-            None
 
         """
 
@@ -151,7 +146,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test data is a dictionary.
 
         Arguments:
-            mock_json -> Mock Ref:  json.dump
 
         """
 
@@ -168,7 +162,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test data is not a dictionary.
 
         Arguments:
-            None
 
         """
 
@@ -185,7 +178,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test data is being converted to a Mail message.
 
         Arguments:
-            mock_json -> Mock Ref:  json.dump
 
         """
 
@@ -204,7 +196,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test data is not being converted to a Mail message.
 
         Arguments:
-            mock_json -> Mock Ref:  json.dump
 
         """
 
@@ -222,7 +213,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test data is sent to standard out.
 
         Arguments:
-            None
 
         """
 
@@ -236,7 +226,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test data is being suppressed to standard out.
 
         Arguments:
-            None
 
         """
 
@@ -250,7 +239,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test data is being converted to a Mail message.
 
         Arguments:
-            None
 
         """
 
@@ -266,7 +254,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test json data going to mail in correct format.
 
         Arguments:
-            None
 
         """
 
@@ -282,7 +269,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test data is not being written to file.
 
         Arguments:
-            None
 
         """
 
@@ -297,7 +283,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test data is being written to file.
 
         Arguments:
-            mock_write -> Mock Ref:  gen_libs.write_file
 
         """
 
