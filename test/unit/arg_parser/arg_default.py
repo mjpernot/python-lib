@@ -9,7 +9,6 @@
         test/unit/arg_parser/arg_default.py
 
     Arguments:
-        None
 
 """
 
@@ -33,7 +32,6 @@ import arg_parser
 import gen_libs
 import version
 
-# Version
 __version__ = version.__version__
 
 
@@ -45,7 +43,7 @@ class UnitTest(unittest.TestCase):
 
     Super-Class:  unittest.TestCase
 
-    Sub-Classes:  None
+    Sub-Classes:
 
     Methods:
         setUp -> Unit testing initilization.
@@ -63,7 +61,6 @@ class UnitTest(unittest.TestCase):
         Description:  Initialization for unit testing.
 
         Arguments:
-            None
 
         """
 
@@ -86,7 +83,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with arg already in args_array.
 
         Arguments:
-            None
 
         """
 
@@ -103,7 +99,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with arg in opt_def_dict.
 
         Arguments:
-            None
 
         """
 
@@ -122,7 +117,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with arg not in opt_def_dict.
 
         Arguments:
-            None
 
         """
 
@@ -139,7 +133,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with opt_def_dict being empty.
 
         Arguments:
-            None
 
         """
 

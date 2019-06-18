@@ -9,7 +9,6 @@
         test/unit/arg_parser/arg_dir_chk_crt.py
 
     Arguments:
-        None
 
 """
 
@@ -33,7 +32,6 @@ import arg_parser
 import gen_libs
 import version
 
-# Version
 __version__ = version.__version__
 
 
@@ -44,7 +42,6 @@ def raise_oserror():
     Description:  Stub holder to return a raised OSError exception.
 
     Arguments:
-        None
 
     """
 
@@ -59,7 +56,7 @@ class UnitTest(unittest.TestCase):
 
     Super-Class:  unittest.TestCase
 
-    Sub-Classes:  None
+    Sub-Classes:
 
     Methods:
         setUp -> Unit testing initilization.
@@ -82,7 +79,6 @@ class UnitTest(unittest.TestCase):
         Description:  Initialization for unit testing.
 
         Arguments:
-            None
 
         """
 
@@ -108,7 +104,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with checking dir good, but creating dir failed.
 
         Arguments:
-            None
 
         """
 
@@ -128,7 +123,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with failing to create directory.
 
         Arguments:
-            None
 
         """
 
@@ -148,7 +142,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with creating directory.
 
         Arguments:
-            None
 
         """
 
@@ -167,7 +160,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with directory does not exist.
 
         Arguments:
-            None
 
         """
 
@@ -195,7 +187,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with match between sets, but no access to directory.
 
         Arguments:
-            None
 
         """
 
@@ -213,7 +204,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with one match between sets and is directory.
 
         Arguments:
-            None
 
         """
 
@@ -230,7 +220,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with no match between arguments passed.
 
         Arguments:
-            None
 
         """
 
@@ -244,7 +233,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with args_array is empty.
 
         Arguments:
-            None
 
         """
 
@@ -258,7 +246,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with dir_chk_list is empty.
 
         Arguments:
-            None
 
         """
 
