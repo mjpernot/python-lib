@@ -292,3 +292,15 @@ cd {Python_Project}/python-lib
 test/unit/gen_class/unit_test_run.sh
 ```
 
+# Unit test runs for cmds_gen.py:
+
+```
+cd {Python_Project}/python-lib
+test/unit/cmds_gen/add_cmd.py
+```
+
+### All unit testing for cmds_gen.py:
+```
+cd {Python_Project}/python-lib
+test/unit/cmds_gen/unit_test_run.py
+

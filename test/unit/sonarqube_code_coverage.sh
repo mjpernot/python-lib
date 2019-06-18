@@ -27,6 +27,7 @@ coverage run -a --source=arg_parser test/unit/arg_parser/arg_xor_dict.py
 coverage run -a --source=arg_parser test/unit/arg_parser/parse_multi.py
 coverage run -a --source=arg_parser test/unit/arg_parser/parse_single.py
 coverage run -a --source=arg_parser test/unit/arg_parser/file_create.py
+coverage run -a --source=cmds_gen test/unit/cmds_gen/add_cmd.py
 coverage run -a --source=gen_libs test/unit/gen_libs/and_is_true.py
 coverage run -a --source=gen_libs test/unit/gen_libs/bytes_2_readable.py
 coverage run -a --source=gen_libs test/unit/gen_libs/chk_crt_dir.py
