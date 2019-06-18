@@ -9,7 +9,6 @@
         test/unit/arg_parser/arg_set_path.py
 
     Arguments:
-        None
 
 """
 
@@ -33,7 +32,6 @@ import arg_parser
 import gen_libs
 import version
 
-# Version
 __version__ = version.__version__
 
 
@@ -45,7 +43,7 @@ class UnitTest(unittest.TestCase):
 
     Super-Class:  unittest.TestCase
 
-    Sub-Classes:  None
+    Sub-Classes:
 
     Methods:
         setUp -> Unit testing initilization.
@@ -64,7 +62,6 @@ class UnitTest(unittest.TestCase):
         Description:  Initialization for unit testing.
 
         Arguments:
-            None
 
         """
 
@@ -85,7 +82,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with argument not present.
 
         Arguments:
-            None
 
         """
 
@@ -99,7 +95,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with argument present.
 
         Arguments:
-            None
 
         """
 
@@ -113,7 +108,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with both args empty.
 
         Arguments:
-            None
 
         """
 
@@ -127,7 +121,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with empty string for arg_opt.
 
         Arguments:
-            None
 
         """
 
@@ -141,7 +134,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with empty dictionary for args_array.
 
         Arguments:
-            None
 
         """
 

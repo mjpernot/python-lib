@@ -9,7 +9,6 @@
         test/unit/arg_parser/arg_require.py
 
     Arguments:
-        None
 
 """
 
@@ -33,7 +32,6 @@ import arg_parser
 import gen_libs
 import version
 
-# Version
 __version__ = version.__version__
 
 
@@ -45,7 +43,7 @@ class UnitTest(unittest.TestCase):
 
     Super-Class:  unittest.TestCase
 
-    Sub-Classes:  None
+    Sub-Classes:
 
     Methods:
         setUp -> Unit testing initilization.
@@ -65,7 +63,6 @@ class UnitTest(unittest.TestCase):
         Description:  Initialization for unit testing.
 
         Arguments:
-            None
 
         """
 
@@ -85,7 +82,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with two required arguments, but one failure.
 
         Arguments:
-            None
 
         """
 
@@ -100,7 +96,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with two required arguments.
 
         Arguments:
-            None
 
         """
 
@@ -114,7 +109,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with one required argument.
 
         Arguments:
-            None
 
         """
 
@@ -128,7 +122,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with empty args_array.
 
         Arguments:
-            None
 
         """
 
@@ -143,7 +136,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with empty list for opt_req_list.
 
         Arguments:
-            None
 
         """
 
@@ -157,7 +149,6 @@ class UnitTest(unittest.TestCase):
         Description:  Test with both args with empty sets.
 
         Arguments:
-            None
 
         """
 
