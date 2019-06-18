@@ -76,7 +76,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertEqual(gen_libs.del_not_in_list([1,2,3], [1,2,3,4]), [1,2,3])
+        self.assertEqual(gen_libs.del_not_in_list([1, 2, 3], [1, 2, 3, 4]),
+                         [1, 2, 3])
 
     def test_with_two_items(self):
 
@@ -88,7 +89,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertEqual(gen_libs.del_not_in_list([1,2,3], [2,4]), [2])
+        self.assertEqual(gen_libs.del_not_in_list([1, 2, 3], [2, 4]), [2])
 
     def test_with_one_item(self):
 
@@ -100,7 +101,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertEqual(gen_libs.del_not_in_list([1,2,3], [1,3,4]), [1,3])
+        self.assertEqual(gen_libs.del_not_in_list([1, 2, 3], [1, 3, 4]),
+                         [1, 3])
 
     def test_with_list2_empty(self):
 
@@ -112,7 +114,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertEqual(gen_libs.del_not_in_list([1,2,3], []), [])
+        self.assertEqual(gen_libs.del_not_in_list([1, 2, 3], []), [])
 
     def test_with_list1_empty(self):
 
