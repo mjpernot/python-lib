@@ -530,7 +530,8 @@ class Mail(System):
 
         super(Mail, self).__init__(host, host_name)
 
-        self.subj = subj
+        if instance(subj, list):
+            subj = list(subj)
 
         if isinstance(to, list):
             self.to = list(to)
@@ -538,6 +539,8 @@ class Mail(System):
         else:
             self.to = to
 
+        self.subj = None
+        self.create_subject(subj)
         self.frm = frm
         self.msg_type = msg_type
         self.msg = ""
