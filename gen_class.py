@@ -601,7 +601,11 @@ class Mail(System):
         """
 
         if subj:
-            self.subj = subj
+            if isinstance(subj, list):
+                self.subj = "".join(str(item) for item in list(subj))
+
+            else:
+                self.subj = subj
 
     def send_mail(self):
 
