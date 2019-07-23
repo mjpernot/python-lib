@@ -421,6 +421,8 @@ def arg_set_path(args_array, arg_opt):
 
     """
 
+    args_array = dict(args_array)
+
     if arg_opt in args_array:
         return args_array[arg_opt] + "/"
 
