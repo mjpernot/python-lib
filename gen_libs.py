@@ -513,11 +513,14 @@ def del_not_in_list(list1, list2, **kwargs):
         list 1 and list 2.
 
     Arguments:
-        (input) list1 -> List 1.
-        (input) list2 -> List 2.
-        (output) list1 -> List 1 minus items not in list 2.
+        (input) list1 -> List one.
+        (input) list2 -> List two.
+        (output) list1 -> List one minus items not in list two.
 
     """
+
+    list1 = list(list1)
+    list2 = list(list2)
 
     for x in list(set(list1) - set(list2)):
         list1.remove(x)
