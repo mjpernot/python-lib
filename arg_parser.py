@@ -151,6 +151,9 @@ def arg_default(arg, args_array, opt_def_dict, **kwargs):
 
     """
 
+    args_array = dict(args_array)
+    opt_def_dict = dict(opt_def_dict)
+
     if arg in opt_def_dict:
         args_array[arg] = opt_def_dict[arg]
         return args_array

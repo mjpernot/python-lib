@@ -10,6 +10,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - gen_libs.str_2_list:  Refactored function.
 
 ### Fixed
+- arg_parser.arg_default:  Fixed problem with mutable default arguments issue.
 - arg_parser.arg_dir_chk_crt:  Fixed problem with mutable default arguments issue.
 - arg_parser.arg_file_chk:  Fixed problem with mutable default arguments issue.
 - arg_parser.arg_noreq_xor:  Fixed problem with mutable default arguments issue.
