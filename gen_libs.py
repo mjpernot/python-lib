@@ -1077,6 +1077,7 @@ def list_2_dict(kv_list, fld_del=".", **kwargs):
 
     """
 
+    kv_list = list(kv_list)
     dict_list = {}
 
     for x in kv_list:
