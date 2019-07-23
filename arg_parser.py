@@ -174,8 +174,14 @@ def arg_dir_chk_crt(args_array, dir_chk_list, dir_crt_list=None):
 
     """
 
+    args_array = dict(args_array)
+    dir_chk_list = list(dir_chk_list)
+
     if dir_crt_list is None:
         dir_crt_list = []
+
+    else:
+        dir_crt_list = list(dir_crt_list)
 
     exit_flag = False
 
