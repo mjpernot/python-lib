@@ -540,7 +540,7 @@ def dict_2_list(dict_list, key_val, **kwargs):
 
     """
 
-    return [row[key_val] for row in dict_list]
+    return [row[key_val] for row in list(dict_list)]
 
 
 def dict_2_std(data, ofile=False, **kwargs):
