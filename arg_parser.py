@@ -442,6 +442,7 @@ def arg_validate(args_array, valid_func):
 
     """
 
+    args_array = dict(args_array)
     status_flag = True
 
     for x in set(valid_func.keys()) & set(args_array.keys()):
