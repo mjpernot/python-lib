@@ -62,7 +62,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.data = "dict_2_std"
+        self.data = {"key": "value"}
         self.ofile = "test/unit/gen_libs/tmp/test_dict_2_std.txt"
 
     @mock.patch("gen_libs.prt_dict")
