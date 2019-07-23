@@ -9,6 +9,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - gen_libs.str_2_list:  Refactored function.
 
 ### Fixed
+- gen_libs.rm_dup_list:  Fixed problem with mutable default arguments issue.
 - gen_class.Mail.create_subject:  Fixed so the subject line can be a string or list.
 - gen_class.Mail.\_\_init\_\_:  Fixed it where a subject can handle a list.
 
@@ -30,14 +31,14 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 ## [2.7.3] - 2019-05-02
 ### Changed
 - gen_libs.rotate_files:  Refactored code in function to be more stream-line.
-- arg_parser.arg_parse2:  Replaced multi-list code section with call to _parse_multi function.
-- arg_parser.arg_parse2:  Replaced single-list code section with call to _parse_single function.
-- arg_parser.arg_file_chk:  Replaced exception code with call to _create_file function.
+- arg_parser.arg_parse2:  Replaced multi-list code section with call to \_parse_multi function.
+- arg_parser.arg_parse2:  Replaced single-list code section with call to \_parse_single function.
+- arg_parser.arg_file_chk:  Replaced exception code with call to \_create_file function.
 
 ### Added
-- arg_parser._parse_single:  Private function for use by arg_parser2 function.
-- arg_parser._file_create:  Private function for use by arg_file_chk function.
-- arg_parser._parse_multi:  Private function for use by arg_parser2 function.
+- arg_parser.\_parse_single:  Private function for use by arg_parser2 function.
+- arg_parser.\_file_create:  Private function for use by arg_file_chk function.
+- arg_parser.\_parse_multi:  Private function for use by arg_parser2 function.
 
 ### Removed
 - gen_libs.copy_tree:  Function replaced by shutil.copytree.

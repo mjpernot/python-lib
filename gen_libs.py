@@ -1637,6 +1637,8 @@ def rm_dup_list(orig_list, **kwargs):
 
     """
 
+    orig_list = list(orig_list)
+
     return list(set(orig_list))
 
 
@@ -1719,7 +1721,7 @@ def rotate_files(fname, cnt=0, max_cnt=5, **kwargs):
     if cnt < max_cnt and os.path.isfile(fname + "." + str(cnt)):
         rotate_files(fname, cnt + 1, max_cnt)
 
-        # Rename file to + 1.
+        # Rename file to +1
         os.rename(fname + "." + str(cnt), fname + "." + str(cnt + 1))
 
 
