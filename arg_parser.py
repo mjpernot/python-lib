@@ -120,7 +120,10 @@ def arg_cond_req_or(args_array, opt_con_req_dict):
 
     """
 
+    args_array = dict(args_array)
+    opt_con_req_dict = dict(opt_con_req_dict)
     or_flag = True
+
     for x in set(opt_con_req_dict.keys()) & set(args_array.keys()):
         tmp_flag = False
 
