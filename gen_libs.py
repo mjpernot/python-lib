@@ -460,6 +460,7 @@ def data_multi_out(data, o_file=None, json_fmt=False, sup_std=False, mail=None,
     err_msg = None
 
     if json_fmt and isinstance(data, dict):
+        data = dict(data)
         data = json.dumps(data, indent=4)
 
     elif json_fmt:
