@@ -284,7 +284,7 @@ def arg_noreq_xor(args_array, xor_noreq_list):
     """
 
     args_array = dict(args_array)
-    xor_noreq_list = list(xor_noreq_list)
+    xor_noreq_list = dict(xor_noreq_list)
     xor_flag = True
 
     for x in xor_noreq_list:
