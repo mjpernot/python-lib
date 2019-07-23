@@ -531,7 +531,7 @@ class Mail(System):
 
         super(Mail, self).__init__(host, host_name)
 
-        if instance(subj, list):
+        if isinstance(subj, list):
             subj = list(subj)
 
         if isinstance(to, list):
