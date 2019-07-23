@@ -616,7 +616,7 @@ def display_data(data, level=0, f_hdlr=sys.stdout, **kwargs):
         format, prints to a file handler.
 
     Arguments:
-        (input) data -> Dictionary data document.
+        (input) data -> Data object.
         (input) level -> Number of tabs to print.
         (input) f_hdlr -> File handler (e.g. file or standard out).
 
@@ -641,6 +641,7 @@ def display_data(data, level=0, f_hdlr=sys.stdout, **kwargs):
             cnt += 1
 
     if isinstance(data, dict):
+        data = dict(data)
 
         for item in data:
 
@@ -659,6 +660,7 @@ def display_data(data, level=0, f_hdlr=sys.stdout, **kwargs):
 
     # Recursive call for specific data types.
     elif isinstance(data, list):
+        data = list(data)
 
         for item in data:
             display_data(item, level, f_hdlr=f_hdlr)
