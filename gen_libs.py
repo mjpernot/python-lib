@@ -1171,6 +1171,7 @@ def make_zip(zip_file_path, cur_file_dir, files_to_zip, is_rel_path=False,
 
     """
 
+    files_to_zip = list(files_to_zip)
     newzip = None
 
     if not cur_file_dir.endswith(os.path.sep):
