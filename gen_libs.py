@@ -556,6 +556,8 @@ def dict_2_std(data, ofile=False, **kwargs):
 
     """
 
+    data = dict(data)
+
     if ofile:
         outfile = open(ofile, "w")
 
