@@ -339,6 +339,8 @@ def arg_require(args_array, opt_req_list):
 
     """
 
+    args_array = dict(args_array)
+    opt_req_list = list(opt_req_list)
     exit_flag = False
 
     for x in set(opt_req_list) - set(args_array.keys()):
