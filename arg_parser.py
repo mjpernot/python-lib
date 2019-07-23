@@ -217,8 +217,14 @@ def arg_file_chk(args_array, file_chk_list, file_crt_list=None):
 
     """
 
+    args_array = dict(args_array)
+    file_chk_list = list(file_chk_list)
+
     if file_crt_list is None:
         file_crt_list = []
+
+    else:
+        file_crt_list = list(file_crt_list)
 
     exit_flag = False
 
@@ -308,6 +314,9 @@ def arg_parse2(argv, opt_val_list, opt_def_dict=None, **kwargs):
 
     if opt_def_dict is None:
         opt_def_dict = {}
+
+    else:
+        opt_def_dict = dict(opt_def_dict)
 
     multi_list = list(kwargs.get("multi_val", []))
     opt_val = list(kwargs.get("opt_val", []))
