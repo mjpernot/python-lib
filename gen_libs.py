@@ -978,6 +978,7 @@ def key_cleaner(data, char, repl, **kwargs):
     """
 
     if type(data) is dict:
+        data = dict(data)
 
         for key, value in data.iteritems():
 
@@ -992,6 +993,7 @@ def key_cleaner(data, char, repl, **kwargs):
             return data
 
     if type(data) is list:
+        data = list(data)
         return map(key_cleaner, data, char, repl)
 
     if type(data) is tuple:
