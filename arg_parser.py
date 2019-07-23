@@ -93,6 +93,8 @@ def arg_cond_req(args_array, opt_con_req_list):
 
     """
 
+    args_array = dict(args_array)
+    opt_con_req_list = dict(opt_con_req_list)
     exit_flag = True
 
     for x in set(args_array.keys()) & set(opt_con_req_list.keys()):
