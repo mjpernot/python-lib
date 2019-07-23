@@ -867,6 +867,7 @@ def help_func(args_array, version, func_name=None, **kwargs):
 
     """
 
+    args_array = dict(args_array)
     exit_flag = False
 
     if "-h" in args_array:
