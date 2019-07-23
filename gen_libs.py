@@ -1256,6 +1256,8 @@ def merge_two_dicts(data_1, data_2, **kwargs):
     data = None
 
     if isinstance(data_1, dict) and type(data_1) == type(data_2):
+        data_1 = dict(data_1)
+        data_2 = dict(data_2)
         data = data_1.copy()
         data.update(data_2)
 
