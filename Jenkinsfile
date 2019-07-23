@@ -71,6 +71,7 @@ pipeline {
                 ./test/unit/gen_libs/is_true.py
                 ./test/unit/gen_libs/key_cleaner.py
                 ./test/unit/gen_libs/list_2_dict.py
+                ./test/unit/gen_libs/list_2_str.py
                 ./test/unit/gen_libs/list_dirs.py
                 ./test/unit/gen_libs/list_files.py
                 ./test/unit/gen_libs/list_filter_files.py

@@ -45,6 +45,8 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_subj_list -> Test subject line as a list.
+        test_subj_string -> Test subject line as a string.
         test_with_data -> Test other attributes with data.
         test_to_string -> Test to line with a string.
         test_to_list -> Test to line with a list.
@@ -64,9 +66,46 @@ class UnitTest(unittest.TestCase):
 
         self.to = ["mail_address@domain.name"]
         self.subj = None
+        self.subj2 = "Test_Subj"
+        self.subj3 = "This is a test"
+        self.subj4 = ["This", "is", "a", "test"]
+        self.subj4a = "Thisisatest"
         self.frm = None
+        self.frm2 = "mail_address@domain.name"
         self.host_name = None
         self.host = None
+
+    def test_subj_list(self):
+
+        """Function:  test_subj_string
+
+        Description:  Test subject line as a string.
+
+        Arguments:
+
+        """
+
+        email = gen_class.Mail(self.to, subj=self.subj4, frm=self.frm2)
+
+        self.assertEqual((email.to, email.subj, email.frm, email.host_name,
+                          email.host), (email.to, self.subj4a, self.frm2, None,
+                                        None))
+
+    def test_subj_string(self):
+
+        """Function:  test_subj_string
+
+        Description:  Test subject line as a string.
+
+        Arguments:
+
+        """
+
+        email = gen_class.Mail(self.to, subj=self.subj3, frm=self.frm2)
+
+        self.assertEqual((email.to, email.subj, email.frm, email.host_name,
+                          email.host), (email.to, self.subj3, self.frm2, None,
+                                        None))
 
     def test_with_data(self):
 
@@ -78,13 +117,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        subj = "Test_Subj"
-        frm = "mail_address@domain.name"
-
-        email = gen_class.Mail(self.to, subj=subj, frm=frm)
+        email = gen_class.Mail(self.to, subj=self.subj2, frm=self.frm2)
 
         self.assertEqual((email.to, email.subj, email.frm, email.host_name,
-                          email.host), (email.to, subj, frm, None, None))
+                          email.host), (email.to, self.subj2, self.frm2, None,
+                                        None))
 
     def test_to_string(self):
 

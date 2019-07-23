@@ -44,6 +44,7 @@
         list_files
         list_filter_files
         list_2_dict
+        list_2_str
         load_module
         make_md5_hash
         make_zip
@@ -459,6 +460,7 @@ def data_multi_out(data, o_file=None, json_fmt=False, sup_std=False, mail=None,
     err_msg = None
 
     if json_fmt and isinstance(data, dict):
+        data = dict(data)
         data = json.dumps(data, indent=4)
 
     elif json_fmt:
@@ -493,6 +495,9 @@ def del_not_and_list(list1, list2, **kwargs):
 
     """
 
+    list1 = list(list1)
+    list2 = list(list2)
+
     for x in list2:
         try:
             list1.remove(x)
@@ -512,11 +517,14 @@ def del_not_in_list(list1, list2, **kwargs):
         list 1 and list 2.
 
     Arguments:
-        (input) list1 -> List 1.
-        (input) list2 -> List 2.
-        (output) list1 -> List 1 minus items not in list 2.
+        (input) list1 -> List one.
+        (input) list2 -> List two.
+        (output) list1 -> List one minus items not in list two.
 
     """
+
+    list1 = list(list1)
+    list2 = list(list2)
 
     for x in list(set(list1) - set(list2)):
         list1.remove(x)
@@ -539,7 +547,7 @@ def dict_2_list(dict_list, key_val, **kwargs):
 
     """
 
-    return [row[key_val] for row in dict_list]
+    return [row[key_val] for row in list(dict_list)]
 
 
 def dict_2_std(data, ofile=False, **kwargs):
@@ -554,6 +562,8 @@ def dict_2_std(data, ofile=False, **kwargs):
         (input) ofile -> Name of file to print to.
 
     """
+
+    data = dict(data)
 
     if ofile:
         outfile = open(ofile, "w")
@@ -615,7 +625,7 @@ def display_data(data, level=0, f_hdlr=sys.stdout, **kwargs):
         format, prints to a file handler.
 
     Arguments:
-        (input) data -> Dictionary data document.
+        (input) data -> Data object.
         (input) level -> Number of tabs to print.
         (input) f_hdlr -> File handler (e.g. file or standard out).
 
@@ -640,6 +650,7 @@ def display_data(data, level=0, f_hdlr=sys.stdout, **kwargs):
             cnt += 1
 
     if isinstance(data, dict):
+        data = dict(data)
 
         for item in data:
 
@@ -658,6 +669,7 @@ def display_data(data, level=0, f_hdlr=sys.stdout, **kwargs):
 
     # Recursive call for specific data types.
     elif isinstance(data, list):
+        data = list(data)
 
         for item in data:
             display_data(item, level, f_hdlr=f_hdlr)
@@ -866,6 +878,7 @@ def help_func(args_array, version, func_name=None, **kwargs):
 
     """
 
+    args_array = dict(args_array)
     exit_flag = False
 
     if "-h" in args_array:
@@ -892,6 +905,8 @@ def in_list(name, array_list, **kwargs):
         (output) Return name in a list or empty list.
 
     """
+
+    array_list = list(array_list)
 
     if name in array_list:
         return [name]
@@ -936,6 +951,9 @@ def is_missing_lists(list1, list2, **kwargs):
 
     """
 
+    list1 = list(list1)
+    list2 = list(list2)
+
     return [x for x in list1 if x not in list2]
 
 
@@ -977,6 +995,7 @@ def key_cleaner(data, char, repl, **kwargs):
     """
 
     if type(data) is dict:
+        data = dict(data)
 
         for key, value in data.iteritems():
 
@@ -991,6 +1010,7 @@ def key_cleaner(data, char, repl, **kwargs):
             return data
 
     if type(data) is list:
+        data = list(data)
         return map(key_cleaner, data, char, repl)
 
     if type(data) is tuple:
@@ -1030,15 +1050,13 @@ def list_files(dir_path, **kwargs):
 
     Arguments:
         (input) dir_path -> Directory path.
-        (output) file_names -> List of file names.
+        (output) List of file names.
 
     """
 
     # Loop on directory and if an entry is a file then add to list.
-    file_names = [x for x in os.listdir(dir_path)
-                  if os.path.isfile(os.path.join(dir_path, x))]
-
-    return file_names
+    return [x for x in os.listdir(dir_path)
+            if os.path.isfile(os.path.join(dir_path, x))]
 
 
 def list_filter_files(dir_path, file_filter, **kwargs):
@@ -1076,6 +1094,7 @@ def list_2_dict(kv_list, fld_del=".", **kwargs):
 
     """
 
+    kv_list = list(kv_list)
     dict_list = {}
 
     for x in kv_list:
@@ -1088,6 +1107,23 @@ def list_2_dict(kv_list, fld_del=".", **kwargs):
             dict_list[db].append(tbl)
 
     return dict_list
+
+
+def list_2_str(data_list, join_del="", **kwargs):
+
+    """Function:  list_2_str
+
+    Description:  Convert a list to a string.  Will be joined together with a
+        join delimiter.  The list can consist of strings or integers.
+
+    Arguments:
+        (input) data_list -> List to join.
+        (input) join_del -> Join delimiter for the string.
+        (output) join_str -> Join together string.
+
+    """
+
+    return join_del.join(str(item) for item in list(data_list))
 
 
 def load_module(mod_name, mod_path, **kwargs):
@@ -1153,6 +1189,7 @@ def make_zip(zip_file_path, cur_file_dir, files_to_zip, is_rel_path=False,
 
     """
 
+    files_to_zip = list(files_to_zip)
     newzip = None
 
     if not cur_file_dir.endswith(os.path.sep):
@@ -1202,6 +1239,8 @@ def merge_data_types(data_1, data_2, **kwargs):
             data = data_1 + data_2
 
         elif isinstance(data_1, dict):
+            data_1 = dict(data_1)
+            data_2 = dict(data_2)
             data, _, _ = merge_two_dicts(data_1, data_2)
 
         else:
@@ -1238,6 +1277,8 @@ def merge_two_dicts(data_1, data_2, **kwargs):
     data = None
 
     if isinstance(data_1, dict) and type(data_1) == type(data_2):
+        data_1 = dict(data_1)
+        data_2 = dict(data_2)
         data = data_1.copy()
         data.update(data_2)
 
@@ -1400,6 +1441,8 @@ def not_in_list(name, array_list, **kwargs):
 
     """
 
+    array_list = list(array_list)
+
     if name not in array_list:
         return [name]
 
@@ -1545,6 +1588,8 @@ def prt_dict(data, fhandler=sys.stdout, **kwargs):
 
     """
 
+    data = dict(data)
+
     for x, y in data.iteritems():
 
         if isinstance(y, dict):
@@ -1618,6 +1663,8 @@ def rm_dup_list(orig_list, **kwargs):
         (output) Returns an unique list.
 
     """
+
+    orig_list = list(orig_list)
 
     return list(set(orig_list))
 
@@ -1701,7 +1748,7 @@ def rotate_files(fname, cnt=0, max_cnt=5, **kwargs):
     if cnt < max_cnt and os.path.isfile(fname + "." + str(cnt)):
         rotate_files(fname, cnt + 1, max_cnt)
 
-        # Rename file to + 1.
+        # Rename file to +1
         os.rename(fname + "." + str(cnt), fname + "." + str(cnt + 1))
 
 
@@ -1714,13 +1761,11 @@ def str_2_list(del_str, fld_del, **kwargs):
     Arguments:
         (input) del_str -> Delimited string.
         (input) fld_del -> Field delimiter.
-        (output) new_list -> List of values from the string.
+        (output) List of values from the string.
 
     """
 
-    new_list = del_str.split(fld_del)
-
-    return new_list
+    return del_str.split(fld_del)
 
 
 def str_2_type(lit_str, **kwargs):
@@ -1757,7 +1802,6 @@ def touch(f_name, **kwargs):
     err_msg = None
     base_dir = os.path.dirname(f_name)
 
-    # Create directory path.
     if not os.path.exists(base_dir):
         try:
             os.makedirs(base_dir)
@@ -1769,7 +1813,6 @@ def touch(f_name, **kwargs):
 
     if status:
         try:
-            # Do not overwrite if it exists.
             with open(f_name, "a"):
                 os.utime(f_name, None)
 

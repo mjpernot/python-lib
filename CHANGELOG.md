@@ -4,6 +4,59 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [2.7.5] - 2019-07-22
+### Change
+- gen_libs.list_files:  Refactored function.
+- gen_libs.str_2_list:  Refactored function.
+
+### Fixed
+- gen_class.ProgramLock.\_\_init\_\_:  Fixed problem with mutable default arguments issue.
+- cmds_gen.add_cmd:  Fixed problem with mutable default arguments issue.
+- cmds_gen.is_add_cmd:  Fixed problem with mutable default arguments issue.
+- cmds_gen.run_prog:  Fixed problem with mutable default arguments issue.
+- arg_parser.arg_add_def:  Fixed problem with mutable default arguments issue.
+- arg_parser.arg_cond_req:  Fixed problem with mutable default arguments issue.
+- arg_parser.arg_cond_req_or:  Fixed problem with mutable default arguments issue.
+- arg_parser.arg_default:  Fixed problem with mutable default arguments issue.
+- arg_parser.arg_dir_chk_crt:  Fixed problem with mutable default arguments issue.
+- arg_parser.arg_file_chk:  Fixed problem with mutable default arguments issue.
+- arg_parser.arg_noreq_xor:  Fixed problem with mutable default arguments issue.
+- arg_parser.arg_parse2:  Fixed problem with mutable default arguments issue.
+- arg_parser.arg_require:  Fixed problem with mutable default arguments issue.
+- arg_parser.arg_req_or_lst:  Fixed problem with mutable default arguments issue.
+- arg_parser.arg_req_xor:  Fixed problem with mutable default arguments issue.
+- arg_parser.arg_set_path:  Fixed problem with mutable default arguments issue.
+- arg_parser.arg_validate:  Fixed problem with mutable default arguments issue.
+- arg_parser.arg_valid_val:  Fixed problem with mutable default arguments issue.
+- arg_parser.arg_wildcard:  Fixed problem with mutable default arguments issue.
+- arg_parser.arg_xor_dict:  Fixed problem with mutable default arguments issue.
+- gen_libs.data_multi_out:  Fixed problem with mutable default arguments issue.
+- gen_libs.del_not_and_list:  Fixed problem with mutable default arguments issue.
+- gen_libs.del_not_in_list:  Fixed problem with mutable default arguments issue.
+- gen_libs.dict_2_list:  Fixed problem with mutable default arguments issue.
+- gen_libs.dict_2_std:  Fixed problem with mutable default arguments issue.
+- gen_libs.display_data:  Fixed problem with mutable default arguments issue.
+- gen_libs.help_func:  Fixed problem with mutable default arguments issue.
+- gen_libs.in_list:  Fixed problem with mutable default arguments issue.
+- gen_libs.is_missing_lists:  Fixed problem with mutable default arguments issue.
+- gen_libs.key_cleaner:  Fixed problem with mutable default arguments issue.
+- gen_libs.list_2_dict:  Fixed problem with mutable default arguments issue.
+- gen_libs.make_zip:  Fixed problem with mutable default arguments issue.
+- gen_libs.merge_data_types:  Fixed problem with mutable default arguments issue.
+- gen_libs.merge_two_dicts:  Fixed problem with mutable default arguments issue.
+- gen_libs.not_in_list:  Fixed problem with mutable default arguments issue.
+- gen_libs.prt_dict:  Fixed problem with mutable default arguments issue.
+- gen_libs.rm_dup_list:  Fixed problem with mutable default arguments issue.
+- gen_class.Mail.create_subject:  Fixed so the subject line can be a string or list.
+- gen_class.Mail.\_\_init\_\_:  Fixed it where a subject can handle a list.
+
+### Added
+- gen_libs.list_2_str:  Convert a list to a string.
+
+### Deprecated
+- gen_libs.data_multi_out:  No longer required.
+
+
 ## [2.7.4] - 2019-06-17
 ### Added
 - gen_libs.openfile:  Opens a normal or compressed file based on filename extension.
@@ -15,14 +68,14 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 ## [2.7.3] - 2019-05-02
 ### Changed
 - gen_libs.rotate_files:  Refactored code in function to be more stream-line.
-- arg_parser.arg_parse2:  Replaced multi-list code section with call to _parse_multi function.
-- arg_parser.arg_parse2:  Replaced single-list code section with call to _parse_single function.
-- arg_parser.arg_file_chk:  Replaced exception code with call to _create_file function.
+- arg_parser.arg_parse2:  Replaced multi-list code section with call to \_parse_multi function.
+- arg_parser.arg_parse2:  Replaced single-list code section with call to \_parse_single function.
+- arg_parser.arg_file_chk:  Replaced exception code with call to \_create_file function.
 
 ### Added
-- arg_parser._parse_single:  Private function for use by arg_parser2 function.
-- arg_parser._file_create:  Private function for use by arg_file_chk function.
-- arg_parser._parse_multi:  Private function for use by arg_parser2 function.
+- arg_parser.\_parse_single:  Private function for use by arg_parser2 function.
+- arg_parser.\_file_create:  Private function for use by arg_file_chk function.
+- arg_parser.\_parse_multi:  Private function for use by arg_parser2 function.
 
 ### Removed
 - gen_libs.copy_tree:  Function replaced by shutil.copytree.
@@ -53,9 +106,9 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - arg_parser.arg_parse2:  Changed function parameter mutable argument default to immutable argument default.
 - arg_parser.arg_dir_chk_crt:  Changed function parameter mutable argument default to immutable argument default.
 - arg_parser.arg_file_chk:  Changed function parameter mutable argument default to immutable argument default.
-- gen_class.Mail.__init__:  Shallow copied assignment of "to" to "self.to" if it is a list.
-- gen_class.Daemon.__init__:  Shallow copied assignment of "argv_list" list to "self.argv_list".
-- gen_class.Daemon.__init__:  Changed function parameter mutable argument default to immutable argument default.
+- gen_class.Mail.\_\_init\_\_:  Shallow copied assignment of "to" to "self.to" if it is a list.
+- gen_class.Daemon.\_\_init\_\_:  Shallow copied assignment of "argv_list" list to "self.argv_list".
+- gen_class.Daemon.\_\_init\_\_:  Changed function parameter mutable argument default to immutable argument default.
 
 ### Deprecated
 - system.py:  Module has been deprecated.
@@ -81,7 +134,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 ## [2.5.0] - 2018-09-10
 ### Changed
 - arg_parser.arg_parse2:  Replaced "gen_libs.Chk_Int" with "gen_libs.chk_int" call.
-- system.FGraph.__init__:  Replaced "gen_libs.file_search" with "gen_libs.file_search".
+- system.FGraph.\_\_init\_\_:  Replaced "gen_libs.file_search" with "gen_libs.file_search".
 - gen_libs.file_search:  Refactored the code in the function.
 - gen_libs.file_2_list:  Remove any newlines from the end of each line.
 
@@ -179,7 +232,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 ## [2.4.0] - 2018-05-28
 ### Changed
-- gen_class.Yum.__init__:  Added self.distro attribute to class.
+- gen_class.Yum.\_\_init\_\_:  Added self.distro attribute to class.
 
 ### Added
 - gen_class.Yum.get_disto:  Method - Return class linux_distribution.
@@ -213,7 +266,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - gen_class.Yum.get_release:  Return the class OS release version.
 
 ### Changed
-- gen_class.Yum.__init__:  Added new attributes for OS version information.
+- gen_class.Yum.\_\_init\_\_:  Added new attributes for OS version information.
 
 ### Removed
 - gen_class.Progress_Bar:  Been replaced by ProgressBar class.
@@ -409,7 +462,7 @@ Breaking Change
 - cmds_gen.Create_Cfg_Array:  Replaced by create_cfg_array function.
 
 ### Removed
-- gen_libs.py:  Removed "from sys import *", already have "import sys" in place.
+- gen_libs.py:  Removed "from sys import \*", already have "import sys" in place.
 
 
 ## [1.36.0] - 2018-03-09
@@ -475,7 +528,7 @@ Breaking Change
 - gen_libs.clear_file:  Clear contents of an existing file.
 
 ### Changed
-- gen_libs.get_base_dir:  Added **kwargs to argument list for future use.
+- gen_libs.get_base_dir:  Added \*\*kwargs to argument list for future use.
 
 ### Deprecated
 - gen_libs.Write_File2:  Replaced by gen_libs.write_file.
@@ -507,7 +560,7 @@ Breaking Change
 
 ## [1.29.0] - 2017-10-06
 ### Added
-- gen_libs._ntuple_diskusage
+- gen_libs.\_ntuple_diskusage
 - gen_libs.Disk_Usage
 
 
@@ -743,7 +796,7 @@ Breaking Change
 - gen_libs.Rename_File2
 
 ### Changed
-- cmds_gen.Create_Cfg_Array:   - Added in **kwargs to allow passing of cfg_path and allow a path to be added to the config file name if the config file does not exist at the current directory.
+- cmds_gen.Create_Cfg_Array:  Added in \*\*kwargs to allow passing of cfg_path and allow a path to be added to the config file name if the config file does not exist at the current directory.
 
 ### Deprecated
 - cmds_gen.Find_Name
@@ -779,7 +832,7 @@ Breaking Change
 - gen_libs:  sys module
 
 ### Changed
-- arg_parser.py:  Libraries - Replaced 'from sys import *' with 'import sys'.
+- arg_parser.py:  Libraries - Replaced "from sys import \*" with "import sys".
 
 
 ## [1.10.0] - 2016-02-19

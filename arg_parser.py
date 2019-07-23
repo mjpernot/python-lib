@@ -61,7 +61,11 @@ def arg_add_def(args_array, def_array=None, opt_req_list=None, **kwargs):
 
     """
 
+    args_array = dict(args_array)
+
     if def_array and opt_req_list:
+        def_array = dict(def_array)
+        opt_req_list = list(opt_req_list)
 
         # Add missing required options with default values to argument array.
         for x in set(opt_req_list) & \
@@ -69,6 +73,7 @@ def arg_add_def(args_array, def_array=None, opt_req_list=None, **kwargs):
             args_array[x] = def_array[x]
 
     elif def_array:
+        def_array = dict(def_array)
 
         # Add all default values to argument array.
         for x in set(def_array.keys()) - set(args_array.keys()):
@@ -93,6 +98,8 @@ def arg_cond_req(args_array, opt_con_req_list):
 
     """
 
+    args_array = dict(args_array)
+    opt_con_req_list = dict(opt_con_req_list)
     exit_flag = True
 
     for x in set(args_array.keys()) & set(opt_con_req_list.keys()):
@@ -120,7 +127,10 @@ def arg_cond_req_or(args_array, opt_con_req_dict):
 
     """
 
+    args_array = dict(args_array)
+    opt_con_req_dict = dict(opt_con_req_dict)
     or_flag = True
+
     for x in set(opt_con_req_dict.keys()) & set(args_array.keys()):
         tmp_flag = False
 
@@ -151,6 +161,9 @@ def arg_default(arg, args_array, opt_def_dict, **kwargs):
 
     """
 
+    args_array = dict(args_array)
+    opt_def_dict = dict(opt_def_dict)
+
     if arg in opt_def_dict:
         args_array[arg] = opt_def_dict[arg]
         return args_array
@@ -174,8 +187,14 @@ def arg_dir_chk_crt(args_array, dir_chk_list, dir_crt_list=None):
 
     """
 
+    args_array = dict(args_array)
+    dir_chk_list = list(dir_chk_list)
+
     if dir_crt_list is None:
         dir_crt_list = []
+
+    else:
+        dir_crt_list = list(dir_crt_list)
 
     exit_flag = False
 
@@ -217,8 +236,14 @@ def arg_file_chk(args_array, file_chk_list, file_crt_list=None):
 
     """
 
+    args_array = dict(args_array)
+    file_chk_list = list(file_chk_list)
+
     if file_crt_list is None:
         file_crt_list = []
+
+    else:
+        file_crt_list = list(file_crt_list)
 
     exit_flag = False
 
@@ -258,7 +283,10 @@ def arg_noreq_xor(args_array, xor_noreq_list):
 
     """
 
+    args_array = dict(args_array)
+    xor_noreq_list = dict(xor_noreq_list)
     xor_flag = True
+
     for x in xor_noreq_list:
 
         # Xor between key and values in dictionary.
@@ -300,8 +328,14 @@ def arg_parse2(argv, opt_val_list, opt_def_dict=None, **kwargs):
 
     """
 
+    argv = list(argv)
+    opt_val_list = list(opt_val_list)
+
     if opt_def_dict is None:
         opt_def_dict = {}
+
+    else:
+        opt_def_dict = dict(opt_def_dict)
 
     multi_list = list(kwargs.get("multi_val", []))
     opt_val = list(kwargs.get("opt_val", []))
@@ -339,6 +373,8 @@ def arg_require(args_array, opt_req_list):
 
     """
 
+    args_array = dict(args_array)
+    opt_req_list = list(opt_req_list)
     exit_flag = False
 
     for x in set(opt_req_list) - set(args_array.keys()):
@@ -363,6 +399,8 @@ def arg_req_or_lst(args_array, opt_or_dict_list):
 
     """
 
+    args_array = dict(args_array)
+    opt_or_dict_list = dict(opt_or_dict_list)
     or_flag = True
 
     for x in set(opt_or_dict_list.keys()) - set(args_array.keys()):
@@ -394,6 +432,8 @@ def arg_req_xor(args_array, opt_xor_list):
 
     """
 
+    args_array = dict(args_array)
+    opt_xor_list = dict(opt_xor_list)
     status_flag = True
 
     for x in opt_xor_list:
@@ -421,6 +461,8 @@ def arg_set_path(args_array, arg_opt):
 
     """
 
+    args_array = dict(args_array)
+
     if arg_opt in args_array:
         return args_array[arg_opt] + "/"
 
@@ -442,6 +484,7 @@ def arg_validate(args_array, valid_func):
 
     """
 
+    args_array = dict(args_array)
     status_flag = True
 
     for x in set(valid_func.keys()) & set(args_array.keys()):
@@ -467,6 +510,8 @@ def arg_valid_val(args_array, opt_valid_val, **kwargs):
 
     """
 
+    args_array = dict(args_array)
+    opt_valid_val = dict(opt_valid_val)
     status_flag = True
 
     # Intersects the keys in args_array and opt_valid_val.
@@ -495,6 +540,9 @@ def arg_wildcard(args_array, opt_wildcard, **kwargs):
 
     """
 
+    args_array = dict(args_array)
+    opt_wildcard = list(opt_wildcard)
+
     for opt in opt_wildcard:
         args_array[opt] = glob.glob(args_array[opt])
 
@@ -518,6 +566,8 @@ def arg_xor_dict(args_array, opt_xor_dict):
 
     """
 
+    args_array = dict(args_array)
+    opt_xor_dict = dict(opt_xor_dict)
     xor_flag = True
 
     for x in set(opt_xor_dict.keys()) & set(args_array.keys()):

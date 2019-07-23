@@ -170,6 +170,7 @@ test/unit/gen_libs/file_2_list.py
 test/unit/gen_libs/is_empty_file.py
 test/unit/gen_libs/touch.py
 test/unit/gen_libs/list_dirs.py
+test/unit/gen_libs/list_2_str.py
 test/unit/gen_libs/cp_file.py
 test/unit/gen_libs/rotate_files.py
 test/unit/gen_libs/bytes_2_readable.py

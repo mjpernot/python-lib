@@ -43,6 +43,8 @@ def add_cmd(cmd, **kwargs):
 
     """
 
+    cmd = list(cmd)
+
     # Append before returning, appending on return does not make the change.
     if "val" in kwargs:
         cmd.append(kwargs["arg"] + kwargs["val"])
@@ -147,6 +149,10 @@ def is_add_cmd(args_array, cmd, opt_arg_list, **kwargs):
 
     """
 
+    cmd = list(cmd)
+    args_array = dict(args_array)
+    opt_arg_list = dict(opt_arg_list)
+
     for x in opt_arg_list:
 
         # Is option in array and is set to True.
@@ -181,6 +187,8 @@ def run_prog(cmd, **kwargs):
             retdata -> True|False - Return output to calling function.
 
     """
+
+    cmd = list(cmd)
 
     # Write to file.
     if kwargs.get("ofile", False):
