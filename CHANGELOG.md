@@ -5,6 +5,9 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 
 ## [2.7.5] - 2019-07-22
+### Change
+- gen_libs.str_2_list:  Refactored function.
+
 ### Fixed
 - gen_class.Mail.create_subject:  Fixed so the subject line can be a string or list.
 - gen_class.Mail.\_\_init\_\_:  Fixed it where a subject can handle a list.

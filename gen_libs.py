@@ -1736,9 +1736,7 @@ def str_2_list(del_str, fld_del, **kwargs):
 
     """
 
-    new_list = del_str.split(fld_del)
-
-    return new_list
+    return del_str.split(fld_del)
 
 
 def str_2_type(lit_str, **kwargs):
@@ -1775,7 +1773,6 @@ def touch(f_name, **kwargs):
     err_msg = None
     base_dir = os.path.dirname(f_name)
 
-    # Create directory path.
     if not os.path.exists(base_dir):
         try:
             os.makedirs(base_dir)
@@ -1787,7 +1784,6 @@ def touch(f_name, **kwargs):
 
     if status:
         try:
-            # Do not overwrite if it exists.
             with open(f_name, "a"):
                 os.utime(f_name, None)
 
