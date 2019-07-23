@@ -63,7 +63,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.dir_path = "test/unit/gen_libs/tmp"
+        self.dir_path = "test/unit/gen_libs/tmp/tmp"
+        os.makedirs(self.dir_path)
         self.fname = os.path.join(self.dir_path, "file1.txt")
 
         with open(self.fname, "w"):
@@ -121,6 +122,8 @@ class UnitTest(unittest.TestCase):
 
         if os.path.isfile(self.fname):
             os.remove(self.fname)
+
+        os.rmdir(self.dir_path)
 
 
 if __name__ == "__main__":

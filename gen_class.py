@@ -392,6 +392,7 @@ class ProgramLock(object):
 
         """
 
+        argv = list(argv)
         self.lock_created = False
 
         # Creates filename based on the full path to the program file.
@@ -530,7 +531,8 @@ class Mail(System):
 
         super(Mail, self).__init__(host, host_name)
 
-        self.subj = subj
+        if isinstance(subj, list):
+            subj = list(subj)
 
         if isinstance(to, list):
             self.to = list(to)
@@ -538,6 +540,8 @@ class Mail(System):
         else:
             self.to = to
 
+        self.subj = None
+        self.create_subject(subj)
         self.frm = frm
         self.msg_type = msg_type
         self.msg = ""
@@ -598,7 +602,11 @@ class Mail(System):
         """
 
         if subj:
-            self.subj = subj
+            if isinstance(subj, list):
+                self.subj = "".join(str(item) for item in list(subj))
+
+            else:
+                self.subj = subj
 
     def send_mail(self):
 
