@@ -363,6 +363,8 @@ def arg_req_or_lst(args_array, opt_or_dict_list):
 
     """
 
+    args_array = dict(args_array)
+    opt_or_dict_list = dict(opt_or_dict_list)
     or_flag = True
 
     for x in set(opt_or_dict_list.keys()) - set(args_array.keys()):
