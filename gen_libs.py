@@ -1031,15 +1031,13 @@ def list_files(dir_path, **kwargs):
 
     Arguments:
         (input) dir_path -> Directory path.
-        (output) file_names -> List of file names.
+        (output) List of file names.
 
     """
 
     # Loop on directory and if an entry is a file then add to list.
-    file_names = [x for x in os.listdir(dir_path)
-                  if os.path.isfile(os.path.join(dir_path, x))]
-
-    return file_names
+    return [x for x in os.listdir(dir_path)
+            if os.path.isfile(os.path.join(dir_path, x))]
 
 
 def list_filter_files(dir_path, file_filter, **kwargs):
@@ -1744,7 +1742,7 @@ def str_2_list(del_str, fld_del, **kwargs):
     Arguments:
         (input) del_str -> Delimited string.
         (input) fld_del -> Field delimiter.
-        (output) new_list -> List of values from the string.
+        (output) List of values from the string.
 
     """
 
