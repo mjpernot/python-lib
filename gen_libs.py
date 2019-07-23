@@ -44,6 +44,7 @@
         list_files
         list_filter_files
         list_2_dict
+        list_2_str
         load_module
         make_md5_hash
         make_zip
@@ -1088,6 +1089,23 @@ def list_2_dict(kv_list, fld_del=".", **kwargs):
             dict_list[db].append(tbl)
 
     return dict_list
+
+
+def list_2_str(data_list, join_del="", **kwargs):
+
+    """Function:  list_2_str
+
+    Description:  Convert a list to a string.  Will be joined together with a
+        join delimiter.  The list can consist of strings or integers.
+
+    Arguments:
+        (input) data_list -> List to join.
+        (input) join_del -> Join delimiter for the string.
+        (output) join_str -> Join together string.
+
+    """
+
+    return join_del.join(str(item) for item in list(data_list))
 
 
 def load_module(mod_name, mod_path, **kwargs):

@@ -9,6 +9,9 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - gen_class.Mail.create_subject:  Fixed so the subject line can be a string or list.
 - gen_class.Mail.\_\_init\_\_:  Fixed it where a subject can handle a list.
 
+### Added
+- gen_libs.list_2_str:  Convert a list to a string.
+
 
 ## [2.7.4] - 2019-06-17
 ### Added
