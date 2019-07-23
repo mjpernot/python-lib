@@ -67,6 +67,7 @@ coverage run -a --source=gen_libs test/unit/gen_libs/is_missing_lists.py
 coverage run -a --source=gen_libs test/unit/gen_libs/is_true.py
 coverage run -a --source=gen_libs test/unit/gen_libs/key_cleaner.py
 coverage run -a --source=gen_libs test/unit/gen_libs/list_2_dict.py
+coverage run -a --source=gen_libs test/unit/gen_libs/list_2_str.py
 coverage run -a --source=gen_libs test/unit/gen_libs/list_dirs.py
 coverage run -a --source=gen_libs test/unit/gen_libs/list_files.py
 coverage run -a --source=gen_libs test/unit/gen_libs/list_filter_files.py
