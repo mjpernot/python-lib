@@ -518,6 +518,8 @@ def arg_xor_dict(args_array, opt_xor_dict):
 
     """
 
+    args_array = dict(args_array)
+    opt_xor_dict = dict(opt_xor_dict)
     xor_flag = True
 
     for x in set(opt_xor_dict.keys()) & set(args_array.keys()):
