@@ -1418,6 +1418,8 @@ def not_in_list(name, array_list, **kwargs):
 
     """
 
+    array_list = list(array_list)
+
     if name not in array_list:
         return [name]
 

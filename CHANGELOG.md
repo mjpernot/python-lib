@@ -9,6 +9,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - gen_libs.str_2_list:  Refactored function.
 
 ### Fixed
+- gen_libs.not_in_list:  Fixed problem with mutable default arguments issue.
 - gen_libs.prt_dict:  Fixed problem with mutable default arguments issue.
 - gen_libs.rm_dup_list:  Fixed problem with mutable default arguments issue.
 - gen_class.Mail.create_subject:  Fixed so the subject line can be a string or list.
