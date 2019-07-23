@@ -467,6 +467,8 @@ def arg_valid_val(args_array, opt_valid_val, **kwargs):
 
     """
 
+    args_array = dict(args_array)
+    opt_valid_val = dict(opt_valid_val)
     status_flag = True
 
     # Intersects the keys in args_array and opt_valid_val.
