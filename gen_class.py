@@ -392,6 +392,7 @@ class ProgramLock(object):
 
         """
 
+        argv = list(argv)
         self.lock_created = False
 
         # Creates filename based on the full path to the program file.

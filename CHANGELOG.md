@@ -10,6 +10,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - gen_libs.str_2_list:  Refactored function.
 
 ### Fixed
+- gen_class.ProgramLock.\_\_init\_\_:  Fixed problem with mutable default arguments issue.
 - cmds_gen.add_cmd:  Fixed problem with mutable default arguments issue.
 - cmds_gen.is_add_cmd:  Fixed problem with mutable default arguments issue.
 - cmds_gen.run_prog:  Fixed problem with mutable default arguments issue.
