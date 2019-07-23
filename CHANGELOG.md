@@ -12,6 +12,9 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 ### Added
 - gen_libs.list_2_str:  Convert a list to a string.
 
+### Deprecated
+- gen_libs.data_multi_out:  No longer required.
+
 
 ## [2.7.4] - 2019-06-17
 ### Added
