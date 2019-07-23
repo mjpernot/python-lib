@@ -1220,6 +1220,8 @@ def merge_data_types(data_1, data_2, **kwargs):
             data = data_1 + data_2
 
         elif isinstance(data_1, dict):
+            data_1 = dict(data_1)
+            data_2 = dict(data_2)
             data, _, _ = merge_two_dicts(data_1, data_2)
 
         else:
