@@ -394,6 +394,8 @@ def arg_req_xor(args_array, opt_xor_list):
 
     """
 
+    args_array = dict(args_array)
+    opt_xor_list = dict(opt_xor_list)
     status_flag = True
 
     for x in opt_xor_list:
