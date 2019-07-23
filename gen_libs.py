@@ -1563,6 +1563,8 @@ def prt_dict(data, fhandler=sys.stdout, **kwargs):
 
     """
 
+    data = dict(data)
+
     for x, y in data.iteritems():
 
         if isinstance(y, dict):
