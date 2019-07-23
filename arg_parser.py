@@ -495,6 +495,9 @@ def arg_wildcard(args_array, opt_wildcard, **kwargs):
 
     """
 
+    args_array = dict(args_array)
+    opt_wildcard = list(opt_wildcard)
+
     for opt in opt_wildcard:
         args_array[opt] = glob.glob(args_array[opt])
 
