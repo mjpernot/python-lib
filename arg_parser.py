@@ -300,6 +300,9 @@ def arg_parse2(argv, opt_val_list, opt_def_dict=None, **kwargs):
 
     """
 
+    argv = list(argv)
+    opt_val_list = list(opt_val_list)
+
     if opt_def_dict is None:
         opt_def_dict = {}
 
