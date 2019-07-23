@@ -894,6 +894,8 @@ def in_list(name, array_list, **kwargs):
 
     """
 
+    array_list = list(array_list)
+
     if name in array_list:
         return [name]
 

@@ -10,6 +10,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - gen_libs.str_2_list:  Refactored function.
 
 ### Fixed
+- gen_libs.in_list:  Fixed problem with mutable default arguments issue.
 - gen_libs.is_missing_lists:  Fixed problem with mutable default arguments issue.
 - gen_libs.key_cleaner:  Fixed problem with mutable default arguments issue.
 - gen_libs.list_2_dict:  Fixed problem with mutable default arguments issue.
