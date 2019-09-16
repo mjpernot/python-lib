@@ -13,6 +13,7 @@
         chk_int
         clear_file
         compress
+        cp_dir
         cp_file
         cp_file2
         crt_file_time
@@ -339,6 +340,39 @@ def compress(fname, **kwargs):
 
     P1 = subprocess.Popen(["gzip", fname])
     P1.wait()
+
+
+def cp_dir(src_dir, dest_dir, **kwargs):
+
+    """Function:  cp_dir
+
+    Description:  Copies a directory from source to destination.
+
+    Arguments:
+        (input) src_dir -> Source directory.
+        (input) dest_dir -> Destination directory.
+        (output) status -> True|False - True if copy was successful.
+        (output) err_msg -> Error message from copytree exception or None.
+
+    """
+
+    status = True
+    err_msg = None
+
+    try:
+        shutil.copytree(src_dir, dest_dir)
+
+    # Directory permission error.
+    except shutil.Error as e:
+        err_msg = "Directory not copied.  Error Message: %s" % (e)
+        status = False
+
+    # Directory does not exist.
+    except OSError as e:
+        err_msg = "Directory not copied.  Error Message: %s" % (e)
+        status = False
+
+    return status, err_msg
 
 
 def cp_file(fname, src_dir, dest_dir, new_fname=None, **kwargs):

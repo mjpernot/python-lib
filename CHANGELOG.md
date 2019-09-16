@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [2.7.6] - 2019-09-16
+### Added
+- gen_libs.cp_dir:  Copies a directory from source to destination with exception handling.
+
+
 ## [2.7.5] - 2019-07-22
 ### Change
 - gen_libs.list_files:  Refactored function.
