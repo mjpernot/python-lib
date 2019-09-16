@@ -6,6 +6,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 ## [2.7.6] - 2019-09-16
 ### Added
+- gen_class.setup_mail:  Initialize a mail instance.
 - gen_libs.cp_dir:  Copies a directory from source to destination with exception handling.
 
 
