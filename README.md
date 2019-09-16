@@ -152,6 +152,7 @@ exit
 
 ```
 cd {Python_Project}/python-lib
+test/unit/gen_libs/cp_dir.py
 test/unit/gen_libs/month_delta.py
 test/unit/gen_libs/file_search_cnt.py
 test/unit/gen_libs/get_base_dir.py
