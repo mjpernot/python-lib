@@ -72,10 +72,6 @@ class UnitTest(unittest.TestCase):
 
             Description:  Class which is a representation of the Mail class.
 
-            Super-Class:  object
-
-            Sub-Classes:
-
             Methods:
                 __init__ -> Initialize configuration environment.
 
