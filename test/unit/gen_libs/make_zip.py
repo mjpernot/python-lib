@@ -40,10 +40,6 @@ class ZipFile(object):
 
     Description:  Class which is a representation of the zipfile class.
 
-    Super-Class:  object
-
-    Sub-Classes:
-
     Methods:
         __init__ -> Initialize configuration environment.
         write -> Mock representation of zipfile.ZipFile.write method.
@@ -95,10 +91,6 @@ class UnitTest(unittest.TestCase):
     """Class:  UnitTest
 
     Description:  Class which is a representation of a unit testing.
-
-    Super-Class:  unittest.TestCase
-
-    Sub-Classes:
 
     Methods:
         setUp -> Unit testing initilization.

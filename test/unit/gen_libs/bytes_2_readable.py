@@ -39,10 +39,6 @@ class UnitTest(unittest.TestCase):
 
     Description:  Class which is a representation of a unit testing.
 
-    Super-Class:  unittest.TestCase
-
-    Sub-Classes:
-
     Methods:
         setUp -> Unit testing initilization.
         test_with_negative -> Test with -1 bytes.
