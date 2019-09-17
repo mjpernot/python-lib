@@ -28,12 +28,6 @@ class Machine(object):
 
     Description:  Base class for all machines.
 
-    Super-Class:  object
-
-    Sub-Classes:
-        Linux
-        Solaris
-
     Methods:
         __init__ -> Class instance initilization.
 
@@ -47,10 +41,6 @@ class Linux(Machine):
     """Class:  Linux
 
     Description:  Class with methods and attributes for Linux operating system.
-
-    Super-Class:  Machine
-
-    Sub-Classes:
 
     Methods:
         __init__ -> Class instance initilization.
@@ -78,10 +68,6 @@ class Solaris(Machine):
 
     Description:  Class with methods and attributes for Solaris operating
         system.
-
-    Super-Class:  Machine
-
-    Sub-Classes:
 
     Methods:
         __init__ -> Class instance initilization.
