@@ -79,10 +79,6 @@ class Daemon:
     Description:  Class that creates and runs a Python program as a daemon
         program in include starting, stopping and restarting the process.
 
-    Super-Class:
-
-    Sub-Classes:
-
     Methods:
         __init__ -> Class instance initilization.
         daemonize -> Background the process and create a pidfile for tracking.
@@ -296,10 +292,6 @@ class ProgressBar(object):
     Description:  Class that displays and updates a progress bar for an ongoing
         operation.
 
-    Super-Class:  object
-
-    Sub-Classes:
-
     Methods:
         __init__ -> Class instance initilization.
         update -> Calculates how the total number of blocks completed.
@@ -383,10 +375,6 @@ class SingleInstanceException(BaseException):
     Description:  Class exception for the ProgramLock class when an instance
         lock has been detected.
 
-    Super-Class:  BaseException
-
-    Sub-Classes:
-
     Methods:
 
     """
@@ -401,10 +389,6 @@ class ProgramLock(object):
     Description:  Class that creates a file lock instance and in which other
         programs using the same parameters will detect the lock as already
         present and prevent a second program instance from starting.
-
-    Super-Class:  object
-
-    Sub-Classes:
 
     Methods:
         __init__ -> Class instance initilization.
@@ -475,11 +459,6 @@ class System(object):
         methods and attributes to contain information about the physical
         server.
 
-    Super-Class:  object
-
-    Sub-Classes:
-        Mail
-
     Methods:
         __init__ -> Class instance initilization.
         set_host_name -> Set the hostname attribute.
@@ -528,10 +507,6 @@ class Mail(System):
         is used as a proxy for creating an email.  The basic methods and
         attributes include reading in the message, creating the message body,
         and sending the email.
-
-    Super-Class:  System
-
-    Sub-Classes:
 
     Methods:
         __init__ -> Class instance initilization.
@@ -676,10 +651,6 @@ class Logger(object):
     Description:  Class which is a representation of a log file instance.  A
         Logger object is used as a proxy to implement the creation, formatting,
         writing to, and closing of a log file.
-
-    Super-Class:  object
-
-    Sub-Classes:
 
     Methods:
         __init__ -> Class instance initilization.
@@ -828,10 +799,6 @@ class Yum(yum.YumBase):
 
     Description:  Class which is a representation for YumBase system class.  A
         yum object is used as a proxy for using the yum command.
-
-    Super-Class:  yum.YumBase
-
-    Sub-Classes:
 
     Methods:
         __init__ -> Class instance initilization.
