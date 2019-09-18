@@ -270,6 +270,7 @@ test/unit/arg_parser/unit_test_run.sh
 ```
 cd {Python_Project}/python-lib
 test/unit/gen_class/setup_mail.py
+test/unit/gen_class/Logger_init.py
 test/unit/gen_class/ProgressBar_init.py
 test/unit/gen_class/ProgressBar_update.py
 test/unit/gen_class/ProgressBar_calc_and_update.py
