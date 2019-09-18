@@ -110,6 +110,12 @@ pipeline {
                 ./test/unit/gen_libs/write_to_log.py
                 ./test/unit/gen_class/setup_mail.py
                 ./test/unit/gen_class/Logger_init.py
+                ./test/unit/gen_class/Logger_log_close.py
+                ./test/unit/gen_class/Logger_log_crit.py
+                ./test/unit/gen_class/Logger_log_debug.py
+                ./test/unit/gen_class/Logger_log_err.py
+                ./test/unit/gen_class/Logger_log_info.py
+                ./test/unit/gen_class/Logger_log_warn.py
                 ./test/unit/gen_class/ProgramLock_init.py
                 ./test/unit/gen_class/ProgramLock_del.py
                 ./test/unit/gen_class/ProgressBar_init.py
