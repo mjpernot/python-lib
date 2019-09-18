@@ -38,6 +38,7 @@ import getpass
 
 # Third-party
 import yum
+import json
 
 # Local
 import version
@@ -565,7 +566,12 @@ class Mail(System):
         """
 
         if txt_ln:
-            self.msg = self.msg + txt_ln
+
+            if isinstance(txt_ln, str):
+                self.msg = self.msg + txt_ln
+
+            else:
+                self.msg = self.msg + json.dumps(txt_ln)
 
     def read_stdin(self):
 

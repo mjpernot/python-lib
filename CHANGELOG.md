@@ -4,8 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
-## [2.7.6] - 2019-09-16
+## [2.7.6] - 2019-09-18
 ### Added
+- gen_class.Mail.add_2_msg:  Added ability to convert non-string arguments to strings.
 - gen_class.setup_mail:  Initialize a mail instance.
 - gen_libs.cp_dir:  Copies a directory from source to destination with exception handling.
 
