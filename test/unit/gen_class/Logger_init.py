@@ -78,7 +78,7 @@ class UnitTest(unittest.TestCase):
         log_file = gen_class.Logger(self.name, self.f_name, level="CRITICAL")
 
         self.assertEqual(log_file.logger.level, 50)
-        
+
     def test_error_setting(self):
 
         """Function:  test_error_setting
@@ -92,7 +92,7 @@ class UnitTest(unittest.TestCase):
         log_file = gen_class.Logger(self.name, self.f_name, level="ERROR")
 
         self.assertEqual(log_file.logger.level, 40)
-        
+
     def test_warning_setting(self):
 
         """Function:  test_warning_setting
@@ -106,7 +106,7 @@ class UnitTest(unittest.TestCase):
         log_file = gen_class.Logger(self.name, self.f_name, level="WARNING")
 
         self.assertEqual(log_file.logger.level, 30)
-        
+
     def test_debug_setting(self):
 
         """Function:  test_debug_setting
@@ -120,7 +120,7 @@ class UnitTest(unittest.TestCase):
         log_file = gen_class.Logger(self.name, self.f_name, level="DEBUG")
 
         self.assertEqual(log_file.logger.level, 10)
-        
+
     def test_info_setting(self):
 
         """Function:  test_info_setting
@@ -134,7 +134,7 @@ class UnitTest(unittest.TestCase):
         log_file = gen_class.Logger(self.name, self.f_name, level="INFO")
 
         self.assertEqual(log_file.logger.level, 20)
-        
+
     def test_default_setting(self):
 
         """Function:  test_default_setting
@@ -148,7 +148,6 @@ class UnitTest(unittest.TestCase):
         log_file = gen_class.Logger(self.name, self.f_name)
 
         self.assertEqual(log_file.logger.level, 20)
-        
 
     def tearDown(self):
 
