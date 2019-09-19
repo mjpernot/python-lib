@@ -42,6 +42,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_no_message -> Test with no message passed.
         test_zero_percent -> Test with zero percent completed.
         test_fifty_percent -> Test with 50 percent completed.
         test_hundred_percent -> Test with 100 percent completed.
@@ -62,6 +63,22 @@ class UnitTest(unittest.TestCase):
         self.width = 20
         self.progress_sym = "#"
         self.empty_sym = " "
+
+    def test_no_message(self):
+
+        """Function:  test_no_message
+
+        Description:  Test with no message passed.
+
+        Arguments:
+
+        """
+
+        BAR = gen_class.ProgressBar(None, self.width, self.progress_sym,
+                                    self.empty_sym)
+
+        with gen_libs.no_std_out():
+            self.assertFalse(BAR.update(50))
 
     def test_zero_percent(self):
 
