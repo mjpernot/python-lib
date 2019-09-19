@@ -105,6 +105,7 @@ coverage run -a --source=gen_libs test/unit/gen_libs/write_file2.py
 coverage run -a --source=gen_libs test/unit/gen_libs/write_file.py
 coverage run -a --source=gen_libs test/unit/gen_libs/write_to_log.py
 coverage run -a --source=gen_class test/unit/gen_class/setup_mail.py
+coverage run -a --source=gen_class test/unit/gen_class/Daemon_init.py
 coverage run -a --source=gen_class test/unit/gen_class/Logger_init.py
 coverage run -a --source=gen_class test/unit/gen_class/Logger_log_close.py
 coverage run -a --source=gen_class test/unit/gen_class/Logger_log_crit.py
