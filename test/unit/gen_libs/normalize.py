@@ -41,6 +41,8 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Unit testing initilization.
+        test_rng3 -> Test with one range encompassing all ranges.
+        test_rng2 -> Test with two consective sets of ranges.
         test_rng1 -> Test with two sets of ranges.
 
     """
@@ -56,7 +58,35 @@ class UnitTest(unittest.TestCase):
         """
 
         self.rng = [(12, 15), (1, 10)]
+        self.rng2 = [(1, 12), (12, 15)]
+        self.rng3 = [(1, 22), (12, 15)]
         self.result = [(1, 10), (12, 15)]
+        self.result2 = [(1, 15)]
+        self.result3 = [(1, 22)]
+
+    def test_rng3(self):
+
+        """Function:  test_rng3
+
+        Description:  Test with one range encompassing all ranges.
+
+        Arguments:
+
+        """
+
+        self.assertEqual(gen_libs.normalize(self.rng3), self.result3)
+
+    def test_rng2(self):
+
+        """Function:  test_rng2
+
+        Description:  Test with two consective sets of ranges.
+
+        Arguments:
+
+        """
+
+        self.assertEqual(gen_libs.normalize(self.rng2), self.result2)
 
     def test_rng1(self):
 
