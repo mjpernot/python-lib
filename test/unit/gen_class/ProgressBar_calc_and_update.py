@@ -65,7 +65,7 @@ class UnitTest(unittest.TestCase):
         self.progress_sym = "#"
         self.empty_sym = " "
 
-    @mock.patch("gen_class.ProgressBar")
+    @mock.patch("gen_class.ProgressBar.update")
     def test_zero_one(self, mock_bar):
 
         """Function:  test_zero_one
@@ -76,14 +76,14 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_bar.update.return_value = True
+        mock_bar.return_value = True
 
         BAR = gen_class.ProgressBar(self.msg, self.width, self.progress_sym,
                                     self.empty_sym)
 
-        self.assertTrue(BAR.calc_and_update(0, 1))
+        self.assertFalse(BAR.calc_and_update(0, 1))
 
-    @mock.patch("gen_class.ProgressBar")
+    @mock.patch("gen_class.ProgressBar.update")
     def test_zero_percent(self, mock_bar):
 
         """Function:  test_zero_percent
@@ -94,14 +94,14 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_bar.update.return_value = True
+        mock_bar.return_value = True
 
         BAR = gen_class.ProgressBar(self.msg, self.width, self.progress_sym,
                                     self.empty_sym)
 
-        self.assertTrue(BAR.calc_and_update(0, 100))
+        self.assertFalse(BAR.calc_and_update(0, 100))
 
-    @mock.patch("gen_class.ProgressBar")
+    @mock.patch("gen_class.ProgressBar.update")
     def test_fifty_percent(self, mock_bar):
 
         """Function:  test_fifty_percent
@@ -112,14 +112,14 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_bar.update.return_value = True
+        mock_bar.return_value = True
 
         BAR = gen_class.ProgressBar(self.msg, self.width, self.progress_sym,
                                     self.empty_sym)
 
-        self.assertTrue(BAR.calc_and_update(50, 100))
+        self.assertFalse(BAR.calc_and_update(50, 100))
 
-    @mock.patch("gen_class.ProgressBar")
+    @mock.patch("gen_class.ProgressBar.update")
     def test_hundred_percent(self, mock_bar):
 
         """Function:  test_hundred_percent
@@ -130,12 +130,12 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_bar.update.return_value = True
+        mock_bar.return_value = True
 
         BAR = gen_class.ProgressBar(self.msg, self.width, self.progress_sym,
                                     self.empty_sym)
 
-        self.assertTrue(BAR.calc_and_update(100, 100))
+        self.assertFalse(BAR.calc_and_update(100, 100))
 
 
 if __name__ == "__main__":
