@@ -17,6 +17,7 @@
 # Standard
 import sys
 import os
+import io
 
 if sys.version_info < (2, 7):
     import unittest2 as unittest
@@ -58,9 +59,8 @@ class UnitTest(unittest.TestCase):
 
         self.to = "To_Address"
 
-    @mock.patch("gen_class.Mail.read_stdin")
-    @mock.patch("gen_class.sys")
-    def test_read_stdin(self, mock_sys, mock_read):
+    @mock.patch("gen_class.sys.stdin", io.StringIO(u"Test email line"))
+    def test_read_stdin(self):
 
         """Function:  test_read_stdin
 
@@ -70,11 +70,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_sys.stdin.return_value = ["This", "is", "a", "test"]
-        mock_read.return_value = True
         email = gen_class.Mail(self.to)
 
-        self.assertTrue(email.read_stdin())
+        email.read_stdin()
+
+        self.assertEqual((email.to, email.msg), (self.to, '"Test email line"'))
 
 
 if __name__ == "__main__":
