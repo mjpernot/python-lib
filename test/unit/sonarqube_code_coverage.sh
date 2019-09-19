@@ -121,6 +121,7 @@ coverage run -a --source=gen_class test/unit/gen_class/SingleInstanceException.p
 coverage run -a --source=gen_class test/unit/gen_class/Yum_fetch_update_pkgs.py
 coverage run -a --source=gen_class test/unit/gen_class/Yum_fetch_install_pkgs.py
 coverage run -a --source=gen_class test/unit/gen_class/Yum_get_distro.py
+coverage run -a --source=gen_class test/unit/gen_class/Yum_get_hostname.py
 coverage run -a --source=gen_class test/unit/gen_class/Yum_get_os.py
 coverage run -a --source=gen_class test/unit/gen_class/Yum_get_release.py
 coverage run -a --source=gen_class test/unit/gen_class/Yum_init.py
