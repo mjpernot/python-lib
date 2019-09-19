@@ -55,6 +55,7 @@ test/unit/gen_libs/milli_2_readadble.py
 test/unit/gen_libs/month_delta.py
 test/unit/gen_libs/mv_file.py
 test/unit/gen_libs/mv_file2.py
+test/unit/gen_libs/normalize.py
 test/unit/gen_libs/not_in_list.py
 test/unit/gen_libs/no_std_out.py
 test/unit/gen_libs/openfile.py

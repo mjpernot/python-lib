@@ -57,6 +57,7 @@ coverage run -a --source=gen_libs test/unit/gen_libs/milli_2_readadble.py
 coverage run -a --source=gen_libs test/unit/gen_libs/month_delta.py
 coverage run -a --source=gen_libs test/unit/gen_libs/mv_file.py
 coverage run -a --source=gen_libs test/unit/gen_libs/mv_file2.py
+coverage run -a --source=gen_libs test/unit/gen_libs/normalize.py
 coverage run -a --source=gen_libs test/unit/gen_libs/not_in_list.py
 coverage run -a --source=gen_libs test/unit/gen_libs/no_std_out.py
 coverage run -a --source=gen_libs test/unit/gen_libs/openfile.py
