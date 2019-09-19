@@ -121,6 +121,7 @@ pipeline {
                 ./test/unit/gen_class/ProgressBar_init.py
                 ./test/unit/gen_class/SingleInstanceException.py
                 ./test/unit/gen_class/System_init.py
+                ./test/unit/gen_class/System_set_host_name.py
                 ./test/unit/gen_class/Yum_init.py
                 ./test/unit/gen_class/Yum_get_hostname.py
                 ./test/unit/gen_class/Yum_get_release.py
