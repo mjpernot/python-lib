@@ -232,7 +232,7 @@ def arg_file_chk(args_array, file_chk_list, file_crt_list=None):
         (input) args_array -> Array of command line options and values.
         (input) file_chk_list -> Options which will have files included.
         (input) file_crt_list -> Options require files to be created.
-        (output) exit_flag -> If files are unavailable.
+        (output) status -> True|False - If files are unavailable.
 
     """
 
@@ -245,7 +245,7 @@ def arg_file_chk(args_array, file_chk_list, file_crt_list=None):
     else:
         file_crt_list = list(file_crt_list)
 
-    exit_flag = False
+    status = False
 
     for x in set(args_array.keys()) & set(file_chk_list):
 
@@ -263,10 +263,10 @@ def arg_file_chk(args_array, file_chk_list, file_crt_list=None):
 
             except IOError as (errno, strerror):
 
-                exit_flag = _file_create(name, x, file_crt_list, errno,
-                                         strerror, exit_flag)
+                status = _file_create(name, x, file_crt_list, errno, strerror,
+                                      status)
 
-    return exit_flag
+    return status
 
 
 def arg_noreq_xor(args_array, xor_noreq_list):
