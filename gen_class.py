@@ -699,24 +699,24 @@ class Logger(object):
 
         self.handler.setFormatter(self.formatter)
 
-        self.logger = logging.getLogger(name)
+        self.log = logging.getLogger(name)
 
         if level == "DEBUG":
-            self.logger.setLevel(logging.DEBUG)
+            self.log.setLevel(logging.DEBUG)
 
         elif level == "WARNING":
-            self.logger.setLevel(logging.WARNING)
+            self.log.setLevel(logging.WARNING)
 
         elif level == "ERROR":
-            self.logger.setLevel(logging.ERROR)
+            self.log.setLevel(logging.ERROR)
 
         elif level == "CRITICAL":
-            self.logger.setLevel(logging.CRITICAL)
+            self.log.setLevel(logging.CRITICAL)
 
         else:
-            self.logger.setLevel(logging.INFO)
+            self.log.setLevel(logging.INFO)
 
-        self.logger.addHandler(self.handler)
+        self.log.addHandler(self.handler)
 
     def log_debug(self, msg, **kwargs):
 
@@ -729,7 +729,7 @@ class Logger(object):
 
         """
 
-        self.logger.debug(msg)
+        self.log.debug(msg)
 
     def log_info(self, msg, **kwargs):
 
@@ -742,7 +742,7 @@ class Logger(object):
 
         """
 
-        self.logger.info(msg)
+        self.log.info(msg)
 
     def log_warn(self, msg, **kwargs):
 
@@ -755,7 +755,7 @@ class Logger(object):
 
         """
 
-        self.logger.warning(msg)
+        self.log.warning(msg)
 
     def log_err(self, msg, **kwargs):
 
@@ -768,7 +768,7 @@ class Logger(object):
 
         """
 
-        self.logger.error(msg)
+        self.log.error(msg)
 
     def log_crit(self, msg, **kwargs):
 
@@ -781,7 +781,7 @@ class Logger(object):
 
         """
 
-        self.logger.critical(msg)
+        self.log.critical(msg)
 
     def log_close(self, **kwargs):
 
@@ -794,9 +794,9 @@ class Logger(object):
 
         """
 
-        for handle in self.logger.handlers:
+        for handle in self.log.handlers:
             handle.close()
-            self.logger.removeHandler(handle)
+            self.log.removeHandler(handle)
 
 
 class Yum(yum.YumBase):
