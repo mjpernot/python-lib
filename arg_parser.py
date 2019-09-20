@@ -562,22 +562,22 @@ def arg_xor_dict(args_array, opt_xor_dict):
         (input) args_array -> Array of command line options and values.
         (input) opt_xor_dict -> Dictionary with key and values that will be xor
             with each other.
-        (output) xor_flag -> True or False on validity of options.
+        (output) status -> True|False - If key or value is in args_array.
 
     """
 
     args_array = dict(args_array)
     opt_xor_dict = dict(opt_xor_dict)
-    xor_flag = True
+    status = True
 
     for x in set(opt_xor_dict.keys()) & set(args_array.keys()):
 
         for y in set(opt_xor_dict[x]) & set(args_array.keys()):
             print("Option {0} or {1}, but not both.".format(x, y))
-            xor_flag = False
+            status = False
             break
 
-    return xor_flag
+    return status
 
 
 def _file_create(name, option, file_crt_list, errno, strerror, exit_flag,
