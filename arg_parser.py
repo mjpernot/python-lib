@@ -82,7 +82,7 @@ def arg_add_def(args_array, def_array=None, opt_req_list=None, **kwargs):
     return args_array
 
 
-def arg_cond_req(args_array, opt_con_req_list):
+def arg_cond_req(args_array, opt_con_req_list, **kwargs):
 
     """Function:  arg_cond_req
 
@@ -113,7 +113,7 @@ def arg_cond_req(args_array, opt_con_req_list):
     return status
 
 
-def arg_cond_req_or(args_array, opt_con_req_dict):
+def arg_cond_req_or(args_array, opt_con_req_dict, **kwargs):
 
     """Function:  arg_cond_req_or
 
@@ -172,7 +172,7 @@ def arg_default(arg, args_array, opt_def_dict, **kwargs):
         sys.exit("Error: Arg {0} missing value".format(arg))
 
 
-def arg_dir_chk_crt(args_array, dir_chk_list, dir_crt_list=None):
+def arg_dir_chk_crt(args_array, dir_chk_list, dir_crt_list=None, **kwargs):
 
     """Function:  arg_dir_chk_crt
 
@@ -222,7 +222,7 @@ def arg_dir_chk_crt(args_array, dir_chk_list, dir_crt_list=None):
     return status
 
 
-def arg_file_chk(args_array, file_chk_list, file_crt_list=None):
+def arg_file_chk(args_array, file_chk_list, file_crt_list=None, **kwargs):
 
     """Function:  arg_file_chk
 
@@ -269,7 +269,7 @@ def arg_file_chk(args_array, file_chk_list, file_crt_list=None):
     return status
 
 
-def arg_noreq_xor(args_array, xor_noreq_list):
+def arg_noreq_xor(args_array, xor_noreq_list, **kwargs):
 
     """Function:  arg_noreq_xor
 
@@ -354,7 +354,7 @@ def arg_parse2(argv, opt_val_list, opt_def_dict=None, **kwargs):
     return args_array
 
 
-def arg_require(args_array, opt_req_list):
+def arg_require(args_array, opt_req_list, **kwargs):
 
     """Function:  arg_require
 
@@ -378,7 +378,7 @@ def arg_require(args_array, opt_req_list):
     return status
 
 
-def arg_req_or_lst(args_array, opt_or_dict_list):
+def arg_req_or_lst(args_array, opt_or_dict_list, **kwargs):
 
     """Function:  arg_req_or_lst
 
@@ -412,7 +412,7 @@ def arg_req_or_lst(args_array, opt_or_dict_list):
     return status
 
 
-def arg_req_xor(args_array, opt_xor_list):
+def arg_req_xor(args_array, opt_xor_list, **kwargs):
 
     """Function:  arg_req_xor
 
@@ -442,7 +442,7 @@ def arg_req_xor(args_array, opt_xor_list):
     return status
 
 
-def arg_set_path(args_array, arg_opt):
+def arg_set_path(args_array, arg_opt, **kwargs):
 
     """Function:  arg_set_path
 
@@ -464,7 +464,7 @@ def arg_set_path(args_array, arg_opt):
         return ""
 
 
-def arg_validate(args_array, valid_func):
+def arg_validate(args_array, valid_func, **kwargs):
 
     """Function:  arg_validate
 
@@ -543,7 +543,7 @@ def arg_wildcard(args_array, opt_wildcard, **kwargs):
     return args_array
 
 
-def arg_xor_dict(args_array, opt_xor_dict):
+def arg_xor_dict(args_array, opt_xor_dict, **kwargs):
 
     """Function:  arg_xor_dict
 

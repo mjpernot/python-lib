@@ -6,6 +6,17 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 ## [2.7.6] - 2019-09-20
 ### Changed
+- arg_parser.arg_xor_dict:  Added \*\*kwargs to argument list.
+- arg_parser.arg_validate:  Added \*\*kwargs to argument list.
+- arg_parser.arg_set_path:  Added \*\*kwargs to argument list.
+- arg_parser.arg_req_xor:  Added \*\*kwargs to argument list.
+- arg_parser.arg_req_or_lst:  Added \*\*kwargs to argument list.
+- arg_parser.arg_require:  Added \*\*kwargs to argument list.
+- arg_parser.arg_noreq_xor:  Added \*\*kwargs to argument list.
+- arg_parser.arg_file_chk:  Added \*\*kwargs to argument list.
+- arg_parser.arg_dir_chk_crt:  Added \*\*kwargs to argument list.
+- arg_parser.arg_cond_req_or:  Added \*\*kwargs to argument list.
+- arg_parser.arg_cond_req:  Added \*\*kwargs to argument list.
 - arg_parser.arg_parse2:  Documentation update.
 - arg_parser.\_file_create:  Changed "exit_flag" to "status" and updated documentation.
 - arg_parser.arg_xor_dict:  Changed "xor_flag" to "status" and updated documentation.
