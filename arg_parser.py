@@ -428,13 +428,13 @@ def arg_req_xor(args_array, opt_xor_list):
     Arguments:
         (input) args_array -> Array of command line options and values.
         (input) opt_xor_list -> dict of options that are required XOR.
-        (output) return -> True or false.
+        (output) status -> True|False - If one option has been selected.
 
     """
 
     args_array = dict(args_array)
     opt_xor_list = dict(opt_xor_list)
-    status_flag = True
+    status = True
 
     for x in opt_xor_list:
 
@@ -443,9 +443,9 @@ def arg_req_xor(args_array, opt_xor_list):
                             (opt_xor_list[x] in args_array)):
             print("Option {0} or {1}, but not both.".format(x,
                                                             opt_xor_list[x]))
-            status_flag = False
+            status = False
 
-    return status_flag
+    return status
 
 
 def arg_set_path(args_array, arg_opt):
