@@ -183,7 +183,7 @@ def arg_dir_chk_crt(args_array, dir_chk_list, dir_crt_list=None):
         (input) args_array -> Array of command line options and values.
         (input) dir_chk_list -> Options which will have directories.
         (input) dir_crt_list -> Options to create directories if not present.
-        (output) exit_flag -> If directories are unavailable.
+        (output) status -> True|False - If directories are unavailable.
 
     """
 
@@ -196,7 +196,7 @@ def arg_dir_chk_crt(args_array, dir_chk_list, dir_crt_list=None):
     else:
         dir_crt_list = list(dir_crt_list)
 
-    exit_flag = False
+    status = False
 
     for x in set(dir_chk_list) & set(args_array.keys()):
 
@@ -209,17 +209,17 @@ def arg_dir_chk_crt(args_array, dir_chk_list, dir_crt_list=None):
 
                 except:
                     print("Error:  Unable to create {0}".format(args_array[x]))
-                    exit_flag = True
+                    status = True
 
             else:
                 print("Error:  {0} does not exist.".format(args_array[x]))
-                exit_flag = True
+                status = True
 
         elif not os.access(args_array[x], os.W_OK) and x in dir_crt_list:
             print("Error: {0} is not writable.".format(args_array[x]))
-            exit_flag = True
+            status = True
 
-    return exit_flag
+    return status
 
 
 def arg_file_chk(args_array, file_chk_list, file_crt_list=None):
