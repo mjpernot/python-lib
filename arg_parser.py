@@ -369,19 +369,19 @@ def arg_require(args_array, opt_req_list):
     Arguments:
         (input) args_array -> Array of command line options and values.
         (input) opt_req_list -> Options that are required.
-        (output) exit_flag -> If required options not listed.
+        (output) status -> True|False - If required option is not listed.
 
     """
 
     args_array = dict(args_array)
     opt_req_list = list(opt_req_list)
-    exit_flag = False
+    status = False
 
     for x in set(opt_req_list) - set(args_array.keys()):
         print("Error:  The '{0}' option is required".format(x))
-        exit_flag = True
+        status = True
 
-    return exit_flag
+    return status
 
 
 def arg_req_or_lst(args_array, opt_or_dict_list):
