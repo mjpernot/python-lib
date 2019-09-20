@@ -6,6 +6,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 ## [2.7.6] - 2019-09-20
 ### Changed
+- arg_parser.arg_cond_req_or:  Changed "or_flag" to "status" and updated documentation.
 - arg_parser.arg_cond_req:  Changed "exit_flag" to "status" and updated documentation.
 - gen_class.Logger:  Changed "self.logger" to "self.log" to avoid confusion with class name.
 - gen_class.Logger.\_\_init\_\_:  Moved "mode" argument to \*\*kwargs.
