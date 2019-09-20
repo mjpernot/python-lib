@@ -411,7 +411,7 @@ def arg_req_or_lst(args_array, opt_or_dict, **kwargs):
     return status
 
 
-def arg_req_xor(args_array, opt_xor_list, **kwargs):
+def arg_req_xor(args_array, opt_xor, **kwargs):
 
     """Function:  arg_req_xor
 
@@ -420,22 +420,22 @@ def arg_req_xor(args_array, opt_xor_list, **kwargs):
 
     Arguments:
         (input) args_array -> Array of command line options and values.
-        (input) opt_xor_list -> dict of options that are required XOR.
+        (input) opt_xor -> dict of options that are required XOR.
         (output) status -> True|False - If one option has been selected.
 
     """
 
     args_array = dict(args_array)
-    opt_xor_list = dict(opt_xor_list)
+    opt_xor = dict(opt_xor)
     status = True
 
-    for x in opt_xor_list:
+    for x in opt_xor:
 
         # Xor between key and values in dictionary.
         if not operator.xor((x in args_array),
-                            (opt_xor_list[x] in args_array)):
+                            (opt_xor[x] in args_array)):
             print("Option {0} or {1}, but not both.".format(x,
-                                                            opt_xor_list[x]))
+                                                            opt_xor[x]))
             status = False
 
     return status
