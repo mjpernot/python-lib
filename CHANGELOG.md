@@ -7,6 +7,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 ## [2.7.6] - 2019-09-20
 ### Changed
 - gen_class.Logger.\_\_init\_\_:  Moved "mode" argument to \*\*kwargs.
+- gen_class.Logger.\_\_init\_\_:  Removed check for "INFO" and let the "else" clause catch it.
 
 ### Added
 - gen_class.Mail.add_2_msg:  Added ability to convert non-string arguments to strings.

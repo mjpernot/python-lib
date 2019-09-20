@@ -704,9 +704,6 @@ class Logger(object):
         if level == "DEBUG":
             self.logger.setLevel(logging.DEBUG)
 
-        elif level == "INFO":
-            self.logger.setLevel(logging.INFO)
-
         elif level == "WARNING":
             self.logger.setLevel(logging.WARNING)
 
