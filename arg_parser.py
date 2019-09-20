@@ -457,7 +457,7 @@ def arg_set_path(args_array, arg_opt):
     Arguments:
         (input) args_array -> Array of command line options and values.
         (input) arg_opt -> Argument option holding directory path.
-        (output) Directory path.
+        (output) Returns directory path or empty string.
 
     """
 
@@ -480,21 +480,21 @@ def arg_validate(args_array, valid_func):
     Arguments:
         (input) args_array -> Array of command line options and values.
         (input) valid_func -> Dictionary list of options & functions.
-        (output) status_flag -> True or False on validity of data.
+        (output) status -> True|False - If format is valid.
 
     """
 
     args_array = dict(args_array)
-    status_flag = True
+    status = True
 
     for x in set(valid_func.keys()) & set(args_array.keys()):
 
         # Call function from function list.
         if not valid_func[x](args_array[x]):
             print("Error:  Invalid format: {0} '{1}'".format(x, args_array[x]))
-            status_flag = False
+            status = False
 
-    return status_flag
+    return status
 
 
 def arg_valid_val(args_array, opt_valid_val, **kwargs):
