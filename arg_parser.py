@@ -506,13 +506,13 @@ def arg_valid_val(args_array, opt_valid_val, **kwargs):
     Arguments:
         (input) args_array -> Array of command line options and values.
         (input) opt_valid_val -> Dictionary of options & their valid values
-        (output) status_flag -> True or False on validity of data.
+        (output) status -> True|False - If format is valid.
 
     """
 
     args_array = dict(args_array)
     opt_valid_val = dict(opt_valid_val)
-    status_flag = True
+    status = True
 
     # Intersects the keys in args_array and opt_valid_val.
     for x in set(args_array.keys()) & set(opt_valid_val.keys()):
@@ -521,9 +521,9 @@ def arg_valid_val(args_array, opt_valid_val, **kwargs):
         if not args_array[x] in opt_valid_val[x]:
             print("Error:  Incorrect value ({0}) for option: {1}".
                   format(args_array[x], x))
-            status_flag = False
+            status = False
 
-    return status_flag
+    return status
 
 
 def arg_wildcard(args_array, opt_wildcard, **kwargs):
