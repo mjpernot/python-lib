@@ -6,6 +6,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 ## [2.7.6] - 2019-09-20
 ### Changed
+- arg_parser.\_file_create:  Changed "exit_flag" to "status" and updated documentation.
 - arg_parser.arg_xor_dict:  Changed "xor_flag" to "status" and updated documentation.
 - arg_parser.arg_valid_val:  Changed "status_flag" to "status" and updated documentation.
 - arg_parser.arg_validate:  Changed "status_flag" to "status" and updated documentation.

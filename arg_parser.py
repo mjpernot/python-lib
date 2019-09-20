@@ -580,7 +580,7 @@ def arg_xor_dict(args_array, opt_xor_dict):
     return status
 
 
-def _file_create(name, option, file_crt_list, errno, strerror, exit_flag,
+def _file_create(name, option, file_crt_list, errno, strerror, status,
                  **kwargs):
 
     """Function:  _file_create
@@ -596,8 +596,8 @@ def _file_create(name, option, file_crt_list, errno, strerror, exit_flag,
         (input) file_crt_list -> Options that require files to be created.
         (input) errno -> Current error status from file_crt_list function.
         (input) strerror -> Current error message from file_crt_list function.
-        (input) exit_flag -> Current status of file_crt_list function.
-        (output) exit_flag -> True|False - if file creation fails.
+        (input) status -> Current status of file_crt_list function.
+        (output) status -> True|False - If file creation fails.
 
     """
 
@@ -613,15 +613,15 @@ def _file_create(name, option, file_crt_list, errno, strerror, exit_flag,
             # Unable to create file.
             print("I/O Error: ({0}): {1}".format(errno, strerror))
             print("Check option: '{0}', file: '{1}'".format(option, name))
-            exit_flag = True
+            status = True
 
     # File not present.
     else:
         print("I/O Error: ({0}): {1}".format(errno, strerror))
         print("Check option: '{0}', file: '{1}'".format(option, name))
-        exit_flag = True
+        status = True
 
-    return exit_flag
+    return status
 
 
 def _parse_multi(argv, args_array, opt_def_dict, **kwargs):
