@@ -6,6 +6,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 ## [2.7.6] - 2019-09-20
 ### Changed
+- arg_parser.arg_noreq_xor:  Changed "xor_flag" to "status" and updated documentation.
 - arg_parser.arg_file_chk:  Changed "exit_flag" to "status" and updated documentation.
 - arg_parser.arg_dir_chk_crt:  Changed "exit_flag" to "status" and updated documentation.
 - arg_parser.arg_cond_req_or:  Changed "or_flag" to "status" and updated documentation.

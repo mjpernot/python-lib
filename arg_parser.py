@@ -279,13 +279,13 @@ def arg_noreq_xor(args_array, xor_noreq_list):
     Arguments:
         (input) args_array -> Array of command line options and values.
         (input) xor_noreq_list -> Dictionary of the two XOR options.
-        (output) xor_flag -> True or false.
+        (output) status -> True|False - If only one option has been selected.
 
     """
 
     args_array = dict(args_array)
     xor_noreq_list = dict(xor_noreq_list)
-    xor_flag = True
+    status = True
 
     for x in xor_noreq_list:
 
@@ -296,9 +296,9 @@ def arg_noreq_xor(args_array, xor_noreq_list):
 
             print("Options: {0} or {1}, not both.".format(x,
                                                           xor_noreq_list[x]))
-            xor_flag = False
+            status = False
 
-    return xor_flag
+    return status
 
 
 def arg_parse2(argv, opt_val_list, opt_def_dict=None, **kwargs):
