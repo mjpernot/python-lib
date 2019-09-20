@@ -122,7 +122,7 @@ def arg_cond_req_or(args_array, opt_con_req_dict, **kwargs):
 
     Arguments:
         (input) args_array -> Array of command line options and values.
-        (input) opt_con_req_dict -> List options that might be required.
+        (input) opt_con_req_dict -> Dict of options that might be required.
         (output) status -> True|False - If options are the argument list.
 
     """
@@ -269,7 +269,7 @@ def arg_file_chk(args_array, file_chk_list, file_crt_list=None, **kwargs):
     return status
 
 
-def arg_noreq_xor(args_array, xor_noreq_list, **kwargs):
+def arg_noreq_xor(args_array, xor_noreq, **kwargs):
 
     """Function:  arg_noreq_xor
 
@@ -278,24 +278,23 @@ def arg_noreq_xor(args_array, xor_noreq_list, **kwargs):
 
     Arguments:
         (input) args_array -> Array of command line options and values.
-        (input) xor_noreq_list -> Dictionary of the two XOR options.
+        (input) xor_noreq -> Dictionary of the two XOR options.
         (output) status -> True|False - If only one option has been selected.
 
     """
 
     args_array = dict(args_array)
-    xor_noreq_list = dict(xor_noreq_list)
+    xor_noreq = dict(xor_noreq)
     status = True
 
-    for x in xor_noreq_list:
+    for x in xor_noreq:
 
         # Xor between key and values in dictionary.
         if not (operator.xor((x in args_array),
-                             (xor_noreq_list[x] in args_array)) or
-                (x not in args_array and xor_noreq_list[x] not in args_array)):
+                             (xor_noreq[x] in args_array)) or
+                (x not in args_array and xor_noreq[x] not in args_array)):
 
-            print("Options: {0} or {1}, not both.".format(x,
-                                                          xor_noreq_list[x]))
+            print("Options: {0} or {1}, not both.".format(x, xor_noreq[x]))
             status = False
 
     return status

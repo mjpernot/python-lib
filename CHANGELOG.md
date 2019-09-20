@@ -6,6 +6,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 ## [2.7.6] - 2019-09-20
 ### Changed
+- arg_parser.arg_noreq_xor:  Changed "xor_noreq_list" to "xor_noreq" due to confusing datatype association.
 - arg_parser.arg_cond_req:  Changed "opt_con_req_list" to "opt_con_req" due to confusing datatype association.
 - arg_parser.arg_xor_dict:  Added \*\*kwargs to argument list.
 - arg_parser.arg_validate:  Added \*\*kwargs to argument list.
