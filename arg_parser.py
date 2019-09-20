@@ -94,23 +94,23 @@ def arg_cond_req(args_array, opt_con_req_list):
         (input) opt_con_req_list -> Dictionary list containing the option as
             the dictionary key to a list of arguments that are required for the
             dictionary key option.
-        (output) exit_flag -> True or false if args are included.
+        (output) status -> True|False - If required args are included.
 
     """
 
     args_array = dict(args_array)
     opt_con_req_list = dict(opt_con_req_list)
-    exit_flag = True
+    status = True
 
     for x in set(args_array.keys()) & set(opt_con_req_list.keys()):
 
         for y in set(opt_con_req_list[x]) - set(args_array.keys()):
-            exit_flag = False
+            status = False
             print("Error:  Option {0} requires options {1}.".
                   format(x, opt_con_req_list[x]))
             break
 
-    return exit_flag
+    return status
 
 
 def arg_cond_req_or(args_array, opt_con_req_dict):
