@@ -395,13 +395,13 @@ def arg_req_or_lst(args_array, opt_or_dict_list):
     Arguments:
         (input) args_array -> Array of command line options and values.
         (input) opt_or_dict_list -> Dictionary list of options for OR.
-        (output) or_flag -> True or False on the Or List selection.
+        (output) status -> True|False - If requirements have been meet.
 
     """
 
     args_array = dict(args_array)
     opt_or_dict_list = dict(opt_or_dict_list)
-    or_flag = True
+    status = True
 
     for x in set(opt_or_dict_list.keys()) - set(args_array.keys()):
         tmp_flag = False
@@ -413,9 +413,9 @@ def arg_req_or_lst(args_array, opt_or_dict_list):
         if not tmp_flag:
             print("Error:  Option: {0} or one of these: {1} is required.".
                   format(x, opt_or_dict_list[x]))
-            or_flag = tmp_flag
+            status = tmp_flag
 
-    return or_flag
+    return status
 
 
 def arg_req_xor(args_array, opt_xor_list):
