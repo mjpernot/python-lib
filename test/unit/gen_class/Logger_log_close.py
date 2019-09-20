@@ -74,7 +74,7 @@ class UnitTest(unittest.TestCase):
         log_file.log_info("TEST")
         log_file.log_close()
 
-        self.assertEqual(log_file.logger.handlers, [])
+        self.assertEqual(log_file.log.handlers, [])
 
     def tearDown(self):
 
