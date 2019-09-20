@@ -308,14 +308,8 @@ def arg_parse2(argv, opt_val_list, opt_def_dict=None, **kwargs):
     Description:  Next version of arg_parse.  This version not only parses the
         command line arguments into an array, but includes an option for a
         dictionary which allows arguments to have default values if no value is
-        passed with the argument.
-        Additional notes on major changes:
-            - Removed the opt_noval_list option, it assumes anything not in
-                opt_val_list array is valid and sets the option to True.
-            - Removed the exit_flag variable and instead uses the sys.exit
-                command to exit the function and program.
-            - Modified the opt_val_list array to have the "-" included with the
-                option when checking for options in the argv command line.
+        passed with the argument.  It assumes anything not in opt_val_list
+        array is valid and sets the option to True.
 
     Arguments:
         (input) argv -> Arguments from the command line.
