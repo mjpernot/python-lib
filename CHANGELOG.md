@@ -4,7 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
-## [2.7.6] - 2019-09-18
+## [2.7.6] - 2019-09-20
+### Changed
+- gen_class.Logger.\_\_init\_\_:  Moved "mode" argument to \*\*kwargs.
+
 ### Added
 - gen_class.Mail.add_2_msg:  Added ability to convert non-string arguments to strings.
 - gen_class.setup_mail:  Initialize a mail instance.

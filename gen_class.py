@@ -670,7 +670,7 @@ class Logger(object):
     """
 
     def __init__(self, name, log_file, level="INFO", msg_fmt=None,
-                 date_fmt=None, mode="a", **kwargs):
+                 date_fmt=None, **kwargs):
 
         """Method:  __init__
 
@@ -682,10 +682,13 @@ class Logger(object):
             (input) level -> Level of message to accept to the log file.
             (input) msg_fmt -> Format of a log file entry.
             (input) date_fmt -> Format of date and time for a log file entry.
-            (input) mode -> a|w - Write mode to log file (append, write)
-                NOTE:  Mode is not yet implemented.
+            (input) **kwargs:
+                mode -> a|w - Write mode to log file (append, write)
+                    NOTE:  Mode is not yet implemented.
 
         """
+
+        mode = kwargs.get("mode", "a")
 
         self.handler = logging.FileHandler(log_file)
 
