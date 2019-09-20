@@ -82,7 +82,7 @@ def arg_add_def(args_array, def_array=None, opt_req_list=None, **kwargs):
     return args_array
 
 
-def arg_cond_req(args_array, opt_con_req_list, **kwargs):
+def arg_cond_req(args_array, opt_con_req, **kwargs):
 
     """Function:  arg_cond_req
 
@@ -91,7 +91,7 @@ def arg_cond_req(args_array, opt_con_req_list, **kwargs):
 
     Arguments:
         (input) args_array -> Array of command line options and values.
-        (input) opt_con_req_list -> Dictionary list containing the option as
+        (input) opt_con_req -> Dictionary list containing the option as
             the dictionary key to a list of arguments that are required for the
             dictionary key option.
         (output) status -> True|False - If required args are included.
@@ -99,15 +99,15 @@ def arg_cond_req(args_array, opt_con_req_list, **kwargs):
     """
 
     args_array = dict(args_array)
-    opt_con_req_list = dict(opt_con_req_list)
+    opt_con_req = dict(opt_con_req)
     status = True
 
-    for x in set(args_array.keys()) & set(opt_con_req_list.keys()):
+    for x in set(args_array.keys()) & set(opt_con_req.keys()):
 
-        for y in set(opt_con_req_list[x]) - set(args_array.keys()):
+        for y in set(opt_con_req[x]) - set(args_array.keys()):
             status = False
             print("Error:  Option {0} requires options {1}.".
-                  format(x, opt_con_req_list[x]))
+                  format(x, opt_con_req[x]))
             break
 
     return status
