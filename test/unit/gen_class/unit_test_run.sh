@@ -5,13 +5,25 @@
 #   is located at.
 
 echo "Unit test: gen_class module"  
+test/unit/gen_class/setup_mail.py
+test/unit/gen_class/Daemon_init.py
+test/unit/gen_class/Logger_init.py
+test/unit/gen_class/Logger_log_close.py
+test/unit/gen_class/Logger_log_crit.py
+test/unit/gen_class/Logger_log_debug.py
+test/unit/gen_class/Logger_log_err.py
+test/unit/gen_class/Logger_log_info.py
+test/unit/gen_class/Logger_log_warn.py
 test/unit/gen_class/ProgressBar_init.py
 test/unit/gen_class/ProgressBar_update.py
 test/unit/gen_class/ProgressBar_calc_and_update.py
 test/unit/gen_class/SingleInstanceException.py
 test/unit/gen_class/ProgramLock_init.py
 test/unit/gen_class/ProgramLock_del.py
+test/unit/gen_class/System_init.py
+test/unit/gen_class/System_set_host_name.py
 test/unit/gen_class/Yum_init.py
+test/unit/gen_class/Yum_get_hostname.py
 test/unit/gen_class/Yum_get_os.py
 test/unit/gen_class/Yum_get_distro.py
 test/unit/gen_class/Yum_get_release.py

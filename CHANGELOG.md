@@ -4,6 +4,50 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [2.7.6] - 2019-09-23
+### Fixed
+- gen_libs.dict_2_list:  Added check to only process dictionaries where that key exists in the dictionary.
+
+### Changed
+- gen_libs.normalize:  Changed "pass" to "continue" to prevent confusion on processing flow.
+- arg_parser.arg_req_xor:  Changed "opt_xor_list" to "opt_xor" due to confusing datatype association.
+- arg_parser.arg_req_or_lst:  Changed "opt_or_dict_list" to "opt_or_dict" due to confusing datatype association.
+- arg_parser.arg_noreq_xor:  Changed "xor_noreq_list" to "xor_noreq" due to confusing datatype association.
+- arg_parser.arg_cond_req:  Changed "opt_con_req_list" to "opt_con_req" due to confusing datatype association.
+- arg_parser.arg_xor_dict:  Added \*\*kwargs to argument list.
+- arg_parser.arg_validate:  Added \*\*kwargs to argument list.
+- arg_parser.arg_set_path:  Added \*\*kwargs to argument list.
+- arg_parser.arg_req_xor:  Added \*\*kwargs to argument list.
+- arg_parser.arg_req_or_lst:  Added \*\*kwargs to argument list.
+- arg_parser.arg_require:  Added \*\*kwargs to argument list.
+- arg_parser.arg_noreq_xor:  Added \*\*kwargs to argument list.
+- arg_parser.arg_file_chk:  Added \*\*kwargs to argument list.
+- arg_parser.arg_dir_chk_crt:  Added \*\*kwargs to argument list.
+- arg_parser.arg_cond_req_or:  Added \*\*kwargs to argument list.
+- arg_parser.arg_cond_req:  Added \*\*kwargs to argument list.
+- arg_parser.arg_parse2:  Documentation update.
+- arg_parser.\_file_create:  Changed "exit_flag" to "status" and updated documentation.
+- arg_parser.arg_xor_dict:  Changed "xor_flag" to "status" and updated documentation.
+- arg_parser.arg_valid_val:  Changed "status_flag" to "status" and updated documentation.
+- arg_parser.arg_validate:  Changed "status_flag" to "status" and updated documentation.
+- arg_parser.arg_req_xor:  Changed "status_flag" to "status" and updated documentation.
+- arg_parser.arg_req_or_lst:  Changed "or_flag" to "status" and updated documentation.
+- arg_parser.arg_require:  Changed "exit_flag" to "status" and updated documentation.
+- arg_parser.arg_noreq_xor:  Changed "xor_flag" to "status" and updated documentation.
+- arg_parser.arg_file_chk:  Changed "exit_flag" to "status" and updated documentation.
+- arg_parser.arg_dir_chk_crt:  Changed "exit_flag" to "status" and updated documentation.
+- arg_parser.arg_cond_req_or:  Changed "or_flag" to "status" and updated documentation.
+- arg_parser.arg_cond_req:  Changed "exit_flag" to "status" and updated documentation.
+- gen_class.Logger:  Changed "self.logger" to "self.log" to avoid confusion with class name.
+- gen_class.Logger.\_\_init\_\_:  Moved "mode" argument to \*\*kwargs.
+- gen_class.Logger.\_\_init\_\_:  Removed check for "INFO" and let the "else" clause catch it.
+
+### Added
+- gen_class.Mail.add_2_msg:  Added ability to convert non-string arguments to strings.
+- gen_class.setup_mail:  Initialize a mail instance.
+- gen_libs.cp_dir:  Copies a directory from source to destination with exception handling.
+
+
 ## [2.7.5] - 2019-07-22
 ### Change
 - gen_libs.list_files:  Refactored function.

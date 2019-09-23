@@ -41,10 +41,6 @@ class FileOpen3(object):
 
     Description:  Class stub holder for file open class.
 
-    Super-Class:
-
-    Sub-Classes:
-
     Methods:
         close -> Stub holder for close function.
 
@@ -68,10 +64,6 @@ class FileOpen2(object):
     """Class:  FileOpen2
 
     Description:  Class stub holder for file open class.
-
-    Super-Class:
-
-    Sub-Classes:
 
     Methods:
         close -> Stub holder for close function.
@@ -97,10 +89,6 @@ class FileOpen(object):
 
     Description:  Class stub holder for file open class.
 
-    Super-Class:
-
-    Sub-Classes:
-
     Methods:
         close -> Stub holder for close function.
 
@@ -124,10 +112,6 @@ class UnitTest(unittest.TestCase):
     """Class:  UnitTest
 
     Description:  Class which is a representation of a unit testing.
-
-    Super-Class:  unittest.TestCase
-
-    Sub-Classes:
 
     Methods:
         setUp -> Unit testing initilization.

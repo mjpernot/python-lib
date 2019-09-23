@@ -152,6 +152,7 @@ exit
 
 ```
 cd {Python_Project}/python-lib
+test/unit/gen_libs/cp_dir.py
 test/unit/gen_libs/month_delta.py
 test/unit/gen_libs/file_search_cnt.py
 test/unit/gen_libs/get_base_dir.py
@@ -203,6 +204,7 @@ test/unit/gen_libs/make_zip.py
 test/unit/gen_libs/milli_2_readadble.py
 test/unit/gen_libs/mv_file.py
 test/unit/gen_libs/mv_file2.py
+test/unit/gen_libs/normalize.py
 test/unit/gen_libs/not_in_list.py
 test/unit/gen_libs/openfile.py
 test/unit/gen_libs/pct_int.py
@@ -268,12 +270,24 @@ test/unit/arg_parser/unit_test_run.sh
 
 ```
 cd {Python_Project}/python-lib
+test/unit/gen_class/setup_mail.py
+test/unit/gen_class/Daemon_init.py
+test/unit/gen_class/Logger_init.py
+test/unit/gen_class/Logger_log_close.py
+test/unit/gen_class/Logger_log_crit.py
+test/unit/gen_class/Logger_log_debug.py
+test/unit/gen_class/Logger_log_err.py
+test/unit/gen_class/Logger_log_info.py
+test/unit/gen_class/Logger_log_warn.py
 test/unit/gen_class/ProgressBar_init.py
 test/unit/gen_class/ProgressBar_update.py
 test/unit/gen_class/ProgressBar_calc_and_update.py
 test/unit/gen_class/SingleInstanceException.py
 test/unit/gen_class/ProgramLock_init.py
+test/unit/gen_class/System_init.py
+test/unit/gen_class/System_set_host_name.py
 test/unit/gen_class/Yum_init.py
+test/unit/gen_class/Yum_get_hostname.py
 test/unit/gen_class/Yum_get_os.py
 test/unit/gen_class/Yum_get_release.py
 test/unit/gen_class/Yum_get_distro.py

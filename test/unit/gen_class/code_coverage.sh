@@ -8,13 +8,25 @@ coverage erase
 
 echo ""
 echo "Running unit test modules in conjunction with coverage"
+coverage run -a --source=gen_class test/unit/gen_class/setup_mail.py
+coverage run -a --source=gen_class test/unit/gen_class/Daemon_init.py
+coverage run -a --source=gen_class test/unit/gen_class/Logger_init.py
+coverage run -a --source=gen_class test/unit/gen_class/Logger_log_close.py
+coverage run -a --source=gen_class test/unit/gen_class/Logger_log_crit.py
+coverage run -a --source=gen_class test/unit/gen_class/Logger_log_debug.py
+coverage run -a --source=gen_class test/unit/gen_class/Logger_log_err.py
+coverage run -a --source=gen_class test/unit/gen_class/Logger_log_info.py
+coverage run -a --source=gen_class test/unit/gen_class/Logger_log_warn.py
 coverage run -a --source=gen_class test/unit/gen_class/ProgramLock_del.py
 coverage run -a --source=gen_class test/unit/gen_class/ProgramLock_init.py
 coverage run -a --source=gen_class test/unit/gen_class/ProgressBar_calc_and_update.py
 coverage run -a --source=gen_class test/unit/gen_class/ProgressBar_init.py
 coverage run -a --source=gen_class test/unit/gen_class/ProgressBar_update.py
 coverage run -a --source=gen_class test/unit/gen_class/SingleInstanceException.py
+coverage run -a --source=gen_class test/unit/gen_class/System_init.py
+coverage run -a --source=gen_class test/unit/gen_class/System_set_host_name.py
 coverage run -a --source=gen_class test/unit/gen_class/Yum_get_distro.py
+coverage run -a --source=gen_class test/unit/gen_class/Yum_get_hostname.py
 coverage run -a --source=gen_class test/unit/gen_class/Yum_get_os.py
 coverage run -a --source=gen_class test/unit/gen_class/Yum_get_release.py
 coverage run -a --source=gen_class test/unit/gen_class/Yum_init.py

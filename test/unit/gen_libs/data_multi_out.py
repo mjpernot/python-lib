@@ -41,10 +41,6 @@ class UnitTest(unittest.TestCase):
 
     Description:  Class which is a representation of a unit testing.
 
-    Super-Class:  unittest.TestCase
-
-    Sub-Classes:
-
     Methods:
         setUp -> Unit testing initilization.
         test_data_is_dict -> Test data is a dictionary.
@@ -75,10 +71,6 @@ class UnitTest(unittest.TestCase):
             """Class:  Mail
 
             Description:  Class which is a representation of the Mail class.
-
-            Super-Class:  object
-
-            Sub-Classes:
 
             Methods:
                 __init__ -> Initialize configuration environment.

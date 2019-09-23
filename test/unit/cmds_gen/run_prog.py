@@ -40,10 +40,6 @@ class SubProcess(object):
 
     Description:  Class which is a representation of the subprocess class.
 
-    Super-Class:  object
-
-    Sub-Classes:
-
     Methods:
         __init__ -> Initialize configuration environment.
         communicate -> Mock representation of subprocess.communicate method.
@@ -93,10 +89,6 @@ class UnitTest(unittest.TestCase):
     """Class:  UnitTest
 
     Description:  Class which is a representation of a unit testing.
-
-    Super-Class:  unittest.TestCase
-
-    Sub-Classes:
 
     Methods:
         setUp -> Unit testing initilization.

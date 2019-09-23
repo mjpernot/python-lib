@@ -31,16 +31,6 @@ class Error(Exception):
 
     Description:  Base class for all exceptions for general use.
 
-    Super-Class:  Exception
-
-    Sub-Classes:
-        EmptyRowError
-        NoOptionError
-        SlaveNotRunningError
-        NotMasterError
-        NotSlaveError
-        BadStatusVariableError
-
     Methods:
 
     """
@@ -55,10 +45,6 @@ class EmptyRowError(Exception):
     Description:  Exception raised when attempting to fetch a key from an empty
         row.
 
-    Super-Class:  Exception
-
-    Sub-Classes:
-
     Methods:
 
     """
@@ -71,10 +57,6 @@ class NoOptionError(Exception):
     """Class:  NoOptionError
 
     Description:  Exception raised when a function does not find an option.
-
-    Super-Class:  Exception
-
-    Sub-Classes:
 
     Methods:
 
@@ -90,10 +72,6 @@ class SlaveNotRunningError(Exception):
     Description:  Exception raised when a slave is not running, but was
         expected to be running.
 
-    Super-Class:  Exception
-
-    Sub-Classes:
-
     Methods:
 
     """
@@ -107,10 +85,6 @@ class NotMasterError(Exception):
 
     Description:  Exception raised when the server is not a master and the
         operation is illegal to run on a non-master.
-
-    Super-Class:  Exception
-
-    Sub-Classes:
 
     Methods:
 
@@ -126,10 +100,6 @@ class NotSlaveError(Exception):
     Description:  Exception raised when the server is not a slave and the
         operation is illegal to run on a non-slave.
 
-    Super-Class:  Exception
-
-    Sub-Classes:
-
     Methods:
 
     """
@@ -143,10 +113,6 @@ class NotYetImplementedError(Exception):
 
     Description:  Exception raised when calling to a method that has not been
         finished.
-
-    Super-Class:  Exception
-
-    Sub-Classes:
 
     Methods:
 
