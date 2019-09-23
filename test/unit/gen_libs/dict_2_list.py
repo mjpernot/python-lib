@@ -59,12 +59,27 @@ class UnitTest(unittest.TestCase):
 
         self.dict_list = {}
         self.dict_list2 = [{"a": 1, "b": 2}, {"d": 1, "a": 2}]
+        self.dict_list3 = [{"e": 1}, {"d": 1, "a": 2}]
         self.key_val1 = "a"
         self.key_val2 = "c"
+        self.key_val3 = "e"
         self.list = []
         self.list2 = [1, 2]
+        self.list3 = [1]
 
-    @unittest.skip("Known bug: see #591")
+    def test_single_key_in_list(self):
+
+        """Function:  test_single_key_in_list
+
+        Description:  Test with single key value in dictionary.
+
+        Arguments:
+
+        """
+
+        self.assertEqual(gen_libs.dict_2_list(self.dict_list3, self.key_val3),
+                         self.list3)
+
     def test_key_not_in_list(self):
 
         """Function:  test_key_not_in_list
