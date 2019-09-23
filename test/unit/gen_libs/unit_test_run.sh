@@ -13,6 +13,7 @@ test/unit/gen_libs/chk_crt_file.py
 test/unit/gen_libs/chk_int.py
 test/unit/gen_libs/clear_file.py
 test/unit/gen_libs/compress.py
+test/unit/gen_libs/cp_dir.py
 test/unit/gen_libs/cp_file2.py
 test/unit/gen_libs/cp_file.py
 test/unit/gen_libs/crt_file_time.py
@@ -54,6 +55,7 @@ test/unit/gen_libs/milli_2_readadble.py
 test/unit/gen_libs/month_delta.py
 test/unit/gen_libs/mv_file.py
 test/unit/gen_libs/mv_file2.py
+test/unit/gen_libs/normalize.py
 test/unit/gen_libs/not_in_list.py
 test/unit/gen_libs/no_std_out.py
 test/unit/gen_libs/openfile.py

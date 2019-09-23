@@ -13,6 +13,7 @@
         chk_int
         clear_file
         compress
+        cp_dir
         cp_file
         cp_file2
         crt_file_time
@@ -341,6 +342,39 @@ def compress(fname, **kwargs):
     P1.wait()
 
 
+def cp_dir(src_dir, dest_dir, **kwargs):
+
+    """Function:  cp_dir
+
+    Description:  Copies a directory from source to destination.
+
+    Arguments:
+        (input) src_dir -> Source directory.
+        (input) dest_dir -> Destination directory.
+        (output) status -> True|False - True if copy was successful.
+        (output) err_msg -> Error message from copytree exception or None.
+
+    """
+
+    status = True
+    err_msg = None
+
+    try:
+        shutil.copytree(src_dir, dest_dir)
+
+    # Directory permission error.
+    except shutil.Error as e:
+        err_msg = "Directory not copied.  Error Message: %s" % (e)
+        status = False
+
+    # Directory does not exist.
+    except OSError as e:
+        err_msg = "Directory not copied.  Error Message: %s" % (e)
+        status = False
+
+    return status, err_msg
+
+
 def cp_file(fname, src_dir, dest_dir, new_fname=None, **kwargs):
 
     """Function:  cp_file
@@ -547,7 +581,7 @@ def dict_2_list(dict_list, key_val, **kwargs):
 
     """
 
-    return [row[key_val] for row in list(dict_list)]
+    return [row[key_val] for row in list(dict_list) if key_val in row]
 
 
 def dict_2_std(data, ofile=False, **kwargs):
@@ -1413,7 +1447,7 @@ def normalize(rngs, **kwargs):
             last = rng
 
         elif rng[1] <= last[1]:
-            pass
+            continue
 
         elif rng[0] <= last[1] or last[1] + 1 >= rng[0]:
             last = (last[0], max(rng[1], last[1]))

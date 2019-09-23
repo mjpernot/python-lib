@@ -40,10 +40,6 @@ class Smtplib(object):
 
     Description:  Class which is a representation of the smtplib class.
 
-    Super-Class:  object
-
-    Sub-Classes:
-
     Methods:
         __init__ -> Initialize configuration environment.
         sendmail -> Mock representation of sendmail method.
@@ -96,10 +92,6 @@ class UnitTest(unittest.TestCase):
     """Class:  UnitTest
 
     Description:  Class which is a representation of a unit testing.
-
-    Super-Class:  unittest.TestCase
-
-    Sub-Classes:
 
     Methods:
         setUp -> Unit testing initilization.

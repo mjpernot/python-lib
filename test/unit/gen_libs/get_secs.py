@@ -41,10 +41,6 @@ class TD(object):
 
     Description:  Class is a representation of datetime delta class.
 
-    Super-Class:  object
-
-    Sub-Classes:
-
     Methods:
         __init__ -> Initialize configuration environment.
 
@@ -69,10 +65,6 @@ class UnitTest(unittest.TestCase):
     """Class:  UnitTest
 
     Description:  Class which is a representation of a unit testing.
-
-    Super-Class:  unittest.TestCase
-
-    Sub-Classes:
 
     Methods:
         setUp -> Unit testing initilization.

@@ -11,7 +11,7 @@ pipeline {
                 sh """
                 virtualenv test_env
                 source test_env/bin/activate
-                pip2 install mock --user
+                pip2 install mock==2.0.0 --user
                 ./test/unit/arg_parser/arg_add_def.py
                 ./test/unit/arg_parser/arg_cond_req.py
                 ./test/unit/arg_parser/arg_cond_req_or.py
@@ -43,6 +43,7 @@ pipeline {
                 ./test/unit/gen_libs/chk_int.py
                 ./test/unit/gen_libs/clear_file.py
                 ./test/unit/gen_libs/compress.py
+                ./test/unit/gen_libs/cp_dir.py
                 ./test/unit/gen_libs/cp_file2.py
                 ./test/unit/gen_libs/cp_file.py
                 ./test/unit/gen_libs/crt_file_time.py
@@ -84,6 +85,7 @@ pipeline {
                 ./test/unit/gen_libs/month_delta.py
                 ./test/unit/gen_libs/mv_file.py
                 ./test/unit/gen_libs/mv_file2.py
+                ./test/unit/gen_libs/normalize.py
                 ./test/unit/gen_libs/not_in_list.py
                 ./test/unit/gen_libs/no_std_out.py
                 ./test/unit/gen_libs/openfile.py
@@ -107,11 +109,23 @@ pipeline {
                 ./test/unit/gen_libs/write_file.py
                 ./test/unit/gen_libs/write_file2.py
                 ./test/unit/gen_libs/write_to_log.py
+                ./test/unit/gen_class/setup_mail.py
+                ./test/unit/gen_class/Daemon_init.py
+                ./test/unit/gen_class/Logger_init.py
+                ./test/unit/gen_class/Logger_log_close.py
+                ./test/unit/gen_class/Logger_log_crit.py
+                ./test/unit/gen_class/Logger_log_debug.py
+                ./test/unit/gen_class/Logger_log_err.py
+                ./test/unit/gen_class/Logger_log_info.py
+                ./test/unit/gen_class/Logger_log_warn.py
                 ./test/unit/gen_class/ProgramLock_init.py
                 ./test/unit/gen_class/ProgramLock_del.py
                 ./test/unit/gen_class/ProgressBar_init.py
                 ./test/unit/gen_class/SingleInstanceException.py
+                ./test/unit/gen_class/System_init.py
+                ./test/unit/gen_class/System_set_host_name.py
                 ./test/unit/gen_class/Yum_init.py
+                ./test/unit/gen_class/Yum_get_hostname.py
                 ./test/unit/gen_class/Yum_get_release.py
                 ./test/unit/gen_class/Yum_get_os.py
                 ./test/unit/gen_class/Yum_get_distro.py

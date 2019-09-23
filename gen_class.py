@@ -4,6 +4,9 @@
 
     Description:  Class that has class definitions for general use.
 
+    Function:
+        setup_mail
+
     Classes:
         Daemon
         ProgressBar
@@ -30,14 +33,44 @@ import time
 import atexit
 import signal
 import platform
+import socket
+import getpass
 
 # Third-party
 import yum
+import json
 
 # Local
 import version
 
 __version__ = version.__version__
+
+
+def setup_mail(to_line, subj=None, frm_line=None, **kwargs):
+
+    """Function:  setup_mail
+
+    Description:  Initialize a mail instance.  Provide 'from line' if one is
+        not passed.
+
+    Arguments:
+        (input) to_line -> Mail to line.  Either a string or list.
+        (input) subj -> Mail subject line.  Either a string or list.
+        (input) frm_line -> Mail from line.
+        (output) Mail instance.
+
+    """
+
+    if isinstance(to_line, list):
+        to_line = list(to_line)
+
+    if isinstance(subj, list):
+        subj = list(subj)
+
+    if not frm_line:
+        frm_line = getpass.getuser() + "@" + socket.gethostname()
+
+    return Mail(to_line, subj, frm_line)
 
 
 class Daemon:
@@ -46,10 +79,6 @@ class Daemon:
 
     Description:  Class that creates and runs a Python program as a daemon
         program in include starting, stopping and restarting the process.
-
-    Super-Class:
-
-    Sub-Classes:
 
     Methods:
         __init__ -> Class instance initilization.
@@ -264,10 +293,6 @@ class ProgressBar(object):
     Description:  Class that displays and updates a progress bar for an ongoing
         operation.
 
-    Super-Class:  object
-
-    Sub-Classes:
-
     Methods:
         __init__ -> Class instance initilization.
         update -> Calculates how the total number of blocks completed.
@@ -351,10 +376,6 @@ class SingleInstanceException(BaseException):
     Description:  Class exception for the ProgramLock class when an instance
         lock has been detected.
 
-    Super-Class:  BaseException
-
-    Sub-Classes:
-
     Methods:
 
     """
@@ -369,10 +390,6 @@ class ProgramLock(object):
     Description:  Class that creates a file lock instance and in which other
         programs using the same parameters will detect the lock as already
         present and prevent a second program instance from starting.
-
-    Super-Class:  object
-
-    Sub-Classes:
 
     Methods:
         __init__ -> Class instance initilization.
@@ -443,11 +460,6 @@ class System(object):
         methods and attributes to contain information about the physical
         server.
 
-    Super-Class:  object
-
-    Sub-Classes:
-        Mail
-
     Methods:
         __init__ -> Class instance initilization.
         set_host_name -> Set the hostname attribute.
@@ -496,10 +508,6 @@ class Mail(System):
         is used as a proxy for creating an email.  The basic methods and
         attributes include reading in the message, creating the message body,
         and sending the email.
-
-    Super-Class:  System
-
-    Sub-Classes:
 
     Methods:
         __init__ -> Class instance initilization.
@@ -558,7 +566,12 @@ class Mail(System):
         """
 
         if txt_ln:
-            self.msg = self.msg + txt_ln
+
+            if isinstance(txt_ln, str):
+                self.msg = self.msg + txt_ln
+
+            else:
+                self.msg = self.msg + json.dumps(txt_ln)
 
     def read_stdin(self):
 
@@ -645,10 +658,6 @@ class Logger(object):
         Logger object is used as a proxy to implement the creation, formatting,
         writing to, and closing of a log file.
 
-    Super-Class:  object
-
-    Sub-Classes:
-
     Methods:
         __init__ -> Class instance initilization.
         log_debug -> Write a debug message to log file.
@@ -661,7 +670,7 @@ class Logger(object):
     """
 
     def __init__(self, name, log_file, level="INFO", msg_fmt=None,
-                 date_fmt=None, mode="a", **kwargs):
+                 date_fmt=None, **kwargs):
 
         """Method:  __init__
 
@@ -673,10 +682,13 @@ class Logger(object):
             (input) level -> Level of message to accept to the log file.
             (input) msg_fmt -> Format of a log file entry.
             (input) date_fmt -> Format of date and time for a log file entry.
-            (input) mode -> a|w - Write mode to log file (append, write)
-                NOTE:  Mode is not yet implemented.
+            (input) **kwargs:
+                mode -> a|w - Write mode to log file (append, write)
+                    NOTE:  Mode is not yet implemented.
 
         """
+
+        mode = kwargs.get("mode", "a")
 
         self.handler = logging.FileHandler(log_file)
 
@@ -687,27 +699,24 @@ class Logger(object):
 
         self.handler.setFormatter(self.formatter)
 
-        self.logger = logging.getLogger(name)
+        self.log = logging.getLogger(name)
 
         if level == "DEBUG":
-            self.logger.setLevel(logging.DEBUG)
-
-        elif level == "INFO":
-            self.logger.setLevel(logging.INFO)
+            self.log.setLevel(logging.DEBUG)
 
         elif level == "WARNING":
-            self.logger.setLevel(logging.WARNING)
+            self.log.setLevel(logging.WARNING)
 
         elif level == "ERROR":
-            self.logger.setLevel(logging.ERROR)
+            self.log.setLevel(logging.ERROR)
 
         elif level == "CRITICAL":
-            self.logger.setLevel(logging.CRITICAL)
+            self.log.setLevel(logging.CRITICAL)
 
         else:
-            self.logger.setLevel(logging.INFO)
+            self.log.setLevel(logging.INFO)
 
-        self.logger.addHandler(self.handler)
+        self.log.addHandler(self.handler)
 
     def log_debug(self, msg, **kwargs):
 
@@ -720,7 +729,7 @@ class Logger(object):
 
         """
 
-        self.logger.debug(msg)
+        self.log.debug(msg)
 
     def log_info(self, msg, **kwargs):
 
@@ -733,7 +742,7 @@ class Logger(object):
 
         """
 
-        self.logger.info(msg)
+        self.log.info(msg)
 
     def log_warn(self, msg, **kwargs):
 
@@ -746,7 +755,7 @@ class Logger(object):
 
         """
 
-        self.logger.warning(msg)
+        self.log.warning(msg)
 
     def log_err(self, msg, **kwargs):
 
@@ -759,7 +768,7 @@ class Logger(object):
 
         """
 
-        self.logger.error(msg)
+        self.log.error(msg)
 
     def log_crit(self, msg, **kwargs):
 
@@ -772,7 +781,7 @@ class Logger(object):
 
         """
 
-        self.logger.critical(msg)
+        self.log.critical(msg)
 
     def log_close(self, **kwargs):
 
@@ -785,9 +794,9 @@ class Logger(object):
 
         """
 
-        for handle in self.logger.handlers:
+        for handle in self.log.handlers:
             handle.close()
-            self.logger.removeHandler(handle)
+            self.log.removeHandler(handle)
 
 
 class Yum(yum.YumBase):
@@ -796,10 +805,6 @@ class Yum(yum.YumBase):
 
     Description:  Class which is a representation for YumBase system class.  A
         yum object is used as a proxy for using the yum command.
-
-    Super-Class:  yum.YumBase
-
-    Sub-Classes:
 
     Methods:
         __init__ -> Class instance initilization.
