@@ -92,9 +92,9 @@ class UnitTest(unittest.TestCase):
 
         os.makedirs(self.cp_dir_dir)
 
-        self.assertEqual((gen_libs.cp_dir(self.cp_dir_dir, self.cp_dir_dir)),
-            (False, "Directory not copied.  Error Message: [Errno 17] " \
-             "File exists: '%s'" % (self.cp_dir_dir)))
+        self.assertEqual((gen_libs.cp_dir(self.cp_dir_dir, self.cp_dir_dir)), (
+            False, "Directory not copied.  Error Message: [Errno 17] "
+            "File exists: '%s'" % (self.cp_dir_dir)))
 
     def test_fail_src_dir(self):
 
@@ -106,9 +106,10 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertEqual((gen_libs.cp_dir(self.cp_dir_dir, self.cp_dir_dir2)),
-            (False, "Directory not copied.  Error Message: [Errno 2] " \
-             "No such file or directory: '%s'" % (self.cp_dir_dir)))
+        self.assertEqual((gen_libs.cp_dir(
+            self.cp_dir_dir, self.cp_dir_dir2)), (
+                False, "Directory not copied.  Error Message: [Errno 2] "
+                "No such file or directory: '%s'" % (self.cp_dir_dir)))
 
     def test_fail_dest_dir(self):
 
@@ -123,9 +124,10 @@ class UnitTest(unittest.TestCase):
         os.makedirs(self.cp_dir_dir)
         os.makedirs(self.cp_dir_dir2)
 
-        self.assertEqual((gen_libs.cp_dir(self.cp_dir_dir, self.cp_dir_dir2)),
-            (False, "Directory not copied.  Error Message: [Errno 17] " \
-             "File exists: '%s'" % (self.cp_dir_dir2)))
+        self.assertEqual((gen_libs.cp_dir(
+            self.cp_dir_dir, self.cp_dir_dir2)), (
+                False, "Directory not copied.  Error Message: [Errno 17] "
+                "File exists: '%s'" % (self.cp_dir_dir2)))
 
     def test_fail_dest_perm(self):
 
@@ -140,9 +142,10 @@ class UnitTest(unittest.TestCase):
         os.makedirs(self.cp_dir_dir)
         os.chmod(self.cp_dir_dir, 0000)
 
-        self.assertEqual((gen_libs.cp_dir(self.cp_dir_dir, self.cp_dir_dir2)),
-            (False, "Directory not copied.  Error Message: [Errno 13] " \
-             "Permission denied: '%s'"% (self.cp_dir_dir)))
+        self.assertEqual((gen_libs.cp_dir(
+            self.cp_dir_dir, self.cp_dir_dir2)), (
+                False, "Directory not copied.  Error Message: [Errno 13] "
+                "Permission denied: '%s'" % (self.cp_dir_dir)))
 
     def tearDown(self):
 
