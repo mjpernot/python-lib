@@ -79,8 +79,8 @@ class UnitTest(unittest.TestCase):
         email.add_2_msg(msg)
         email.add_2_msg(msg2)
 
-        self.assertEqual((email.to, email.msg),
-            (self.to, msg + '{"1": "Test ", "2": "email ", "3": "line2"}'))
+        self.assertEqual((email.to, email.msg), (
+            self.to, msg + '{"1": "Test ", "2": "email ", "3": "line2"}'))
 
     def test_non_string(self):
 
