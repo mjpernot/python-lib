@@ -9,6 +9,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - gen_libs.dict_2_list:  Added check to only process dictionaries where that key exists in the dictionary.
 
 ### Changed
+- gen_libs.normalize:  Changed "pass" to "continue" to prevent confusion on processing flow.
 - arg_parser.arg_req_xor:  Changed "opt_xor_list" to "opt_xor" due to confusing datatype association.
 - arg_parser.arg_req_or_lst:  Changed "opt_or_dict_list" to "opt_or_dict" due to confusing datatype association.
 - arg_parser.arg_noreq_xor:  Changed "xor_noreq_list" to "xor_noreq" due to confusing datatype association.

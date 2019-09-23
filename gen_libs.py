@@ -1447,7 +1447,7 @@ def normalize(rngs, **kwargs):
             last = rng
 
         elif rng[1] <= last[1]:
-            pass
+            continue
 
         elif rng[0] <= last[1] or last[1] + 1 >= rng[0]:
             last = (last[0], max(rng[1], last[1]))
