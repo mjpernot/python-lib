@@ -4,7 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
-## [2.7.6] - 2019-09-20
+## [2.7.6] - 2019-09-23
+### Fixed
+- gen_libs.dict_2_list:  Added check to only process dictionaries where that key exists in the dictionary.
+
 ### Changed
 - arg_parser.arg_req_xor:  Changed "opt_xor_list" to "opt_xor" due to confusing datatype association.
 - arg_parser.arg_req_or_lst:  Changed "opt_or_dict_list" to "opt_or_dict" due to confusing datatype association.
