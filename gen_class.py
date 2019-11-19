@@ -9,6 +9,7 @@
 
     Classes:
         Daemon
+        LogFile
         ProgressBar
         SingleInstanceException
         ProgramLock
@@ -284,6 +285,110 @@ class Daemon:
         Arguments:
 
         """
+
+
+class LogFile(object):
+
+    def __init__(self):
+        self.loglist = []
+        self.regex = None
+        self.marker = None
+        self.linemarker = None
+        self.keylist = []
+        self.predicate = any
+        self.ignore = []
+
+    def get_marker(self, **kwargs):
+        return self.loglist[-1]
+
+    def find_marker(self, update=False, **kwargs):
+        if self.marker and self.loglist:
+            for cnt, line in enumerate(self.loglist):
+                if line.rstrip() == self.marker:
+                    self.linemarker = cnt + 1
+                    break
+
+            if update and self.linemarker:
+                self.loglist = self.loglist[self.linemarker:]
+
+    def filter_ignore(self, **kwargs):
+        if self.ignore and self.loglist:
+            self.loglist = [x for x in self.loglist
+                            if not any(y in x.lower() for y in self.ignore)]
+
+    def filter_keyword(self, **kwargs):
+        if self.keylist and self.loglist:
+            self.loglist = [x for x in self.loglist
+                            if self.predicate(y in x for y in self.keylist)]
+
+    def filter_regex(self, **kwargs):
+        if self.regex and self.loglist:
+            self.loglist = [x for x in self.loglist
+                            if re.search(self.regex, x)]
+
+    def load_ignore(self, data,**kwargs):
+        if isinstance(data, file):
+            self.ignore.extend([x.lower().rstrip().rstrip("\n") for x in data])
+
+        elif isinstance(data, list):
+            data = list(data)
+            self.ignore.extend([x.lower().rstrip().rstrip("\n") for x in data])
+
+        elif isinstance(data, str):
+            self.ignore.append(data.lower().rstrip().rstrip("\n"))
+
+    def load_keyword(self, data, fld_delimit=" ", **kwargs):
+        if isinstance(data, file):
+            self.keylist =
+# STOPPED HERE - how to load a file into the keylist.
+
+        elif isinstance(data, list):
+            self.keylist = list(data)
+
+        elif isinstance(data, str):
+            self.keylist = data.split(fld_delimit)
+
+    def load_loglist(self, data, dictkey=None, **kwargs):
+        if isinstance(data, file):
+            self.loglist.extend([x.rstrip().rstrip("\n") for x in data])
+
+        elif isinstance(data, list):
+            data = list(data)
+            self.loglist.extend([x.rstrip().rstrip("\n") for x in data])
+
+        elif isinstance(data, str):
+            self.loglist.append(data.rstrip().rstrip("\n"))
+
+        elif isinstance(data, dict) and dictkey:
+            data = dict(data)
+
+            if dictkey in data:
+                self.load_loglist(data=data[dictkey])
+
+    def load_marker(self, data, **kwargs):
+        if isinstance(data, file):
+            self.marker = data.readline().rstrip().rstrip("\n")
+
+        elif isinstance(data, str):
+            self.marker = data.rstrip().rstrip("\n")
+
+    def load_regex(self, data, **kwargs):
+        if isinstance(data, file):
+            self.regex = "|".join(str(x.strip().strip("\n")) for x in data)
+
+        elif isinstance(data, list):
+            data = list(data)
+            self.regex = "|".join(str(x.strip().strip("\n")) for x in data)
+
+        elif isinstance(data, str):
+            self.regex = data
+
+    def set_predicate(self, predicate, **kwargs):
+        if predicate == "and":
+            self.predicate = all
+
+        elif predicate == "or":
+            self.predicate = any
 
 
 class ProgressBar(object):
