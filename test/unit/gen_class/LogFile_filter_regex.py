@@ -42,9 +42,9 @@ class UnitTest(unittest.TestCase):
     Methods:
         setUp -> Initialize testing environment.
         test_regex_multiple -> Test with multiple regex expressions.
-        test_no_find_marker_chk -> Test no regex found and marker_chk is True.
+        test_no_find_use_marker -> Test no regex found and use_marker is True.
         test_no_find -> Test with no regex entries found.
-        test_marker_chk_arg -> Test with marker_chk argument set to True.
+        test_use_marker_arg -> Test with use_marker argument set to True.
         test_empty_regex -> Test with empty regex.
         test_empty_log -> Test with empty loglist.
         test_default -> Test with minimum number of arguments.
@@ -87,11 +87,11 @@ class UnitTest(unittest.TestCase):
         log.filter_regex()
         self.assertEqual(log.loglist, self.result3)
 
-    def test_no_find_marker_chk(self):
+    def test_no_find_use_marker(self):
 
         """Function:  test_no_find
 
-        Description:  Test no regex entries found and marker_chk is True.
+        Description:  Test no regex entries found and use_marker is True.
 
         Arguments:
 
@@ -102,7 +102,7 @@ class UnitTest(unittest.TestCase):
         log.regex = self.regex2
         log.linemarker = 2
 
-        log.filter_regex(marker_chk=True)
+        log.filter_regex(use_marker=True)
         self.assertEqual(log.loglist, [])
 
     def test_no_find(self):
@@ -122,11 +122,11 @@ class UnitTest(unittest.TestCase):
         log.filter_regex()
         self.assertEqual(log.loglist, [])
 
-    def test_marker_chk_arg(self):
+    def test_use_marker_arg(self):
 
-        """Function:  test_marker_chk_arg
+        """Function:  test_use_marker_arg
 
-        Description:  Test with marker_chk argument set to True.
+        Description:  Test with use_marker argument set to True.
 
         Arguments:
 
@@ -137,7 +137,7 @@ class UnitTest(unittest.TestCase):
         log.regex = self.regex
         log.linemarker = 2
 
-        log.filter_regex(marker_chk=True)
+        log.filter_regex(use_marker=True)
         self.assertEqual(log.loglist, self.result2)
 
     def test_empty_regex(self):
