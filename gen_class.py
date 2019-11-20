@@ -374,7 +374,7 @@ class LogFile(object):
         Description:  Removed ignore entries from loglist array.
 
         Arguments:
-            (input) marker_chk -> True|False: Start check from marker.
+            (input) use_marker -> True|False: Start check from marker.
 
         """
 
@@ -394,7 +394,7 @@ class LogFile(object):
         Description:  Keep only keyword entries in loglist array.
 
         Arguments:
-            (input) marker_chk -> True|False: Start check from marker.
+            (input) use_marker -> True|False: Start check from marker.
 
         """
 
@@ -407,19 +407,19 @@ class LogFile(object):
                 self.loglist = [x for x in self.loglist
                                 if self.predicate(y in x for y in self.keyword)]
 
-    def filter_regex(self, marker_chk=False, **kwargs):
+    def filter_regex(self, use_marker=False, **kwargs):
 
         """Method:  filter_regex
 
         Description:  Keep only regex entries that match in loglist array.
 
         Arguments:
-            (input) marker_chk -> True|False: Start check from marker.
+            (input) use_marker -> True|False: Start check from marker.
 
         """
 
         if self.regex and self.loglist:
-            if marker_chk and self.linemarker > 0:
+            if use_marker and self.linemarker > 0:
                 self.loglist = [x for x in self.loglist[self.linemarker:]
                                 if re.search(self.regex, x)]
 
