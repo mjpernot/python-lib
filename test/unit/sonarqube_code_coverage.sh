@@ -113,6 +113,7 @@ coverage run -a --source=gen_class test/unit/gen_class/LogFile_filter_regex.py
 coverage run -a --source=gen_class test/unit/gen_class/LogFile_find_marker.py
 coverage run -a --source=gen_class test/unit/gen_class/LogFile_get_marker.py
 coverage run -a --source=gen_class test/unit/gen_class/LogFile_init.py
+coverage run -a --source=gen_class test/unit/gen_class/LogFile_load_ignore.py
 coverage run -a --source=gen_class test/unit/gen_class/Logger_init.py
 coverage run -a --source=gen_class test/unit/gen_class/Logger_log_close.py
 coverage run -a --source=gen_class test/unit/gen_class/Logger_log_crit.py
