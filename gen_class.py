@@ -294,7 +294,7 @@ class LogFile(object):
         self.regex = None
         self.marker = None
         self.linemarker = None
-        self.keylist = []
+        self.keyword = []
         self.predicate = any
         self.ignore = []
 
@@ -317,9 +317,9 @@ class LogFile(object):
                             if not any(y in x.lower() for y in self.ignore)]
 
     def filter_keyword(self, **kwargs):
-        if self.keylist and self.loglist:
+        if self.keyword and self.loglist:
             self.loglist = [x for x in self.loglist
-                            if self.predicate(y in x for y in self.keylist)]
+                            if self.predicate(y in x for y in self.keyword)]
 
     def filter_regex(self, **kwargs):
         if self.regex and self.loglist:
@@ -331,22 +331,20 @@ class LogFile(object):
             self.ignore.extend([x.lower().rstrip().rstrip("\n") for x in data])
 
         elif isinstance(data, list):
-            data = list(data)
-            self.ignore.extend([x.lower().rstrip().rstrip("\n") for x in data])
+            self.ignore = list(data)
 
         elif isinstance(data, str):
             self.ignore.append(data.lower().rstrip().rstrip("\n"))
 
     def load_keyword(self, data, fld_delimit=" ", **kwargs):
         if isinstance(data, file):
-            self.keylist =
-# STOPPED HERE - how to load a file into the keylist.
+            self.keyword.extend([x.lower().rstrip().rstrip("\n") for x in data])
 
         elif isinstance(data, list):
-            self.keylist = list(data)
+            self.keyword = list(data)
 
         elif isinstance(data, str):
-            self.keylist = data.split(fld_delimit)
+            self.keyword = data.split(fld_delimit)
 
     def load_loglist(self, data, dictkey=None, **kwargs):
         if isinstance(data, file):
