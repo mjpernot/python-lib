@@ -71,7 +71,7 @@ class UnitTest(unittest.TestCase):
 
         self.assertEqual((log.loglist, log.regex, log.marker, log.linemarker,
                           log.keyword, log.ignore),
-                         ([], None, None, 0, [], []))
+                         ([], None, None, None, [], []))
 
 
 if __name__ == "__main__":
