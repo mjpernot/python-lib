@@ -40,6 +40,7 @@ import getpass
 # Third-party
 import yum
 import json
+import re
 
 # Local
 import version
