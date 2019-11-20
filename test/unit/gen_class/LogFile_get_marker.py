@@ -72,7 +72,7 @@ class UnitTest(unittest.TestCase):
         log = gen_class.LogFile()
         log.loglist = []
 
-        self.assertEqual((log.loglist), ([]))
+        self.assertEqual(log.get_marker(), [])
 
     def test_default(self):
 
@@ -87,7 +87,7 @@ class UnitTest(unittest.TestCase):
         log = gen_class.LogFile()
         log.loglist = self.loglist
 
-        self.assertEqual((log.loglist), (self.results))
+        self.assertEqual(log.get_marker(), self.results)
 
 
 if __name__ == "__main__":
