@@ -63,9 +63,9 @@ class UnitTest(unittest.TestCase):
 
         self.loglist = ["2019-11 This", "20191-11 is", "2018-10 a",
                         "20-11 test"]
-        self.regex = "\d{4}-\d{2}"
+        self.regex = "^\d{4}-\d{2}"
         self.regex2 = "\d{4}:\d{2}"
-        self.regex3 = "\d{4}-\d{2}|\d{2}-\d{2}"
+        self.regex3 = "^\d{4}-\d{2}|^\d{2}-\d{2}"
         self.result = ["2019-11 This", "2018-10 a"]
         self.result2 = ["2018-10 a"]
         self.result3 = ["2019-11 This", "2018-10 a", "20-11 test"]
