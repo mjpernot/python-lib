@@ -386,7 +386,7 @@ class LogFile(object):
                 self.loglist = [x for x in self.loglist
                                 if not any(y in x.lower() for y in self.ignore)]
 
-    def filter_keyword(self, marker_chk=False, **kwargs):
+    def filter_keyword(self, use_marker=False, **kwargs):
 
         """Method:  filter_keyword
 
@@ -398,7 +398,7 @@ class LogFile(object):
         """
 
         if self.keyword and self.loglist:
-            if marker_chk and self.linemarker > 0:
+            if use_marker and self.linemarker > 0:
                 self.loglist = [x for x in self.loglist[self.linemarker:]
                                 if self.predicate(y in x for y in self.keyword)]
 
