@@ -343,7 +343,7 @@ class LogFile(object):
             return self.loglist[-1]
         
         else:
-            return self.loglist
+            return None
 
     def find_marker(self, update=False, **kwargs):
 
