@@ -324,7 +324,7 @@ class LogFile(object):
         self.loglist = []
         self.regex = None
         self.marker = None
-        self.linemarker = 0
+        self.linemarker = None
         self.keyword = []
         self.predicate = any
         self.ignore = []
@@ -362,7 +362,7 @@ class LogFile(object):
                     self.linemarker = cnt + 1
                     break
 
-            if update and self.linemarker > 0:
+            if update and self.linemarker is not None:
                 self.loglist = self.loglist[self.linemarker:]
                 self.linemarker = 0
 
