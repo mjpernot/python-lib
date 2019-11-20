@@ -289,7 +289,38 @@ class Daemon:
 
 class LogFile(object):
 
+    """Class:  LogFile
+
+    Description:  Class that stores and manipulates log entries either from
+        files or standard in.  Stores log entries that allows for selective
+        searching of log entries based on regex, keyword, and ignore.
+
+    Methods:
+        __init__ -> Class instance initilization.
+        get_marker -> .
+        find_marker -> .
+        filter_ignore -> .
+        filter_keyword -> .
+        filter_regex -> .
+        load_ignore -> .
+        load_keyword -> .
+        load_loglist -> .
+        load_marker -> .
+        load_regex -> .
+        set_predicate -> .
+
+    """
+
     def __init__(self):
+
+        """Method:  __init__
+
+        Description:  Initialization of an instance of the LogFile class.
+
+        Arguments:
+
+        """
+
         self.loglist = []
         self.regex = None
         self.marker = None
@@ -299,9 +330,28 @@ class LogFile(object):
         self.ignore = []
 
     def get_marker(self, **kwargs):
+
+        """Method:  get_marker
+
+        Description:  Return the last line of the loglist array.
+
+        Arguments:
+
+        """
+
         return self.loglist[-1]
 
     def find_marker(self, update=False, **kwargs):
+
+        """Method:  find_marker
+
+        Description:  Find the marker in the loglist array.
+
+        Arguments:
+            (input) update -> True|False: Update loglist based on marker found.
+
+        """
+
         if self.marker and self.loglist:
             for cnt, line in enumerate(self.loglist):
                 if line.rstrip() == self.marker:
@@ -313,6 +363,16 @@ class LogFile(object):
                 self.linemarker = 0
 
     def filter_ignore(self, marker_chk=False, **kwargs):
+
+        """Method:  filter_ignore
+
+        Description:  Removed ignore entries from loglist array.
+
+        Arguments:
+            (input) marker_chk -> True|False: Start check from marker.
+
+        """
+
         if self.ignore and self.loglist:
             if marker_chk and self.linemarker > 0:
                 self.loglist = [x for x in self.loglist[self.linemarker:]
@@ -323,6 +383,16 @@ class LogFile(object):
                                 if not any(y in x.lower() for y in self.ignore)]
 
     def filter_keyword(self, marker_chk=False, **kwargs):
+
+        """Method:  filter_keyword
+
+        Description:  Keep only keyword entries in loglist array.
+
+        Arguments:
+            (input) marker_chk -> True|False: Start check from marker.
+
+        """
+
         if self.keyword and self.loglist:
             if marker_chk and self.linemarker > 0:
                 self.loglist = [x for x in self.loglist[self.linemarker:]
@@ -333,6 +403,16 @@ class LogFile(object):
                                 if self.predicate(y in x for y in self.keyword)]
 
     def filter_regex(self, marker_chk=False, **kwargs):
+
+        """Method:  filter_regex
+
+        Description:  Keep only regex entries that match in loglist array.
+
+        Arguments:
+            (input) marker_chk -> True|False: Start check from marker.
+
+        """
+
         if self.regex and self.loglist:
             if marker_chk and self.linemarker > 0:
                 self.loglist = [x for x in self.loglist[self.linemarker:]
@@ -343,6 +423,16 @@ class LogFile(object):
                                 if re.search(self.regex, x)]
 
     def load_ignore(self, data,**kwargs):
+
+        """Method:  load_ignore
+
+        Description:  Load ignore list from object.
+
+        Arguments:
+            (input) data -> Holds ignore list as a file, list or string.
+
+        """
+
         if isinstance(data, file):
             self.ignore.extend([x.lower().rstrip().rstrip("\n") for x in data])
 
@@ -353,6 +443,17 @@ class LogFile(object):
             self.ignore.append(data.lower().rstrip().rstrip("\n"))
 
     def load_keyword(self, data, fld_delimit=" ", **kwargs):
+
+        """Method:  load_keyword
+
+        Description:  Load keyword list from object.
+
+        Arguments:
+            (input) data -> Holds keyword list as a file, list or string.
+            (input) fld_delimit -> Field delimiter for a string object.
+
+        """
+
         if isinstance(data, file):
             self.keyword.extend([x.lower().rstrip().rstrip("\n") for x in data])
 
@@ -363,6 +464,17 @@ class LogFile(object):
             self.keyword = data.split(fld_delimit)
 
     def load_loglist(self, data, dictkey=None, **kwargs):
+
+        """Method:  load_loglist
+
+        Description:  Load log entries into loglist array.
+
+        Arguments:
+            (input) data -> Holds log entries as a file, list, string, or dict.
+            (input) dictkey -> Dictionary key value for dictionary object.
+
+        """
+
         if isinstance(data, file):
             self.loglist.extend([x.rstrip().rstrip("\n") for x in data])
 
@@ -380,6 +492,16 @@ class LogFile(object):
                 self.load_loglist(data=data[dictkey])
 
     def load_marker(self, data, **kwargs):
+
+        """Method:  load_marker
+
+        Description:  Load marker entry from object.
+
+        Arguments:
+            (input) data -> Holds marker entry as a file or string.
+
+        """
+
         if isinstance(data, file):
             self.marker = data.readline().rstrip().rstrip("\n")
 
@@ -387,6 +509,16 @@ class LogFile(object):
             self.marker = data.rstrip().rstrip("\n")
 
     def load_regex(self, data, **kwargs):
+
+        """Method:  load_regex
+
+        Description:  Load regext entries from object.
+
+        Arguments:
+            (input) data -> Holds marker entry as a file, list, or string.
+
+        """
+
         if isinstance(data, file):
             self.regex = "|".join(str(x.strip().strip("\n")) for x in data)
 
@@ -398,6 +530,16 @@ class LogFile(object):
             self.regex = data
 
     def set_predicate(self, predicate, **kwargs):
+
+        """Method:  set_predicate
+
+        Description:  Set search predicate for keyword search.
+
+        Arguments:
+            (input) predicate -> and|or:  Corresponds to all and any functions.
+
+        """
+
         if predicate == "and":
             self.predicate = all
 
