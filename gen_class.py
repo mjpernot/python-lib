@@ -427,7 +427,7 @@ class LogFile(object):
                 self.loglist = [x for x in self.loglist
                                 if re.search(self.regex, x)]
 
-    def load_ignore(self, data,**kwargs):
+    def load_ignore(self, data, **kwargs):
 
         """Method:  load_ignore
 
