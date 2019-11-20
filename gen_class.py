@@ -366,7 +366,7 @@ class LogFile(object):
                 self.loglist = self.loglist[self.linemarker:]
                 self.linemarker = 0
 
-    def filter_ignore(self, marker_chk=False, **kwargs):
+    def filter_ignore(self, use_marker=False, **kwargs):
 
         """Method:  filter_ignore
 
@@ -378,7 +378,7 @@ class LogFile(object):
         """
 
         if self.ignore and self.loglist:
-            if marker_chk and self.linemarker > 0:
+            if use_marker and self.linemarker > 0:
                 self.loglist = [x for x in self.loglist[self.linemarker:]
                                 if not any(y in x.lower() for y in self.ignore)]
 
