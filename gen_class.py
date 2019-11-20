@@ -310,7 +310,7 @@ class LogFile(object):
 
             if update and self.linemarker > 0:
                 self.loglist = self.loglist[self.linemarker:]
-                self.linemarker = None
+                self.linemarker = 0
 
     def filter_ignore(self, marker_chk=False, **kwargs):
         if self.ignore and self.loglist:
