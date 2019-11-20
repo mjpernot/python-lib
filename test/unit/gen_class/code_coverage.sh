@@ -11,6 +11,7 @@ echo "Running unit test modules in conjunction with coverage"
 coverage run -a --source=gen_class test/unit/gen_class/setup_mail.py
 coverage run -a --source=gen_class test/unit/gen_class/Daemon_init.py
 coverage run -a --source=gen_class test/unit/gen_class/LogFile_filter_ignore.py
+coverage run -a --source=gen_class test/unit/gen_class/LogFile_filter_keyword.py
 coverage run -a --source=gen_class test/unit/gen_class/LogFile_find_marker.py
 coverage run -a --source=gen_class test/unit/gen_class/LogFile_get_marker.py
 coverage run -a --source=gen_class test/unit/gen_class/LogFile_init.py
