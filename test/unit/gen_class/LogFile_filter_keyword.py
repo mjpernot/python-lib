@@ -43,9 +43,9 @@ class UnitTest(unittest.TestCase):
         setUp -> Initialize testing environment.
         test_all_predicate2 -> Test with all predicate set with finds.
         test_all_predicate -> Test with all predicate set with no finds.
-        test_no_find_marker_chk -> Test no ignore found and marker_chk is True.
+        test_no_find_use_marker -> Test no ignore found and use_marker is True.
         test_no_find -> Test with no ignore entries found.
-        test_marker_chk_arg -> Test with marker_chk argument set to True.
+        test_use_marker_arg -> Test with use_marker argument set to True.
         test_empty_keyword -> Test with empty keyword.
         test_empty_log -> Test with empty loglist.
         test_default -> Test with minimum number of arguments.
@@ -63,12 +63,12 @@ class UnitTest(unittest.TestCase):
         """
 
         self.loglist = ["This", "is", "a", "test"]
-        self.loglist = ["This a", "is", "is a", "test is"]
+        self.loglist2 = ["This a", "is", "is a", "test is"]
         self.keyword = ["is", "a"]
         self.keyword2 = ["nothing"]
-        self.result = ["is", "a"]
+        self.result = ["This", "is", "a"]
         self.result2 = ["a"]
-        self.result3 = [["This a", "is a"]
+        self.result3 = ["This a", "is a"]
 
     def test_all_predicate2(self):
 
@@ -81,7 +81,7 @@ class UnitTest(unittest.TestCase):
         """
 
         log = gen_class.LogFile()
-        log.loglist = self.loglist3
+        log.loglist = self.loglist2
         log.keyword = self.keyword
         log.predicate = all
 
@@ -106,11 +106,11 @@ class UnitTest(unittest.TestCase):
         log.filter_keyword()
         self.assertEqual(log.loglist, [])
 
-    def test_no_find_marker_chk(self):
+    def test_no_find_use_marker(self):
 
         """Function:  test_no_find
 
-        Description:  Test no keyword entries found and marker_chk is True.
+        Description:  Test no keyword entries found and use_marker is True.
 
         Arguments:
 
@@ -121,7 +121,7 @@ class UnitTest(unittest.TestCase):
         log.keyword = self.keyword2
         log.linemarker = 2
 
-        log.filter_keyword(marker_chk=True)
+        log.filter_keyword(use_marker=True)
         self.assertEqual(log.loglist, [])
 
     def test_no_find(self):
@@ -141,11 +141,11 @@ class UnitTest(unittest.TestCase):
         log.filter_keyword()
         self.assertEqual(log.loglist, [])
 
-    def test_marker_chk_arg(self):
+    def test_use_marker_arg(self):
 
-        """Function:  test_marker_chk_arg
+        """Function:  test_use_marker_arg
 
-        Description:  Test with marker_chk argument set to True.
+        Description:  Test with use_marker argument set to True.
 
         Arguments:
 
@@ -156,7 +156,7 @@ class UnitTest(unittest.TestCase):
         log.keyword = self.keyword
         log.linemarker = 2
 
-        log.filter_keyword(marker_chk=True)
+        log.filter_keyword(use_marker=True)
         self.assertEqual(log.loglist, self.result2)
 
     def test_empty_keyword(self):
