@@ -41,6 +41,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_empty -> Test with empty loglist.
         test_default -> Test with minimum number of arguments.
 
     """
@@ -57,6 +58,21 @@ class UnitTest(unittest.TestCase):
 
         self.loglist = ["This", "is", "a", "test"]
         self.results = ["test"]
+
+    def test_empty(self):
+
+        """Function:  test_empty
+
+        Description:  Test with empty loglist.
+
+        Arguments:
+
+        """
+
+        log = gen_class.LogFile()
+        log.loglist = []
+
+        self.assertEqual((log.loglist), ([]))
 
     def test_default(self):
 
