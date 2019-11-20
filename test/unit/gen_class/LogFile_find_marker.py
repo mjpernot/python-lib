@@ -41,6 +41,8 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_no_find_update -> Test with no marker found with update arg.
+        test_no_find -> Test with no marker found.
         test_update_arg -> Test with update argument set to True.
         test_empty_marker -> Test with empty marker.
         test_empty_log -> Test with empty loglist.
@@ -60,8 +62,43 @@ class UnitTest(unittest.TestCase):
 
         self.loglist = ["This", "is", "a", "test"]
         self.marker = "is"
+        self.marker2 = "nofind"
         self.result = ["a", "test"]
         self.item = 2
+
+    def test_no_find_update(self):
+
+        """Function:  test_no_find_update
+
+        Description:  Test with no marker found with update arg.
+
+        Arguments:
+
+        """
+
+        log = gen_class.LogFile()
+        log.loglist = self.loglist
+        log.marker = self.marker2
+
+        log.find_marker(update=True)
+        self.assertEqual((log.loglist, log.linemarker), (self.loglist, None))
+
+    def test_no_find(self):
+
+        """Function:  test_no_find
+
+        Description:  Test with no marker found.
+
+        Arguments:
+
+        """
+
+        log = gen_class.LogFile()
+        log.loglist = self.loglist
+        log.marker = self.marker2
+
+        log.find_marker()
+        self.assertEqual((log.loglist, log.linemarker), (self.loglist, None))
 
     def test_update_arg(self):
 
@@ -78,8 +115,7 @@ class UnitTest(unittest.TestCase):
         log.marker = self.marker
 
         log.find_marker(update=True)
-        self.assertEqual((log.loglist, log.linemarker),
-                         (self.result, self.item))
+        self.assertEqual((log.loglist, log.linemarker), (self.result, 0))
 
     def test_empty_marker(self):
 
