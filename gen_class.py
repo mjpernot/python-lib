@@ -338,8 +338,12 @@ class LogFile(object):
         Arguments:
 
         """
-
-        return self.loglist[-1]
+        
+        if self.loglist:
+            return self.loglist[-1]
+        
+        else:
+            return self.loglist
 
     def find_marker(self, update=False, **kwargs):
 
