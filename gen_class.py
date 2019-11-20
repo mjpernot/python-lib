@@ -466,12 +466,12 @@ class LogFile(object):
 
         elif isinstance(data, list):
             data = list(data)
-            self.keyword = self.ignore.extend([x.lower().rstrip().rstrip("\n")
-                                               for x in data])
+            self.keyword.extend([x.lower().rstrip().rstrip("\n")
+                                 for x in data])
 
         elif isinstance(data, str):
-            self.keyword = \
-                         data.lower().rstrip().rstrip("\n").split(fld_delimit)
+            self.keyword.append(
+                data.lower().rstrip().rstrip("\n").split(fld_delimit))
 
     def load_loglist(self, data, dictkey=None, **kwargs):
 
