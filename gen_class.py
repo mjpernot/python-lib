@@ -296,18 +296,18 @@ class LogFile(object):
         searching of log entries based on regex, keyword, and ignore.
 
     Methods:
-        __init__ -> Class instance initilization.
-        get_marker -> .
-        find_marker -> .
-        filter_ignore -> .
-        filter_keyword -> .
-        filter_regex -> .
-        load_ignore -> .
-        load_keyword -> .
-        load_loglist -> .
-        load_marker -> .
-        load_regex -> .
-        set_predicate -> .
+        __init__ -> Initialization of an instance of the LogFile class.
+        get_marker -> Return the last line of the loglist array.
+        find_marker -> Find the marker in the loglist array.
+        filter_ignore -> Removed ignore entries from loglist array.
+        filter_keyword -> Keep only keyword entries in loglist array.
+        filter_regex -> Keep only regex entries that match in loglist array.
+        load_ignore -> Load ignore list from object.
+        load_keyword -> Load keyword list from object.
+        load_loglist -> Load log entries into loglist array from object.
+        load_marker -> Load marker entry from object.
+        load_regex -> Load regext entries from object.
+        set_predicate -> Set search predicate for keyword search.
 
     """
 
@@ -467,7 +467,7 @@ class LogFile(object):
 
         """Method:  load_loglist
 
-        Description:  Load log entries into loglist array.
+        Description:  Load log entries into loglist array from object.
 
         Arguments:
             (input) data -> Holds log entries as a file, list, string, or dict.
