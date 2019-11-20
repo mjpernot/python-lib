@@ -41,9 +41,9 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
-        test_no_find_marker_chk -> Test no ignore found and marker_chk is True.
+        test_no_find_use_marker -> Test no ignore found and use_marker is True.
         test_no_find -> Test with no ignore entries found.
-        test_marker_chk_arg -> Test with marker_chk argument set to True.
+        test_use_marker_arg -> Test with use_marker argument set to True.
         test_empty_ignore -> Test with empty ignore.
         test_empty_log -> Test with empty loglist.
         test_default -> Test with minimum number of arguments.
@@ -67,11 +67,11 @@ class UnitTest(unittest.TestCase):
         self.result2 = ["test"]
         self.result3 = ["a", "test"]
 
-    def test_no_find_marker_chk(self):
+    def test_no_find_use_marker(self):
 
-        """Function:  test_no_find_marker_chk
+        """Function:  test_no_find_use_marker
 
-        Description:  Test no ignore entries found and marker_chk is True.
+        Description:  Test no ignore entries found and use_marker is True.
 
         Arguments:
 
@@ -82,7 +82,7 @@ class UnitTest(unittest.TestCase):
         log.ignore = self.ignore2
         log.linemarker = 2
 
-        log.filter_ignore(marker_chk=True)
+        log.filter_ignore(use_marker=True)
         self.assertEqual(log.loglist, self.result3)
 
     def test_no_find(self):
@@ -102,11 +102,11 @@ class UnitTest(unittest.TestCase):
         log.filter_ignore()
         self.assertEqual(log.loglist, self.loglist)
 
-    def test_marker_chk_arg(self):
+    def test_use_marker_arg(self):
 
-        """Function:  test_marker_chk_arg
+        """Function:  test_use_marker_arg
 
-        Description:  Test with marker_chk argument set to True.
+        Description:  Test with use_marker argument set to True.
 
         Arguments:
 
@@ -117,7 +117,7 @@ class UnitTest(unittest.TestCase):
         log.ignore = self.ignore
         log.linemarker = 2
 
-        log.filter_ignore(marker_chk=True)
+        log.filter_ignore(use_marker=True)
         self.assertEqual(log.loglist, self.result2)
 
     def test_empty_ignore(self):
