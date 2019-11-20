@@ -57,7 +57,7 @@ class UnitTest(unittest.TestCase):
         """
 
         self.loglist = ["This", "is", "a", "test"]
-        self.results = ["test"]
+        self.results = "test"
 
     def test_empty(self):
 
@@ -72,7 +72,7 @@ class UnitTest(unittest.TestCase):
         log = gen_class.LogFile()
         log.loglist = []
 
-        self.assertEqual(log.get_marker(), [])
+        self.assertEqual(log.get_marker(), None)
 
     def test_default(self):
 
