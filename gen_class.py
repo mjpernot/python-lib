@@ -293,7 +293,7 @@ class LogFile(object):
         self.loglist = []
         self.regex = None
         self.marker = None
-        self.linemarker = None
+        self.linemarker = 0
         self.keyword = []
         self.predicate = any
         self.ignore = []
@@ -308,23 +308,39 @@ class LogFile(object):
                     self.linemarker = cnt + 1
                     break
 
-            if update and self.linemarker:
+            if update and self.linemarker > 0:
                 self.loglist = self.loglist[self.linemarker:]
+                self.linemarker = None
 
-    def filter_ignore(self, **kwargs):
+    def filter_ignore(self, marker_chk=False, **kwargs):
         if self.ignore and self.loglist:
-            self.loglist = [x for x in self.loglist
-                            if not any(y in x.lower() for y in self.ignore)]
+            if marker_chk and self.linemarker > 0:
+                self.loglist = [x for x in self.loglist[self.linemarker:]
+                                if not any(y in x.lower() for y in self.ignore)]
 
-    def filter_keyword(self, **kwargs):
+            else:
+                self.loglist = [x for x in self.loglist
+                                if not any(y in x.lower() for y in self.ignore)]
+
+    def filter_keyword(self, marker_chk=False, **kwargs):
         if self.keyword and self.loglist:
-            self.loglist = [x for x in self.loglist
-                            if self.predicate(y in x for y in self.keyword)]
+            if marker_chk and self.linemarker > 0:
+                self.loglist = [x for x in self.loglist[self.linemarker:]
+                                if self.predicate(y in x for y in self.keyword)]
 
-    def filter_regex(self, **kwargs):
+            else:
+                self.loglist = [x for x in self.loglist
+                                if self.predicate(y in x for y in self.keyword)]
+
+    def filter_regex(self, marker_chk=False, **kwargs):
         if self.regex and self.loglist:
-            self.loglist = [x for x in self.loglist
-                            if re.search(self.regex, x)]
+            if marker_chk and self.linemarker > 0:
+                self.loglist = [x for x in self.loglist[self.linemarker:]
+                                if re.search(self.regex, x)]
+
+            else:
+                self.loglist = [x for x in self.loglist
+                                if re.search(self.regex, x)]
 
     def load_ignore(self, data,**kwargs):
         if isinstance(data, file):
