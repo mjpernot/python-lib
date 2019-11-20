@@ -63,12 +63,13 @@ class UnitTest(unittest.TestCase):
         self.loglist = ["This", "is", "a", "test"]
         self.ignore = ["is", "a"]
         self.ignore2 = ["nothing"]
-        self.result = ["This", "test"]
+        self.result = ["test"]
         self.result2 = ["test"]
+        self.result3 = ["a", "test"]
 
     def test_no_find_marker_chk(self):
 
-        """Function:  test_no_find
+        """Function:  test_no_find_marker_chk
 
         Description:  Test no ignore entries found and marker_chk is True.
 
@@ -82,7 +83,7 @@ class UnitTest(unittest.TestCase):
         log.linemarker = 2
 
         log.filter_ignore(marker_chk=True)
-        self.assertEqual(log.loglist, self.loglist)
+        self.assertEqual(log.loglist, self.result3)
 
     def test_no_find(self):
 
