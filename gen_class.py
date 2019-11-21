@@ -470,7 +470,7 @@ class LogFile(object):
                                  for x in data])
 
         elif isinstance(data, str):
-            self.keyword.append(
+            self.keyword.extend(
                 data.lower().rstrip().rstrip("\n").split(fld_delimit))
 
     def load_loglist(self, data, dictkey=None, **kwargs):
