@@ -493,7 +493,7 @@ class LogFile(object):
             self.loglist.extend([x.rstrip().rstrip("\n") for x in data])
 
         elif isinstance(data, str):
-            self.loglist.append(data.rstrip().rstrip("\n"))
+            self.loglist.extend(data.rstrip().split("\n"))
 
         elif isinstance(data, dict) and dictkey:
             data = dict(data)
