@@ -72,7 +72,7 @@ class UnitTest(unittest.TestCase):
 
         """Function:  test_load_empty_file
 
-        Description:  Test loading ignore from an empty file.
+        Description:  Test loading from an empty file.
 
         Arguments:
 
@@ -88,7 +88,7 @@ class UnitTest(unittest.TestCase):
 
         """Function:  test_load_empty_str
 
-        Description:  Test loading ignore from an empty sting.
+        Description:  Test loading from an empty sting.
 
         Arguments:
 
@@ -103,7 +103,7 @@ class UnitTest(unittest.TestCase):
 
         """Function:  test_load_empty_list
 
-        Description:  Test loading ignore from an empty list.
+        Description:  Test loading from an empty list.
 
         Arguments:
 
@@ -118,7 +118,7 @@ class UnitTest(unittest.TestCase):
 
         """Function:  test_load_file
 
-        Description:  Test loading ignore from a file.
+        Description:  Test loading from a file.
 
         Arguments:
 
@@ -134,7 +134,7 @@ class UnitTest(unittest.TestCase):
 
         """Function:  test_load_str
 
-        Description:  Test loading ignore from a sting.
+        Description:  Test loading from a sting.
 
         Arguments:
 
@@ -149,7 +149,7 @@ class UnitTest(unittest.TestCase):
 
         """Function:  test_load_list
 
-        Description:  Test loading ignore from a list.
+        Description:  Test loading from a list.
 
         Arguments:
 
