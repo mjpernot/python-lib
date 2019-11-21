@@ -41,12 +41,12 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
-        test_load_empty_file -> Test loading ignore from an empty file.
-        test_load_empty_str -> Test loading ignore from an empty sting.
-        test_load_empty_list -> Test loading ignore from an empty list.
-        test_load_file -> Test loading ignore from a file.
-        test_load_str -> Test loading ignore from a sting.
-        test_load_list -> Test loading ignore from a list.
+        test_load_empty_file -> Test loading from an empty file.
+        test_load_empty_str -> Test loading from an empty sting.
+        test_load_empty_list -> Test loading from an empty list.
+        test_load_file -> Test loading from a file.
+        test_load_str -> Test loading from a sting.
+        test_load_list -> Test loading from a list.
 
     """
 
