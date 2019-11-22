@@ -537,7 +537,7 @@ class LogFile(object):
             self.regex = "|".join(str(x.strip().strip("\n")) for x in data)
 
         elif isinstance(data, str):
-            self.regex = data
+            self.regex = "|".join(data.rstrip().split("\n"))
 
     def set_predicate(self, predicate, **kwargs):
 
