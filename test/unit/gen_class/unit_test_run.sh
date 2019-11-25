@@ -16,6 +16,7 @@ test/unit/gen_class/LogFile_init.py
 test/unit/gen_class/LogFile_load_ignore.py
 test/unit/gen_class/LogFile_load_keyword.py
 test/unit/gen_class/LogFile_load_loglist.py
+test/unit/gen_class/LogFile_load_regex.py
 test/unit/gen_class/Logger_init.py
 test/unit/gen_class/Logger_log_close.py
 test/unit/gen_class/Logger_log_crit.py

@@ -19,6 +19,7 @@ coverage run -a --source=gen_class test/unit/gen_class/LogFile_init.py
 coverage run -a --source=gen_class test/unit/gen_class/LogFile_load_ignore.py
 coverage run -a --source=gen_class test/unit/gen_class/LogFile_load_keyword.py
 coverage run -a --source=gen_class test/unit/gen_class/LogFile_load_loglist.py
+coverage run -a --source=gen_class test/unit/gen_class/LogFile_load_regex.py
 coverage run -a --source=gen_class test/unit/gen_class/Logger_init.py
 coverage run -a --source=gen_class test/unit/gen_class/Logger_log_close.py
 coverage run -a --source=gen_class test/unit/gen_class/Logger_log_crit.py
