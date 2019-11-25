@@ -65,7 +65,6 @@ class UnitTest(unittest.TestCase):
 
         self.input_list = ["\d{4}\-\d{2}\-\d{2}"]
         self.input_list2 = ["\d{4}\-\d{2}\-\d{2}", "d{2}:\d{2}:\d{2}"]
-
         self.input_str = "\d{4}\-\d{2}\-\d{2}"
         self.input_str2 = "\d{4}\-\d{2}\-\d{2}\nd{2}:\d{2}:\d{2}\n"
         self.input_file = "test/unit/gen_class/testfiles/load_regex_file.txt"
