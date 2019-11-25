@@ -41,12 +41,12 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_load_file_multiple -> Test loading from a file multiple lines.
         test_load_empty_file -> Test loading from an empty file.
         test_load_empty_str -> Test loading from an empty sting.
         test_load_file -> Test loading from a file.
         test_load_str_multiple -> Test loading from a multiple line string.
         test_load_str_single -> Test loading from a single sting.
-
         test_load_empty_list -> Test loading from an empty list.
         test_load_list_multiple -> Test loading from a multiple item list.
         test_load_list -> Test loading from a list.
@@ -66,24 +66,30 @@ class UnitTest(unittest.TestCase):
         self.input_list = ["\d{4}\-\d{2}\-\d{2}"]
         self.input_list2 = ["\d{4}\-\d{2}\-\d{2}", "d{2}:\d{2}:\d{2}"]
 
-        self.input_str = "This is another test"
-        self.input_str2 = "This is line 1\nThis is line 2\nThis is line 3\n"
-        self.input_file = "test/unit/gen_class/testfiles/load_loglist_file.txt"
+        self.input_str = "\d{4}\-\d{2}\-\d{2}"
+        self.input_str2 = "\d{4}\-\d{2}\-\d{2}\nd{2}:\d{2}:\d{2}\n"
+        self.input_file = "test/unit/gen_class/testfiles/load_regex_file.txt"
         self.input_file2 = "test/unit/gen_class/testfiles/empty_file.txt"
-        self.input_file3 = \
-            "test/unit/gen_class/testfiles/load_loglist_file2.txt"
+        self.input_file3 = "test/unit/gen_class/testfiles/load_regex_file2.txt"
 
-        self.result_list = "\d{4}\-\d{2}\-\d{2}"
-        self.result_list2 = "\d{4}\-\d{2}\-\d{2}|d{2}:\d{2}:\d{2}"
+        self.result_str = "\d{4}\-\d{2}\-\d{2}"
+        self.result_str2 = "\d{4}\-\d{2}\-\d{2}|d{2}:\d{2}:\d{2}"
 
-        self.result_str = ["This is another test"]
-        self.result_str2 = ["This is line 1", "This is line 2",
-                            "This is line 3"]
-        self.result_file = ["This is test 1", "This is test 2",
-                            "This is test 3"]
-        self.result_file2 = ["This is test 1", "This is test 2",
-                             "This is test 3", "This is test 4",
-                             "This is test 5", "This is test 6"]
+    def test_load_file_multiple(self):
+
+        """Function:  test_load_file
+
+        Description:  Test loading from a file multiple lines.
+
+        Arguments:
+
+        """
+
+        log = gen_class.LogFile()
+        finst = open(self.input_file3)
+        log.load_regex(finst)
+
+        self.assertEqual(log.regex, self.result_str2)
 
     def test_load_empty_file(self):
 
@@ -97,9 +103,9 @@ class UnitTest(unittest.TestCase):
 
         log = gen_class.LogFile()
         finst = open(self.input_file2)
-        log.load_loglist(finst)
+        log.load_regex(finst)
 
-        self.assertEqual(log.regex, [])
+        self.assertEqual(log.regex, "")
 
     def test_load_empty_str(self):
 
@@ -112,9 +118,9 @@ class UnitTest(unittest.TestCase):
         """
 
         log = gen_class.LogFile()
-        log.load_loglist("")
+        log.load_regex("")
 
-        self.assertEqual(log.regex, [""])
+        self.assertEqual(log.regex, "")
 
     def test_load_file(self):
 
@@ -128,9 +134,9 @@ class UnitTest(unittest.TestCase):
 
         log = gen_class.LogFile()
         finst = open(self.input_file)
-        log.load_loglist(finst)
+        log.load_regex(finst)
 
-        self.assertEqual(log.regex, self.result_file)
+        self.assertEqual(log.regex, self.result_str)
 
     def test_load_str_multiple(self):
 
@@ -143,7 +149,7 @@ class UnitTest(unittest.TestCase):
         """
 
         log = gen_class.LogFile()
-        log.load_loglist(self.input_str2)
+        log.load_regex(self.input_str2)
 
         self.assertEqual(log.regex, self.result_str2)
 
@@ -158,7 +164,7 @@ class UnitTest(unittest.TestCase):
         """
 
         log = gen_class.LogFile()
-        log.load_loglist(self.input_str)
+        log.load_regex(self.input_str)
 
         self.assertEqual(log.regex, self.result_str)
 
@@ -190,7 +196,7 @@ class UnitTest(unittest.TestCase):
         log = gen_class.LogFile()
         log.load_regex(self.input_list2)
 
-        self.assertEqual(log.regex, self.result_list2)
+        self.assertEqual(log.regex, self.result_str2)
 
     def test_load_list(self):
 
@@ -205,7 +211,7 @@ class UnitTest(unittest.TestCase):
         log = gen_class.LogFile()
         log.load_regex(self.input_list)
 
-        self.assertEqual(log.regex, self.result_list)
+        self.assertEqual(log.regex, self.result_str)
 
 
 if __name__ == "__main__":
