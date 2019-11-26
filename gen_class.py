@@ -308,6 +308,7 @@ class LogFile(object):
         load_loglist -> Load log entries into loglist array from object.
         load_marker -> Load marker entry from object.
         load_regex -> Load regext entries from object.
+        set_marker -> Set lastline attribute to last entry in loglist array.
         set_predicate -> Set search predicate for keyword search.
 
     """
@@ -329,6 +330,7 @@ class LogFile(object):
         self.keyword = []
         self.predicate = any
         self.ignore = []
+        self.lastline = None
 
     def get_marker(self, **kwargs):
 
@@ -538,6 +540,19 @@ class LogFile(object):
 
         elif isinstance(data, str):
             self.regex = "|".join(data.rstrip().split("\n"))
+
+    def set_marker(self, **kwargs):
+
+        """Method:  set_marker
+
+        Description:  Set lastline attribute to last entry in loglist array.
+
+        Arguments:
+
+        """
+
+        if self.loglist:
+            self.lastline = self.get_marker()
 
     def set_predicate(self, predicate, **kwargs):
 
