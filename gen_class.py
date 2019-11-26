@@ -503,6 +503,8 @@ class LogFile(object):
             if dictkey in data:
                 self.load_loglist(data=data[dictkey])
 
+        self.set_marker()
+
     def load_marker(self, data, **kwargs):
 
         """Method:  load_marker
