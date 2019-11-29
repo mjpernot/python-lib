@@ -38,6 +38,7 @@ import socket
 import getpass
 
 # Third-party
+import gzip
 import yum
 import json
 import re
@@ -487,7 +488,7 @@ class LogFile(object):
 
         """
 
-        if isinstance(data, file):
+        if isinstance(data, file) or isinstance(data, gzip.GzipFile):
             self.loglist.extend([x.rstrip().rstrip("\n") for x in data])
 
         elif isinstance(data, list):

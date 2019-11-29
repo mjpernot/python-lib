@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [2.7.7] - 2019-11-29
+### Added
+- gen_class.LogFile:  Class and methods that stores and manipulates log entries files or standard in.
+
+
 ## [2.7.6] - 2019-09-23
 ### Fixed
 - gen_libs.dict_2_list:  Added check to only process dictionaries where that key exists in the dictionary.
