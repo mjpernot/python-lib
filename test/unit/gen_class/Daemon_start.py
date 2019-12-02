@@ -70,7 +70,8 @@ class UnitTest(unittest.TestCase):
 
         self.pidfile = "test/unit/gen_class/testfiles/daemon_pidfile"
         self.pidfile2 = "test/unit/gen_class/testfiles/daemon_pidfile2"
-        self.daemon = gen_class.Daemon(self.pidfile2)
+        self.daemon2 = gen_class.Daemon(self.pidfile2)
+        self.daemon = gen_class.Daemon(self.pidfile)
 
     @mock.patch("sys.exit", mock.Mock(return_value=True))
     @mock.patch("gen_class.Daemon.daemonize", mock.Mock(return_value=True))
@@ -88,7 +89,7 @@ class UnitTest(unittest.TestCase):
 
         mock_write.write.return_value = True
 
-        self.assertFalse(self.daemon.start())
+        self.assertFalse(self.daemon2.start())
 
     @mock.patch("sys.exit", mock.Mock(return_value=True))
     @mock.patch("gen_class.Daemon.daemonize", mock.Mock(return_value=True))
