@@ -17,7 +17,6 @@
         cp_file
         cp_file2
         crt_file_time
-        data_multi_out
         del_not_and_list
         del_not_in_list
         dict_2_list
@@ -468,52 +467,6 @@ def crt_file_time(fname, path, ext, **kwargs):
     """
 
     return path + fname + "." + time.strftime("%Y%m%d_%I%M") + ext
-
-
-def data_multi_out(data, o_file=None, json_fmt=False, sup_std=False, mail=None,
-                   **kwargs):
-
-    """Function:  data_multi_out
-
-    Description:  Send data to multiple outputs (e.g. file, mail,
-        standard out).  Will also the ability to convert dictionaries to JSON
-        format.
-
-    Arguments:
-        (input) data -> Data document.
-        (input) o_file -> Directory_path/File_name|None: File name to write to.
-        (input) json_fmt -> True|False - Convert data to JSON format.
-        (input) sup_std -> True|False - Suppress printing to standard out.
-        (input) mail -> Mail_class|None - Mail class instance.
-        (output) err_flag -> True|False - Status of process.
-        (output) err_msg -> Error message.
-
-    """
-
-    err_flag = False
-    err_msg = None
-
-    if json_fmt and isinstance(data, dict):
-        data = dict(data)
-        data = json.dumps(data, indent=4)
-
-    elif json_fmt:
-        err_flag = True
-        err_msg = "Error:  Unable to convert to JSON format, not a dictionary"
-
-    if mail and isinstance(data, dict):
-        mail.add_2_msg(json.dumps(data, indent=4) + '\n')
-
-    elif mail:
-        mail.add_2_msg(data)
-
-    if o_file and not err_flag:
-        write_file(o_file, "w", data)
-
-    if not sup_std:
-        print(data)
-
-    return err_flag, err_msg
 
 
 def del_not_and_list(list1, list2, **kwargs):
