@@ -8,6 +8,9 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 ### Added
 - gen_class.LogFile:  Class and methods that stores and manipulates log entries files or standard in.
 
+### Removed
+- gen_libs.data_multi_out
+
 
 ## [2.7.6] - 2019-09-23
 ### Fixed
