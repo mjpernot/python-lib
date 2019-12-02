@@ -34,17 +34,6 @@ import version
 __version__ = version.__version__
 
 
-class Daemon(object):
-    def __init__(self, pidfile):
-        self.pidfile = pidfile
-
-    def daemonize(self):
-        pass
-
-    def run(self):
-        pass
-
-
 class UnitTest(unittest.TestCase):
 
     """Class:  UnitTest
