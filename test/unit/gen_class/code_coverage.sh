@@ -9,7 +9,23 @@ coverage erase
 echo ""
 echo "Running unit test modules in conjunction with coverage"
 coverage run -a --source=gen_class test/unit/gen_class/setup_mail.py
+coverage run -a --source=gen_class test/unit/gen_class/Daemon_delpid.py
 coverage run -a --source=gen_class test/unit/gen_class/Daemon_init.py
+coverage run -a --source=gen_class test/unit/gen_class/Daemon_restart.py
+coverage run -a --source=gen_class test/unit/gen_class/Daemon_start.py
+coverage run -a --source=gen_class test/unit/gen_class/LogFile_filter_ignore.py
+coverage run -a --source=gen_class test/unit/gen_class/LogFile_filter_keyword.py
+coverage run -a --source=gen_class test/unit/gen_class/LogFile_filter_regex.py
+coverage run -a --source=gen_class test/unit/gen_class/LogFile_find_marker.py
+coverage run -a --source=gen_class test/unit/gen_class/LogFile_get_marker.py
+coverage run -a --source=gen_class test/unit/gen_class/LogFile_init.py
+coverage run -a --source=gen_class test/unit/gen_class/LogFile_load_ignore.py
+coverage run -a --source=gen_class test/unit/gen_class/LogFile_load_keyword.py
+coverage run -a --source=gen_class test/unit/gen_class/LogFile_load_loglist.py
+coverage run -a --source=gen_class test/unit/gen_class/LogFile_load_marker.py
+coverage run -a --source=gen_class test/unit/gen_class/LogFile_load_regex.py
+coverage run -a --source=gen_class test/unit/gen_class/LogFile_set_marker.py
+coverage run -a --source=gen_class test/unit/gen_class/LogFile_set_predicate.py
 coverage run -a --source=gen_class test/unit/gen_class/Logger_init.py
 coverage run -a --source=gen_class test/unit/gen_class/Logger_log_close.py
 coverage run -a --source=gen_class test/unit/gen_class/Logger_log_crit.py

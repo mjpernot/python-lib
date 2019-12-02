@@ -72,6 +72,8 @@ exit
 ### Program:  gen_class.py
 ##### Description:  Class that has class definitions for general use.
 ##### Classes:
+ * LogFile => Class that stores and manipulates log entries from files or standard in.  Stores log entries that allows for selective searching of log entries based on regex, keyword, and ignore.
+
  * ProgressBar => Class that displays and updates a progress bar for an ongoing operation.
 
  * ProgramLock => Class that creates a file lock instance and in which other programs using the same parameters will detect the lock as already present and prevent a second program instance from starting.
@@ -165,7 +167,6 @@ test/unit/gen_libs/get_data.py
 test/unit/gen_libs/clear_file.py
 test/unit/gen_libs/chk_crt_dir.py
 test/unit/gen_libs/chk_crt_file.py
-test/unit/gen_libs/data_multi_out.py
 test/unit/gen_libs/file_search.py
 test/unit/gen_libs/file_2_list.py
 test/unit/gen_libs/is_empty_file.py
@@ -271,7 +272,23 @@ test/unit/arg_parser/unit_test_run.sh
 ```
 cd {Python_Project}/python-lib
 test/unit/gen_class/setup_mail.py
+test/unit/gen_class/Daemon_delpid.py
 test/unit/gen_class/Daemon_init.py
+test/unit/gen_class/Daemon_restart.py
+test/unit/gen_class/Daemon_start.py
+test/unit/gen_class/LogFile_filter_ignore.py
+test/unit/gen_class/LogFile_filter_keyword.py
+test/unit/gen_class/LogFile_filter_regex.py
+test/unit/gen_class/LogFile_find_marker.py
+test/unit/gen_class/LogFile_get_marker.py
+test/unit/gen_class/LogFile_init.py
+test/unit/gen_class/LogFile_load_ignore.py
+test/unit/gen_class/LogFile_load_keyword.py
+test/unit/gen_class/LogFile_load_loglist.py
+test/unit/gen_class/LogFile_load_marker.py
+test/unit/gen_class/LogFile_load_regex.py
+test/unit/gen_class/LogFile_set_marker.py
+test/unit/gen_class/LogFile_set_predicate.py
 test/unit/gen_class/Logger_init.py
 test/unit/gen_class/Logger_log_close.py
 test/unit/gen_class/Logger_log_crit.py

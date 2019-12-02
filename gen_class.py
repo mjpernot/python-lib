@@ -9,6 +9,7 @@
 
     Classes:
         Daemon
+        LogFile
         ProgressBar
         SingleInstanceException
         ProgramLock
@@ -37,8 +38,10 @@ import socket
 import getpass
 
 # Third-party
+import gzip
 import yum
 import json
+import re
 
 # Local
 import version
@@ -284,6 +287,292 @@ class Daemon:
         Arguments:
 
         """
+
+
+class LogFile(object):
+
+    """Class:  LogFile
+
+    Description:  Class that stores and manipulates log entries either from
+        files or standard in.  Stores log entries that allows for selective
+        searching of log entries based on regex, keyword, and ignore.
+
+    Methods:
+        __init__ -> Initialization of an instance of the LogFile class.
+        get_marker -> Return the last line of the loglist array.
+        find_marker -> Find the marker in the loglist array.
+        filter_ignore -> Removed ignore entries from loglist array.
+        filter_keyword -> Keep only keyword entries in loglist array.
+        filter_regex -> Keep only regex entries that match in loglist array.
+        load_ignore -> Load ignore list from object.
+        load_keyword -> Load keyword list from object.
+        load_loglist -> Load log entries into loglist array from object.
+        load_marker -> Load marker entry from object.
+        load_regex -> Load regext entries from object.
+        set_marker -> Set lastline attribute to last entry in loglist array.
+        set_predicate -> Set search predicate for keyword search.
+
+    """
+
+    def __init__(self):
+
+        """Method:  __init__
+
+        Description:  Initialization of an instance of the LogFile class.
+
+        Arguments:
+
+        """
+
+        self.loglist = []
+        self.regex = None
+        self.marker = None
+        self.linemarker = None
+        self.keyword = []
+        self.predicate = any
+        self.ignore = []
+        self.lastline = None
+
+    def get_marker(self, **kwargs):
+
+        """Method:  get_marker
+
+        Description:  Return the last line of the loglist array.
+
+        Arguments:
+
+        """
+        
+        if self.loglist:
+            return self.loglist[-1]
+        
+        else:
+            return None
+
+    def find_marker(self, update=False, **kwargs):
+
+        """Method:  find_marker
+
+        Description:  Find the marker in the loglist array.
+
+        Arguments:
+            (input) update -> True|False: Update loglist based on marker found.
+
+        """
+
+        if self.marker and self.loglist:
+            for cnt, line in enumerate(self.loglist):
+                if line.rstrip() == self.marker:
+                    self.linemarker = cnt + 1
+                    break
+
+            if update and self.linemarker is not None:
+                self.loglist = self.loglist[self.linemarker:]
+                self.linemarker = 0
+
+    def filter_ignore(self, use_marker=False, **kwargs):
+
+        """Method:  filter_ignore
+
+        Description:  Removed ignore entries from loglist array.
+
+        Arguments:
+            (input) use_marker -> True|False: Start check from marker.
+
+        """
+
+        if self.ignore and self.loglist:
+            if use_marker and self.linemarker > 0:
+                self.loglist = [x for x in self.loglist[self.linemarker:]
+                                if not any(y in x.lower() for y in self.ignore)]
+
+            else:
+                self.loglist = [x for x in self.loglist
+                                if not any(y in x.lower() for y in self.ignore)]
+
+    def filter_keyword(self, use_marker=False, **kwargs):
+
+        """Method:  filter_keyword
+
+        Description:  Keep only keyword entries in loglist array.
+
+        Arguments:
+            (input) use_marker -> True|False: Start check from marker.
+
+        """
+
+        if self.keyword and self.loglist:
+            if use_marker and self.linemarker > 0:
+                self.loglist = [x for x in self.loglist[self.linemarker:]
+                                if self.predicate(y in x for y in self.keyword)]
+
+            else:
+                self.loglist = [x for x in self.loglist
+                                if self.predicate(y in x for y in self.keyword)]
+
+    def filter_regex(self, use_marker=False, **kwargs):
+
+        """Method:  filter_regex
+
+        Description:  Keep only regex entries that match in loglist array.
+
+        Arguments:
+            (input) use_marker -> True|False: Start check from marker.
+
+        """
+
+        if self.regex and self.loglist:
+            if use_marker and self.linemarker > 0:
+                self.loglist = [x for x in self.loglist[self.linemarker:]
+                                if re.search(self.regex, x)]
+
+            else:
+                self.loglist = [x for x in self.loglist
+                                if re.search(self.regex, x)]
+
+    def load_ignore(self, data, **kwargs):
+
+        """Method:  load_ignore
+
+        Description:  Load ignore list from object.
+
+        Arguments:
+            (input) data -> Holds ignore list as a file, list or string.
+
+        """
+
+        if isinstance(data, file):
+            self.ignore.extend([x.lower().rstrip().rstrip("\n") for x in data])
+
+        elif isinstance(data, list):
+            data = list(data)
+            self.ignore.extend([x.lower().rstrip().rstrip("\n") for x in data])
+
+        elif isinstance(data, str):
+            self.ignore.append(data.lower().rstrip().rstrip("\n"))
+
+    def load_keyword(self, data, fld_delimit=" ", **kwargs):
+
+        """Method:  load_keyword
+
+        Description:  Load keyword list from object.
+
+        Arguments:
+            (input) data -> Holds keyword list as a file, list or string.
+            (input) fld_delimit -> Field delimiter for a string object.
+
+        """
+
+        if isinstance(data, file):
+            self.keyword.extend([x.lower().rstrip().rstrip("\n")
+                                 for x in data])
+
+        elif isinstance(data, list):
+            data = list(data)
+            self.keyword.extend([x.lower().rstrip().rstrip("\n")
+                                 for x in data])
+
+        elif isinstance(data, str):
+            self.keyword.extend(
+                data.lower().rstrip().rstrip("\n").split(fld_delimit))
+
+    def load_loglist(self, data, dictkey=None, **kwargs):
+
+        """Method:  load_loglist
+
+        Description:  Load log entries into loglist array from object.
+
+        Arguments:
+            (input) data -> Holds log entries as a file, list, string, or dict.
+            (input) dictkey -> Dictionary key value for dictionary object.
+
+        """
+
+        if isinstance(data, file) or isinstance(data, gzip.GzipFile):
+            self.loglist.extend([x.rstrip().rstrip("\n") for x in data])
+
+        elif isinstance(data, list):
+            data = list(data)
+            self.loglist.extend([x.rstrip().rstrip("\n") for x in data])
+
+        elif isinstance(data, str):
+            self.loglist.extend(data.rstrip().split("\n"))
+
+        elif isinstance(data, dict) and dictkey:
+            data = dict(data)
+
+            if dictkey in data:
+                self.load_loglist(data=data[dictkey])
+
+        self.set_marker()
+
+    def load_marker(self, data, **kwargs):
+
+        """Method:  load_marker
+
+        Description:  Load marker entry from object.
+
+        Arguments:
+            (input) data -> Holds marker entry as a file or string.
+
+        """
+
+        if isinstance(data, file):
+            self.marker = data.readline().rstrip().rstrip("\n")
+
+        elif isinstance(data, str):
+            self.marker = data.rstrip().rstrip("\n")
+
+    def load_regex(self, data, **kwargs):
+
+        """Method:  load_regex
+
+        Description:  Load regext entries from object.
+
+        Arguments:
+            (input) data -> Holds marker entry as a file, list, or string.
+
+        """
+
+        if isinstance(data, file):
+            self.regex = "|".join(str(x.strip().strip("\n")) for x in data)
+
+        elif isinstance(data, list):
+            data = list(data)
+            self.regex = "|".join(str(x.strip().strip("\n")) for x in data)
+
+        elif isinstance(data, str):
+            self.regex = "|".join(data.rstrip().split("\n"))
+
+    def set_marker(self, **kwargs):
+
+        """Method:  set_marker
+
+        Description:  Set lastline attribute to last entry in loglist array.
+
+        Arguments:
+
+        """
+
+        if self.loglist:
+            self.lastline = self.get_marker()
+
+    def set_predicate(self, predicate, **kwargs):
+
+        """Method:  set_predicate
+
+        Description:  Set search predicate for keyword search.
+
+        Arguments:
+            (input) predicate -> and|or:  Corresponds to all and any functions.
+
+        """
+
+        if predicate == "and":
+            self.predicate = all
+
+        elif predicate == "or":
+            self.predicate = any
 
 
 class ProgressBar(object):

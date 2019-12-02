@@ -25,6 +25,7 @@ else:
     import unittest
 
 # Third-party
+import mock
 
 # Local
 sys.path.append(os.getcwd())
@@ -194,6 +195,22 @@ class UnitTest(unittest.TestCase):
         self.assertEqual((gen_libs.cp_file(self.src_file, self.cp_file_dir,
                                            self.cp_file_dir2, self.dest_file)),
                          (False, "Permission denied"))
+
+    @mock.patch("os.path.isdir", mock.Mock(return_value=True))
+    @mock.patch("os.path.isfile", mock.Mock(return_value=True))
+    def test_fail_else(self):
+
+        """Function:  test_fail_else
+
+        Description:  Test failure for if statement else clause.
+
+        Arguments:
+
+        """
+
+        self.assertEqual((gen_libs.cp_file(self.src_file, self.cp_file_dir2,
+                                           self.cp_file_dir, self.dest_file)),
+                         (False, "No such file or directory"))
 
     def tearDown(self):
 
