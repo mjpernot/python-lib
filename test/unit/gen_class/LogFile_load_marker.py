@@ -62,7 +62,8 @@ class UnitTest(unittest.TestCase):
         self.input_str2 = "This is a test marker\n"
         self.input_file = "test/unit/gen_class/testfiles/load_marker_file.txt"
         self.input_file2 = "test/unit/gen_class/testfiles/empty_file.txt"
-        self.input_file3 = "test/unit/gen_class/testfiles/load_marker_file2.txt"
+        self.input_file3 = \
+            "test/unit/gen_class/testfiles/load_marker_file2.txt"
 
         self.result_str = "This is a test marker"
 

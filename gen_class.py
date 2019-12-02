@@ -342,10 +342,10 @@ class LogFile(object):
         Arguments:
 
         """
-        
+
         if self.loglist:
             return self.loglist[-1]
-        
+
         else:
             return None
 
@@ -384,11 +384,13 @@ class LogFile(object):
         if self.ignore and self.loglist:
             if use_marker and self.linemarker > 0:
                 self.loglist = [x for x in self.loglist[self.linemarker:]
-                                if not any(y in x.lower() for y in self.ignore)]
+                                if not any(y in x.lower()
+                                           for y in self.ignore)]
 
             else:
                 self.loglist = [x for x in self.loglist
-                                if not any(y in x.lower() for y in self.ignore)]
+                                if not any(y in x.lower()
+                                           for y in self.ignore)]
 
     def filter_keyword(self, use_marker=False, **kwargs):
 
@@ -404,11 +406,13 @@ class LogFile(object):
         if self.keyword and self.loglist:
             if use_marker and self.linemarker > 0:
                 self.loglist = [x for x in self.loglist[self.linemarker:]
-                                if self.predicate(y in x for y in self.keyword)]
+                                if self.predicate(y in x
+                                                  for y in self.keyword)]
 
             else:
                 self.loglist = [x for x in self.loglist
-                                if self.predicate(y in x for y in self.keyword)]
+                                if self.predicate(y in x
+                                                  for y in self.keyword)]
 
     def filter_regex(self, use_marker=False, **kwargs):
 
