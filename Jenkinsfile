@@ -109,6 +109,7 @@ pipeline {
                 ./test/unit/gen_libs/write_file2.py
                 ./test/unit/gen_libs/write_to_log.py
                 ./test/unit/gen_class/setup_mail.py
+                ./test/unit/gen_class/Daemon_delpid.py
                 ./test/unit/gen_class/Daemon_init.py
                 ./test/unit/gen_class/LogFile_filter_ignore.py
                 ./test/unit/gen_class/LogFile_filter_keyword.py
