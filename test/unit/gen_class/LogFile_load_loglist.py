@@ -108,7 +108,8 @@ class UnitTest(unittest.TestCase):
         log.load_loglist(finst)
         log.load_loglist(finst2)
 
-        self.assertEqual(log.loglist, self.result_file2)
+        self.assertEqual((log.loglist, log.lastline), (self.result_file2,
+                                                       self.result_file2[-1]))
 
     def test_load_dict_no_key(self):
 
@@ -123,7 +124,7 @@ class UnitTest(unittest.TestCase):
         log = gen_class.LogFile()
         log.load_loglist(self.input_dict)
 
-        self.assertEqual(log.loglist, [])
+        self.assertEqual((log.loglist, log.lastline), ([], None))
 
     def test_load_empty_dict(self):
 
@@ -138,7 +139,7 @@ class UnitTest(unittest.TestCase):
         log = gen_class.LogFile()
         log.load_loglist({}, dictkey="lines")
 
-        self.assertEqual(log.loglist, [])
+        self.assertEqual((log.loglist, log.lastline), ([], None))
 
     def test_load_dict_str(self):
 
@@ -153,7 +154,8 @@ class UnitTest(unittest.TestCase):
         log = gen_class.LogFile()
         log.load_loglist(self.input_dict2, dictkey="lines")
 
-        self.assertEqual(log.loglist, self.result_dict2)
+        self.assertEqual((log.loglist, log.lastline), (self.result_dict2,
+                                                       self.result_dict2[-1]))
 
     def test_load_dict_list(self):
 
@@ -168,7 +170,8 @@ class UnitTest(unittest.TestCase):
         log = gen_class.LogFile()
         log.load_loglist(self.input_dict, dictkey="lines")
 
-        self.assertEqual(log.loglist, self.result_dict)
+        self.assertEqual((log.loglist, log.lastline), (self.result_dict,
+                                                       self.result_dict[-1]))
 
     def test_load_empty_file(self):
 
@@ -184,7 +187,7 @@ class UnitTest(unittest.TestCase):
         finst = open(self.input_file2)
         log.load_loglist(finst)
 
-        self.assertEqual(log.loglist, [])
+        self.assertEqual((log.loglist, log.lastline), ([], None))
 
     def test_load_empty_str(self):
 
@@ -199,7 +202,7 @@ class UnitTest(unittest.TestCase):
         log = gen_class.LogFile()
         log.load_loglist("")
 
-        self.assertEqual(log.loglist, [""])
+        self.assertEqual((log.loglist, log.lastline), ([""], ""))
 
     def test_load_empty_list(self):
 
@@ -214,7 +217,7 @@ class UnitTest(unittest.TestCase):
         log = gen_class.LogFile()
         log.load_loglist([])
 
-        self.assertEqual(log.loglist, [])
+        self.assertEqual((log.loglist, log.lastline), ([], None))
 
     def test_load_file(self):
 
@@ -230,7 +233,8 @@ class UnitTest(unittest.TestCase):
         finst = open(self.input_file)
         log.load_loglist(finst)
 
-        self.assertEqual(log.loglist, self.result_file)
+        self.assertEqual((log.loglist, log.lastline), (self.result_file,
+                                                       self.result_file[-1]))
 
     def test_load_str_multiple(self):
 
@@ -245,7 +249,8 @@ class UnitTest(unittest.TestCase):
         log = gen_class.LogFile()
         log.load_loglist(self.input_str2)
 
-        self.assertEqual(log.loglist, self.result_str2)
+        self.assertEqual((log.loglist, log.lastline), (self.result_str2,
+                                                       self.result_str2[-1]))
 
     def test_load_str_single(self):
 
@@ -260,7 +265,8 @@ class UnitTest(unittest.TestCase):
         log = gen_class.LogFile()
         log.load_loglist(self.input_str)
 
-        self.assertEqual(log.loglist, self.result_str)
+        self.assertEqual((log.loglist, log.lastline), (self.result_str,
+                                                       self.result_str[-1]))
 
     def test_load_list(self):
 
@@ -275,7 +281,8 @@ class UnitTest(unittest.TestCase):
         log = gen_class.LogFile()
         log.load_loglist(self.input_list)
 
-        self.assertEqual(log.loglist, self.result_list)
+        self.assertEqual((log.loglist, log.lastline), (self.result_list,
+                                                       self.result_list[-1]))
 
 
 if __name__ == "__main__":
