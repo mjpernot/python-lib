@@ -70,7 +70,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertTrue(self.daemon.delpid)
+        self.assertFalse(self.daemon.delpid())
 
 
 if __name__ == "__main__":
