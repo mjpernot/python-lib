@@ -107,6 +107,7 @@ coverage run -a --source=gen_libs test/unit/gen_libs/write_to_log.py
 coverage run -a --source=gen_class test/unit/gen_class/setup_mail.py
 coverage run -a --source=gen_class test/unit/gen_class/Daemon_delpid.py
 coverage run -a --source=gen_class test/unit/gen_class/Daemon_init.py
+coverage run -a --source=gen_class test/unit/gen_class/Daemon_start.py
 coverage run -a --source=gen_class test/unit/gen_class/LogFile_filter_ignore.py
 coverage run -a --source=gen_class test/unit/gen_class/LogFile_filter_keyword.py
 coverage run -a --source=gen_class test/unit/gen_class/LogFile_filter_regex.py

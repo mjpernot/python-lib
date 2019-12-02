@@ -274,6 +274,7 @@ cd {Python_Project}/python-lib
 test/unit/gen_class/setup_mail.py
 test/unit/gen_class/Daemon_delpid.py
 test/unit/gen_class/Daemon_init.py
+test/unit/gen_class/Daemon_start.py
 test/unit/gen_class/LogFile_filter_ignore.py
 test/unit/gen_class/LogFile_filter_keyword.py
 test/unit/gen_class/LogFile_filter_regex.py
