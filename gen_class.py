@@ -406,12 +406,12 @@ class LogFile(object):
         if self.keyword and self.loglist:
             if use_marker and self.linemarker > 0:
                 self.loglist = [x for x in self.loglist[self.linemarker:]
-                                if self.predicate(y in x
+                                if self.predicate(y in x.lower()
                                                   for y in self.keyword)]
 
             else:
                 self.loglist = [x for x in self.loglist
-                                if self.predicate(y in x
+                                if self.predicate(y in x.lower()
                                                   for y in self.keyword)]
 
     def filter_regex(self, use_marker=False, **kwargs):
