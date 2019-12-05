@@ -41,6 +41,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_case_insensitive -> Test with case insensitive ignore.
         test_no_find_use_marker -> Test no ignore found and use_marker is True.
         test_no_find -> Test with no ignore entries found.
         test_use_marker_arg -> Test with use_marker argument set to True.
@@ -61,11 +62,36 @@ class UnitTest(unittest.TestCase):
         """
 
         self.loglist = ["This", "is", "a", "test"]
+        self.loglist2 = ["This is a test",
+                         "This is another test",
+                         "And yet another line",
+                         "And this is a lowercase test",
+                         "and the last line"]
         self.ignore = ["is", "a"]
         self.ignore2 = ["nothing"]
+        self.ignore3 = ["AND"]
         self.result = ["test"]
         self.result2 = ["test"]
         self.result3 = ["a", "test"]
+        self.result4 = ["This is a test",
+                        "This is another test"]
+
+    def test_case_insensitive(self):
+
+        """Function:  test_case_insensitive
+
+        Description:  Test with case insensitive ignore.
+
+        Arguments:
+
+        """
+
+        log = gen_class.LogFile()
+        log.loglist = self.loglist2
+        log.ignore = self.ignore3
+
+        log.filter_ignore()
+        self.assertEqual(log.loglist, self.result4)
 
     def test_no_find_use_marker(self):
 
