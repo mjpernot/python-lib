@@ -92,8 +92,8 @@ class UnitTest(unittest.TestCase):
 
         log = gen_class.LogFile()
         log.loglist = self.loglist3
-        log.keyword = self.keyword3
 
+        log.load_keyword(self.keyword3)
         log.filter_keyword()
         self.assertEqual(log.loglist, self.result4)
 
