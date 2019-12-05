@@ -4,12 +4,20 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
-## [2.7.7] - 2019-11-29
-### Added
-- gen_class.LogFile:  Class and methods that stores and manipulates log entries files or standard in.
+## [2.8.0] - 2019-12-03
+### Update
+- gen_class.LogFile (Field Release):  Class and methods that stores and manipulates log entries files or standard in.
 
+### Fixed
+- gen_class.LogFile.filter_keyword:  Converted search entries to lowercase to be case-insensitive searches.
+
+
+## [2.7.7] - 2019-11-29
 ### Removed
 - gen_libs.data_multi_out
+
+### Added
+- gen_class.LogFile (Beta Release):  Class and methods that stores and manipulates log entries files or standard in.
 
 
 ## [2.7.6] - 2019-09-23
