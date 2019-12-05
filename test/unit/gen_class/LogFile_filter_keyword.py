@@ -64,11 +64,37 @@ class UnitTest(unittest.TestCase):
 
         self.loglist = ["This", "is", "a", "test"]
         self.loglist2 = ["This a", "is", "is a", "test is"]
+        self.loglist3 = ["This is a test",
+                         "This is another test",
+                         "And yet another line",
+                         "And this is a lowercase test",
+                         "and the last line"]
         self.keyword = ["is", "a"]
         self.keyword2 = ["nothing"]
+        self.keyword3 = ["AND"]
         self.result = ["This", "is", "a"]
         self.result2 = ["a"]
         self.result3 = ["This a", "is a"]
+        self.result4 = ["And yet another line",
+                        "And this is a lowercase test",
+                        "and the last line"]
+
+    def test_case_insensitive(self):
+
+        """Function:  test_case_insensitive
+
+        Description:  Test with case-insensitive searches.
+
+        Arguments:
+
+        """
+
+        log = gen_class.LogFile()
+        log.loglist = self.loglist3
+        log.keyword = self.keyword3
+
+        log.filter_keyword()
+        self.assertEqual(log.loglist, self.result4)
 
     def test_all_predicate2(self):
 
