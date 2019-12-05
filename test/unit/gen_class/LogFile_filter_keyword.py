@@ -41,6 +41,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_case_insensitive -> Test with case-insensitive searches.
         test_all_predicate2 -> Test with all predicate set with finds.
         test_all_predicate -> Test with all predicate set with no finds.
         test_no_find_use_marker -> Test no ignore found and use_marker is True.
