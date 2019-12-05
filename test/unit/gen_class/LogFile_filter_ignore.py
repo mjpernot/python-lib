@@ -88,8 +88,8 @@ class UnitTest(unittest.TestCase):
 
         log = gen_class.LogFile()
         log.loglist = self.loglist2
-        log.ignore = self.ignore3
 
+        log.load_ignore(self.ignore3)
         log.filter_ignore()
         self.assertEqual(log.loglist, self.result4)
 
