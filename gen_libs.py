@@ -537,7 +537,7 @@ def dict_2_list(dict_list, key_val, **kwargs):
     return [row[key_val] for row in list(dict_list) if key_val in row]
 
 
-def dict_2_std(data, ofile=False, **kwargs):
+def dict_2_std(data, ofile=False, mode="w", **kwargs):
 
     """Function:  dict_2_std
 
@@ -547,13 +547,19 @@ def dict_2_std(data, ofile=False, **kwargs):
     Arguments:
         (input) data -> Dict document.
         (input) ofile -> Name of file to print to.
+        (input) mode -> File mode: "a" (append) | "w" (write - default) 
 
     """
+
+    modes = ("a", "w")
+
+    if mode not in modes:
+        mode = "w"
 
     data = dict(data)
 
     if ofile:
-        outfile = open(ofile, "w")
+        outfile = open(ofile, mode)
 
     else:
         outfile = sys.stdout
