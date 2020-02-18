@@ -1496,7 +1496,7 @@ def pct_int(num1, num2, **kwargs):
     return int(float_div(num1, num2, **kwargs) * 100)
 
 
-def print_data(data, **kwargs):
+def print_data(data, mode="w", **kwargs):
 
     """Function:  print_data
 
@@ -1505,13 +1505,19 @@ def print_data(data, **kwargs):
 
     Arguments:
         (input) data -> Data to be printed.
+        (input) mode -> File mode: "a" (append) | "w" (write - default)
         (input) **kwargs:
             ofile -> Name of file to print to.
 
     """
 
+    modes = ("a", "w")
+
+    if mode not in modes:
+        mode = "w"
+
     if "ofile" in kwargs and kwargs["ofile"]:
-        outfile = open(kwargs.get("ofile"), "w")
+        outfile = open(kwargs.get("ofile"), mode)
 
     else:
         outfile = sys.stdout
