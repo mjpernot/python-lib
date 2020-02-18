@@ -6,6 +6,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 ## [2.8.1] - 2020-02-18
 ### Changed
+- gen_libs.dict_2_std:  Added file mode option writing to file.
 - gen_libs.print_data:  Added file mode option writing to file.
 
 
