@@ -1534,7 +1534,8 @@ def print_data(data, mode="w", **kwargs):
         outfile.close()
 
 
-def print_dict(data, ofile=None, json_fmt=False, no_std=False, **kwargs):
+def print_dict(data, ofile=None, json_fmt=False, no_std=False, mode="w",
+               **kwargs):
 
     """Function:  print_dict
 
@@ -1546,6 +1547,7 @@ def print_dict(data, ofile=None, json_fmt=False, no_std=False, **kwargs):
         (input) ofile -> Name of output file name.
         (input) json_fmt -> True|False - Print in JSON format.
         (input) no_std -> True|False - Do not print to standard out.
+        (input) mode -> File mode: "a" (append) | "w" (write - default)
         (output) err_flag -> True|False - If error has occurred.
         (output) err_msg -> None or error message.
 
@@ -1553,13 +1555,18 @@ def print_dict(data, ofile=None, json_fmt=False, no_std=False, **kwargs):
 
     err_flag = False
     err_msg = None
+    modes = ("a", "w")
+
+    if mode not in modes:
+        mode = "w"
 
     if isinstance(data, dict):
         if ofile and json_fmt:
-            print_data(json.dumps(data, indent=4), ofile=ofile, **kwargs)
+            print_data(json.dumps(data, indent=4), ofile=ofile, mode=mode,
+                       **kwargs)
 
         elif ofile:
-            dict_2_std(data, ofile=ofile, **kwargs)
+            dict_2_std(data, ofile=ofile, mode=mode, **kwargs)
 
         if not no_std and json_fmt:
             print_data(json.dumps(data, indent=4), **kwargs)
