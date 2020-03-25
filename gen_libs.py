@@ -547,14 +547,9 @@ def dict_2_std(data, ofile=False, mode="w", **kwargs):
     Arguments:
         (input) data -> Dict document.
         (input) ofile -> Name of file to print to.
-        (input) mode -> File mode: "a" (append) | "w" (write - default) 
+        (input) mode -> w|a => Write or append mode.
 
     """
-
-    modes = ("a", "w")
-
-    if mode not in modes:
-        mode = "w"
 
     data = dict(data)
 
