@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
-## [2.8.1] - 2020-02-18
+## [2.8.1] - 2020-03-25
 ### Changed
 - gen_libs.print_dict:  Added file mode option writing to file.
 - gen_libs.dict_2_std:  Added file mode option writing to file.
