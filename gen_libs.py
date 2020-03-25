@@ -1506,16 +1506,11 @@ def print_data(data, mode="w", **kwargs):
 
     Arguments:
         (input) data -> Data to be printed.
-        (input) mode -> File mode: "a" (append) | "w" (write - default)
+        (input) mode -> w|a => Write or append mode.
         (input) **kwargs:
             ofile -> Name of file to print to.
 
     """
-
-    modes = ("a", "w")
-
-    if mode not in modes:
-        mode = "w"
 
     if "ofile" in kwargs and kwargs["ofile"]:
         outfile = open(kwargs.get("ofile"), mode)
