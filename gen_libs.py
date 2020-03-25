@@ -1537,7 +1537,7 @@ def print_dict(data, ofile=None, json_fmt=False, no_std=False, mode="w",
         (input) ofile -> Name of output file name.
         (input) json_fmt -> True|False - Print in JSON format.
         (input) no_std -> True|False - Do not print to standard out.
-        (input) mode -> File mode: "a" (append) | "w" (write - default)
+        (input) mode -> w|a => Write or append mode.
         (output) err_flag -> True|False - If error has occurred.
         (output) err_msg -> None or error message.
 
@@ -1545,10 +1545,6 @@ def print_dict(data, ofile=None, json_fmt=False, no_std=False, mode="w",
 
     err_flag = False
     err_msg = None
-    modes = ("a", "w")
-
-    if mode not in modes:
-        mode = "w"
 
     if isinstance(data, dict):
         if ofile and json_fmt:
