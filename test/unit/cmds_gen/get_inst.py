@@ -56,11 +56,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        class Sub(object):
+        class ModInst(object):
 
-            """Class:  Sub
+            """Class:  ModInst
 
-            Description:  Class is a representation of a subprocess module.
+            Description:  Class is a representation of a module instance.
 
             Methods:
                 __init__ -> Initialize configuration environment.
@@ -71,7 +71,7 @@ class UnitTest(unittest.TestCase):
 
                 """Method:  __init__
 
-                Description:  Initialization instance of the CfgTest class.
+                Description:  Initialization instance of the class.
 
                 Arguments:
 
@@ -79,8 +79,8 @@ class UnitTest(unittest.TestCase):
 
                 pass
 
-        self.subinst = Sub()
-        self.results = Sub()
+        self.modinst = ModInst()
+        self.results = ModInst()
 
     def test_get_inst(self):
 
@@ -93,7 +93,7 @@ class UnitTest(unittest.TestCase):
         """
 
         self.assertEqual(
-            type(cmds_gen.get_inst(self.subinst)), type(self.results))
+            type(cmds_gen.get_inst(self.modinst)), type(self.results))
 
 
 if __name__ == "__main__":
