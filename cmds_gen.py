@@ -10,6 +10,7 @@
         add_cmd
         create_cfg_array
         disconnect
+        get_cmdline
         is_add_cmd
         run_prog
 
@@ -132,6 +133,21 @@ def disconnect(*args):
 
         else:
             x.disconnect()
+
+
+def get_cmdline(cmdline, **kwargs):
+
+    """Function:  get_cmdline
+
+    Description:  Returns the command line arguments.
+
+    Arguments:
+        (input) cmdline -> Command module sys.
+        (output) -> Return command line arguments.
+
+    """
+
+    return cmdline.argv
 
 
 def is_add_cmd(args_array, cmd, opt_arg_list, **kwargs):
