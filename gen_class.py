@@ -5,6 +5,7 @@
     Description:  Class that has class definitions for general use.
 
     Function:
+        get_inst
         setup_mail
 
     Classes:
@@ -47,6 +48,22 @@ import re
 import version
 
 __version__ = version.__version__
+
+
+def get_inst(cmd, **kwargs):
+
+    """Function:  get_inst
+
+    Description:  Returns the module instance header.
+
+    Arguments:
+        (input) cmd -> Module library.
+        (output) -> Return module instance.
+
+    """
+    sub = cmd
+
+    return sub
 
 
 def setup_mail(to_line, subj=None, frm_line=None, **kwargs):
