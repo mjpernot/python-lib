@@ -206,21 +206,22 @@ def run_prog(cmd, **kwargs):
     """
 
     cmd = list(cmd)
+    subinst = get_sub(subprocess)
 
     # Write to file.
     if kwargs.get("ofile", False):
         with open(kwargs["ofile"], "wb") as f_name:
-            P1 = subprocess.Popen(cmd, stdout=f_name)
+            P1 = subinst.Popen(cmd, stdout=f_name)
             P1.wait()
 
     # Return data to calling function.
     elif kwargs.get("retdata", False):
-        P1 = subprocess.Popen(cmd, stdout=subprocess.PIPE)
+        P1 = subinst.Popen(cmd, stdout=subinst.PIPE)
         out, err = P1.communicate()
 
         return out
 
     # Write to standard out.
     else:
-        P1 = subprocess.Popen(cmd)
+        P1 = subinst.Popen(cmd)
         P1.wait()

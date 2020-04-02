@@ -5,6 +5,9 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 
 ## [2.8.1] - 2020-03-25
+### Fixed
+- cmds_gen.run_prog:  Fixed subprocess instance from SonarQube scan finding.
+
 ### Added
 - cmds_gen.get_sub:  Returns the subprocess instance header.
 
