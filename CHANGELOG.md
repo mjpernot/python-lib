@@ -6,7 +6,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 ## [2.8.1] - 2020-03-25
 ### Added
-- cmds_gen.get_cmdline:  Returns the command line arguments.
+- cmds_gen.get_sub:  Returns the subprocess instance header.
 
 ### Changed
 - gen_libs.print_dict:  Added file mode option writing to file.
