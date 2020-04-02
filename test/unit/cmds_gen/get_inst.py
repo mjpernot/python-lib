@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  get_sub.py
+"""Program:  get_inst.py
 
-    Description:  Unit testing of get_sub in cmds_gen.py.
+    Description:  Unit testing of get_inst in cmds_gen.py.
 
     Usage:
-        test/unit/cmds_gen/get_sub.py
+        test/unit/cmds_gen/get_inst.py
 
     Arguments:
 
@@ -42,7 +42,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Unit testing initilization.
-        test_get_sub -> Test returning command line.
+        test_get_inst -> Test returning command line.
 
     """
 
@@ -82,9 +82,9 @@ class UnitTest(unittest.TestCase):
         self.subinst = Sub()
         self.results = Sub()
 
-    def test_get_sub(self):
+    def test_get_inst(self):
 
-        """Function:  test_get_sub
+        """Function:  test_get_inst
 
         Description:  Test returning command line.
 
@@ -93,7 +93,7 @@ class UnitTest(unittest.TestCase):
         """
 
         self.assertEqual(
-            type(cmds_gen.get_sub(self.subinst)), type(self.results))
+            type(cmds_gen.get_inst(self.subinst)), type(self.results))
 
 
 if __name__ == "__main__":
