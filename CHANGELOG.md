@@ -570,7 +570,7 @@ Breaking Change
 
 ## [1.33.1] - 2018-01-25
 ### Changed
-- gen_class/ProgressBar_calc_and_update.py:  Changed format of mock.patch statements.
+- gen_class.ProgressBar_calc_and_update.py:  Changed format of mock.patch statements.
 
 
 ## [1.33.0] - 2018-01-22
