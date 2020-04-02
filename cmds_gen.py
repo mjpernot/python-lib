@@ -135,14 +135,14 @@ def disconnect(*args):
             x.disconnect()
 
 
-def get_sub(cmd, **kwargs):
+def get_inst(cmd, **kwargs):
 
-    """Function:  get_sub
+    """Function:  get_inst
 
-    Description:  Returns the subprocess instance header.
+    Description:  Returns the module instance header.
 
     Arguments:
-        (input) cmd -> Command module subprocess.
+        (input) cmd -> Module library.
         (output) -> Return module instance.
 
     """
@@ -206,7 +206,7 @@ def run_prog(cmd, **kwargs):
     """
 
     cmd = list(cmd)
-    subinst = get_sub(subprocess)
+    subinst = get_inst(subprocess)
 
     # Write to file.
     if kwargs.get("ofile", False):

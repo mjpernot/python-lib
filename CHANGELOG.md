@@ -9,7 +9,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - cmds_gen.run_prog:  Fixed subprocess instance from SonarQube scan finding.
 
 ### Added
-- cmds_gen.get_sub:  Returns the subprocess instance header.
+- cmds_gen.get_inst:  Returns the module instance header.
 
 ### Changed
 - gen_libs.print_dict:  Added file mode option writing to file.
