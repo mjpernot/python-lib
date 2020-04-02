@@ -10,7 +10,7 @@
         add_cmd
         create_cfg_array
         disconnect
-        get_cmdline
+        get_sub
         is_add_cmd
         run_prog
 
@@ -135,19 +135,20 @@ def disconnect(*args):
             x.disconnect()
 
 
-def get_cmdline(cmdline, **kwargs):
+def get_sub(cmd, **kwargs):
 
-    """Function:  get_cmdline
+    """Function:  get_sub
 
-    Description:  Returns the command line arguments.
+    Description:  Returns the subprocess instance header.
 
     Arguments:
-        (input) cmdline -> Command module sys.
-        (output) -> Return command line arguments.
+        (input) cmd -> Command module subprocess.
+        (output) -> Return module instance.
 
     """
+    sub = cmd
 
-    return cmdline.argv
+    return sub
 
 
 def is_add_cmd(args_array, cmd, opt_arg_list, **kwargs):
