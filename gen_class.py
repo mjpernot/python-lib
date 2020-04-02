@@ -947,7 +947,8 @@ class Mail(System):
 
         """
 
-        server = smtplib.SMTP("localhost")
+        inst = get_inst(smtplib)
+        server = inst.SMTP("localhost")
         server.sendmail(self.frm, self.to, self.create_body())
         server.quit()
 
