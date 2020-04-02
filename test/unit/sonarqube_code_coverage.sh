@@ -105,6 +105,7 @@ coverage run -a --source=gen_libs test/unit/gen_libs/validate_int.py
 coverage run -a --source=gen_libs test/unit/gen_libs/write_file2.py
 coverage run -a --source=gen_libs test/unit/gen_libs/write_file.py
 coverage run -a --source=gen_libs test/unit/gen_libs/write_to_log.py
+coverage run -a --source=gen_class test/unit/gen_class/get_inst.py
 coverage run -a --source=gen_class test/unit/gen_class/setup_mail.py
 coverage run -a --source=gen_class test/unit/gen_class/Daemon_delpid.py
 coverage run -a --source=gen_class test/unit/gen_class/Daemon_init.py
