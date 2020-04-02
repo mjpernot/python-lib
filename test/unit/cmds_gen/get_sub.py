@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  get_cmdline.py
+"""Program:  get_sub.py
 
-    Description:  Unit testing of get_cmdline in cmds_gen.py.
+    Description:  Unit testing of get_sub in cmds_gen.py.
 
     Usage:
-        test/unit/cmds_gen/get_cmdline.py
+        test/unit/cmds_gen/get_sub.py
 
     Arguments:
 
@@ -42,7 +42,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Unit testing initilization.
-        test_get_cmdline -> Test returning command line.
+        test_get_sub -> Test returning command line.
 
     """
 
@@ -56,11 +56,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        class CmdLine(object):
+        class Sub(object):
 
-            """Class:  CmdLine
+            """Class:  Sub
 
-            Description:  Class which is a representation of a sys module.
+            Description:  Class is a representation of a subprocess module.
 
             Methods:
                 __init__ -> Initialize configuration environment.
@@ -77,14 +77,14 @@ class UnitTest(unittest.TestCase):
 
                 """
 
-                self.argv = ["./cmds_gen.py", "-c"]
+                pass
 
-        self.cmd_line = CmdLine()
-        self.results = ["./cmds_gen.py", "-c"]
+        self.subinst = Sub()
+        self.results = Sub()
 
-    def test_get_cmdline(self):
+    def test_get_sub(self):
 
-        """Function:  test_get_cmdline
+        """Function:  test_get_sub
 
         Description:  Test returning command line.
 
@@ -92,7 +92,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertEqual(cmds_gen.get_cmdline(self.cmd_line), self.results)
+        self.assertEqual(
+            type(cmds_gen.get_sub(self.subinst)), type(self.results))
 
 
 if __name__ == "__main__":
