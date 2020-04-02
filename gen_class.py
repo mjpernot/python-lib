@@ -50,6 +50,22 @@ import version
 __version__ = version.__version__
 
 
+def get_inst2(cmd, **kwargs):
+
+    """Function:  get_inst2
+
+    Description:  Returns the module instance header.
+
+    Arguments:
+        (input) cmd -> Module library.
+        (output) -> Return module instance.
+
+    """
+    sub = cmd
+
+    return sub.SIGTERM
+
+
 def get_inst(cmd, **kwargs):
 
     """Function:  get_inst
@@ -266,10 +282,10 @@ class Daemon:
 
         # Try killing the daemon process
         try:
-            siginst = get_inst(signal)
+            siginst = get_inst2(signal)
 
             while 1:
-                os.kill(pid, siginst.SIGTERM)
+                os.kill(pid, siginst)
                 time.sleep(0.1)
 
         except OSError, err:
