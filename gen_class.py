@@ -896,7 +896,9 @@ class Mail(System):
 
         """
 
-        for ln in sys.stdin:
+        inst = get_inst(sys)
+
+        for ln in inst.stdin:
             self.add_2_msg(ln)
 
     def create_body(self):
