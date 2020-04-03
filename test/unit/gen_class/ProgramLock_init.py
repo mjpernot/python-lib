@@ -65,7 +65,7 @@ class UnitTest(unittest.TestCase):
         self.tmp_path = os.path.join("/", "tmp")
         self.argv = ["/opt/local/python/ProgramLock_init.py"]
         self.flavor_id = "TEST"
-        self.LOCK = None
+        self.lock = None
         self.lock_file = "-opt-local-python-ProgramLock_init-.lock"
         self.lock_file2 = "-opt-local-python-ProgramLock_init-TEST.lock"
         self.results = os.path.join(self.tmp_path, self.lock_file)
@@ -90,10 +90,10 @@ class UnitTest(unittest.TestCase):
         mock_lock.return_value = True
         mock_tmp.return_value = self.tmp_path
 
-        self.LOCK = gen_class.ProgramLock(self.argv)
+        self.lock = gen_class.ProgramLock(self.argv)
 
-        self.assertEqual((self.LOCK.lock_created, self.LOCK.f_ptr,
-                          self.LOCK.lock_file),
+        self.assertEqual((self.lock.lock_created, self.lock.f_ptr,
+                          self.lock.lock_file),
                          (True, self.f_ptr, self.results))
 
     @mock.patch("gen_class.tempfile.gettempdir")
@@ -115,10 +115,10 @@ class UnitTest(unittest.TestCase):
         mock_lock.return_value = True
         mock_tmp.return_value = self.tmp_path
 
-        self.LOCK = gen_class.ProgramLock(self.argv, self.flavor_id)
+        self.lock = gen_class.ProgramLock(self.argv, self.flavor_id)
 
-        self.assertEqual((self.LOCK.lock_created, self.LOCK.f_ptr,
-                          self.LOCK.lock_file),
+        self.assertEqual((self.lock.lock_created, self.lock.f_ptr,
+                          self.lock.lock_file),
                          (True, self.f_ptr, self.results2))
 
     @mock.patch("gen_class.tempfile.gettempdir")
@@ -140,10 +140,10 @@ class UnitTest(unittest.TestCase):
         mock_lock.return_value = True
         mock_tmp.return_value = self.tmp_path
 
-        self.LOCK = gen_class.ProgramLock(self.argv, self.flavor_id)
+        self.lock = gen_class.ProgramLock(self.argv, self.flavor_id)
 
-        self.assertEqual((self.LOCK.lock_created, self.LOCK.f_ptr,
-                          self.LOCK.lock_file),
+        self.assertEqual((self.lock.lock_created, self.lock.f_ptr,
+                          self.lock.lock_file),
                          (True, self.f_ptr, self.results2))
 
     def tearDown(self):
