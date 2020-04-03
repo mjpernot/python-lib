@@ -31,6 +31,7 @@ test/unit/gen_libs/file_search.py
 test/unit/gen_libs/float_div.py
 test/unit/gen_libs/get_base_dir.py
 test/unit/gen_libs/get_data.py
+test/unit/gen_libs/get_inst.py
 test/unit/gen_libs/get_date.py
 test/unit/gen_libs/get_secs.py
 test/unit/gen_libs/get_time.py
