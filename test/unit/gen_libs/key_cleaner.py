@@ -43,7 +43,10 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Unit testing initilization.
-        test_key_cleaner -> Test key_cleaner function.
+        test_key_cleaner_tuple -> Test with tuple passed.
+        test_key_cleaner_multi_list -> Test with multiple item list passed.
+        test_key_cleaner_single_list -> Test with single item list passed.
+        test_key_cleaner_dict -> Test with dictionary passed.
 
     """
 
@@ -58,15 +61,62 @@ class UnitTest(unittest.TestCase):
         """
 
         self.data = {"no.ne": "value2"}
+        self.data2 = [{"no.ne": "value2"}]
+        self.data3 = [{"no.ne": "value2"}, {"no.ne": "value2"}]
+        self.data4 = ({"no.ne": "value2"}, {"no.ne": "value2"})
         self.char = "e"
         self.repl = "a"
         self.results = {"no.na": "value2"}
+        self.results2 = [{"no.na": "value2"}]
+        self.results3 = [{"no.na": "value2"}, {"no.na": "value2"}]
+        self.results4 = ({"no.ne": "value2"}, {"no.ne": "value2"})
 
-    def test_key_cleaner(self):
+    @unittest.skip("Error:  Unable to handle tuple.")
+    def test_key_cleaner_tuple(self):
 
-        """Function:  test_key_cleaner
+        """Function:  test_key_cleaner_tuple
 
-        Description:  Test key_cleaner function.
+        Description:  Test with tuple passed.
+
+        Arguments:
+
+        """
+
+        self.assertEqual(gen_libs.key_cleaner(self.data4, self.char,
+                                              self.repl), self.results4)
+
+    @unittest.skip("Error:  Unable to handle multiple item list.")
+    def test_key_cleaner_multi_list(self):
+
+        """Function:  test_key_cleaner_multi_list
+
+        Description:  Test with multiple item list passed.
+
+        Arguments:
+
+        """
+
+        self.assertEqual(gen_libs.key_cleaner(self.data3, self.char,
+                                              self.repl), self.results3)
+
+    def test_key_cleaner_single_list(self):
+
+        """Function:  test_key_cleaner_single_list
+
+        Description:  Test with single item list passed.
+
+        Arguments:
+
+        """
+
+        self.assertEqual(gen_libs.key_cleaner(self.data2, self.char,
+                                              self.repl), self.results2)
+
+    def test_key_cleaner_dict(self):
+
+        """Function:  test_key_cleaner_dict
+
+        Description:  Test with dictionary passed.
 
         Arguments:
 
