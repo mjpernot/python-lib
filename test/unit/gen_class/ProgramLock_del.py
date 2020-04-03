@@ -63,7 +63,6 @@ class UnitTest(unittest.TestCase):
         self.test_file = os.path.join(self.test_path, "test_file.txt")
         self.f_ptr = open(self.test_file, "w")
         self.tmp_path = os.path.join("/", "tmp")
-
         self.argv = ["/opt/local/python/ProgramLock_init.py"]
         self.flavor_id = "TEST"
         self.LOCK = None
