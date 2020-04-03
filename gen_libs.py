@@ -32,6 +32,7 @@
         get_base_dir
         get_data
         get_date
+        get_inst
         get_secs
         get_time
         help_func
@@ -817,6 +818,22 @@ def get_date(**kwargs):
     """
 
     return datetime.datetime.strftime(datetime.datetime.now(), "%Y-%m-%d")
+
+
+def get_inst(cmd, **kwargs):
+
+    """Function:  get_inst
+
+    Description:  Returns the module instance header.
+
+    Arguments:
+        (input) cmd -> Module library.
+        (output) -> Return module instance.
+
+    """
+    sub = cmd
+
+    return sub
 
 
 def get_secs(td, **kwargs):
