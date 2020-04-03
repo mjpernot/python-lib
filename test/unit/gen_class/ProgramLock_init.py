@@ -66,6 +66,10 @@ class UnitTest(unittest.TestCase):
         self.argv = ["/opt/local/python/ProgramLock_init.py"]
         self.flavor_id = "TEST"
         self.LOCK = None
+        self.lock_file = "-opt-local-python-ProgramLock_init-.lock"
+        self.lock_file2 = "-opt-local-python-ProgramLock_init-TEST.lock"
+        self.results = os.path.join(self.tmp_path, self.lock_file)
+        self.results2 = os.path.join(self.tmp_path, self.lock_file2)
 
     @mock.patch("gen_class.tempfile.gettempdir")
     @mock.patch("gen_class.fcntl.lockf")
@@ -90,8 +94,7 @@ class UnitTest(unittest.TestCase):
 
         self.assertEqual((self.LOCK.lock_created, self.LOCK.f_ptr,
                           self.LOCK.lock_file),
-                         (True, self.f_ptr,
-                          "/tmp/-opt-local-python-ProgramLock_init-.lock"))
+                         (True, self.f_ptr, self.results))
 
     @mock.patch("gen_class.tempfile.gettempdir")
     @mock.patch("gen_class.fcntl.lockf")
@@ -116,8 +119,7 @@ class UnitTest(unittest.TestCase):
 
         self.assertEqual((self.LOCK.lock_created, self.LOCK.f_ptr,
                           self.LOCK.lock_file),
-                         (True, self.f_ptr,
-                          "/tmp/-opt-local-python-ProgramLock_init-TEST.lock"))
+                         (True, self.f_ptr, self.results2))
 
     @mock.patch("gen_class.tempfile.gettempdir")
     @mock.patch("gen_class.fcntl.lockf")
@@ -142,8 +144,7 @@ class UnitTest(unittest.TestCase):
 
         self.assertEqual((self.LOCK.lock_created, self.LOCK.f_ptr,
                           self.LOCK.lock_file),
-                         (True, self.f_ptr,
-                          "/tmp/-opt-local-python-ProgramLock_init-TEST.lock"))
+                         (True, self.f_ptr, self.results2))
 
     def tearDown(self):
 
