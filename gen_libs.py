@@ -338,7 +338,8 @@ def compress(fname, **kwargs):
 
     """
 
-    P1 = subprocess.Popen(["gzip", fname])
+    inst = get_inst(subprocess)
+    P1 = inst.Popen(["gzip", fname])
     P1.wait()
 
 
