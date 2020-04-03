@@ -62,7 +62,7 @@ class UnitTest(unittest.TestCase):
         self.test_path = os.path.join(os.getcwd(), "test/unit/gen_class")
         self.test_file = os.path.join(self.test_path, "test_file.txt")
         self.f_ptr = open(self.test_file, "w")
-
+        self.tmp_path = os.path.join("/", "tmp")
         self.argv = ["/opt/local/python/ProgramLock_init.py"]
         self.flavor_id = "TEST"
         self.LOCK = None
@@ -84,7 +84,7 @@ class UnitTest(unittest.TestCase):
         mock_path.return_value = self.argv[0]
         mock_open.return_value = self.f_ptr
         mock_lock.return_value = True
-        mock_tmp.return_value = "/tmp"
+        mock_tmp.return_value = self.tmp_path
 
         self.LOCK = gen_class.ProgramLock(self.argv)
 
@@ -110,7 +110,7 @@ class UnitTest(unittest.TestCase):
         mock_path.return_value = self.argv[0]
         mock_open.return_value = self.f_ptr
         mock_lock.return_value = True
-        mock_tmp.return_value = "/tmp"
+        mock_tmp.return_value = self.tmp_path
 
         self.LOCK = gen_class.ProgramLock(self.argv, self.flavor_id)
 
@@ -136,7 +136,7 @@ class UnitTest(unittest.TestCase):
         mock_path.return_value = self.argv[0]
         mock_open.return_value = self.f_ptr
         mock_lock.return_value = True
-        mock_tmp.return_value = "/tmp"
+        mock_tmp.return_value = self.tmp_path
 
         self.LOCK = gen_class.ProgramLock(self.argv, self.flavor_id)
 
