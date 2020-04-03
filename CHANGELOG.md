@@ -14,6 +14,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 ### Added
 - cmds_gen.get_inst:  Returns the module instance header.
 - gen_class.get_inst:  Returns the module instance header.
+- gen_libs.get_inst:  Returns the module instance header.
 
 ### Changed
 - gen_libs.print_dict:  Added file mode option writing to file.
