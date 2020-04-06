@@ -46,7 +46,7 @@ class UnitTest(unittest.TestCase):
 
     def test_NotSlaveError(self):
 
-        """Function:  test_Error
+        """Function:  NotSlaveError
 
         Description:  Test with no arguments.
 
