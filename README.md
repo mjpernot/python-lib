@@ -175,3 +175,10 @@ test/unit/errors/unit_test_run.sh
 test/unit/errors/code_coverage.sh
 ```
 
+### All unit and code coverage testing for machine.py:
+```
+cd {Python_Project}/python-lib
+test/unit/machine/unit_test_run.sh
+test/unit/machine/code_coverage.sh
+```
+
