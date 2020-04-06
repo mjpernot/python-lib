@@ -399,7 +399,7 @@ def arg_req_or_lst(args_array, opt_or_dict, **kwargs):
     for x in set(opt_or_dict.keys()) - set(args_array.keys()):
         tmp_flag = False
 
-        for y in set(opt_or_dict[x]) & set(args_array.keys()):
+        for _ in set(opt_or_dict[x]) & set(args_array.keys()):
             tmp_flag = True
             break
 
