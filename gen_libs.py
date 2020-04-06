@@ -53,6 +53,7 @@
         merge_data_types
         merge_two_dicts
         milli_2_readadble
+        month_days
         month_delta
         mv_file
         mv_file2
@@ -109,6 +110,7 @@ import io
 import json
 import ast
 import gzip
+import calendar
 
 # Local
 import version
@@ -1345,6 +1347,21 @@ def milli_2_readadble(ms, **kwargs):
 
     return "%d days %d hours %d minutes %d seconds" \
            % (days, hours, minutes, seconds)
+
+
+def month_days(dtg, **kwargs):
+
+    """Function:  month_days
+
+    Description:  Return the number of days in the month for the date.
+
+    Arguments:
+        (input) dtg -> Is a datetime class instance.
+        (output) -> Number of days in the month for the date.
+
+    """
+
+    return calendar.monthrange(dtg.year, dtg.month)[1]
 
 
 def month_delta(date, delta, **kwargs):
