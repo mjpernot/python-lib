@@ -58,6 +58,7 @@ class UnitTest(unittest.TestCase):
         """
 
         self.to = ["mail_address@domain.name"]
+        self.subj_mask = "Subject: %s\n\n%s"
 
     def test_long_subject(self):
 
@@ -70,14 +71,12 @@ class UnitTest(unittest.TestCase):
         """
 
         msg = "Test email line with a line greater than thirty characters"
-
         email = gen_class.Mail(self.to)
         email.add_2_msg(msg)
-
         email.create_body()
 
         self.assertEqual(email.create_body(),
-                         ("Subject: %s\n\n%s" % (msg[:30], msg)))
+                         (self.subj_mask % (msg[:30], msg)))
 
     def test_with_subject(self):
 
@@ -91,14 +90,11 @@ class UnitTest(unittest.TestCase):
 
         msg = "Test email line"
         subj = "Test subject"
-
         email = gen_class.Mail(self.to, subj=subj)
         email.add_2_msg(msg)
-
         email.create_body()
 
-        self.assertEqual(email.create_body(),
-                         ("Subject: %s\n\n%s" % (subj, msg)))
+        self.assertEqual(email.create_body(), (self.subj_mask % (subj, msg)))
 
     def test_create_body(self):
 
@@ -111,14 +107,11 @@ class UnitTest(unittest.TestCase):
         """
 
         msg = "Test email line"
-
         email = gen_class.Mail(self.to)
         email.add_2_msg(msg)
-
         email.create_body()
 
-        self.assertEqual(email.create_body(),
-                         ("Subject: %s\n\n%s" % (msg, msg)))
+        self.assertEqual(email.create_body(), (self.subj_mask % (msg, msg)))
 
 
 if __name__ == "__main__":
