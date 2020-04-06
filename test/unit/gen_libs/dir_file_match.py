@@ -43,6 +43,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Unit testing initilization.
+        test_file_search_path -> Test with files matching with path included.
         test_no_file_match -> Test with no files matching.
         test_file_match -> Test with files matching.
 
@@ -62,8 +63,26 @@ class UnitTest(unittest.TestCase):
         self.list_files = ["file1.txt", "file2.txt", "test.txt"]
         self.results = []
         self.results2 = ["file1.txt", "file2.txt"]
+        self.results3 = ["test/unit/gen_libs/tmp/file1.txt",
+                         "test/unit/gen_libs/tmp/file2.txt"]
         self.file_str = "file"
         self.file_str2 = "none"
+
+    @mock.patch("gen_libs.list_files")
+    def test_file_search_path(self, mock_list):
+
+        """Function:  test_file_search_path
+
+        Description:  Test with files matching with path included.
+
+        Arguments:
+
+        """
+
+        mock_list.return_value = self.list_files
+
+        self.assertEqual(gen_libs.dir_file_match(
+            self.dir_path, self.file_str, True), self.results3)
 
     @mock.patch("gen_libs.list_files")
     def test_no_file_match(self, mock_list):
