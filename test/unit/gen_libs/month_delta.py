@@ -63,6 +63,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.date_mask = "%Y-%m-%d"
         self.date = "2017-12-21"
         self.delta = 0
 
@@ -77,7 +78,7 @@ class UnitTest(unittest.TestCase):
         """
 
         self.assertEqual(gen_libs.month_delta(datetime.datetime.strptime(
-            self.date, "%Y-%m-%d"), self.delta), (12, 2017))
+            self.date, self.date_mask), self.delta), (12, 2017))
 
     def test_month_delta2(self):
 
@@ -92,7 +93,7 @@ class UnitTest(unittest.TestCase):
         self.delta = -1
 
         self.assertEqual(gen_libs.month_delta(datetime.datetime.strptime(
-            self.date, "%Y-%m-%d"), self.delta), (11, 2017))
+            self.date, self.date_mask), self.delta), (11, 2017))
 
     def test_month_delta3(self):
 
@@ -107,7 +108,7 @@ class UnitTest(unittest.TestCase):
         self.delta = 1
 
         self.assertEqual(gen_libs.month_delta(datetime.datetime.strptime(
-            self.date, "%Y-%m-%d"), self.delta), (1, 2018))
+            self.date, self.date_mask), self.delta), (1, 2018))
 
     def test_month_delta4(self):
 
@@ -122,7 +123,7 @@ class UnitTest(unittest.TestCase):
         self.delta = -11
 
         self.assertEqual(gen_libs.month_delta(datetime.datetime.strptime(
-            self.date, "%Y-%m-%d"), self.delta), (1, 2017))
+            self.date, self.date_mask), self.delta), (1, 2017))
 
     def test_month_delta5(self):
 
@@ -137,7 +138,7 @@ class UnitTest(unittest.TestCase):
         self.delta = -12
 
         self.assertEqual(gen_libs.month_delta(datetime.datetime.strptime(
-            self.date, "%Y-%m-%d"), self.delta), (12, 2016))
+            self.date, self.date_mask), self.delta), (12, 2016))
 
     def test_month_delta6(self):
 
@@ -152,7 +153,7 @@ class UnitTest(unittest.TestCase):
         self.delta = 11
 
         self.assertEqual(gen_libs.month_delta(datetime.datetime.strptime(
-            self.date, "%Y-%m-%d"), self.delta), (11, 2018))
+            self.date, self.date_mask), self.delta), (11, 2018))
 
     def test_month_delta7(self):
 
@@ -167,7 +168,7 @@ class UnitTest(unittest.TestCase):
         self.delta = 12
 
         self.assertEqual(gen_libs.month_delta(datetime.datetime.strptime(
-            self.date, "%Y-%m-%d"), self.delta), (12, 2018))
+            self.date, self.date_mask), self.delta), (12, 2018))
 
     def test_month_delta8(self):
 
@@ -182,7 +183,7 @@ class UnitTest(unittest.TestCase):
         self.delta = 13
 
         self.assertEqual(gen_libs.month_delta(datetime.datetime.strptime(
-            self.date, "%Y-%m-%d"), self.delta), (1, 2019))
+            self.date, self.date_mask), self.delta), (1, 2019))
 
 
 if __name__ == "__main__":
