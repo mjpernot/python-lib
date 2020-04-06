@@ -405,7 +405,7 @@ class UnitTest(unittest.TestCase):
 
         mock_open.return_value = self.open
 
-        self.args_array = {"-f":self.path_file, "-m": "Marker"}
+        self.args_array = {"-f": self.path_file, "-m": "Marker"}
 
         self.assertFalse(arg_parser.arg_file_chk(self.args_array,
                                                  self.file_chk_list))
