@@ -46,7 +46,7 @@ class UnitTest(unittest.TestCase):
 
     def test_EmptyRowError(self):
 
-        """Function:  test_Error
+        """Function:  EmptyRowError
 
         Description:  Test with no arguments.
 
