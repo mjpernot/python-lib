@@ -60,6 +60,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.setvalue = "--setvalue=OFF"
         self.args_array = {}
         self.args_array2 = {"-a": "value1"}
         self.args_array3 = {"-b": True}
@@ -67,13 +68,13 @@ class UnitTest(unittest.TestCase):
         self.cmd = ["--test"]
         self.opt_arg_list = []
         self.opt_arg_list2 = {"-a": "--setvalue="}
-        self.opt_arg_list3 = {"-b": "--setvalue=OFF"}
-        self.opt_arg_list4 = {"-c": ["--setvalue=OFF", "--setstd=ON"]}
+        self.opt_arg_list3 = {"-b": self.setvalue}
+        self.opt_arg_list4 = {"-c": [self.setvalue, "--setstd=ON"]}
 
         self.base = ["--test"]
         self.base2 = ["--test", "--setvalue=value1"]
-        self.base3 = ["--test", "--setvalue=OFF"]
-        self.base4 = ["--test", "--setvalue=OFF", "--setstd=ON"]
+        self.base3 = ["--test", self.setvalue]
+        self.base4 = ["--test", self.setvalue, "--setstd=ON"]
 
     def test_list_boolean(self):
 
