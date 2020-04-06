@@ -46,7 +46,7 @@ class UnitTest(unittest.TestCase):
 
     def test_NotMasterError(self):
 
-        """Function:  test_Error
+        """Function:  NotMasterError
 
         Description:  Test with no arguments.
 
