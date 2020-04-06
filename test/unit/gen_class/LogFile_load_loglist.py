@@ -64,12 +64,16 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.input_dict = {"lines": ["This is line 1 ", "This is line 2",
-                                     "This is line 3  ", "This is line 4"]}
+        self.line1 = "This is line 1"
+        self.line2 = "This is line 2"
+        self.line3 = "This is line 3"
+        self.line4 = "This is line 4"
+        self.input_dict = {"lines": ["This is line 1 ", self.line2,
+                                     "This is line 3  ", self.line4]}
         self.input_dict2 = {"lines":
                             "This is line 1\nThis is line 2\nThis is line 3\n"}
-        self.input_list = ["This is line 1 ", "This is line 2",
-                           "This is line 3  ", "This is line 4"]
+        self.input_list = ["This is line 1 ", self.line2,
+                           "This is line 3  ", self.line4]
         self.input_str = "This is another test"
         self.input_str2 = "This is line 1\nThis is line 2\nThis is line 3\n"
         self.input_file = "test/unit/gen_class/testfiles/load_loglist_file.txt"
@@ -77,15 +81,11 @@ class UnitTest(unittest.TestCase):
         self.input_file3 = \
             "test/unit/gen_class/testfiles/load_loglist_file2.txt"
 
-        self.result_dict = ["This is line 1", "This is line 2",
-                            "This is line 3", "This is line 4"]
-        self.result_dict2 = ["This is line 1", "This is line 2",
-                             "This is line 3"]
-        self.result_list = ["This is line 1", "This is line 2",
-                            "This is line 3", "This is line 4"]
+        self.result_dict = [self.line1, self.line2, self.line3, self.line4]
+        self.result_dict2 = [self.line1, self.line2, self.line3]
+        self.result_list = [self.line1, self.line2, self.line3, self.line4]
         self.result_str = ["This is another test"]
-        self.result_str2 = ["This is line 1", "This is line 2",
-                            "This is line 3"]
+        self.result_str2 = [self.line1, self.line2, self.line3]
         self.result_file = ["This is test 1", "This is test 2",
                             "This is test 3"]
         self.result_file2 = ["This is test 1", "This is test 2",

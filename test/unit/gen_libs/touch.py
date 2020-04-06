@@ -61,13 +61,14 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.file = "touch.txt"
         self.base_path = "test/unit/gen_libs/tmp"
-        self.file_name = os.path.join(self.base_path, "touch.txt")
+        self.file_name = os.path.join(self.base_path, self.file)
         self.exist_file = "test/unit/gen_libs/testfiles/touch.txt"
-        self.dir_create = os.path.join(self.base_path, "touch", "touch.txt")
+        self.dir_create = os.path.join(self.base_path, "touch", self.file)
         self.dir_path = os.path.join(self.base_path, "touch_fail")
-        self.dir_fail = os.path.join(self.dir_path, "touch", "touch.txt")
-        self.file_fail = os.path.join(self.dir_path, "touch.txt")
+        self.dir_fail = os.path.join(self.dir_path, "touch", self.file)
+        self.file_fail = os.path.join(self.dir_path, self.file)
 
         self.file_msg = "ERROR: File create failure. Reason: Permission denied"
         self.dir_msg = \

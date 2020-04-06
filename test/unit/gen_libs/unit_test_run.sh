@@ -17,6 +17,7 @@ test/unit/gen_libs/cp_dir.py
 test/unit/gen_libs/cp_file2.py
 test/unit/gen_libs/cp_file.py
 test/unit/gen_libs/crt_file_time.py
+test/unit/gen_libs/date_range.py
 test/unit/gen_libs/del_not_and_list.py
 test/unit/gen_libs/del_not_in_list.py
 test/unit/gen_libs/dict_2_list.py
@@ -28,9 +29,11 @@ test/unit/gen_libs/file_2_list.py
 test/unit/gen_libs/file_cleanup.py
 test/unit/gen_libs/file_search_cnt.py
 test/unit/gen_libs/file_search.py
+test/unit/gen_libs/filename_search.py
 test/unit/gen_libs/float_div.py
 test/unit/gen_libs/get_base_dir.py
 test/unit/gen_libs/get_data.py
+test/unit/gen_libs/get_inst.py
 test/unit/gen_libs/get_date.py
 test/unit/gen_libs/get_secs.py
 test/unit/gen_libs/get_time.py
@@ -51,6 +54,7 @@ test/unit/gen_libs/make_zip.py
 test/unit/gen_libs/merge_data_types.py
 test/unit/gen_libs/merge_two_dicts.py
 test/unit/gen_libs/milli_2_readadble.py
+test/unit/gen_libs/month_days.py
 test/unit/gen_libs/month_delta.py
 test/unit/gen_libs/mv_file.py
 test/unit/gen_libs/mv_file2.py

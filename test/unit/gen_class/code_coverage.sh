@@ -8,6 +8,7 @@ coverage erase
 
 echo ""
 echo "Running unit test modules in conjunction with coverage"
+coverage run -a --source=gen_class test/unit/gen_class/get_inst.py
 coverage run -a --source=gen_class test/unit/gen_class/setup_mail.py
 coverage run -a --source=gen_class test/unit/gen_class/Daemon_delpid.py
 coverage run -a --source=gen_class test/unit/gen_class/Daemon_init.py

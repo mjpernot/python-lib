@@ -59,17 +59,20 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.value = "value*"
+        self.test = "test*"
         self.args_array = {}
-        self.args_array2 = {"value*": []}
-        self.args_array3 = {"value*": [], "test*": []}
+        self.args_array2 = {self.value: []}
+        self.args_array3 = {self.value: [], self.test: []}
 
         self.opt_wildcard = []
-        self.opt_wildcard2 = ["value*"]
-        self.opt_wildcard3 = ["value*", "test*"]
+        self.opt_wildcard2 = [self.value]
+        self.opt_wildcard3 = [self.value, self.test]
 
         self.test_array = {}
-        self.test_array2 = {"value*": ["value1", "value2"]}
-        self.test_array3 = {"value*": ["value1", "value2"], "test*": ["test2"]}
+        self.test_array2 = {self.value: ["value1", "value2"]}
+        self.test_array3 = {self.value: ["value1", "value2"],
+                            self.test: ["test2"]}
 
     @mock.patch("arg_parser.glob")
     def test_two_wildcard(self, mock_glob):

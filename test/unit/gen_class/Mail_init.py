@@ -60,14 +60,15 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.to = ["mail_address@domain.name"]
+        self.mailaddr = "mail_address@domain.name"
+        self.to = [self.mailaddr]
         self.subj = None
         self.subj2 = "Test_Subj"
         self.subj3 = "This is a test"
         self.subj4 = ["This", "is", "a", "test"]
         self.subj4a = "Thisisatest"
         self.frm = None
-        self.frm2 = "mail_address@domain.name"
+        self.frm2 = self.mailaddr
         self.host_name = None
         self.host = None
 
@@ -131,9 +132,9 @@ class UnitTest(unittest.TestCase):
 
         email = gen_class.Mail(self.to)
 
-        self.assertEqual(("mail_address@domain.name", email.subj, email.frm,
+        self.assertEqual((self.mailaddr, email.subj, email.frm,
                           email.host_name, email.host),
-                         ("mail_address@domain.name", None, None, None, None))
+                         (self.mailaddr, None, None, None, None))
 
     def test_to_list(self):
 

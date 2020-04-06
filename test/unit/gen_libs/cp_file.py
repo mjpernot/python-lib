@@ -65,11 +65,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.err_mask = "No such file or directory: %s"
         self.base_path = "test/unit/gen_libs/tmp"
         self.cp_file_dir = os.path.join(self.base_path, "cp_file_dir")
         self.cp_file_dir2 = os.path.join(self.base_path, "cp_file_dir2")
         self.dir_fail = os.path.join(self.base_path, "not_cp_file_dir")
-
         self.src_file = "src_cp_file.txt"
         self.dest_file = "src_cp_file2.txt"
 
@@ -146,8 +146,7 @@ class UnitTest(unittest.TestCase):
 
         self.assertEqual((gen_libs.cp_file(self.src_file, self.cp_file_dir2,
                                            self.cp_file_dir, self.dest_file)),
-                         (False, "No such file or directory: %s"
-                          % (self.cp_file_dir2)))
+                         (False, self.err_mask % (self.cp_file_dir2)))
 
     def test_fail_src_file(self):
 
@@ -161,7 +160,7 @@ class UnitTest(unittest.TestCase):
 
         self.assertEqual((gen_libs.cp_file(self.dest_file, self.cp_file_dir,
                                            self.cp_file_dir, self.src_file)),
-                         (False, "No such file or directory: %s"
+                         (False, self.err_mask
                           % (os.path.join(self.cp_file_dir, self.dest_file))))
 
     def test_fail_dest_dir(self):
@@ -176,8 +175,7 @@ class UnitTest(unittest.TestCase):
 
         self.assertEqual((gen_libs.cp_file(self.src_file, self.cp_file_dir,
                                            self.cp_file_dir2, self.dest_file)),
-                         (False, "No such file or directory: %s"
-                          % (self.cp_file_dir2)))
+                         (False, self.err_mask % (self.cp_file_dir2)))
 
     def test_fail_dest_perm(self):
 

@@ -57,10 +57,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.list1 = ["This is test\n", "And another\n", "And the last"]
+        self.line = "And the last"
+        self.list1 = ["This is test\n", "And another\n", self.line]
         self.list2 = ["This is test\n", "And another\n", "And the last\n"]
-        self.list3 = ["This is test", "And another", "And the last"]
-        self.list = ["This is test", "And another", "And the last"]
+        self.list3 = ["This is test", "And another", self.line]
+        self.list = ["This is test", "And another", self.line]
 
     def test_with_no_newlines(self):
 

@@ -64,6 +64,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.err_mask = "Error:  File %s does not exist."
         self.file_name = "TEST_FILE"
         self.base_dir = "test/unit/gen_libs/tmp"
         self.test_path = os.path.join(os.getcwd(), self.base_dir)
@@ -81,7 +82,6 @@ class UnitTest(unittest.TestCase):
         """
 
         err_msg_chk = "Error:  No value passed for filename."
-
         status, err_msg = gen_libs.chk_crt_file("", no_print=True)
 
         self.assertFalse(status)
@@ -97,8 +97,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        err_msg_chk = "Error:  File %s does not exist." % (self.f_name)
-
+        err_msg_chk = self.err_mask % (self.f_name)
         status, err_msg = gen_libs.chk_crt_file(self.f_name, no_print=True)
 
         self.assertFalse(status)
@@ -115,7 +114,6 @@ class UnitTest(unittest.TestCase):
         """
 
         err_msg_chk = None
-
         status, err_msg = gen_libs.chk_crt_file(self.f_name, create=True,
                                                 no_print=True)
 
@@ -133,9 +131,7 @@ class UnitTest(unittest.TestCase):
         """
 
         err_msg_chk = None
-
         open(self.f_name, "a").close()
-
         status, err_msg = gen_libs.chk_crt_file(self.f_name, write=True,
                                                 no_print=True)
 
@@ -153,10 +149,8 @@ class UnitTest(unittest.TestCase):
         """
 
         err_msg_chk = "Error: File %s is not writable." % (self.f_name)
-
         open(self.f_name, "a").close()
         os.chmod(self.f_name, 0444)
-
         status, err_msg = gen_libs.chk_crt_file(self.f_name, write=True,
                                                 no_print=True)
 
@@ -174,9 +168,7 @@ class UnitTest(unittest.TestCase):
         """
 
         err_msg_chk = None
-
         open(self.f_name, "a").close()
-
         status, err_msg = gen_libs.chk_crt_file(self.f_name, read=True,
                                                 no_print=True)
 
@@ -194,10 +186,8 @@ class UnitTest(unittest.TestCase):
         """
 
         err_msg_chk = "Error: File %s is not readable." % (self.f_name)
-
         open(self.f_name, "a").close()
         os.chmod(self.f_name, 0333)
-
         status, err_msg = gen_libs.chk_crt_file(self.f_name, read=True,
                                                 no_print=True)
 
@@ -214,8 +204,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        err_msg_chk = "Error:  File %s does not exist." % (self.f_name)
-
+        err_msg_chk = self.err_mask % (self.f_name)
         status, err_msg = gen_libs.chk_crt_file(self.f_name, no_print=True)
 
         self.assertFalse(status)
@@ -231,12 +220,10 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        err_msg_chk = "Error:  File %s does not exist." % (self.f_name)
+        err_msg_chk = self.err_mask % (self.f_name)
         f_hdlr = open(self.l_name, "w")
-
         status, err_msg = gen_libs.chk_crt_file(self.f_name, f_hdlr=f_hdlr,
                                                 no_print=True)
-
         f_hdlr.close()
 
         if err_msg_chk in open(self.l_name).read():

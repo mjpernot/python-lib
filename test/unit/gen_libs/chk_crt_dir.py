@@ -64,6 +64,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.err_mask = "Error: Directory: %s does not exist."
         self.dir_name = "TEST_DIR"
         self.file_name = "TEST_FILE"
         self.base_dir = "test/unit/gen_libs/tmp"
@@ -82,7 +83,6 @@ class UnitTest(unittest.TestCase):
         """
 
         err_msg_chk = "Error:  No value passed for directory name"
-
         status, err_msg = gen_libs.chk_crt_dir("", no_print=True)
 
         self.assertFalse(status)
@@ -98,8 +98,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        err_msg_chk = "Error: Directory: %s does not exist." % (self.d_name)
-
+        err_msg_chk = self.err_mask % (self.d_name)
         status, err_msg = gen_libs.chk_crt_dir(self.d_name, no_print=True)
 
         self.assertFalse(status)
@@ -116,7 +115,6 @@ class UnitTest(unittest.TestCase):
         """
 
         err_msg_chk = None
-
         status, err_msg = gen_libs.chk_crt_dir(self.d_name, create=True,
                                                no_print=True)
 
@@ -134,9 +132,7 @@ class UnitTest(unittest.TestCase):
         """
 
         err_msg_chk = None
-
         os.makedirs(self.d_name)
-
         status, err_msg = gen_libs.chk_crt_dir(self.d_name, write=True,
                                                no_print=True)
 
@@ -154,10 +150,8 @@ class UnitTest(unittest.TestCase):
         """
 
         err_msg_chk = "Error: Directory: %s is not writeable." % (self.d_name)
-
         os.makedirs(self.d_name)
         os.chmod(self.d_name, 0444)
-
         status, err_msg = gen_libs.chk_crt_dir(self.d_name, write=True,
                                                no_print=True)
 
@@ -175,9 +169,7 @@ class UnitTest(unittest.TestCase):
         """
 
         err_msg_chk = None
-
         os.makedirs(self.d_name)
-
         status, err_msg = gen_libs.chk_crt_dir(self.d_name, read=True,
                                                no_print=True)
 
@@ -195,10 +187,8 @@ class UnitTest(unittest.TestCase):
         """
 
         err_msg_chk = "Error: Directory: %s is not readable." % (self.d_name)
-
         os.makedirs(self.d_name)
         os.chmod(self.d_name, 0333)
-
         status, err_msg = gen_libs.chk_crt_dir(self.d_name, read=True,
                                                no_print=True)
 
@@ -215,8 +205,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        err_msg_chk = "Error: Directory: %s does not exist." % (self.d_name)
-
+        err_msg_chk = self.err_mask % (self.d_name)
         status, err_msg = gen_libs.chk_crt_dir(self.d_name, no_print=True)
 
         self.assertFalse(status)
@@ -232,12 +221,10 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        err_msg_chk = "Error: Directory: %s does not exist." % (self.d_name)
+        err_msg_chk = self.err_mask % (self.d_name)
         f_hdlr = open(self.f_name, "w")
-
         status, err_msg = gen_libs.chk_crt_dir(self.d_name, f_hdlr=f_hdlr,
                                                no_print=True)
-
         f_hdlr.close()
 
         if err_msg_chk in open(self.f_name).read():
