@@ -829,12 +829,11 @@ def get_inst(cmd, **kwargs):
 
     Arguments:
         (input) cmd -> Module library.
-        (output) -> Return module instance.
+        (output) cmd -> Return module instance.
 
     """
-    sub = cmd
 
-    return sub
+    return cmd
 
 
 def get_secs(td, **kwargs):
