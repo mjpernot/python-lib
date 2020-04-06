@@ -60,11 +60,12 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.file1 = "file1.txt"
         self.dir_path = "test/unit/gen_libs/tmp/"
-        self.list_files = ["file1.txt", "file2.txt", "test.txt"]
+        self.list_files = [self.file1, "file2.txt", "test.txt"]
         self.results = []
-        self.results2 = ["file1.txt", "file2.txt"]
-        self.results3 = ["file1.txt"]
+        self.results2 = [self.file1, "file2.txt"]
+        self.results3 = [self.file1]
         self.results4 = ["test/unit/gen_libs/tmp/file1.txt",
                          "test/unit/gen_libs/tmp/file2.txt"]
         self.file_str = "file"
