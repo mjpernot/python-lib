@@ -7,7 +7,7 @@
 echo ""
 echo "Unit test"
 test/unit/errors/EmptyRowError.py
-test/unit/errors/Errors.py
+test/unit/errors/Error.py
 test/unit/errors/NoOptionError.py
 test/unit/errors/NotMasterError.py
 test/unit/errors/NotSlaveError.py
