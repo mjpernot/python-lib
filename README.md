@@ -164,7 +164,14 @@ test/unit/gen_class/code_coverage.sh
 ### All unit and code coverage testing for cmds_gen.py:
 ```
 cd {Python_Project}/python-lib
-test/unit/cmds_gen/unit_test_run.py
+test/unit/cmds_gen/unit_test_run.sh
 test/unit/cmds_gen/code_coverage.sh
+```
+
+### All unit and code coverage testing for errors.py:
+```
+cd {Python_Project}/python-lib
+test/unit/errors/unit_test_run.sh
+test/unit/errors/code_coverage.sh
 ```
 
