@@ -147,8 +147,9 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.path_file = "test/file1"
         self.file_chk_list = ["-f"]
-        self.args_array = {"-f": ["test/file1"], "-m": "Marker"}
+        self.args_array = {"-f": [self.path_file], "-m": "Marker"}
         self.file_crt_list = ["-f"]
         self.open = FileOpen()
         self.open2 = FileOpen2()
@@ -386,7 +387,7 @@ class UnitTest(unittest.TestCase):
 
         mock_open.return_value = self.open
 
-        self.args_array = {"-f": {"test/file1"}, "-m": "Marker"}
+        self.args_array = {"-f": {self.path_file}, "-m": "Marker"}
 
         self.assertFalse(arg_parser.arg_file_chk(self.args_array,
                                                  self.file_chk_list))
@@ -404,7 +405,7 @@ class UnitTest(unittest.TestCase):
 
         mock_open.return_value = self.open
 
-        self.args_array = {"-f": "test/file1", "-m": "Marker"}
+        self.args_array = {"-f":self.path_file, "-m": "Marker"}
 
         self.assertFalse(arg_parser.arg_file_chk(self.args_array,
                                                  self.file_chk_list))
@@ -439,7 +440,7 @@ class UnitTest(unittest.TestCase):
         mock_open.return_value = self.open
 
         self.file_chk_list = ["-f", "-g"]
-        self.args_array = {"-f": "test/file1", "-g": "test2/file2"}
+        self.args_array = {"-f": self.path_file, "-g": "test2/file2"}
 
         self.assertFalse(arg_parser.arg_file_chk(self.args_array,
                                                  self.file_chk_list))
