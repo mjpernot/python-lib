@@ -58,10 +58,12 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.filep = "file.py"
+        self.filet = "file.txt"
         self.dir_path = "test/unit/gen_libs/tmp/tmp"
         os.makedirs(self.dir_path)
-        self.fname1 = os.path.join(self.dir_path, "file.py")
-        self.fname2 = os.path.join(self.dir_path, "file.txt")
+        self.fname1 = os.path.join(self.dir_path, self.filep)
+        self.fname2 = os.path.join(self.dir_path, self.filet)
         self.dname = os.path.join(self.dir_path, "dir1")
 
         with open(self.fname1, "a"):
@@ -72,8 +74,8 @@ class UnitTest(unittest.TestCase):
 
         os.makedirs(self.dname)
 
-        self.results1 = ["file.txt", "file.py"]
-        self.results2 = ["file.py", "file.txt"]
+        self.results1 = [self.filet, self.filep]
+        self.results2 = [self.filep, self.filet]
 
     def test_list_files(self):
 
