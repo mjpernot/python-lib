@@ -23,6 +23,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - gen_libs.get_inst:  Returns the module instance header.
 
 ### Changed
+- gen_libs.dir_file_match:  Added argument to allow full paths with names to be returned.
 - arg_parser.arg_req_or_lst:  Changed "y" variable to throwaway variable "\_".
 - arg_parser.arg_cond_req_or:  Changed "y" variable to throwaway variable "\_".
 - arg_parser.arg_cond_req:  Changed "y" variable to throwaway variable "\_".
