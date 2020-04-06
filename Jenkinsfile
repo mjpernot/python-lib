@@ -37,6 +37,13 @@ pipeline {
                 ./test/unit/cmds_gen/get_inst.py
                 ./test/unit/cmds_gen/is_add_cmd.py
                 ./test/unit/cmds_gen/run_prog.py
+                ./test/unit/errors/EmptyRowError.py
+                ./test/unit/errors/Errors.py
+                ./test/unit/errors/NoOptionError.py
+                ./test/unit/errors/NotMasterError.py
+                ./test/unit/errors/NotSlaveError.py
+                ./test/unit/errors/NotYetImplementedError.py
+                ./test/unit/errors/SlaveNotRunningError.py
                 ./test/unit/gen_libs/and_is_true.py
                 ./test/unit/gen_libs/bytes_2_readable.py
                 ./test/unit/gen_libs/chk_crt_dir.py
