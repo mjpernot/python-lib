@@ -46,7 +46,7 @@ class UnitTest(unittest.TestCase):
 
     def test_NotYetImplementedError(self):
 
-        """Function:  test_Error
+        """Function:  NotYetImplementedError
 
         Description:  Test with no arguments.
 
