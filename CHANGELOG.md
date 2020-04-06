@@ -15,6 +15,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - gen_class.Daemon.\_\_init\_\_:  Fixed critical finding from SonarQube scan finding.
 
 ### Added
+- gen_libs.date_range:  Generators a list of year-month-01 combinations between two dates.
 - gen_libs.month_days:  Return the number of days in the month for a date.
 - gen_libs.filename_search:  Return list of file names that contain search string in the file name.
 - cmds_gen.get_inst:  Returns the module instance header.
