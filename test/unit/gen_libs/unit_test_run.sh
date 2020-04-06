@@ -53,6 +53,7 @@ test/unit/gen_libs/make_zip.py
 test/unit/gen_libs/merge_data_types.py
 test/unit/gen_libs/merge_two_dicts.py
 test/unit/gen_libs/milli_2_readadble.py
+test/unit/gen_libs/month_days.py
 test/unit/gen_libs/month_delta.py
 test/unit/gen_libs/mv_file.py
 test/unit/gen_libs/mv_file2.py
