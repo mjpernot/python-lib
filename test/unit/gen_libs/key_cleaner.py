@@ -60,16 +60,20 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.data = {"no.ne": "value2"}
-        self.data2 = [{"no.ne": "value2"}]
-        self.data3 = [{"no.ne": "value2"}, {"no.ne": "value2"}]
-        self.data4 = ({"no.ne": "value2"}, {"no.ne": "value2"})
+        self.pre_value = "no.ne"
+        self.post_value = "no.na"
+        self.data = {self.pre_value: "value2"}
+        self.data2 = [{self.pre_value: "value2"}]
+        self.data3 = [{self.pre_value: "value2"}, {self.pre_value: "value2"}]
+        self.data4 = ({self.pre_value: "value2"}, {self.pre_value: "value2"})
         self.char = "e"
         self.repl = "a"
-        self.results = {"no.na": "value2"}
-        self.results2 = [{"no.na": "value2"}]
-        self.results3 = [{"no.na": "value2"}, {"no.na": "value2"}]
-        self.results4 = ({"no.ne": "value2"}, {"no.ne": "value2"})
+        self.results = {self.post_value: "value2"}
+        self.results2 = [{self.post_value: "value2"}]
+        self.results3 = [{self.post_value: "value2"},
+                         {self.post_value: "value2"}]
+        self.results4 = ({self.pre_value: "value2"},
+                         {self.pre_value: "value2"})
 
     @unittest.skip("Error:  Unable to handle tuple.")
     def test_key_cleaner_tuple(self):
