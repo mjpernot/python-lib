@@ -19,6 +19,7 @@ coverage run -a --source=gen_libs test/unit/gen_libs/cp_dir.py
 coverage run -a --source=gen_libs test/unit/gen_libs/cp_file2.py
 coverage run -a --source=gen_libs test/unit/gen_libs/cp_file.py
 coverage run -a --source=gen_libs test/unit/gen_libs/crt_file_time.py
+coverage run -a --source=gen_libs test/unit/gen_libs/date_range.py
 coverage run -a --source=gen_libs test/unit/gen_libs/del_not_and_list.py
 coverage run -a --source=gen_libs test/unit/gen_libs/del_not_in_list.py
 coverage run -a --source=gen_libs test/unit/gen_libs/dict_2_list.py
