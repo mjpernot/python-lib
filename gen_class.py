@@ -1005,17 +1005,13 @@ class Logger(object):
 
         """
 
-        mode = kwargs.get("mode", "a")
-
         self.handler = logging.FileHandler(log_file)
 
         if not msg_fmt:
             msg_fmt = "%(asctime)s %(levelname)s %(message)s"
 
         self.formatter = logging.Formatter(msg_fmt, date_fmt)
-
         self.handler.setFormatter(self.formatter)
-
         self.log = logging.getLogger(name)
 
         if level == "DEBUG":
