@@ -17,6 +17,7 @@
         cp_file
         cp_file2
         crt_file_time
+        date_range
         del_not_and_list
         del_not_in_list
         dict_2_list
@@ -472,6 +473,42 @@ def crt_file_time(fname, path, ext, **kwargs):
     """
 
     return path + fname + "." + time.strftime("%Y%m%d_%I%M") + ext
+
+
+def date_range(start_dt, end_dt, **kwargs):
+
+    """Function:  date_range
+
+    Description:  Generators a list of year-month-01 combinations between two
+        dates.
+        NOTE:  The day will be included in the datetime instance, but all days
+            will be set to the beginning of each month (e.g. YYYY-MM-01).
+
+    Arguments:
+        (input) start_dt -> Start date - datetime class instance.
+        (input) end_dt -> End date - datetime class instance.
+        (output) Generator list of datetime instances.
+
+    """
+
+    start_dt = start_dt.replace(day=1)
+    end_dt = end_dt.replace(day=1)
+    forward = end_dt >= start_dt
+    finish = False
+    dt = start_dt
+
+    while not finish:
+        yield dt.date()
+
+        if forward:
+            days = month_days(dt)
+            dt = dt + datetime.timedelta(days=days)
+            finish = dt > end_dt
+
+        else:
+            _tmp_dt = dt.replace(day=1) - datetime.timedelta(days=1)
+            dt = (_tmp_dt.replace(day=dt.day))
+            finish = dt < end_dt
 
 
 def del_not_and_list(list1, list2, **kwargs):
