@@ -111,8 +111,10 @@ class Daemon:
 
     """
 
-    def __init__(self, pidfile, stdin="/dev/null", stdout="/dev/null",
-                 stderr="/dev/null", argv_list=None):
+    DEV_NULL = "/dev/null"
+
+    def __init__(self, pidfile, stdin=DEV_NULL, stdout=DEV_NULL,
+                 stderr=DEV_NULL, argv_list=None):
 
         """Method:  __init__
 
