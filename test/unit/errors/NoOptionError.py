@@ -46,7 +46,7 @@ class UnitTest(unittest.TestCase):
 
     def test_NoOptionError(self):
 
-        """Function:  test_Error
+        """Function:  test_NoOptionError
 
         Description:  Test with no arguments.
 
