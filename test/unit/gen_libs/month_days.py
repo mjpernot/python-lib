@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  get_base_dir.py
+"""Program:  month_days.py
 
-    Description:  Unit testing of get_base_dir in gen_libs.py.
+    Description:  Unit testing of month_days in gen_libs.py.
 
     Usage:
-        test/unit/gen_libs/get_base_dir.py
+        test/unit/gen_libs/month_days.py
 
     Arguments:
 
@@ -18,6 +18,7 @@
 from __future__ import print_function
 import sys
 import os
+import datetime
 
 if sys.version_info < (2, 7):
     import unittest2 as unittest
@@ -25,6 +26,7 @@ else:
     import unittest
 
 # Third-party
+import mock
 
 # Local
 sys.path.append(os.getcwd())
@@ -42,7 +44,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Unit testing initilization.
-        test_get_base_dir -> Test with current program path.
+        test_month_days -> Test months_days function.
 
     """
 
@@ -56,21 +58,20 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.cur_path = os.path.dirname(os.path.realpath(__file__))
+        self.dt = datetime.datetime.strptime("20200301", "%Y%m%d")
+        self.results = 31
 
-    def test_get_base_dir(self):
+    def test_month_days(self):
 
-        """Function:  test_get_base_dir
+        """Function:  test_month_days
 
-        Description:  Test get_base_dir function with 0 pattern found.
+        Description:  Test months_days function.
 
         Arguments:
 
         """
 
-        cmdline = gen_libs.get_inst(sys)
-
-        self.assertEqual(gen_libs.get_base_dir(cmdline.argv[0]), self.cur_path)
+        self.assertEqual(gen_libs.month_days(self.dt), self.results)
 
 
 if __name__ == "__main__":

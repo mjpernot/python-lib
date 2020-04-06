@@ -104,7 +104,7 @@ def arg_cond_req(args_array, opt_con_req, **kwargs):
 
     for x in set(args_array.keys()) & set(opt_con_req.keys()):
 
-        for y in set(opt_con_req[x]) - set(args_array.keys()):
+        for _ in set(opt_con_req[x]) - set(args_array.keys()):
             status = False
             print("Error:  Option {0} requires options {1}.".
                   format(x, opt_con_req[x]))
@@ -134,7 +134,7 @@ def arg_cond_req_or(args_array, opt_con_req_dict, **kwargs):
     for x in set(opt_con_req_dict.keys()) & set(args_array.keys()):
         tmp_flag = False
 
-        for y in set(opt_con_req_dict[x]) & set(args_array.keys()):
+        for _ in set(opt_con_req_dict[x]) & set(args_array.keys()):
             tmp_flag = True
             break
 
@@ -399,7 +399,7 @@ def arg_req_or_lst(args_array, opt_or_dict, **kwargs):
     for x in set(opt_or_dict.keys()) - set(args_array.keys()):
         tmp_flag = False
 
-        for y in set(opt_or_dict[x]) & set(args_array.keys()):
+        for _ in set(opt_or_dict[x]) & set(args_array.keys()):
             tmp_flag = True
             break
 

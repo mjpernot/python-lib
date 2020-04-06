@@ -73,7 +73,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.argv = ["./merge_repo.py", "-c", "merge", "-d", "-M", "-f",
+        self.path_file = "./merge_repo.py"
+        self.argv = [self.path_file, "-c", "merge", "-d", "-M", "-f",
                      "file1", "file2"]
         self.opt_val_list = ["-c", "-d", "-f", "-g"]
         self.opt_def_dict = {"-g": "def_val"}
@@ -114,7 +115,7 @@ class UnitTest(unittest.TestCase):
         mock_int.return_value = False
         mock_def.return_value = {"-g": "def_val"}
 
-        self.argv = ["./merge_repo.py", "-g"]
+        self.argv = [self.path_file, "-g"]
 
         self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list,
                                                self.opt_def_dict,
@@ -134,7 +135,7 @@ class UnitTest(unittest.TestCase):
 
         mock_int.return_value = False
 
-        self.argv = ["./merge_repo.py", "-f", "file1", "file2"]
+        self.argv = [self.path_file, "-f", "file1", "file2"]
 
         self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list,
                                                multi_val=self.multi_list),
@@ -153,7 +154,7 @@ class UnitTest(unittest.TestCase):
 
         mock_int.return_value = False
 
-        self.argv = ["./merge_repo.py", "-f", "file1"]
+        self.argv = [self.path_file, "-f", "file1"]
 
         self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list,
                                                multi_val=self.multi_list),
@@ -174,7 +175,7 @@ class UnitTest(unittest.TestCase):
         mock_int.return_value = False
         mock_def.return_value = "SystemExit: Error: Arg -f missing value"
 
-        self.argv = ["./merge_repo.py", "-f"]
+        self.argv = [self.path_file, "-f"]
 
         self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list,
                                                multi_val=self.multi_list),
@@ -193,7 +194,7 @@ class UnitTest(unittest.TestCase):
 
         mock_int.return_value = False
 
-        self.argv = ["./merge_repo.py", "-f", "file1", "file2", "-M"]
+        self.argv = [self.path_file, "-f", "file1", "file2", "-M"]
 
         self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list,
                                                multi_val=self.multi_list),
@@ -212,7 +213,7 @@ class UnitTest(unittest.TestCase):
 
         mock_int.return_value = False
 
-        self.argv = ["./merge_repo.py", "-f", "file1", "file2"]
+        self.argv = [self.path_file, "-f", "file1", "file2"]
 
         self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list,
                                                multi_val=self.multi_list),
@@ -231,7 +232,7 @@ class UnitTest(unittest.TestCase):
 
         mock_int.return_value = True
 
-        self.argv = ["./merge_repo.py", "-c", "-1"]
+        self.argv = [self.path_file, "-c", "-1"]
 
         self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list),
                          {"-c": "-1"})
@@ -249,7 +250,7 @@ class UnitTest(unittest.TestCase):
 
         mock_int.return_value = False
 
-        self.argv = ["./merge_repo.py", "-c", "merge", "-d"]
+        self.argv = [self.path_file, "-c", "merge", "-d"]
 
         self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list,
                                                opt_val=self.opt_val),
@@ -270,7 +271,7 @@ class UnitTest(unittest.TestCase):
         mock_def.return_value = "SystemExit: Error: Arg -d missing value"
         mock_int.return_value = False
 
-        self.argv = ["./merge_repo.py", "-c", "merge", "-d"]
+        self.argv = [self.path_file, "-c", "merge", "-d"]
 
         self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list),
                          "SystemExit: Error: Arg -d missing value")
@@ -285,7 +286,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.argv = ["./merge_repo.py", "-c", "merge", "-d", "config"]
+        self.argv = [self.path_file, "-c", "merge", "-d", "config"]
 
         self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list),
                          {"-c": "merge", "-d": "config"})
@@ -300,7 +301,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.argv = ["./merge_repo.py", "-c", "merge"]
+        self.argv = [self.path_file, "-c", "merge"]
 
         self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list),
                          {"-c": "merge"})
@@ -315,7 +316,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.argv = ["./merge_repo.py", "-c", "merge"]
+        self.argv = [self.path_file, "-c", "merge"]
 
         self.assertEqual(arg_parser.arg_parse2(self.argv, []), {"-c": True})
 
@@ -329,7 +330,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.argv = ["./merge_repo.py", "-M"]
+        self.argv = [self.path_file, "-M"]
 
         self.assertEqual(arg_parser.arg_parse2(self.argv, []), {"-M": True})
 
@@ -371,7 +372,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.argv = ["./merge_repo.py"]
+        self.argv = [self.path_file]
 
         self.assertEqual(arg_parser.arg_parse2(self.argv, []), {})
 

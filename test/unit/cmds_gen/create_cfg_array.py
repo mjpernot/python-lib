@@ -63,12 +63,28 @@ class UnitTest(unittest.TestCase):
         self.cfg_file2 = "create_cfg_array_config_file2"
         self.cfg_file3 = "create_cfg_array_config_file3"
         self.cfg_file4 = "create_cfg_array_config_file4"
+        self.cfg_file5 = \
+            "./test/unit/cmds_gen/testfiles/create_cfg_array_config_file3"
         self.cfg_path = "./test/unit/cmds_gen/testfiles"
 
         self.base = [{}]
         self.base2 = [{'host': 'SERVER_IP', 'port': '3306', 'user': 'root'}]
         self.base3 = [{'host': 'SERVER_IP', 'port': '3306', 'user': 'root'},
                       {'host': 'SERVER_IP2', 'port': '3307', 'user': 'root'}]
+
+    def test_single_entry2(self):
+
+        """Function:  test_single_entry
+
+        Description:  Test with single user entry.
+
+        Arguments:
+
+        """
+
+        self.assertEqual(cmds_gen.create_cfg_array(self.cfg_file5,
+                                                   cfg_path=self.cfg_path),
+                         self.base2)
 
     def test_multiple_entries(self):
 

@@ -5,6 +5,7 @@
     Description:  Class that has class definitions for general use.
 
     Function:
+        get_inst
         setup_mail
 
     Classes:
@@ -47,6 +48,22 @@ import re
 import version
 
 __version__ = version.__version__
+
+
+def get_inst(cmd, **kwargs):
+
+    """Function:  get_inst
+
+    Description:  Returns the module instance header.
+
+    Arguments:
+        (input) cmd -> Module library.
+        (output) -> Return module instance.
+
+    """
+    sub = cmd
+
+    return sub
 
 
 def setup_mail(to_line, subj=None, frm_line=None, **kwargs):
@@ -94,8 +111,10 @@ class Daemon:
 
     """
 
-    def __init__(self, pidfile, stdin="/dev/null", stdout="/dev/null",
-                 stderr="/dev/null", argv_list=None):
+    DEV_NULL = "/dev/null"
+
+    def __init__(self, pidfile, stdin=DEV_NULL, stdout=DEV_NULL,
+                 stderr=DEV_NULL, argv_list=None):
 
         """Method:  __init__
 
@@ -249,8 +268,10 @@ class Daemon:
 
         # Try killing the daemon process
         try:
+            inst = get_inst(os)
+
             while 1:
-                os.kill(pid, signal.SIGTERM)
+                inst.kill(pid, signal.SIGTERM)
                 time.sleep(0.1)
 
         except OSError, err:
@@ -877,7 +898,9 @@ class Mail(System):
 
         """
 
-        for ln in sys.stdin:
+        inst = get_inst(sys)
+
+        for ln in inst.stdin:
             self.add_2_msg(ln)
 
     def create_body(self):
@@ -926,7 +949,8 @@ class Mail(System):
 
         """
 
-        server = smtplib.SMTP("localhost")
+        inst = get_inst(smtplib)
+        server = inst.SMTP("localhost")
         server.sendmail(self.frm, self.to, self.create_body())
         server.quit()
 
@@ -981,17 +1005,13 @@ class Logger(object):
 
         """
 
-        mode = kwargs.get("mode", "a")
-
         self.handler = logging.FileHandler(log_file)
 
         if not msg_fmt:
             msg_fmt = "%(asctime)s %(levelname)s %(message)s"
 
         self.formatter = logging.Formatter(msg_fmt, date_fmt)
-
         self.handler.setFormatter(self.formatter)
-
         self.log = logging.getLogger(name)
 
         if level == "DEBUG":

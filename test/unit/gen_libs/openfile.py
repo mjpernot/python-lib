@@ -70,7 +70,8 @@ class UnitTest(unittest.TestCase):
         print("This is a test file", file=f_hdlr2)
         f_hdlr2.close()
 
-        P1 = subprocess.Popen(["gzip", self.f_name2])
+        cmd = gen_libs.get_inst(subprocess)
+        P1 = cmd.Popen(["gzip", self.f_name2])
         P1.wait()
 
         self.f_name2 = self.f_name2 + ".gz"

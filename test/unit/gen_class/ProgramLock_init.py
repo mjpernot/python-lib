@@ -62,10 +62,14 @@ class UnitTest(unittest.TestCase):
         self.test_path = os.path.join(os.getcwd(), "test/unit/gen_class")
         self.test_file = os.path.join(self.test_path, "test_file.txt")
         self.f_ptr = open(self.test_file, "w")
-
+        self.tmp_path = os.path.join("/", "tmp")
         self.argv = ["/opt/local/python/ProgramLock_init.py"]
         self.flavor_id = "TEST"
-        self.LOCK = None
+        self.lock = None
+        self.lock_file = "-opt-local-python-ProgramLock_init-.lock"
+        self.lock_file2 = "-opt-local-python-ProgramLock_init-TEST.lock"
+        self.results = os.path.join(self.tmp_path, self.lock_file)
+        self.results2 = os.path.join(self.tmp_path, self.lock_file2)
 
     @mock.patch("gen_class.tempfile.gettempdir")
     @mock.patch("gen_class.fcntl.lockf")
@@ -84,14 +88,13 @@ class UnitTest(unittest.TestCase):
         mock_path.return_value = self.argv[0]
         mock_open.return_value = self.f_ptr
         mock_lock.return_value = True
-        mock_tmp.return_value = "/tmp"
+        mock_tmp.return_value = self.tmp_path
 
-        self.LOCK = gen_class.ProgramLock(self.argv)
+        self.lock = gen_class.ProgramLock(self.argv)
 
-        self.assertEqual((self.LOCK.lock_created, self.LOCK.f_ptr,
-                          self.LOCK.lock_file),
-                         (True, self.f_ptr,
-                          "/tmp/-opt-local-python-ProgramLock_init-.lock"))
+        self.assertEqual((self.lock.lock_created, self.lock.f_ptr,
+                          self.lock.lock_file),
+                         (True, self.f_ptr, self.results))
 
     @mock.patch("gen_class.tempfile.gettempdir")
     @mock.patch("gen_class.fcntl.lockf")
@@ -110,14 +113,13 @@ class UnitTest(unittest.TestCase):
         mock_path.return_value = self.argv[0]
         mock_open.return_value = self.f_ptr
         mock_lock.return_value = True
-        mock_tmp.return_value = "/tmp"
+        mock_tmp.return_value = self.tmp_path
 
-        self.LOCK = gen_class.ProgramLock(self.argv, self.flavor_id)
+        self.lock = gen_class.ProgramLock(self.argv, self.flavor_id)
 
-        self.assertEqual((self.LOCK.lock_created, self.LOCK.f_ptr,
-                          self.LOCK.lock_file),
-                         (True, self.f_ptr,
-                          "/tmp/-opt-local-python-ProgramLock_init-TEST.lock"))
+        self.assertEqual((self.lock.lock_created, self.lock.f_ptr,
+                          self.lock.lock_file),
+                         (True, self.f_ptr, self.results2))
 
     @mock.patch("gen_class.tempfile.gettempdir")
     @mock.patch("gen_class.fcntl.lockf")
@@ -136,14 +138,13 @@ class UnitTest(unittest.TestCase):
         mock_path.return_value = self.argv[0]
         mock_open.return_value = self.f_ptr
         mock_lock.return_value = True
-        mock_tmp.return_value = "/tmp"
+        mock_tmp.return_value = self.tmp_path
 
-        self.LOCK = gen_class.ProgramLock(self.argv, self.flavor_id)
+        self.lock = gen_class.ProgramLock(self.argv, self.flavor_id)
 
-        self.assertEqual((self.LOCK.lock_created, self.LOCK.f_ptr,
-                          self.LOCK.lock_file),
-                         (True, self.f_ptr,
-                          "/tmp/-opt-local-python-ProgramLock_init-TEST.lock"))
+        self.assertEqual((self.lock.lock_created, self.lock.f_ptr,
+                          self.lock.lock_file),
+                         (True, self.f_ptr, self.results2))
 
     def tearDown(self):
 

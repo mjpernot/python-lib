@@ -34,8 +34,16 @@ pipeline {
                 ./test/unit/cmds_gen/add_cmd.py
                 ./test/unit/cmds_gen/create_cfg_array.py
                 ./test/unit/cmds_gen/disconnect.py
+                ./test/unit/cmds_gen/get_inst.py
                 ./test/unit/cmds_gen/is_add_cmd.py
                 ./test/unit/cmds_gen/run_prog.py
+                ./test/unit/errors/EmptyRowError.py
+                ./test/unit/errors/Error.py
+                ./test/unit/errors/NoOptionError.py
+                ./test/unit/errors/NotMasterError.py
+                ./test/unit/errors/NotSlaveError.py
+                ./test/unit/errors/NotYetImplementedError.py
+                ./test/unit/errors/SlaveNotRunningError.py
                 ./test/unit/gen_libs/and_is_true.py
                 ./test/unit/gen_libs/bytes_2_readable.py
                 ./test/unit/gen_libs/chk_crt_dir.py
@@ -47,6 +55,7 @@ pipeline {
                 ./test/unit/gen_libs/cp_file2.py
                 ./test/unit/gen_libs/cp_file.py
                 ./test/unit/gen_libs/crt_file_time.py
+                ./test/unit/gen_libs/date_range.py
                 ./test/unit/gen_libs/del_not_and_list.py
                 ./test/unit/gen_libs/del_not_in_list.py
                 ./test/unit/gen_libs/dict_2_list.py
@@ -58,10 +67,12 @@ pipeline {
                 ./test/unit/gen_libs/file_cleanup.py
                 ./test/unit/gen_libs/file_search_cnt.py
                 ./test/unit/gen_libs/file_search.py
+                ./test/unit/gen_libs/filename_search.py
                 ./test/unit/gen_libs/float_div.py
                 ./test/unit/gen_libs/get_base_dir.py
                 ./test/unit/gen_libs/get_data.py
                 ./test/unit/gen_libs/get_date.py
+                ./test/unit/gen_libs/get_inst.py
                 ./test/unit/gen_libs/get_secs.py
                 ./test/unit/gen_libs/get_time.py
                 ./test/unit/gen_libs/help_func.py
@@ -81,6 +92,7 @@ pipeline {
                 ./test/unit/gen_libs/merge_data_types.py
                 ./test/unit/gen_libs/merge_two_dicts.py
                 ./test/unit/gen_libs/milli_2_readadble.py
+                ./test/unit/gen_libs/month_days.py
                 ./test/unit/gen_libs/month_delta.py
                 ./test/unit/gen_libs/mv_file.py
                 ./test/unit/gen_libs/mv_file2.py
@@ -108,6 +120,7 @@ pipeline {
                 ./test/unit/gen_libs/write_file.py
                 ./test/unit/gen_libs/write_file2.py
                 ./test/unit/gen_libs/write_to_log.py
+                ./test/unit/gen_class/get_inst.py
                 ./test/unit/gen_class/setup_mail.py
                 ./test/unit/gen_class/Daemon_delpid.py
                 ./test/unit/gen_class/Daemon_init.py
@@ -155,6 +168,9 @@ pipeline {
                 ./test/unit/gen_class/Mail_print_email.py
                 ./test/unit/gen_class/Mail_read_stdin.py
                 ./test/unit/gen_class/Mail_send_mail.py
+                ./test/unit/machine/Linux.py
+                ./test/unit/machine/Machine.py
+                ./test/unit/machine/Solaris.py
                 deactivate
                 rm -rf test_env
                 """

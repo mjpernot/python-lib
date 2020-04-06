@@ -17,6 +17,7 @@
         cp_file
         cp_file2
         crt_file_time
+        date_range
         del_not_and_list
         del_not_in_list
         dict_2_list
@@ -28,10 +29,12 @@
         file_search
         file_search_cnt
         file_2_list
+        filename_search
         float_div
         get_base_dir
         get_data
         get_date
+        get_inst
         get_secs
         get_time
         help_func
@@ -51,6 +54,7 @@
         merge_data_types
         merge_two_dicts
         milli_2_readadble
+        month_days
         month_delta
         mv_file
         mv_file2
@@ -107,6 +111,7 @@ import io
 import json
 import ast
 import gzip
+import calendar
 
 # Local
 import version
@@ -337,7 +342,8 @@ def compress(fname, **kwargs):
 
     """
 
-    P1 = subprocess.Popen(["gzip", fname])
+    inst = get_inst(subprocess)
+    P1 = inst.Popen(["gzip", fname])
     P1.wait()
 
 
@@ -469,6 +475,42 @@ def crt_file_time(fname, path, ext, **kwargs):
     return path + fname + "." + time.strftime("%Y%m%d_%I%M") + ext
 
 
+def date_range(start_dt, end_dt, **kwargs):
+
+    """Function:  date_range
+
+    Description:  Generators a list of year-month-01 combinations between two
+        dates.
+        NOTE:  The day will be included in the datetime instance, but all days
+            will be set to the beginning of each month (e.g. YYYY-MM-01).
+
+    Arguments:
+        (input) start_dt -> Start date - datetime class instance.
+        (input) end_dt -> End date - datetime class instance.
+        (output) Generator list of datetime instances.
+
+    """
+
+    start_dt = start_dt.replace(day=1)
+    end_dt = end_dt.replace(day=1)
+    forward = end_dt >= start_dt
+    finish = False
+    dt = start_dt
+
+    while not finish:
+        yield dt.date()
+
+        if forward:
+            days = month_days(dt)
+            dt = dt + datetime.timedelta(days=days)
+            finish = dt > end_dt
+
+        else:
+            _tmp_dt = dt.replace(day=1) - datetime.timedelta(days=1)
+            dt = (_tmp_dt.replace(day=dt.day))
+            finish = dt < end_dt
+
+
 def del_not_and_list(list1, list2, **kwargs):
 
     """Function:  del_not_and_list
@@ -537,7 +579,7 @@ def dict_2_list(dict_list, key_val, **kwargs):
     return [row[key_val] for row in list(dict_list) if key_val in row]
 
 
-def dict_2_std(data, ofile=False, **kwargs):
+def dict_2_std(data, ofile=False, mode="w", **kwargs):
 
     """Function:  dict_2_std
 
@@ -547,13 +589,14 @@ def dict_2_std(data, ofile=False, **kwargs):
     Arguments:
         (input) data -> Dict document.
         (input) ofile -> Name of file to print to.
+        (input) mode -> w|a => Write or append mode.
 
     """
 
     data = dict(data)
 
     if ofile:
-        outfile = open(ofile, "w")
+        outfile = open(ofile, mode)
 
     else:
         outfile = sys.stdout
@@ -564,21 +607,29 @@ def dict_2_std(data, ofile=False, **kwargs):
         outfile.close()
 
 
-def dir_file_match(dir_path, file_str, **kwargs):
+def dir_file_match(dir_path, file_str, add_path=False, **kwargs):
 
     """Function:  dir_file_match
 
     Description:  Return a list of file names from a directory, but only those
         that match a search string.
 
+    NOTE:  Match works starting at the beginning of the file name.
+
     Arguments:
         (input) dir_path -> Directory path to search in.
         (input) file_str -> Name of search string.
-        (output) Return a list of file names matching search string.
+        (input) add_path -> True|False - Add path name to file name.
+        (output) Return a list of (path/)file names matching the search string.
 
     """
 
-    return [x for x in list_files(dir_path) if re.match(file_str, x)]
+    if add_path:
+        return [os.path.join(dir_path, x)
+                for x in list_files(dir_path) if re.match(file_str, x)]
+
+    else:
+        return [x for x in list_files(dir_path) if re.match(file_str, x)]
 
 
 def disk_usage(path, **kwargs):
@@ -753,6 +804,33 @@ def file_2_list(filename, **kwargs):
     return lines
 
 
+def filename_search(dir_path, file_str, add_path=False, **kwargs):
+
+    """Function:  filename_search
+
+    Description:  Return a list of file names from a directory that contain
+        the search string somewhere in the file name.
+
+    NOTE:  file_str argument will be able to handle regular expressions.
+
+    Arguments:
+        (input) dir_path -> Directory path to search in.
+        (input) file_str -> Name of search string (can be regular expression).
+        (input) add_path -> True|False - Add path name to file name.
+        (output) Return a list of (path/)file names found with search string.
+
+    """
+
+    if add_path:
+        return [os.path.join(dir_path, x)
+                for x in list_files(dir_path)
+                if re.search(file_str, x)]
+
+    else:
+        return [x for x in list_files(dir_path)
+                if re.search(file_str, x)]
+
+
 def float_div(num1, num2, **kwargs):
 
     """Function:  float_div
@@ -816,6 +894,21 @@ def get_date(**kwargs):
     """
 
     return datetime.datetime.strftime(datetime.datetime.now(), "%Y-%m-%d")
+
+
+def get_inst(cmd, **kwargs):
+
+    """Function:  get_inst
+
+    Description:  Returns the module instance header.
+
+    Arguments:
+        (input) cmd -> Module library.
+        (output) cmd -> Return module instance.
+
+    """
+
+    return cmd
 
 
 def get_secs(td, **kwargs):
@@ -1146,8 +1239,8 @@ def make_md5_hash(file_path, to_file=True, **kwargs):
 
     """
 
-    P1 = subprocess.Popen(["/usr/bin/md5sum", file_path],
-                          stdout=subprocess.PIPE)
+    inst = get_inst(subprocess)
+    P1 = inst.Popen(["/usr/bin/md5sum", file_path], stdout=inst.PIPE)
     hash_results, status = P1.communicate()
     hash_results = hash_results.split("  ")[0]
 
@@ -1299,6 +1392,21 @@ def milli_2_readadble(ms, **kwargs):
 
     return "%d days %d hours %d minutes %d seconds" \
            % (days, hours, minutes, seconds)
+
+
+def month_days(dtg, **kwargs):
+
+    """Function:  month_days
+
+    Description:  Return the number of days in the month for the date.
+
+    Arguments:
+        (input) dtg -> Is a datetime class instance.
+        (output) -> Number of days in the month for the date.
+
+    """
+
+    return calendar.monthrange(dtg.year, dtg.month)[1]
 
 
 def month_delta(date, delta, **kwargs):
@@ -1496,7 +1604,7 @@ def pct_int(num1, num2, **kwargs):
     return int(float_div(num1, num2, **kwargs) * 100)
 
 
-def print_data(data, **kwargs):
+def print_data(data, mode="w", **kwargs):
 
     """Function:  print_data
 
@@ -1505,13 +1613,14 @@ def print_data(data, **kwargs):
 
     Arguments:
         (input) data -> Data to be printed.
+        (input) mode -> w|a => Write or append mode.
         (input) **kwargs:
             ofile -> Name of file to print to.
 
     """
 
     if "ofile" in kwargs and kwargs["ofile"]:
-        outfile = open(kwargs.get("ofile"), "w")
+        outfile = open(kwargs.get("ofile"), mode)
 
     else:
         outfile = sys.stdout
@@ -1522,7 +1631,8 @@ def print_data(data, **kwargs):
         outfile.close()
 
 
-def print_dict(data, ofile=None, json_fmt=False, no_std=False, **kwargs):
+def print_dict(data, ofile=None, json_fmt=False, no_std=False, mode="w",
+               **kwargs):
 
     """Function:  print_dict
 
@@ -1534,6 +1644,7 @@ def print_dict(data, ofile=None, json_fmt=False, no_std=False, **kwargs):
         (input) ofile -> Name of output file name.
         (input) json_fmt -> True|False - Print in JSON format.
         (input) no_std -> True|False - Do not print to standard out.
+        (input) mode -> w|a => Write or append mode.
         (output) err_flag -> True|False - If error has occurred.
         (output) err_msg -> None or error message.
 
@@ -1544,10 +1655,11 @@ def print_dict(data, ofile=None, json_fmt=False, no_std=False, **kwargs):
 
     if isinstance(data, dict):
         if ofile and json_fmt:
-            print_data(json.dumps(data, indent=4), ofile=ofile, **kwargs)
+            print_data(json.dumps(data, indent=4), ofile=ofile, mode=mode,
+                       **kwargs)
 
         elif ofile:
-            dict_2_std(data, ofile=ofile, **kwargs)
+            dict_2_std(data, ofile=ofile, mode=mode, **kwargs)
 
         if not no_std and json_fmt:
             print_data(json.dumps(data, indent=4), **kwargs)

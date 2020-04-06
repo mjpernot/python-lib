@@ -4,8 +4,37 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [2.8.1] - 2020-03-25
+### Fixed
+- gen_libs.make_md5_hash:  Fixed subprocess instance from SonarQube scan finding.
+- gen_libs.compress:  Fixed subprocess instance from SonarQube scan finding.
+- cmds_gen.run_prog:  Fixed subprocess instance from SonarQube scan finding.
+- gen_class.Daemon.stop:  Fixed signal instance from SonarQube scan finding.
+- gen_class.Mail.read_stdin:  Fixed sys instance from SonarQube scan finding.
+- gen_class.Mail.send_mail:  Fixed smtplib instance from SonarQube scan finding.
+- gen_class.Daemon.\_\_init\_\_:  Fixed critical finding from SonarQube scan finding.
+
+### Added
+- gen_libs.date_range:  Generators a list of year-month-01 combinations between two dates.
+- gen_libs.month_days:  Return the number of days in the month for a date.
+- gen_libs.filename_search:  Return list of file names that contain search string in the file name.
+- cmds_gen.get_inst:  Returns the module instance header.
+- gen_class.get_inst:  Returns the module instance header.
+- gen_libs.get_inst:  Returns the module instance header.
+
+### Changed
+- gen_libs.dir_file_match:  Added argument to allow full paths with names to be returned.
+- arg_parser.arg_req_or_lst:  Changed "y" variable to throwaway variable "\_".
+- arg_parser.arg_cond_req_or:  Changed "y" variable to throwaway variable "\_".
+- arg_parser.arg_cond_req:  Changed "y" variable to throwaway variable "\_".
+- gen_class.Logger.\_\_init\_\_:  Removed non-used variable and code.
+- gen_libs.print_dict:  Added file mode option writing to file.
+- gen_libs.dict_2_std:  Added file mode option writing to file.
+- gen_libs.print_data:  Added file mode option writing to file.
+
+
 ## [2.8.0] - 2019-12-03
-### Update
+### Changed
 - gen_class.LogFile (Field Release):  Class and methods that stores and manipulates log entries files or standard in.
 
 ### Fixed
@@ -560,7 +589,7 @@ Breaking Change
 
 ## [1.33.1] - 2018-01-25
 ### Changed
-- gen_class/ProgressBar_calc_and_update.py:  Changed format of mock.patch statements.
+- gen_class.ProgressBar_calc_and_update.py:  Changed format of mock.patch statements.
 
 
 ## [1.33.0] - 2018-01-22

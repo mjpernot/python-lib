@@ -61,14 +61,16 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.loglist = ["2019-11 This", "20191-11 is", "2018-10 a",
+        self.yearmon = "2018-10 a"
+        self.yearmon2 = "2019-11 This"
+        self.loglist = [self.yearmon2, "20191-11 is", self.yearmon,
                         "20-11 test"]
         self.regex = "^\d{4}-\d{2}"
         self.regex2 = "\d{4}:\d{2}"
         self.regex3 = "^\d{4}-\d{2}|^\d{2}-\d{2}"
-        self.result = ["2019-11 This", "2018-10 a"]
-        self.result2 = ["2018-10 a"]
-        self.result3 = ["2019-11 This", "2018-10 a", "20-11 test"]
+        self.result = [self.yearmon2, self.yearmon]
+        self.result2 = [self.yearmon]
+        self.result3 = [self.yearmon2, self.yearmon, "20-11 test"]
 
     def test_regex_multiple(self):
 
