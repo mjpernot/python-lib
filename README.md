@@ -182,3 +182,38 @@ test/unit/machine/unit_test_run.sh
 test/unit/machine/code_coverage.sh
 ```
 
+# Integration Testing:
+
+### Description: Testing consists of integration testing for the functions in the library modules and methods in the classes.
+
+### Installation:
+
+Install the project using git.
+  * Replace **{Python_Project}** with the baseline path of the python program.
+  * Replace **{Branch_Name}** with the name of the Git branch being tested.  See Git Merge Request.
+
+```
+umask 022
+cd {Python_Project}
+git clone --branch {Branch_Name} git@sc.appdev.proj.coe.ic.gov:JAC-DSXD/python-lib.git
+```
+
+Install/upgrade system modules.
+
+```
+cd python-lib
+sudo bash
+umask 022
+pip install -r requirements.txt --upgrade --trusted-host pypi.appdev.proj.coe.ic.gov
+exit
+```
+
+# Integration test runs:
+  * Replace **{Python_Project}** with the baseline path of the python program.
+
+### All integration testing for arg_parser.py:
+```
+cd {Python_Project}/python-lib
+test/unit/arg_parser/integration_test_run.sh
+```
+
