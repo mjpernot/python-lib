@@ -43,6 +43,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Unit testing initilization.
+        test_open_fail3 -> Test with unable to open file to write.
         test_open_fail2 -> Test with no -f in file_crt_list list.
         test_open_fail -> Test with errno set to non-two value.
         test_open_success -> Test with file open returning successful.
@@ -71,6 +72,23 @@ class UnitTest(unittest.TestCase):
         self.status = False
         self.name = os.path.join(
             os.getcwd(), "test/integration/arg_parser/tmp/file_create.txt")
+        self.name2 = os.path.join(
+            os.getcwd(), "test/integration/arg_parser/tmp/tmp/file_create.txt")
+
+    def test_open_fail3(self):
+
+        """Function:  test_open_fail3
+
+        Description:  Test with unable to open file to write.
+
+        Arguments:
+
+        """
+
+        with gen_libs.no_std_out():
+            self.assertTrue(arg_parser._file_create(
+                self.name2, self.option, self.file_crt_list, self.errno,
+                self.strerror, self.status))
 
     def test_open_fail2(self):
 
