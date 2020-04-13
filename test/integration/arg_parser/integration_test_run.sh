@@ -10,6 +10,6 @@ echo "Unit test:"
 #test/integration/arg_parser/arg_file_chk.py
 #test/integration/arg_parser/arg_parse2.py
 test/integration/arg_parser/_file_create.py
-#test/integration/arg_parser/_parse_multi.py
+test/integration/arg_parser/_parse_multi.py
 #test/integration/arg_parser/_parse_single.py
 
