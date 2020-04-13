@@ -43,7 +43,8 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Unit testing initilization.
-        test_open_fail -> Test with file open returning failure.
+        test_open_fail2 -> Test with no -f in file_crt_list list.
+        test_open_fail -> Test with errno set to non-two value.
         test_open_success -> Test with file open returning successful.
         test_errno_not_two -> Test with errno not set to two.
         test_option_not_in_list -> Test with option not being in file_crt_list.
@@ -63,18 +64,19 @@ class UnitTest(unittest.TestCase):
 
         self.option = "-f"
         self.file_crt_list = ["-f"]
+        self.file_crt_list2 = ["-g"]
         self.errno = 2
+        self.errno2 = 1
         self.strerror = "No file"
         self.status = False
         self.name = os.path.join(
             os.getcwd(), "test/integration/arg_parser/tmp/file_create.txt")
 
-    @unittest.skip("Not yet implemented")
-    def test_open_fail(self):
+    def test_open_fail2(self):
 
-        """Function:  test_open_fail
+        """Function:  test_open_fail2
 
-        Description:  Test with file open returning failure.
+        Description:  Test with no -f in file_crt_list list.
 
         Arguments:
 
@@ -82,7 +84,22 @@ class UnitTest(unittest.TestCase):
 
         with gen_libs.no_std_out():
             self.assertTrue(arg_parser._file_create(
-                self.name, self.option, self.file_crt_list, self.errno,
+                self.name, self.option, self.file_crt_list2, self.errno,
+                self.strerror, self.status))
+
+    def test_open_fail(self):
+
+        """Function:  test_open_fail
+
+        Description:  Test with errno set to non-two value.
+
+        Arguments:
+
+        """
+
+        with gen_libs.no_std_out():
+            self.assertTrue(arg_parser._file_create(
+                self.name, self.option, self.file_crt_list, self.errno2,
                 self.strerror, self.status))
 
     def test_open_success(self):
@@ -116,7 +133,7 @@ class UnitTest(unittest.TestCase):
         with gen_libs.no_std_out():
             self.assertTrue(arg_parser._file_create(
                 self.name, self.option, self.file_crt_list, self.errno,
-                self.strerror, self.exit_flag))
+                self.strerror, self.status))
 
     def test_option_not_in_list(self):
 
@@ -133,7 +150,7 @@ class UnitTest(unittest.TestCase):
         with gen_libs.no_std_out():
             self.assertTrue(arg_parser._file_create(
                 self.name, self.option, self.file_crt_list, self.errno,
-                self.strerror, self.exit_flag))
+                self.strerror, self.status))
 
     def tearDown(self):
 
