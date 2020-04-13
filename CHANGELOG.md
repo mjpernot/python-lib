@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [2.8.2] - 2020-04-13
+
+
 ## [2.8.1] - 2020-03-25
 ### Fixed
 - gen_libs.make_md5_hash:  Fixed subprocess instance from SonarQube scan finding.
