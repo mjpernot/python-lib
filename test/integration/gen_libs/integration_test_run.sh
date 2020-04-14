@@ -6,7 +6,7 @@
 
 echo ""
 echo "Unit test:  gen_libs.py"
-#test/integration/gen_libs/chk_crt_dir.py
+test/integration/gen_libs/chk_crt_dir.py
 #test/integration/gen_libs/chk_crt_file.py
 #test/integration/gen_libs/chk_int.py
 #test/integration/gen_libs/dict_2_std.py
