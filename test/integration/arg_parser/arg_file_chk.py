@@ -232,7 +232,8 @@ class UnitTest(unittest.TestCase):
 
         self.args_array = {"-f": []}
 
-        self.assertFalse(arg_parser.arg_file_chk(self.args_array, self.file_chk_list))
+        self.assertFalse(arg_parser.arg_file_chk(self.args_array,
+                                                 self.file_chk_list))
 
     def test_name_loop_two_items(self):
 
