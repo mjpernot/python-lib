@@ -10,7 +10,7 @@ test/integration/gen_libs/chk_crt_dir.py
 test/integration/gen_libs/chk_crt_file.py
 test/integration/gen_libs/dict_2_std.py
 test/integration/gen_libs/dir_file_match.py
-#test/integration/gen_libs/display_data.py
+test/integration/gen_libs/display_data.py
 #test/integration/gen_libs/filename_search.py
 #test/integration/gen_libs/make_md5_hash.py
 #test/integration/gen_libs/merge_data_types.py
