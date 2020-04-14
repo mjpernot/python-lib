@@ -67,7 +67,7 @@ class UnitTest(unittest.TestCase):
         self.err_mask = "Error: Directory: %s does not exist."
         self.dir_name = "TEST_DIR"
         self.file_name = "TEST_FILE"
-        self.base_dir = "test/unit/gen_libs/tmp"
+        self.base_dir = "test/integration/gen_libs/tmp"
         self.test_path = os.path.join(os.getcwd(), self.base_dir)
         self.d_name = os.path.join(self.test_path, self.dir_name)
         self.f_name = os.path.join(self.test_path, self.file_name)
