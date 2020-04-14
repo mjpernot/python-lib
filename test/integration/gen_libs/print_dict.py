@@ -91,7 +91,7 @@ class UnitTest(unittest.TestCase):
 
         self.assertEqual(gen_libs.print_dict(
             self.data, ofile=self.ofile, json_fmt=True, no_std=True),
-                         (False, None))
+            (False, None))
 
         self.assertTrue(filecmp.cmp(self.basefile, self.ofile))
 
@@ -120,7 +120,7 @@ class UnitTest(unittest.TestCase):
 
         self.assertEqual(gen_libs.print_dict(
             self.data, ofile=self.ofile, json_fmt=True, no_std=True),
-                         (False, None))
+            (False, None))
 
         self.assertTrue(filecmp.cmp(self.basefile, self.ofile))
 
