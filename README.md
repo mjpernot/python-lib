@@ -217,3 +217,9 @@ cd {Python_Project}/python-lib
 test/unit/arg_parser/integration_test_run.sh
 ```
 
+### All integration testing for gen_libs.py:
+```
+cd {Python_Project}/python-lib
+test/unit/gen_libs/integration_test_run.sh
+```
+
