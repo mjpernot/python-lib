@@ -70,7 +70,6 @@ class UnitTest(unittest.TestCase):
 
         """
 
-
         data = gen_libs.make_md5_hash(self.file_path, to_file=False).split(" ")
 
         self.assertEqual(len(data), 1)
