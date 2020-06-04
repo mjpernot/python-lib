@@ -199,7 +199,7 @@ pipeline {
                                 "pattern": "./*.py",
                                 "recursive": false,
                                 "excludePatterns": ["test/unit/gen_libs/*.py","test/unit/gen_class/*.py"],
-                                "target": "generic-local/highpoint/python-lib/"
+                                "target": "pypi-proj-local/highpoint/python-lib/"
                             }
                         ]
                     }"""
