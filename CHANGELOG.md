@@ -6,8 +6,12 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 ## [2.8.2] - 2020-07-15
 ### Fixed
+- gen_libs.crt_file_time:  Fixed where no trailing slash in path gives incorrect results.
 - arg_parser.arg_set_path:  Fixed where a second trailing slash was added if one was already present.
 
+### Changed
+- gen_libs.crt_file_time:  Made ext argument an optional argument.
+- gen_libs.crt_file_time:  Add period (.) seperator between filename and extension.
 
 ## [2.8.1] - 2020-03-25
 ### Fixed

@@ -458,7 +458,7 @@ def cp_file2(fname, src_dir, dest_dir, new_fname=None, **kwargs):
     shutil.copy2(os.path.join(src_dir, fname), dest_dir)
 
 
-def crt_file_time(fname, path, ext, **kwargs):
+def crt_file_time(fname, path, ext="", **kwargs):
 
     """Function:  crt_file_time
 
@@ -472,7 +472,10 @@ def crt_file_time(fname, path, ext, **kwargs):
 
     """
 
-    return path + fname + "." + time.strftime("%Y%m%d_%I%M") + ext
+    if ext and "." not in ext[0]:
+        ext = "." + ext
+
+    return os.path.join(path, fname + "." + time.strftime("%Y%m%d_%I%M") + ext)
 
 
 def date_range(start_dt, end_dt, **kwargs):
