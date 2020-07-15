@@ -43,6 +43,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Unit testing initilization.
+        test_trailing_slash -> Test with trailing slash already present.
         test_arg_not_present -> Test with argument not present.
         test_arg_present -> Test with argument present.
         test_empty_both -> Test with both args empty.
@@ -63,6 +64,7 @@ class UnitTest(unittest.TestCase):
 
         self.args_array = {}
         self.args_array2 = {"-a": "/dir/path", "-c": "/dir/diff_path"}
+        self.args_array3 = {"-a": "/dir/path/"}
 
         self.arg_opt = None
         self.arg_opt2 = "-a"
@@ -70,6 +72,19 @@ class UnitTest(unittest.TestCase):
 
         self.ret = ""
         self.ret2 = "/dir/path/"
+
+    def test_trailing_slash(self):
+
+        """Function:  test_trailing_slash
+
+        Description:  Test with trailing slash already present.
+
+        Arguments:
+
+        """
+
+        self.assertEqual(arg_parser.arg_set_path(self.args_array3,
+                                                 self.arg_opt2), self.ret2)
 
     def test_arg_not_present(self):
 
