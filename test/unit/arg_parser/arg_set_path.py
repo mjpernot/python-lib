@@ -24,12 +24,10 @@ else:
     import unittest
 
 # Third-party
-import mock
 
 # Local
 sys.path.append(os.getcwd())
 import arg_parser
-import gen_libs
 import version
 
 __version__ = version.__version__
