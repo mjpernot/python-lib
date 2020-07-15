@@ -457,7 +457,7 @@ def arg_set_path(args_array, arg_opt, **kwargs):
     args_array = dict(args_array)
 
     if arg_opt in args_array:
-        return args_array[arg_opt] + "/"
+        return os.path.join(args_array[arg_opt], "")
 
     else:
         return ""
