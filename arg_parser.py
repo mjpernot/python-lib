@@ -658,7 +658,7 @@ def _parse_multi(argv, args_array, opt_def_dict, **kwargs):
     else:
         # Handle multiple values for argument.
         args_array[argv[0]] = []
-        x = 0
+        cnt = 0
         tmp_argv = argv[1:]
 
         # Process values until next argument.
@@ -669,11 +669,11 @@ def _parse_multi(argv, args_array, opt_def_dict, **kwargs):
             else:
                 args_array[argv[0]].append(tmp_argv[0])
 
-            x = x + 1
+            cnt = cnt + 1
             tmp_argv = tmp_argv[1:]
 
         # Move to argument after the multiple values.
-        argv = argv[x:]
+        argv = argv[cnt:]
 
     return argv, args_array
 
