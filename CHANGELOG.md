@@ -6,6 +6,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 ## [2.8.2] - 2020-07-15
 ### Fixed
+- arg_parser.arg_dir_chk_crt:  Does not create directory if dir_crt_list is not subset of dir_chk_list.
 - gen_libs.crt_file_time:  Fixed where no trailing slash in path gives incorrect results.
 - arg_parser.arg_set_path:  Fixed where a second trailing slash was added if one was already present.
 

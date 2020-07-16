@@ -192,6 +192,7 @@ def arg_dir_chk_crt(args_array, dir_chk_list, dir_crt_list=None, **kwargs):
 
     args_array = dict(args_array)
     dir_chk_list = list(dir_chk_list)
+    status = False
 
     if dir_crt_list is None:
         dir_crt_list = []
@@ -199,28 +200,32 @@ def arg_dir_chk_crt(args_array, dir_chk_list, dir_crt_list=None, **kwargs):
     else:
         dir_crt_list = list(dir_crt_list)
 
-    status = False
+    if set(dir_crt_list).issubset(set(dir_chk_list)):
 
-    for x in set(dir_chk_list) & set(args_array.keys()):
+        for item in set(dir_chk_list) & set(args_array.keys()):
 
-        if not os.path.isdir(args_array[x]):
-
-            if x in dir_crt_list:
+            if not os.path.isdir(args_array[item]) and item in dir_crt_list:
 
                 try:
-                    os.makedirs(args_array[x])
+                    os.makedirs(args_array[item])
 
                 except:
-                    print("Error:  Unable to create {0}".format(args_array[x]))
+                    print("Error:  Unable to create {0}"
+                          .format(args_array[item]))
                     status = True
 
-            else:
-                print("Error:  {0} does not exist.".format(args_array[x]))
+            elif not os.path.isdir(args_array[item]):
+                print("Error: {0} does not exist.".format(args_array[item]))
                 status = True
 
-        elif not os.access(args_array[x], os.W_OK) and x in dir_crt_list:
-            print("Error: {0} is not writable.".format(args_array[x]))
-            status = True
+            elif not os.access(args_array[item], os.W_OK):
+                print("Error: {0} is not writable.".format(args_array[item]))
+                status = True
+
+    else:
+        print("Error:  dir_crt_list: {0} is not a subset of dir_chk_list: {1}"
+              .format(dir_crt_list, dir_chk_list))
+        status = True
 
     return status
 
