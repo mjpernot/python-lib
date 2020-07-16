@@ -125,14 +125,14 @@ def disconnect(*args):
 
     """
 
-    for x in args:
+    for server in args:
 
-        if isinstance(x, list):
-            for y in x:
-                y.disconnect()
+        if isinstance(server, list):
+            for srv in server:
+                srv.disconnect()
 
         else:
-            x.disconnect()
+            server.disconnect()
 
 
 def get_inst(cmd, **kwargs):
