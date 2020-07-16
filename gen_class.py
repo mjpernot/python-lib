@@ -252,9 +252,9 @@ class Daemon:
 
         # Get the pid from the pidfile
         try:
-            pf = file(self.pidfile, "r")
-            pid = int(pf.read().strip())
-            pf.close()
+            pfile = file(self.pidfile, "r")
+            pid = int(pfile.read().strip())
+            pfile.close()
 
         except IOError:
             pid = None
