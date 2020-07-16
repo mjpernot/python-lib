@@ -467,11 +467,13 @@ class LogFile(object):
         """
 
         if isinstance(data, file):
-            self.ignore.extend([x.lower().rstrip().rstrip("\n") for x in data])
+            self.ignore.extend(
+                [item.lower().rstrip().rstrip("\n") for item in data])
 
         elif isinstance(data, list):
             data = list(data)
-            self.ignore.extend([x.lower().rstrip().rstrip("\n") for x in data])
+            self.ignore.extend(
+                [item.lower().rstrip().rstrip("\n") for item in data])
 
         elif isinstance(data, str):
             self.ignore.append(data.lower().rstrip().rstrip("\n"))
