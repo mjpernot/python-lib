@@ -131,16 +131,16 @@ def arg_cond_req_or(args_array, opt_con_req_dict, **kwargs):
     opt_con_req_dict = dict(opt_con_req_dict)
     status = True
 
-    for x in set(opt_con_req_dict.keys()) & set(args_array.keys()):
+    for item in set(opt_con_req_dict.keys()) & set(args_array.keys()):
         tmp_flag = False
 
-        for _ in set(opt_con_req_dict[x]) & set(args_array.keys()):
+        for _ in set(opt_con_req_dict[item]) & set(args_array.keys()):
             tmp_flag = True
             break
 
         if not tmp_flag:
             print("Error: Option {0} requires one of these options {1}".
-                  format(x, opt_con_req_dict[x]))
+                  format(item, opt_con_req_dict[item]))
             status = tmp_flag
 
     return status
