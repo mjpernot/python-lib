@@ -404,14 +404,14 @@ class LogFile(object):
 
         if self.ignore and self.loglist:
             if use_marker and self.linemarker > 0:
-                self.loglist = [x for x in self.loglist[self.linemarker:]
-                                if not any(y in x.lower()
-                                           for y in self.ignore)]
+                self.loglist = [item for item in self.loglist[self.linemarker:]
+                                if not any(line in item.lower()
+                                           for line in self.ignore)]
 
             else:
-                self.loglist = [x for x in self.loglist
-                                if not any(y in x.lower()
-                                           for y in self.ignore)]
+                self.loglist = [item for item in self.loglist
+                                if not any(line in item.lower()
+                                           for line in self.ignore)]
 
     def filter_keyword(self, use_marker=False, **kwargs):
 
