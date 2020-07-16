@@ -295,14 +295,14 @@ def arg_noreq_xor(args_array, xor_noreq, **kwargs):
     xor_noreq = dict(xor_noreq)
     status = True
 
-    for x in xor_noreq:
+    for opt in xor_noreq:
 
         # Xor between key and values in dictionary.
-        if not (operator.xor((x in args_array),
-                             (xor_noreq[x] in args_array)) or
-                (x not in args_array and xor_noreq[x] not in args_array)):
+        if not (operator.xor((opt in args_array),
+                             (xor_noreq[opt] in args_array)) or
+                (opt not in args_array and xor_noreq[opt] not in args_array)):
 
-            print("Options: {0} or {1}, not both.".format(x, xor_noreq[x]))
+            print("Options: {0} or {1}, not both.".format(opt, xor_noreq[opt]))
             status = False
 
     return status
