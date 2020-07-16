@@ -404,16 +404,16 @@ def arg_req_or_lst(args_array, opt_or_dict, **kwargs):
     opt_or_dict = dict(opt_or_dict)
     status = True
 
-    for x in set(opt_or_dict.keys()) - set(args_array.keys()):
+    for item in set(opt_or_dict.keys()) - set(args_array.keys()):
         tmp_flag = False
 
-        for _ in set(opt_or_dict[x]) & set(args_array.keys()):
+        for _ in set(opt_or_dict[item]) & set(args_array.keys()):
             tmp_flag = True
             break
 
         if not tmp_flag:
             print("Error:  Option: {0} or one of these: {1} is required.".
-                  format(x, opt_or_dict[x]))
+                  format(item, opt_or_dict[item]))
             status = tmp_flag
 
     return status
