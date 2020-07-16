@@ -12,6 +12,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - arg_parser.arg_set_path:  Fixed where a second trailing slash was added if one was already present.
 
 ### Changed
+- arg_parser.arg_validate:  Changed variable names to standard naming convention.
 - arg_parser.arg_req_xor:  Changed variable names to standard naming convention.
 - arg_parser.arg_req_or_lst:  Changed variable names to standard naming convention.
 - arg_parser.arg_require:  Changed variable names to standard naming convention.

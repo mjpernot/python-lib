@@ -488,11 +488,12 @@ def arg_validate(args_array, valid_func, **kwargs):
     args_array = dict(args_array)
     status = True
 
-    for x in set(valid_func.keys()) & set(args_array.keys()):
+    for item in set(valid_func.keys()) & set(args_array.keys()):
 
         # Call function from function list.
-        if not valid_func[x](args_array[x]):
-            print("Error:  Invalid format: {0} '{1}'".format(x, args_array[x]))
+        if not valid_func[item](args_array[item]):
+            print("Error:  Invalid format: {0} '{1}'"
+                  .format(item, args_array[item]))
             status = False
 
     return status
