@@ -64,7 +64,7 @@ class UnitTest(unittest.TestCase):
         self.subj2 = "Test subject2"
         self.subj3 = "This is a string"
         self.subj4 = ["This", "is", "a", "list"]
-        self.subj4a = "Thisisalist"
+        self.subj4a = "This is a list"
 
     def test_subj_list(self):
 
