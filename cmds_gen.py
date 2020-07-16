@@ -211,17 +211,17 @@ def run_prog(cmd, **kwargs):
     # Write to file.
     if kwargs.get("ofile", False):
         with open(kwargs["ofile"], "wb") as f_name:
-            P1 = subinst.Popen(cmd, stdout=f_name)
-            P1.wait()
+            proc1 = subinst.Popen(cmd, stdout=f_name)
+            proc1.wait()
 
     # Return data to calling function.
     elif kwargs.get("retdata", False):
-        P1 = subinst.Popen(cmd, stdout=subinst.PIPE)
-        out, err = P1.communicate()
+        proc1 = subinst.Popen(cmd, stdout=subinst.PIPE)
+        out, err = proc1.communicate()
 
         return out
 
     # Write to standard out.
     else:
-        P1 = subinst.Popen(cmd)
-        P1.wait()
+        proc1 = subinst.Popen(cmd)
+        proc1.wait()
