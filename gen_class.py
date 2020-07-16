@@ -448,12 +448,12 @@ class LogFile(object):
 
         if self.regex and self.loglist:
             if use_marker and self.linemarker > 0:
-                self.loglist = [x for x in self.loglist[self.linemarker:]
-                                if re.search(self.regex, x)]
+                self.loglist = [item for item in self.loglist[self.linemarker:]
+                                if re.search(self.regex, item)]
 
             else:
-                self.loglist = [x for x in self.loglist
-                                if re.search(self.regex, x)]
+                self.loglist = [item for item in self.loglist
+                                if re.search(self.regex, item)]
 
     def load_ignore(self, data, **kwargs):
 
