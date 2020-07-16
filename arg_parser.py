@@ -68,16 +68,16 @@ def arg_add_def(args_array, def_array=None, opt_req_list=None, **kwargs):
         opt_req_list = list(opt_req_list)
 
         # Add missing required options with default values to argument array.
-        for x in set(opt_req_list) & \
+        for item in set(opt_req_list) & \
                 (set(def_array.keys()) - set(args_array.keys())):
-            args_array[x] = def_array[x]
+            args_array[item] = def_array[item]
 
     elif def_array:
         def_array = dict(def_array)
 
         # Add all default values to argument array.
-        for x in set(def_array.keys()) - set(args_array.keys()):
-            args_array[x] = def_array[x]
+        for item in set(def_array.keys()) - set(args_array.keys()):
+            args_array[item] = def_array[item]
 
     return args_array
 
