@@ -10,6 +10,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - arg_parser.arg_set_path:  Fixed where a second trailing slash was added if one was already present.
 
 ### Changed
+- gen_class.Mail.create_subject:  Changed delimiter to a space for lists passed to method.
 - gen_libs.crt_file_time:  Made ext argument an optional argument.
 - gen_libs.crt_file_time:  Add period (.) seperator between filename and extension.
 

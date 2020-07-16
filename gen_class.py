@@ -932,7 +932,7 @@ class Mail(System):
 
         if subj:
             if isinstance(subj, list):
-                self.subj = "".join(str(item) for item in list(subj))
+                self.subj = " ".join(str(item) for item in list(subj))
 
             else:
                 self.subj = subj
