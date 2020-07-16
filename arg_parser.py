@@ -572,10 +572,10 @@ def arg_xor_dict(args_array, opt_xor_dict, **kwargs):
     opt_xor_dict = dict(opt_xor_dict)
     status = True
 
-    for x in set(opt_xor_dict.keys()) & set(args_array.keys()):
+    for opt in set(opt_xor_dict.keys()) & set(args_array.keys()):
 
-        for y in set(opt_xor_dict[x]) & set(args_array.keys()):
-            print("Option {0} or {1}, but not both.".format(x, y))
+        for item in set(opt_xor_dict[opt]) & set(args_array.keys()):
+            print("Option {0} or {1}, but not both.".format(opt, item))
             status = False
             break
 
