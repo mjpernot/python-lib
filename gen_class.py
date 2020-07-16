@@ -188,12 +188,12 @@ class Daemon:
         # Redirect standard file descriptors
         sys.stdout.flush()
         sys.stderr.flush()
-        si = file(self.stdin, "r")
-        so = file(self.stdout, "a+")
-        se = file(self.stderr, "a+", 0)
-        os.dup2(si.fileno(), sys.stdin.fileno())
-        os.dup2(so.fileno(), sys.stdout.fileno())
-        os.dup2(se.fileno(), sys.stderr.fileno())
+        sdi = file(self.stdin, "r")
+        sdo = file(self.stdout, "a+")
+        sde = file(self.stderr, "a+", 0)
+        os.dup2(sdi.fileno(), sys.stdin.fileno())
+        os.dup2(sdo.fileno(), sys.stdout.fileno())
+        os.dup2(sde.fileno(), sys.stderr.fileno())
 
         # Write pidfile
         atexit.register(self.delpid)
