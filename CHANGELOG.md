@@ -12,6 +12,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - arg_parser.arg_set_path:  Fixed where a second trailing slash was added if one was already present.
 
 ### Changed
+- arg_parser.arg_cond_req:  Changed variable names to standard naming convention.
 - arg_parser.arg_add_def:  Changed variable names to standard naming convention.
 - gen_class.Mail.create_subject:  Changed delimiter to a space for lists passed to method.
 - gen_libs.crt_file_time:  Made ext argument an optional argument.

@@ -102,12 +102,12 @@ def arg_cond_req(args_array, opt_con_req, **kwargs):
     opt_con_req = dict(opt_con_req)
     status = True
 
-    for x in set(args_array.keys()) & set(opt_con_req.keys()):
+    for item in set(args_array.keys()) & set(opt_con_req.keys()):
 
-        for _ in set(opt_con_req[x]) - set(args_array.keys()):
+        for _ in set(opt_con_req[item]) - set(args_array.keys()):
             status = False
             print("Error:  Option {0} requires options {1}.".
-                  format(x, opt_con_req[x]))
+                  format(item, opt_con_req[item]))
             break
 
     return status
