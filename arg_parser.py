@@ -255,13 +255,13 @@ def arg_file_chk(args_array, file_chk_list, file_crt_list=None, **kwargs):
 
     status = False
 
-    for x in set(args_array.keys()) & set(file_chk_list):
+    for item in set(args_array.keys()) & set(file_chk_list):
 
-        if isinstance(args_array[x], list):
-            tmp_list = args_array[x]
+        if isinstance(args_array[item], list):
+            tmp_list = args_array[item]
 
         else:
-            tmp_list = [args_array[x]]
+            tmp_list = [args_array[item]]
 
         for name in tmp_list:
 
@@ -271,8 +271,8 @@ def arg_file_chk(args_array, file_chk_list, file_crt_list=None, **kwargs):
 
             except IOError as (errno, strerror):
 
-                status = _file_create(name, x, file_crt_list, errno, strerror,
-                                      status)
+                status = _file_create(name, item, file_crt_list, errno,
+                                      strerror, status)
 
     return status
 
