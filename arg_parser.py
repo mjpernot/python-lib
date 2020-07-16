@@ -437,13 +437,13 @@ def arg_req_xor(args_array, opt_xor, **kwargs):
     opt_xor = dict(opt_xor)
     status = True
 
-    for x in opt_xor:
+    for item in opt_xor:
 
         # Xor between key and values in dictionary.
-        if not operator.xor((x in args_array),
-                            (opt_xor[x] in args_array)):
-            print("Option {0} or {1}, but not both.".format(x,
-                                                            opt_xor[x]))
+        if not operator.xor((item in args_array),
+                            (opt_xor[item] in args_array)):
+            print("Option {0} or {1}, but not both.".format(item,
+                                                            opt_xor[item]))
             status = False
 
     return status
