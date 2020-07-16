@@ -378,8 +378,8 @@ def arg_require(args_array, opt_req_list, **kwargs):
     opt_req_list = list(opt_req_list)
     status = False
 
-    for x in set(opt_req_list) - set(args_array.keys()):
-        print("Error:  The '{0}' option is required".format(x))
+    for item in set(opt_req_list) - set(args_array.keys()):
+        print("Error:  The '{0}' option is required".format(item))
         status = True
 
     return status
