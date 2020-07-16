@@ -517,12 +517,12 @@ def arg_valid_val(args_array, opt_valid_val, **kwargs):
     status = True
 
     # Intersects the keys in args_array and opt_valid_val.
-    for x in set(args_array.keys()) & set(opt_valid_val.keys()):
+    for item in set(args_array.keys()) & set(opt_valid_val.keys()):
 
         # If passed value is valid for this option.
-        if not args_array[x] in opt_valid_val[x]:
+        if not args_array[item] in opt_valid_val[item]:
             print("Error:  Incorrect value ({0}) for option: {1}".
-                  format(args_array[x], x))
+                  format(args_array[item], item))
             status = False
 
     return status
