@@ -2,7 +2,7 @@
 # Classification (U)
 
 # Description:
-  This project consists of a number of common local python functions and classes that are available for use.
+  Consists of a number of common local python functions and classes that are available for use.
 
 
 ### This README file is broken down into the following sections:
