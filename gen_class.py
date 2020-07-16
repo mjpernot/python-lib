@@ -224,9 +224,9 @@ class Daemon:
 
         # Check for a pidfile to see if the daemon already runs.
         try:
-            pf = file(self.pidfile, "r")
-            pid = int(pf.read().strip())
-            pf.close()
+            pfile = file(self.pidfile, "r")
+            pid = int(pfile.read().strip())
+            pfile.close()
 
         except IOError:
             pid = None
