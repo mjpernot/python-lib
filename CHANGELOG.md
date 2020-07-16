@@ -12,6 +12,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - arg_parser.arg_set_path:  Fixed where a second trailing slash was added if one was already present.
 
 ### Changed
+- cmds_gen.is_add_cmd:  Changed variable names to standard naming convention.
 - cmds_gen.disconnect:  Changed variable names to standard naming convention.
 - arg_parser.\_parse_multi:  Changed variable names to standard naming convention.
 - arg_parser.arg_xor_dict:  Changed variable names to standard naming convention.

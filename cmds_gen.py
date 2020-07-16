@@ -170,22 +170,22 @@ def is_add_cmd(args_array, cmd, opt_arg_list, **kwargs):
     args_array = dict(args_array)
     opt_arg_list = dict(opt_arg_list)
 
-    for x in opt_arg_list:
+    for opt in opt_arg_list:
 
         # Is option in array and is set to True.
-        if x in args_array and args_array[x] and isinstance(args_array[x],
-                                                            bool):
+        if opt in args_array and args_array[opt] and isinstance(
+            args_array[opt], bool):
 
-            if isinstance(opt_arg_list[x], list):
+            if isinstance(opt_arg_list[opt], list):
 
-                for y in opt_arg_list[x]:
-                    cmd = add_cmd(cmd, arg=y)
+                for item in opt_arg_list[opt]:
+                    cmd = add_cmd(cmd, arg=item)
 
             else:
-                cmd = add_cmd(cmd, arg=opt_arg_list[x])
+                cmd = add_cmd(cmd, arg=opt_arg_list[opt])
 
-        elif x in args_array:
-            cmd = add_cmd(cmd, arg=opt_arg_list[x], val=args_array[x])
+        elif opt in args_array:
+            cmd = add_cmd(cmd, arg=opt_arg_list[opt], val=args_array[opt])
 
     return cmd
 
