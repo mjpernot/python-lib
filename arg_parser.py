@@ -153,6 +153,9 @@ def arg_default(arg, args_array, opt_def_dict, **kwargs):
     Description:  Checks to see if an argument has a default value and if so
         assigns that value to the option in the args_array list.
 
+    Note:  This function will overwrite an existing value for an argument if
+        one is already present in the args_array dictionary.
+
     Arguments:
         (input) arg -> Argument option.
         (input) args_array -> Array of command line options and values.
