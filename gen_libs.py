@@ -651,10 +651,10 @@ def disk_usage(path, **kwargs):
 
     """
 
-    st = os.statvfs(path)
-    free = st.f_bavail * st.f_frsize
-    total = st.f_blocks * st.f_frsize
-    used = (st.f_blocks - st.f_bfree) * st.f_frsize
+    stv = os.statvfs(path)
+    free = stv.f_bavail * stv.f_frsize
+    total = stv.f_blocks * stv.f_frsize
+    used = (stv.f_blocks - stv.f_bfree) * stv.f_frsize
 
     return _ntuple_diskusage(total, used, free)
 
