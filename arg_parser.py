@@ -604,15 +604,15 @@ def _file_create(name, option, file_crt_list, errno, strerror, status,
             fname = open(name, "w")
             fname.close()
 
-        except IOError as (errno, strerror):
+        except IOError as (err, strerr):
             # Unable to create file.
-            print("I/O Error: ({0}): {1}".format(errno, strerror))
+            print("I/O Error: ({0}): {1}".format(err, strerr))
             print("Check option: '{0}', file: '{1}'".format(option, name))
             status = True
 
     # File not present.
     else:
-        print("I/O Error: ({0}): {1}".format(errno, strerror))
+        print("File Error: ({0}): {1}".format(errno, strerror))
         print("Check option: '{0}', file: '{1}'".format(option, name))
         status = True
 
