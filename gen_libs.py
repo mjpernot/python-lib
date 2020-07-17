@@ -628,11 +628,12 @@ def dir_file_match(dir_path, file_str, add_path=False, **kwargs):
     """
 
     if add_path:
-        return [os.path.join(dir_path, x)
-                for x in list_files(dir_path) if re.match(file_str, x)]
+        return [os.path.join(dir_path, item)
+                for item in list_files(dir_path) if re.match(file_str, item)]
 
     else:
-        return [x for x in list_files(dir_path) if re.match(file_str, x)]
+        return [item for item in list_files(dir_path)
+                if re.match(file_str, item)]
 
 
 def disk_usage(path, **kwargs):
