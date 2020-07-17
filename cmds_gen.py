@@ -173,8 +173,8 @@ def is_add_cmd(args_array, cmd, opt_arg_list, **kwargs):
     for opt in opt_arg_list:
 
         # Is option in array and is set to True.
-        if opt in args_array and args_array[opt] and isinstance(
-            args_array[opt], bool):
+        if opt in args_array and args_array[opt] \
+           and isinstance(args_array[opt], bool):
 
             if isinstance(opt_arg_list[opt], list):
 
