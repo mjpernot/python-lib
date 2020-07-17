@@ -1139,8 +1139,8 @@ def list_files(dir_path, **kwargs):
     """
 
     # Loop on directory and if an entry is a file then add to list.
-    return [x for x in os.listdir(dir_path)
-            if os.path.isfile(os.path.join(dir_path, x))]
+    return [item for item in os.listdir(dir_path)
+            if os.path.isfile(os.path.join(dir_path, item))]
 
 
 def list_filter_files(dir_path, file_filter, **kwargs):

@@ -15,6 +15,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - arg_parser.arg_set_path:  Fixed where a second trailing slash was added if one was already present.
 
 ### Changed
+- gen_libs.list_files:  Changed variable names to standard naming convention.
 - gen_libs.list_dirs:  Changed variable names to standard naming convention.
 - gen_libs.is_true:  Changed variable names to standard naming convention.
 - gen_libs.is_missing_lists:  Changed variable names to standard naming convention.
