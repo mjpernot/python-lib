@@ -15,6 +15,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - arg_parser.arg_set_path:  Fixed where a second trailing slash was added if one was already present.
 
 ### Changed
+- gen_libs.and_is_true:  Changed variable names to standard naming convention.
 - arg_parser.\_file_create:  Changed print errors to distingish between different exceptions.
 - arg_parser.arg_set_path:  Removed non-required else clause.
 - arg_parser.arg_dir_chk_crt:  Call to \_make_dir to reduce complexity rating.

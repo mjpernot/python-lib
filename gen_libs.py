@@ -123,7 +123,7 @@ __version__ = version.__version__
 _ntuple_diskusage = collections.namedtuple("usage", "total used free")
 
 
-def and_is_true(x, y, **kwargs):
+def and_is_true(itemx, itemy, **kwargs):
 
     """Function:  and_is_true
 
@@ -131,15 +131,15 @@ def and_is_true(x, y, **kwargs):
         {Yes (True) / No (False)}.
 
     Arguments:
-        (input) x -> Yes or No value.
-        (input) y -> Yes or No value.
+        (input) itemx -> Yes or No value.
+        (input) itemy -> Yes or No value.
         (output) Return True | False based on AND comparsion.
 
     """
 
     truth_tbl = {"Yes": True, "No": False}
 
-    return truth_tbl[x] and truth_tbl[y]
+    return truth_tbl[itemx] and truth_tbl[itemy]
 
 
 def bytes_2_readable(size, precision=2, **kwargs):
