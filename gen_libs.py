@@ -368,13 +368,13 @@ def cp_dir(src_dir, dest_dir, **kwargs):
         shutil.copytree(src_dir, dest_dir)
 
     # Directory permission error.
-    except shutil.Error as e:
-        err_msg = "Directory not copied.  Error Message: %s" % (e)
+    except shutil.Error as err:
+        err_msg = "Directory not copied.  Error Message: %s" % (err)
         status = False
 
     # Directory does not exist.
-    except OSError as e:
-        err_msg = "Directory not copied.  Error Message: %s" % (e)
+    except OSError as err:
+        err_msg = "Directory not copied.  Error Message: %s" % (err)
         status = False
 
     return status, err_msg
