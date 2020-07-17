@@ -343,8 +343,8 @@ def compress(fname, **kwargs):
     """
 
     inst = get_inst(subprocess)
-    P1 = inst.Popen(["gzip", fname])
-    P1.wait()
+    proc1 = inst.Popen(["gzip", fname])
+    proc1.wait()
 
 
 def cp_dir(src_dir, dest_dir, **kwargs):
