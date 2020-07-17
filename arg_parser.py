@@ -461,8 +461,7 @@ def arg_set_path(args_array, arg_opt, **kwargs):
     if arg_opt in args_array:
         return os.path.join(args_array[arg_opt], "")
 
-    else:
-        return ""
+    return ""
 
 
 def arg_validate(args_array, valid_func, **kwargs):
