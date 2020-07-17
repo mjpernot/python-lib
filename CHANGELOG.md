@@ -5,6 +5,9 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 
 ## [2.8.2] - 2020-07-15
+### Added
+- arg_parser.\_make_dir:  Tries to create a directory and capture any exceptions.
+
 ### Fixed
 - arg_parser.arg_dir_chk_crt:  Never checks for write access unless directory is in dir_crt_list.
 - arg_parser.arg_dir_chk_crt:  Does not create directory if dir_crt_list is not subset of dir_chk_list.
@@ -12,6 +15,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - arg_parser.arg_set_path:  Fixed where a second trailing slash was added if one was already present.
 
 ### Changed
+- arg_parser.arg_dir_chk_crt:  Call to \_make_dir to reduce complexity rating.
 - gen_class.LogFile.load_ignore:  Changed variable names to standard naming convention.
 - gen_class.LogFile.filter_regex:  Changed variable names to standard naming convention.
 - gen_class.LogFile.filter_keyword:  Changed variable names to standard naming convention.

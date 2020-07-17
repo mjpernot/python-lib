@@ -23,6 +23,7 @@
         arg_wildcard
         arg_xor_dict
         _file_create
+        _make_dir
         _parse_multi
         _parse_single
 
@@ -205,14 +206,7 @@ def arg_dir_chk_crt(args_array, dir_chk_list, dir_crt_list=None, **kwargs):
         for item in set(dir_chk_list) & set(args_array.keys()):
 
             if not os.path.isdir(args_array[item]) and item in dir_crt_list:
-
-                try:
-                    os.makedirs(args_array[item])
-
-                except:
-                    print("Error:  Unable to create {0}"
-                          .format(args_array[item]))
-                    status = True
+                status = _make_dir(args_array[item], status)
 
             elif not os.path.isdir(args_array[item]):
                 print("Error: {0} does not exist.".format(args_array[item]))
@@ -621,6 +615,31 @@ def _file_create(name, option, file_crt_list, errno, strerror, status,
     else:
         print("I/O Error: ({0}): {1}".format(errno, strerror))
         print("Check option: '{0}', file: '{1}'".format(option, name))
+        status = True
+
+    return status
+
+
+def _make_dir(dirname, status, **kwargs):
+
+    """Function:  _make_dir
+
+    Description:  Tries to create a directory and capture any exceptions.
+
+    NOTE:  Used by the arg_dir_chk_crt() to reduce the complexity rating.
+
+    Arguments:
+        (input) dirname -> Directory name.
+        (input) status -> True|False - If directories are unavailable.
+        (output) status -> True|False - If directories are unavailable.
+
+    """
+
+    try:
+        os.makedirs(dirname)
+
+    except:
+        print("Error:  Unable to create {0}".format(dirname))
         status = True
 
     return status
