@@ -369,12 +369,12 @@ def cp_dir(src_dir, dest_dir, **kwargs):
 
     # Directory permission error.
     except shutil.Error as err:
-        err_msg = "Directory not copied.  Error Message: %s" % (err)
+        err_msg = "Directory not copied.  Perms Error Message: %s" % (err)
         status = False
 
     # Directory does not exist.
     except OSError as err:
-        err_msg = "Directory not copied.  Error Message: %s" % (err)
+        err_msg = "Directory not copied.  Exist Error Message: %s" % (err)
         status = False
 
     return status, err_msg
