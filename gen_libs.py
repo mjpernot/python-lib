@@ -1116,8 +1116,8 @@ def list_dirs(dir_path, **kwargs):
     """
 
     if os.path.isdir(dir_path):
-        dir_list = [x for x in os.listdir(dir_path)
-                    if os.path.isdir(os.path.join(dir_path, x))]
+        dir_list = [item for item in os.listdir(dir_path)
+                    if os.path.isdir(os.path.join(dir_path, item))]
 
     else:
         dir_list = []
