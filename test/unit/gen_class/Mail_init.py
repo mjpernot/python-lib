@@ -66,7 +66,7 @@ class UnitTest(unittest.TestCase):
         self.subj2 = "Test_Subj"
         self.subj3 = "This is a test"
         self.subj4 = ["This", "is", "a", "test"]
-        self.subj4a = "Thisisatest"
+        self.subj4a = "This is a test"
         self.frm = None
         self.frm2 = self.mailaddr
         self.host_name = None
