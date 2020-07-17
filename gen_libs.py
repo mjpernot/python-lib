@@ -803,7 +803,7 @@ def file_2_list(filename, **kwargs):
     """
 
     with open(filename, "r") as f_hdlr:
-        lines = [x.rstrip("\n") for x in f_hdlr.readlines()]
+        lines = [item.rstrip("\n") for item in f_hdlr.readlines()]
 
     return lines
 
