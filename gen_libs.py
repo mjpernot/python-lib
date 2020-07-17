@@ -1041,7 +1041,7 @@ def is_missing_lists(list1, list2, **kwargs):
     return [item for item in list1 if item not in list2]
 
 
-def is_true(x, **kwargs):
+def is_true(item, **kwargs):
 
     """Function:  is_true
 
@@ -1056,7 +1056,7 @@ def is_true(x, **kwargs):
 
     truth_tbl = {"Yes": True, "No": False, "ON": True, "OFF": False}
 
-    return truth_tbl[x]
+    return truth_tbl[item]
 
 
 def key_cleaner(data, char, repl, **kwargs):
