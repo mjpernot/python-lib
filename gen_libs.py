@@ -530,9 +530,9 @@ def del_not_and_list(list1, list2, **kwargs):
     list1 = list(list1)
     list2 = list(list2)
 
-    for x in list2:
+    for item in list2:
         try:
-            list1.remove(x)
+            list1.remove(item)
 
         except ValueError:
             pass
