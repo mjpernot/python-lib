@@ -558,8 +558,8 @@ def del_not_in_list(list1, list2, **kwargs):
     list1 = list(list1)
     list2 = list(list2)
 
-    for x in list(set(list1) - set(list2)):
-        list1.remove(x)
+    for item in list(set(list1) - set(list2)):
+        list1.remove(item)
 
     return list1
 
