@@ -1182,13 +1182,13 @@ def list_2_dict(kv_list, fld_del=".", **kwargs):
     dict_list = {}
 
     for x in kv_list:
-        db, tbl = x.split(fld_del)
+        dbs, tbl = x.split(fld_del)
 
-        if db not in dict_list:
-            dict_list[db] = [tbl]
+        if dbs not in dict_list:
+            dict_list[dbs] = [tbl]
 
         else:
-            dict_list[db].append(tbl)
+            dict_list[dbs].append(tbl)
 
     return dict_list
 
