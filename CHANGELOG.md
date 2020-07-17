@@ -64,6 +64,10 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - gen_libs.crt_file_time:  Made ext argument an optional argument.
 - gen_libs.crt_file_time:  Add period (.) seperator between filename and extension.
 
+### Deprecated
+- cmds_gen.run_prog
+
+
 ## [2.8.1] - 2020-03-25
 ### Fixed
 - gen_libs.make_md5_hash:  Fixed subprocess instance from SonarQube scan finding.
@@ -773,7 +777,6 @@ Breaking Change
 ### Changed
 - arg_parser.py:  Convert comments/documentation to docstrings.
 - arg_parser.py:  Change single quotes to double quotes.
-- arg_parser.py:  Convert comments/documentation to docstrings.
 - cmds_gen.py:  Change single quotes to double quotes.
 - machine.py:  Convert comments/documentation to docstrings.
 - errors.py:  Convert comments/documentation to docstrings.
@@ -849,10 +852,8 @@ Breaking Change
 
 ## [1.17.1] - 2017-04-25
 ### Added
-- gen_class.Program_Lock:  Allow a program to create a lock instance of the program.
--   This will allow other programs to know if an instance of the program is running.
-- gen_class.Single_Instance_Exception:  Class exception for the Program_Lock class.
--   Used when an instance lock has been detected.
+- gen_class.Program_Lock:  Allow a program to create a lock instance of the program.  This will allow other programs to know if an instance of the program is running.
+- gen_class.Single_Instance_Exception:  Class exception for the Program_Lock class.  Used when an instance lock has been detected.
 
 
 ## [1.17.0] - 2017-04-07
