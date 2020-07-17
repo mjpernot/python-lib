@@ -764,9 +764,9 @@ def file_search(f_name, string, **kwargs):
     line = None
 
     with open(f_name, "r") as s_file:
-        for x in s_file:
-            if string in x:
-                line = x
+        for item in s_file:
+            if string in item:
+                line = item
                 break
 
     return line
