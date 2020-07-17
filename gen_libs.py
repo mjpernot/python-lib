@@ -915,19 +915,19 @@ def get_inst(cmd, **kwargs):
     return cmd
 
 
-def get_secs(td, **kwargs):
+def get_secs(tdd, **kwargs):
 
     """Function:  get_secs
 
     Description:  Converts a datetime delta value to total number of seconds.
 
     Arguments:
-        (input) td -> Datetime Delta.
+        (input) tdd -> Datetime Delta.
         (output) -> Returns total number of seconds for datetime delta.
 
     """
 
-    return (td.seconds + td.days * 24 * 3600) * 10**6 / 10**6
+    return (tdd.seconds + tdd.days * 24 * 3600) * 10**6 / 10**6
 
 
 def get_time(**kwargs):
