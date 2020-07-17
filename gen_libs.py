@@ -826,13 +826,13 @@ def filename_search(dir_path, file_str, add_path=False, **kwargs):
     """
 
     if add_path:
-        return [os.path.join(dir_path, x)
-                for x in list_files(dir_path)
-                if re.search(file_str, x)]
+        return [os.path.join(dir_path, item)
+                for item in list_files(dir_path)
+                if re.search(file_str, item)]
 
     else:
-        return [x for x in list_files(dir_path)
-                if re.search(file_str, x)]
+        return [item for item in list_files(dir_path)
+                if re.search(file_str, item)]
 
 
 def float_div(num1, num2, **kwargs):
