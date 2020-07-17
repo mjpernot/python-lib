@@ -296,7 +296,7 @@ def chk_crt_file(f_name=None, create=False, write=False, read=False,
     return status, err_msg
 
 
-def chk_int(x, **kwargs):
+def chk_int(line, **kwargs):
 
     """Function:  chk_int
 
@@ -304,16 +304,16 @@ def chk_int(x, **kwargs):
         NOTE:   Does not work for floats.
 
     Arguments:
-        (input) x -> String containing an integer.
+        (input) line -> String containing an integer.
         (output) True|False -> Whether the string is an integer.
 
     """
 
     # Remove positive/negative sign if present.
-    if x[0] in ("-", "+"):
-        return x[1:].isdigit()
+    if line[0] in ("-", "+"):
+        return line[1:].isdigit()
 
-    return x.isdigit()
+    return line.isdigit()
 
 
 def clear_file(f_name, **kwargs):
