@@ -883,7 +883,7 @@ def get_data(f_hdlr, **kwargs):
 
     """
 
-    return [x.rstrip() for x in f_hdlr]
+    return [item.rstrip() for item in f_hdlr]
 
 
 def get_date(**kwargs):
