@@ -498,20 +498,20 @@ def date_range(start_dt, end_dt, **kwargs):
     end_dt = end_dt.replace(day=1)
     forward = end_dt >= start_dt
     finish = False
-    dt = start_dt
+    sdt = start_dt
 
     while not finish:
-        yield dt.date()
+        yield sdt.date()
 
         if forward:
-            days = month_days(dt)
-            dt = dt + datetime.timedelta(days=days)
-            finish = dt > end_dt
+            days = month_days(sdt)
+            sdt = sdt + datetime.timedelta(days=days)
+            finish = sdt > end_dt
 
         else:
-            _tmp_dt = dt.replace(day=1) - datetime.timedelta(days=1)
-            dt = (_tmp_dt.replace(day=dt.day))
-            finish = dt < end_dt
+            _tmp_dt = sdt.replace(day=1) - datetime.timedelta(days=1)
+            sdt = (_tmp_dt.replace(day=sdt.day))
+            finish = sdt < end_dt
 
 
 def del_not_and_list(list1, list2, **kwargs):
