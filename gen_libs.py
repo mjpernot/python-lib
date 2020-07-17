@@ -1038,7 +1038,7 @@ def is_missing_lists(list1, list2, **kwargs):
     list1 = list(list1)
     list2 = list(list2)
 
-    return [x for x in list1 if x not in list2]
+    return [item for item in list1 if item not in list2]
 
 
 def is_true(x, **kwargs):
