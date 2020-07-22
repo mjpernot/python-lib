@@ -101,7 +101,6 @@ import datetime
 import sys
 import zipfile
 import glob
-import errno
 import re
 import collections
 import contextlib
