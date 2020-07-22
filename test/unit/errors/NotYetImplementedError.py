@@ -40,13 +40,13 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        test_NotYetImplementedError -> Test with no arguments.
+        test_notyetimplementederror -> Test with no arguments.
 
     """
 
-    def test_NotYetImplementedError(self):
+    def test_notyetimplementederror(self):
 
-        """Function:  NotYetImplementedError
+        """Function:  test_notyetimplementederror
 
         Description:  Test with no arguments.
 
