@@ -40,13 +40,13 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        test_NoOptionError -> Test with no arguments.
+        test_nooptionerror -> Test with no arguments.
 
     """
 
-    def test_NoOptionError(self):
+    def test_nooptionerror(self):
 
-        """Function:  test_NoOptionError
+        """Function:  test_nooptionerror
 
         Description:  Test with no arguments.
 
