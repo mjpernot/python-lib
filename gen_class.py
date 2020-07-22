@@ -35,14 +35,13 @@ import time
 import atexit
 import signal
 import platform
-import socket
 import getpass
 
 # Third-party
 import gzip
-import yum
 import json
 import re
+import yum
 
 # Local
 import version
