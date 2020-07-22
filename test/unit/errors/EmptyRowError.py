@@ -40,13 +40,13 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        test_EmptyRowError -> Test with no arguments.
+        test_emptyrowerror -> Test with no arguments.
 
     """
 
-    def test_EmptyRowError(self):
+    def test_emptyrowerror(self):
 
-        """Function:  EmptyRowError
+        """Function:  test_emptyrowerror
 
         Description:  Test with no arguments.
 
