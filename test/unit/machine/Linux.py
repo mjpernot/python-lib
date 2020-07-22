@@ -40,13 +40,13 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        test_Machine -> Test with no arguments.
+        test_linux -> Test with no arguments.
 
     """
 
-    def test_Linux(self):
+    def test_linux(self):
 
-        """Function:  test_Linux
+        """Function:  test_linux
 
         Description:  Test with no arguments.
 
