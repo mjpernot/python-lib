@@ -40,13 +40,13 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        test_SlaveNotRunningError -> Test with no arguments.
+        test_slavenotrunningerror -> Test with no arguments.
 
     """
 
-    def test_SlaveNotRunningError(self):
+    def test_slavenotrunningerror(self):
 
-        """Function:  SlaveNotRunningError
+        """Function:  test_slavenotrunningerror
 
         Description:  Test with no arguments.
 
