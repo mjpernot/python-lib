@@ -47,11 +47,7 @@ def clear_file_check(f_name):
 
     gen_libs.clear_file(f_name)
 
-    if os.stat(f_name).st_size == 0:
-        return True
-
-    else:
-        return False
+    return os.stat(f_name).st_size == 0
 
 
 class UnitTest(unittest.TestCase):
