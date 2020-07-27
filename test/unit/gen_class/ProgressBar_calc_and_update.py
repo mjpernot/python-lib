@@ -78,10 +78,10 @@ class UnitTest(unittest.TestCase):
 
         mock_bar.return_value = True
 
-        BAR = gen_class.ProgressBar(self.msg, self.width, self.progress_sym,
+        bar = gen_class.ProgressBar(self.msg, self.width, self.progress_sym,
                                     self.empty_sym)
 
-        self.assertFalse(BAR.calc_and_update(0, 1))
+        self.assertFalse(bar.calc_and_update(0, 1))
 
     @mock.patch("gen_class.ProgressBar.update")
     def test_zero_percent(self, mock_bar):
@@ -96,10 +96,10 @@ class UnitTest(unittest.TestCase):
 
         mock_bar.return_value = True
 
-        BAR = gen_class.ProgressBar(self.msg, self.width, self.progress_sym,
+        bar = gen_class.ProgressBar(self.msg, self.width, self.progress_sym,
                                     self.empty_sym)
 
-        self.assertFalse(BAR.calc_and_update(0, 100))
+        self.assertFalse(bar.calc_and_update(0, 100))
 
     @mock.patch("gen_class.ProgressBar.update")
     def test_fifty_percent(self, mock_bar):
@@ -114,10 +114,10 @@ class UnitTest(unittest.TestCase):
 
         mock_bar.return_value = True
 
-        BAR = gen_class.ProgressBar(self.msg, self.width, self.progress_sym,
+        bar = gen_class.ProgressBar(self.msg, self.width, self.progress_sym,
                                     self.empty_sym)
 
-        self.assertFalse(BAR.calc_and_update(50, 100))
+        self.assertFalse(bar.calc_and_update(50, 100))
 
     @mock.patch("gen_class.ProgressBar.update")
     def test_hundred_percent(self, mock_bar):
@@ -132,10 +132,10 @@ class UnitTest(unittest.TestCase):
 
         mock_bar.return_value = True
 
-        BAR = gen_class.ProgressBar(self.msg, self.width, self.progress_sym,
+        bar = gen_class.ProgressBar(self.msg, self.width, self.progress_sym,
                                     self.empty_sym)
 
-        self.assertFalse(BAR.calc_and_update(100, 100))
+        self.assertFalse(bar.calc_and_update(100, 100))
 
 
 if __name__ == "__main__":
