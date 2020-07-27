@@ -83,8 +83,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        for x in gen_libs.date_range(self.end_dt, self.start_dt):
-            self.datelist.append(x)
+        for item in gen_libs.date_range(self.end_dt, self.start_dt):
+            self.datelist.append(item)
 
         self.assertEqual(self.datelist, self.results2)
 
@@ -98,8 +98,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        for x in gen_libs.date_range(self.start_dt, self.end_dt):
-            self.datelist.append(x)
+        for item in gen_libs.date_range(self.start_dt, self.end_dt):
+            self.datelist.append(item)
 
         self.assertEqual(self.datelist, self.results)
 
