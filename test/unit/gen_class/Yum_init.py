@@ -79,9 +79,9 @@ class UnitTest(unittest.TestCase):
         mock_release.return_value = "2.6"
         mock_distro.return_value = ("Centos", "7.5.1804", "Core")
 
-        YUM = gen_class.Yum(self.host_name)
+        yum = gen_class.Yum(self.host_name)
 
-        self.assertEqual((YUM.host_name, YUM.os, YUM.release, YUM.distro),
+        self.assertEqual((yum.host_name, yum.os, yum.release, yum.distro),
                          (self.host_name, self.os, self.release, self.distro))
 
     @mock.patch("platform.linux_distribution")
@@ -104,9 +104,9 @@ class UnitTest(unittest.TestCase):
         mock_socket.return_value = "HOSTNAME"
         mock_distro.return_value = ("Centos", "7.5.1804", "Core")
 
-        YUM = gen_class.Yum()
+        yum = gen_class.Yum()
 
-        self.assertEqual((YUM.host_name, YUM.os, YUM.release, YUM.distro),
+        self.assertEqual((yum.host_name, yum.os, yum.release, yum.distro),
                          (self.host_name, self.os, self.release, self.distro))
 
 
