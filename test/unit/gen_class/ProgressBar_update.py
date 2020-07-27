@@ -74,11 +74,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        BAR = gen_class.ProgressBar(None, self.width, self.progress_sym,
+        bar = gen_class.ProgressBar(None, self.width, self.progress_sym,
                                     self.empty_sym)
 
         with gen_libs.no_std_out():
-            self.assertFalse(BAR.update(50))
+            self.assertFalse(bar.update(50))
 
     def test_zero_percent(self):
 
@@ -90,11 +90,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        BAR = gen_class.ProgressBar(self.msg, self.width, self.progress_sym,
+        bar = gen_class.ProgressBar(self.msg, self.width, self.progress_sym,
                                     self.empty_sym)
 
         with gen_libs.no_std_out():
-            self.assertFalse(BAR.update(0))
+            self.assertFalse(bar.update(0))
 
     def test_fifty_percent(self):
 
@@ -106,11 +106,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        BAR = gen_class.ProgressBar(self.msg, self.width, self.progress_sym,
+        bar = gen_class.ProgressBar(self.msg, self.width, self.progress_sym,
                                     self.empty_sym)
 
         with gen_libs.no_std_out():
-            self.assertFalse(BAR.update(50))
+            self.assertFalse(bar.update(50))
 
     def test_hundred_percent(self):
 
@@ -122,11 +122,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        BAR = gen_class.ProgressBar(self.msg, self.width, self.progress_sym,
+        bar = gen_class.ProgressBar(self.msg, self.width, self.progress_sym,
                                     self.empty_sym)
 
         with gen_libs.no_std_out():
-            self.assertFalse(BAR.update(100))
+            self.assertFalse(bar.update(100))
 
 
 if __name__ == "__main__":
