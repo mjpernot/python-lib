@@ -73,9 +73,9 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        BAR = gen_class.ProgressBar(self.msg)
+        bar = gen_class.ProgressBar(self.msg)
 
-        self.assertEqual((BAR.msg, BAR.width, BAR.progress_sym, BAR.empty_sym),
+        self.assertEqual((bar.msg, bar.width, bar.progress_sym, bar.empty_sym),
                          (self.msg, self.width, self.progress_sym,
                           self.empty_sym))
 
@@ -89,9 +89,9 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        BAR = gen_class.ProgressBar(self.msg, 30, "@", "#")
+        bar = gen_class.ProgressBar(self.msg, 30, "@", "#")
 
-        self.assertEqual((BAR.msg, BAR.width, BAR.progress_sym, BAR.empty_sym),
+        self.assertEqual((bar.msg, bar.width, bar.progress_sym, bar.empty_sym),
                          (self.msg, 30, "@", "#"))
 
     def test_width_zero(self):
@@ -104,9 +104,9 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        BAR = gen_class.ProgressBar(self.msg, 0)
+        bar = gen_class.ProgressBar(self.msg, 0)
 
-        self.assertEqual((BAR.msg, BAR.width, BAR.progress_sym, BAR.empty_sym),
+        self.assertEqual((bar.msg, bar.width, bar.progress_sym, bar.empty_sym),
                          (self.msg, 20, self.progress_sym, self.empty_sym))
 
     def test_width_less_zero(self):
@@ -119,9 +119,9 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        BAR = gen_class.ProgressBar(self.msg, -10)
+        bar = gen_class.ProgressBar(self.msg, -10)
 
-        self.assertEqual((BAR.msg, BAR.width, BAR.progress_sym, BAR.empty_sym),
+        self.assertEqual((bar.msg, bar.width, bar.progress_sym, bar.empty_sym),
                          (self.msg, 20, self.progress_sym, self.empty_sym))
 
 
