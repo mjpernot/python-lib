@@ -78,9 +78,9 @@ class UnitTest(unittest.TestCase):
         mock_release.return_value = "2.6"
         mock_distro.return_value = ("Centos", "7.5.1804", "Core")
 
-        YUM = gen_class.Yum(self.host_name)
+        yum = gen_class.Yum(self.host_name)
 
-        self.assertEqual(YUM.get_distro(), self.distro)
+        self.assertEqual(yum.get_distro(), self.distro)
 
 
 if __name__ == "__main__":
