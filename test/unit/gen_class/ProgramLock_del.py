@@ -92,15 +92,9 @@ class UnitTest(unittest.TestCase):
         mock_link.return_value = True
 
         self.LOCK = gen_class.ProgramLock(self.argv, self.flavor_id)
-
         del self.LOCK
 
-        if hasattr(self, "LOCK"):
-            status = True
-        else:
-            status = False
-
-        self.assertFalse(status)
+        self.assertFalse(hasattr(self, "LOCK"))
 
     @mock.patch("gen_class.os.path.isfile")
     @mock.patch("gen_class.tempfile.gettempdir")
@@ -125,15 +119,9 @@ class UnitTest(unittest.TestCase):
         mock_file.return_value = False
 
         self.LOCK = gen_class.ProgramLock(self.argv, self.flavor_id)
-
         del self.LOCK
 
-        if hasattr(self, "LOCK"):
-            status = True
-        else:
-            status = False
-
-        self.assertFalse(status)
+        self.assertFalse(hasattr(self, "LOCK"))
 
     @mock.patch("gen_class.tempfile.gettempdir")
     @mock.patch("gen_class.fcntl.lockf")
@@ -155,17 +143,10 @@ class UnitTest(unittest.TestCase):
         mock_tmp.return_value = self.tmp_path
 
         self.LOCK = gen_class.ProgramLock(self.argv, self.flavor_id)
-
         self.LOCK.lock_created = False
-
         del self.LOCK
 
-        if hasattr(self, "LOCK"):
-            status = True
-        else:
-            status = False
-
-        self.assertFalse(status)
+        self.assertFalse(hasattr(self, "LOCK"))
 
     def tearDown(self):
 
