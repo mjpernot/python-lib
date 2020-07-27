@@ -45,11 +45,7 @@ def validate_value(arg):
 
     """
 
-    if arg == "value":
-        return True
-
-    else:
-        return False
+    return arg == "value"
 
 
 def validate_value2(arg):
@@ -63,11 +59,7 @@ def validate_value2(arg):
 
     """
 
-    if arg == "value2":
-        return True
-
-    else:
-        return False
+    return arg == "value2"
 
 
 class UnitTest(unittest.TestCase):
