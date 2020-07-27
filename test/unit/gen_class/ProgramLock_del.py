@@ -65,7 +65,7 @@ class UnitTest(unittest.TestCase):
         self.tmp_path = os.path.join("/", "tmp")
         self.argv = ["/opt/local/python/ProgramLock_init.py"]
         self.flavor_id = "TEST"
-        self.LOCK = None
+        self.lock = None
 
     @mock.patch("gen_class.os.unlink")
     @mock.patch("gen_class.os.path.isfile")
@@ -91,8 +91,8 @@ class UnitTest(unittest.TestCase):
         mock_file.isfile.return_value = True
         mock_link.return_value = True
 
-        self.LOCK = gen_class.ProgramLock(self.argv, self.flavor_id)
-        del self.LOCK
+        self.lock = gen_class.ProgramLock(self.argv, self.flavor_id)
+        del self.lock
 
         self.assertFalse(hasattr(self, "LOCK"))
 
@@ -118,8 +118,8 @@ class UnitTest(unittest.TestCase):
         mock_tmp.return_value = self.tmp_path
         mock_file.return_value = False
 
-        self.LOCK = gen_class.ProgramLock(self.argv, self.flavor_id)
-        del self.LOCK
+        self.lock = gen_class.ProgramLock(self.argv, self.flavor_id)
+        del self.lock
 
         self.assertFalse(hasattr(self, "LOCK"))
 
@@ -142,9 +142,9 @@ class UnitTest(unittest.TestCase):
         mock_lock.side_effect = [True, True]
         mock_tmp.return_value = self.tmp_path
 
-        self.LOCK = gen_class.ProgramLock(self.argv, self.flavor_id)
-        self.LOCK.lock_created = False
-        del self.LOCK
+        self.lock = gen_class.ProgramLock(self.argv, self.flavor_id)
+        self.lock.lock_created = False
+        del self.lock
 
         self.assertFalse(hasattr(self, "LOCK"))
 
