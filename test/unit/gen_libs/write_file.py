@@ -48,11 +48,7 @@ def create_file(f_name, mode):
 
     gen_libs.write_file(f_name, mode, "TEST")
 
-    if os.path.isfile(f_name):
-        return True
-
-    else:
-        return False
+    return os.path.isfile(f_name)
 
 
 def write_file(f_name, mode):
@@ -70,16 +66,7 @@ def write_file(f_name, mode):
 
     gen_libs.write_file(f_name, mode, "TEST")
 
-    if os.path.isfile(f_name):
-
-        if "TEST" in open(f_name).read():
-            return True
-
-        else:
-            return False
-
-    else:
-        return False
+    return os.path.isfile(f_name) and "TEST" in open(f_name).read()
 
 
 class UnitTest(unittest.TestCase):
