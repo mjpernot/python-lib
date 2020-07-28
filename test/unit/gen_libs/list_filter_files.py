@@ -25,7 +25,6 @@ else:
     import unittest
 
 # Third-party
-import mock
 
 # Local
 sys.path.append(os.getcwd())
@@ -61,11 +60,9 @@ class UnitTest(unittest.TestCase):
         """
 
         self.dir_path = "test/unit/gen_libs/tmp"
-
         self.file_filter3 = "*.txt"
         self.file_filter1 = "*.md"
         self.file_filter2 = "*.py"
-
         self.fname1 = os.path.join(self.dir_path, "file1.py")
         self.fname2 = os.path.join(self.dir_path, "file2.txt")
         self.fname3 = os.path.join(self.dir_path, "file3.txt")
@@ -103,13 +100,8 @@ class UnitTest(unittest.TestCase):
         file_list = gen_libs.list_filter_files(self.dir_path,
                                                self.file_filter3)
 
-        if file_list == self.results3 or file_list == self.results4:
-            status = True
-
-        else:
-            status = False
-
-        self.assertTrue(status)
+        self.assertTrue(file_list == self.results3
+                        or file_list == self.results4)
 
     def test_one_file_select(self):
 
