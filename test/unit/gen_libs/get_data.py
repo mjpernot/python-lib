@@ -51,11 +51,7 @@ def compare_list_check(f_name):
     f_hdlr = open(f_name, "r")
     test_list = gen_libs.get_data(f_hdlr)
 
-    if base_list == test_list:
-        return True
-
-    else:
-        return False
+    return base_list == test_list
 
 
 class UnitTest(unittest.TestCase):
