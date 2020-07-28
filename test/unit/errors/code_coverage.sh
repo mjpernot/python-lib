@@ -14,7 +14,7 @@ coverage run -a --source=errors test/unit/errors/NoOptionError.py
 coverage run -a --source=errors test/unit/errors/NotMasterError.py
 coverage run -a --source=errors test/unit/errors/NotSlaveError.py
 coverage run -a --source=errors test/unit/errors/NotYetImplementedError.py
-coverage run -a --source=errors test/unit/errors/SlaveNotRunningError.py
+coverage run -a --source=errors test/unit/errors/slavenotrunningerror.py
 
 echo ""
 echo "Producing code coverage report"

@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  SlaveNotRunningError.py
+"""Program:  slavenotrunningerror.py
 
     Description:  Unit testing of SlaveNotRunningError in errors.py.
 
     Usage:
-        test/unit/errors/SlaveNotRunningError.py
+        test/unit/errors/slavenotrunningerror.py
 
     Arguments:
 

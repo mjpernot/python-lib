@@ -44,7 +44,7 @@ pipeline {
                 ./test/unit/errors/NotMasterError.py
                 ./test/unit/errors/NotSlaveError.py
                 ./test/unit/errors/NotYetImplementedError.py
-                ./test/unit/errors/SlaveNotRunningError.py
+                ./test/unit/errors/slavenotrunningerror.py
                 ./test/unit/gen_libs/and_is_true.py
                 ./test/unit/gen_libs/bytes_2_readable.py
                 ./test/unit/gen_libs/chk_crt_dir.py
