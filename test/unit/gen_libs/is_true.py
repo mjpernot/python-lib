@@ -25,7 +25,6 @@ else:
     import unittest
 
 # Third-party
-import mock
 
 # Local
 sys.path.append(os.getcwd())
@@ -60,10 +59,10 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.x1 = "Yes"
-        self.x2 = "No"
-        self.x3 = "ON"
-        self.x4 = "OFF"
+        self.is1 = "Yes"
+        self.is2 = "No"
+        self.is3 = "ON"
+        self.is4 = "OFF"
 
     def test_is_true_off(self):
 
@@ -75,7 +74,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertEqual(gen_libs.is_true(self.x4), False)
+        self.assertEqual(gen_libs.is_true(self.is4), False)
 
     def test_is_true_on(self):
 
@@ -87,7 +86,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertEqual(gen_libs.is_true(self.x3), True)
+        self.assertEqual(gen_libs.is_true(self.is3), True)
 
     def test_is_true_no(self):
 
@@ -99,7 +98,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertEqual(gen_libs.is_true(self.x2), False)
+        self.assertEqual(gen_libs.is_true(self.is2), False)
 
     def test_is_true_yes(self):
 
@@ -111,7 +110,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertEqual(gen_libs.is_true(self.x1), True)
+        self.assertEqual(gen_libs.is_true(self.is1), True)
 
 
 if __name__ == "__main__":
