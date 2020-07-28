@@ -57,7 +57,8 @@ class ZipFile(object):
 
         """
 
-        pass
+        self.in_fname = None
+        self.out_fname = None
 
     def write(self, in_fname, out_fname=None):
 
@@ -70,6 +71,9 @@ class ZipFile(object):
             (input) out_fname -> Out file Name.
 
         """
+
+        self.in_fname = in_fname
+        self.out_fname = out_fname
 
         return True
 
