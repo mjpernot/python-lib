@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  NotSlaveError.py
+"""Program:  notslaveerror.py
 
     Description:  Unit testing of NotSlaveError in errors.py.
 
     Usage:
-        test/unit/errors/NotSlaveError.py
+        test/unit/errors/notslaveerror.py
 
     Arguments:
 
