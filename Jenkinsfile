@@ -41,7 +41,7 @@ pipeline {
                 ./test/unit/errors/EmptyRowError.py
                 ./test/unit/errors/Error.py
                 ./test/unit/errors/NoOptionError.py
-                ./test/unit/errors/NotMasterError.py
+                ./test/unit/errors/notmastererror.py
                 ./test/unit/errors/notslaveerror.py
                 ./test/unit/errors/notyetimplementederror.py
                 ./test/unit/errors/slavenotrunningerror.py
