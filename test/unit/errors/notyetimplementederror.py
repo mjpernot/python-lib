@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  NotYetImplementedError.py
+"""Program:  notyetimplementederror.py
 
-    Description:  Unit testing of NotYetImplementedError in errors.py.
+    Description:  Unit testing of notyetimplementederror in errors.py.
 
     Usage:
-        test/unit/errors/NotYetImplementedError.py
+        test/unit/errors/notyetimplementederror.py
 
     Arguments:
 
