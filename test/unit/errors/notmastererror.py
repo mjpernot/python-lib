@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  NotMasterError.py
+"""Program:  notmastererror.py
 
     Description:  Unit testing of NotMasterError in errors.py.
 
     Usage:
-        test/unit/errors/NotMasterError.py
+        test/unit/errors/notmastererror.py
 
     Arguments:
 
