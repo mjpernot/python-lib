@@ -11,7 +11,7 @@ echo "Running unit test modules in conjunction with coverage"
 coverage run -a --source=errors test/unit/errors/EmptyRowError.py
 coverage run -a --source=errors test/unit/errors/Error.py
 coverage run -a --source=errors test/unit/errors/NoOptionError.py
-coverage run -a --source=errors test/unit/errors/NotMasterError.py
+coverage run -a --source=errors test/unit/errors/notmastererror.py
 coverage run -a --source=errors test/unit/errors/notslaveerror.py
 coverage run -a --source=errors test/unit/errors/notyetimplementederror.py
 coverage run -a --source=errors test/unit/errors/slavenotrunningerror.py
