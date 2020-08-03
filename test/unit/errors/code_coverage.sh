@@ -12,7 +12,7 @@ coverage run -a --source=errors test/unit/errors/EmptyRowError.py
 coverage run -a --source=errors test/unit/errors/Error.py
 coverage run -a --source=errors test/unit/errors/NoOptionError.py
 coverage run -a --source=errors test/unit/errors/NotMasterError.py
-coverage run -a --source=errors test/unit/errors/NotSlaveError.py
+coverage run -a --source=errors test/unit/errors/notslaveerror.py
 coverage run -a --source=errors test/unit/errors/notyetimplementederror.py
 coverage run -a --source=errors test/unit/errors/slavenotrunningerror.py
 
