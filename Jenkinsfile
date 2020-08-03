@@ -42,7 +42,7 @@ pipeline {
                 ./test/unit/errors/Error.py
                 ./test/unit/errors/NoOptionError.py
                 ./test/unit/errors/NotMasterError.py
-                ./test/unit/errors/NotSlaveError.py
+                ./test/unit/errors/notslaveerror.py
                 ./test/unit/errors/notyetimplementederror.py
                 ./test/unit/errors/slavenotrunningerror.py
                 ./test/unit/gen_libs/and_is_true.py
