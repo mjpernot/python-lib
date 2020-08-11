@@ -8,9 +8,9 @@ coverage erase
 
 echo ""
 echo "Running unit test modules in conjunction with coverage"
-coverage run -a --source=errors test/unit/errors/EmptyRowError.py
-coverage run -a --source=errors test/unit/errors/Error.py
-coverage run -a --source=errors test/unit/errors/NoOptionError.py
+coverage run -a --source=errors test/unit/errors/emptyrowerror.py
+coverage run -a --source=errors test/unit/errors/error.py
+coverage run -a --source=errors test/unit/errors/nooptionerror.py
 coverage run -a --source=errors test/unit/errors/notmastererror.py
 coverage run -a --source=errors test/unit/errors/notslaveerror.py
 coverage run -a --source=errors test/unit/errors/notyetimplementederror.py
