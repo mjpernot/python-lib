@@ -88,8 +88,8 @@ class UnitTest(unittest.TestCase):
 
         file_list = gen_libs.list_files(self.dir_path)
 
-        self.assertTrue(file_list == self.results1
-                        or file_list == self.results2)
+        self.assertTrue(
+            file_list == self.results1 or file_list == self.results2)
 
     def tearDown(self):
 
