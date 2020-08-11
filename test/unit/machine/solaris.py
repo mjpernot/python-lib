@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  Solaris.py
+"""Program:  solaris.py
 
     Description:  Unit testing of Solaris in machine.py.
 
     Usage:
-        test/unit/machine/Solaris.py
+        test/unit/machine/solaris.py
 
     Arguments:
 
