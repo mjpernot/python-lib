@@ -100,8 +100,8 @@ class UnitTest(unittest.TestCase):
         file_list = gen_libs.list_filter_files(self.dir_path,
                                                self.file_filter3)
 
-        self.assertTrue(file_list == self.results3
-                        or file_list == self.results4)
+        self.assertTrue(
+            file_list == self.results3 or file_list == self.results4)
 
     def test_one_file_select(self):
 
