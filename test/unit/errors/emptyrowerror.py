@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  EmptyRowError.py
+"""Program:  emptyrowerror.py
 
     Description:  Unit testing of EmptyRowError in errors.py.
 
     Usage:
-        test/unit/errors/EmptyRowError.py
+        test/unit/errors/emptyrowerror.py
 
     Arguments:
 
