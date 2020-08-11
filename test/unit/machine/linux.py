@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  Linux.py
+"""Program:  linux.py
 
     Description:  Unit testing of Linux in machine.py.
 
     Usage:
-        test/unit/machine/Linux.py
+        test/unit/machine/linux.py
 
     Arguments:
 
