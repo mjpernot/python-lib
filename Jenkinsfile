@@ -38,9 +38,9 @@ pipeline {
                 ./test/unit/cmds_gen/get_inst.py
                 ./test/unit/cmds_gen/is_add_cmd.py
                 ./test/unit/cmds_gen/run_prog.py
-                ./test/unit/errors/EmptyRowError.py
-                ./test/unit/errors/Error.py
-                ./test/unit/errors/NoOptionError.py
+                ./test/unit/errors/emptyrowerror.py
+                ./test/unit/errors/error.py
+                ./test/unit/errors/nooptionerror.py
                 ./test/unit/errors/notmastererror.py
                 ./test/unit/errors/notslaveerror.py
                 ./test/unit/errors/notyetimplementederror.py
