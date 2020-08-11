@@ -1,12 +1,16 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  Machine.py
+"""Program:  amachine.py
 
     Description:  Unit testing of Machine in machine.py.
 
+    Note: The file is called amachine.py instead of machine.py, this is due to
+        the fact if it is called machine.py then the other unit test files
+        try use this file as the import.
+
     Usage:
-        test/unit/machine/Machine.py
+        test/unit/machine/amachine.py
 
     Arguments:
 
