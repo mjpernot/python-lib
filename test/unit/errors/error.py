@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  Error.py
+"""Program:  error.py
 
     Description:  Unit testing of Error in errors.py.
 
     Usage:
-        test/unit/errors/Error.py
+        test/unit/errors/error.py
 
     Arguments:
 
