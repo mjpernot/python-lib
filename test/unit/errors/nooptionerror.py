@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  NoOptionError.py
+"""Program:  nooptionerror.py
 
     Description:  Unit testing of NoOptionError in errors.py.
 
     Usage:
-        test/unit/errors/NoOptionError.py
+        test/unit/errors/nooptionerror.py
 
     Arguments:
 
