@@ -127,19 +127,19 @@ pipeline {
                 ./test/unit/gen_class/daemon_init.py
                 ./test/unit/gen_class/daemon_restart.py
                 ./test/unit/gen_class/daemon_start.py
-                ./test/unit/gen_class/LogFile_filter_ignore.py
-                ./test/unit/gen_class/LogFile_filter_keyword.py
-                ./test/unit/gen_class/LogFile_filter_regex.py
-                ./test/unit/gen_class/LogFile_find_marker.py
-                ./test/unit/gen_class/LogFile_get_marker.py
-                ./test/unit/gen_class/LogFile_init.py
-                ./test/unit/gen_class/LogFile_load_ignore.py
-                ./test/unit/gen_class/LogFile_load_keyword.py
-                ./test/unit/gen_class/LogFile_load_loglist.py
-                ./test/unit/gen_class/LogFile_load_marker.py
-                ./test/unit/gen_class/LogFile_load_regex.py
-                ./test/unit/gen_class/LogFile_set_marker.py
-                ./test/unit/gen_class/LogFile_set_predicate.py
+                ./test/unit/gen_class/logfile_filter_ignore.py
+                ./test/unit/gen_class/logfile_filter_keyword.py
+                ./test/unit/gen_class/logfile_filter_regex.py
+                ./test/unit/gen_class/logfile_find_marker.py
+                ./test/unit/gen_class/logfile_get_marker.py
+                ./test/unit/gen_class/logfile_init.py
+                ./test/unit/gen_class/logfile_load_ignore.py
+                ./test/unit/gen_class/logfile_load_keyword.py
+                ./test/unit/gen_class/logfile_load_loglist.py
+                ./test/unit/gen_class/logfile_load_marker.py
+                ./test/unit/gen_class/logfile_load_regex.py
+                ./test/unit/gen_class/logfile_set_marker.py
+                ./test/unit/gen_class/logfile_set_predicate.py
                 ./test/unit/gen_class/Logger_init.py
                 ./test/unit/gen_class/Logger_log_close.py
                 ./test/unit/gen_class/Logger_log_crit.py
