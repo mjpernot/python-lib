@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  LogFile_filter_ignore.py
+"""Program:  logfile_filter_ignore.py
 
     Description:  Unit testing of LogFile.filter_ignore in gen_class.py.
 
     Usage:
-        test/unit/gen_class/LogFile_filter_ignore.py
+        test/unit/gen_class/logfile_filter_ignore.py
 
     Arguments:
 

@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  LogFile_set_predicate.py
+"""Program:  logfile_set_predicate.py
 
     Description:  Unit testing of LogFile.set_predicate in gen_class.py.
 
     Usage:
-        test/unit/gen_class/LogFile_set_predicate.py
+        test/unit/gen_class/logfile_set_predicate.py
 
     Arguments:
 

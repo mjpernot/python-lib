@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  LogFile_filter_regex.py
+"""Program:  logfile_filter_regex.py
 
     Description:  Unit testing of LogFile.filter_regex in gen_class.py.
 
     Usage:
-        test/unit/gen_class/LogFile_filter_regex.py
+        test/unit/gen_class/logfile_filter_regex.py
 
     Arguments:
 

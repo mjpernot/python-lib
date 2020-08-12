@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  LogFile_init.py
+"""Program:  logfile_init.py
 
     Description:  Unit testing of LogFile.__init__ in gen_class.py.
 
     Usage:
-        test/unit/gen_class/LogFile_init.py
+        test/unit/gen_class/logfile_init.py
 
     Arguments:
 

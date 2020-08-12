@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  LogFile_get_marker.py
+"""Program:  logfile_get_marker.py
 
     Description:  Unit testing of LogFile.get_marker in gen_class.py.
 
     Usage:
-        test/unit/gen_class/LogFile_get_marker.py
+        test/unit/gen_class/logfile_get_marker.py
 
     Arguments:
 

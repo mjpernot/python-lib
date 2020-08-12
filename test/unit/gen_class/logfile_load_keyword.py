@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  LogFile_load_keyword.py
+"""Program:  logfile_load_keyword.py
 
     Description:  Unit testing of LogFile.load_keyword in gen_class.py.
 
     Usage:
-        test/unit/gen_class/LogFile_load_keyword.py
+        test/unit/gen_class/logfile_load_keyword.py
 
     Arguments:
 
