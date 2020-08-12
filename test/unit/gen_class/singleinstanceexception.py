@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  SingleInstanceException.py
+"""Program:  singleinstanceexception.py
 
     Description:  Unit testing of SingleInstanceException in gen_class.py.
 
     Usage:
-        test/unit/gen_class/SingleInstanceException.py
+        test/unit/gen_class/singleinstanceexception.py
 
     Arguments:
 
