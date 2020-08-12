@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  Mail_read_stdin.py
+"""Program:  mail_read_stdin.py
 
     Description:  Unit testing of read_stdin in gen_libs.py.
 
     Usage:
-        test/unit/gen_libs/Mail_read_stdin.py
+        test/unit/gen_libs/mail_read_stdin.py
 
     Arguments:
 

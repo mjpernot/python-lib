@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  Mail_print_email.py
+"""Program:  mail_print_email.py
 
     Description:  Unit testing of Mail.print_email in gen_class.py.
 
     Usage:
-        test/unit/gen_class/Mail_print_email.py
+        test/unit/gen_class/mail_print_email.py
 
     Arguments:
 
