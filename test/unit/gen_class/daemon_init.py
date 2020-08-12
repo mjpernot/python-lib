@@ -41,6 +41,10 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_stderr_arg -> Test with stderr arg passed.
+        test_stdout_arg -> Test with stdout arg passed.
+        test_stdin_arg -> Test with stdin arg passed.
+        test_argv_list -> Test with argv list passed.
         test_default_setting -> Test with default settings.
 
     """
@@ -56,6 +60,70 @@ class UnitTest(unittest.TestCase):
         """
 
         self.pidfile = "PidFile"
+        self.argv_list = ["program", "arg1", "arg2"]
+        self.stdin = "/path/file1"
+        self.stdout = "/path/file2"
+        self.stderr = "/path/file3"
+
+    def test_stderr_arg(self):
+
+        """Function:  test_stderr_arg
+
+        Description:  Test with stderr arg passed.
+
+        Arguments:
+
+        """
+
+        daemon_inst = gen_class.Daemon(self.pidfile, stderr=self.stderr)
+
+        self.assertEqual((daemon_inst.stderr, daemon_inst.pidfile),
+                         (self.stderr, self.pidfile))
+
+    def test_stdout_arg(self):
+
+        """Function:  test_stdout_arg
+
+        Description:  Test with stdout arg passed.
+
+        Arguments:
+
+        """
+
+        daemon_inst = gen_class.Daemon(self.pidfile, stdout=self.stdout)
+
+        self.assertEqual((daemon_inst.stdout, daemon_inst.pidfile),
+                         (self.stdout, self.pidfile))
+
+    def test_stdin_arg(self):
+
+        """Function:  test_stdin_arg
+
+        Description:  Test with stdin arg passed.
+
+        Arguments:
+
+        """
+
+        daemon_inst = gen_class.Daemon(self.pidfile, stdin=self.stdin)
+
+        self.assertEqual((daemon_inst.stdin, daemon_inst.pidfile),
+                         (self.stdin, self.pidfile))
+
+    def test_argv_list(self):
+
+        """Function:  test_argv_list
+
+        Description:  Test with argv list passed.
+
+        Arguments:
+
+        """
+
+        daemon_inst = gen_class.Daemon(self.pidfile, argv_list=self.argv_list)
+
+        self.assertEqual((daemon_inst.argv_list, daemon_inst.pidfile),
+                         (self.argv_list, self.pidfile))
 
     def test_default_setting(self):
 
