@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  ProgramLock_del.py
+"""Program:  programlock_del.py
 
     Description:  Unit testing of ProgramLock.__del__ in gen_class.py.
 
     Usage:
-        test/unit/gen_class/ProgramLock_del.py
+        test/unit/gen_class/programlock_del.py
 
     Arguments:
 

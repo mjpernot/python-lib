@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  ProgramLock_init.py
+"""Program:  programlock_init.py
 
     Description:  Unit testing of ProgramLock.__init__ in gen_class.py.
 
     Usage:
-        test/unit/gen_class/ProgramLock_init.py
+        test/unit/gen_class/programlock_init.py
 
     Arguments:
 
