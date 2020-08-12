@@ -140,13 +140,13 @@ pipeline {
                 ./test/unit/gen_class/logfile_load_regex.py
                 ./test/unit/gen_class/logfile_set_marker.py
                 ./test/unit/gen_class/logfile_set_predicate.py
-                ./test/unit/gen_class/Logger_init.py
-                ./test/unit/gen_class/Logger_log_close.py
-                ./test/unit/gen_class/Logger_log_crit.py
-                ./test/unit/gen_class/Logger_log_debug.py
-                ./test/unit/gen_class/Logger_log_err.py
-                ./test/unit/gen_class/Logger_log_info.py
-                ./test/unit/gen_class/Logger_log_warn.py
+                ./test/unit/gen_class/logger_init.py
+                ./test/unit/gen_class/logger_log_close.py
+                ./test/unit/gen_class/logger_log_crit.py
+                ./test/unit/gen_class/logger_log_debug.py
+                ./test/unit/gen_class/logger_log_err.py
+                ./test/unit/gen_class/logger_log_info.py
+                ./test/unit/gen_class/logger_log_warn.py
                 ./test/unit/gen_class/programlock_init.py
                 ./test/unit/gen_class/programlock_del.py
                 ./test/unit/gen_class/progressbar_init.py
