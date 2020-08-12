@@ -149,7 +149,9 @@ pipeline {
                 ./test/unit/gen_class/Logger_log_warn.py
                 ./test/unit/gen_class/programlock_init.py
                 ./test/unit/gen_class/programlock_del.py
-                ./test/unit/gen_class/ProgressBar_init.py
+                ./test/unit/gen_class/progressbar_init.py
+                ./test/unit/gen_class/progressbar_update.py
+                ./test/unit/gen_class/progressbar_calc_and_update.py
                 ./test/unit/gen_class/singleinstanceexception.py
                 ./test/unit/gen_class/system_init.py
                 ./test/unit/gen_class/system_set_host_name.py
@@ -160,8 +162,6 @@ pipeline {
                 ./test/unit/gen_class/yum_get_distro.py
                 ./test/unit/gen_class/yum_fetch_install_pkgs.py
                 ./test/unit/gen_class/yum_fetch_update_pkgs.py
-                ./test/unit/gen_class/ProgressBar_update.py
-                ./test/unit/gen_class/ProgressBar_calc_and_update.py
                 ./test/unit/gen_class/Mail_init.py
                 ./test/unit/gen_class/Mail_add_2_msg.py
                 ./test/unit/gen_class/Mail_create_body.py
