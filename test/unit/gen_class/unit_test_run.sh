@@ -46,11 +46,11 @@ test/unit/gen_class/yum_get_distro.py
 test/unit/gen_class/yum_get_release.py
 test/unit/gen_class/yum_fetch_install_pkgs.py
 test/unit/gen_class/yum_fetch_update_pkgs.py
-test/unit/gen_class/Mail_init.py
-test/unit/gen_class/Mail_add_2_msg.py
-test/unit/gen_class/Mail_create_body.py
-test/unit/gen_class/Mail_create_subject.py
-test/unit/gen_class/Mail_print_email.py
-test/unit/gen_class/Mail_read_stdin.py
-test/unit/gen_class/Mail_send_mail.py
+test/unit/gen_class/mail_init.py
+test/unit/gen_class/mail_add_2_msg.py
+test/unit/gen_class/mail_create_body.py
+test/unit/gen_class/mail_create_subject.py
+test/unit/gen_class/mail_print_email.py
+test/unit/gen_class/mail_read_stdin.py
+test/unit/gen_class/mail_send_mail.py
 
