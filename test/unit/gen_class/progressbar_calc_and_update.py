@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  ProgressBar_calc_and_update.py
+"""Program:  progressbar_calc_and_update.py
 
     Description:  Unit testing of ProgressBar.calc_and_update in gen_class.py.
 
     Usage:
-        test/unit/gen_class/ProgressBar_calc_and_update.py
+        test/unit/gen_class/progressbar_calc_and_update.py
 
     Arguments:
 

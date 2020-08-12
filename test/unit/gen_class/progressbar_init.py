@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  ProgressBar_init.py
+"""Program:  progressbar_init.py
 
     Description:  Unit testing of ProgressBar.__init__ in gen_class.py.
 
     Usage:
-        test/unit/gen_class/ProgressBar_init.py
+        test/unit/gen_class/progressbar_init.py
 
     Arguments:
 
