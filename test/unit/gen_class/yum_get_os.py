@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  Yum_get_os.py
+"""Program:  yum_get_os.py
 
     Description:  Unit testing of Yum.get_os in gen_class.py.
 
     Usage:
-        test/unit/gen_class/Yum_get_os.py
+        test/unit/gen_class/yum_get_os.py
 
     Arguments:
 
