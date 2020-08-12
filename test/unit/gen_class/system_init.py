@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  System_init.py
+"""Program:  system_init.py
 
     Description:  Unit testing of System.__init__ in gen_class.py.
 
     Usage:
-        test/unit/gen_class/System_init.py
+        test/unit/gen_class/system_init.py
 
     Arguments:
 

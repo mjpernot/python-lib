@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  System_set_host_name.py
+"""Program:  system_set_host_name.py
 
     Description:  Unit testing of System.set_host_name in gen_class.py.
 
     Usage:
-        test/unit/gen_class/System_set_host_name.py
+        test/unit/gen_class/system_set_host_name.py
 
     Arguments:
 
