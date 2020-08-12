@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  Yum_fetch_update_pkgs.py
+"""Program:  yum_fetch_update_pkgs.py
 
     Description:  Unit testing of Yum.fetch_update_pkgs in gen_class.py.
 
     Usage:
-        test/unit/gen_class/Yum_fetch_update_pkgs.py
+        test/unit/gen_class/yum_fetch_update_pkgs.py
 
     Arguments:
 
