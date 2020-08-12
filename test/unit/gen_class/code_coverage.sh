@@ -10,10 +10,10 @@ echo ""
 echo "Running unit test modules in conjunction with coverage"
 coverage run -a --source=gen_class test/unit/gen_class/get_inst.py
 coverage run -a --source=gen_class test/unit/gen_class/setup_mail.py
-coverage run -a --source=gen_class test/unit/gen_class/Daemon_delpid.py
-coverage run -a --source=gen_class test/unit/gen_class/Daemon_init.py
-coverage run -a --source=gen_class test/unit/gen_class/Daemon_restart.py
-coverage run -a --source=gen_class test/unit/gen_class/Daemon_start.py
+coverage run -a --source=gen_class test/unit/gen_class/daemon_delpid.py
+coverage run -a --source=gen_class test/unit/gen_class/daemon_init.py
+coverage run -a --source=gen_class test/unit/gen_class/daemon_restart.py
+coverage run -a --source=gen_class test/unit/gen_class/daemon_start.py
 coverage run -a --source=gen_class test/unit/gen_class/LogFile_filter_ignore.py
 coverage run -a --source=gen_class test/unit/gen_class/LogFile_filter_keyword.py
 coverage run -a --source=gen_class test/unit/gen_class/LogFile_filter_regex.py
