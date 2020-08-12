@@ -34,7 +34,7 @@ test/unit/gen_class/Logger_log_warn.py
 test/unit/gen_class/ProgressBar_init.py
 test/unit/gen_class/ProgressBar_update.py
 test/unit/gen_class/ProgressBar_calc_and_update.py
-test/unit/gen_class/SingleInstanceException.py
+test/unit/gen_class/singleinstanceexception.py
 test/unit/gen_class/ProgramLock_init.py
 test/unit/gen_class/ProgramLock_del.py
 test/unit/gen_class/system_init.py
