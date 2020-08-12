@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  Daemon_delpid.py
+"""Program:  daemon_delpid.py
 
     Description:  Unit testing of Daemon.delpid in gen_class.py.
 
     Usage:
-        test/unit/gen_class/Daemon_delpid.py
+        test/unit/gen_class/daemon_delpid.py
 
     Arguments:
 

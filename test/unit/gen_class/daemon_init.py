@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  Daemon_init.py
+"""Program:  daemon_init.py
 
     Description:  Unit testing of Daemon.__init__ in gen_class.py.
 
     Usage:
-        test/unit/gen_class/Daemon_init.py
+        test/unit/gen_class/daemon_init.py
 
     Arguments:
 
