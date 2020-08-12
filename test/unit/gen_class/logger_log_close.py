@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  Logger_log_close.py
+"""Program:  logger_log_close.py
 
     Description:  Unit testing of Logger.log_close in gen_class.py.
 
     Usage:
-        test/unit/gen_class/Logger_log_close.py
+        test/unit/gen_class/logger_log_close.py
 
     Arguments:
 

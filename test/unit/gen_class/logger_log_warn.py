@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  Logger_log_warn.py
+"""Program:  logger_log_warn.py
 
     Description:  Unit testing of Logger.log_warn in gen_class.py.
 
     Usage:
-        test/unit/gen_class/Logger_log_warn.py
+        test/unit/gen_class/logger_log_warn.py
 
     Arguments:
 

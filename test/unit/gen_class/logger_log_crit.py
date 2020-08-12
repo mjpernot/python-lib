@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  Logger_log_crit.py
+"""Program:  logger_log_crit.py
 
     Description:  Unit testing of Logger.log_crit in gen_class.py.
 
     Usage:
-        test/unit/gen_class/Logger_log_crit.py
+        test/unit/gen_class/logger_log_crit.py
 
     Arguments:
 
