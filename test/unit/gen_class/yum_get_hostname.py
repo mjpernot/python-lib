@@ -57,7 +57,7 @@ class UnitTest(unittest.TestCase):
         """
 
         self.host_name = "HOSTNAME"
-        self.os = "Linux"
+        self.osys = "Linux"
         self.release = "2.6"
         self.distro = ("Centos", "7.5.1804", "Core")
 
