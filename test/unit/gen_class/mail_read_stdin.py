@@ -57,7 +57,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.to = "To_Address"
+        self.toaddr = "To_Address"
 
     @mock.patch("gen_class.sys.stdin", io.StringIO(u"Test email line"))
     def test_read_stdin(self):
@@ -70,11 +70,12 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        email = gen_class.Mail(self.to)
+        email = gen_class.Mail(self.toaddr)
 
         email.read_stdin()
 
-        self.assertEqual((email.to, email.msg), (self.to, '"Test email line"'))
+        self.assertEqual((email.to, email.msg), (self.toaddr,
+                                                 '"Test email line"'))
 
 
 if __name__ == "__main__":
