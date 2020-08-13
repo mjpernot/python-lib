@@ -57,10 +57,9 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        if pkgnarrow and patterns and ignore_case:
-            rpmdb1 = collections.namedtuple('Rpmdb', 'name version arch repo')
+        rpmdb1 = collections.namedtuple('Rpmdb', 'name version arch repo')
 
-        else:
+        if pkgnarrow and patterns and ignore_case and not rpmdb1:
             rpmdb1 = collections.namedtuple('Rpmdb', 'name version arch repo')
 
         return [rpmdb1(name="Name", version="1.0", arch="Linux",
