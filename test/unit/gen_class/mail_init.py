@@ -61,7 +61,7 @@ class UnitTest(unittest.TestCase):
         """
 
         self.mailaddr = "mail_address@domain.name"
-        self.to = [self.mailaddr]
+        self.toaddr = [self.mailaddr]
         self.subj = None
         self.subj2 = "Test_Subj"
         self.subj3 = "This is a test"
@@ -82,7 +82,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        email = gen_class.Mail(self.to, subj=self.subj4, frm=self.frm2)
+        email = gen_class.Mail(self.toaddr, subj=self.subj4, frm=self.frm2)
 
         self.assertEqual((email.to, email.subj, email.frm, email.host_name,
                           email.host), (email.to, self.subj4a, self.frm2, None,
@@ -98,7 +98,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        email = gen_class.Mail(self.to, subj=self.subj3, frm=self.frm2)
+        email = gen_class.Mail(self.toaddr, subj=self.subj3, frm=self.frm2)
 
         self.assertEqual((email.to, email.subj, email.frm, email.host_name,
                           email.host), (email.to, self.subj3, self.frm2, None,
@@ -114,7 +114,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        email = gen_class.Mail(self.to, subj=self.subj2, frm=self.frm2)
+        email = gen_class.Mail(self.toaddr, subj=self.subj2, frm=self.frm2)
 
         self.assertEqual((email.to, email.subj, email.frm, email.host_name,
                           email.host), (email.to, self.subj2, self.frm2, None,
@@ -130,7 +130,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        email = gen_class.Mail(self.to)
+        email = gen_class.Mail(self.toaddr)
 
         self.assertEqual((self.mailaddr, email.subj, email.frm,
                           email.host_name, email.host),
@@ -146,10 +146,10 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        email = gen_class.Mail(self.to)
+        email = gen_class.Mail(self.toaddr)
 
         self.assertEqual((email.to, email.subj, email.frm, email.host_name,
-                          email.host), (self.to, None, None, None, None))
+                          email.host), (self.toaddr, None, None, None, None))
 
     def test_default(self):
 
@@ -161,10 +161,10 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        email = gen_class.Mail(self.to)
+        email = gen_class.Mail(self.toaddr)
 
         self.assertEqual((email.to, email.subj, email.frm, email.host_name,
-                          email.host), (self.to, None, None, None, None))
+                          email.host), (self.toaddr, None, None, None, None))
 
 
 if __name__ == "__main__":
