@@ -57,7 +57,7 @@ class UnitTest(unittest.TestCase):
         """
 
         self.host_name = "HOSTNAME"
-        self.os = "Linux"
+        self.osys = "Linux"
         self.release = "2.6"
         self.distro = ("Centos", "7.5.1804", "Core")
 
@@ -80,7 +80,7 @@ class UnitTest(unittest.TestCase):
 
         yum = gen_class.Yum(self.host_name)
 
-        self.assertEqual(yum.get_os(), self.os)
+        self.assertEqual(yum.get_os(), self.osys)
 
 
 if __name__ == "__main__":
