@@ -57,7 +57,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.to = ["mail_address@domain.name"]
+        self.toaddr = ["mail_address@domain.name"]
         self.subj_mask = "Subject: %s\n\n%s"
 
     def test_long_subject(self):
@@ -71,7 +71,7 @@ class UnitTest(unittest.TestCase):
         """
 
         msg = "Test email line with a line greater than thirty characters"
-        email = gen_class.Mail(self.to)
+        email = gen_class.Mail(self.toaddr)
         email.add_2_msg(msg)
         email.create_body()
 
@@ -90,7 +90,7 @@ class UnitTest(unittest.TestCase):
 
         msg = "Test email line"
         subj = "Test subject"
-        email = gen_class.Mail(self.to, subj=subj)
+        email = gen_class.Mail(self.toaddr, subj=subj)
         email.add_2_msg(msg)
         email.create_body()
 
@@ -107,7 +107,7 @@ class UnitTest(unittest.TestCase):
         """
 
         msg = "Test email line"
-        email = gen_class.Mail(self.to)
+        email = gen_class.Mail(self.toaddr)
         email.add_2_msg(msg)
         email.create_body()
 
