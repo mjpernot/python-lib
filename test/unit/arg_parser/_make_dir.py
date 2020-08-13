@@ -35,7 +35,7 @@ import version
 __version__ = version.__version__
 
 
-def raise_oserror():
+def raise_oserror(dirname):
 
     """Function:  raise_oserror
 
@@ -45,7 +45,14 @@ def raise_oserror():
 
     """
 
-    raise OSError
+    if dirname == "/dir/path/dirname":
+        raise OSError(21, "Other Error")
+
+    elif dirname == "/dir/path/dirname13":
+        raise OSError(13, "Permission denied")
+
+    elif dirname == "/dir/path/dirname17":
+        raise OSError(17, "File exist")
 
 
 class UnitTest(unittest.TestCase):
@@ -56,6 +63,8 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Unit testing initilization.
+        test_create_dir_exist -> Test with file exist to create directory.
+        test_create_dir_perm -> Test with permission denied to create dir.
         test_create_dir_fail -> Test with failing to create directory.
         test_create_dir -> Test with creating directory.
 
@@ -72,7 +81,41 @@ class UnitTest(unittest.TestCase):
         """
 
         self.dirname = "/dir/path/dirname"
+        self.dirname13 = "/dir/path/dirname13"
+        self.dirname17 = "/dir/path/dirname17"
         self.status = False
+
+    @mock.patch("arg_parser.os")
+    def test_create_dir_exist(self, mock_os):
+
+        """Function:  test_create_dir_exist
+
+        Description:  Test with file exist to create directory.
+
+        Arguments:
+
+        """
+
+        mock_os.makedirs = raise_oserror
+
+        with gen_libs.no_std_out():
+            self.assertTrue(arg_parser._make_dir(self.dirname17, self.status))
+
+    @mock.patch("arg_parser.os")
+    def test_create_dir_perm(self, mock_os):
+
+        """Function:  test_create_dir_perm
+
+        Description:  Test with permission denied to create directory.
+
+        Arguments:
+
+        """
+
+        mock_os.makedirs = raise_oserror
+
+        with gen_libs.no_std_out():
+            self.assertTrue(arg_parser._make_dir(self.dirname13, self.status))
 
     @mock.patch("arg_parser.os")
     def test_create_dir_fail(self, mock_os):
