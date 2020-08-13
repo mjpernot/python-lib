@@ -58,7 +58,7 @@ class UnitTest(unittest.TestCase):
         """
 
         self.host_name = "HOSTNAME"
-        self.os = "Linux"
+        self.osys = "Linux"
         self.release = "2.6"
         self.distro = ("Centos", "7.5.1804", "Core")
 
@@ -81,8 +81,9 @@ class UnitTest(unittest.TestCase):
 
         yum = gen_class.Yum(self.host_name)
 
-        self.assertEqual((yum.host_name, yum.os, yum.release, yum.distro),
-                         (self.host_name, self.os, self.release, self.distro))
+        self.assertEqual(
+            (yum.host_name, yum.os, yum.release, yum.distro),
+            (self.host_name, self.osys, self.release, self.distro))
 
     @mock.patch("platform.linux_distribution")
     @mock.patch("socket.gethostname")
@@ -106,8 +107,9 @@ class UnitTest(unittest.TestCase):
 
         yum = gen_class.Yum()
 
-        self.assertEqual((yum.host_name, yum.os, yum.release, yum.distro),
-                         (self.host_name, self.os, self.release, self.distro))
+        self.assertEqual(
+            (yum.host_name, yum.os, yum.release, yum.distro),
+            (self.host_name, self.osys, self.release, self.distro))
 
 
 if __name__ == "__main__":
