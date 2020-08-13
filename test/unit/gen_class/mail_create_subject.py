@@ -59,7 +59,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.to = ["mail_address@domain.name"]
+        self.toaddr = ["mail_address@domain.name"]
         self.subj = "Test subject"
         self.subj2 = "Test subject2"
         self.subj3 = "This is a string"
@@ -76,7 +76,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        email = gen_class.Mail(self.to)
+        email = gen_class.Mail(self.toaddr)
         email.create_subject(subj=self.subj4)
 
         self.assertEqual(email.subj, self.subj4a)
@@ -91,7 +91,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        email = gen_class.Mail(self.to)
+        email = gen_class.Mail(self.toaddr)
         email.create_subject(subj=self.subj3)
 
         self.assertEqual(email.subj, self.subj3)
@@ -106,7 +106,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        email = gen_class.Mail(self.to, subj=self.subj)
+        email = gen_class.Mail(self.toaddr, subj=self.subj)
         email.create_subject(subj=self.subj2)
 
         self.assertEqual(email.subj, self.subj2)
@@ -121,7 +121,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        email = gen_class.Mail(self.to, subj=self.subj)
+        email = gen_class.Mail(self.toaddr, subj=self.subj)
         email.create_subject(subj=None)
 
         self.assertEqual(email.subj, self.subj)
@@ -136,7 +136,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        email = gen_class.Mail(self.to)
+        email = gen_class.Mail(self.toaddr)
         email.create_subject(subj=self.subj)
 
         self.assertEqual(email.subj, self.subj)
