@@ -684,7 +684,7 @@ class ProgressBar(object):
         self.update(progress)
 
 
-class SingleInstanceException(BaseException):
+class SingleInstanceException(Exception):
 
     """Class:  SingleInstanceException
 
