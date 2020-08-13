@@ -88,9 +88,10 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        dir1 = "/test_path/dir1"
         self.args_array = {}
-        self.args_array2 = {"-d": "/test_path/dir1"}
-        self.args_array3 = {"-d": "/test_path/dir1", "-g": "/test_path/dir2"}
+        self.args_array2 = {"-d": dir1}
+        self.args_array3 = {"-d": dir1, "-g": "/test_path/dir2"}
         self.args_array4 = {"-d": "/dir/path/dirname13"}
         self.args_array5 = {"-d": "/dir/path/dirname17"}
 
