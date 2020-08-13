@@ -24,8 +24,8 @@ else:
     import unittest
 
 # Third-party
-import mock
 import collections
+import mock
 
 # Local
 sys.path.append(os.getcwd())
@@ -48,7 +48,21 @@ class UnitTest(unittest.TestCase):
     """
 
     def mock_get_update(self, pkgnarrow, patterns, ignore_case):
-        rpmdb1 = collections.namedtuple('Rpmdb', 'name version arch repo')
+
+        """Function:  mock_get_update
+
+        Description:  Mock function.
+
+        Arguments:
+
+        """
+
+        if pkgnarrow and patterns and ignore_case:
+            rpmdb1 = collections.namedtuple('Rpmdb', 'name version arch repo')
+
+        else:
+            rpmdb1 = collections.namedtuple('Rpmdb', 'name version arch repo')
+        
         return [rpmdb1(name="Name", version="1.0", arch="Linux",
                        repo="RepoName")]
 
@@ -63,7 +77,7 @@ class UnitTest(unittest.TestCase):
         """
 
         self.host_name = "HOSTNAME"
-        self.os = "Linux"
+        self.osys = "Linux"
         self.release = "2.6"
         self.distro = ("Centos", "7.5.1804", "Core")
         self.update_pkgs = [{"package": "Name", "ver": "1.0", "arch": "Linux",
