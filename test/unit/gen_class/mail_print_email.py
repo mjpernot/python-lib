@@ -55,7 +55,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.to = ["mail_address@domain.name"]
+        self.toaddr = ["mail_address@domain.name"]
         self.frm = ["mail_address@domain.name"]
         self.subj = "Test subject"
         self.body = "Test mail body"
@@ -70,12 +70,12 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        email = gen_class.Mail(self.to, subj=self.subj, frm=self.frm)
+        email = gen_class.Mail(self.toaddr, subj=self.subj, frm=self.frm)
         email.create_subject(subj=self.subj)
         email.add_2_msg(txt_ln=self.body)
 
         self.assertEqual(email.print_email(),
-                         "To: %s\nFrom: %s\n%s" % (self.to, self.frm,
+                         "To: %s\nFrom: %s\n%s" % (self.toaddr, self.frm,
                                                    email.create_body()))
 
 
