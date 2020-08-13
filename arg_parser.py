@@ -637,9 +637,15 @@ def _make_dir(dirname, status, **kwargs):
     try:
         os.makedirs(dirname)
 
-    except:
-        print("Error:  Unable to create {0}".format(dirname))
-        status = True
+    except OSError as (errno, strerr):
+        if errno == 13 or errno == 17:
+            print("Error:  {0} for {1}".format(strerr, dirname))
+            status = True
+
+        else:
+            print("Error {0}:  Message:  {1} for {2}".format(
+                errno, strerr, dirname))
+            status = True
 
     return status
 
