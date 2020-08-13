@@ -57,9 +57,11 @@ class Smtplib(object):
 
         """
 
-        pass
+        self.frm = None
+        self.toaddr = None
+        self.func = None
 
-    def sendmail(self, frm, to, func):
+    def sendmail(self, frm, toaddr, func):
 
         """Method:  sendmail
 
@@ -67,12 +69,14 @@ class Smtplib(object):
 
         Arguments:
             frm -> Mock for from address.
-            to -> Mock for to address.
+            toaddr -> Mock for to address.
             func -> Mock for function call.
 
         """
 
-        pass
+        self.frm = frm
+        self.toaddr = toaddr
+        self.func = func
 
     def quit(self):
 
