@@ -40,13 +40,13 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        test_SingleInstanceException -> Test with no arguments.
+        test_singleinstanceexception -> Test with no arguments.
 
     """
 
-    def test_SingleInstanceException(self):
+    def test_singleinstanceexception(self):
 
-        """Function:  test_SingleInstanceException
+        """Function:  test_singleinstanceexception
 
         Description:  Test with no arguments.
 
