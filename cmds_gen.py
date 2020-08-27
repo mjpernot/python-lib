@@ -12,7 +12,7 @@
         disconnect
         get_sub
         is_add_cmd
-        run_prog (Deprecated)
+        run_prog
 
 """
 
@@ -196,8 +196,6 @@ def run_prog(cmd, **kwargs):
 
     Description:  Opens a system call to run the program command and write the
         output as specified in **kwargs or standard out.
-
-    Note:  Function is Deprecated.
 
     Arguments:
         (input) cmd -> List array holding program command line.
