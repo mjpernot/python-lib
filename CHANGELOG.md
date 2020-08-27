@@ -66,9 +66,6 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - gen_libs.crt_file_time:  Made ext argument an optional argument.
 - gen_libs.crt_file_time:  Add period (.) seperator between filename and extension.
 
-### Deprecated
-- cmds_gen.run_prog
-
 
 ## [2.8.1] - 2020-03-25
 ### Fixed
