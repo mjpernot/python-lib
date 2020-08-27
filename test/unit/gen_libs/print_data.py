@@ -24,7 +24,6 @@ else:
     import unittest
 
 # Third-party
-import mock
 
 # Local
 sys.path.append(os.getcwd())
@@ -86,13 +85,7 @@ class UnitTest(unittest.TestCase):
 
         gen_libs.print_data(self.data, ofile=self.ofile)
 
-        if os.path.isfile(self.ofile):
-            status = True
-
-        else:
-            status = False
-
-        self.assertTrue(status)
+        self.assertTrue(os.path.isfile(self.ofile))
 
     def tearDown(self):
 

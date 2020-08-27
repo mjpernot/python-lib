@@ -12,6 +12,7 @@ pipeline {
                 virtualenv test_env
                 source test_env/bin/activate
                 pip2 install mock==2.0.0 --user
+                ./test/unit/arg_parser/_make_dir.py
                 ./test/unit/arg_parser/arg_add_def.py
                 ./test/unit/arg_parser/arg_cond_req.py
                 ./test/unit/arg_parser/arg_cond_req_or.py
@@ -37,13 +38,13 @@ pipeline {
                 ./test/unit/cmds_gen/get_inst.py
                 ./test/unit/cmds_gen/is_add_cmd.py
                 ./test/unit/cmds_gen/run_prog.py
-                ./test/unit/errors/EmptyRowError.py
-                ./test/unit/errors/Error.py
-                ./test/unit/errors/NoOptionError.py
-                ./test/unit/errors/NotMasterError.py
-                ./test/unit/errors/NotSlaveError.py
-                ./test/unit/errors/NotYetImplementedError.py
-                ./test/unit/errors/SlaveNotRunningError.py
+                ./test/unit/errors/emptyrowerror.py
+                ./test/unit/errors/error.py
+                ./test/unit/errors/nooptionerror.py
+                ./test/unit/errors/notmastererror.py
+                ./test/unit/errors/notslaveerror.py
+                ./test/unit/errors/notyetimplementederror.py
+                ./test/unit/errors/slavenotrunningerror.py
                 ./test/unit/gen_libs/and_is_true.py
                 ./test/unit/gen_libs/bytes_2_readable.py
                 ./test/unit/gen_libs/chk_crt_dir.py
@@ -122,55 +123,55 @@ pipeline {
                 ./test/unit/gen_libs/write_to_log.py
                 ./test/unit/gen_class/get_inst.py
                 ./test/unit/gen_class/setup_mail.py
-                ./test/unit/gen_class/Daemon_delpid.py
-                ./test/unit/gen_class/Daemon_init.py
-                ./test/unit/gen_class/Daemon_restart.py
-                ./test/unit/gen_class/Daemon_start.py
-                ./test/unit/gen_class/LogFile_filter_ignore.py
-                ./test/unit/gen_class/LogFile_filter_keyword.py
-                ./test/unit/gen_class/LogFile_filter_regex.py
-                ./test/unit/gen_class/LogFile_find_marker.py
-                ./test/unit/gen_class/LogFile_get_marker.py
-                ./test/unit/gen_class/LogFile_init.py
-                ./test/unit/gen_class/LogFile_load_ignore.py
-                ./test/unit/gen_class/LogFile_load_keyword.py
-                ./test/unit/gen_class/LogFile_load_loglist.py
-                ./test/unit/gen_class/LogFile_load_marker.py
-                ./test/unit/gen_class/LogFile_load_regex.py
-                ./test/unit/gen_class/LogFile_set_marker.py
-                ./test/unit/gen_class/LogFile_set_predicate.py
-                ./test/unit/gen_class/Logger_init.py
-                ./test/unit/gen_class/Logger_log_close.py
-                ./test/unit/gen_class/Logger_log_crit.py
-                ./test/unit/gen_class/Logger_log_debug.py
-                ./test/unit/gen_class/Logger_log_err.py
-                ./test/unit/gen_class/Logger_log_info.py
-                ./test/unit/gen_class/Logger_log_warn.py
-                ./test/unit/gen_class/ProgramLock_init.py
-                ./test/unit/gen_class/ProgramLock_del.py
-                ./test/unit/gen_class/ProgressBar_init.py
-                ./test/unit/gen_class/SingleInstanceException.py
-                ./test/unit/gen_class/System_init.py
-                ./test/unit/gen_class/System_set_host_name.py
-                ./test/unit/gen_class/Yum_init.py
-                ./test/unit/gen_class/Yum_get_hostname.py
-                ./test/unit/gen_class/Yum_get_release.py
-                ./test/unit/gen_class/Yum_get_os.py
-                ./test/unit/gen_class/Yum_get_distro.py
-                ./test/unit/gen_class/Yum_fetch_install_pkgs.py
-                ./test/unit/gen_class/Yum_fetch_update_pkgs.py
-                ./test/unit/gen_class/ProgressBar_update.py
-                ./test/unit/gen_class/ProgressBar_calc_and_update.py
-                ./test/unit/gen_class/Mail_init.py
-                ./test/unit/gen_class/Mail_add_2_msg.py
-                ./test/unit/gen_class/Mail_create_body.py
-                ./test/unit/gen_class/Mail_create_subject.py
-                ./test/unit/gen_class/Mail_print_email.py
-                ./test/unit/gen_class/Mail_read_stdin.py
-                ./test/unit/gen_class/Mail_send_mail.py
-                ./test/unit/machine/Linux.py
-                ./test/unit/machine/Machine.py
-                ./test/unit/machine/Solaris.py
+                ./test/unit/gen_class/daemon_delpid.py
+                ./test/unit/gen_class/daemon_init.py
+                ./test/unit/gen_class/daemon_restart.py
+                ./test/unit/gen_class/daemon_start.py
+                ./test/unit/gen_class/logfile_filter_ignore.py
+                ./test/unit/gen_class/logfile_filter_keyword.py
+                ./test/unit/gen_class/logfile_filter_regex.py
+                ./test/unit/gen_class/logfile_find_marker.py
+                ./test/unit/gen_class/logfile_get_marker.py
+                ./test/unit/gen_class/logfile_init.py
+                ./test/unit/gen_class/logfile_load_ignore.py
+                ./test/unit/gen_class/logfile_load_keyword.py
+                ./test/unit/gen_class/logfile_load_loglist.py
+                ./test/unit/gen_class/logfile_load_marker.py
+                ./test/unit/gen_class/logfile_load_regex.py
+                ./test/unit/gen_class/logfile_set_marker.py
+                ./test/unit/gen_class/logfile_set_predicate.py
+                ./test/unit/gen_class/logger_init.py
+                ./test/unit/gen_class/logger_log_close.py
+                ./test/unit/gen_class/logger_log_crit.py
+                ./test/unit/gen_class/logger_log_debug.py
+                ./test/unit/gen_class/logger_log_err.py
+                ./test/unit/gen_class/logger_log_info.py
+                ./test/unit/gen_class/logger_log_warn.py
+                ./test/unit/gen_class/programlock_init.py
+                ./test/unit/gen_class/programlock_del.py
+                ./test/unit/gen_class/progressbar_init.py
+                ./test/unit/gen_class/progressbar_update.py
+                ./test/unit/gen_class/progressbar_calc_and_update.py
+                ./test/unit/gen_class/singleinstanceexception.py
+                ./test/unit/gen_class/system_init.py
+                ./test/unit/gen_class/system_set_host_name.py
+                ./test/unit/gen_class/yum_init.py
+                ./test/unit/gen_class/yum_get_hostname.py
+                ./test/unit/gen_class/yum_get_release.py
+                ./test/unit/gen_class/yum_get_os.py
+                ./test/unit/gen_class/yum_get_distro.py
+                ./test/unit/gen_class/yum_fetch_install_pkgs.py
+                ./test/unit/gen_class/yum_fetch_update_pkgs.py
+                ./test/unit/gen_class/mail_init.py
+                ./test/unit/gen_class/mail_add_2_msg.py
+                ./test/unit/gen_class/mail_create_body.py
+                ./test/unit/gen_class/mail_create_subject.py
+                ./test/unit/gen_class/mail_print_email.py
+                ./test/unit/gen_class/mail_read_stdin.py
+                ./test/unit/gen_class/mail_send_mail.py
+                ./test/unit/machine/linux.py
+                ./test/unit/machine/amachine.py
+                ./test/unit/machine/solaris.py
                 deactivate
                 rm -rf test_env
                 """
@@ -192,14 +193,14 @@ pipeline {
             steps {
                 script {
                     server = Artifactory.server('Artifactory')
-                    server.credentialsId = 'svc-highpoint-artifactory'
+                    server.credentialsId = 'art-svc-highpoint-dev'
                     uploadSpec = """{
                         "files": [
                             {
                                 "pattern": "./*.py",
                                 "recursive": false,
                                 "excludePatterns": ["test/unit/gen_libs/*.py","test/unit/gen_class/*.py"],
-                                "target": "generic-local/highpoint/python-lib/"
+                                "target": "pypi-proj-local/highpoint/python-lib/"
                             }
                         ]
                     }"""

@@ -25,7 +25,6 @@ else:
     import unittest
 
 # Third-party
-import mock
 
 # Local
 sys.path.append(os.getcwd())
@@ -82,7 +81,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.td = TD()
+        self.tdelta = TD()
         self.outsecs = 866200
 
     def test_get_secs(self):
@@ -95,7 +94,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertEqual(gen_libs.get_secs(self.td), self.outsecs)
+        self.assertEqual(gen_libs.get_secs(self.tdelta), self.outsecs)
 
 
 if __name__ == "__main__":

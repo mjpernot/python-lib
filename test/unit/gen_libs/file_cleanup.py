@@ -25,7 +25,6 @@ else:
     import unittest
 
 # Third-party
-import mock
 
 # Local
 sys.path.append(os.getcwd())
@@ -78,13 +77,7 @@ class UnitTest(unittest.TestCase):
 
         gen_libs.file_cleanup(self.dir_path, 1)
 
-        if os.path.isfile(self.fname):
-            status = True
-
-        else:
-            status = False
-
-        self.assertTrue(status)
+        self.assertTrue(os.path.isfile(self.fname))
 
     def test_remove_file(self):
 

@@ -29,7 +29,6 @@ import mock
 # Local
 sys.path.append(os.getcwd())
 import arg_parser
-import gen_libs
 import version
 
 __version__ = version.__version__
@@ -62,31 +61,26 @@ class UnitTest(unittest.TestCase):
 
         self.args_array = {"-c": "config"}
         self.args_array2 = {"-c": "config", "-f": "new_file"}
-
+        self.results = {"-c": "config", "-f": "file1"}
         self.opt_def_dict = {}
         self.opt_def_dict2 = {"-f": "file1", "-i": "sysmon"}
-
         self.arg = "-f"
         self.arg2 = "-g"
 
-    # Known bug:  If a option:default is passed in that already exists in
-    #   args_array, the default will overwrite the existing value.
-    @unittest.skip("Known bug")
     def test_arg_in_argsarray(self):
 
         """Function:  test_arg_in_argsarray
 
         Description:  Test with arg already in args_array.
 
+        Note:  arg_default will overwrite an existing value if one is present.
+
         Arguments:
 
         """
 
-        test_array = dict(self.args_array2)
-
-        self.assertEqual(arg_parser.arg_default(self.arg, self.args_array2,
-                                                self.opt_def_dict2),
-                         test_array)
+        self.assertEqual(arg_parser.arg_default(
+            self.arg, self.args_array2, self.opt_def_dict2), self.results)
 
     def test_arg_in_optdefdict(self):
 
@@ -98,12 +92,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        test_array = dict(self.args_array)
-        test_array[self.arg] = self.opt_def_dict2[self.arg]
-
-        self.assertEqual(arg_parser.arg_default(self.arg, self.args_array,
-                                                self.opt_def_dict2),
-                         test_array)
+        self.assertEqual(arg_parser.arg_default(
+            self.arg, self.args_array, self.opt_def_dict2), self.results)
 
     @mock.patch("arg_parser.sys.exit")
     def test_not_in_optdefdict(self, mock_exit):
