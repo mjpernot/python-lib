@@ -63,9 +63,10 @@ class UnitTest(unittest.TestCase):
         self.dir_path = "test/integration/gen_libs/basefiles/"
         self.list_files = [self.file1, "file2.txt", "test.txt"]
         self.results = []
-        self.results2 = [self.file1, "file2.txt"]
+        self.results2 = ["md5_file.txt", self.file1, "file2.txt"]
         self.results3 = [self.file1]
-        self.results4 = ["test/integration/gen_libs/basefiles/file1.txt",
+        self.results4 = ["test/integration/gen_libs/basefiles/md5_file.txt",
+                         "test/integration/gen_libs/basefiles/file1.txt",
                          "test/integration/gen_libs/basefiles/file2.txt"]
         self.file_str = "file"
         self.file_str2 = "none"
