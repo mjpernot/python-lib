@@ -71,8 +71,8 @@ class UnitTest(unittest.TestCase):
         f_hdlr2.close()
 
         cmd = gen_libs.get_inst(subprocess)
-        P1 = cmd.Popen(["gzip", self.f_name2])
-        P1.wait()
+        proc1 = cmd.Popen(["gzip", self.f_name2])
+        proc1.wait()
 
         self.f_name2 = self.f_name2 + ".gz"
 

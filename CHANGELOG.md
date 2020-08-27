@@ -4,6 +4,69 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [2.8.2] - 2020-07-15
+### Added
+- arg_parser.\_make_dir:  Tries to create a directory and capture any exceptions.
+
+### Fixed
+- arg_parser.arg_dir_chk_crt:  Never checks for write access unless directory is in dir_crt_list.
+- arg_parser.arg_dir_chk_crt:  Does not create directory if dir_crt_list is not subset of dir_chk_list.
+- gen_libs.crt_file_time:  Fixed where no trailing slash in path gives incorrect results.
+- arg_parser.arg_set_path:  Fixed where a second trailing slash was added if one was already present.
+
+### Changed
+- arg_parser.\_make_dir:  Replaced bare exception with catching specific exception cases.
+- gen_class.SingleInstanceException:  Changed exception class from BaseException to Exception.
+- gen_libs.list_2_dict:  Changed variable names to standard naming convention.
+- gen_libs.list_files:  Changed variable names to standard naming convention.
+- gen_libs.list_dirs:  Changed variable names to standard naming convention.
+- gen_libs.is_true:  Changed variable names to standard naming convention.
+- gen_libs.is_missing_lists:  Changed variable names to standard naming convention.
+- gen_libs.get_secs:  Changed variable names to standard naming convention.
+- gen_libs.get_data:  Changed variable names to standard naming convention.
+- gen_libs.filename_search:  Changed variable names to standard naming convention.
+- gen_libs.file_2_list:  Changed variable names to standard naming convention.
+- gen_libs.file_search:  Changed variable names to standard naming convention.
+- gen_libs.disk_usage:  Changed variable names to standard naming convention.
+- gen_libs.dir_file_match:  Changed variable names to standard naming convention.
+- gen_libs.del_not_in_list:  Changed variable names to standard naming convention.
+- gen_libs.del_not_and_list:  Changed variable names to standard naming convention.
+- gen_libs.date_range:  Changed variable names to standard naming convention.
+- gen_libs.cp_dir:  Changed print errors to distingish between different exceptions.
+- gen_libs.cp_dir:  Changed variable names to standard naming convention.
+- gen_libs.compress:  Changed variable names to standard naming convention.
+- gen_libs.chk_int:  Changed variable names to standard naming convention.
+- gen_libs.and_is_true:  Changed variable names to standard naming convention.
+- arg_parser.\_file_create:  Changed print errors to distingish between different exceptions.
+- arg_parser.arg_set_path:  Removed non-required else clause.
+- arg_parser.arg_dir_chk_crt:  Call to \_make_dir to reduce complexity rating.
+- gen_class.LogFile.load_ignore:  Changed variable names to standard naming convention.
+- gen_class.LogFile.filter_regex:  Changed variable names to standard naming convention.
+- gen_class.LogFile.filter_keyword:  Changed variable names to standard naming convention.
+- gen_class.LogFile.filter_ignore:  Changed variable names to standard naming convention.
+- gen_class.Daemon.stop:  Changed variable names to standard naming convention.
+- gen_class.Daemon.start:  Changed variable names to standard naming convention.
+- gen_class.Daemon.daemonize:  Changed variable names to standard naming convention.
+- cmds_gen.run_prog:  Changed variable names to standard naming convention.
+- cmds_gen.is_add_cmd:  Changed variable names to standard naming convention.
+- cmds_gen.disconnect:  Changed variable names to standard naming convention.
+- arg_parser.\_parse_multi:  Changed variable names to standard naming convention.
+- arg_parser.arg_xor_dict:  Changed variable names to standard naming convention.
+- arg_parser.arg_valid_val:  Changed variable names to standard naming convention.
+- arg_parser.arg_validate:  Changed variable names to standard naming convention.
+- arg_parser.arg_req_xor:  Changed variable names to standard naming convention.
+- arg_parser.arg_req_or_lst:  Changed variable names to standard naming convention.
+- arg_parser.arg_require:  Changed variable names to standard naming convention.
+- arg_parser.arg_noreq_xor:  Changed variable names to standard naming convention.
+- arg_parser.arg_file_chk:  Changed variable names to standard naming convention.
+- arg_parser.arg_cond_req_or:  Changed variable names to standard naming convention.
+- arg_parser.arg_cond_req:  Changed variable names to standard naming convention.
+- arg_parser.arg_add_def:  Changed variable names to standard naming convention.
+- gen_class.Mail.create_subject:  Changed delimiter to a space for lists passed to method.
+- gen_libs.crt_file_time:  Made ext argument an optional argument.
+- gen_libs.crt_file_time:  Add period (.) seperator between filename and extension.
+
+
 ## [2.8.1] - 2020-03-25
 ### Fixed
 - gen_libs.make_md5_hash:  Fixed subprocess instance from SonarQube scan finding.
@@ -713,7 +776,6 @@ Breaking Change
 ### Changed
 - arg_parser.py:  Convert comments/documentation to docstrings.
 - arg_parser.py:  Change single quotes to double quotes.
-- arg_parser.py:  Convert comments/documentation to docstrings.
 - cmds_gen.py:  Change single quotes to double quotes.
 - machine.py:  Convert comments/documentation to docstrings.
 - errors.py:  Convert comments/documentation to docstrings.
@@ -789,10 +851,8 @@ Breaking Change
 
 ## [1.17.1] - 2017-04-25
 ### Added
-- gen_class.Program_Lock:  Allow a program to create a lock instance of the program.
--   This will allow other programs to know if an instance of the program is running.
-- gen_class.Single_Instance_Exception:  Class exception for the Program_Lock class.
--   Used when an instance lock has been detected.
+- gen_class.Program_Lock:  Allow a program to create a lock instance of the program.  This will allow other programs to know if an instance of the program is running.
+- gen_class.Single_Instance_Exception:  Class exception for the Program_Lock class.  Used when an instance lock has been detected.
 
 
 ## [1.17.0] - 2017-04-07

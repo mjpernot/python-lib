@@ -6,6 +6,7 @@
 
 echo ""
 echo "Unit test:"
+test/unit/arg_parser/_make_dir.py
 test/unit/arg_parser/arg_add_def.py
 test/unit/arg_parser/arg_cond_req.py
 test/unit/arg_parser/arg_cond_req_or.py

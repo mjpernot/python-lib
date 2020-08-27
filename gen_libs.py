@@ -101,7 +101,6 @@ import datetime
 import sys
 import zipfile
 import glob
-import errno
 import re
 import collections
 import contextlib
@@ -123,7 +122,7 @@ __version__ = version.__version__
 _ntuple_diskusage = collections.namedtuple("usage", "total used free")
 
 
-def and_is_true(x, y, **kwargs):
+def and_is_true(itemx, itemy, **kwargs):
 
     """Function:  and_is_true
 
@@ -131,15 +130,15 @@ def and_is_true(x, y, **kwargs):
         {Yes (True) / No (False)}.
 
     Arguments:
-        (input) x -> Yes or No value.
-        (input) y -> Yes or No value.
+        (input) itemx -> Yes or No value.
+        (input) itemy -> Yes or No value.
         (output) Return True | False based on AND comparsion.
 
     """
 
     truth_tbl = {"Yes": True, "No": False}
 
-    return truth_tbl[x] and truth_tbl[y]
+    return truth_tbl[itemx] and truth_tbl[itemy]
 
 
 def bytes_2_readable(size, precision=2, **kwargs):
@@ -296,7 +295,7 @@ def chk_crt_file(f_name=None, create=False, write=False, read=False,
     return status, err_msg
 
 
-def chk_int(x, **kwargs):
+def chk_int(line, **kwargs):
 
     """Function:  chk_int
 
@@ -304,16 +303,16 @@ def chk_int(x, **kwargs):
         NOTE:   Does not work for floats.
 
     Arguments:
-        (input) x -> String containing an integer.
+        (input) line -> String containing an integer.
         (output) True|False -> Whether the string is an integer.
 
     """
 
     # Remove positive/negative sign if present.
-    if x[0] in ("-", "+"):
-        return x[1:].isdigit()
+    if line[0] in ("-", "+"):
+        return line[1:].isdigit()
 
-    return x.isdigit()
+    return line.isdigit()
 
 
 def clear_file(f_name, **kwargs):
@@ -343,8 +342,8 @@ def compress(fname, **kwargs):
     """
 
     inst = get_inst(subprocess)
-    P1 = inst.Popen(["gzip", fname])
-    P1.wait()
+    proc1 = inst.Popen(["gzip", fname])
+    proc1.wait()
 
 
 def cp_dir(src_dir, dest_dir, **kwargs):
@@ -368,13 +367,13 @@ def cp_dir(src_dir, dest_dir, **kwargs):
         shutil.copytree(src_dir, dest_dir)
 
     # Directory permission error.
-    except shutil.Error as e:
-        err_msg = "Directory not copied.  Error Message: %s" % (e)
+    except shutil.Error as err:
+        err_msg = "Directory not copied.  Perms Error Message: %s" % (err)
         status = False
 
     # Directory does not exist.
-    except OSError as e:
-        err_msg = "Directory not copied.  Error Message: %s" % (e)
+    except OSError as err:
+        err_msg = "Directory not copied.  Exist Error Message: %s" % (err)
         status = False
 
     return status, err_msg
@@ -458,7 +457,7 @@ def cp_file2(fname, src_dir, dest_dir, new_fname=None, **kwargs):
     shutil.copy2(os.path.join(src_dir, fname), dest_dir)
 
 
-def crt_file_time(fname, path, ext, **kwargs):
+def crt_file_time(fname, path, ext="", **kwargs):
 
     """Function:  crt_file_time
 
@@ -472,7 +471,10 @@ def crt_file_time(fname, path, ext, **kwargs):
 
     """
 
-    return path + fname + "." + time.strftime("%Y%m%d_%I%M") + ext
+    if ext and "." not in ext[0]:
+        ext = "." + ext
+
+    return os.path.join(path, fname + "." + time.strftime("%Y%m%d_%I%M") + ext)
 
 
 def date_range(start_dt, end_dt, **kwargs):
@@ -495,20 +497,20 @@ def date_range(start_dt, end_dt, **kwargs):
     end_dt = end_dt.replace(day=1)
     forward = end_dt >= start_dt
     finish = False
-    dt = start_dt
+    sdt = start_dt
 
     while not finish:
-        yield dt.date()
+        yield sdt.date()
 
         if forward:
-            days = month_days(dt)
-            dt = dt + datetime.timedelta(days=days)
-            finish = dt > end_dt
+            days = month_days(sdt)
+            sdt = sdt + datetime.timedelta(days=days)
+            finish = sdt > end_dt
 
         else:
-            _tmp_dt = dt.replace(day=1) - datetime.timedelta(days=1)
-            dt = (_tmp_dt.replace(day=dt.day))
-            finish = dt < end_dt
+            _tmp_dt = sdt.replace(day=1) - datetime.timedelta(days=1)
+            sdt = (_tmp_dt.replace(day=sdt.day))
+            finish = sdt < end_dt
 
 
 def del_not_and_list(list1, list2, **kwargs):
@@ -527,9 +529,9 @@ def del_not_and_list(list1, list2, **kwargs):
     list1 = list(list1)
     list2 = list(list2)
 
-    for x in list2:
+    for item in list2:
         try:
-            list1.remove(x)
+            list1.remove(item)
 
         except ValueError:
             pass
@@ -555,8 +557,8 @@ def del_not_in_list(list1, list2, **kwargs):
     list1 = list(list1)
     list2 = list(list2)
 
-    for x in list(set(list1) - set(list2)):
-        list1.remove(x)
+    for item in list(set(list1) - set(list2)):
+        list1.remove(item)
 
     return list1
 
@@ -625,11 +627,12 @@ def dir_file_match(dir_path, file_str, add_path=False, **kwargs):
     """
 
     if add_path:
-        return [os.path.join(dir_path, x)
-                for x in list_files(dir_path) if re.match(file_str, x)]
+        return [os.path.join(dir_path, item)
+                for item in list_files(dir_path) if re.match(file_str, item)]
 
     else:
-        return [x for x in list_files(dir_path) if re.match(file_str, x)]
+        return [item for item in list_files(dir_path)
+                if re.match(file_str, item)]
 
 
 def disk_usage(path, **kwargs):
@@ -647,10 +650,10 @@ def disk_usage(path, **kwargs):
 
     """
 
-    st = os.statvfs(path)
-    free = st.f_bavail * st.f_frsize
-    total = st.f_blocks * st.f_frsize
-    used = (st.f_blocks - st.f_bfree) * st.f_frsize
+    stv = os.statvfs(path)
+    free = stv.f_bavail * stv.f_frsize
+    total = stv.f_blocks * stv.f_frsize
+    used = (stv.f_blocks - stv.f_bfree) * stv.f_frsize
 
     return _ntuple_diskusage(total, used, free)
 
@@ -760,9 +763,9 @@ def file_search(f_name, string, **kwargs):
     line = None
 
     with open(f_name, "r") as s_file:
-        for x in s_file:
-            if string in x:
-                line = x
+        for item in s_file:
+            if string in item:
+                line = item
                 break
 
     return line
@@ -799,7 +802,7 @@ def file_2_list(filename, **kwargs):
     """
 
     with open(filename, "r") as f_hdlr:
-        lines = [x.rstrip("\n") for x in f_hdlr.readlines()]
+        lines = [item.rstrip("\n") for item in f_hdlr.readlines()]
 
     return lines
 
@@ -822,13 +825,13 @@ def filename_search(dir_path, file_str, add_path=False, **kwargs):
     """
 
     if add_path:
-        return [os.path.join(dir_path, x)
-                for x in list_files(dir_path)
-                if re.search(file_str, x)]
+        return [os.path.join(dir_path, item)
+                for item in list_files(dir_path)
+                if re.search(file_str, item)]
 
     else:
-        return [x for x in list_files(dir_path)
-                if re.search(file_str, x)]
+        return [item for item in list_files(dir_path)
+                if re.search(file_str, item)]
 
 
 def float_div(num1, num2, **kwargs):
@@ -879,7 +882,7 @@ def get_data(f_hdlr, **kwargs):
 
     """
 
-    return [x.rstrip() for x in f_hdlr]
+    return [item.rstrip() for item in f_hdlr]
 
 
 def get_date(**kwargs):
@@ -911,19 +914,19 @@ def get_inst(cmd, **kwargs):
     return cmd
 
 
-def get_secs(td, **kwargs):
+def get_secs(tdd, **kwargs):
 
     """Function:  get_secs
 
     Description:  Converts a datetime delta value to total number of seconds.
 
     Arguments:
-        (input) td -> Datetime Delta.
+        (input) tdd -> Datetime Delta.
         (output) -> Returns total number of seconds for datetime delta.
 
     """
 
-    return (td.seconds + td.days * 24 * 3600) * 10**6 / 10**6
+    return (tdd.seconds + tdd.days * 24 * 3600) * 10**6 / 10**6
 
 
 def get_time(**kwargs):
@@ -1034,10 +1037,10 @@ def is_missing_lists(list1, list2, **kwargs):
     list1 = list(list1)
     list2 = list(list2)
 
-    return [x for x in list1 if x not in list2]
+    return [item for item in list1 if item not in list2]
 
 
-def is_true(x, **kwargs):
+def is_true(item, **kwargs):
 
     """Function:  is_true
 
@@ -1052,7 +1055,7 @@ def is_true(x, **kwargs):
 
     truth_tbl = {"Yes": True, "No": False, "ON": True, "OFF": False}
 
-    return truth_tbl[x]
+    return truth_tbl[item]
 
 
 def key_cleaner(data, char, repl, **kwargs):
@@ -1112,8 +1115,8 @@ def list_dirs(dir_path, **kwargs):
     """
 
     if os.path.isdir(dir_path):
-        dir_list = [x for x in os.listdir(dir_path)
-                    if os.path.isdir(os.path.join(dir_path, x))]
+        dir_list = [item for item in os.listdir(dir_path)
+                    if os.path.isdir(os.path.join(dir_path, item))]
 
     else:
         dir_list = []
@@ -1135,8 +1138,8 @@ def list_files(dir_path, **kwargs):
     """
 
     # Loop on directory and if an entry is a file then add to list.
-    return [x for x in os.listdir(dir_path)
-            if os.path.isfile(os.path.join(dir_path, x))]
+    return [item for item in os.listdir(dir_path)
+            if os.path.isfile(os.path.join(dir_path, item))]
 
 
 def list_filter_files(dir_path, file_filter, **kwargs):
@@ -1178,13 +1181,13 @@ def list_2_dict(kv_list, fld_del=".", **kwargs):
     dict_list = {}
 
     for x in kv_list:
-        db, tbl = x.split(fld_del)
+        dbs, tbl = x.split(fld_del)
 
-        if db not in dict_list:
-            dict_list[db] = [tbl]
+        if dbs not in dict_list:
+            dict_list[dbs] = [tbl]
 
         else:
-            dict_list[db].append(tbl)
+            dict_list[dbs].append(tbl)
 
     return dict_list
 

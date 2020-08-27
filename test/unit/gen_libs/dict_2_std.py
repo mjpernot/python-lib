@@ -92,13 +92,7 @@ class UnitTest(unittest.TestCase):
 
         gen_libs.dict_2_std(self.data, ofile=self.ofile)
 
-        if os.path.isfile(self.ofile):
-            status = True
-
-        else:
-            status = False
-
-        self.assertTrue(status)
+        self.assertTrue(os.path.isfile(self.ofile))
 
     def tearDown(self):
 

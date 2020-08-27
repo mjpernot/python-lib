@@ -23,6 +23,7 @@
         arg_wildcard
         arg_xor_dict
         _file_create
+        _make_dir
         _parse_multi
         _parse_single
 
@@ -68,16 +69,16 @@ def arg_add_def(args_array, def_array=None, opt_req_list=None, **kwargs):
         opt_req_list = list(opt_req_list)
 
         # Add missing required options with default values to argument array.
-        for x in set(opt_req_list) & \
+        for item in set(opt_req_list) & \
                 (set(def_array.keys()) - set(args_array.keys())):
-            args_array[x] = def_array[x]
+            args_array[item] = def_array[item]
 
     elif def_array:
         def_array = dict(def_array)
 
         # Add all default values to argument array.
-        for x in set(def_array.keys()) - set(args_array.keys()):
-            args_array[x] = def_array[x]
+        for item in set(def_array.keys()) - set(args_array.keys()):
+            args_array[item] = def_array[item]
 
     return args_array
 
@@ -102,12 +103,12 @@ def arg_cond_req(args_array, opt_con_req, **kwargs):
     opt_con_req = dict(opt_con_req)
     status = True
 
-    for x in set(args_array.keys()) & set(opt_con_req.keys()):
+    for item in set(args_array.keys()) & set(opt_con_req.keys()):
 
-        for _ in set(opt_con_req[x]) - set(args_array.keys()):
+        for _ in set(opt_con_req[item]) - set(args_array.keys()):
             status = False
             print("Error:  Option {0} requires options {1}.".
-                  format(x, opt_con_req[x]))
+                  format(item, opt_con_req[item]))
             break
 
     return status
@@ -131,16 +132,16 @@ def arg_cond_req_or(args_array, opt_con_req_dict, **kwargs):
     opt_con_req_dict = dict(opt_con_req_dict)
     status = True
 
-    for x in set(opt_con_req_dict.keys()) & set(args_array.keys()):
+    for item in set(opt_con_req_dict.keys()) & set(args_array.keys()):
         tmp_flag = False
 
-        for _ in set(opt_con_req_dict[x]) & set(args_array.keys()):
+        for _ in set(opt_con_req_dict[item]) & set(args_array.keys()):
             tmp_flag = True
             break
 
         if not tmp_flag:
             print("Error: Option {0} requires one of these options {1}".
-                  format(x, opt_con_req_dict[x]))
+                  format(item, opt_con_req_dict[item]))
             status = tmp_flag
 
     return status
@@ -152,6 +153,9 @@ def arg_default(arg, args_array, opt_def_dict, **kwargs):
 
     Description:  Checks to see if an argument has a default value and if so
         assigns that value to the option in the args_array list.
+
+    Note:  This function will overwrite an existing value for an argument if
+        one is already present in the args_array dictionary.
 
     Arguments:
         (input) arg -> Argument option.
@@ -189,6 +193,7 @@ def arg_dir_chk_crt(args_array, dir_chk_list, dir_crt_list=None, **kwargs):
 
     args_array = dict(args_array)
     dir_chk_list = list(dir_chk_list)
+    status = False
 
     if dir_crt_list is None:
         dir_crt_list = []
@@ -196,28 +201,25 @@ def arg_dir_chk_crt(args_array, dir_chk_list, dir_crt_list=None, **kwargs):
     else:
         dir_crt_list = list(dir_crt_list)
 
-    status = False
+    if set(dir_crt_list).issubset(set(dir_chk_list)):
 
-    for x in set(dir_chk_list) & set(args_array.keys()):
+        for item in set(dir_chk_list) & set(args_array.keys()):
 
-        if not os.path.isdir(args_array[x]):
+            if not os.path.isdir(args_array[item]) and item in dir_crt_list:
+                status = _make_dir(args_array[item], status)
 
-            if x in dir_crt_list:
-
-                try:
-                    os.makedirs(args_array[x])
-
-                except:
-                    print("Error:  Unable to create {0}".format(args_array[x]))
-                    status = True
-
-            else:
-                print("Error:  {0} does not exist.".format(args_array[x]))
+            elif not os.path.isdir(args_array[item]):
+                print("Error: {0} does not exist.".format(args_array[item]))
                 status = True
 
-        elif not os.access(args_array[x], os.W_OK) and x in dir_crt_list:
-            print("Error: {0} is not writable.".format(args_array[x]))
-            status = True
+            elif not os.access(args_array[item], os.W_OK):
+                print("Error: {0} is not writable.".format(args_array[item]))
+                status = True
+
+    else:
+        print("Error:  dir_crt_list: {0} is not a subset of dir_chk_list: {1}"
+              .format(dir_crt_list, dir_chk_list))
+        status = True
 
     return status
 
@@ -247,13 +249,13 @@ def arg_file_chk(args_array, file_chk_list, file_crt_list=None, **kwargs):
 
     status = False
 
-    for x in set(args_array.keys()) & set(file_chk_list):
+    for item in set(args_array.keys()) & set(file_chk_list):
 
-        if isinstance(args_array[x], list):
-            tmp_list = args_array[x]
+        if isinstance(args_array[item], list):
+            tmp_list = args_array[item]
 
         else:
-            tmp_list = [args_array[x]]
+            tmp_list = [args_array[item]]
 
         for name in tmp_list:
 
@@ -263,8 +265,8 @@ def arg_file_chk(args_array, file_chk_list, file_crt_list=None, **kwargs):
 
             except IOError as (errno, strerror):
 
-                status = _file_create(name, x, file_crt_list, errno, strerror,
-                                      status)
+                status = _file_create(name, item, file_crt_list, errno,
+                                      strerror, status)
 
     return status
 
@@ -287,14 +289,14 @@ def arg_noreq_xor(args_array, xor_noreq, **kwargs):
     xor_noreq = dict(xor_noreq)
     status = True
 
-    for x in xor_noreq:
+    for opt in xor_noreq:
 
         # Xor between key and values in dictionary.
-        if not (operator.xor((x in args_array),
-                             (xor_noreq[x] in args_array)) or
-                (x not in args_array and xor_noreq[x] not in args_array)):
+        if not (operator.xor((opt in args_array),
+                             (xor_noreq[opt] in args_array)) or
+                (opt not in args_array and xor_noreq[opt] not in args_array)):
 
-            print("Options: {0} or {1}, not both.".format(x, xor_noreq[x]))
+            print("Options: {0} or {1}, not both.".format(opt, xor_noreq[opt]))
             status = False
 
     return status
@@ -370,8 +372,8 @@ def arg_require(args_array, opt_req_list, **kwargs):
     opt_req_list = list(opt_req_list)
     status = False
 
-    for x in set(opt_req_list) - set(args_array.keys()):
-        print("Error:  The '{0}' option is required".format(x))
+    for item in set(opt_req_list) - set(args_array.keys()):
+        print("Error:  The '{0}' option is required".format(item))
         status = True
 
     return status
@@ -396,16 +398,16 @@ def arg_req_or_lst(args_array, opt_or_dict, **kwargs):
     opt_or_dict = dict(opt_or_dict)
     status = True
 
-    for x in set(opt_or_dict.keys()) - set(args_array.keys()):
+    for item in set(opt_or_dict.keys()) - set(args_array.keys()):
         tmp_flag = False
 
-        for _ in set(opt_or_dict[x]) & set(args_array.keys()):
+        for _ in set(opt_or_dict[item]) & set(args_array.keys()):
             tmp_flag = True
             break
 
         if not tmp_flag:
             print("Error:  Option: {0} or one of these: {1} is required.".
-                  format(x, opt_or_dict[x]))
+                  format(item, opt_or_dict[item]))
             status = tmp_flag
 
     return status
@@ -429,13 +431,13 @@ def arg_req_xor(args_array, opt_xor, **kwargs):
     opt_xor = dict(opt_xor)
     status = True
 
-    for x in opt_xor:
+    for item in opt_xor:
 
         # Xor between key and values in dictionary.
-        if not operator.xor((x in args_array),
-                            (opt_xor[x] in args_array)):
-            print("Option {0} or {1}, but not both.".format(x,
-                                                            opt_xor[x]))
+        if not operator.xor((item in args_array),
+                            (opt_xor[item] in args_array)):
+            print("Option {0} or {1}, but not both.".format(item,
+                                                            opt_xor[item]))
             status = False
 
     return status
@@ -457,10 +459,9 @@ def arg_set_path(args_array, arg_opt, **kwargs):
     args_array = dict(args_array)
 
     if arg_opt in args_array:
-        return args_array[arg_opt] + "/"
+        return os.path.join(args_array[arg_opt], "")
 
-    else:
-        return ""
+    return ""
 
 
 def arg_validate(args_array, valid_func, **kwargs):
@@ -480,11 +481,12 @@ def arg_validate(args_array, valid_func, **kwargs):
     args_array = dict(args_array)
     status = True
 
-    for x in set(valid_func.keys()) & set(args_array.keys()):
+    for item in set(valid_func.keys()) & set(args_array.keys()):
 
         # Call function from function list.
-        if not valid_func[x](args_array[x]):
-            print("Error:  Invalid format: {0} '{1}'".format(x, args_array[x]))
+        if not valid_func[item](args_array[item]):
+            print("Error:  Invalid format: {0} '{1}'"
+                  .format(item, args_array[item]))
             status = False
 
     return status
@@ -508,12 +510,12 @@ def arg_valid_val(args_array, opt_valid_val, **kwargs):
     status = True
 
     # Intersects the keys in args_array and opt_valid_val.
-    for x in set(args_array.keys()) & set(opt_valid_val.keys()):
+    for item in set(args_array.keys()) & set(opt_valid_val.keys()):
 
         # If passed value is valid for this option.
-        if not args_array[x] in opt_valid_val[x]:
+        if not args_array[item] in opt_valid_val[item]:
             print("Error:  Incorrect value ({0}) for option: {1}".
-                  format(args_array[x], x))
+                  format(args_array[item], item))
             status = False
 
     return status
@@ -563,10 +565,10 @@ def arg_xor_dict(args_array, opt_xor_dict, **kwargs):
     opt_xor_dict = dict(opt_xor_dict)
     status = True
 
-    for x in set(opt_xor_dict.keys()) & set(args_array.keys()):
+    for opt in set(opt_xor_dict.keys()) & set(args_array.keys()):
 
-        for y in set(opt_xor_dict[x]) & set(args_array.keys()):
-            print("Option {0} or {1}, but not both.".format(x, y))
+        for item in set(opt_xor_dict[opt]) & set(args_array.keys()):
+            print("Option {0} or {1}, but not both.".format(opt, item))
             status = False
             break
 
@@ -602,17 +604,48 @@ def _file_create(name, option, file_crt_list, errno, strerror, status,
             fname = open(name, "w")
             fname.close()
 
-        except IOError as (errno, strerror):
+        except IOError as (err, strerr):
             # Unable to create file.
-            print("I/O Error: ({0}): {1}".format(errno, strerror))
+            print("I/O Error: ({0}): {1}".format(err, strerr))
             print("Check option: '{0}', file: '{1}'".format(option, name))
             status = True
 
     # File not present.
     else:
-        print("I/O Error: ({0}): {1}".format(errno, strerror))
+        print("File Error: ({0}): {1}".format(errno, strerror))
         print("Check option: '{0}', file: '{1}'".format(option, name))
         status = True
+
+    return status
+
+
+def _make_dir(dirname, status, **kwargs):
+
+    """Function:  _make_dir
+
+    Description:  Tries to create a directory and capture any exceptions.
+
+    NOTE:  Used by the arg_dir_chk_crt() to reduce the complexity rating.
+
+    Arguments:
+        (input) dirname -> Directory name.
+        (input) status -> True|False - If directories are unavailable.
+        (output) status -> True|False - If directories are unavailable.
+
+    """
+
+    try:
+        os.makedirs(dirname)
+
+    except OSError as (errno, strerr):
+        if errno == 13 or errno == 17:
+            print("Error:  {0} for {1}".format(strerr, dirname))
+            status = True
+
+        else:
+            print("Error {0}:  Message:  {1} for {2}".format(
+                errno, strerr, dirname))
+            status = True
 
     return status
 
@@ -649,7 +682,7 @@ def _parse_multi(argv, args_array, opt_def_dict, **kwargs):
     else:
         # Handle multiple values for argument.
         args_array[argv[0]] = []
-        x = 0
+        cnt = 0
         tmp_argv = argv[1:]
 
         # Process values until next argument.
@@ -660,11 +693,11 @@ def _parse_multi(argv, args_array, opt_def_dict, **kwargs):
             else:
                 args_array[argv[0]].append(tmp_argv[0])
 
-            x = x + 1
+            cnt = cnt + 1
             tmp_argv = tmp_argv[1:]
 
         # Move to argument after the multiple values.
-        argv = argv[x:]
+        argv = argv[cnt:]
 
     return argv, args_array
 

@@ -35,14 +35,13 @@ import time
 import atexit
 import signal
 import platform
-import socket
 import getpass
 
 # Third-party
 import gzip
-import yum
 import json
 import re
+import yum
 
 # Local
 import version
@@ -188,12 +187,12 @@ class Daemon:
         # Redirect standard file descriptors
         sys.stdout.flush()
         sys.stderr.flush()
-        si = file(self.stdin, "r")
-        so = file(self.stdout, "a+")
-        se = file(self.stderr, "a+", 0)
-        os.dup2(si.fileno(), sys.stdin.fileno())
-        os.dup2(so.fileno(), sys.stdout.fileno())
-        os.dup2(se.fileno(), sys.stderr.fileno())
+        sdi = file(self.stdin, "r")
+        sdo = file(self.stdout, "a+")
+        sde = file(self.stderr, "a+", 0)
+        os.dup2(sdi.fileno(), sys.stdin.fileno())
+        os.dup2(sdo.fileno(), sys.stdout.fileno())
+        os.dup2(sde.fileno(), sys.stderr.fileno())
 
         # Write pidfile
         atexit.register(self.delpid)
@@ -224,9 +223,9 @@ class Daemon:
 
         # Check for a pidfile to see if the daemon already runs.
         try:
-            pf = file(self.pidfile, "r")
-            pid = int(pf.read().strip())
-            pf.close()
+            pfile = file(self.pidfile, "r")
+            pid = int(pfile.read().strip())
+            pfile.close()
 
         except IOError:
             pid = None
@@ -252,9 +251,9 @@ class Daemon:
 
         # Get the pid from the pidfile
         try:
-            pf = file(self.pidfile, "r")
-            pid = int(pf.read().strip())
-            pf.close()
+            pfile = file(self.pidfile, "r")
+            pid = int(pfile.read().strip())
+            pfile.close()
 
         except IOError:
             pid = None
@@ -404,14 +403,14 @@ class LogFile(object):
 
         if self.ignore and self.loglist:
             if use_marker and self.linemarker > 0:
-                self.loglist = [x for x in self.loglist[self.linemarker:]
-                                if not any(y in x.lower()
-                                           for y in self.ignore)]
+                self.loglist = [item for item in self.loglist[self.linemarker:]
+                                if not any(line in item.lower()
+                                           for line in self.ignore)]
 
             else:
-                self.loglist = [x for x in self.loglist
-                                if not any(y in x.lower()
-                                           for y in self.ignore)]
+                self.loglist = [item for item in self.loglist
+                                if not any(line in item.lower()
+                                           for line in self.ignore)]
 
     def filter_keyword(self, use_marker=False, **kwargs):
 
@@ -426,14 +425,14 @@ class LogFile(object):
 
         if self.keyword and self.loglist:
             if use_marker and self.linemarker > 0:
-                self.loglist = [x for x in self.loglist[self.linemarker:]
-                                if self.predicate(y in x.lower()
-                                                  for y in self.keyword)]
+                self.loglist = [item for item in self.loglist[self.linemarker:]
+                                if self.predicate(line in item.lower()
+                                                  for line in self.keyword)]
 
             else:
-                self.loglist = [x for x in self.loglist
-                                if self.predicate(y in x.lower()
-                                                  for y in self.keyword)]
+                self.loglist = [item for item in self.loglist
+                                if self.predicate(line in item.lower()
+                                                  for line in self.keyword)]
 
     def filter_regex(self, use_marker=False, **kwargs):
 
@@ -448,12 +447,12 @@ class LogFile(object):
 
         if self.regex and self.loglist:
             if use_marker and self.linemarker > 0:
-                self.loglist = [x for x in self.loglist[self.linemarker:]
-                                if re.search(self.regex, x)]
+                self.loglist = [item for item in self.loglist[self.linemarker:]
+                                if re.search(self.regex, item)]
 
             else:
-                self.loglist = [x for x in self.loglist
-                                if re.search(self.regex, x)]
+                self.loglist = [item for item in self.loglist
+                                if re.search(self.regex, item)]
 
     def load_ignore(self, data, **kwargs):
 
@@ -467,11 +466,13 @@ class LogFile(object):
         """
 
         if isinstance(data, file):
-            self.ignore.extend([x.lower().rstrip().rstrip("\n") for x in data])
+            self.ignore.extend(
+                [item.lower().rstrip().rstrip("\n") for item in data])
 
         elif isinstance(data, list):
             data = list(data)
-            self.ignore.extend([x.lower().rstrip().rstrip("\n") for x in data])
+            self.ignore.extend(
+                [item.lower().rstrip().rstrip("\n") for item in data])
 
         elif isinstance(data, str):
             self.ignore.append(data.lower().rstrip().rstrip("\n"))
@@ -683,7 +684,7 @@ class ProgressBar(object):
         self.update(progress)
 
 
-class SingleInstanceException(BaseException):
+class SingleInstanceException(Exception):
 
     """Class:  SingleInstanceException
 
@@ -932,7 +933,7 @@ class Mail(System):
 
         if subj:
             if isinstance(subj, list):
-                self.subj = "".join(str(item) for item in list(subj))
+                self.subj = " ".join(str(item) for item in list(subj))
 
             else:
                 self.subj = subj

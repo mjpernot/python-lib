@@ -59,7 +59,7 @@ class UnitTest(unittest.TestCase):
         """
 
         self.yes = "Yes"
-        self.no = "No"
+        self.nos = "No"
 
     def test_yes_yes(self):
 
@@ -83,7 +83,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertFalse(gen_libs.and_is_true(self.no, self.no))
+        self.assertFalse(gen_libs.and_is_true(self.nos, self.nos))
 
     def test_no_yes(self):
 
@@ -95,7 +95,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertFalse(gen_libs.and_is_true(self.no, self.yes))
+        self.assertFalse(gen_libs.and_is_true(self.nos, self.yes))
 
     def test_yes_no(self):
 
@@ -107,7 +107,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertFalse(gen_libs.and_is_true(self.yes, self.no))
+        self.assertFalse(gen_libs.and_is_true(self.yes, self.nos))
 
 
 if __name__ == "__main__":

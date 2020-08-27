@@ -125,14 +125,14 @@ def disconnect(*args):
 
     """
 
-    for x in args:
+    for server in args:
 
-        if isinstance(x, list):
-            for y in x:
-                y.disconnect()
+        if isinstance(server, list):
+            for srv in server:
+                srv.disconnect()
 
         else:
-            x.disconnect()
+            server.disconnect()
 
 
 def get_inst(cmd, **kwargs):
@@ -170,22 +170,22 @@ def is_add_cmd(args_array, cmd, opt_arg_list, **kwargs):
     args_array = dict(args_array)
     opt_arg_list = dict(opt_arg_list)
 
-    for x in opt_arg_list:
+    for opt in opt_arg_list:
 
         # Is option in array and is set to True.
-        if x in args_array and args_array[x] and isinstance(args_array[x],
-                                                            bool):
+        if opt in args_array and args_array[opt] \
+           and isinstance(args_array[opt], bool):
 
-            if isinstance(opt_arg_list[x], list):
+            if isinstance(opt_arg_list[opt], list):
 
-                for y in opt_arg_list[x]:
-                    cmd = add_cmd(cmd, arg=y)
+                for item in opt_arg_list[opt]:
+                    cmd = add_cmd(cmd, arg=item)
 
             else:
-                cmd = add_cmd(cmd, arg=opt_arg_list[x])
+                cmd = add_cmd(cmd, arg=opt_arg_list[opt])
 
-        elif x in args_array:
-            cmd = add_cmd(cmd, arg=opt_arg_list[x], val=args_array[x])
+        elif opt in args_array:
+            cmd = add_cmd(cmd, arg=opt_arg_list[opt], val=args_array[opt])
 
     return cmd
 
@@ -211,17 +211,17 @@ def run_prog(cmd, **kwargs):
     # Write to file.
     if kwargs.get("ofile", False):
         with open(kwargs["ofile"], "wb") as f_name:
-            P1 = subinst.Popen(cmd, stdout=f_name)
-            P1.wait()
+            proc1 = subinst.Popen(cmd, stdout=f_name)
+            proc1.wait()
 
     # Return data to calling function.
     elif kwargs.get("retdata", False):
-        P1 = subinst.Popen(cmd, stdout=subinst.PIPE)
-        out, err = P1.communicate()
+        proc1 = subinst.Popen(cmd, stdout=subinst.PIPE)
+        out, err = proc1.communicate()
 
         return out
 
     # Write to standard out.
     else:
-        P1 = subinst.Popen(cmd)
-        P1.wait()
+        proc1 = subinst.Popen(cmd)
+        proc1.wait()

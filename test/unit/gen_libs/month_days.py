@@ -26,7 +26,6 @@ else:
     import unittest
 
 # Third-party
-import mock
 
 # Local
 sys.path.append(os.getcwd())
@@ -58,7 +57,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.dt = datetime.datetime.strptime("20200301", "%Y%m%d")
+        self.dtg = datetime.datetime.strptime("20200301", "%Y%m%d")
         self.results = 31
 
     def test_month_days(self):
@@ -71,7 +70,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertEqual(gen_libs.month_days(self.dt), self.results)
+        self.assertEqual(gen_libs.month_days(self.dtg), self.results)
 
 
 if __name__ == "__main__":

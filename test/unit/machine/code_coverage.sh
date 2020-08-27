@@ -8,9 +8,9 @@ coverage erase
 
 echo ""
 echo "Running unit test modules in conjunction with coverage"
-coverage run -a --source=machine test/unit/machine/Linux.py
-coverage run -a --source=machine test/unit/machine/Machine.py
-coverage run -a --source=machine test/unit/machine/Solaris.py
+coverage run -a --source=machine test/unit/machine/linux.py
+coverage run -a --source=machine test/unit/machine/amachine.py
+coverage run -a --source=machine test/unit/machine/solaris.py
 
 echo ""
 echo "Producing code coverage report"
