@@ -533,13 +533,27 @@ def arg_wildcard(args_array, opt_wildcard, **kwargs):
         (input) opt_wildcard -> List of wildcard options.
         (output) args_array -> Array of command line options and values.
 
+    Example:
+        Input:
+            args_array = {"-a": ["cmds*", "arg*"], "-b": ["gen*"],
+                          "-c": "*class*"}
+            opt_wildcard = ["-a", "-b", "-c"]
+        Output:
+            {'-a': ['cmds_gen.py', 'arg_parser.py'], '-c': ['gen_class.py'],
+             '-b': ['gen_libs.py', 'gen_class.py']}
+
     """
 
     args_array = dict(args_array)
     opt_wildcard = list(opt_wildcard)
 
     for opt in opt_wildcard:
-        args_array[opt] = glob.glob(args_array[opt])
+        if opt in args_array.keys() and isinstance(args_array[opt], list):
+            t_list = [glob.glob(item) for item in args_array[opt]]
+            args_array[opt] = [item1 for item2 in t_list for item1 in item2]
+
+        elif opt in args_array.keys() and isinstance(args_array[opt], str):
+            args_array[opt] = glob.glob(args_array[opt])
 
     return args_array
 

@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [2.8.3] - 2020-12-24
+
+### Changed
+- gen_libs.arg_wildcard:  Refactored the function for better functionality.
+- Documentation update.
+
+### Deprecated
+- cmds_gen.disconnect:  No longer required.
+
+
 ## [2.8.2] - 2020-07-15
 ### Added
 - arg_parser.\_make_dir:  Tries to create a directory and capture any exceptions.
