@@ -7,6 +7,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 ## [2.8.3] - 2020-12-24
 
 ### Changed
+- gen_libs.make_md5_hash:  Changed variable name to standard naming convention.
 - gen_libs.list_2_dict:  Changed variable name to standard naming convention.
 - gen_libs.del_not_and_list:  Replaced try/except with an intersect of two sets to capture items to be removed.
 - arg_parser.arg_wildcard:  Refactored the function for better functionality.

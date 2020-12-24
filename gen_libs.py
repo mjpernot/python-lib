@@ -1239,8 +1239,8 @@ def make_md5_hash(file_path, to_file=True, **kwargs):
     """
 
     inst = get_inst(subprocess)
-    P1 = inst.Popen(["/usr/bin/md5sum", file_path], stdout=inst.PIPE)
-    hash_results, status = P1.communicate()
+    proc1 = inst.Popen(["/usr/bin/md5sum", file_path], stdout=inst.PIPE)
+    hash_results, status = proc1.communicate()
     hash_results = hash_results.split("  ")[0]
 
     if to_file:
