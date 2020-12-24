@@ -1380,14 +1380,14 @@ def milli_2_readadble(ms, **kwargs):
 
     """
 
-    x = ms / 1000
-    seconds = x % 60
-    x /= 60
-    minutes = x % 60
-    x /= 60
-    hours = x % 24
-    x /= 24
-    days = x
+    data = ms / 1000
+    seconds = data % 60
+    data /= 60
+    minutes = data % 60
+    data /= 60
+    hours = data % 24
+    data /= 24
+    days = data
 
     return "%d days %d hours %d minutes %d seconds" \
            % (days, hours, minutes, seconds)
