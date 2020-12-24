@@ -1688,13 +1688,13 @@ def prt_dict(data, fhandler=sys.stdout, **kwargs):
 
     data = dict(data)
 
-    for x, y in data.iteritems():
+    for key, val in data.iteritems():
 
-        if isinstance(y, dict):
-            prt_dict(y, fhandler, **kwargs)
+        if isinstance(val, dict):
+            prt_dict(val, fhandler, **kwargs)
 
         else:
-            print("{0}:  {1}".format(x, y), file=fhandler)
+            print("{0}:  {1}".format(key, val), file=fhandler)
 
 
 def prt_lvl(lvl=1, **kwargs):
