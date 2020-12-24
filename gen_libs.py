@@ -1176,8 +1176,8 @@ def list_2_dict(kv_list, fld_del=".", **kwargs):
     kv_list = list(kv_list)
     dict_list = {}
 
-    for x in kv_list:
-        dbs, tbl = x.split(fld_del)
+    for item in kv_list:
+        dbs, tbl = item.split(fld_del)
 
         if dbs not in dict_list:
             dict_list[dbs] = [tbl]
