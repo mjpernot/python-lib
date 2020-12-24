@@ -1368,7 +1368,7 @@ def merge_two_dicts(data_1, data_2, **kwargs):
     return data, status, err_msg
 
 
-def milli_2_readadble(ms, **kwargs):
+def milli_2_readadble(msecs, **kwargs):
 
     """Function:  milli_2_readadble
 
@@ -1376,11 +1376,11 @@ def milli_2_readadble(ms, **kwargs):
         Returns values with appropriate tags.
 
     Arguments:
-        (input) ms -> Milliseconds.
+        (input) msecs -> Milliseconds.
 
     """
 
-    data = ms / 1000
+    data = msecs / 1000
     seconds = data % 60
     data /= 60
     minutes = data % 60
