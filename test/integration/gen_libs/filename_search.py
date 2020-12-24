@@ -83,7 +83,7 @@ class UnitTest(unittest.TestCase):
         """
 
         self.assertEqual(gen_libs.filename_search(
-            self.dir_path, self.file_str, True), self.results4)
+            self.dir_path, self.file_str, True).sort(), self.results4.sort())
 
     def test_no_file_search(self):
 
@@ -122,7 +122,7 @@ class UnitTest(unittest.TestCase):
         """
 
         self.assertEqual(gen_libs.filename_search(
-            self.dir_path, self.file_str), self.results2)
+            self.dir_path, self.file_str).sort(), self.results2.sort())
 
 
 if __name__ == "__main__":
