@@ -41,6 +41,10 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Unit testing initilization.
+        test_indent_multi_lvl -> Test multi level with indentation.
+        test_indent_multi_dict -> Test multi dict with indentation.
+        test_indent2 -> Test with passing indentation setting.
+        test_indent -> Test with passing indentation setting.
         test_multi_lvl -> Test with multiple level dictionary.
         test_multi_dict -> Test with multiple items in dictionary.
         test_one_item -> Test with one item in dictionary.
@@ -63,6 +67,64 @@ class UnitTest(unittest.TestCase):
         self.data3 = {"key1": "value1", "key2": "value2"}
         self.data4 = {"key1": {"key2": "value2"}}
         self.f_hldr = open("/dev/null", "w")
+        self.indent = 0
+        self.indent2 = 1
+
+    def test_indent_multi_lvl(self):
+
+        """Function:  test_indent_multi_lvl
+
+        Description:  Test multi level with indentation.
+
+        Arguments:
+
+        """
+
+        with gen_libs.no_std_out():
+            self.assertFalse(gen_libs.prt_dict(self.data4, self.f_hldr,
+                                               indent=self.indent2))
+
+    def test_indent_multi_dict(self):
+
+        """Function:  test_multi_dict
+
+        Description:  Test multi dict with indentation.
+
+        Arguments:
+
+        """
+
+        with gen_libs.no_std_out():
+            self.assertFalse(gen_libs.prt_dict(self.data3, self.f_hldr,
+                                               indent=self.indent2))
+
+    def test_indent2(self):
+
+        """Function:  test_indent2
+
+        Description:  Test with passing indentation setting.
+
+        Arguments:
+
+        """
+
+        with gen_libs.no_std_out():
+            self.assertFalse(gen_libs.prt_dict(self.data2, self.f_hldr,
+                                               indent=self.indent2))
+
+    def test_indent(self):
+
+        """Function:  test_indent
+
+        Description:  Test with passing indentation setting.
+
+        Arguments:
+
+        """
+
+        with gen_libs.no_std_out():
+            self.assertFalse(gen_libs.prt_dict(self.data2, self.f_hldr,
+                                               indent=self.indent))
 
     def test_multi_lvl(self):
 
