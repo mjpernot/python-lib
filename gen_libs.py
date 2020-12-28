@@ -1635,8 +1635,8 @@ def print_dict(data, ofile=None, json_fmt=False, no_std=False, mode="w",
 
     """Function:  print_dict
 
-    Description:  Print dictionary to a file and/or standard out and in either
-        JSON or standard format.
+    Description:  Print dictionary to a file, standard out, and/or an email
+        instance and in either JSON or standard format.
 
     Arguments:
         (input) data -> Dictionary document.
@@ -1644,6 +1644,8 @@ def print_dict(data, ofile=None, json_fmt=False, no_std=False, mode="w",
         (input) json_fmt -> True|False - Print in JSON format.
         (input) no_std -> True|False - Do not print to standard out.
         (input) mode -> w|a => Write or append mode.
+        (input) kwargs:
+            mail -> Mail instance.
         (output) err_flag -> True|False - If error has occurred.
         (output) err_msg -> None or error message.
 
@@ -1651,6 +1653,7 @@ def print_dict(data, ofile=None, json_fmt=False, no_std=False, mode="w",
 
     err_flag = False
     err_msg = None
+    mail = kwargs.get("mail", None)
 
     if isinstance(data, dict):
         if ofile and json_fmt:
@@ -1665,6 +1668,12 @@ def print_dict(data, ofile=None, json_fmt=False, no_std=False, mode="w",
 
         elif not no_std:
             dict_2_std(data, ofile=False, **kwargs)
+
+        if mail and json_fmt:
+            mail.add_2_msg(json.dumps(data, indent=4))
+
+        elif mail:
+            mail.add_2_msg(data)
 
     else:
         err_flag = True
