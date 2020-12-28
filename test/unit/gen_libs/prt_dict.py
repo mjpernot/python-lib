@@ -86,7 +86,7 @@ class UnitTest(unittest.TestCase):
 
     def test_indent_multi_dict(self):
 
-        """Function:  test_multi_dict
+        """Function:  test_indent_multi_dict
 
         Description:  Test multi dict with indentation.
 
