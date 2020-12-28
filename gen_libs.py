@@ -1683,18 +1683,23 @@ def prt_dict(data, fhandler=sys.stdout, **kwargs):
     Arguments:
         (input) data -> JSON document.
         (input) outhldr -> File handler to standard out or a file.
+        (input) kwargs:
+            indent -> Level of indentation for printing.
 
     """
 
     data = dict(data)
+    indent = kwargs.get("indent", 0)
+    spc = " "
 
     for key, val in data.iteritems():
 
         if isinstance(val, dict):
-            prt_dict(val, fhandler, **kwargs)
+            print("{0}{1}:".format(spc * indent, key), file=fhandler)
+            prt_dict(val, fhandler, indent=indent + 4)
 
         else:
-            print("{0}:  {1}".format(key, val), file=fhandler)
+            print("{0}{1}:  {2}".format(spc * indent, key, val), file=fhandler)
 
 
 def prt_lvl(lvl=1, **kwargs):

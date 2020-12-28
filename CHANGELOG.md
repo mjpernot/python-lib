@@ -6,6 +6,9 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 ## [2.8.3] - 2020-12-24
 
+### Fixed
+- gen_libs.prt_dict:  Print keys for nested dictionaries in the value.
+
 ### Changed
 - gen_libs.del_not_and_list:  Replaced try/except with an intersect of two sets to capture items to be removed.
 - arg_parser.arg_wildcard:  Refactored the function for better functionality.
