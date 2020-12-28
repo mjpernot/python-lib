@@ -252,7 +252,7 @@ def arg_file_chk(args_array, file_chk_list, file_crt_list=None, **kwargs):
     for item in set(args_array.keys()) & set(file_chk_list):
 
         if isinstance(args_array[item], list):
-            tmp_list = args_array[item]
+            tmp_list = list(args_array[item])
 
         else:
             tmp_list = [args_array[item]]
