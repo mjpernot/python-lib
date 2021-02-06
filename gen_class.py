@@ -25,6 +25,7 @@
 
 # Standard
 import os
+import subprocess
 import fcntl
 import sys
 import tempfile
@@ -831,6 +832,7 @@ class Mail(System):
         create_body -> Combines subject line & message into a single entity.
         create_subject -> Creates or overwrites a subject to the email.
         send_mail -> Emails message out via smtp connection.
+        send_mailx -> Emails message out using mailx.
         print_email -> Print email to standard out.
 
     """
@@ -954,6 +956,32 @@ class Mail(System):
         server = inst.SMTP("localhost")
         server.sendmail(self.frm, self.to, self.create_body())
         server.quit()
+
+    def send_mailx(self):
+
+        """Method:  send_mailx
+
+        Description:  Opens a subprocess to mail out the message and subject
+            to the email address.
+
+        Note:  This was created due to the some mail guards not working with
+            the smtplib module, but works fine with mailx.
+
+        Arguments:
+
+        """
+
+        if isinstance(self.subj, list):
+            self.subj = "".join(str(item) for item in list(self.subj))
+
+        if isinstance(self.to, list):
+            self.to = " ".join(str(item) for item in list(self.to))
+
+        inst = get_inst(subprocess)
+        proc1 = inst.Popen(['echo', self.msg], stdout=inst.PIPE)
+        proc2 = inst.Popen(['mailx', '-s', self.subj, subj.to],
+                           stdin=proc1.stdout)
+        proc2.wait()
 
     def print_email(self):
 

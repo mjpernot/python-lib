@@ -10,6 +10,9 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - gen_libs.prt_dict:  Print keys for nested dictionaries in the value.
 - arg_parser.arg_file_chk:  Fixed problem with mutable default arguments issue.
 
+### Added
+- gen_class.Mail.send_mailx:  Emails message out using mailx.
+
 ### Changed
 - gen_libs.print_dict:  Added ability to add the dictionary to an email instance message.
 - gen_libs.del_not_and_list:  Replaced try/except with an intersect of two sets to capture items to be removed.
