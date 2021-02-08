@@ -75,6 +75,7 @@ coverage run -a --source=gen_libs test/unit/gen_libs/rename_file.py
 coverage run -a --source=gen_libs test/unit/gen_libs/rm_dup_list.py
 coverage run -a --source=gen_libs test/unit/gen_libs/rm_file.py
 coverage run -a --source=gen_libs test/unit/gen_libs/rm_newline_list.py
+coverage run -a --source=gen_libs test/unit/gen_libs/rm_whitespace.py
 coverage run -a --source=gen_libs test/unit/gen_libs/root_run.py
 coverage run -a --source=gen_libs test/unit/gen_libs/rotate_files.py
 coverage run -a --source=gen_libs test/unit/gen_libs/str_2_list.py
