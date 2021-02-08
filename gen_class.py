@@ -940,7 +940,7 @@ class Mail(System):
             else:
                 self.subj = subj
 
-    def send_mail(self):
+    def send_mail(self, use_mailx=False):
 
         """Method:  send_mail
 
@@ -948,14 +948,22 @@ class Mail(System):
             to the email address.  Call to create_body() puts "Subj:" into the
             message which is required for sendmail.
 
+        Note:  Setup the send_mailx call to allow programs using the current
+            send_mail to need only an argument option.
+
         Arguments:
+            (input) use_mailx -> True|False - To use mailx command.
 
         """
 
-        inst = get_inst(smtplib)
-        server = inst.SMTP("localhost")
-        server.sendmail(self.frm, self.to, self.create_body())
-        server.quit()
+        if use_mailx:
+            self.send_mailx()
+
+        else:
+            inst = get_inst(smtplib)
+            server = inst.SMTP("localhost")
+            server.sendmail(self.frm, self.to, self.create_body())
+            server.quit()
 
     def send_mailx(self):
 

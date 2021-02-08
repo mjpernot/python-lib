@@ -14,6 +14,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - gen_class.Mail.send_mailx:  Emails message out using mailx.
 
 ### Changed
+- gen_class.Mail.send_mail:  Add a keyword argument option to allow the send_mailx method to be called.
 - gen_libs.print_dict:  Added ability to add the dictionary to an email instance message.
 - gen_libs.del_not_and_list:  Replaced try/except with an intersect of two sets to capture items to be removed.
 - arg_parser.arg_wildcard:  Refactored the function for better functionality.
