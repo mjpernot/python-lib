@@ -78,6 +78,7 @@ coverage run -a --source=gen_libs test/unit/gen_libs/in_list.py
 coverage run -a --source=gen_libs test/unit/gen_libs/is_empty_file.py
 coverage run -a --source=gen_libs test/unit/gen_libs/is_file_text.py
 coverage run -a --source=gen_libs test/unit/gen_libs/is_missing_lists.py
+coverage run -a --source=gen_libs test/unit/gen_libs/is_pos_int.py
 coverage run -a --source=gen_libs test/unit/gen_libs/is_true.py
 coverage run -a --source=gen_libs test/unit/gen_libs/key_cleaner.py
 coverage run -a --source=gen_libs test/unit/gen_libs/list_2_dict.py
