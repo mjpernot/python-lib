@@ -76,6 +76,7 @@ pipeline {
                 ./test/unit/gen_libs/get_inst.py
                 ./test/unit/gen_libs/get_secs.py
                 ./test/unit/gen_libs/get_time.py
+                ./test/unit/gen_libs/has_whitespace.py
                 ./test/unit/gen_libs/help_func.py
                 ./test/unit/gen_libs/in_list.py
                 ./test/unit/gen_libs/is_empty_file.py
