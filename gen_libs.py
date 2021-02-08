@@ -73,6 +73,7 @@
         rm_dup_list
         rm_file
         rm_newline_list
+        rm_whitespace
         root_run
         rotate_files
         str_2_list
@@ -1841,6 +1842,21 @@ def rm_newline_list(orig_list, **kwargs):
     """
 
     return [x.strip("\n") for x in orig_list]
+
+
+def rm_whitespace(data, **kwargs):
+
+    """Function:  rm_whitespace
+
+    Description:  Remove white space from a data string.
+
+    Arguments:
+        (input) data -> Data string.
+        (output) Data string minus any white spaces.
+
+    """
+
+    return data.replace(" ", "")
 
 
 def root_run(**kwargs):

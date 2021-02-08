@@ -11,6 +11,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - arg_parser.arg_file_chk:  Fixed problem with mutable default arguments issue.
 
 ### Added
+- gen_libs.rm_whitespace:  Remove white space from a data string.
 - gen_libs.has_whitespace:  Returns True|False on whether a string has a white space.
 - gen_class.Mail.send_mailx:  Emails message out using mailx.
 
