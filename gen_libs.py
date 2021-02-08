@@ -74,6 +74,7 @@
         rename_file
         rm_dup_list
         rm_file
+        rm_key
         rm_newline_list
         rm_whitespace
         root_run
@@ -1879,6 +1880,28 @@ def rm_file(file_path, **kwargs):
         err_msg = "Error: %s - %s" % (err.filename, err.strerror)
 
     return err_flag, err_msg
+
+
+def rm_key(data, key, **kwargs):
+
+    """Function:  rm_key
+
+    Description:  Remove a key from a dictionary if it exists and return a
+        copy of the modified dictionary.
+
+    Arguments:
+        (input) data -> Original dictionary.
+        (input) key -> Name of key to be removed.
+        (output) mod_data -> Modified dictionary of original dictionary.
+
+    """
+
+    mod_data = dict(data)
+
+    if key in mod_data:
+        del mod_data[key]
+
+    return mod_data
 
 
 def rm_newline_list(orig_list, **kwargs):
