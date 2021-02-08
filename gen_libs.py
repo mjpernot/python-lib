@@ -37,6 +37,7 @@
         get_inst
         get_secs
         get_time
+        has_whitespace
         help_func
         in_list
         is_empty_file
@@ -105,6 +106,7 @@ import re
 import collections
 import contextlib
 import io
+import string
 
 # Third party
 import json
@@ -937,6 +939,25 @@ def get_time(**kwargs):
     """
 
     return datetime.datetime.strftime(datetime.datetime.now(), "%H:%M:%S")
+
+
+def has_whitespace(data, **kwargs):
+
+    """Function:  has_whitespace
+
+    Description:  Returns True|False on whether a string has a white space.
+
+    Arguments:
+        (input) data -> Data string.
+        (output) True|False - Has a white space.
+
+    """
+
+    for item in data:
+        if item in string.whitespace:
+            return True
+
+    return False
 
 
 def help_func(args_array, version, func_name=None, **kwargs):
