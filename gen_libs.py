@@ -43,6 +43,7 @@
         is_empty_file
         is_file_text
         is_missing_lists
+        is_pos_int
         is_true
         key_cleaner
         list_dirs
@@ -1092,6 +1093,21 @@ def is_missing_lists(list1, list2, **kwargs):
     list2 = list(list2)
 
     return [item for item in list1 if item not in list2]
+
+
+def is_pos_int(num, **kwargs):
+
+    """Function:  is_pos_int
+
+    Description:  Returns True|False if number is an integer and positive.
+
+    Arguments:
+        (input) num -> Integer value.
+        (output) True|False -> Number is an integer and positive.
+
+    """
+
+    return isinstance(num, int) and num > 0
 
 
 def is_true(item, **kwargs):

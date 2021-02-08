@@ -11,6 +11,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - arg_parser.arg_file_chk:  Fixed problem with mutable default arguments issue.
 
 ### Added
+- gen_libs.is_pos_int:  Returns True|False if number is an integer and positive.
 - gen_libs.is_file_text:  Returns True|False on whether the file is a text file.
 - gen_libs.rm_whitespace:  Remove white space from a data string.
 - gen_libs.has_whitespace:  Returns True|False on whether a string has a white space.
