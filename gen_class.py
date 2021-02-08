@@ -965,21 +965,20 @@ class Mail(System):
             to the email address.
 
         Note:  This was created due to the some mail guards not working with
-            the smtplib module, but works fine with mailx.
+            the smtplib module, but will work fine with mailx.
 
         Arguments:
 
         """
 
-        if isinstance(self.subj, list):
-            self.subj = "".join(str(item) for item in list(self.subj))
+        self.subj = self.subj.replace(" ", "")
 
         if isinstance(self.to, list):
             self.to = " ".join(str(item) for item in list(self.to))
 
         inst = get_inst(subprocess)
         proc1 = inst.Popen(['echo', self.msg], stdout=inst.PIPE)
-        proc2 = inst.Popen(['mailx', '-s', self.subj, subj.to],
+        proc2 = inst.Popen(['mailx', '-s', self.subj, self.to],
                            stdin=proc1.stdout)
         proc2.wait()
 
