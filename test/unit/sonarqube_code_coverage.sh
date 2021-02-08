@@ -165,6 +165,7 @@ coverage run -a --source=gen_class test/unit/gen_class/mail_create_subject.py
 coverage run -a --source=gen_class test/unit/gen_class/mail_print_email.py
 coverage run -a --source=gen_class test/unit/gen_class/mail_read_stdin.py
 coverage run -a --source=gen_class test/unit/gen_class/mail_send_mail.py
+coverage run -a --source=gen_class test/unit/gen_class/mail_send_mailx.py
 coverage run -a --source=machine test/unit/machine/linux.py
 coverage run -a --source=machine test/unit/machine/amachine.py
 coverage run -a --source=machine test/unit/machine/solaris.py
