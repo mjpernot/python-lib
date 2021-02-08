@@ -43,6 +43,7 @@ test/unit/gen_libs/in_list.py
 test/unit/gen_libs/is_empty_file.py
 test/unit/gen_libs/is_file_text.py
 test/unit/gen_libs/is_missing_lists.py
+test/unit/gen_libs/is_pos_int.py
 test/unit/gen_libs/is_true.py
 test/unit/gen_libs/key_cleaner.py
 test/unit/gen_libs/list_2_dict.py
