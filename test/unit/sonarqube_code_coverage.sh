@@ -72,6 +72,7 @@ coverage run -a --source=gen_libs test/unit/gen_libs/get_date.py
 coverage run -a --source=gen_libs test/unit/gen_libs/get_inst.py
 coverage run -a --source=gen_libs test/unit/gen_libs/get_secs.py
 coverage run -a --source=gen_libs test/unit/gen_libs/get_time.py
+coverage run -a --source=gen_libs test/unit/gen_libs/has_whitespace.py
 coverage run -a --source=gen_libs test/unit/gen_libs/help_func.py
 coverage run -a --source=gen_libs test/unit/gen_libs/in_list.py
 coverage run -a --source=gen_libs test/unit/gen_libs/is_empty_file.py
