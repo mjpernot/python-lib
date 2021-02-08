@@ -41,6 +41,7 @@
         help_func
         in_list
         is_empty_file
+        is_file_text
         is_missing_lists
         is_true
         key_cleaner
@@ -1036,6 +1037,41 @@ def is_empty_file(f_name, **kwargs):
         status = None
 
     return status
+
+
+def is_file_text(f_name, **kwargs):
+
+    """Function:  is_file_text
+
+    Description:  Returns True|False on whether the file is a text file.
+
+    Arguments:
+        (input) f_name -> File being checked.
+        (output) True|False -> Is the file a text file.
+
+    """
+
+    f_head = open(f_name).read(512)
+    text_chars = "".join(map(chr, range(32, 127)) + list("\n\r\t\b"))
+    _null_trans = string.maketrans("", "")
+
+    # Empty files are text.
+    if not f_head:
+        return True
+
+    # Files with null bytes are binary.
+    if "\0" in f_head:
+        return False
+
+    # Get the non-text characters.
+    #   Maps char to itself then use 'remove' option to get rid of text chars.
+    non_text = f_head.translate(_null_trans, text_chars)
+
+    # If > 30% non-text characters, then a binary file.
+    if float(len(non_text))/float(len(f_head)) > 0.30:
+        return False
+
+    return True
 
 
 def is_missing_lists(list1, list2, **kwargs):
