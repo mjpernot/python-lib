@@ -41,6 +41,10 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_multiple_errors4 -> Test with exist, read, and write errors.
+        test_multiple_errors3 -> Test with exist and write errors.
+        test_multiple_errors2 -> Test with exist and read errors.
+        test_multiple_errors -> Test with read and write errors.
         test_no_file_name -> Test with no file name passed.
         test_file_not_exist -> Test with file does not exist.
         test_create_file -> Test with creating file.
@@ -70,6 +74,90 @@ class UnitTest(unittest.TestCase):
         self.test_path = os.path.join(os.getcwd(), self.base_dir)
         self.f_name = os.path.join(self.test_path, self.file_name)
         self.l_name = os.path.join(self.test_path, "TEST_LOG")
+
+    def test_multiple_errors4(self):
+
+        """Function:  test_multiple_errors4
+
+        Description:  Test with exist, read, and write errors.
+
+        Arguments:
+
+        """
+
+        err_msg_chk = "Error:  File %s does not exist." % (self.f_name)
+        err_msg_chk2 = "Error: File %s is not writable." % (self.f_name)
+        err_msg_chk = "\n".join([err_msg_chk, err_msg_chk2])
+        err_msg_chk2 = "Error: File %s is not readable." % (self.f_name)
+        err_msg_chk = "\n".join([err_msg_chk, err_msg_chk2])
+        err_msg_chk = err_msg_chk.strip("\n")
+        status, err_msg = gen_libs.chk_crt_file(
+            self.f_name, read=True, write=True, no_print=True)
+
+        self.assertFalse(status)
+        self.assertEqual(err_msg, err_msg_chk)
+
+    def test_multiple_errors3(self):
+
+        """Function:  test_multiple_errors3
+
+        Description:  Test with exist and write errors.
+
+        Arguments:
+
+        """
+
+        err_msg_chk = "Error:  File %s does not exist." % (self.f_name)
+        err_msg_chk2 = "Error: File %s is not writable." % (self.f_name)
+        err_msg_chk = "\n".join([err_msg_chk, err_msg_chk2])
+        err_msg_chk = err_msg_chk.strip("\n")
+        status, err_msg = gen_libs.chk_crt_file(
+            self.f_name, write=True, no_print=True)
+
+        self.assertFalse(status)
+        self.assertEqual(err_msg, err_msg_chk)
+
+    def test_multiple_errors2(self):
+
+        """Function:  test_multiple_errors2
+
+        Description:  Test with exist and read errors.
+
+        Arguments:
+
+        """
+
+        err_msg_chk = "Error:  File %s does not exist." % (self.f_name)
+        err_msg_chk2 = "Error: File %s is not readable." % (self.f_name)
+        err_msg_chk = "\n".join([err_msg_chk, err_msg_chk2])
+        err_msg_chk = err_msg_chk.strip("\n")
+        status, err_msg = gen_libs.chk_crt_file(
+            self.f_name, read=True, no_print=True)
+
+        self.assertFalse(status)
+        self.assertEqual(err_msg, err_msg_chk)
+
+    def test_multiple_errors(self):
+
+        """Function:  test_multiple_errors
+
+        Description:  Test with read and write errors.
+
+        Arguments:
+
+        """
+
+        err_msg_chk = "Error: File %s is not writable." % (self.f_name)
+        err_msg_chk2 = "Error: File %s is not readable." % (self.f_name)
+        err_msg_chk = "\n".join([err_msg_chk, err_msg_chk2])
+        err_msg_chk = err_msg_chk.strip("\n")
+        open(self.f_name, "a").close()
+        os.chmod(self.f_name, 0111)
+        status, err_msg = gen_libs.chk_crt_file(
+            self.f_name, write=True, read=True, no_print=True)
+
+        self.assertFalse(status)
+        self.assertEqual(err_msg, err_msg_chk)
 
     def test_no_file_name(self):
 
