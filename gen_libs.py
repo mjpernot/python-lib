@@ -263,7 +263,7 @@ def chk_crt_file(f_name=None, create=False, write=False, read=False,
 
     no_print = kwargs.get("no_print", False)
     status = True
-    err_msg = None
+    err_msg = ""
 
     # Redirect print to /dev/null.
     if no_print:
@@ -287,18 +287,26 @@ def chk_crt_file(f_name=None, create=False, write=False, read=False,
 
         # File not writeable.
         if write and not os.access(f_name, os.W_OK):
-            err_msg = "Error: File %s is not writable." % (f_name)
-            print(err_msg, file=f_hdlr)
+            tmp_msg = "Error: File %s is not writable." % (f_name)
+            print(tmp_msg, file=f_hdlr)
+            err_msg = "\n".join([err_msg, tmp_msg])
             status = False
 
         # File not readable.
         if read and not os.access(f_name, os.R_OK):
-            err_msg = "Error: File %s is not readable." % (f_name)
-            print(err_msg, file=f_hdlr)
+            tmp_msg = "Error: File %s is not readable." % (f_name)
+            print(tmp_msg, file=f_hdlr)
+            err_msg = "\n".join([err_msg, tmp_msg])
             status = False
 
     if no_print:
         f_hdlr.close()
+
+    if not err_msg:
+        err_msg = None
+
+    else:
+        err_msg = err_msg.strip("\n")
 
     return status, err_msg
 

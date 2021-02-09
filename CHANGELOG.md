@@ -7,6 +7,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 ## [2.8.3] - 2020-12-24
 
 ### Fixed
+- gen_libs.chk_crt_file:  Error messages being overwritten if multiple errors encountered.
 - gen_libs.prt_dict:  Print keys for nested dictionaries in the value.
 - arg_parser.arg_file_chk:  Fixed problem with mutable default arguments issue.
 
