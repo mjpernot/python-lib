@@ -79,6 +79,7 @@
         rm_whitespace
         root_run
         rotate_files
+        sec_2_hr
         str_2_list
         str_2_type
         touch
@@ -1974,6 +1975,21 @@ def rotate_files(fname, cnt=0, max_cnt=5, **kwargs):
 
         # Rename file to +1
         os.rename(fname + "." + str(cnt), fname + "." + str(cnt + 1))
+
+
+def sec_2_hr(sec, **kwargs):
+
+    """Function:  sec_2_hr
+
+    Description:  Change seconds to hours.
+
+    Arguments:
+        (input) sec -> Number of seconds.
+        (output) Number of hours out to 2 decimal points.
+
+    """
+
+    return (sec/36)/float(100)
 
 
 def str_2_list(del_str, fld_del, **kwargs):
