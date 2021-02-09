@@ -68,6 +68,7 @@
         pct_int
         print_data
         print_dict
+        print_list
         prt_dict
         prt_lvl
         prt_msg
@@ -1756,6 +1757,36 @@ def print_dict(data, ofile=None, json_fmt=False, no_std=False, mode="w",
         err_msg = "Error: %s -> Is not a dictionary" % (data)
 
     return err_flag, err_msg
+
+
+def print_list(data, **kwargs):
+
+    """Function:  print_list
+
+    Description:  Prints each item in a list on a seperate line to either a
+        file or standard out.
+
+    Arguments:
+        (input) data -> List of data strings.
+        (input) **kwargs:
+            ofile -> Path and name of file to write to.
+            mode -> a|w - File write mode.
+
+    """
+
+    data = list(data)
+    mode = kwargs.get("mode", "w")
+    ofile = kwargs.get("ofile", False)
+    outfile = sys.stdout
+
+    if ofile:
+        outfile = open(ofile, mode)
+
+    for line in data:
+        print(line, file=outfile)
+
+    if ofile:
+        outfile.close()
 
 
 def prt_dict(data, fhandler=sys.stdout, **kwargs):

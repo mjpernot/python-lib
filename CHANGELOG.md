@@ -11,6 +11,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - arg_parser.arg_file_chk:  Fixed problem with mutable default arguments issue.
 
 ### Added
+- gen_libs.print_list:  Prints each item in a list on a seperate line to either a file or standard out.
 - gen_libs.sec_2_hr:  Change seconds to hours with hours out to 2 decimal points.
 - gen_libs.rm_key:  Remove a key from a dictionary if it exists and return a copy of the modified dictionary.
 - gen_libs.is_pos_int:  Returns True|False if number is an integer and positive.
