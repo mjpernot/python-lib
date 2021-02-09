@@ -107,6 +107,7 @@ pipeline {
                 ./test/unit/gen_libs/pct_int.py
                 ./test/unit/gen_libs/print_data.py
                 ./test/unit/gen_libs/print_dict.py
+                ./test/unit/gen_libs/print_list.py
                 ./test/unit/gen_libs/prt_dict.py
                 ./test/unit/gen_libs/prt_lvl.py
                 ./test/unit/gen_libs/prt_msg.py
