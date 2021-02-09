@@ -70,6 +70,7 @@ coverage run -a --source=gen_libs test/unit/gen_libs/openfile.py
 coverage run -a --source=gen_libs test/unit/gen_libs/pct_int.py
 coverage run -a --source=gen_libs test/unit/gen_libs/print_data.py
 coverage run -a --source=gen_libs test/unit/gen_libs/print_dict.py
+coverage run -a --source=gen_libs test/unit/gen_libs/print_list.py
 coverage run -a --source=gen_libs test/unit/gen_libs/prt_dict.py
 coverage run -a --source=gen_libs test/unit/gen_libs/prt_lvl.py
 coverage run -a --source=gen_libs test/unit/gen_libs/prt_msg.py
