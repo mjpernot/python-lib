@@ -118,6 +118,7 @@ pipeline {
                 ./test/unit/gen_libs/rm_whitespace.py
                 ./test/unit/gen_libs/root_run.py
                 ./test/unit/gen_libs/rotate_files.py
+                ./test/unit/gen_libs/sec_2_hr.py
                 ./test/unit/gen_libs/str_2_list.py
                 ./test/unit/gen_libs/str_2_type.py
                 ./test/unit/gen_libs/touch.py
