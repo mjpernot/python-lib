@@ -41,6 +41,10 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_exe_file -> Test with checking execute permission on file.
+        test_no_exe_file -> Test with checking no execute permission on file.
+        test_multiple_errors6 -> Test with write and execute errors.
+        test_multiple_errors5 -> Test with read and execute errors.
         test_multiple_errors4 -> Test with exist, read, and write errors.
         test_multiple_errors3 -> Test with exist and write errors.
         test_multiple_errors2 -> Test with exist and read errors.
@@ -77,6 +81,89 @@ class UnitTest(unittest.TestCase):
         self.prt_template = "Error:  File %s does not exist."
         self.prt_template2 = "Error: File %s is not writable."
         self.prt_template3 = "Error: File %s is not readable."
+        self.prt_template4 = "Error: File %s is not executable."
+
+    def test_exe_file(self):
+
+        """Function:  test_exe_file
+
+        Description:  Test with checking execute permission on file.
+
+        Arguments:
+
+        """
+
+        err_msg_chk = None
+        open(self.f_name, "a").close()
+        os.chmod(self.f_name, 0777)
+        status, err_msg = gen_libs.chk_crt_file(self.f_name, exe=True,
+                                                no_print=True)
+
+        self.assertTrue(status)
+        self.assertEqual(err_msg, err_msg_chk)
+
+    def test_no_exe_file(self):
+
+        """Function:  test_no_exe_file
+
+        Description:  Test with checking no execute permission on file.
+
+        Arguments:
+
+        """
+
+        err_msg_chk = self.prt_template4 % (self.f_name)
+        open(self.f_name, "a").close()
+        os.chmod(self.f_name, 0444)
+        status, err_msg = gen_libs.chk_crt_file(self.f_name, exe=True,
+                                                no_print=True)
+
+        self.assertFalse(status)
+        self.assertEqual(err_msg, err_msg_chk)
+
+    def test_multiple_errors6(self):
+
+        """Function:  test_multiple_errors6
+
+        Description:  Test with write and execute errors.
+
+        Arguments:
+
+        """
+
+        err_msg_chk = self.prt_template2 % (self.f_name)
+        err_msg_chk2 = self.prt_template4 % (self.f_name)
+        err_msg_chk = "\n".join([err_msg_chk, err_msg_chk2])
+        err_msg_chk = err_msg_chk.strip("\n")
+        open(self.f_name, "a").close()
+        os.chmod(self.f_name, 0444)
+        status, err_msg = gen_libs.chk_crt_file(
+            self.f_name, exe=True, write=True, no_print=True)
+
+        self.assertFalse(status)
+        self.assertEqual(err_msg, err_msg_chk)
+
+    def test_multiple_errors5(self):
+
+        """Function:  test_multiple_errors5
+
+        Description:  Test with read and execute errors.
+
+        Arguments:
+
+        """
+
+        err_msg_chk = self.prt_template3 % (self.f_name)
+        err_msg_chk2 = self.prt_template4 % (self.f_name)
+        err_msg_chk = "\n".join([err_msg_chk, err_msg_chk2])
+        err_msg_chk = err_msg_chk.strip("\n")
+        open(self.f_name, "a").close()
+        os.chmod(self.f_name, 0222)
+        status, err_msg = gen_libs.chk_crt_file(
+            self.f_name, exe=True, read=True, no_print=True)
+
+        self.assertFalse(status)
+        self.assertEqual(err_msg, err_msg_chk)
 
     def test_multiple_errors4(self):
 
