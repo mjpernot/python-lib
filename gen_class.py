@@ -938,6 +938,7 @@ class Mail(System):
 
         Arguments:
             (input) subj -> Subject line.
+            (input) delimiter -> Subject line delimiter if using a list.
 
         """
 
