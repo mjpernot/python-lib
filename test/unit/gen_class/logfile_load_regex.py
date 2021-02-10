@@ -69,16 +69,15 @@ class UnitTest(unittest.TestCase):
         self.input_list2 = [self.regex, "d{2}:\d{2}:\d{2}"]
         self.input_str = self.regex
         self.input_str2 = "\d{4}\-\d{2}\-\d{2}\nd{2}:\d{2}:\d{2}\n"
-        self.input_str3 = r"\d{4}\-\d{2}\-\d{2}\nd{2}:\d{2}:\d{2}\n"
+        self.input_str3 = r"\d{4}\-\d{2}\-\d{2}\n\d{2}:\d{2}:\d{2}\n"
         self.input_file = "test/unit/gen_class/testfiles/load_regex_file.txt"
         self.input_file2 = "test/unit/gen_class/testfiles/empty_file.txt"
         self.input_file3 = "test/unit/gen_class/testfiles/load_regex_file2.txt"
 
         self.result_str = self.regex
         self.result_str2 = "\d{4}\-\d{2}\-\d{2}|d{2}:\d{2}:\d{2}"
-        self.result_str3 = "\d{4}\-\d{2}\-\d{2}|d{2}:\d{2}:\d{2}"
+        self.result_str3 = "\\d{4}\\-\\d{2}\\-\\d{2}\\n\\d{2}:\\d{2}:\\d{2}\\n"
 
-    @unittest.skip("This is here, because raw strings cannot be used with \n")
     def test_load_str_multiple_raw(self):
 
         """Function:  test_load_str_multiple_raw
