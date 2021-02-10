@@ -256,16 +256,18 @@ def chk_crt_file(f_name=None, create=False, write=False, read=False,
         (input) f_hdlr -> File handler to write messages to or stdout.
         (input) **kwargs:
             no_print -> True|False - Suppress printing of error messages.
+            exe -> True|False - Is Executable on file.
         (output) status -> True|False - False if one of the checks fails.
         (output) err_msg -> None|Error message of check that fails.
 
     """
 
     no_print = kwargs.get("no_print", False)
+    exe = kwargs.get("exe", False)
     status = True
     err_msg = ""
 
-    # Redirect print to /dev/null.
+    # Redirect print to /dev/null
     if no_print:
         f_hdlr = open(os.devnull, "w")
 
@@ -275,26 +277,31 @@ def chk_crt_file(f_name=None, create=False, write=False, read=False,
         status = False
 
     else:
-        # Create empty file if requested.
         if create and not os.path.isfile(f_name):
             touch(f_name)
 
-        # File does not exist.
         elif not os.path.isfile(f_name):
             err_msg = "Error:  File %s does not exist." % (f_name)
             print(err_msg, file=f_hdlr)
             status = False
 
-        # File not writeable.
+        # File writeable
         if write and not os.access(f_name, os.W_OK):
             tmp_msg = "Error: File %s is not writable." % (f_name)
             print(tmp_msg, file=f_hdlr)
             err_msg = "\n".join([err_msg, tmp_msg])
             status = False
 
-        # File not readable.
+        # File readable
         if read and not os.access(f_name, os.R_OK):
             tmp_msg = "Error: File %s is not readable." % (f_name)
+            print(tmp_msg, file=f_hdlr)
+            err_msg = "\n".join([err_msg, tmp_msg])
+            status = False
+
+        # File executable
+        if exe and not os.access(f_name, os.X_OK):
+            tmp_msg = "Error: File %s is not executable." % (f_name)
             print(tmp_msg, file=f_hdlr)
             err_msg = "\n".join([err_msg, tmp_msg])
             status = False
@@ -302,11 +309,11 @@ def chk_crt_file(f_name=None, create=False, write=False, read=False,
     if no_print:
         f_hdlr.close()
 
-    if not err_msg:
-        err_msg = None
+    if err_msg:
+        err_msg = err_msg.strip("\n")
 
     else:
-        err_msg = err_msg.strip("\n")
+        err_msg = None
 
     return status, err_msg
 
