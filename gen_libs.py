@@ -245,8 +245,8 @@ def chk_crt_file(f_name=None, create=False, write=False, read=False,
     """Function:  chk_crt_file
 
     Description:  Check for the existence of a file and whether to create one
-        if not present.  Also checks the read and write permissions on the file
-        as determined by the arguments.
+        if not present.  Also checks the read, write, and execute permissions
+        on the file as determined by the arguments.
 
     Arguments:
         (input) f_name -> File name with directory path.
