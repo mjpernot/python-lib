@@ -96,7 +96,7 @@ class UnitTest(unittest.TestCase):
 
         err_msg_chk = None
         open(self.f_name, "a").close()
-        os.chmod(self.f_name, 0777)
+        os.chmod(self.f_name, 0755)
         status, err_msg = gen_libs.chk_crt_file(self.f_name, exe=True,
                                                 no_print=True)
 
