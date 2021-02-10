@@ -162,9 +162,9 @@ class Daemon:
                 # Exit first parent
                 sys.exit(0)
 
-        except OSError, e:
+        except OSError, err:
             sys.stderr.write("Fork #1 failed: %d (%s)\n" %
-                             (e.errno, e.strerror))
+                             (err.errno, err.strerror))
             sys.exit(1)
 
         # Decouple from parent environment
@@ -180,9 +180,9 @@ class Daemon:
                 # Exit from second parent
                 sys.exit(0)
 
-        except OSError, e:
+        except OSError, err:
             sys.stderr.write("Fork #2 failed: %d (%s)\n" %
-                             (e.errno, e.strerror))
+                             (err.errno, err.strerror))
             sys.exit(1)
 
         # Redirect standard file descriptors
