@@ -556,6 +556,9 @@ class LogFile(object):
 
         Description:  Load regext entries from object.
 
+        Note:  If passing in r"data_string" (raw strings) then any embedded
+            "\n" (newlines) will not be split upon in the string operation.
+
         Arguments:
             (input) data -> Holds marker entry as a file, list, or string.
 
