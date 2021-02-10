@@ -286,29 +286,6 @@ def chk_crt_file(f_name=None, create=False, write=False, read=False,
             print(err_msg, file=f_hdlr)
             status = False
 
-        """
-        # File writeable
-        if write and not os.access(f_name, os.W_OK):
-            tmp_msg = "Error: File %s is not writable." % (f_name)
-            print(tmp_msg, file=f_hdlr)
-            err_msg = "\n".join([err_msg, tmp_msg])
-            status = False
-
-        # File readable
-        if read and not os.access(f_name, os.R_OK):
-            tmp_msg = "Error: File %s is not readable." % (f_name)
-            print(tmp_msg, file=f_hdlr)
-            err_msg = "\n".join([err_msg, tmp_msg])
-            status = False
-
-        # File executable
-        if exe and not os.access(f_name, os.X_OK):
-            tmp_msg = "Error: File %s is not executable." % (f_name)
-            print(tmp_msg, file=f_hdlr)
-            err_msg = "\n".join([err_msg, tmp_msg])
-            status = False
-        """
-
         status, err_msg = perm_check(
             f_name, "File", f_hdlr, status=status, err_msg=err_msg,
             read=read, write=write, exe=exe)
@@ -1722,7 +1699,7 @@ def perm_check(item, item_type, f_hdlr=sys.stdout, **kwargs):
             write -> True|False - Is Writable on file.
             exe -> True|False - Is Executable on file.
         (output) status -> True|False - False if one of the checks fails.
-        (output) err_msg -> None|Error message of check that fails.
+        (output) err_msg -> Error message of check(s) that fail.
 
     """
 
@@ -1732,18 +1709,21 @@ def perm_check(item, item_type, f_hdlr=sys.stdout, **kwargs):
     write = kwargs.get("write", False)
     exe = kwargs.get("exe", False)
 
+    # Object writable
     if write and not os.access(item, os.W_OK):
         tmp_msg = "Error: %s %s is not writable." % (item_type, item)
         print(tmp_msg, file=f_hdlr)
         err_msg = "\n".join([err_msg, tmp_msg])
         status = False
 
+    # Object readable
     if read and not os.access(item, os.R_OK):
         tmp_msg = "Error: %s %s is not readable." % (item_type, item)
         print(tmp_msg, file=f_hdlr)
         err_msg = "\n".join([err_msg, tmp_msg])
         status = False
 
+    # Object executable
     if exe and not os.access(item, os.X_OK):
         tmp_msg = "Error: %s %s is not executable." % (item_type, item)
         print(tmp_msg, file=f_hdlr)
