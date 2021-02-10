@@ -865,9 +865,14 @@ class Mail(System):
         else:
             self.to = to
 
+        if frm:
+            self.frm = frm
+
+        else:
+            self.frm = getpass.getuser() + "@" + socket.gethostname()
+
         self.subj = None
         self.create_subject(subj)
-        self.frm = frm
         self.msg_type = msg_type
         self.msg = ""
 

@@ -23,6 +23,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - gen_class.Mail.send_mailx:  Emails message out using mailx.
 
 ### Changed
+- gen_class.Mail.\_\_init\_\_:  Set "from address" to default of current user and hostname if none is provided.
 - gen_libs.chk_crt_dir:  Added option to see if directory is executable.
 - gen_libs.chk_crt_dir, gen_libs.chk_crt_file:  Replaced section of code on permission checks with call to perm_check.
 - gen_libs.chk_crt_file:  Added option to see if file is executable.
