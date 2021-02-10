@@ -930,7 +930,7 @@ class Mail(System):
 
         return "Subject: %s\n\n%s" % (self.subj, self.msg)
 
-    def create_subject(self, subj=None):
+    def create_subject(self, subj=None, delimiter=" "):
 
         """Method:  create_subject
 
@@ -943,7 +943,7 @@ class Mail(System):
 
         if subj:
             if isinstance(subj, list):
-                self.subj = " ".join(str(item) for item in list(subj))
+                self.subj = delimiter.join(str(item) for item in list(subj))
 
             else:
                 self.subj = subj
