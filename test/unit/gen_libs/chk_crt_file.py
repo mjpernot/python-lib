@@ -74,6 +74,9 @@ class UnitTest(unittest.TestCase):
         self.test_path = os.path.join(os.getcwd(), self.base_dir)
         self.f_name = os.path.join(self.test_path, self.file_name)
         self.l_name = os.path.join(self.test_path, "TEST_LOG")
+        self.prt_template = "Error:  File %s does not exist."
+        self.prt_template2 = "Error: File %s is not writable."
+        self.prt_template3 = "Error: File %s is not readable."
 
     def test_multiple_errors4(self):
 
@@ -85,10 +88,10 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        err_msg_chk = "Error:  File %s does not exist." % (self.f_name)
-        err_msg_chk2 = "Error: File %s is not writable." % (self.f_name)
+        err_msg_chk = self.prt_template % (self.f_name)
+        err_msg_chk2 = self.prt_template2 % (self.f_name)
         err_msg_chk = "\n".join([err_msg_chk, err_msg_chk2])
-        err_msg_chk2 = "Error: File %s is not readable." % (self.f_name)
+        err_msg_chk2 = self.prt_template3 % (self.f_name)
         err_msg_chk = "\n".join([err_msg_chk, err_msg_chk2])
         err_msg_chk = err_msg_chk.strip("\n")
         status, err_msg = gen_libs.chk_crt_file(
@@ -107,8 +110,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        err_msg_chk = "Error:  File %s does not exist." % (self.f_name)
-        err_msg_chk2 = "Error: File %s is not writable." % (self.f_name)
+        err_msg_chk = self.prt_template % (self.f_name)
+        err_msg_chk2 = self.prt_template2 % (self.f_name)
         err_msg_chk = "\n".join([err_msg_chk, err_msg_chk2])
         err_msg_chk = err_msg_chk.strip("\n")
         status, err_msg = gen_libs.chk_crt_file(
@@ -127,8 +130,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        err_msg_chk = "Error:  File %s does not exist." % (self.f_name)
-        err_msg_chk2 = "Error: File %s is not readable." % (self.f_name)
+        err_msg_chk = self.prt_template % (self.f_name)
+        err_msg_chk2 = self.prt_template3 % (self.f_name)
         err_msg_chk = "\n".join([err_msg_chk, err_msg_chk2])
         err_msg_chk = err_msg_chk.strip("\n")
         status, err_msg = gen_libs.chk_crt_file(
@@ -147,8 +150,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        err_msg_chk = "Error: File %s is not writable." % (self.f_name)
-        err_msg_chk2 = "Error: File %s is not readable." % (self.f_name)
+        err_msg_chk = self.prt_template2 % (self.f_name)
+        err_msg_chk2 = self.prt_template3 % (self.f_name)
         err_msg_chk = "\n".join([err_msg_chk, err_msg_chk2])
         err_msg_chk = err_msg_chk.strip("\n")
         open(self.f_name, "a").close()
@@ -236,7 +239,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        err_msg_chk = "Error: File %s is not writable." % (self.f_name)
+        err_msg_chk = self.prt_template2 % (self.f_name)
         open(self.f_name, "a").close()
         os.chmod(self.f_name, 0444)
         status, err_msg = gen_libs.chk_crt_file(self.f_name, write=True,
@@ -273,7 +276,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        err_msg_chk = "Error: File %s is not readable." % (self.f_name)
+        err_msg_chk = self.prt_template3 % (self.f_name)
         open(self.f_name, "a").close()
         os.chmod(self.f_name, 0333)
         status, err_msg = gen_libs.chk_crt_file(self.f_name, read=True,
