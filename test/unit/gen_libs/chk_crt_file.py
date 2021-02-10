@@ -57,6 +57,7 @@ class UnitTest(unittest.TestCase):
         test_read_file -> Test with checking read permission on file.
         test_no_read_file -> Test with checking no read permission on file.
         test_no_print_set -> Test with no_print option set.
+        test_print_file2 -> Test with printing error messages to file.
         test_print_file -> Test with printing error messages to file.
         tearDown -> Cleanup of unit testing.
 
@@ -388,6 +389,24 @@ class UnitTest(unittest.TestCase):
         self.assertFalse(status)
         self.assertEqual(err_msg, err_msg_chk)
 
+    def test_print_file2(self):
+
+        """Function:  test_print_file2
+
+        Description:  Test with printing error messages to file.
+
+        Arguments:
+
+        """
+
+        err_msg_chk = self.err_mask % (self.f_name)
+        f_hdlr = open(self.l_name, "w")
+        status, err_msg = gen_libs.chk_crt_file(self.f_name, f_hdlr=f_hdlr,
+                                                no_print=True)
+        f_hdlr.close()
+
+        self.assertFalse(err_msg_chk in open(self.l_name).read())
+
     def test_print_file(self):
 
         """Function:  test_print_file
@@ -404,7 +423,6 @@ class UnitTest(unittest.TestCase):
                                                 no_print=True)
         f_hdlr.close()
 
-        self.assertFalse(err_msg_chk in open(self.l_name).read())
         self.assertFalse(status)
         self.assertEqual(err_msg, err_msg_chk)
 
