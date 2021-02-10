@@ -402,8 +402,7 @@ class UnitTest(unittest.TestCase):
 
         err_msg_chk = self.err_mask % (self.d_name)
         f_hdlr = open(self.f_name, "w")
-        status, err_msg = gen_libs.chk_crt_dir(self.d_name, f_hdlr=f_hdlr,
-                                               no_print=True)
+        _, _ = gen_libs.chk_crt_dir(self.d_name, f_hdlr=f_hdlr, no_print=True)
         f_hdlr.close()
 
         self.assertFalse(err_msg_chk in open(self.f_name).read())
