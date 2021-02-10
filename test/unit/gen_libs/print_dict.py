@@ -129,7 +129,7 @@ class UnitTest(unittest.TestCase):
         self.assertEqual(
             gen_libs.print_dict(
                 self.data, mail=self.mail, no_std=True, json_fmt=True),
-                (False, None))
+            (False, None))
 
     def test_non_dict(self):
 
