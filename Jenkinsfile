@@ -105,6 +105,7 @@ pipeline {
                 ./test/unit/gen_libs/no_std_out.py
                 ./test/unit/gen_libs/openfile.py
                 ./test/unit/gen_libs/pct_int.py
+                ./test/unit/gen_libs/perm_check.py
                 ./test/unit/gen_libs/print_data.py
                 ./test/unit/gen_libs/print_dict.py
                 ./test/unit/gen_libs/print_list.py
