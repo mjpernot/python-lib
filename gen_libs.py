@@ -190,14 +190,16 @@ def chk_crt_dir(dir_name=None, create=False, write=False, read=False,
         (input) f_hdlr -> File handler to write messages to or stdout.
         (input) **kwargs:
             no_print -> True|False - Suppress printing of error messages.
+            exe -> True|False - Is Executable on file.
         (output) status -> True|False - False if one of the checks fails.
         (output) err_msg -> None|Error message of check that fails.
 
     """
 
     no_print = kwargs.get("no_print", False)
+    exe = kwargs.get("exe", False)
     status = True
-    err_msg = None
+    err_msg = ""
 
     # Redirect print to /dev/null.
     if no_print:
@@ -225,17 +227,18 @@ def chk_crt_dir(dir_name=None, create=False, write=False, read=False,
             print(err_msg, file=f_hdlr)
             status = False
 
-        # Directory not writeable.
-        elif write and not os.access(dir_name, os.W_OK):
-            err_msg = "Error: Directory: %s is not writeable." % (dir_name)
-            print(err_msg, file=f_hdlr)
-            status = False
+        status, err_msg = perm_check(
+            dir_name, "Directory", f_hdlr, status=status, err_msg=err_msg,
+            read=read, write=write, exe=exe)
 
-        # Directory not readable.
-        elif read and not os.access(dir_name, os.R_OK):
-            err_msg = "Error: Directory: %s is not readable." % (dir_name)
-            print(err_msg, file=f_hdlr)
-            status = False
+    if no_print:
+        f_hdlr.close()
+
+    if err_msg:
+        err_msg = err_msg.strip("\n")
+
+    else:
+        err_msg = None
 
     return status, err_msg
 
