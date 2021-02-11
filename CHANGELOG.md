@@ -23,6 +23,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - gen_class.Mail.send_mailx:  Emails message out using mailx.
 
 ### Changed
+- gne_class.Mail.read_stdin:  Changed variable name to standard naming convention.
 - gen_class.Logger.\_\_init\_\_:  Added "mode" keyword argument to allow append or write modes to log files.
 - gen_class:  Removed unneccessary \*\*kwargs from arguments lists.
 - gen_class.Mail.create_subject:  Added argument to set the subject line delimiter if using a list.

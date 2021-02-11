@@ -917,8 +917,8 @@ class Mail(System):
 
         inst = get_inst(sys)
 
-        for ln in inst.stdin:
-            self.add_2_msg(ln)
+        for line in inst.stdin:
+            self.add_2_msg(line)
 
     def create_body(self):
 
