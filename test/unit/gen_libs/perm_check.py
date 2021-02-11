@@ -71,7 +71,7 @@ class UnitTest(unittest.TestCase):
         self.f_name = os.path.join(self.test_path, self.file_name)
         self.l_name = os.path.join(self.test_path, "TEST_LOG")
         self.prt_template = "\nError:  File %s does not exist."
-        self.prt_template2 = "\nError: File %s is not writable."
+        self.prt_template2 = "\nError: File %s is not writeable."
         self.prt_template3 = "\nError: File %s is not readable."
         self.prt_template4 = "\nError: File %s is not executable."
 
