@@ -149,7 +149,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        err_msg_chk = "Error: Directory: %s is not writeable." % (self.d_name)
+        err_msg_chk = "Error: Directory %s is not writeable." % (self.d_name)
         os.makedirs(self.d_name)
         os.chmod(self.d_name, 0444)
         status, err_msg = gen_libs.chk_crt_dir(self.d_name, write=True,
@@ -186,7 +186,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        err_msg_chk = "Error: Directory: %s is not readable." % (self.d_name)
+        err_msg_chk = "Error: Directory %s is not readable." % (self.d_name)
         os.makedirs(self.d_name)
         os.chmod(self.d_name, 0333)
         status, err_msg = gen_libs.chk_crt_dir(self.d_name, read=True,
