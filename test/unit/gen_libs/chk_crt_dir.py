@@ -81,7 +81,7 @@ class UnitTest(unittest.TestCase):
         self.d_name = os.path.join(self.test_path, self.dir_name)
         self.f_name = os.path.join(self.test_path, self.file_name)
         self.prt_template = "Error: Directory: %s does not exist."
-        self.prt_template2 = "Error: Directory %s is not writable."
+        self.prt_template2 = "Error: Directory %s is not writeable."
         self.prt_template3 = "Error: Directory %s is not readable."
         self.prt_template4 = "Error: Directory %s is not executable."
 
