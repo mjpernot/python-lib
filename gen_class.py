@@ -846,15 +846,15 @@ class Mail(System):
 
     """
 
-    def __init__(self, to, subj=None, frm=None, msg_type=None, host_name=None,
-                 host=None):
+    def __init__(self, toaddr, subj=None, frm=None, msg_type=None,
+                 host_name=None, host=None):
 
         """Method:  __init__
 
         Description:  Initialization of an instance of the Mail class.
 
         Arguments:
-            (input) to -> To email address.
+            (input) toaddr -> To email address.
             (input) subj -> Subject line of mail.
             (input) msg_type -> Type of email being sent.
             (input) frm -> From email address.
@@ -868,11 +868,11 @@ class Mail(System):
         if isinstance(subj, list):
             subj = list(subj)
 
-        if isinstance(to, list):
-            self.to = list(to)
+        if isinstance(toaddr, list):
+            self.to = list(toaddr)
 
         else:
-            self.to = to
+            self.to = toaddr
 
         if frm:
             self.frm = frm
