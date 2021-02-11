@@ -41,6 +41,9 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_mode_write -> Test with write mode setting.
+        test_mode_append -> Test with append mode setting.
+        test_mode_default -> Test with default mode setting.
         test_critical_setting -> Test with critical settings.
         test_error_setting -> Test with error settings.
         test_warning_setting -> Test with warning settings.
@@ -64,6 +67,48 @@ class UnitTest(unittest.TestCase):
         self.name = "Logger_init_test"
         self.f_name = os.path.join(
             os.getcwd(), "test/unit/gen_class/tmp/Logger_init_test.txt")
+
+    def test_mode_write(self):
+
+        """Function:  test_mode_write
+
+        Description:  Test with write mode setting.
+
+        Arguments:
+
+        """
+
+        log_file = gen_class.Logger(self.name, self.f_name, mode="w")
+
+        self.assertTrue(log_file.handler)
+
+    def test_mode_append(self):
+
+        """Function:  test_mode_append
+
+        Description:  Test with append mode setting.
+
+        Arguments:
+
+        """
+
+        log_file = gen_class.Logger(self.name, self.f_name, mode="a")
+
+        self.assertTrue(log_file.handler)
+
+    def test_mode_default(self):
+
+        """Function:  test_mode_default
+
+        Description:  Test with default mode setting.
+
+        Arguments:
+
+        """
+
+        log_file = gen_class.Logger(self.name, self.f_name)
+
+        self.assertTrue(log_file.handler)
 
     def test_critical_setting(self):
 

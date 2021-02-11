@@ -135,7 +135,7 @@ def disconnect(*args):
             server.disconnect()
 
 
-def get_inst(cmd, **kwargs):
+def get_inst(cmd):
 
     """Function:  get_inst
 
@@ -151,7 +151,7 @@ def get_inst(cmd, **kwargs):
     return sub
 
 
-def is_add_cmd(args_array, cmd, opt_arg_list, **kwargs):
+def is_add_cmd(args_array, cmd, opt_arg_list):
 
     """Function:  is_add_cmd
 

@@ -41,6 +41,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_subj_list_delimiter -> Test with delimiter passed.
         test_subj_list -> Test subject as a list.
         test_subj_string -> Test subject as a string.
         test_subj_overwrite -> Test overwriting existing subject.
@@ -65,6 +66,38 @@ class UnitTest(unittest.TestCase):
         self.subj3 = "This is a string"
         self.subj4 = ["This", "is", "a", "list"]
         self.subj4a = "This is a list"
+        self.subj4b = "This_is_a_list"
+        self.subj4c = "Thisisalist"
+
+    def test_subj_list_delimiter2(self):
+
+        """Function:  test_subj_list_delimiter2
+
+        Description:  Test with delimiter passed.
+
+        Arguments:
+
+        """
+
+        email = gen_class.Mail(self.toaddr)
+        email.create_subject(subj=self.subj4, delimiter="")
+
+        self.assertEqual(email.subj, self.subj4c)
+
+    def test_subj_list_delimiter(self):
+
+        """Function:  test_subj_list_delimiter
+
+        Description:  Test with delimiter passed.
+
+        Arguments:
+
+        """
+
+        email = gen_class.Mail(self.toaddr)
+        email.create_subject(subj=self.subj4, delimiter="_")
+
+        self.assertEqual(email.subj, self.subj4b)
 
     def test_subj_list(self):
 

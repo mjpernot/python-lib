@@ -42,6 +42,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Unit testing initilization.
+        test_include_path -> Test with including path with file name.
         test_list_files -> Test list_files function.
         tearDown -> Clean up of unit testing.
 
@@ -75,6 +76,23 @@ class UnitTest(unittest.TestCase):
 
         self.results1 = [self.filet, self.filep]
         self.results2 = [self.filep, self.filet]
+        self.results3 = [self.fname1, self.fname2]
+        self.results4 = [self.fname2, self.fname1]
+
+    def test_include_path(self):
+
+        """Function:  test_include_path
+
+        Description:  Test with including path with file name.
+
+        Arguments:
+
+        """
+
+        file_list = gen_libs.list_files(self.dir_path, include_path=True)
+
+        self.assertTrue(
+            file_list == self.results3 or file_list == self.results4)
 
     def test_list_files(self):
 

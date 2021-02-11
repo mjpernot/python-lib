@@ -4,6 +4,48 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [2.8.3] - 2020-12-24
+
+### Fixed
+- gen_libs.chk_crt_file:  Error messages being overwritten if multiple errors encountered.
+- gen_libs.prt_dict:  Print keys for nested dictionaries in the value.
+- arg_parser.arg_file_chk:  Fixed problem with mutable default arguments issue.
+
+### Added
+- gen_libs.perm_check:  Check for permission settings on an object.
+- gen_libs.print_list:  Prints each item in a list on a seperate line to either a file or standard out.
+- gen_libs.sec_2_hr:  Change seconds to hours with hours out to 2 decimal points.
+- gen_libs.rm_key:  Remove a key from a dictionary if it exists and return a copy of the modified dictionary.
+- gen_libs.is_pos_int:  Returns True|False if number is an integer and positive.
+- gen_libs.is_file_text:  Returns True|False on whether the file is a text file.
+- gen_libs.rm_whitespace:  Remove white space from a data string.
+- gen_libs.has_whitespace:  Returns True|False on whether a string has a white space.
+- gen_class.Mail.send_mailx:  Emails message out using mailx.
+
+### Changed
+- gen_libs.list_files:  Added "include_path" option to include directory path with the file name.
+- gen_libs.in_list, gen_libs.make_md5_hash, gen_libs.not_in_list, gen_libs.openfile, gen_libs.root_run, gen_libs.filename_search, gen_libs.dir_file_match:  Refactored function.
+- gen_class.LogFile.get_marker:  Refactored method.
+- gen_class:  Changed a number of variable names to standard naming convention.
+- gen_class.Logger.\_\_init\_\_:  Added "mode" keyword argument to allow append or write modes to log files.
+- cmds_gen, arg_parser, gen_class:  Removed unneccessary \*\*kwargs from arguments lists.
+- gen_class.Mail.create_subject:  Added argument to set the subject line delimiter if using a list.
+- gen_class.Mail.\_\_init\_\_:  Set "from address" to default of current user and hostname if none is provided.
+- gen_libs.chk_crt_dir:  Added option to see if directory is executable.
+- gen_libs.chk_crt_dir, gen_libs.chk_crt_file:  Replaced section of code on permission checks with call to perm_check.
+- gen_libs.chk_crt_file:  Added option to see if file is executable.
+- gen_class.Mail.send_mail:  Add a keyword argument option to allow the send_mailx method to be called.
+- gen_libs.print_dict:  Added ability to add the dictionary to an email instance message.
+- gen_libs.del_not_and_list:  Replaced try/except with an intersect of two sets to capture items to be removed.
+- arg_parser.arg_wildcard:  Refactored the function for better functionality.
+- gen_libs.milli_2_readadble, gen_libs.make_md5_hash, gen_libs.list_2_dict, gen_libs.prt_dict:  Changed variable name to standard naming convention.
+- Documentation update.
+
+### Deprecated
+- cmds_gen.run_prog
+- cmds_gen.disconnect
+
+
 ## [2.8.2] - 2020-07-15
 ### Added
 - arg_parser.\_make_dir:  Tries to create a directory and capture any exceptions.
@@ -17,51 +59,13 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 ### Changed
 - arg_parser.\_make_dir:  Replaced bare exception with catching specific exception cases.
 - gen_class.SingleInstanceException:  Changed exception class from BaseException to Exception.
-- gen_libs.list_2_dict:  Changed variable names to standard naming convention.
-- gen_libs.list_files:  Changed variable names to standard naming convention.
-- gen_libs.list_dirs:  Changed variable names to standard naming convention.
-- gen_libs.is_true:  Changed variable names to standard naming convention.
-- gen_libs.is_missing_lists:  Changed variable names to standard naming convention.
-- gen_libs.get_secs:  Changed variable names to standard naming convention.
-- gen_libs.get_data:  Changed variable names to standard naming convention.
-- gen_libs.filename_search:  Changed variable names to standard naming convention.
-- gen_libs.file_2_list:  Changed variable names to standard naming convention.
-- gen_libs.file_search:  Changed variable names to standard naming convention.
-- gen_libs.disk_usage:  Changed variable names to standard naming convention.
-- gen_libs.dir_file_match:  Changed variable names to standard naming convention.
-- gen_libs.del_not_in_list:  Changed variable names to standard naming convention.
-- gen_libs.del_not_and_list:  Changed variable names to standard naming convention.
-- gen_libs.date_range:  Changed variable names to standard naming convention.
-- gen_libs.cp_dir:  Changed print errors to distingish between different exceptions.
-- gen_libs.cp_dir:  Changed variable names to standard naming convention.
-- gen_libs.compress:  Changed variable names to standard naming convention.
-- gen_libs.chk_int:  Changed variable names to standard naming convention.
-- gen_libs.and_is_true:  Changed variable names to standard naming convention.
+- gen_libs:  Changed in numerous functions the variable names to standard naming convention.
 - arg_parser.\_file_create:  Changed print errors to distingish between different exceptions.
 - arg_parser.arg_set_path:  Removed non-required else clause.
 - arg_parser.arg_dir_chk_crt:  Call to \_make_dir to reduce complexity rating.
-- gen_class.LogFile.load_ignore:  Changed variable names to standard naming convention.
-- gen_class.LogFile.filter_regex:  Changed variable names to standard naming convention.
-- gen_class.LogFile.filter_keyword:  Changed variable names to standard naming convention.
-- gen_class.LogFile.filter_ignore:  Changed variable names to standard naming convention.
-- gen_class.Daemon.stop:  Changed variable names to standard naming convention.
-- gen_class.Daemon.start:  Changed variable names to standard naming convention.
-- gen_class.Daemon.daemonize:  Changed variable names to standard naming convention.
-- cmds_gen.run_prog:  Changed variable names to standard naming convention.
-- cmds_gen.is_add_cmd:  Changed variable names to standard naming convention.
-- cmds_gen.disconnect:  Changed variable names to standard naming convention.
-- arg_parser.\_parse_multi:  Changed variable names to standard naming convention.
-- arg_parser.arg_xor_dict:  Changed variable names to standard naming convention.
-- arg_parser.arg_valid_val:  Changed variable names to standard naming convention.
-- arg_parser.arg_validate:  Changed variable names to standard naming convention.
-- arg_parser.arg_req_xor:  Changed variable names to standard naming convention.
-- arg_parser.arg_req_or_lst:  Changed variable names to standard naming convention.
-- arg_parser.arg_require:  Changed variable names to standard naming convention.
-- arg_parser.arg_noreq_xor:  Changed variable names to standard naming convention.
-- arg_parser.arg_file_chk:  Changed variable names to standard naming convention.
-- arg_parser.arg_cond_req_or:  Changed variable names to standard naming convention.
-- arg_parser.arg_cond_req:  Changed variable names to standard naming convention.
-- arg_parser.arg_add_def:  Changed variable names to standard naming convention.
+- gen_class:  Changed in numerous methods in multiple classes the variable names to standard naming convention.
+- cmds_gen:  Changed in numerous functions the variable names to standard naming convention.
+- arg_parser:  Changed in numerous functions the variable names to standard naming convention.
 - gen_class.Mail.create_subject:  Changed delimiter to a space for lists passed to method.
 - gen_libs.crt_file_time:  Made ext argument an optional argument.
 - gen_libs.crt_file_time:  Add period (.) seperator between filename and extension.
@@ -69,9 +73,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 ## [2.8.1] - 2020-03-25
 ### Fixed
-- gen_libs.make_md5_hash:  Fixed subprocess instance from SonarQube scan finding.
-- gen_libs.compress:  Fixed subprocess instance from SonarQube scan finding.
-- cmds_gen.run_prog:  Fixed subprocess instance from SonarQube scan finding.
+- gen_libs.compress, cmds_gen.run_prog, gen_libs.make_md5_hash:  Fixed subprocess instance from SonarQube scan finding.
 - gen_class.Daemon.stop:  Fixed signal instance from SonarQube scan finding.
 - gen_class.Mail.read_stdin:  Fixed sys instance from SonarQube scan finding.
 - gen_class.Mail.send_mail:  Fixed smtplib instance from SonarQube scan finding.
@@ -81,19 +83,13 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - gen_libs.date_range:  Generators a list of year-month-01 combinations between two dates.
 - gen_libs.month_days:  Return the number of days in the month for a date.
 - gen_libs.filename_search:  Return list of file names that contain search string in the file name.
-- cmds_gen.get_inst:  Returns the module instance header.
-- gen_class.get_inst:  Returns the module instance header.
-- gen_libs.get_inst:  Returns the module instance header.
+- gen_class.get_inst, gen_libs.get_inst, cmds_gen.get_inst:  Returns the module instance header.
 
 ### Changed
 - gen_libs.dir_file_match:  Added argument to allow full paths with names to be returned.
-- arg_parser.arg_req_or_lst:  Changed "y" variable to throwaway variable "\_".
-- arg_parser.arg_cond_req_or:  Changed "y" variable to throwaway variable "\_".
-- arg_parser.arg_cond_req:  Changed "y" variable to throwaway variable "\_".
+- arg_parser.arg_cond_req_or, arg_parser.arg_cond_req, arg_parser.arg_req_or_lst:  Changed "y" variable to throwaway variable "\_".
 - gen_class.Logger.\_\_init\_\_:  Removed non-used variable and code.
-- gen_libs.print_dict:  Added file mode option writing to file.
-- gen_libs.dict_2_std:  Added file mode option writing to file.
-- gen_libs.print_data:  Added file mode option writing to file.
+- gen_libs.dict_2_std, gen_libs.print_data, gen_libs.print_dict:  Added file mode option writing to file.
 
 
 ## [2.8.0] - 2019-12-03
@@ -123,29 +119,12 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - arg_parser.arg_req_or_lst:  Changed "opt_or_dict_list" to "opt_or_dict" due to confusing datatype association.
 - arg_parser.arg_noreq_xor:  Changed "xor_noreq_list" to "xor_noreq" due to confusing datatype association.
 - arg_parser.arg_cond_req:  Changed "opt_con_req_list" to "opt_con_req" due to confusing datatype association.
-- arg_parser.arg_xor_dict:  Added \*\*kwargs to argument list.
-- arg_parser.arg_validate:  Added \*\*kwargs to argument list.
-- arg_parser.arg_set_path:  Added \*\*kwargs to argument list.
-- arg_parser.arg_req_xor:  Added \*\*kwargs to argument list.
-- arg_parser.arg_req_or_lst:  Added \*\*kwargs to argument list.
-- arg_parser.arg_require:  Added \*\*kwargs to argument list.
-- arg_parser.arg_noreq_xor:  Added \*\*kwargs to argument list.
-- arg_parser.arg_file_chk:  Added \*\*kwargs to argument list.
-- arg_parser.arg_dir_chk_crt:  Added \*\*kwargs to argument list.
-- arg_parser.arg_cond_req_or:  Added \*\*kwargs to argument list.
-- arg_parser.arg_cond_req:  Added \*\*kwargs to argument list.
+- arg_parser.arg_validate, arg_parser.arg_set_path, arg_parser.arg_req_xor, arg_parser.arg_req_or_lst, arg_parser.arg_require, arg_parser.arg_noreq_xor, arg_parser.arg_file_chk, arg_parser.arg_dir_chk_crt, arg_parser.arg_cond_req_or, arg_parser.arg_cond_req, arg_parser.arg_xor_dict:  Added \*\*kwargs to argument list.
 - arg_parser.arg_parse2:  Documentation update.
-- arg_parser.\_file_create:  Changed "exit_flag" to "status" and updated documentation.
-- arg_parser.arg_xor_dict:  Changed "xor_flag" to "status" and updated documentation.
-- arg_parser.arg_valid_val:  Changed "status_flag" to "status" and updated documentation.
-- arg_parser.arg_validate:  Changed "status_flag" to "status" and updated documentation.
-- arg_parser.arg_req_xor:  Changed "status_flag" to "status" and updated documentation.
-- arg_parser.arg_req_or_lst:  Changed "or_flag" to "status" and updated documentation.
-- arg_parser.arg_require:  Changed "exit_flag" to "status" and updated documentation.
-- arg_parser.arg_noreq_xor:  Changed "xor_flag" to "status" and updated documentation.
-- arg_parser.arg_file_chk:  Changed "exit_flag" to "status" and updated documentation.
-- arg_parser.arg_dir_chk_crt:  Changed "exit_flag" to "status" and updated documentation.
-- arg_parser.arg_cond_req_or:  Changed "or_flag" to "status" and updated documentation.
+- arg_parser.arg_file_chk, arg_parser.arg_dir_chk_crt, arg_parser.arg_require, arg_parser.\_file_create:  Changed "exit_flag" to "status" and updated documentation.
+- arg_parser.arg_noreq_xor, arg_parser.arg_xor_dict:  Changed "xor_flag" to "status" and updated documentation.
+- arg_parser.arg_validate, arg_parser.arg_req_xor, arg_parser.arg_valid_val:  Changed "status_flag" to "status" and updated documentation.
+- arg_parser.arg_cond_req_or, arg_parser.arg_req_or_lst:  Changed "or_flag" to "status" and updated documentation.
 - arg_parser.arg_cond_req:  Changed "exit_flag" to "status" and updated documentation.
 - gen_class.Logger:  Changed "self.logger" to "self.log" to avoid confusion with class name.
 - gen_class.Logger.\_\_init\_\_:  Moved "mode" argument to \*\*kwargs.
@@ -158,47 +137,13 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 ## [2.7.5] - 2019-07-22
 ### Change
-- gen_libs.list_files:  Refactored function.
-- gen_libs.str_2_list:  Refactored function.
+- gen_libs.str_2_list, gen_libs.list_files:  Refactored function.
 
 ### Fixed
 - gen_class.ProgramLock.\_\_init\_\_:  Fixed problem with mutable default arguments issue.
-- cmds_gen.add_cmd:  Fixed problem with mutable default arguments issue.
-- cmds_gen.is_add_cmd:  Fixed problem with mutable default arguments issue.
-- cmds_gen.run_prog:  Fixed problem with mutable default arguments issue.
-- arg_parser.arg_add_def:  Fixed problem with mutable default arguments issue.
-- arg_parser.arg_cond_req:  Fixed problem with mutable default arguments issue.
-- arg_parser.arg_cond_req_or:  Fixed problem with mutable default arguments issue.
-- arg_parser.arg_default:  Fixed problem with mutable default arguments issue.
-- arg_parser.arg_dir_chk_crt:  Fixed problem with mutable default arguments issue.
-- arg_parser.arg_file_chk:  Fixed problem with mutable default arguments issue.
-- arg_parser.arg_noreq_xor:  Fixed problem with mutable default arguments issue.
-- arg_parser.arg_parse2:  Fixed problem with mutable default arguments issue.
-- arg_parser.arg_require:  Fixed problem with mutable default arguments issue.
-- arg_parser.arg_req_or_lst:  Fixed problem with mutable default arguments issue.
-- arg_parser.arg_req_xor:  Fixed problem with mutable default arguments issue.
-- arg_parser.arg_set_path:  Fixed problem with mutable default arguments issue.
-- arg_parser.arg_validate:  Fixed problem with mutable default arguments issue.
-- arg_parser.arg_valid_val:  Fixed problem with mutable default arguments issue.
-- arg_parser.arg_wildcard:  Fixed problem with mutable default arguments issue.
-- arg_parser.arg_xor_dict:  Fixed problem with mutable default arguments issue.
-- gen_libs.data_multi_out:  Fixed problem with mutable default arguments issue.
-- gen_libs.del_not_and_list:  Fixed problem with mutable default arguments issue.
-- gen_libs.del_not_in_list:  Fixed problem with mutable default arguments issue.
-- gen_libs.dict_2_list:  Fixed problem with mutable default arguments issue.
-- gen_libs.dict_2_std:  Fixed problem with mutable default arguments issue.
-- gen_libs.display_data:  Fixed problem with mutable default arguments issue.
-- gen_libs.help_func:  Fixed problem with mutable default arguments issue.
-- gen_libs.in_list:  Fixed problem with mutable default arguments issue.
-- gen_libs.is_missing_lists:  Fixed problem with mutable default arguments issue.
-- gen_libs.key_cleaner:  Fixed problem with mutable default arguments issue.
-- gen_libs.list_2_dict:  Fixed problem with mutable default arguments issue.
-- gen_libs.make_zip:  Fixed problem with mutable default arguments issue.
-- gen_libs.merge_data_types:  Fixed problem with mutable default arguments issue.
-- gen_libs.merge_two_dicts:  Fixed problem with mutable default arguments issue.
-- gen_libs.not_in_list:  Fixed problem with mutable default arguments issue.
-- gen_libs.prt_dict:  Fixed problem with mutable default arguments issue.
-- gen_libs.rm_dup_list:  Fixed problem with mutable default arguments issue.
+- cmds_gen.is_add_cmd, cmds_gen.run_prog, cmds_gen.add_cmd:  Fixed problem with mutable default arguments issue.
+- arg_parser:  Fixed in numerous functions the problem with mutable default arguments issue.
+- gen_libs.data_multi_out:  Fixed in numerous functions the problem with mutable default arguments issue.
 - gen_class.Mail.create_subject:  Fixed so the subject line can be a string or list.
 - gen_class.Mail.\_\_init\_\_:  Fixed it where a subject can handle a list.
 
@@ -235,8 +180,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 ## [2.7.2] - 2019-03-06
 ### Changed
-- gen_class.Yum.fetch_update_pkgs:  Changed output to camelCase.
-- gen_class.Yum.fetch_install_pkgs:  Changed output to camelCase.
+- gen_class.Yum.fetch_install_pkgs, gen_class.Yum.fetch_update_pkgs:  Changed output to camelCase.
 
 
 ## [2.7.1] - 2018-12-11
@@ -255,9 +199,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 ### Fixed
 - arg_parser.arg_parse2:  Shallow copied assignments of "multi_val" and "opt_val".
-- arg_parser.arg_parse2:  Changed function parameter mutable argument default to immutable argument default.
-- arg_parser.arg_dir_chk_crt:  Changed function parameter mutable argument default to immutable argument default.
-- arg_parser.arg_file_chk:  Changed function parameter mutable argument default to immutable argument default.
+- arg_parser.arg_dir_chk_crt, arg_parser.arg_file_chk, arg_parser.arg_parse2:  Changed function parameter mutable argument default to immutable argument default.
 - gen_class.Mail.\_\_init\_\_:  Shallow copied assignment of "to" to "self.to" if it is a list.
 - gen_class.Daemon.\_\_init\_\_:  Shallow copied assignment of "argv_list" list to "self.argv_list".
 - gen_class.Daemon.\_\_init\_\_:  Changed function parameter mutable argument default to immutable argument default.
@@ -268,19 +210,19 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 ## [2.6.0] - 2018-09-13
 ### Removed
-- gen_libs.Prt_Msg:  Function was previously deprecated.
-- gen_libs.Prt_Lvl:  Function was previously deprecated.
-- gen_libs.Print_Data:  Function was previously deprecated.
-- gen_libs.Open_File:  Function was previously deprecated.
-- gen_libs.Load_Module:  Function was previously deprecated.
-- gen_libs.List_Filter_Files:  Function was previously deprecated.
-- gen_libs.Close_File:  Function was previously deprecated.
-- gen_libs.Chk_Crt_File:  Function was previously deprecated.
-- gen_libs.Chk_Crt_Dir:  Function was previously deprecated.
-- cmds_gen.Add_Cmd:  Function was previously deprecated.
-- cmds_gen.Is_Add_Cmd:  Function was previously deprecated.
-- cmds_gen.Disconnect:  Function was previously deprecated.
-- arg_parser.Arg_Set_Path:  Function was previously deprecated.
+- gen_libs.Prt_Msg
+- gen_libs.Prt_Lvl
+- gen_libs.Print_Data
+- gen_libs.Open_File
+- gen_libs.Load_Module
+- gen_libs.List_Filter_Files
+- gen_libs.Close_File
+- gen_libs.Chk_Crt_File
+- gen_libs.Chk_Crt_Dir
+- cmds_gen.Add_Cmd
+- cmds_gen.Is_Add_Cmd
+- cmds_gen.Disconnect
+- arg_parser.Arg_Set_Path
 
 
 ## [2.5.0] - 2018-09-10
@@ -303,83 +245,83 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - gen_libs.is_empty_file:  Checks if a file is empty.
 
 ### Removed
-- gen_libs.Milli_2_Readadble:  Function was previously deprecated.
-- gen_libs.File_Search:  Function was previously deprecated.
-- gen_libs.Chk_Int:  Function was previously deprecated.
-- arg_parser.Arg_Wildcard:  Function was previously deprecated.
-- arg_parser.Arg_Add_Def:  Function was previously deprecated.
-- arg_parser.Arg_Valid_Val:  Function was previously deprecated.
-- arg_parser.Arg_Default:  Function was previously deprecated.
-- arg_parser.Arg_Parse2:  Function was previously deprecated.
-- arg_parser.Arg_Xor_Dict:  Function was previously deprecated.
-- arg_parser.Arg_Validate:  Function was previously deprecated.
-- arg_parser.Arg_Cond_Req:  Function was previously deprecated.
-- arg_parser.Arg_Cond_Req_Or:  Function was previously deprecated.
-- arg_parser.Arg_Req_Or_Lst:  Function was previously deprecated.
-- arg_parser.Arg_NoReq_Xor:  Function was previously deprecated.
-- arg_parser.Arg_Req_Xor:  Function was previously deprecated.
-- arg_parser.Arg_Dir_Chk_Crt:  Function was previously deprecated.
-- arg_parser.Arg_File_Chk:  Function was previously deprecated.
-- arg_parser.Arg_Parse:  Function was previously deprecated.
-- arg_parser.Arg_Require:  Function was previously deprecated.
-- system.Yum:  Class was previously deprecated.
-- system.F_Graph:  Class was previously deprecated.
-- system.Mail:  Class was previously deprecated.
-- cmds_gen.Run_Prog:  Function was previously deprecated.
-- cmds_gen.Create_Cfg_Array:  Function was previously deprecated.
-- gen_libs.Validate_Int:  Function was previously deprecated.
-- gen_libs.Validate_Date:  Function was previously deprecated.
-- gen_libs.Str_2_Type:  Function was previously deprecated.
-- gen_libs.Str_2_List:  Function was previously deprecated.
-- gen_libs.Help_Func:  Function was previously deprecated.
-- gen_libs.Rm_Newline_List:  Function was previously deprecated.
-- gen_libs.Rm_File:  Function was previously deprecated.
-- gen_libs.Rm_Dup_List:  Function was previously deprecated.
-- gen_libs.Rotate_Files:  Function was previously deprecated.
-- gen_libs.Root_Run:  Function was previously deprecated.
-- gen_libs.Normalize:  Function was previously deprecated.
-- gen_libs.Make_Zip:  Function was previously deprecated.
-- gen_libs.List_Files:  Function was previously deprecated.
-- gen_libs.List_2_Dict:  Function was previously deprecated.
-- gen_libs.Key_Cleaner:  Function was previously deprecated.
-- gen_libs.Is_True:  Function was previously deprecated.
-- gen_libs.Is_Missing_Lists:  Function was previously deprecated.
-- gen_libs.Not_In_List:  Function was previously deprecated.
-- gen_libs.In_List:  Function was previously deprecated.
-- gen_libs.Get_Time:  Function was previously deprecated.
-- gen_libs.Get_Secs:  Function was previously deprecated.
-- gen_libs.Get_Date:  Function was previously deprecated.
-- gen_libs.Float_Div:  Function was previously deprecated.
-- gen_libs.Pct_Int:  Function was previously deprecated.
-- gen_libs.File_Cleanup:  Function was previously deprecated.
-- gen_libs.Disk_Usage:  Function was previously deprecated.
-- gen_libs.Dir_File_Match:  Function was previously deprecated.
-- gen_libs.Prt_Dict:  Function was previously deprecated.
-- gen_libs.Dict_2_Std:  Function was previously deprecated.
-- gen_libs.Print_Dict:  Function was previously deprecated.
-- gen_libs.Dict_2_List:  Function was previously deprecated.
-- gen_libs.Del_Not_In_List:  Function was previously deprecated.
-- gen_libs.Del_Not_And_List:  Function was previously deprecated.
-- gen_libs.Crt_File_Time:  Function was previously deprecated.
-- gen_libs.Write_File2:  Function was previously deprecated.
-- gen_libs.Make_MD5_Hash:  Function was previously deprecated.
-- gen_libs.Write_2_Log:  Function was previously deprecated.
-- gen_libs.Rename_File:  Function was previously deprecated.
-- gen_libs.Rename_File2:  Function was previously deprecated.
-- gen_libs.Mv_File2:  Function was previously deprecated.
-- gen_libs.Mv_File:  Function was previously deprecated.
-- gen_libs.Cp_File:  Function was previously deprecated.
-- gen_libs.Cp_File2:  Function was previously deprecated.
-- gen_libs.Copy_Tree:  Function was previously deprecated.
-- gen_libs.Compress:  Function was previously deprecated.
-- gen_libs.File_2_List:  Function was previously deprecated.
-- gen_libs.Chmod:  Function was previously deprecated.
-- gen_libs.Bytes_2_Readable:  Function was previously deprecated.
-- gen_libs.And_Is_True:  Function was previously deprecated.
-- gen_libs.Merge_2_Dicts:  Function was previously deprecated.
-- gen_libs.Display_Data:  Function was previously deprecated.
-- gen_libs.Empty_File:  Function was previously deprecated.
-- gen_libs.Chown:  Function was previously deprecated.
+- gen_libs.Milli_2_Readadble
+- gen_libs.File_Search
+- gen_libs.Chk_Int
+- arg_parser.Arg_Wildcard
+- arg_parser.Arg_Add_Def
+- arg_parser.Arg_Valid_Val
+- arg_parser.Arg_Default
+- arg_parser.Arg_Parse2
+- arg_parser.Arg_Xor_Dict
+- arg_parser.Arg_Validate
+- arg_parser.Arg_Cond_Req
+- arg_parser.Arg_Cond_Req_Or
+- arg_parser.Arg_Req_Or_Lst
+- arg_parser.Arg_NoReq_Xor
+- arg_parser.Arg_Req_Xor
+- arg_parser.Arg_Dir_Chk_Crt
+- arg_parser.Arg_File_Chk
+- arg_parser.Arg_Parse
+- arg_parser.Arg_Require
+- system.Yum
+- system.F_Graph
+- system.Mail
+- cmds_gen.Run_Prog
+- cmds_gen.Create_Cfg_Array
+- gen_libs.Validate_Int
+- gen_libs.Validate_Date
+- gen_libs.Str_2_Type
+- gen_libs.Str_2_List
+- gen_libs.Help_Func
+- gen_libs.Rm_Newline_List
+- gen_libs.Rm_File
+- gen_libs.Rm_Dup_List
+- gen_libs.Rotate_Files
+- gen_libs.Root_Run
+- gen_libs.Normalize
+- gen_libs.Make_Zip
+- gen_libs.List_Files
+- gen_libs.List_2_Dict
+- gen_libs.Key_Cleaner
+- gen_libs.Is_True
+- gen_libs.Is_Missing_Lists
+- gen_libs.Not_In_List
+- gen_libs.In_List
+- gen_libs.Get_Time
+- gen_libs.Get_Secs
+- gen_libs.Get_Date
+- gen_libs.Float_Div
+- gen_libs.Pct_Int
+- gen_libs.File_Cleanup
+- gen_libs.Disk_Usage
+- gen_libs.Dir_File_Match
+- gen_libs.Prt_Dict
+- gen_libs.Dict_2_Std
+- gen_libs.Print_Dict
+- gen_libs.Dict_2_List
+- gen_libs.Del_Not_In_List
+- gen_libs.Del_Not_And_List
+- gen_libs.Crt_File_Time
+- gen_libs.Write_File2
+- gen_libs.Make_MD5_Hash
+- gen_libs.Write_2_Log
+- gen_libs.Rename_File
+- gen_libs.Rename_File2
+- gen_libs.Mv_File2
+- gen_libs.Mv_File
+- gen_libs.Cp_File
+- gen_libs.Cp_File2
+- gen_libs.Copy_Tree
+- gen_libs.Compress
+- gen_libs.File_2_List
+- gen_libs.Chmod
+- gen_libs.Bytes_2_Readable
+- gen_libs.And_Is_True
+- gen_libs.Merge_2_Dicts
+- gen_libs.Display_Data
+- gen_libs.Empty_File
+- gen_libs.Chown
 
 
 ## [2.4.0] - 2018-05-28
@@ -390,8 +332,8 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - gen_class.Yum.get_disto:  Method - Return class linux_distribution.
 
 ### Removed
-- gen_class.Program_Lock:  Removed class and associated methods.
-- gen_class.Single_Instance_Exception:  Removed class and associated methods.
+- gen_class.Program_Lock
+- gen_class.Single_Instance_Exception
 
 
 ## [2.3.0] - 2018-05-25
@@ -515,17 +457,12 @@ Breaking Change
 - gen_libs.make_md5_hash:  Changed Write_File2 to write_file call.
 - gen_libs.write_to_log:  Changed Write_File to write_file2 call.
 - gen_libs.Load_Module:  Qualified all calls using sys module.
-- gen_libs.file_2_list:  Replaced Close_File call with close command.
-- gen_libs.file_search:  Replaced Close_File call with close command.
+- gen_libs.file_search, gen_libs.file_2_list:  Replaced Close_File call with close command.
 - gen_libs.file_search:  Replaced Open_File call with open command.
 - gen_libs.py:  Changed "from subprocess" to "import subprocess".
 - gen_libs.py:  Qualified all calls to functions in subprocess module.
-- arg_parser.py:  Setup single-source version control.
-- system.py:  Setup single-source version control.
 - cmds_gen.is_add_cmd:  Replaced Add_Cmd with add_cmd function call.
-- cmds_gen.py:  Setup single-source version control.
-- machine.py:  Setup single-source version control.
-- errors.py:  Setup single-source version control.
+- system.py, cmds_gen.py, machine.py, errors.py, arg_parser.py:  Setup single-source version control.
 
 ### Deprecated
 - gen_libs.Validate_Int:  Replaced by validate_int function.
@@ -717,10 +654,8 @@ Breaking Change
 
 
 ## [1.28.1] - 2017-09-26
-### Error
-- gen_libs.Make_MD5_Hash:  It's overwriting hash files if file names are same, but extensions are different.
-
 ### Fixed
+- gen_libs.Make_MD5_Hash:  It's overwriting hash files if file names are same, but extensions are different.
 - gen_libs.Make_MD5_Hash:  Retain extension in hash file name to prevent overwriting.
 
 
@@ -788,10 +723,8 @@ Breaking Change
 
 
 ## [1.21.5] - 2017-08-03
-### Error
-- gen_libs:  List_Files function listed twice.
-
 ### Fixed
+- gen_libs:  List_Files function listed twice.
 - gen_libs:  Rename List_Files created on 2017-07-17 to List_Filter_Files due to naming conflict.
 
 
@@ -879,8 +812,7 @@ Breaking Change
 - gen_libs.normalize
 
 ### Fixed
-- arg_parser.Arg_Parse2:  Change from String type to Boolean type.
-- arg_parser.Arg_Parse:  Change from String type to Boolean type.
+- arg_parser.Arg_Parse, arg_parser.Arg_Parse2:  Change from String type to Boolean type.
 
 
 ## [1.15.0] - 2016-12-06
@@ -892,13 +824,8 @@ Breaking Change
 - gen_libs:  ast library
 
 ### Changed
-- arg_parser.Arg_Xor_Dict: Combine 'for' and 'if' into a intersect 'for' statments or complement 'for' statement.  Added break after first false.
-- arg_parser.Arg_Require: Combine 'for' and 'if' into a intersect 'for' statments or complement 'for' statement.
-- arg_parser.Arg_Validate: Combine 'for' and 'if' into a intersect 'for' statments or complement 'for' statement.
-- arg_parser.Arg_Cond_Req_Or: Combine 'for' and 'if' into a intersect 'for' statments or complement 'for' statement.
-- arg_parser.Arg_Req_Or_Lst: Combine 'for' and 'if' into a intersect 'for' statments or complement 'for' statement.
-- arg_parser.Arg_Cond_Req: Combine 'for' and 'if' into a intersect 'for' statments or complement 'for' statement.  Added break after first false.
-- arg_parser.Arg_Dir_Chk_Crt: Combine 'for' and 'if' into a intersect 'for' statments or complement 'for' statement.
+- arg_parser.Arg_Cond_Req, arg_parser.Arg_Xor_Dict: Combine 'for' and 'if' into a intersect 'for' statments or complement 'for' statement.  Added break after first false.
+- arg_parser.Arg_Validate, arg_parser.Arg_Cond_Req_Or, arg_parser.Arg_Req_Or_Lst, arg_parser.Arg_Dir_Chk_Crt, arg_parser.Arg_Require: Combine 'for' and 'if' into a intersect 'for' statments or complement 'for' statement.
 - cmds_gen.Is_Add_Cmd:  Changed args_array[x] from a String type check to a Boolean type check.
 
 ### Removed
@@ -917,7 +844,7 @@ Breaking Change
 - gen_libs.Zip_File
 - gen_libs.Missing_Files
 - gen_libs.Del_Or_List
-- gen_libs:   #!/usr/bin/python line, not required for library
+- gen_libs:   #!/usr/bin/python line.
 
 
 ## [1.13.0] - 2016-08-09

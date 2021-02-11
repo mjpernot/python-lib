@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  mail_send_mail.py
+"""Program:  mail_send_mailx.py
 
     Description:  Unit testing of send_mail in gen_libs.py.
 
     Usage:
-        test/unit/gen_libs/mail_send_mail.py
+        test/unit/gen_libs/mail_send_mailx.py
 
     Arguments:
 
@@ -91,63 +91,6 @@ class SubProcess(object):
         pass
 
 
-class Smtplib(object):
-
-    """Class:  SubProcess
-
-    Description:  Class which is a representation of the smtplib class.
-
-    Methods:
-        __init__ -> Initialize configuration environment.
-        sendmail -> Mock representation of sendmail method.
-        quit -> Mock representation of quit method.
-
-    """
-
-    def __init__(self):
-
-        """Method:  __init__
-
-        Description:  Initialization instance of the subprocess class.
-
-        Arguments:
-
-        """
-
-        self.frm = None
-        self.toaddr = None
-        self.func = None
-
-    def sendmail(self, frm, toaddr, func):
-
-        """Method:  sendmail
-
-        Description:  Mock representation of sendmail method.
-
-        Arguments:
-            frm -> Mock for from address.
-            toaddr -> Mock for to address.
-            func -> Mock for function call.
-
-        """
-
-        self.frm = frm
-        self.toaddr = toaddr
-        self.func = func
-
-    def quit(self):
-
-        """Method:  quit
-
-        Description:  Mock representation of quit method.
-
-        Arguments:
-
-        """
-
-        pass
-
-
 class UnitTest(unittest.TestCase):
 
     """Class:  UnitTest
@@ -164,7 +107,6 @@ class UnitTest(unittest.TestCase):
         test_subj_str -> Test subject line as a string.
         test_send_mailx2 -> Test send_mailx function.
         test_send_mailx -> Test send_mailx function.
-        test_send_mail -> Test test_send_mail function.
 
     """
 
@@ -205,7 +147,7 @@ class UnitTest(unittest.TestCase):
         mail = gen_class.Mail(self.toaddr3, subj=self.subj, frm=self.frm)
         mock_subp.side_effect = [self.subp, self.subp2]
 
-        mail.send_mail(use_mailx=True)
+        mail.send_mailx()
 
         self.assertEqual((mail.subj, mail.to), (self.subj, self.toaddr3a))
 
@@ -223,7 +165,7 @@ class UnitTest(unittest.TestCase):
         mail = gen_class.Mail(self.toaddr2, subj=self.subj, frm=self.frm)
         mock_subp.side_effect = [self.subp, self.subp2]
 
-        mail.send_mail(use_mailx=True)
+        mail.send_mailx()
 
         self.assertEqual((mail.subj, mail.to), (self.subj, self.toaddr))
 
@@ -241,7 +183,7 @@ class UnitTest(unittest.TestCase):
         mail = gen_class.Mail(self.toaddr, subj=self.subj, frm=self.frm)
         mock_subp.side_effect = [self.subp, self.subp2]
 
-        mail.send_mail(use_mailx=True)
+        mail.send_mailx()
 
         self.assertEqual((mail.subj, mail.to), (self.subj, self.toaddr))
 
@@ -259,7 +201,7 @@ class UnitTest(unittest.TestCase):
         mail = gen_class.Mail(self.toaddr, subj=self.subj3, frm=self.frm)
         mock_subp.side_effect = [self.subp, self.subp2]
 
-        mail.send_mail(use_mailx=True)
+        mail.send_mailx()
 
         self.assertEqual((mail.subj, mail.to), (self.subj3a, self.toaddr))
 
@@ -277,7 +219,7 @@ class UnitTest(unittest.TestCase):
         mail = gen_class.Mail(self.toaddr, subj=self.subj2, frm=self.frm)
         mock_subp.side_effect = [self.subp, self.subp2]
 
-        mail.send_mail(use_mailx=True)
+        mail.send_mailx()
 
         self.assertEqual((mail.subj, mail.to), (self.subj2a, self.toaddr))
 
@@ -295,7 +237,7 @@ class UnitTest(unittest.TestCase):
         mail = gen_class.Mail(self.toaddr, subj=self.subj, frm=self.frm)
         mock_subp.side_effect = [self.subp, self.subp2]
 
-        mail.send_mail(use_mailx=True)
+        mail.send_mailx()
 
         self.assertEqual((mail.subj, mail.to), (self.subj, self.toaddr))
 
@@ -313,7 +255,7 @@ class UnitTest(unittest.TestCase):
         mail = gen_class.Mail(self.toaddr, subj=self.subj, frm=self.frm)
         mock_subp.side_effect = [self.subp, self.subp2]
 
-        mail.send_mail(use_mailx=True)
+        mail.send_mailx()
 
         self.assertEqual((mail.subj, mail.to), (self.subj, self.toaddr))
 
@@ -331,25 +273,7 @@ class UnitTest(unittest.TestCase):
         mail = gen_class.Mail(self.toaddr, subj=self.subj, frm=self.frm)
         mock_subp.side_effect = [self.subp, self.subp2]
 
-        self.assertFalse(mail.send_mail(use_mailx=True))
-
-    @mock.patch("gen_class.Mail.create_body")
-    @mock.patch("gen_class.smtplib.SMTP")
-    def test_send_mail(self, mock_smtp, mock_body):
-
-        """Function:  test_send_mail
-
-        Description:  Test test_send_mail function.
-
-        Arguments:
-
-        """
-
-        mock_smtp.return_value = Smtplib()
-        mock_body.return_value = True
-        email = gen_class.Mail(self.toaddr)
-
-        self.assertFalse(email.send_mail())
+        self.assertFalse(mail.send_mailx())
 
 
 if __name__ == "__main__":
