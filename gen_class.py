@@ -1051,12 +1051,12 @@ class Logger(object):
             (input) msg_fmt -> Format of a log file entry.
             (input) date_fmt -> Format of date and time for a log file entry.
             (input) **kwargs:
-                mode -> a|w - Write mode to log file (append, write)
-                    NOTE:  Mode is not yet implemented.
+                mode -> a|w - Filemode to log file.
 
         """
 
-        self.handler = logging.FileHandler(log_file)
+        self.handler = logging.FileHandler(log_file,
+                                           mode=kwargs.get("mode", "a"))
 
         if not msg_fmt:
             msg_fmt = "%(asctime)s %(levelname)s %(message)s"
