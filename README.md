@@ -2,7 +2,7 @@
 # Classification (U)
 
 # Description:
-  Consists of a number of common local python functions and classes that are available for use.
+  A number of local python functions and classes that are available for general python use.
 
 
 ### This README file is broken down into the following sections:
