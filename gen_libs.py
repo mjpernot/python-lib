@@ -834,9 +834,8 @@ def filename_search(dir_path, file_str, add_path=False):
                 for item in list_files(dir_path)
                 if re.search(file_str, item)]
 
-    else:
-        return [item for item in list_files(dir_path)
-                if re.search(file_str, item)]
+    return [item for item in list_files(dir_path)
+            if re.search(file_str, item)]
 
 
 def float_div(num1, num2):
