@@ -1326,8 +1326,7 @@ def make_md5_hash(file_path, to_file=True):
 
         return hash_file
 
-    else:
-        return hash_results
+    return hash_results
 
 
 def make_zip(zip_file_path, cur_file_dir, files_to_zip, is_rel_path=False):
