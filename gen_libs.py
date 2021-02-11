@@ -1017,8 +1017,7 @@ def in_list(name, array_list):
     if name in array_list:
         return [name]
 
-    else:
-        return []
+    return []
 
 
 def is_empty_file(f_name):
