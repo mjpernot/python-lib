@@ -147,7 +147,7 @@ class UnitTest(unittest.TestCase):
         email = gen_class.Mail(self.toaddr, subj=self.subj2, frm=self.frm2)
 
         self.assertEqual(
-            (email.to, email.subj, email.frm, email.host_name,email.host),
+            (email.to, email.subj, email.frm, email.host_name, email.host),
             (email.to, self.subj2, self.frm2, None, None))
 
     def test_to_string(self):
