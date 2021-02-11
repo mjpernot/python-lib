@@ -42,8 +42,8 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - Documentation update.
 
 ### Deprecated
-- cmds_gen.run_prog:  No longer required.
-- cmds_gen.disconnect:  No longer required.
+- cmds_gen.run_prog
+- cmds_gen.disconnect
 
 
 ## [2.8.2] - 2020-07-15
