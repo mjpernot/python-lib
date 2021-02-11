@@ -131,7 +131,7 @@ __version__ = version.__version__
 _ntuple_diskusage = collections.namedtuple("usage", "total used free")
 
 
-def and_is_true(itemx, itemy, **kwargs):
+def and_is_true(itemx, itemy):
 
     """Function:  and_is_true
 
@@ -150,7 +150,7 @@ def and_is_true(itemx, itemy, **kwargs):
     return truth_tbl[itemx] and truth_tbl[itemy]
 
 
-def bytes_2_readable(size, precision=2, **kwargs):
+def bytes_2_readable(size, precision=2):
 
     """Function:  bytes_2_readable
 
@@ -305,7 +305,7 @@ def chk_crt_file(f_name=None, create=False, write=False, read=False,
     return status, err_msg
 
 
-def chk_int(line, **kwargs):
+def chk_int(line):
 
     """Function:  chk_int
 
@@ -325,7 +325,7 @@ def chk_int(line, **kwargs):
     return line.isdigit()
 
 
-def clear_file(f_name, **kwargs):
+def clear_file(f_name):
 
     """Function:  clear_file
 
@@ -339,7 +339,7 @@ def clear_file(f_name, **kwargs):
     open(f_name, "w").close()
 
 
-def compress(fname, **kwargs):
+def compress(fname):
 
     """Function:  compress
 
@@ -356,7 +356,7 @@ def compress(fname, **kwargs):
     proc1.wait()
 
 
-def cp_dir(src_dir, dest_dir, **kwargs):
+def cp_dir(src_dir, dest_dir):
 
     """Function:  cp_dir
 
@@ -389,7 +389,7 @@ def cp_dir(src_dir, dest_dir, **kwargs):
     return status, err_msg
 
 
-def cp_file(fname, src_dir, dest_dir, new_fname=None, **kwargs):
+def cp_file(fname, src_dir, dest_dir, new_fname=None):
 
     """Function:  cp_file
 
@@ -443,7 +443,7 @@ def cp_file(fname, src_dir, dest_dir, new_fname=None, **kwargs):
     return status, err_msg
 
 
-def cp_file2(fname, src_dir, dest_dir, new_fname=None, **kwargs):
+def cp_file2(fname, src_dir, dest_dir, new_fname=None):
 
     """Function:  cp_file2
 
@@ -467,7 +467,7 @@ def cp_file2(fname, src_dir, dest_dir, new_fname=None, **kwargs):
     shutil.copy2(os.path.join(src_dir, fname), dest_dir)
 
 
-def crt_file_time(fname, path, ext="", **kwargs):
+def crt_file_time(fname, path, ext=""):
 
     """Function:  crt_file_time
 
@@ -487,7 +487,7 @@ def crt_file_time(fname, path, ext="", **kwargs):
     return os.path.join(path, fname + "." + time.strftime("%Y%m%d_%I%M") + ext)
 
 
-def date_range(start_dt, end_dt, **kwargs):
+def date_range(start_dt, end_dt):
 
     """Function:  date_range
 
@@ -523,7 +523,7 @@ def date_range(start_dt, end_dt, **kwargs):
             finish = sdt < end_dt
 
 
-def del_not_and_list(list1, list2, **kwargs):
+def del_not_and_list(list1, list2):
 
     """Function:  del_not_and_list
 
@@ -545,7 +545,7 @@ def del_not_and_list(list1, list2, **kwargs):
     return list1
 
 
-def del_not_in_list(list1, list2, **kwargs):
+def del_not_in_list(list1, list2):
 
     """Function:  del_not_in_list
 
@@ -569,7 +569,7 @@ def del_not_in_list(list1, list2, **kwargs):
     return list1
 
 
-def dict_2_list(dict_list, key_val, **kwargs):
+def dict_2_list(dict_list, key_val):
 
     """Function:  dict_2_list
 
@@ -615,7 +615,7 @@ def dict_2_std(data, ofile=False, mode="w", **kwargs):
         outfile.close()
 
 
-def dir_file_match(dir_path, file_str, add_path=False, **kwargs):
+def dir_file_match(dir_path, file_str, add_path=False):
 
     """Function:  dir_file_match
 
@@ -636,12 +636,11 @@ def dir_file_match(dir_path, file_str, add_path=False, **kwargs):
         return [os.path.join(dir_path, item)
                 for item in list_files(dir_path) if re.match(file_str, item)]
 
-    else:
-        return [item for item in list_files(dir_path)
-                if re.match(file_str, item)]
+    return [item for item in list_files(dir_path)
+            if re.match(file_str, item)]
 
 
-def disk_usage(path, **kwargs):
+def disk_usage(path):
 
     """Function:  disk_usage
 
@@ -664,7 +663,7 @@ def disk_usage(path, **kwargs):
     return _ntuple_diskusage(total, used, free)
 
 
-def display_data(data, level=0, f_hdlr=sys.stdout, **kwargs):
+def display_data(data, level=0, f_hdlr=sys.stdout):
 
     """Function:  display_data
 
@@ -727,7 +726,7 @@ def display_data(data, level=0, f_hdlr=sys.stdout, **kwargs):
         print("%s" % data, file=f_hdlr)
 
 
-def file_cleanup(dir_path, days, **kwargs):
+def file_cleanup(dir_path, days):
 
     """Function:  file_cleanup
 
@@ -751,7 +750,7 @@ def file_cleanup(dir_path, days, **kwargs):
             os.remove(fullname)
 
 
-def file_search(f_name, string, **kwargs):
+def file_search(f_name, string):
 
     """Function:  file_search
 
@@ -777,7 +776,7 @@ def file_search(f_name, string, **kwargs):
     return line
 
 
-def file_search_cnt(f_name, pattern, **kwargs):
+def file_search_cnt(f_name, pattern):
 
     """Function:  file_search_cnt
 
@@ -794,7 +793,7 @@ def file_search_cnt(f_name, pattern, **kwargs):
     return open(f_name, "r").read().count(pattern)
 
 
-def file_2_list(filename, **kwargs):
+def file_2_list(filename):
 
     """Function:  file_2_list
 
@@ -813,7 +812,7 @@ def file_2_list(filename, **kwargs):
     return lines
 
 
-def filename_search(dir_path, file_str, add_path=False, **kwargs):
+def filename_search(dir_path, file_str, add_path=False):
 
     """Function:  filename_search
 
@@ -840,7 +839,7 @@ def filename_search(dir_path, file_str, add_path=False, **kwargs):
                 if re.search(file_str, item)]
 
 
-def float_div(num1, num2, **kwargs):
+def float_div(num1, num2):
 
     """Function:  float_div
 
@@ -861,7 +860,7 @@ def float_div(num1, num2, **kwargs):
         return 0
 
 
-def get_base_dir(f_name, **kwargs):
+def get_base_dir(f_name):
 
     """Function:  get_base_dir
 
@@ -876,7 +875,7 @@ def get_base_dir(f_name, **kwargs):
     return os.path.dirname(os.path.realpath(f_name))
 
 
-def get_data(f_hdlr, **kwargs):
+def get_data(f_hdlr):
 
     """Function:  get_data
 
@@ -891,7 +890,7 @@ def get_data(f_hdlr, **kwargs):
     return [item.rstrip() for item in f_hdlr]
 
 
-def get_date(**kwargs):
+def get_date():
 
     """Function:  get_date
 
@@ -905,7 +904,7 @@ def get_date(**kwargs):
     return datetime.datetime.strftime(datetime.datetime.now(), "%Y-%m-%d")
 
 
-def get_inst(cmd, **kwargs):
+def get_inst(cmd):
 
     """Function:  get_inst
 
@@ -920,7 +919,7 @@ def get_inst(cmd, **kwargs):
     return cmd
 
 
-def get_secs(tdd, **kwargs):
+def get_secs(tdd):
 
     """Function:  get_secs
 
@@ -935,7 +934,7 @@ def get_secs(tdd, **kwargs):
     return (tdd.seconds + tdd.days * 24 * 3600) * 10**6 / 10**6
 
 
-def get_time(**kwargs):
+def get_time():
 
     """Function:  get_time
 
@@ -949,7 +948,7 @@ def get_time(**kwargs):
     return datetime.datetime.strftime(datetime.datetime.now(), "%H:%M:%S")
 
 
-def has_whitespace(data, **kwargs):
+def has_whitespace(data):
 
     """Function:  has_whitespace
 
@@ -968,7 +967,7 @@ def has_whitespace(data, **kwargs):
     return False
 
 
-def help_func(args_array, version, func_name=None, **kwargs):
+def help_func(args_array, version, func_name=None):
 
     """Function:  help_func
 
@@ -1000,7 +999,7 @@ def help_func(args_array, version, func_name=None, **kwargs):
     return exit_flag
 
 
-def in_list(name, array_list, **kwargs):
+def in_list(name, array_list):
 
     """Function:  in_list
 
@@ -1023,7 +1022,7 @@ def in_list(name, array_list, **kwargs):
         return []
 
 
-def is_empty_file(f_name, **kwargs):
+def is_empty_file(f_name):
 
     """Function:  is_empty_file
 
@@ -1045,7 +1044,7 @@ def is_empty_file(f_name, **kwargs):
     return status
 
 
-def is_file_text(f_name, **kwargs):
+def is_file_text(f_name):
 
     """Function:  is_file_text
 
@@ -1080,7 +1079,7 @@ def is_file_text(f_name, **kwargs):
     return True
 
 
-def is_missing_lists(list1, list2, **kwargs):
+def is_missing_lists(list1, list2):
 
     """Function:  is_missing_lists
 
@@ -1100,7 +1099,7 @@ def is_missing_lists(list1, list2, **kwargs):
     return [item for item in list1 if item not in list2]
 
 
-def is_pos_int(num, **kwargs):
+def is_pos_int(num):
 
     """Function:  is_pos_int
 
@@ -1115,7 +1114,7 @@ def is_pos_int(num, **kwargs):
     return isinstance(num, int) and num > 0
 
 
-def is_true(item, **kwargs):
+def is_true(item):
 
     """Function:  is_true
 
@@ -1133,7 +1132,7 @@ def is_true(item, **kwargs):
     return truth_tbl[item]
 
 
-def key_cleaner(data, char, repl, **kwargs):
+def key_cleaner(data, char, repl):
 
     """Function:     key_cleaner
 
@@ -1177,7 +1176,7 @@ def key_cleaner(data, char, repl, **kwargs):
     return data
 
 
-def list_dirs(dir_path, **kwargs):
+def list_dirs(dir_path):
 
     """Function:  list_dirs
 
@@ -1199,7 +1198,7 @@ def list_dirs(dir_path, **kwargs):
     return dir_list
 
 
-def list_files(dir_path, **kwargs):
+def list_files(dir_path):
 
     """Function:  list_files
 
@@ -1217,7 +1216,7 @@ def list_files(dir_path, **kwargs):
             if os.path.isfile(os.path.join(dir_path, item))]
 
 
-def list_filter_files(dir_path, file_filter, **kwargs):
+def list_filter_files(dir_path, file_filter):
 
     """Function:  list_filter_files
 
@@ -1237,7 +1236,7 @@ def list_filter_files(dir_path, file_filter, **kwargs):
     return glob.glob(dir_path + file_filter)
 
 
-def list_2_dict(kv_list, fld_del=".", **kwargs):
+def list_2_dict(kv_list, fld_del="."):
 
     """Function:  list_2_dict
 
@@ -1267,7 +1266,7 @@ def list_2_dict(kv_list, fld_del=".", **kwargs):
     return dict_list
 
 
-def list_2_str(data_list, join_del="", **kwargs):
+def list_2_str(data_list, join_del=""):
 
     """Function:  list_2_str
 
@@ -1284,7 +1283,7 @@ def list_2_str(data_list, join_del="", **kwargs):
     return join_del.join(str(item) for item in list(data_list))
 
 
-def load_module(mod_name, mod_path, **kwargs):
+def load_module(mod_name, mod_path):
 
     """Function:  load_module
 
@@ -1301,7 +1300,7 @@ def load_module(mod_name, mod_path, **kwargs):
     return __import__(mod_name)
 
 
-def make_md5_hash(file_path, to_file=True, **kwargs):
+def make_md5_hash(file_path, to_file=True):
 
     """Function:  make_md5_hash
 
@@ -1332,8 +1331,7 @@ def make_md5_hash(file_path, to_file=True, **kwargs):
         return hash_results
 
 
-def make_zip(zip_file_path, cur_file_dir, files_to_zip, is_rel_path=False,
-             **kwargs):
+def make_zip(zip_file_path, cur_file_dir, files_to_zip, is_rel_path=False):
 
     """Function:  make_zip
 
@@ -1368,7 +1366,7 @@ def make_zip(zip_file_path, cur_file_dir, files_to_zip, is_rel_path=False,
         newzip.close()
 
 
-def merge_data_types(data_1, data_2, **kwargs):
+def merge_data_types(data_1, data_2):
 
     """Function:  merge_data_types
 
@@ -1412,7 +1410,7 @@ def merge_data_types(data_1, data_2, **kwargs):
     return data, status, err_msg
 
 
-def merge_two_dicts(data_1, data_2, **kwargs):
+def merge_two_dicts(data_1, data_2):
 
     """Function:  merge_two_dicts
 
@@ -1447,7 +1445,7 @@ def merge_two_dicts(data_1, data_2, **kwargs):
     return data, status, err_msg
 
 
-def milli_2_readadble(msecs, **kwargs):
+def milli_2_readadble(msecs):
 
     """Function:  milli_2_readadble
 
@@ -1472,7 +1470,7 @@ def milli_2_readadble(msecs, **kwargs):
            % (days, hours, minutes, seconds)
 
 
-def month_days(dtg, **kwargs):
+def month_days(dtg):
 
     """Function:  month_days
 
@@ -1487,7 +1485,7 @@ def month_days(dtg, **kwargs):
     return calendar.monthrange(dtg.year, dtg.month)[1]
 
 
-def month_delta(date, delta, **kwargs):
+def month_delta(date, delta):
 
     """Function:  month_delta
 
@@ -1510,7 +1508,7 @@ def month_delta(date, delta, **kwargs):
     return month, year
 
 
-def mv_file(fname, src_dir, dest_dir, new_fname=None, **kwargs):
+def mv_file(fname, src_dir, dest_dir, new_fname=None):
 
     """Function:  mv_file
 
@@ -1535,7 +1533,7 @@ def mv_file(fname, src_dir, dest_dir, new_fname=None, **kwargs):
     shutil.move(os.path.join(src_dir, fname), dest_dir)
 
 
-def mv_file2(src_file_path, des_path, new_fname=None, **kwargs):
+def mv_file2(src_file_path, des_path, new_fname=None):
 
     """Function:  mv_file2
 
@@ -1560,7 +1558,7 @@ def mv_file2(src_file_path, des_path, new_fname=None, **kwargs):
     shutil.move(src_file_path, des_path)
 
 
-def normalize(rngs, **kwargs):
+def normalize(rngs):
 
     """Function:  normalize
 
@@ -1600,7 +1598,7 @@ def normalize(rngs, **kwargs):
     return result
 
 
-def not_in_list(name, array_list, **kwargs):
+def not_in_list(name, array_list):
 
     """Function:  not_in_list
 
@@ -1644,7 +1642,7 @@ def no_std_out():
     sys.stdout = save_stdout
 
 
-def openfile(filename, mode="r", **kwargs):
+def openfile(filename, mode="r"):
 
     """Function:  openfile
 
@@ -1874,7 +1872,7 @@ def prt_dict(data, fhandler=sys.stdout, **kwargs):
             print("{0}{1}:  {2}".format(spc * indent, key, val), file=fhandler)
 
 
-def prt_lvl(lvl=1, **kwargs):
+def prt_lvl(lvl=1):
 
     """Function:  prt_lvl
 
@@ -1893,7 +1891,7 @@ def prt_lvl(lvl=1, **kwargs):
         cnt += 1
 
 
-def prt_msg(hdr, msg, lvl=0, **kwargs):
+def prt_msg(hdr, msg, lvl=0):
 
     """Function:  prt_msg
 
@@ -1911,7 +1909,7 @@ def prt_msg(hdr, msg, lvl=0, **kwargs):
     print("{0}:  {1}".format(hdr, msg))
 
 
-def rename_file(fname, new_fname, dir_path, **kwargs):
+def rename_file(fname, new_fname, dir_path):
 
     """Function:  rename_file
 
@@ -1927,7 +1925,7 @@ def rename_file(fname, new_fname, dir_path, **kwargs):
     os.rename(os.path.join(dir_path, fname), os.path.join(dir_path, new_fname))
 
 
-def rm_dup_list(orig_list, **kwargs):
+def rm_dup_list(orig_list):
 
     """Function:  rm_dup_list
 
@@ -1944,7 +1942,7 @@ def rm_dup_list(orig_list, **kwargs):
     return list(set(orig_list))
 
 
-def rm_file(file_path, **kwargs):
+def rm_file(file_path):
 
     """Function:  rm_file
 
@@ -1970,7 +1968,7 @@ def rm_file(file_path, **kwargs):
     return err_flag, err_msg
 
 
-def rm_key(data, key, **kwargs):
+def rm_key(data, key):
 
     """Function:  rm_key
 
@@ -1992,7 +1990,7 @@ def rm_key(data, key, **kwargs):
     return mod_data
 
 
-def rm_newline_list(orig_list, **kwargs):
+def rm_newline_list(orig_list):
 
     """Function:  rm_newline_list
 
@@ -2007,7 +2005,7 @@ def rm_newline_list(orig_list, **kwargs):
     return [x.strip("\n") for x in orig_list]
 
 
-def rm_whitespace(data, **kwargs):
+def rm_whitespace(data):
 
     """Function:  rm_whitespace
 
@@ -2022,7 +2020,7 @@ def rm_whitespace(data, **kwargs):
     return data.replace(" ", "")
 
 
-def root_run(**kwargs):
+def root_run():
 
     """Function:  root_run
 
@@ -2041,7 +2039,7 @@ def root_run(**kwargs):
         return False
 
 
-def rotate_files(fname, cnt=0, max_cnt=5, **kwargs):
+def rotate_files(fname, cnt=0, max_cnt=5):
 
     """Function:  rotate_files
 
@@ -2064,7 +2062,7 @@ def rotate_files(fname, cnt=0, max_cnt=5, **kwargs):
         os.rename(fname + "." + str(cnt), fname + "." + str(cnt + 1))
 
 
-def sec_2_hr(sec, **kwargs):
+def sec_2_hr(sec):
 
     """Function:  sec_2_hr
 
@@ -2079,7 +2077,7 @@ def sec_2_hr(sec, **kwargs):
     return (sec/36)/float(100)
 
 
-def str_2_list(del_str, fld_del, **kwargs):
+def str_2_list(del_str, fld_del):
 
     """Function:  str_2_list
 
@@ -2095,7 +2093,7 @@ def str_2_list(del_str, fld_del, **kwargs):
     return del_str.split(fld_del)
 
 
-def str_2_type(lit_str, **kwargs):
+def str_2_type(lit_str):
 
     """Function:  str_2_type
 
@@ -2112,7 +2110,7 @@ def str_2_type(lit_str, **kwargs):
     return ast.literal_eval(lit_str)
 
 
-def touch(f_name, **kwargs):
+def touch(f_name):
 
     """Function:  touch
 
@@ -2175,7 +2173,7 @@ def validate_date(dtg, **kwargs):
         return False
 
 
-def validate_int(num, **kwargs):
+def validate_int(num):
 
     """Function:  validate_int
 
@@ -2195,7 +2193,7 @@ def validate_int(num, **kwargs):
         return False
 
 
-def write_file(fname=None, mode="a", data=None, **kwargs):
+def write_file(fname=None, mode="a", data=None):
 
     """Function:  write_file
 
@@ -2213,7 +2211,7 @@ def write_file(fname=None, mode="a", data=None, **kwargs):
             print(data, file=f_hdlr)
 
 
-def write_file2(f_handle=None, line=None, **kwargs):
+def write_file2(f_handle=None, line=None):
 
     """Function:  write_file2
 
@@ -2229,7 +2227,7 @@ def write_file2(f_handle=None, line=None, **kwargs):
         print(line, file=f_handle)
 
 
-def write_to_log(f_hldr, text, **kwargs):
+def write_to_log(f_hldr, text):
 
     """Function:  write_to_log
 
