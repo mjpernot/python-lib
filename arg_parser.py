@@ -44,7 +44,7 @@ import version
 __version__ = version.__version__
 
 
-def arg_add_def(args_array, def_array=None, opt_req_list=None, **kwargs):
+def arg_add_def(args_array, def_array=None, opt_req_list=None):
 
     """Function:  arg_add_def
 
@@ -83,7 +83,7 @@ def arg_add_def(args_array, def_array=None, opt_req_list=None, **kwargs):
     return args_array
 
 
-def arg_cond_req(args_array, opt_con_req, **kwargs):
+def arg_cond_req(args_array, opt_con_req):
 
     """Function:  arg_cond_req
 
@@ -114,7 +114,7 @@ def arg_cond_req(args_array, opt_con_req, **kwargs):
     return status
 
 
-def arg_cond_req_or(args_array, opt_con_req_dict, **kwargs):
+def arg_cond_req_or(args_array, opt_con_req_dict):
 
     """Function:  arg_cond_req_or
 
@@ -147,7 +147,7 @@ def arg_cond_req_or(args_array, opt_con_req_dict, **kwargs):
     return status
 
 
-def arg_default(arg, args_array, opt_def_dict, **kwargs):
+def arg_default(arg, args_array, opt_def_dict):
 
     """Function:  arg_default
 
@@ -176,7 +176,7 @@ def arg_default(arg, args_array, opt_def_dict, **kwargs):
         sys.exit("Error: Arg {0} missing value".format(arg))
 
 
-def arg_dir_chk_crt(args_array, dir_chk_list, dir_crt_list=None, **kwargs):
+def arg_dir_chk_crt(args_array, dir_chk_list, dir_crt_list=None):
 
     """Function:  arg_dir_chk_crt
 
@@ -224,7 +224,7 @@ def arg_dir_chk_crt(args_array, dir_chk_list, dir_crt_list=None, **kwargs):
     return status
 
 
-def arg_file_chk(args_array, file_chk_list, file_crt_list=None, **kwargs):
+def arg_file_chk(args_array, file_chk_list, file_crt_list=None):
 
     """Function:  arg_file_chk
 
@@ -271,7 +271,7 @@ def arg_file_chk(args_array, file_chk_list, file_crt_list=None, **kwargs):
     return status
 
 
-def arg_noreq_xor(args_array, xor_noreq, **kwargs):
+def arg_noreq_xor(args_array, xor_noreq):
 
     """Function:  arg_noreq_xor
 
@@ -355,7 +355,7 @@ def arg_parse2(argv, opt_val_list, opt_def_dict=None, **kwargs):
     return args_array
 
 
-def arg_require(args_array, opt_req_list, **kwargs):
+def arg_require(args_array, opt_req_list):
 
     """Function:  arg_require
 
@@ -379,7 +379,7 @@ def arg_require(args_array, opt_req_list, **kwargs):
     return status
 
 
-def arg_req_or_lst(args_array, opt_or_dict, **kwargs):
+def arg_req_or_lst(args_array, opt_or_dict):
 
     """Function:  arg_req_or_lst
 
@@ -413,7 +413,7 @@ def arg_req_or_lst(args_array, opt_or_dict, **kwargs):
     return status
 
 
-def arg_req_xor(args_array, opt_xor, **kwargs):
+def arg_req_xor(args_array, opt_xor):
 
     """Function:  arg_req_xor
 
@@ -443,7 +443,7 @@ def arg_req_xor(args_array, opt_xor, **kwargs):
     return status
 
 
-def arg_set_path(args_array, arg_opt, **kwargs):
+def arg_set_path(args_array, arg_opt):
 
     """Function:  arg_set_path
 
@@ -464,7 +464,7 @@ def arg_set_path(args_array, arg_opt, **kwargs):
     return ""
 
 
-def arg_validate(args_array, valid_func, **kwargs):
+def arg_validate(args_array, valid_func):
 
     """Function:  arg_validate
 
@@ -492,7 +492,7 @@ def arg_validate(args_array, valid_func, **kwargs):
     return status
 
 
-def arg_valid_val(args_array, opt_valid_val, **kwargs):
+def arg_valid_val(args_array, opt_valid_val):
 
     """Function:  arg_valid_val
 
@@ -521,7 +521,7 @@ def arg_valid_val(args_array, opt_valid_val, **kwargs):
     return status
 
 
-def arg_wildcard(args_array, opt_wildcard, **kwargs):
+def arg_wildcard(args_array, opt_wildcard):
 
     """Function:  arg_wildcard
 
@@ -558,7 +558,7 @@ def arg_wildcard(args_array, opt_wildcard, **kwargs):
     return args_array
 
 
-def arg_xor_dict(args_array, opt_xor_dict, **kwargs):
+def arg_xor_dict(args_array, opt_xor_dict):
 
     """Function:  arg_xor_dict
 
@@ -589,8 +589,7 @@ def arg_xor_dict(args_array, opt_xor_dict, **kwargs):
     return status
 
 
-def _file_create(name, option, file_crt_list, errno, strerror, status,
-                 **kwargs):
+def _file_create(name, option, file_crt_list, errno, strerror, status):
 
     """Function:  _file_create
 
@@ -633,7 +632,7 @@ def _file_create(name, option, file_crt_list, errno, strerror, status,
     return status
 
 
-def _make_dir(dirname, status, **kwargs):
+def _make_dir(dirname, status):
 
     """Function:  _make_dir
 
@@ -664,7 +663,7 @@ def _make_dir(dirname, status, **kwargs):
     return status
 
 
-def _parse_multi(argv, args_array, opt_def_dict, **kwargs):
+def _parse_multi(argv, args_array, opt_def_dict):
 
     """Function:  _parse_multi
 
@@ -716,7 +715,7 @@ def _parse_multi(argv, args_array, opt_def_dict, **kwargs):
     return argv, args_array
 
 
-def _parse_single(argv, args_array, opt_def_dict, opt_val, **kwargs):
+def _parse_single(argv, args_array, opt_def_dict, opt_val):
 
     """Function:  _parse_single
 

@@ -26,7 +26,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - gen_class.LogFile.get_marker:  Refactored method.
 - gen_class:  Changed a number of variable names to standard naming convention.
 - gen_class.Logger.\_\_init\_\_:  Added "mode" keyword argument to allow append or write modes to log files.
-- gen_class:  Removed unneccessary \*\*kwargs from arguments lists.
+- arg_parser, gen_class:  Removed unneccessary \*\*kwargs from arguments lists.
 - gen_class.Mail.create_subject:  Added argument to set the subject line delimiter if using a list.
 - gen_class.Mail.\_\_init\_\_:  Set "from address" to default of current user and hostname if none is provided.
 - gen_libs.chk_crt_dir:  Added option to see if directory is executable.
