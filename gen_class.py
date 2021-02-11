@@ -50,7 +50,7 @@ import version
 __version__ = version.__version__
 
 
-def get_inst(cmd, **kwargs):
+def get_inst(cmd):
 
     """Function:  get_inst
 
@@ -61,12 +61,13 @@ def get_inst(cmd, **kwargs):
         (output) -> Return module instance.
 
     """
+
     sub = cmd
 
     return sub
 
 
-def setup_mail(to_line, subj=None, frm_line=None, **kwargs):
+def setup_mail(to_line, subj=None, frm_line=None):
 
     """Function:  setup_mail
 
@@ -359,7 +360,7 @@ class LogFile(object):
         self.ignore = []
         self.lastline = None
 
-    def get_marker(self, **kwargs):
+    def get_marker(self):
 
         """Method:  get_marker
 
@@ -375,7 +376,7 @@ class LogFile(object):
         else:
             return None
 
-    def find_marker(self, update=False, **kwargs):
+    def find_marker(self, update=False):
 
         """Method:  find_marker
 
@@ -396,7 +397,7 @@ class LogFile(object):
                 self.loglist = self.loglist[self.linemarker:]
                 self.linemarker = 0
 
-    def filter_ignore(self, use_marker=False, **kwargs):
+    def filter_ignore(self, use_marker=False):
 
         """Method:  filter_ignore
 
@@ -418,7 +419,7 @@ class LogFile(object):
                                 if not any(line in item.lower()
                                            for line in self.ignore)]
 
-    def filter_keyword(self, use_marker=False, **kwargs):
+    def filter_keyword(self, use_marker=False):
 
         """Method:  filter_keyword
 
@@ -440,7 +441,7 @@ class LogFile(object):
                                 if self.predicate(line in item.lower()
                                                   for line in self.keyword)]
 
-    def filter_regex(self, use_marker=False, **kwargs):
+    def filter_regex(self, use_marker=False):
 
         """Method:  filter_regex
 
@@ -460,7 +461,7 @@ class LogFile(object):
                 self.loglist = [item for item in self.loglist
                                 if re.search(self.regex, item)]
 
-    def load_ignore(self, data, **kwargs):
+    def load_ignore(self, data):
 
         """Method:  load_ignore
 
@@ -483,7 +484,7 @@ class LogFile(object):
         elif isinstance(data, str):
             self.ignore.append(data.lower().rstrip().rstrip("\n"))
 
-    def load_keyword(self, data, fld_delimit=" ", **kwargs):
+    def load_keyword(self, data, fld_delimit=" "):
 
         """Method:  load_keyword
 
@@ -508,7 +509,7 @@ class LogFile(object):
             self.keyword.extend(
                 data.lower().rstrip().rstrip("\n").split(fld_delimit))
 
-    def load_loglist(self, data, dictkey=None, **kwargs):
+    def load_loglist(self, data, dictkey=None):
 
         """Method:  load_loglist
 
@@ -538,7 +539,7 @@ class LogFile(object):
 
         self.set_marker()
 
-    def load_marker(self, data, **kwargs):
+    def load_marker(self, data):
 
         """Method:  load_marker
 
@@ -555,7 +556,7 @@ class LogFile(object):
         elif isinstance(data, str):
             self.marker = data.rstrip().rstrip("\n")
 
-    def load_regex(self, data, **kwargs):
+    def load_regex(self, data):
 
         """Method:  load_regex
 
@@ -579,7 +580,7 @@ class LogFile(object):
         elif isinstance(data, str):
             self.regex = "|".join(data.rstrip().split("\n"))
 
-    def set_marker(self, **kwargs):
+    def set_marker(self):
 
         """Method:  set_marker
 
@@ -592,7 +593,7 @@ class LogFile(object):
         if self.loglist:
             self.lastline = self.get_marker()
 
-    def set_predicate(self, predicate, **kwargs):
+    def set_predicate(self, predicate):
 
         """Method:  set_predicate
 
@@ -1081,7 +1082,7 @@ class Logger(object):
 
         self.log.addHandler(self.handler)
 
-    def log_debug(self, msg, **kwargs):
+    def log_debug(self, msg):
 
         """Method:  log_debug
 
@@ -1094,7 +1095,7 @@ class Logger(object):
 
         self.log.debug(msg)
 
-    def log_info(self, msg, **kwargs):
+    def log_info(self, msg):
 
         """Method:  log_info
 
@@ -1107,7 +1108,7 @@ class Logger(object):
 
         self.log.info(msg)
 
-    def log_warn(self, msg, **kwargs):
+    def log_warn(self, msg):
 
         """Method:  log_warn
 
@@ -1120,7 +1121,7 @@ class Logger(object):
 
         self.log.warning(msg)
 
-    def log_err(self, msg, **kwargs):
+    def log_err(self, msg):
 
         """Method:  log_err
 
@@ -1133,7 +1134,7 @@ class Logger(object):
 
         self.log.error(msg)
 
-    def log_crit(self, msg, **kwargs):
+    def log_crit(self, msg):
 
         """Method:  log_crit
 
@@ -1146,7 +1147,7 @@ class Logger(object):
 
         self.log.critical(msg)
 
-    def log_close(self, **kwargs):
+    def log_close(self):
 
         """Method:  log_close
 
@@ -1230,7 +1231,7 @@ class Yum(yum.YumBase):
 
         return self.host_name
 
-    def get_os(self, **kwargs):
+    def get_os(self):
 
         """Method:  get_os
 
@@ -1243,7 +1244,7 @@ class Yum(yum.YumBase):
 
         return self.os
 
-    def get_release(self, **kwargs):
+    def get_release(self):
 
         """Method:  get_release
 
