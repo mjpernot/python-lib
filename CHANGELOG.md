@@ -23,6 +23,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - gen_class.Mail.send_mailx:  Emails message out using mailx.
 
 ### Changed
+- gen_class.LogFile.get_marker:  Refactored method.
 - gen_class:  Changed a number of variable names to standard naming convention.
 - gen_class.Logger.\_\_init\_\_:  Added "mode" keyword argument to allow append or write modes to log files.
 - gen_class:  Removed unneccessary \*\*kwargs from arguments lists.

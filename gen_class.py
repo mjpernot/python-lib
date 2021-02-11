@@ -373,8 +373,7 @@ class LogFile(object):
         if self.loglist:
             return self.loglist[-1]
 
-        else:
-            return None
+        return None
 
     def find_marker(self, update=False):
 
