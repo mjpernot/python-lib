@@ -2034,8 +2034,7 @@ def root_run():
     if os.geteuid() == 0:
         return True
 
-    else:
-        return False
+    return False
 
 
 def rotate_files(fname, cnt=0, max_cnt=5):
