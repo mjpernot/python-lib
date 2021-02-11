@@ -1658,8 +1658,7 @@ def openfile(filename, mode="r"):
     if filename.endswith(".gz"):
         return gzip.open(filename, mode)
 
-    else:
-        return open(filename, mode)
+    return open(filename, mode)
 
 
 def pct_int(num1, num2, **kwargs):

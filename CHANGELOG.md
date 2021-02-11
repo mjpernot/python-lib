@@ -23,9 +23,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - gen_class.Mail.send_mailx:  Emails message out using mailx.
 
 ### Changed
-- gen_libs.root_run:  Refactored function.
-- gen_libs.filename_search:  Refactored function.
-- gen_libs.dir_file_match:  Refactored function.
+- gen_libs.openfile, gen_libs.root_run, gen_libs.filename_search, gen_libs.dir_file_match:  Refactored function.
 - gen_class.LogFile.get_marker:  Refactored method.
 - gen_class:  Changed a number of variable names to standard naming convention.
 - gen_class.Logger.\_\_init\_\_:  Added "mode" keyword argument to allow append or write modes to log files.
