@@ -1196,20 +1196,23 @@ def list_dirs(dir_path):
     return dir_list
 
 
-def list_files(dir_path):
+def list_files(dir_path, include_path=False):
 
     """Function:  list_files
 
     Description:  Get a list of file names in a directory and return as a list.
-        List will be returned as directory_path/file_name.
 
     Arguments:
         (input) dir_path -> Directory path.
+        (input) include_path -> True|False - include dir path with file name.
         (output) List of file names.
 
     """
 
-    # Loop on directory and if an entry is a file then add to list.
+    if include_path:
+        return [os.path.join(dir_path, item) for item in os.listdir(dir_path)
+                if os.path.isfile(os.path.join(dir_path, item))]
+
     return [item for item in os.listdir(dir_path)
             if os.path.isfile(os.path.join(dir_path, item))]
 

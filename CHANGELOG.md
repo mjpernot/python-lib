@@ -23,6 +23,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - gen_class.Mail.send_mailx:  Emails message out using mailx.
 
 ### Changed
+- gen_libs.list_files:  Added "include_path" option to include directory path with the file name.
 - gen_libs.in_list, gen_libs.make_md5_hash, gen_libs.not_in_list, gen_libs.openfile, gen_libs.root_run, gen_libs.filename_search, gen_libs.dir_file_match:  Refactored function.
 - gen_class.LogFile.get_marker:  Refactored method.
 - gen_class:  Changed a number of variable names to standard naming convention.
