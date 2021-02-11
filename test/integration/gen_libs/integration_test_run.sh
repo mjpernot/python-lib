@@ -15,4 +15,5 @@ test/integration/gen_libs/filename_search.py
 test/integration/gen_libs/make_md5_hash.py
 test/integration/gen_libs/merge_data_types.py
 test/integration/gen_libs/print_dict.py
+test/integration/gen_libs/prt_dict.py
 

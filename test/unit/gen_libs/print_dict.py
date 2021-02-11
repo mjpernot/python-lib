@@ -29,6 +29,7 @@ import mock
 # Local
 sys.path.append(os.getcwd())
 import gen_libs
+import gen_class
 import version
 
 __version__ = version.__version__
@@ -42,6 +43,10 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Unit testing initilization.
+        test_mail_std2 -> Test with mail with standard format.
+        test_mail_std -> Test with mail with standard format.
+        test_mail_json2 -> Test with mail with JSON format.
+        test_mail_json -> Test with mail with JSON format.
         test_non_dict -> Test with non-dictionary object.
         test_ofile_json -> Test with ofile and json_fmt arguments.
         test_set_nostd -> Test with no_std argument.
@@ -62,9 +67,69 @@ class UnitTest(unittest.TestCase):
         """
 
         self.data = {}
+        self.data2 = {"key1": "value1"}
         self.ofile = "Out_File"
         self.json_fmt = True
         self.no_std = True
+        self.mail = gen_class.Mail("to_address", "subject_line")
+        self.msg = '{\n    "key1": "value1"\n}'
+        self.msg2 = '{"key1": "value1"}'
+
+    def test_mail_std2(self):
+
+        """Function:  test_mail_std2
+
+        Description:  Test with mail with standard format.
+
+        Arguments:
+
+        """
+
+        gen_libs.print_dict(self.data2, mail=self.mail, no_std=True)
+        self.assertEqual(self.mail.msg, self.msg2)
+
+    def test_mail_std(self):
+
+        """Function:  test_mail_std
+
+        Description:  Test with mail with standard format.
+
+        Arguments:
+
+        """
+
+        self.assertEqual(
+            gen_libs.print_dict(
+                self.data, mail=self.mail, no_std=True), (False, None))
+
+    def test_mail_json2(self):
+
+        """Function:  test_mail_json2
+
+        Description:  Test with mail with JSON format.
+
+        Arguments:
+
+        """
+
+        gen_libs.print_dict(self.data2, mail=self.mail, no_std=True,
+                            json_fmt=True)
+        self.assertEqual(self.mail.msg, self.msg)
+
+    def test_mail_json(self):
+
+        """Function:  test_mail_json
+
+        Description:  Test with mail with JSON format.
+
+        Arguments:
+
+        """
+
+        self.assertEqual(
+            gen_libs.print_dict(
+                self.data, mail=self.mail, no_std=True, json_fmt=True),
+            (False, None))
 
     def test_non_dict(self):
 

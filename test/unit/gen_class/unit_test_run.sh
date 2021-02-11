@@ -53,4 +53,5 @@ test/unit/gen_class/mail_create_subject.py
 test/unit/gen_class/mail_print_email.py
 test/unit/gen_class/mail_read_stdin.py
 test/unit/gen_class/mail_send_mail.py
+test/unit/gen_class/mail_send_mailx.py
 

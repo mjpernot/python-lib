@@ -76,10 +76,13 @@ pipeline {
                 ./test/unit/gen_libs/get_inst.py
                 ./test/unit/gen_libs/get_secs.py
                 ./test/unit/gen_libs/get_time.py
+                ./test/unit/gen_libs/has_whitespace.py
                 ./test/unit/gen_libs/help_func.py
                 ./test/unit/gen_libs/in_list.py
                 ./test/unit/gen_libs/is_empty_file.py
+                ./test/unit/gen_libs/is_file_text.py
                 ./test/unit/gen_libs/is_missing_lists.py
+                ./test/unit/gen_libs/is_pos_int.py
                 ./test/unit/gen_libs/is_true.py
                 ./test/unit/gen_libs/key_cleaner.py
                 ./test/unit/gen_libs/list_2_dict.py
@@ -102,17 +105,22 @@ pipeline {
                 ./test/unit/gen_libs/no_std_out.py
                 ./test/unit/gen_libs/openfile.py
                 ./test/unit/gen_libs/pct_int.py
+                ./test/unit/gen_libs/perm_check.py
                 ./test/unit/gen_libs/print_data.py
                 ./test/unit/gen_libs/print_dict.py
+                ./test/unit/gen_libs/print_list.py
                 ./test/unit/gen_libs/prt_dict.py
                 ./test/unit/gen_libs/prt_lvl.py
                 ./test/unit/gen_libs/prt_msg.py
                 ./test/unit/gen_libs/rename_file.py
                 ./test/unit/gen_libs/rm_dup_list.py
                 ./test/unit/gen_libs/rm_file.py
+                ./test/unit/gen_libs/rm_key.py
                 ./test/unit/gen_libs/rm_newline_list.py
+                ./test/unit/gen_libs/rm_whitespace.py
                 ./test/unit/gen_libs/root_run.py
                 ./test/unit/gen_libs/rotate_files.py
+                ./test/unit/gen_libs/sec_2_hr.py
                 ./test/unit/gen_libs/str_2_list.py
                 ./test/unit/gen_libs/str_2_type.py
                 ./test/unit/gen_libs/touch.py
@@ -169,6 +177,7 @@ pipeline {
                 ./test/unit/gen_class/mail_print_email.py
                 ./test/unit/gen_class/mail_read_stdin.py
                 ./test/unit/gen_class/mail_send_mail.py
+                ./test/unit/gen_class/mail_send_mailx.py
                 ./test/unit/machine/linux.py
                 ./test/unit/machine/amachine.py
                 ./test/unit/machine/solaris.py

@@ -24,7 +24,6 @@ else:
     import unittest
 
 # Third-party
-import mock
 
 # Local
 sys.path.append(os.getcwd())
@@ -42,8 +41,13 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Unit testing initilization.
-        test_two_wildcard -> Test with two wildcard returns.
-        test_one_wildcard -> Test with one wildcard return.
+        test_two_string_wildcard -> Test with two string wildcards.
+        test_str_list_wildcard -> Test with string and list wildcard.
+        test_string_wildcard -> Test with a string wildcard.
+        test_two_wildcard2 -> Test with two wildcards.
+        test_two_wildcard -> Test with two wildcards.
+        test_one_wildcard2 -> Test with one wildcard.
+        test_one_wildcard -> Test with one wildcard.
         test_empty_optwildcard -> Test with empty list for opt_wildcard.
 
     """
@@ -58,54 +62,130 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.value = "value*"
-        self.test = "test*"
+        base_dir = "./test/unit/arg_parser"
+        wild1 = os.path.join(base_dir, "arg_wild*")
+        wild2 = os.path.join(base_dir, "unit*")
+        file1 = os.path.join(base_dir, "arg_wildcard.py")
+        file2 = os.path.join(base_dir, "unit_test_run.sh")
+
         self.args_array = {}
-        self.args_array2 = {self.value: []}
-        self.args_array3 = {self.value: [], self.test: []}
+        self.args_array2 = {"-a": [wild1]}
+        self.args_array3 = {"-a": [wild1], "-b": [wild2]}
+        self.args_array4 = {"-a": [wild1, wild2]}
+        self.args_array5 = {"-a": [wild1, wild2], "-b": [wild2]}
+        self.args_array6 = {"-a": wild1}
+        self.args_array7 = {"-a": wild1, "-b": [wild2]}
+        self.args_array8 = {"-a": wild1, "-b": wild2}
 
         self.opt_wildcard = []
-        self.opt_wildcard2 = [self.value]
-        self.opt_wildcard3 = [self.value, self.test]
+        self.opt_wildcard2 = ["-a"]
+        self.opt_wildcard3 = ["-a", "-b"]
 
         self.test_array = {}
-        self.test_array2 = {self.value: ["value1", "value2"]}
-        self.test_array3 = {self.value: ["value1", "value2"],
-                            self.test: ["test2"]}
+        self.test_array2 = {"-a": [file1]}
+        self.test_array3 = {"-a": [file1], "-b": [file2]}
+        self.test_array4 = {"-a": [file1, file2]}
+        self.test_array5 = {"-a": [file1, file2], "-b": [file2]}
 
-    @mock.patch("arg_parser.glob")
-    def test_two_wildcard(self, mock_glob):
+    def test_two_string_wildcard(self):
+
+        """Function:  test_two_string_wildcard
+
+        Description:  Test with two string wildcards.
+
+        Arguments:
+
+        """
+
+        n_array = arg_parser.arg_wildcard(self.args_array8, self.opt_wildcard3)
+
+        self.assertEqual(n_array, self.test_array3)
+
+    def test_str_list_wildcard(self):
+
+        """Function:  test_str_list_wildcard
+
+        Description:  Test with string and list wildcard.
+
+        Arguments:
+
+        """
+
+        n_array = arg_parser.arg_wildcard(self.args_array7, self.opt_wildcard3)
+
+        self.assertEqual(n_array, self.test_array3)
+
+    def test_string_wildcard(self):
+
+        """Function:  test_string_wildcard
+
+        Description:  Test with a string wildcard.
+
+        Arguments:
+
+        """
+
+        n_array = arg_parser.arg_wildcard(self.args_array6, self.opt_wildcard2)
+
+        self.assertEqual(n_array, self.test_array2)
+
+    def test_two_wildcard2(self):
+
+        """Function:  test_two_wildcard2
+
+        Description:  Test with two wildcards.
+
+        Arguments:
+
+        """
+
+        n_array = arg_parser.arg_wildcard(self.args_array5, self.opt_wildcard3)
+
+        self.assertEqual(
+            n_array["-a"].sort(), self.test_array5["-a"].sort() and
+            n_array["-b"], self.test_array5["-b"])
+
+    def test_two_wildcard(self):
 
         """Function:  test_two_wildcard
 
-        Description:  Test with two wildcard returns.
+        Description:  Test with two wildcards.
 
         Arguments:
 
         """
 
-        mock_glob.glob.side_effect = [["value1", "value2"], ["test2"]]
+        n_array = arg_parser.arg_wildcard(self.args_array3, self.opt_wildcard3)
 
-        self.assertEqual(arg_parser.arg_wildcard(self.args_array3,
-                                                 self.opt_wildcard3),
-                         self.test_array3)
+        self.assertEqual(n_array, self.test_array3)
 
-    @mock.patch("arg_parser.glob")
-    def test_one_wildcard(self, mock_glob):
+    def test_one_wildcard2(self):
+
+        """Function:  test_one_wildcard2
+
+        Description:  Test with one wildcard.
+
+        Arguments:
+
+        """
+
+        n_array = arg_parser.arg_wildcard(self.args_array4, self.opt_wildcard2)
+
+        self.assertEqual(n_array["-a"].sort(), self.test_array4["-a"].sort())
+
+    def test_one_wildcard(self):
 
         """Function:  test_one_wildcard
 
-        Description:  Test with one wildcard return.
+        Description:  Test with one wildcard.
 
         Arguments:
 
         """
 
-        mock_glob.glob.return_value = ["value1", "value2"]
+        n_array = arg_parser.arg_wildcard(self.args_array2, self.opt_wildcard2)
 
-        self.assertEqual(arg_parser.arg_wildcard(self.args_array2,
-                                                 self.opt_wildcard2),
-                         self.test_array2)
+        self.assertEqual(n_array, self.test_array2)
 
     def test_empty_optwildcard(self):
 
@@ -117,9 +197,9 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertEqual(arg_parser.arg_wildcard(self.args_array,
-                                                 self.opt_wildcard),
-                         self.test_array)
+        n_array = arg_parser.arg_wildcard(self.args_array, self.opt_wildcard)
+
+        self.assertEqual(n_array, self.test_array)
 
 
 if __name__ == "__main__":

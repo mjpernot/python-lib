@@ -25,6 +25,7 @@
 
 # Standard
 import os
+import subprocess
 import fcntl
 import sys
 import tempfile
@@ -49,7 +50,7 @@ import version
 __version__ = version.__version__
 
 
-def get_inst(cmd, **kwargs):
+def get_inst(cmd):
 
     """Function:  get_inst
 
@@ -60,12 +61,13 @@ def get_inst(cmd, **kwargs):
         (output) -> Return module instance.
 
     """
+
     sub = cmd
 
     return sub
 
 
-def setup_mail(to_line, subj=None, frm_line=None, **kwargs):
+def setup_mail(to_line, subj=None, frm_line=None):
 
     """Function:  setup_mail
 
@@ -107,6 +109,11 @@ class Daemon:
         stop -> Kill the daemon process
         restart -> Restart the daemon process
         run -> Stub method holder, instance will contain the code to execute.
+
+    Possible Bug:  Sometimes during start and stop operations an error is
+        encountered on a sys.stderr.write command that states: "unsupported
+        format character".  Unable to reproduce the error and thus fix the
+        error.
 
     """
 
@@ -161,9 +168,9 @@ class Daemon:
                 # Exit first parent
                 sys.exit(0)
 
-        except OSError, e:
+        except OSError, err:
             sys.stderr.write("Fork #1 failed: %d (%s)\n" %
-                             (e.errno, e.strerror))
+                             (err.errno, err.strerror))
             sys.exit(1)
 
         # Decouple from parent environment
@@ -179,9 +186,9 @@ class Daemon:
                 # Exit from second parent
                 sys.exit(0)
 
-        except OSError, e:
+        except OSError, err:
             sys.stderr.write("Fork #2 failed: %d (%s)\n" %
-                             (e.errno, e.strerror))
+                             (err.errno, err.strerror))
             sys.exit(1)
 
         # Redirect standard file descriptors
@@ -353,7 +360,7 @@ class LogFile(object):
         self.ignore = []
         self.lastline = None
 
-    def get_marker(self, **kwargs):
+    def get_marker(self):
 
         """Method:  get_marker
 
@@ -366,10 +373,9 @@ class LogFile(object):
         if self.loglist:
             return self.loglist[-1]
 
-        else:
-            return None
+        return None
 
-    def find_marker(self, update=False, **kwargs):
+    def find_marker(self, update=False):
 
         """Method:  find_marker
 
@@ -390,7 +396,7 @@ class LogFile(object):
                 self.loglist = self.loglist[self.linemarker:]
                 self.linemarker = 0
 
-    def filter_ignore(self, use_marker=False, **kwargs):
+    def filter_ignore(self, use_marker=False):
 
         """Method:  filter_ignore
 
@@ -412,7 +418,7 @@ class LogFile(object):
                                 if not any(line in item.lower()
                                            for line in self.ignore)]
 
-    def filter_keyword(self, use_marker=False, **kwargs):
+    def filter_keyword(self, use_marker=False):
 
         """Method:  filter_keyword
 
@@ -434,7 +440,7 @@ class LogFile(object):
                                 if self.predicate(line in item.lower()
                                                   for line in self.keyword)]
 
-    def filter_regex(self, use_marker=False, **kwargs):
+    def filter_regex(self, use_marker=False):
 
         """Method:  filter_regex
 
@@ -454,7 +460,7 @@ class LogFile(object):
                 self.loglist = [item for item in self.loglist
                                 if re.search(self.regex, item)]
 
-    def load_ignore(self, data, **kwargs):
+    def load_ignore(self, data):
 
         """Method:  load_ignore
 
@@ -477,7 +483,7 @@ class LogFile(object):
         elif isinstance(data, str):
             self.ignore.append(data.lower().rstrip().rstrip("\n"))
 
-    def load_keyword(self, data, fld_delimit=" ", **kwargs):
+    def load_keyword(self, data, fld_delimit=" "):
 
         """Method:  load_keyword
 
@@ -502,7 +508,7 @@ class LogFile(object):
             self.keyword.extend(
                 data.lower().rstrip().rstrip("\n").split(fld_delimit))
 
-    def load_loglist(self, data, dictkey=None, **kwargs):
+    def load_loglist(self, data, dictkey=None):
 
         """Method:  load_loglist
 
@@ -532,7 +538,7 @@ class LogFile(object):
 
         self.set_marker()
 
-    def load_marker(self, data, **kwargs):
+    def load_marker(self, data):
 
         """Method:  load_marker
 
@@ -549,11 +555,14 @@ class LogFile(object):
         elif isinstance(data, str):
             self.marker = data.rstrip().rstrip("\n")
 
-    def load_regex(self, data, **kwargs):
+    def load_regex(self, data):
 
         """Method:  load_regex
 
         Description:  Load regext entries from object.
+
+        Note:  If passing in r"data_string" (raw strings) then any embedded
+            "\n" (newlines) will not be split upon in the string operation.
 
         Arguments:
             (input) data -> Holds marker entry as a file, list, or string.
@@ -570,7 +579,7 @@ class LogFile(object):
         elif isinstance(data, str):
             self.regex = "|".join(data.rstrip().split("\n"))
 
-    def set_marker(self, **kwargs):
+    def set_marker(self):
 
         """Method:  set_marker
 
@@ -583,7 +592,7 @@ class LogFile(object):
         if self.loglist:
             self.lastline = self.get_marker()
 
-    def set_predicate(self, predicate, **kwargs):
+    def set_predicate(self, predicate):
 
         """Method:  set_predicate
 
@@ -831,19 +840,20 @@ class Mail(System):
         create_body -> Combines subject line & message into a single entity.
         create_subject -> Creates or overwrites a subject to the email.
         send_mail -> Emails message out via smtp connection.
+        send_mailx -> Emails message out using mailx.
         print_email -> Print email to standard out.
 
     """
 
-    def __init__(self, to, subj=None, frm=None, msg_type=None, host_name=None,
-                 host=None):
+    def __init__(self, toaddr, subj=None, frm=None, msg_type=None,
+                 host_name=None, host=None):
 
         """Method:  __init__
 
         Description:  Initialization of an instance of the Mail class.
 
         Arguments:
-            (input) to -> To email address.
+            (input) toaddr -> To email address.
             (input) subj -> Subject line of mail.
             (input) msg_type -> Type of email being sent.
             (input) frm -> From email address.
@@ -857,15 +867,20 @@ class Mail(System):
         if isinstance(subj, list):
             subj = list(subj)
 
-        if isinstance(to, list):
-            self.to = list(to)
+        if isinstance(toaddr, list):
+            self.to = list(toaddr)
 
         else:
-            self.to = to
+            self.to = toaddr
+
+        if frm:
+            self.frm = frm
+
+        else:
+            self.frm = getpass.getuser() + "@" + socket.gethostname()
 
         self.subj = None
         self.create_subject(subj)
-        self.frm = frm
         self.msg_type = msg_type
         self.msg = ""
 
@@ -901,8 +916,8 @@ class Mail(System):
 
         inst = get_inst(sys)
 
-        for ln in inst.stdin:
-            self.add_2_msg(ln)
+        for line in inst.stdin:
+            self.add_2_msg(line)
 
     def create_body(self):
 
@@ -920,7 +935,7 @@ class Mail(System):
 
         return "Subject: %s\n\n%s" % (self.subj, self.msg)
 
-    def create_subject(self, subj=None):
+    def create_subject(self, subj=None, delimiter=" "):
 
         """Method:  create_subject
 
@@ -928,17 +943,18 @@ class Mail(System):
 
         Arguments:
             (input) subj -> Subject line.
+            (input) delimiter -> Subject line delimiter if using a list.
 
         """
 
         if subj:
             if isinstance(subj, list):
-                self.subj = " ".join(str(item) for item in list(subj))
+                self.subj = delimiter.join(str(item) for item in list(subj))
 
             else:
                 self.subj = subj
 
-    def send_mail(self):
+    def send_mail(self, use_mailx=False):
 
         """Method:  send_mail
 
@@ -946,14 +962,47 @@ class Mail(System):
             to the email address.  Call to create_body() puts "Subj:" into the
             message which is required for sendmail.
 
+        Note:  Setup the send_mailx call to allow programs using the current
+            send_mail to need only an argument option.
+
+        Arguments:
+            (input) use_mailx -> True|False - To use mailx command.
+
+        """
+
+        if use_mailx:
+            self.send_mailx()
+
+        else:
+            inst = get_inst(smtplib)
+            server = inst.SMTP("localhost")
+            server.sendmail(self.frm, self.to, self.create_body())
+            server.quit()
+
+    def send_mailx(self):
+
+        """Method:  send_mailx
+
+        Description:  Opens a subprocess to mail out the message and subject
+            to the email address.
+
+        Note:  This was created due to the some mail guards not working with
+            the smtplib module, but will work fine with mailx.
+
         Arguments:
 
         """
 
-        inst = get_inst(smtplib)
-        server = inst.SMTP("localhost")
-        server.sendmail(self.frm, self.to, self.create_body())
-        server.quit()
+        self.subj = self.subj.replace(" ", "")
+
+        if isinstance(self.to, list):
+            self.to = " ".join(str(item) for item in list(self.to))
+
+        inst = get_inst(subprocess)
+        proc1 = inst.Popen(['echo', self.msg], stdout=inst.PIPE)
+        proc2 = inst.Popen(['mailx', '-s', self.subj, self.to],
+                           stdin=proc1.stdout)
+        proc2.wait()
 
     def print_email(self):
 
@@ -1001,12 +1050,12 @@ class Logger(object):
             (input) msg_fmt -> Format of a log file entry.
             (input) date_fmt -> Format of date and time for a log file entry.
             (input) **kwargs:
-                mode -> a|w - Write mode to log file (append, write)
-                    NOTE:  Mode is not yet implemented.
+                mode -> a|w - Filemode to log file.
 
         """
 
-        self.handler = logging.FileHandler(log_file)
+        self.handler = logging.FileHandler(log_file,
+                                           mode=kwargs.get("mode", "a"))
 
         if not msg_fmt:
             msg_fmt = "%(asctime)s %(levelname)s %(message)s"
@@ -1032,7 +1081,7 @@ class Logger(object):
 
         self.log.addHandler(self.handler)
 
-    def log_debug(self, msg, **kwargs):
+    def log_debug(self, msg):
 
         """Method:  log_debug
 
@@ -1045,7 +1094,7 @@ class Logger(object):
 
         self.log.debug(msg)
 
-    def log_info(self, msg, **kwargs):
+    def log_info(self, msg):
 
         """Method:  log_info
 
@@ -1058,7 +1107,7 @@ class Logger(object):
 
         self.log.info(msg)
 
-    def log_warn(self, msg, **kwargs):
+    def log_warn(self, msg):
 
         """Method:  log_warn
 
@@ -1071,7 +1120,7 @@ class Logger(object):
 
         self.log.warning(msg)
 
-    def log_err(self, msg, **kwargs):
+    def log_err(self, msg):
 
         """Method:  log_err
 
@@ -1084,7 +1133,7 @@ class Logger(object):
 
         self.log.error(msg)
 
-    def log_crit(self, msg, **kwargs):
+    def log_crit(self, msg):
 
         """Method:  log_crit
 
@@ -1097,7 +1146,7 @@ class Logger(object):
 
         self.log.critical(msg)
 
-    def log_close(self, **kwargs):
+    def log_close(self):
 
         """Method:  log_close
 
@@ -1181,7 +1230,7 @@ class Yum(yum.YumBase):
 
         return self.host_name
 
-    def get_os(self, **kwargs):
+    def get_os(self):
 
         """Method:  get_os
 
@@ -1194,7 +1243,7 @@ class Yum(yum.YumBase):
 
         return self.os
 
-    def get_release(self, **kwargs):
+    def get_release(self):
 
         """Method:  get_release
 

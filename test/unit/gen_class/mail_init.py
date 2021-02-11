@@ -41,6 +41,8 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp -> Initialize testing environment.
+        test_no_from_addr -> Test with no from address is passed.
+        test_from_addr -> Test with from address is passed.
         test_subj_list -> Test subject line as a list.
         test_subj_string -> Test subject line as a string.
         test_with_data -> Test other attributes with data.
@@ -72,6 +74,34 @@ class UnitTest(unittest.TestCase):
         self.host_name = None
         self.host = None
 
+    def test_no_from_addr(self):
+
+        """Function:  test_no_from_addr
+
+        Description:  Test with no from address is passed.
+
+        Arguments:
+
+        """
+
+        email = gen_class.Mail(self.toaddr, subj=self.subj4, frm=self.frm2)
+
+        self.assertTrue(email.frm)
+
+    def test_from_addr(self):
+
+        """Function:  test_from_addr
+
+        Description:  Test with from address is passed.
+
+        Arguments:
+
+        """
+
+        email = gen_class.Mail(self.toaddr, subj=self.subj4, frm=self.frm2)
+
+        self.assertEqual(email.frm, self.frm2)
+
     def test_subj_list(self):
 
         """Function:  test_subj_string
@@ -84,9 +114,9 @@ class UnitTest(unittest.TestCase):
 
         email = gen_class.Mail(self.toaddr, subj=self.subj4, frm=self.frm2)
 
-        self.assertEqual((email.to, email.subj, email.frm, email.host_name,
-                          email.host), (email.to, self.subj4a, self.frm2, None,
-                                        None))
+        self.assertEqual(
+            (email.to, email.subj, email.frm, email.host_name, email.host),
+            (email.to, self.subj4a, self.frm2, None, None))
 
     def test_subj_string(self):
 
@@ -100,9 +130,9 @@ class UnitTest(unittest.TestCase):
 
         email = gen_class.Mail(self.toaddr, subj=self.subj3, frm=self.frm2)
 
-        self.assertEqual((email.to, email.subj, email.frm, email.host_name,
-                          email.host), (email.to, self.subj3, self.frm2, None,
-                                        None))
+        self.assertEqual(
+            (email.to, email.subj, email.frm, email.host_name, email.host),
+            (email.to, self.subj3, self.frm2, None, None))
 
     def test_with_data(self):
 
@@ -116,9 +146,9 @@ class UnitTest(unittest.TestCase):
 
         email = gen_class.Mail(self.toaddr, subj=self.subj2, frm=self.frm2)
 
-        self.assertEqual((email.to, email.subj, email.frm, email.host_name,
-                          email.host), (email.to, self.subj2, self.frm2, None,
-                                        None))
+        self.assertEqual(
+            (email.to, email.subj, email.frm, email.host_name, email.host),
+            (email.to, self.subj2, self.frm2, None, None))
 
     def test_to_string(self):
 
@@ -132,9 +162,9 @@ class UnitTest(unittest.TestCase):
 
         email = gen_class.Mail(self.toaddr)
 
-        self.assertEqual((self.mailaddr, email.subj, email.frm,
-                          email.host_name, email.host),
-                         (self.mailaddr, None, None, None, None))
+        self.assertEqual(
+            (self.mailaddr, email.subj, email.host_name, email.host),
+            (self.mailaddr, None, None, None))
 
     def test_to_list(self):
 
@@ -148,8 +178,9 @@ class UnitTest(unittest.TestCase):
 
         email = gen_class.Mail(self.toaddr)
 
-        self.assertEqual((email.to, email.subj, email.frm, email.host_name,
-                          email.host), (self.toaddr, None, None, None, None))
+        self.assertEqual(
+            (email.to, email.subj, email.host_name, email.host),
+            (self.toaddr, None, None, None))
 
     def test_default(self):
 
@@ -163,8 +194,9 @@ class UnitTest(unittest.TestCase):
 
         email = gen_class.Mail(self.toaddr)
 
-        self.assertEqual((email.to, email.subj, email.frm, email.host_name,
-                          email.host), (self.toaddr, None, None, None, None))
+        self.assertEqual(
+            (email.to, email.subj, email.host_name, email.host),
+            (self.toaddr, None, None, None))
 
 
 if __name__ == "__main__":

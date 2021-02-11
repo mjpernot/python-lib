@@ -49,6 +49,7 @@ class UnitTest(unittest.TestCase):
         test_read_dir -> Test with checking read permission on directory.
         test_no_read_dir -> Test with checking no read permission on directory.
         test_no_print_set -> Test with no_print option set.
+        test_print_file2 -> Test with printing error messages to file.
         test_print_file -> Test with printing error messages to file.
         tearDown -> Cleanup of unit testing.
 
@@ -149,7 +150,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        err_msg_chk = "Error: Directory: %s is not writeable." % (self.d_name)
+        err_msg_chk = "Error: Directory %s is not writeable." % (self.d_name)
         os.makedirs(self.d_name)
         os.chmod(self.d_name, 0444)
         status, err_msg = gen_libs.chk_crt_dir(self.d_name, write=True,
@@ -186,7 +187,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        err_msg_chk = "Error: Directory: %s is not readable." % (self.d_name)
+        err_msg_chk = "Error: Directory %s is not readable." % (self.d_name)
         os.makedirs(self.d_name)
         os.chmod(self.d_name, 0333)
         status, err_msg = gen_libs.chk_crt_dir(self.d_name, read=True,
@@ -211,6 +212,23 @@ class UnitTest(unittest.TestCase):
         self.assertFalse(status)
         self.assertEqual(err_msg, err_msg_chk)
 
+    def test_print_file2(self):
+
+        """Function:  test_print_file2
+
+        Description:  Test with printing error messages to file.
+
+        Arguments:
+
+        """
+
+        err_msg_chk = self.err_mask % (self.d_name)
+        f_hdlr = open(self.f_name, "w")
+        _, _ = gen_libs.chk_crt_dir(self.d_name, f_hdlr=f_hdlr, no_print=True)
+        f_hdlr.close()
+
+        self.assertFalse(err_msg_chk in open(self.f_name).read())
+
     def test_print_file(self):
 
         """Function:  test_print_file
@@ -227,7 +245,6 @@ class UnitTest(unittest.TestCase):
                                                no_print=True)
         f_hdlr.close()
 
-        self.assertFalse(err_msg_chk in open(self.f_name).read())
         self.assertFalse(status)
         self.assertEqual(err_msg, err_msg_chk)
 
