@@ -109,6 +109,11 @@ class Daemon:
         restart -> Restart the daemon process
         run -> Stub method holder, instance will contain the code to execute.
 
+    Possible Bug:  Sometimes during start and stop operations an error is
+        encountered on a sys.stderr.write command that states: "unsupported
+        format character".  Unable to reproduce the error and thus fix the
+        error.
+
     """
 
     DEV_NULL = "/dev/null"
