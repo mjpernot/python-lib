@@ -185,7 +185,7 @@ def chk_crt_dir(dir_name=None, create=False, write=False, read=False,
     Arguments:
         (input) dir_name -> Directory name.
         (input) create -> True|False - Create directory if not present.
-        (input) write -> True|False - Is Writable on directory.
+        (input) write -> True|False - Is Writeable on directory.
         (input) read -> True|False - Is Readable on directory.
         (input) f_hdlr -> File handler to write messages to or stdout.
         (input) **kwargs:
@@ -255,7 +255,7 @@ def chk_crt_file(f_name=None, create=False, write=False, read=False,
     Arguments:
         (input) f_name -> File name with directory path.
         (input) create -> True|False - Create file if not present.
-        (input) write -> True|False - Is Writable on file.
+        (input) write -> True|False - Is Writeable on file.
         (input) read -> True|False - Is Readable on file.
         (input) f_hdlr -> File handler to write messages to or stdout.
         (input) **kwargs:
@@ -1692,7 +1692,7 @@ def perm_check(item, item_type, f_hdlr=sys.stdout, **kwargs):
             status -> Current status from calling function.
             err_msg -> Current error messages from calling function.
             read -> True|False - Is Readable on file.
-            write -> True|False - Is Writable on file.
+            write -> True|False - Is Writeable on file.
             exe -> True|False - Is Executable on file.
         (output) status -> True|False - False if one of the checks fails.
         (output) err_msg -> Error message of check(s) that fail.
@@ -1705,9 +1705,9 @@ def perm_check(item, item_type, f_hdlr=sys.stdout, **kwargs):
     write = kwargs.get("write", False)
     exe = kwargs.get("exe", False)
 
-    # Object writable
+    # Object writeable
     if write and not os.access(item, os.W_OK):
-        tmp_msg = "Error: %s %s is not writable." % (item_type, item)
+        tmp_msg = "Error: %s %s is not writeable." % (item_type, item)
         print(tmp_msg, file=f_hdlr)
         err_msg = "\n".join([err_msg, tmp_msg])
         status = False
