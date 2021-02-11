@@ -1616,8 +1616,7 @@ def not_in_list(name, array_list):
     if name not in array_list:
         return [name]
 
-    else:
-        return []
+    return []
 
 
 @contextlib.contextmanager
