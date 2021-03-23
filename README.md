@@ -40,7 +40,7 @@ cp requirements-python-lib.txt > {Other_Python_Project}/requirements-python-lib.
 Modify the {Other_Python_Project}/README.md file:
 
 ```
-   pip install -r requirements-python-lib.txt --target lib --trusted-host pypi.appdev.proj.coe.ic.gov
+pip install -r requirements-python-lib.txt --target lib --trusted-host pypi.appdev.proj.coe.ic.gov
 ```
 
 ##### Add the general python-lib requirements to the other program's requirements.txt file.  Remove any duplicates.
