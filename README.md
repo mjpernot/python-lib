@@ -138,23 +138,7 @@ test/unit/machine/code_coverage.sh
 
 ### Installation:
 
-Install the project using git.
-  * Replace **{Python_Project}** with the baseline path of the python program.
-
-```
-cd {Python_Project}
-git clone git@sc.appdev.proj.coe.ic.gov:JAC-DSXD/python-lib.git
-```
-
-Install/upgrade system modules.
-
-```
-cd python-lib
-sudo bash
-umask 022
-pip install -r requirements.txt --upgrade --trusted-host pypi.appdev.proj.coe.ic.gov
-exit
-```
+Install the project using the procedures in the Installation section under Unit Testing.
 
 ### Testing:
 ```
