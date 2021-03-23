@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [2.8.4] - 2021-03-23
+
+
 ## [2.8.3] - 2020-12-24
 
 ### Fixed
