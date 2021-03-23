@@ -148,7 +148,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        err_msg_chk = "Error: File %s is not writable." % (self.f_name)
+        err_msg_chk = "Error: File %s is not writeable." % (self.f_name)
         open(self.f_name, "a").close()
         os.chmod(self.f_name, 0444)
         status, err_msg = gen_libs.chk_crt_file(self.f_name, write=True,
