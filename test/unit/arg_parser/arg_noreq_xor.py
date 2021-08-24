@@ -41,14 +41,14 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_two_match_two_fail -> Test with two matches and both are failure.
-        test_two_match_one_fail -> Test with two matches and one is failure.
+        setUp
+        test_two_match_two_fail
+        test_two_match_one_fail
         test_two_match_success -> Test with two matches and is successful
-        test_one_match_fail -> Test with one match and is failure.
-        test_one_match_success -> Test with one match and is successful.
-        test_empty_xornoreqlist -> Test with empty dict for xor_noreq_list.
-        test_empty_argsarray -> Test with empty dictionary for args_array.
+        test_one_match_fail
+        test_one_match_success
+        test_empty_xornoreqlist
+        test_empty_argsarray
 
     """
 
