@@ -40,14 +40,14 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_optreqlist_two_args -> Test adding two args from opt_req_list.
-        test_optreqlist_zero_arg -> Test adding zero args from opt_req_list.
-        test_optreqlist_one_arg -> Test with adding one arg from opt_req_list.
-        test_argsarray_only -> Test with args_array passed only.
-        test_defarray_two_args -> Test with adding two args from def_array.
-        test_defarray_one_arg -> Test with adding one arg from def_array.
-        test_empty_defarray -> Test with empty list for def_array.
+        setUp
+        test_optreqlist_two_args
+        test_optreqlist_zero_arg
+        test_optreqlist_one_arg
+        test_argsarray_only
+        test_defarray_two_args
+        test_defarray_one_arg
+        test_empty_defarray
 
     """
 
