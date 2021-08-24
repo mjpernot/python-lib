@@ -41,15 +41,15 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_two_values_fail2 -> Test with two values and two failures.
-        test_two_values_fail -> Test with two values and one failure.
-        test_two_values_success -> Test with two values and is successful.
-        test_value_fail -> Test with one value and is failure.
-        test_value_success -> Test with one value and is successful.
-        test_empty_both -> Test with empty dictionary for both arguments.
-        test_empty_validfunc -> Test with empty dict for opt_valid_val.
-        test_empty_argsarray -> Test with empty dictionary for args_array.
+        setUp
+        test_two_values_fail2
+        test_two_values_fail
+        test_two_values_success
+        test_value_fail
+        test_value_success
+        test_empty_both
+        test_empty_validfunc
+        test_empty_argsarray
 
     """
 
