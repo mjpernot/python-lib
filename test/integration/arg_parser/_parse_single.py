@@ -40,11 +40,11 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_optvalset_arg_int -> Test opt_val_set set to integer value.
-        test_optval_set -> Test with opt_val set with no value in arg.
-        test_optvalset_two_arg -> Test with opt_val_set set to two arguments.
-        test_optvalset_one_arg -> Test with opt_val_set set to one argument.
+        setUp
+        test_optvalset_arg_int
+        test_optval_set
+        test_optvalset_two_arg
+        test_optvalset_one_arg
 
     """
 
