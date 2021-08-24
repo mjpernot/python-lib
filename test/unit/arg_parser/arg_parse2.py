@@ -41,25 +41,25 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_all_together -> Test with all options together.
-        test_multi_defdict_set -> Test with multi_list and opt_def_dict set.
-        test_multilist_two_val -> Test with multi_list set to two values.
-        test_multilist_one_val -> Test with multi_list set to one value.
-        test_multilist_def_arg -> Test with multi_list set to 1 arg using def.
-        test_multilist_two_args -> Test multi_list set to 1 arg & 1 other arg.
-        test_multilist_one_arg -> Test with multi_list set to one argument.
-        test_optvalset_arg_int -> Test opt_val_set set to integer value.
-        test_optval_set -> Test with opt_val set with no value in arg.
-        test_optvalset_no_val -> Test opt_val_set set with no value in arg.
-        test_optvalset_two_arg -> Test with opt_val_set set to two arguments.
-        test_optvalset_one_arg -> Test with opt_val_set set to one argument.
-        test_arg_value_not_set -> Test argument value, but not set in opt_val.
-        test_prog_with_arg -> Test with program name with argument.
-        test_with_two_args -> Test with two arguments, no values.
-        test_with_one_arg -> Test with one argument, no values.
-        test_argv_no_args -> Test with argv with no arguments.
-        test_empty_argv_list -> Test with argv as empty list.
+        setUp
+        test_all_together
+        test_multi_defdict_set
+        test_multilist_two_val
+        test_multilist_one_val
+        test_multilist_def_arg
+        test_multilist_two_args
+        test_multilist_one_arg
+        test_optvalset_arg_int
+        test_optval_set
+        test_optvalset_no_val
+        test_optvalset_two_arg
+        test_optvalset_one_arg
+        test_arg_value_not_set
+        test_prog_with_arg
+        test_with_two_args
+        test_with_one_arg
+        test_argv_no_args
+        test_empty_argv_list
 
     """
 
