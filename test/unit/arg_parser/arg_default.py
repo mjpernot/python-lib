@@ -41,11 +41,11 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_arg_in_argsarray -> Test with arg already in args_array.
-        test_arg_in_optdefdict -> Test with arg in opt_def_dict.
-        test_not_in_optdefdict -> Test with arg not in opt_def_dict.
-        test_empty_optdefdict -> Test adding two args from opt_req_list.
+        setUp
+        test_arg_in_argsarray
+        test_arg_in_optdefdict
+        test_not_in_optdefdict
+        test_empty_optdefdict
 
     """
 
