@@ -42,7 +42,7 @@ class FileOpen3(object):
     Description:  Class stub holder for file open class.
 
     Methods:
-        close -> Stub holder for close function.
+        close
 
     """
 
@@ -66,7 +66,7 @@ class FileOpen2(object):
     Description:  Class stub holder for file open class.
 
     Methods:
-        close -> Stub holder for close function.
+        close
 
     """
 
@@ -90,7 +90,7 @@ class FileOpen(object):
     Description:  Class stub holder for file open class.
 
     Methods:
-        close -> Stub holder for close function.
+        close
 
     """
 
@@ -114,26 +114,26 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_second_open_no_error -> Test with second open no error.
-        test_second_open_error -> Test with second open but returns error.
-        test_filecrtlist_in_list -> Test file_crt_list with option in list.
-        test_filecrtlist_not_in_list -> Test file_crt_list option not in list.
-        test_filecrtlist_empty_list -> Test file_crt_list passed empty list.
-        test_filecrtlist_not_passed -> Test file_crt_list not being passed.
-        test_first_open_error_two -> Test with first open & error 2 returned.
-        test_first_open_error_ten -> Test with first open & error 10 returned.
-        test_first_open_no_errors -> Test with first open and no errors.
-        test_name_loop_zero_items -> Test with name loop on zero items.
-        test_name_loop_two_items -> Test with name loop on two items.
-        test_name_loop_one_item -> Test with name loop on one item.
-        test_isinstance_is_set -> Test with isinstance against a set.
-        test_isinstance_is_string -> Test with isinstance against a string.
-        test_isinstance_is_list -> Test with isinstance against a list.
-        test_two_match_between_sets -> Test with two matches between sets.
-        test_one_match_between_sets -> Test with one match between sets.
-        test_one_match_empty_list -> Test 1 match between sets but empty list.
-        test_no_match_between_sets -> Test with no match between sets passed.
+        setUp
+        test_second_open_no_error
+        test_second_open_error
+        test_filecrtlist_in_list
+        test_filecrtlist_not_in_list
+        test_filecrtlist_empty_list
+        test_filecrtlist_not_passed
+        test_first_open_error_two
+        test_first_open_error_ten
+        test_first_open_no_errors
+        test_name_loop_zero_items
+        test_name_loop_two_items
+        test_name_loop_one_item
+        test_isinstance_is_set
+        test_isinstance_is_string
+        test_isinstance_is_list
+        test_two_match_between_sets
+        test_one_match_between_sets
+        test_one_match_empty_list
+        test_no_match_between_sets
 
     """
 
