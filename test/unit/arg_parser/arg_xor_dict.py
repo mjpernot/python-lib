@@ -41,18 +41,18 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_multiple_miss2 -> Test with multiple key/list present.
-        test_multiple_miss -> Test with multiple keys with one not present.
-        test_multiple_mix -> Test with multiple key/list present.
-        test_multiple_lists -> Test with multiple lists present.
-        test_multiple_keys -> Test with multiple keys present.
-        test_both_present -> Test with both key and list options present.
-        test_list_only -> Test with list option present.
-        test_key_only -> Test with key option present.
-        test_empty_argsarray -> Test with empty args_array.
-        test_empty_optxordict -> Test with empty list for opt_req_list.
-        test_both_empty -> Test with both args with empty sets.
+        setUp
+        test_multiple_miss2
+        test_multiple_miss
+        test_multiple_mix
+        test_multiple_lists
+        test_multiple_keys
+        test_both_present
+        test_list_only
+        test_key_only
+        test_empty_argsarray
+        test_empty_optxordict
+        test_both_empty
 
     """
 
