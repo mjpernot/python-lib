@@ -40,15 +40,15 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_two_string_wildcard -> Test with two string wildcards.
-        test_str_list_wildcard -> Test with string and list wildcard.
-        test_string_wildcard -> Test with a string wildcard.
-        test_two_wildcard2 -> Test with two wildcards.
-        test_two_wildcard -> Test with two wildcards.
-        test_one_wildcard2 -> Test with one wildcard.
-        test_one_wildcard -> Test with one wildcard.
-        test_empty_optwildcard -> Test with empty list for opt_wildcard.
+        setUp
+        test_two_string_wildcard
+        test_str_list_wildcard
+        test_string_wildcard
+        test_two_wildcard2
+        test_two_wildcard
+        test_one_wildcard2
+        test_one_wildcard
+        test_empty_optwildcard
 
     """
 
