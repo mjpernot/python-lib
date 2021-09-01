@@ -40,10 +40,10 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_with_char -> Test with character passed.
-        test_invalid_format -> Test with invalid datetime group format.
-        test_valid_format -> Test with valid datetime group format.
+        setUp
+        test_with_char
+        test_invalid_format
+        test_valid_format
 
     """
 

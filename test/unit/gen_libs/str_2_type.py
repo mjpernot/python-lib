@@ -40,9 +40,9 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_with_tuple -> Test with converting string to tuple.
-        test_with_int -> Test with converting string to integer.
+        setUp
+        test_with_tuple
+        test_with_int
 
     """
 

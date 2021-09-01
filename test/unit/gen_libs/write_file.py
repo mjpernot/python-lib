@@ -41,8 +41,8 @@ def create_file(f_name, mode):
 
     Arguments:
         (input) f_name -> Name of file
-        (input) mode w|a -> Write or append to file.
-        (output) True|False -> Creation of file was successful.
+        (input) mode w|a
+        (output) True|False
 
     """
 
@@ -59,8 +59,8 @@ def write_file(f_name, mode):
 
     Arguments:
         (input) f_name -> Name of file
-        (input) mode w|a -> Write or append to file.
-        (output) True|False -> Writing to a file was successful.
+        (input) mode w|a
+        (output) True|False
 
     """
 
@@ -76,10 +76,10 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_create_file -> Test creating file.
-        test_write_file -> Test writing to file.
-        tearDown -> Cleanup of unit testing.
+        setUp
+        test_create_file
+        test_write_file
+        tearDown
 
     """
 

@@ -40,10 +40,10 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_with_space -> Test with space delimited string.
-        test_with_colon -> Test with colon delimited string.
-        test_with_comma -> Test with comma delimited string.
+        setUp
+        test_with_space
+        test_with_colon
+        test_with_comma
 
     """
 

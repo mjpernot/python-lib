@@ -40,9 +40,9 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_with_rm_file -> Test with removing file.
-        test_with_raise_exception -> Test raising exception.
+        setUp
+        test_with_rm_file
+        test_with_raise_exception
 
     """
 
