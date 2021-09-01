@@ -40,11 +40,11 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_default -> Test with minimum number of arguments.
-        test_user_values -> Test with user values for arguments.
-        test_width_zero -> Test with zero width argument.
-        test_width_less_zero -> Test with less than zero width argument.
+        setUp
+        test_default
+        test_user_values
+        test_width_zero
+        test_width_less_zero
 
     """
 

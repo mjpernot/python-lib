@@ -41,11 +41,11 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_unlock -> Test __del__ method with unlock successful.
-        test_no_file -> Test __del__ method with no file to unlink.
-        test_no_lock -> Test __del__ method with lock set to false in class.
-        tearDown -> Clean up of testing environment.
+        setUp
+        test_unlock
+        test_no_file
+        test_no_lock
+        tearDown
 
     """
 
