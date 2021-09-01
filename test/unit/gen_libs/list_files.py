@@ -41,10 +41,10 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_include_path -> Test with including path with file name.
-        test_list_files -> Test list_files function.
-        tearDown -> Clean up of unit testing.
+        setUp
+        test_include_path
+        test_list_files
+        tearDown
 
     """
 

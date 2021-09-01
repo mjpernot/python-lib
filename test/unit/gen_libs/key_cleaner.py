@@ -41,11 +41,11 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_key_cleaner_tuple -> Test with tuple passed.
-        test_key_cleaner_multi_list -> Test with multiple item list passed.
-        test_key_cleaner_single_list -> Test with single item list passed.
-        test_key_cleaner_dict -> Test with dictionary passed.
+        setUp
+        test_key_cleaner_tuple
+        test_key_cleaner_multi_list
+        test_key_cleaner_single_list
+        test_key_cleaner_dict
 
     """
 

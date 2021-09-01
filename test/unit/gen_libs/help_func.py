@@ -54,11 +54,11 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_help_option -> Test with -h option.
-        test_version_option -> Test with -v option.
-        test_both_options -> Test with -h and -v options.
-        test_no_options -> Test with no -h or -v options in array.
+        setUp
+        test_help_option
+        test_version_option
+        test_both_options
+        test_no_options
 
     """
 
