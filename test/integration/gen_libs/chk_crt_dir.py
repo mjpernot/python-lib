@@ -150,9 +150,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        perm = "444"
+
         err_msg_chk = "Error: Directory %s is not writeable." % (self.d_name)
         os.makedirs(self.d_name)
-        os.chmod(self.d_name, 0444)
+        os.chmod(self.d_name, int(perm, 8))
         status, err_msg = gen_libs.chk_crt_dir(self.d_name, write=True,
                                                no_print=True)
 
