@@ -17,6 +17,7 @@
         cp_dir
         cp_file
         cp_file2
+        create_cfg_array
         crt_file_time
         date_range
         del_not_and_list
@@ -147,6 +148,7 @@ def add_cmd(cmd, **kwargs):
         (output) cmd -> List containing the program command line.
 
     """
+
     cmd = list(cmd)
 
     # Append before returning, appending on return does not make the change.
@@ -493,6 +495,59 @@ def cp_file2(fname, src_dir, dest_dir, new_fname=None):
         dest_dir = os.path.join(dest_dir, new_fname)
 
     shutil.copy2(os.path.join(src_dir, fname), dest_dir)
+
+
+def create_cfg_array(cfg_file, **kwargs):
+
+    """Function:  create_cfg_array
+
+    Description:  Parses a configuration file which can contain multiple
+        configuration connections & creates an array of configurations.  This
+        is for general class use and will require the first line of the
+        configuration file to be the "user" entry and the key and the value
+        will be delimited by "=" (equal sign).
+
+    Arguments:
+        (input) cfg_file -> Configuration file.
+        (input) **kwargs:
+            cfg_path - Configuration directory path.
+        (output) cfg_array -> Array of configurations.
+
+    """
+
+    cfg_array = []
+    cfg_dict = {}
+    cfg_path = kwargs.get("cfg_path", "./")
+
+    # Does config file exists in current location.
+    if os.path.isfile(cfg_file):
+        fname = open(cfg_file, "r")
+
+    else:
+        fname = open(os.path.join(cfg_path, cfg_file), "r")
+
+    for line in fname:
+
+        # Ignore comment lines.
+        if line[0] != "#":
+            key, value = line.split("=")
+
+            # Set each entry in the config to it's own array based on 'user'.
+            # If the key is "user" (new slave) and config dictionary exist.
+            if key.strip() == "user" and cfg_dict:
+                cfg_array.append(cfg_dict)
+                cfg_dict = {}
+
+            cfg_dict[key.strip()] = value.strip().rstrip()
+
+    # Execute after 'for' loop.
+    else:
+        # Add last dict to config array.
+        cfg_array.append(cfg_dict)
+
+    fname.close()
+
+    return cfg_array
 
 
 def crt_file_time(fname, path, ext=""):
