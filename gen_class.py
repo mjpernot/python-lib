@@ -160,6 +160,8 @@ class Daemon:
 
         """
 
+        mask = 0
+
         # Do first fork
         try:
             pid = os.fork()
@@ -176,7 +178,7 @@ class Daemon:
         # Decouple from parent environment
         os.chdir("/")
         os.setsid()
-        os.umask(0)
+        os.umask(mask)
 
         # Do second fork
         try:
