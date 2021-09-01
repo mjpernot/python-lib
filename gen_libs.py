@@ -88,6 +88,7 @@
         str_2_list
         str_2_type
         touch
+        transpose_dict
         validate_date
         validate_int
         write_file
@@ -2266,6 +2267,42 @@ def touch(f_name):
             err_msg = "ERROR: File create failure. Reason: %s" % (strerror)
 
     return status, err_msg
+
+
+def transpose_dict(data, data_key):
+
+    """Function:  transpose_dict
+
+    Description:  Transpose specified keys in a list of dictionaries
+        to specified data types or None.
+
+    Arguments:
+        (input) data -> Initial list of dictionaries.
+        (input) data_key -> Dictionary of keys and data types.
+        (output) mod_data -> Modified list of dictionaries.
+
+    """
+
+    data = list(data)
+    data_key = dict(data_key)
+    mod_data = list()
+
+    for list_item in data:
+        list_item = dict(list_item)
+
+        for item in set(list_item.keys()) & set(data_key.keys()):
+            if not list_item[item] or list_item[item] == "None":
+                list_item[item] = None
+
+            elif data_key[item] == "int":
+                list_item[item] = int(list_item[item])
+
+            elif data_key[item] == "bool":
+                list_item[item] = ast.literal_eval(list_item[item])
+
+        mod_data.append(list_item)
+
+    return mod_data
 
 
 def validate_date(dtg, **kwargs):
