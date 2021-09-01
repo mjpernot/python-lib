@@ -42,6 +42,7 @@
         has_whitespace
         help_func
         in_list
+        is_add_cmd
         is_empty_file
         is_file_text
         is_missing_lists
@@ -1101,6 +1102,45 @@ def in_list(name, array_list):
         return [name]
 
     return []
+
+
+def is_add_cmd(args_array, cmd, opt_arg_list):
+
+    """Function:  is_add_cmd
+
+    Description:  Determine if any additional options need to be added to the
+        command line.
+
+    Arguments:
+        (input) args_array -> Array of command line options and values.
+        (input) cmd -> List array containing the program arguments.
+        (input) opt_arg_list -> Dictionary of additional options.
+        (output) cmd -> List array containing the program arguments.
+
+    """
+
+    cmd = list(cmd)
+    args_array = dict(args_array)
+    opt_arg_list = dict(opt_arg_list)
+
+    for opt in opt_arg_list:
+
+        # Is option in array and is set to True.
+        if opt in args_array and args_array[opt] \
+           and isinstance(args_array[opt], bool):
+
+            if isinstance(opt_arg_list[opt], list):
+
+                for item in opt_arg_list[opt]:
+                    cmd = add_cmd(cmd, arg=item)
+
+            else:
+                cmd = add_cmd(cmd, arg=opt_arg_list[opt])
+
+        elif opt in args_array:
+            cmd = add_cmd(cmd, arg=opt_arg_list[opt], val=args_array[opt])
+
+    return cmd
 
 
 def is_empty_file(f_name):
