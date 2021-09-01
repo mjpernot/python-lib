@@ -6,6 +6,7 @@
         general use.
 
     Functions:
+        add_cmd
         and_is_true
         bytes_2_readable
         chk_crt_dir
@@ -129,6 +130,33 @@ __version__ = version.__version__
 
 # Tuples
 _ntuple_diskusage = collections.namedtuple("usage", "total used free")
+
+
+def add_cmd(cmd, **kwargs):
+
+    """Function:  add_cmd
+
+    Description:  Append name of argument and possibly value for the argument
+        to the command line list.
+
+    Arguments:
+        (input) cmd -> List containing the program command line.
+        (input) **kwargs:
+            arg -> Name of argument being added.
+            val -> Value for argument being added.
+        (output) cmd -> List containing the program command line.
+
+    """
+    cmd = list(cmd)
+
+    # Append before returning, appending on return does not make the change.
+    if "val" in kwargs:
+        cmd.append(kwargs["arg"] + kwargs["val"])
+
+    else:
+        cmd.append(kwargs["arg"])
+
+    return cmd
 
 
 def and_is_true(itemx, itemy):
