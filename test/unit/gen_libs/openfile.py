@@ -42,10 +42,10 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_openfile -> Test with normal flat file.
-        test_openfile_gzip -> Test with compressed file.
-        tearDown -> Clean up of unit testing.
+        setUp
+        test_openfile
+        test_openfile_gzip
+        tearDown
 
     """
 

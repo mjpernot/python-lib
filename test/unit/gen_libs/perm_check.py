@@ -40,17 +40,17 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_exe_file -> Test with checking execute permission on file.
-        test_no_exe_file -> Test with checking no execute permission on file.
-        test_multiple_errors3 -> Test with write and execute errors.
-        test_multiple_errors2 -> Test with read and execute errors.
-        test_multiple_errors -> Test with read and write errors.
-        test_write_file -> Test with checking write permission on file.
-        test_no_write_file -> Test with checking no write permission on file.
-        test_read_file -> Test with checking read permission on file.
-        test_no_read_file -> Test with checking no read permission on file.
-        tearDown -> Cleanup of unit testing.
+        setUp
+        test_exe_file
+        test_no_exe_file
+        test_multiple_errors3
+        test_multiple_errors2
+        test_multiple_errors
+        test_write_file
+        test_no_write_file
+        test_read_file
+        test_no_read_file
+        tearDown
 
     """
 
