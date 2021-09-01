@@ -42,9 +42,9 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_reverse_dates -> Test with dates reversed.
-        test_month_days -> Test months_days function.
+        setUp
+        test_reverse_dates
+        test_month_days
 
     """
 

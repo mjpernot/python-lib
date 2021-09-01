@@ -40,8 +40,8 @@ def clear_file_check(f_name):
     Description:  Checks to see if a file was cleared of data.
 
     Arguments:
-        (input) f_name -> Test file name to check.
-        (output) True|False -> Comparsion results of file check.
+        (input) f_name
+        (output) True|False
 
     """
 
@@ -57,9 +57,9 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_clear_file -> Test with clearing an existing file that has data.
-        tearDown -> Cleanup of unit testing.
+        setUp
+        test_clear_file
+        tearDown
 
     """
 

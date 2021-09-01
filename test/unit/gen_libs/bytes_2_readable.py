@@ -40,13 +40,13 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_with_negative -> Test with -1 bytes.
-        test_with_1mb -> Test with 1048577 bytes.
-        test_with_1025 -> Test with 1025 bytes.
-        test_with_1024 -> Test with 1024 bytes.
-        test_with_one -> Test with one bytes.
-        test_with_zero -> Test with zero bytes.
+        setUp
+        test_with_negative
+        test_with_1mb
+        test_with_1025
+        test_with_1024
+        test_with_one
+        test_with_zero
 
     """
 

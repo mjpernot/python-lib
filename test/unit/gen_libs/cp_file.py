@@ -42,16 +42,16 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_cp_file -> Test copy of file in same directory.
-        test_cp_file_dir -> Test copy of file in different directory.
-        test_cp_file_same -> Test copy of file to same name.
-        test_cp_file_diff -> Test copy of file to different name.
-        test_fail_src_dir -> Test failure on missing source directory.
-        test_fail_src_file -> Test failure on missing source file.
-        test_fail_dest_dir -> Test failure on missing destination directory.
-        test_fail_dest_perm -> Test failure on directory permission.
-        tearDown -> Cleanup of unit testing.
+        setUp
+        test_cp_file
+        test_cp_file_dir
+        test_cp_file_same
+        test_cp_file_diff
+        test_fail_src_dir
+        test_fail_src_file
+        test_fail_dest_dir
+        test_fail_dest_perm
+        tearDown
 
     """
 

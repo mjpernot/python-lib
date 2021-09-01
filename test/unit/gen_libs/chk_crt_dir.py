@@ -40,26 +40,26 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_exe_dir -> Test with checking execute permission on dir.
-        test_no_exe_dir -> Test with checking no execute permission on dir.
-        test_multiple_errors6 -> Test with write and execute errors.
-        test_multiple_errors5 -> Test with read and execute errors.
-        test_multiple_errors4 -> Test with exist, read, and write errors.
-        test_multiple_errors3 -> Test with exist and write errors.
-        test_multiple_errors2 -> Test with exist and read errors.
-        test_multiple_errors -> Test with read and write errors.
-        test_no_dir_name -> Test with no directory name passed.
-        test_dir_not_exist -> Test with directory does not exist.
-        test_create_dir -> Test with creating directory.
-        test_write_dir -> Test with checking write permission on directory.
-        test_no_write_dir -> Test with checking no write perm on directory.
-        test_read_dir -> Test with checking read permission on directory.
-        test_no_read_dir -> Test with checking no read permission on directory.
-        test_no_print_set -> Test with no_print option set.
-        test_print_file2 -> Test with printing error messages to file.
-        test_print_file -> Test with printing error messages to file.
-        tearDown -> Cleanup of unit testing.
+        setUp
+        test_exe_dir
+        test_no_exe_dir
+        test_multiple_errors6
+        test_multiple_errors5
+        test_multiple_errors4
+        test_multiple_errors3
+        test_multiple_errors2
+        test_multiple_errors
+        test_no_dir_name
+        test_dir_not_exist
+        test_create_dir
+        test_write_dir
+        test_no_write_dir
+        test_read_dir
+        test_no_read_dir
+        test_no_print_set
+        test_print_file2
+        test_print_file
+        tearDown
 
     """
 

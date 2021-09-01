@@ -41,13 +41,13 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_cp_dir -> Test copy of directory to another directory.
-        test_cp_dir_same -> Test copy of directory to same name.
-        test_fail_src_dir -> Test failure on missing source directory.
-        test_fail_dest_dir -> Test failure on destination dir already exists.
-        test_fail_dest_perm -> Test failure on directory permission.
-        tearDown -> Cleanup of unit testing.
+        setUp
+        test_cp_dir
+        test_cp_dir_same
+        test_fail_src_dir
+        test_fail_dest_dir
+        test_fail_dest_perm
+        tearDown
 
     """
 
