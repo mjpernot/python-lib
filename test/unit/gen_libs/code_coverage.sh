@@ -90,6 +90,7 @@ coverage run -a --source=gen_libs test/unit/gen_libs/sec_2_hr.py
 coverage run -a --source=gen_libs test/unit/gen_libs/str_2_list.py
 coverage run -a --source=gen_libs test/unit/gen_libs/str_2_type.py
 coverage run -a --source=gen_libs test/unit/gen_libs/touch.py
+coverage run -a --source=gen_libs test/unit/gen_libs/transpose_dict.py
 coverage run -a --source=gen_libs test/unit/gen_libs/validate_date.py
 coverage run -a --source=gen_libs test/unit/gen_libs/validate_int.py
 coverage run -a --source=gen_libs test/unit/gen_libs/write_file.py
