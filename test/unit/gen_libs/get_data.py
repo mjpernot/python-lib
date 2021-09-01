@@ -40,8 +40,8 @@ def compare_list_check(f_name):
     Description:  .
 
     Arguments:
-        (input) f_name -> Test file name to check.
-        (output) True|False -> Comparsion results of baseline to test.
+        (input) f_name
+        (output) True|False
 
     """
 
@@ -61,8 +61,8 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_compare_lists -> Test with comparing baseline list with test list.
+        setUp
+        test_compare_lists
 
     """
 

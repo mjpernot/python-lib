@@ -42,11 +42,11 @@ def display_data_check(b_name, f_name, data, level=0):
         check test data files to baseline data files.
 
     Arguments:
-        (input) b_name -> Baseline file name to check against.
-        (input) f_name -> Test file name to check.
-        (input) data -> Data structure.
-        (input) level -> Number of tabs to start at.
-        (output) True|False -> Comparsion results of baseline and test files.
+        (input) b_name
+        (input) f_name
+        (input) data
+        (input) level
+        (output) True|False
 
     """
 
@@ -63,15 +63,15 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_non_dict -> Test with non-dictionary structure.
-        test_only_list -> Test with only a list structure.
-        test_empty_list -> Test with an empty list structure.
-        test_only_dict -> Test with only a dictionary structure.
-        test_dict_list -> Test with a list within a dictionary structure.
-        test_dict_dict -> Test with a dictionary within a dictionary structure.
-        test_level_is_one -> Test with a level setting of one.
-        tearDown -> Clean up of testing environment.
+        setUp
+        test_non_dict
+        test_only_list
+        test_empty_list
+        test_only_dict
+        test_dict_list
+        test_dict_dict
+        test_level_is_one
+        tearDown
 
     """
 

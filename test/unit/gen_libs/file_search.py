@@ -40,12 +40,12 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_no_str_found -> Test with no string found.
-        test_str_found_first_line -> Test string found in first line.
-        test_str_found_last_line -> Test string found in last line.
-        test_str_found_first_instance -> Test found with multiple matches.
-        test_str_found_middle_line -> Test string found in middle line.
+        setUp
+        test_no_str_found
+        test_str_found_first_line
+        test_str_found_last_line
+        test_str_found_first_instance
+        test_str_found_middle_line
 
     """
 
