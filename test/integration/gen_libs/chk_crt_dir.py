@@ -32,6 +32,10 @@ import version
 
 __version__ = version.__version__
 
+# Global
+PERM1 = "444"
+PERM2 = "333"
+
 
 class UnitTest(unittest.TestCase):
 
@@ -150,11 +154,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        perm = "444"
+        global PERM1
 
         err_msg_chk = "Error: Directory %s is not writeable." % (self.d_name)
         os.makedirs(self.d_name)
-        os.chmod(self.d_name, int(perm, 8))
+        os.chmod(self.d_name, int(PERM1, 8))
         status, err_msg = gen_libs.chk_crt_dir(self.d_name, write=True,
                                                no_print=True)
 
@@ -189,9 +193,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        global PERM2
+
         err_msg_chk = "Error: Directory %s is not readable." % (self.d_name)
         os.makedirs(self.d_name)
-        os.chmod(self.d_name, 0333)
+        os.chmod(self.d_name, int(PERM2, 8))
         status, err_msg = gen_libs.chk_crt_dir(self.d_name, read=True,
                                                no_print=True)
 

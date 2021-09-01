@@ -32,6 +32,10 @@ import version
 
 __version__ = version.__version__
 
+# Global
+PERM1 = "444"
+PERM2 = "333"
+
 
 class UnitTest(unittest.TestCase):
 
@@ -148,9 +152,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        global PERM1
+
         err_msg_chk = "Error: File %s is not writeable." % (self.f_name)
         open(self.f_name, "a").close()
-        os.chmod(self.f_name, 0444)
+        os.chmod(self.f_name, int(PERM1, 8))
         status, err_msg = gen_libs.chk_crt_file(self.f_name, write=True,
                                                 no_print=True)
 
@@ -185,9 +191,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        global PERM2
+
         err_msg_chk = "Error: File %s is not readable." % (self.f_name)
         open(self.f_name, "a").close()
-        os.chmod(self.f_name, 0333)
+        os.chmod(self.f_name, int(PERM2, 8))
         status, err_msg = gen_libs.chk_crt_file(self.f_name, read=True,
                                                 no_print=True)
 
