@@ -127,6 +127,7 @@ pipeline {
                 ./test/unit/gen_libs/str_2_list.py
                 ./test/unit/gen_libs/str_2_type.py
                 ./test/unit/gen_libs/touch.py
+                ./test/unit/gen_libs/transpose_dict.py
                 ./test/unit/gen_libs/validate_date.py
                 ./test/unit/gen_libs/validate_int.py
                 ./test/unit/gen_libs/write_file.py
