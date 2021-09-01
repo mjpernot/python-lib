@@ -12,7 +12,10 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - gen_libs.add_cmd:  Append name of arg and value for arg to command line.
 
 ### Deprecated
+- cmds_gen.add_cmd
+- cmds_gen.create_cfg_array
 - cmds_gen.get_inst
+- cmds_gen.is_add_cmd
 
 
 ## [2.8.3] - 2020-12-24
