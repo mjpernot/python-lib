@@ -35,6 +35,11 @@ import version
 __version__ = version.__version__
 
 
+# Global
+PERM1 = "755"
+PERM2 = "444"
+
+
 class UnitTest(unittest.TestCase):
 
     """Class:  UnitTest
@@ -187,8 +192,10 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        global PERM2
+
         gen_libs.touch(os.path.join(self.cp_file_dir2, self.src_file))
-        os.chmod(self.cp_file_dir2, 0444)
+        os.chmod(self.cp_file_dir2, int(PERM2, 8))
 
         self.assertEqual((gen_libs.cp_file(self.src_file, self.cp_file_dir,
                                            self.cp_file_dir2, self.dest_file)),
@@ -220,10 +227,12 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        global PERM1
+
         shutil.rmtree(self.cp_file_dir)
 
         if os.path.isdir(self.cp_file_dir2):
-            os.chmod(self.cp_file_dir2, 0755)
+            os.chmod(self.cp_file_dir2, int(PERM1, 8))
             shutil.rmtree(self.cp_file_dir2)
 
 

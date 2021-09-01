@@ -33,6 +33,15 @@ import version
 __version__ = version.__version__
 
 
+# Global
+PERM1 = "777"
+PERM2 = "444"
+PERM3 = "222"
+PERM4 = "111"
+PERM5 = "333"
+PERM6 = "000"
+
+
 class UnitTest(unittest.TestCase):
 
     """Class:  UnitTest
@@ -85,9 +94,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        global PERM1
+
         err_msg_chk = ""
         open(self.f_name, "a").close()
-        os.chmod(self.f_name, 0777)
+        os.chmod(self.f_name, int(PERM1, 8))
         f_hdlr = open(os.devnull, "w")
         status, err_msg = gen_libs.perm_check(
             self.f_name, "File", f_hdlr, exe=True)
@@ -105,9 +116,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        global PERM6
+
         err_msg_chk = self.prt_template4 % (self.f_name)
         open(self.f_name, "a").close()
-        os.chmod(self.f_name, 0000)
+        os.chmod(self.f_name, int(PERM6, 8))
         f_hdlr = open(os.devnull, "w")
         status, err_msg = gen_libs.perm_check(
             self.f_name, "File", f_hdlr, exe=True)
@@ -125,11 +138,13 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        global PERM2
+
         err_msg_chk = self.prt_template2 % (self.f_name)
         err_msg_chk2 = self.prt_template4 % (self.f_name)
         err_msg_chk = "".join([err_msg_chk, err_msg_chk2])
         open(self.f_name, "a").close()
-        os.chmod(self.f_name, 0444)
+        os.chmod(self.f_name, int(PERM2, 8))
         f_hdlr = open(os.devnull, "w")
         status, err_msg = gen_libs.perm_check(
             self.f_name, "File", f_hdlr, exe=True, write=True)
@@ -147,11 +162,13 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        global PERM3
+
         err_msg_chk = self.prt_template3 % (self.f_name)
         err_msg_chk2 = self.prt_template4 % (self.f_name)
         err_msg_chk = "".join([err_msg_chk, err_msg_chk2])
         open(self.f_name, "a").close()
-        os.chmod(self.f_name, 0222)
+        os.chmod(self.f_name, int(PERM3, 8))
         f_hdlr = open(os.devnull, "w")
         status, err_msg = gen_libs.perm_check(
             self.f_name, "File", f_hdlr, exe=True, read=True)
@@ -169,11 +186,13 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        global PERM4
+
         err_msg_chk = self.prt_template2 % (self.f_name)
         err_msg_chk2 = self.prt_template3 % (self.f_name)
         err_msg_chk = "".join([err_msg_chk, err_msg_chk2])
         open(self.f_name, "a").close()
-        os.chmod(self.f_name, 0111)
+        os.chmod(self.f_name, int(PERM4, 8))
         f_hdlr = open(os.devnull, "w")
         status, err_msg = gen_libs.perm_check(
             self.f_name, "File", f_hdlr, write=True, read=True)
@@ -210,9 +229,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        global PERM2
+
         err_msg_chk = self.prt_template2 % (self.f_name)
         open(self.f_name, "a").close()
-        os.chmod(self.f_name, 0444)
+        os.chmod(self.f_name, int(PERM2, 8))
         f_hdlr = open(os.devnull, "w")
         status, err_msg = gen_libs.perm_check(
             self.f_name, "File", f_hdlr, write=True)
@@ -249,9 +270,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        global PERM5
+
         err_msg_chk = self.prt_template3 % (self.f_name)
         open(self.f_name, "a").close()
-        os.chmod(self.f_name, 0333)
+        os.chmod(self.f_name, int(PERM5, 8))
         f_hdlr = open(os.devnull, "w")
         status, err_msg = gen_libs.perm_check(
             self.f_name, "File", f_hdlr, read=True)
