@@ -7,6 +7,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 ## [2.8.4] - 2021-03-23
 
 ### Added
+- gen_libs.transpose_dict:  Transpose specified keys in a list of dictionaries to specified data types or None.
 - gen_libs.is_add_cmd:  Determine if any additional options need to be added to the command line.
 - gen_libs.create_cfg_array:  Parse config file and create array of configurations.
 - gen_libs.add_cmd:  Append name of arg and value for arg to command line.
