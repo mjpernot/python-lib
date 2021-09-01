@@ -40,17 +40,17 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_mode_write -> Test with write mode setting.
-        test_mode_append -> Test with append mode setting.
-        test_mode_default -> Test with default mode setting.
-        test_critical_setting -> Test with critical settings.
-        test_error_setting -> Test with error settings.
-        test_warning_setting -> Test with warning settings.
-        test_debug_setting -> Test with debug settings.
-        test_info_setting -> Test with info settings.
-        test_default_setting -> Test with default settings.
-        tearDown -> Cleanup of unit testing.
+        setUp
+        test_mode_write
+        test_mode_append
+        test_mode_default
+        test_critical_setting
+        test_error_setting
+        test_warning_setting
+        test_debug_setting
+        test_info_setting
+        test_default_setting
+        tearDown
 
     """
 
