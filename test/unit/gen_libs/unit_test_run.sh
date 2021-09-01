@@ -6,6 +6,7 @@
 
 echo ""
 echo "Unit test:  gen_libs.py"
+test/unit/gen_libs/add_cmd.py
 test/unit/gen_libs/and_is_true.py
 test/unit/gen_libs/bytes_2_readable.py
 test/unit/gen_libs/chk_crt_dir.py
@@ -16,6 +17,7 @@ test/unit/gen_libs/compress.py
 test/unit/gen_libs/cp_dir.py
 test/unit/gen_libs/cp_file2.py
 test/unit/gen_libs/cp_file.py
+test/unit/gen_libs/create_cfg_array.py
 test/unit/gen_libs/crt_file_time.py
 test/unit/gen_libs/date_range.py
 test/unit/gen_libs/del_not_and_list.py
@@ -40,6 +42,7 @@ test/unit/gen_libs/get_time.py
 test/unit/gen_libs/has_whitespace.py
 test/unit/gen_libs/help_func.py
 test/unit/gen_libs/in_list.py
+test/unit/gen_libs/is_add_cmd.py
 test/unit/gen_libs/is_empty_file.py
 test/unit/gen_libs/is_file_text.py
 test/unit/gen_libs/is_missing_lists.py
