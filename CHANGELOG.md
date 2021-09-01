@@ -5,7 +5,9 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 
 ## [2.8.4] - 2021-03-23
+
 ### Added
+- gen_libs.create_cfg_array:  Parse config file and create array of configurations.
 - gen_libs.add_cmd:  Append name of arg and value for arg to command line.
 
 
