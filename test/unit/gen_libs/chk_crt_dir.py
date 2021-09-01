@@ -32,6 +32,13 @@ import version
 
 __version__ = version.__version__
 
+# Global
+PERM1 = "755"
+PERM2 = "444"
+PERM3 = "222"
+PERM4 = "111"
+PERM5 = "333"
+
 
 class UnitTest(unittest.TestCase):
 
@@ -95,9 +102,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        global PERM1
+
         err_msg_chk = None
         os.makedirs(self.d_name)
-        os.chmod(self.d_name, 0755)
+        os.chmod(self.d_name, int(PERM1, 8))
         status, err_msg = gen_libs.chk_crt_dir(self.d_name, exe=True,
                                                no_print=True)
 
@@ -114,9 +123,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        global PERM2
+
         err_msg_chk = self.prt_template4 % (self.d_name)
         os.makedirs(self.d_name)
-        os.chmod(self.d_name, 0444)
+        os.chmod(self.d_name, int(PERM2, 8))
         status, err_msg = gen_libs.chk_crt_dir(self.d_name, exe=True,
                                                no_print=True)
 
@@ -133,12 +144,14 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        global PERM2
+
         err_msg_chk = self.prt_template2 % (self.d_name)
         err_msg_chk2 = self.prt_template4 % (self.d_name)
         err_msg_chk = "\n".join([err_msg_chk, err_msg_chk2])
         err_msg_chk = err_msg_chk.strip("\n")
         os.makedirs(self.d_name)
-        os.chmod(self.d_name, 0444)
+        os.chmod(self.d_name, int(PERM2, 8))
         status, err_msg = gen_libs.chk_crt_dir(
             self.d_name, exe=True, write=True, no_print=True)
 
@@ -155,12 +168,14 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        global PERM3
+
         err_msg_chk = self.prt_template3 % (self.d_name)
         err_msg_chk2 = self.prt_template4 % (self.d_name)
         err_msg_chk = "\n".join([err_msg_chk, err_msg_chk2])
         err_msg_chk = err_msg_chk.strip("\n")
         os.makedirs(self.d_name)
-        os.chmod(self.d_name, 0222)
+        os.chmod(self.d_name, int(PERM3, 8))
         status, err_msg = gen_libs.chk_crt_dir(
             self.d_name, exe=True, read=True, no_print=True)
 
@@ -239,12 +254,14 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        global PERM4
+
         err_msg_chk = self.prt_template2 % (self.d_name)
         err_msg_chk2 = self.prt_template3 % (self.d_name)
         err_msg_chk = "\n".join([err_msg_chk, err_msg_chk2])
         err_msg_chk = err_msg_chk.strip("\n")
         os.makedirs(self.d_name)
-        os.chmod(self.d_name, 0111)
+        os.chmod(self.d_name, int(PERM4, 8))
         status, err_msg = gen_libs.chk_crt_dir(
             self.d_name, write=True, read=True, no_print=True)
 
@@ -328,9 +345,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        global PERM2
+
         err_msg_chk = self.prt_template2 % (self.d_name)
         os.makedirs(self.d_name)
-        os.chmod(self.d_name, 0444)
+        os.chmod(self.d_name, int(PERM2, 8))
         status, err_msg = gen_libs.chk_crt_dir(self.d_name, write=True,
                                                no_print=True)
 
@@ -365,9 +384,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        global PERM5
+
         err_msg_chk = self.prt_template3 % (self.d_name)
         os.makedirs(self.d_name)
-        os.chmod(self.d_name, 0333)
+        os.chmod(self.d_name, int(PERM5, 8))
         status, err_msg = gen_libs.chk_crt_dir(self.d_name, read=True,
                                                no_print=True)
 
