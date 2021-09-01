@@ -40,14 +40,14 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_data1_notequal_data2 -> Test with data types not equal.
-        test_data1_equal_data2 -> Test with data types equal.
-        test_merge_string -> Test with merge of two strings.
-        test_merge_list -> Test with merge of two lists.
-        test_merge_tuple -> Test with merge of two tuples.
-        test_merge_dict -> Test with merge of two dictionaries.
-        test_non_merge -> Test with non-mergable data types.
+        setUp
+        test_data1_notequal_data2
+        test_data1_equal_data2
+        test_merge_string
+        test_merge_list
+        test_merge_tuple
+        test_merge_dict
+        test_non_merge
 
     """
 
