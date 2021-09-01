@@ -40,13 +40,13 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_subj_list_delimiter -> Test with delimiter passed.
-        test_subj_list -> Test subject as a list.
-        test_subj_string -> Test subject as a string.
-        test_subj_overwrite -> Test overwriting existing subject.
-        test_subject_none -> Test with no subject passed.
-        test_no_subject -> Test creating subject.
+        setUp
+        test_subj_list_delimiter
+        test_subj_list
+        test_subj_string
+        test_subj_overwrite
+        test_subject_none
+        test_no_subject
 
     """
 

@@ -40,10 +40,10 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_long_subject -> Test with subject line to maximum.
-        test_with_subject -> Test creating body with subject line in place.
-        test_create_body -> Test creating body.
+        setUp
+        test_long_subject
+        test_with_subject
+        test_create_body
 
     """
 
