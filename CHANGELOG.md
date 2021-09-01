@@ -15,10 +15,11 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - machine.Solaris:  Changed defaults_file to /etc/my.cnf.
 
 ### Deprecated
-- cmds_gen.add_cmd
-- cmds_gen.create_cfg_array
-- cmds_gen.get_inst
-- cmds_gen.is_add_cmd
+- machine.Solaris class.
+- cmds_gen.add_cmd function.
+- cmds_gen.create_cfg_array function.
+- cmds_gen.get_inst function.
+- cmds_gen.is_add_cmd function.
 
 
 ## [2.8.3] - 2020-12-24
