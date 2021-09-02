@@ -40,15 +40,15 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_indent_multi_lvl -> Test multi level with indentation.
-        test_indent_multi_dict -> Test multi dict with indentation.
-        test_indent2 -> Test with passing indentation setting.
-        test_indent -> Test with passing indentation setting.
-        test_multi_lvl -> Test with multiple level dictionary.
-        test_multi_dict -> Test with multiple items in dictionary.
-        test_one_item -> Test with one item in dictionary.
-        test_empty_dict -> Test with empty dictionary.
+        setUp
+        test_indent_multi_lvl
+        test_indent_multi_dict
+        test_indent2
+        test_indent
+        test_multi_lvl
+        test_multi_dict
+        test_one_item
+        test_empty_dict
 
     """
 

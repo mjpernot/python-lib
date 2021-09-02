@@ -41,15 +41,15 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_month_delta -> Test with delta 0.
-        test_month_delta2 -> Test with delta -1.
-        test_month_delta3 -> Test with delta 1.
-        test_month_delta4 -> Test with delta -11.
-        test_month_delta5 -> Test with delta -12.
-        test_month_delta6 -> Test with delta 11.
-        test_month_delta7 -> Test with delta 12.
-        test_month_delta8 -> Test with delta 13.
+        setUp
+        test_month_delta
+        test_month_delta2
+        test_month_delta3
+        test_month_delta4
+        test_month_delta5
+        test_month_delta6
+        test_month_delta7
+        test_month_delta8
 
     """
 

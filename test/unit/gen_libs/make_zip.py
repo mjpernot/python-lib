@@ -41,9 +41,9 @@ class ZipFile(object):
     Description:  Class which is a representation of the zipfile class.
 
     Methods:
-        __init__ -> Initialize configuration environment.
-        write -> Mock representation of zipfile.ZipFile.write method.
-        close -> Mock representation of zipfile.ZipFile.close method.
+        __init__
+        write
+        close
 
     """
 
@@ -67,8 +67,8 @@ class ZipFile(object):
         Description:  Mock representation of zipfile.ZipFile.write method.
 
         Arguments:
-            (input) in_fname -> In file name.
-            (input) out_fname -> Out file Name.
+            (input) in_fname
+            (input) out_fname
 
         """
 
@@ -97,10 +97,10 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_path_sep -> Test missing path seperator.
-        test_relative_path -> Test the relative path way.
-        test_abs_path -> Test the absolute path way.
+        setUp
+        test_path_sep
+        test_relative_path
+        test_abs_path
 
     """
 

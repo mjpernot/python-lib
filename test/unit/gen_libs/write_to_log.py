@@ -41,8 +41,8 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_write_to_log -> Test write_to_log function.
+        setUp
+        test_write_to_log
 
     """
 

@@ -41,11 +41,11 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_default -> Test __init__ method with default arguments.
-        test_flavor -> Test __init__ method with flavor argument.
-        test_lock -> Test __init__ method with lock successful.
-        tearDown -> Clean up of testing environment.
+        setUp
+        test_default
+        test_flavor
+        test_lock
+        tearDown
 
     """
 

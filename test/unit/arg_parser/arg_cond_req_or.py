@@ -41,15 +41,15 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_multi_cond_req2 -> Test multi conditional requirements, 1 missing.
-        test_multi_cond_req -> Test multiple conditional requirements present.
-        test_two_cond_req2 -> Test two conditional requirements, one missing.
-        test_two_cond_req -> Test with two conditional requirements.
-        test_two_args_present -> Test with two arguments are present.
-        test_one_arg_present -> Test with one argument is present.
-        test_empty_optconreqdict -> Test with empty dict for opt_con_req_dict.
-        test_empty_argsarray -> Test with empty args_array.
+        setUp
+        test_multi_cond_req2
+        test_multi_cond_req
+        test_two_cond_req2
+        test_two_cond_req
+        test_two_args_present
+        test_one_arg_present
+        test_empty_optconreqdict
+        test_empty_argsarray
 
     """
 

@@ -40,12 +40,12 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_one_entry -> Test with one entry in dictionary.
-        test_empty_dict -> Test with empty dictionary.
-        test_rm_miss_key -> Test with missing key to remove.
-        test_rm_no_key -> Test with no key to remove.
-        test_rm_key -> Test removing one key.
+        setUp
+        test_one_entry
+        test_empty_dict
+        test_rm_miss_key
+        test_rm_no_key
+        test_rm_key
 
     """
 

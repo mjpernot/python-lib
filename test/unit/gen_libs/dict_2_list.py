@@ -40,10 +40,10 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_key_not_in_list -> Test with key value not in dictionary.
-        test_key_in_list -> Test with key value in dictionary.
-        test_empty_dict -> Test with empty dictionary.
+        setUp
+        test_key_not_in_list
+        test_key_in_list
+        test_empty_dict
 
     """
 

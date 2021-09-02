@@ -32,6 +32,13 @@ import version
 
 __version__ = version.__version__
 
+# Global
+PERM1 = "755"
+PERM2 = "444"
+PERM3 = "222"
+PERM4 = "111"
+PERM5 = "333"
+
 
 class UnitTest(unittest.TestCase):
 
@@ -40,26 +47,26 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_exe_file -> Test with checking execute permission on file.
-        test_no_exe_file -> Test with checking no execute permission on file.
-        test_multiple_errors6 -> Test with write and execute errors.
-        test_multiple_errors5 -> Test with read and execute errors.
-        test_multiple_errors4 -> Test with exist, read, and write errors.
-        test_multiple_errors3 -> Test with exist and write errors.
-        test_multiple_errors2 -> Test with exist and read errors.
-        test_multiple_errors -> Test with read and write errors.
-        test_no_file_name -> Test with no file name passed.
-        test_file_not_exist -> Test with file does not exist.
-        test_create_file -> Test with creating file.
-        test_write_file -> Test with checking write permission on file.
-        test_no_write_file -> Test with checking no write permission on file.
-        test_read_file -> Test with checking read permission on file.
-        test_no_read_file -> Test with checking no read permission on file.
-        test_no_print_set -> Test with no_print option set.
-        test_print_file2 -> Test with printing error messages to file.
-        test_print_file -> Test with printing error messages to file.
-        tearDown -> Cleanup of unit testing.
+        setUp
+        test_exe_file
+        test_no_exe_file
+        test_multiple_errors6
+        test_multiple_errors5
+        test_multiple_errors4
+        test_multiple_errors3
+        test_multiple_errors2
+        test_multiple_errors
+        test_no_file_name
+        test_file_not_exist
+        test_create_file
+        test_write_file
+        test_no_write_file
+        test_read_file
+        test_no_read_file
+        test_no_print_set
+        test_print_file2
+        test_print_file
+        tearDown
 
     """
 
@@ -94,9 +101,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        global PERM1
+
         err_msg_chk = None
         open(self.f_name, "a").close()
-        os.chmod(self.f_name, 0755)
+        os.chmod(self.f_name, int(PERM1, 8))
         status, err_msg = gen_libs.chk_crt_file(self.f_name, exe=True,
                                                 no_print=True)
 
@@ -113,9 +122,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        global PERM2
+
         err_msg_chk = self.prt_template4 % (self.f_name)
         open(self.f_name, "a").close()
-        os.chmod(self.f_name, 0444)
+        os.chmod(self.f_name, int(PERM2, 8))
         status, err_msg = gen_libs.chk_crt_file(self.f_name, exe=True,
                                                 no_print=True)
 
@@ -132,12 +143,14 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        global PERM2
+
         err_msg_chk = self.prt_template2 % (self.f_name)
         err_msg_chk2 = self.prt_template4 % (self.f_name)
         err_msg_chk = "\n".join([err_msg_chk, err_msg_chk2])
         err_msg_chk = err_msg_chk.strip("\n")
         open(self.f_name, "a").close()
-        os.chmod(self.f_name, 0444)
+        os.chmod(self.f_name, int(PERM2, 8))
         status, err_msg = gen_libs.chk_crt_file(
             self.f_name, exe=True, write=True, no_print=True)
 
@@ -154,12 +167,14 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        global PERM3
+
         err_msg_chk = self.prt_template3 % (self.f_name)
         err_msg_chk2 = self.prt_template4 % (self.f_name)
         err_msg_chk = "\n".join([err_msg_chk, err_msg_chk2])
         err_msg_chk = err_msg_chk.strip("\n")
         open(self.f_name, "a").close()
-        os.chmod(self.f_name, 0222)
+        os.chmod(self.f_name, int(PERM3, 8))
         status, err_msg = gen_libs.chk_crt_file(
             self.f_name, exe=True, read=True, no_print=True)
 
@@ -238,12 +253,14 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        global PERM4
+
         err_msg_chk = self.prt_template2 % (self.f_name)
         err_msg_chk2 = self.prt_template3 % (self.f_name)
         err_msg_chk = "\n".join([err_msg_chk, err_msg_chk2])
         err_msg_chk = err_msg_chk.strip("\n")
         open(self.f_name, "a").close()
-        os.chmod(self.f_name, 0111)
+        os.chmod(self.f_name, int(PERM4, 8))
         status, err_msg = gen_libs.chk_crt_file(
             self.f_name, write=True, read=True, no_print=True)
 
@@ -327,9 +344,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        global PERM2
+
         err_msg_chk = self.prt_template2 % (self.f_name)
         open(self.f_name, "a").close()
-        os.chmod(self.f_name, 0444)
+        os.chmod(self.f_name, int(PERM2, 8))
         status, err_msg = gen_libs.chk_crt_file(self.f_name, write=True,
                                                 no_print=True)
 
@@ -364,9 +383,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        global PERM5
+
         err_msg_chk = self.prt_template3 % (self.f_name)
         open(self.f_name, "a").close()
-        os.chmod(self.f_name, 0333)
+        os.chmod(self.f_name, int(PERM5, 8))
         status, err_msg = gen_libs.chk_crt_file(self.f_name, read=True,
                                                 no_print=True)
 

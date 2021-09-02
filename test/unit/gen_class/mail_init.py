@@ -40,15 +40,15 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_no_from_addr -> Test with no from address is passed.
-        test_from_addr -> Test with from address is passed.
-        test_subj_list -> Test subject line as a list.
-        test_subj_string -> Test subject line as a string.
-        test_with_data -> Test other attributes with data.
-        test_to_string -> Test to line with a string.
-        test_to_list -> Test to line with a list.
-        test_default -> Test with minimum number of arguments.
+        setUp
+        test_no_from_addr
+        test_from_addr
+        test_subj_list
+        test_subj_string
+        test_with_data
+        test_to_string
+        test_to_list
+        test_default
 
     """
 

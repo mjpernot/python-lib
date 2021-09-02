@@ -41,7 +41,7 @@ def validate_value(arg):
     Description:  Test function.
 
     Arguments:
-        (input) arg -> Test value being tested.
+        (input) arg
 
     """
 
@@ -55,7 +55,7 @@ def validate_value2(arg):
     Description:  Test function.
 
     Arguments:
-        (input) arg -> Test value being tested.
+        (input) arg
 
     """
 
@@ -69,14 +69,14 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_two_validate_fail2 -> Test with two match and two failures.
-        test_two_validate_fail -> Test with two match and one failure.
-        test_two_validate_success -> Test with two match and is successful.
-        test_validate_fail -> Test with one match and is failure.
-        test_validate_success -> Test with one match and is successful.
-        test_empty_validfunc -> Test with empty dict for valid_func.
-        test_empty_argsarray -> Test with empty dictionary for args_array.
+        setUp
+        test_two_validate_fail2
+        test_two_validate_fail
+        test_two_validate_success
+        test_validate_fail
+        test_validate_success
+        test_empty_validfunc
+        test_empty_argsarray
 
     """
 

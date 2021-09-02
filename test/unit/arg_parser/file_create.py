@@ -42,7 +42,7 @@ class FileOpen2(object):
     Description:  Class stub holder for file open class.
 
     Methods:
-        close -> Stub holder for close function.
+        close
 
     """
 
@@ -66,7 +66,7 @@ class FileOpen(object):
     Description:  Class stub holder for file open class.
 
     Methods:
-        close -> Stub holder for close function.
+        close
 
     """
 
@@ -90,11 +90,11 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_open_fail -> Test with file open returning failure.
-        test_open_success -> Test with file open returning successful.
-        test_errno_not_two -> Test with errno not set to two.
-        test_option_not_in_list -> Test with option not being in file_crt_list.
+        setUp
+        test_open_fail
+        test_open_success
+        test_errno_not_two
+        test_option_not_in_list
 
     """
 

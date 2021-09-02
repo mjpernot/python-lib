@@ -40,13 +40,13 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_with_multi_dups -> Test with multiple dupes in list.
-        test_with_one_dup2 -> Test with one dupe in multiple item list.
-        test_with_one_dup -> Test with one dupe in list.
-        test_with_multi_item -> Test with multiple items in list.
-        test_with_one_item -> Test with single item in list.
-        test_with_empty_list -> Test with empty list.
+        setUp
+        test_with_multi_dups
+        test_with_one_dup2
+        test_with_one_dup
+        test_with_multi_item
+        test_with_one_item
+        test_with_empty_list
 
     """
 

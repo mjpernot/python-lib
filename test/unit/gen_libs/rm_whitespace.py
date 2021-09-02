@@ -41,16 +41,16 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_empty_string -> Test with empty data string.
-        test_multiple_space -> Test with multiple spaces in string.
-        test_carriage_space -> Test with carriage return character.
-        test_tab_space -> Test with tab character.
-        test_newline_space -> Test with newline character.
-        test_middle_space -> Test with white space in middle of string.
-        test_begin_space -> Test with white space at beginning of string.
-        test_end_space -> Test with white space at end of string.
-        test_no_spaces -> Test with no white spaces.
+        setUp
+        test_empty_string
+        test_multiple_space
+        test_carriage_space
+        test_tab_space
+        test_newline_space
+        test_middle_space
+        test_begin_space
+        test_end_space
+        test_no_spaces
 
     """
 

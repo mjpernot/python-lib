@@ -40,8 +40,8 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_get_inst -> Test returning command line.
+        setUp
+        test_get_inst
 
     """
 
@@ -62,7 +62,7 @@ class UnitTest(unittest.TestCase):
             Description:  Class is a representation of a module instance.
 
             Methods:
-                __init__ -> Initialize configuration environment.
+                __init__
 
             """
 

@@ -41,11 +41,11 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_zero_one -> Test with zero and one arguments.
-        test_zero_percent -> Test with zero percent completed.
-        test_fifty_percent -> Test with 50 percent completed.
-        test_hundred_percent -> Test with 100 percent completed.
+        setUp
+        test_zero_one
+        test_zero_percent
+        test_fifty_percent
+        test_hundred_percent
 
     """
 

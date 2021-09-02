@@ -41,9 +41,9 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_with_nonroot -> Test with non-root user.
-        test_with_root -> Test with root user.
+        setUp
+        test_with_nonroot
+        test_with_root
 
     """
 

@@ -42,12 +42,12 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_no_trailing_slash -> Test with no trailing slash in path.
-        test_trailing_slash -> Test with trailing slash in path.
-        test_ext_no_sep -> Test with no seperator in extension.
-        test_no_ext -> Test with no extension passed.
-        test_crt_file_time -> Test crt_file_time function.
+        setUp
+        test_no_trailing_slash
+        test_trailing_slash
+        test_ext_no_sep
+        test_no_ext
+        test_crt_file_time
 
     """
 

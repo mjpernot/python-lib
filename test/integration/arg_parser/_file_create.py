@@ -41,14 +41,14 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_open_fail3 -> Test with unable to open file to write.
-        test_open_fail2 -> Test with no -f in file_crt_list list.
-        test_open_fail -> Test with errno set to non-two value.
-        test_open_success -> Test with file open returning successful.
-        test_errno_not_two -> Test with errno not set to two.
-        test_option_not_in_list -> Test with option not being in file_crt_list.
-        tearDown -> Cleanup of unit testing.
+        setUp
+        test_open_fail3
+        test_open_fail2
+        test_open_fail
+        test_open_success
+        test_errno_not_two
+        test_option_not_in_list
+        tearDown
 
     """
 

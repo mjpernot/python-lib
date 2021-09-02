@@ -41,7 +41,7 @@ def linecnt(fname):
     Description:  Count number of lines in a file.
 
     Arguments:
-        (input) fname -> File name.
+        (input) fname
         (output) Number of lines in the file.
 
     """
@@ -56,35 +56,35 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_mode_a_empty6 -> Test with append mode with empty list.
-        test_mode_a_empty5 -> Test with append mode with empty list.
-        test_mode_a_empty4 -> Test with append mode with empty list.
-        test_mode_a_empty3 -> Test with append mode with empty list.
-        test_mode_a_empty2 -> Test with append mode with empty list.
-        test_mode_a_empty -> Test with append mode with empty list.
+        setUp
+        test_mode_a_empty6
+        test_mode_a_empty5
+        test_mode_a_empty4
+        test_mode_a_empty3
+        test_mode_a_empty2
+        test_mode_a_empty
         test_mode_w_empty3 -> Test with write mode with empty list
         test_mode_w_empty2 -> Test with write mode with empty list
         test_mode_w_empty -> Test with write mode with empty list
-        test_mode_a_passed3 -> Test with file mode of append passing mode.
-        test_mode_a_passed2 -> Test with file mode of append passing mode.
-        test_mode_a_passed -> Test with file mode of append passing mode.
-        test_mode_a_passed3 -> Test with file mode of append passing mode.
-        test_mode_a_passed2 -> Test with file mode of append passing mode.
-        test_mode_a_passed -> Test with file mode of append passing mode.
-        test_mode_w_default3 -> Test file mode overwrite using default setting.
-        test_mode_w_default2 -> Test file mode overwrite using default setting.
-        test_mode_w_default -> Test file mode overwrite using default setting.
-        test_write_multi_file3 -> Test with writing multiple lines to file.
-        test_write_multi_file2 -> Test with writing multiple lines to file.
-        test_write_multi_file -> Test with writing multiple lines to file.
-        test_write_file3 -> Test with writing to file.
-        test_write_file2 -> Test with writing to file.
-        test_write_file -> Test with writing to file.
-        test_std_out3 -> Test with empty list.
-        test_std_out2 -> Test with printing multiple lines to standard out.
-        test_std_out -> Test with printing to standard out.
-        tearDown -> Cleanup of testing environment.
+        test_mode_a_passed3
+        test_mode_a_passed2
+        test_mode_a_passed
+        test_mode_a_passed3
+        test_mode_a_passed2
+        test_mode_a_passed
+        test_mode_w_default3
+        test_mode_w_default2
+        test_mode_w_default
+        test_write_multi_file3
+        test_write_multi_file2
+        test_write_multi_file
+        test_write_file3
+        test_write_file2
+        test_write_file
+        test_std_out3
+        test_std_out2
+        test_std_out
+        tearDown
 
     """
 

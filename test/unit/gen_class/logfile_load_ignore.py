@@ -40,13 +40,13 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_load_empty_file -> Test loading ignore from an empty file.
-        test_load_empty_str -> Test loading ignore from an empty sting.
-        test_load_empty_list -> Test loading ignore from an empty list.
-        test_load_file -> Test loading ignore from a file.
-        test_load_str -> Test loading ignore from a sting.
-        test_load_list -> Test loading ignore from a list.
+        setUp
+        test_load_empty_file
+        test_load_empty_str
+        test_load_empty_list
+        test_load_file
+        test_load_str
+        test_load_list
 
     """
 

@@ -42,17 +42,17 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_mail_std2 -> Test with mail with standard format.
-        test_mail_std -> Test with mail with standard format.
-        test_mail_json2 -> Test with mail with JSON format.
-        test_mail_json -> Test with mail with JSON format.
-        test_non_dict -> Test with non-dictionary object.
-        test_ofile_json -> Test with ofile and json_fmt arguments.
-        test_set_nostd -> Test with no_std argument.
-        test_set_json -> Test with json_fmt argument.
-        test_set_ofile -> Test with ofile argument.
-        test_set_default -> Test with default settings.
+        setUp
+        test_mail_std2
+        test_mail_std
+        test_mail_json2
+        test_mail_json
+        test_non_dict
+        test_ofile_json
+        test_set_nostd
+        test_set_json
+        test_set_ofile
+        test_set_default
 
     """
 

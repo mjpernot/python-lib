@@ -40,12 +40,12 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_list_boolean -> Test with single argument with a list.
-        test_single_boolean -> Test with single argument with a boolean.
-        test_single_value -> Test with single argument with a value.
-        test_empty_argsarray -> Test with empty args_array.
-        test_empty_optarglist -> Test with empty opt_arg_list.
+        setUp
+        test_list_boolean
+        test_single_boolean
+        test_single_value
+        test_empty_argsarray
+        test_empty_optarglist
 
     """
 

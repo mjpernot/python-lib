@@ -4,6 +4,25 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [2.8.4] - 2021-03-23
+
+### Added
+- gen_libs.transpose_dict:  Transpose specified keys in a list of dictionaries to specified data types or None.
+- gen_libs.is_add_cmd:  Determine if any additional options need to be added to the command line.
+- gen_libs.create_cfg_array:  Parse config file and create array of configurations.
+- gen_libs.add_cmd:  Append name of arg and value for arg to command line.
+
+### Changed
+- machine.Solaris:  Changed defaults_file to /etc/my.cnf.
+
+### Deprecated
+- machine.Solaris class.
+- cmds_gen.add_cmd function.
+- cmds_gen.create_cfg_array function.
+- cmds_gen.get_inst function.
+- cmds_gen.is_add_cmd function.
+
+
 ## [2.8.3] - 2020-12-24
 
 ### Fixed

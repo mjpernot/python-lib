@@ -32,6 +32,10 @@ import version
 
 __version__ = version.__version__
 
+# Global
+PERM1 = "444"
+PERM2 = "333"
+
 
 class UnitTest(unittest.TestCase):
 
@@ -40,17 +44,17 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_no_file_name -> Test with no file name passed.
-        test_file_not_exist -> Test with file does not exist.
-        test_create_file -> Test with creating file.
-        test_write_file -> Test with checking write permission on file.
-        test_no_write_file -> Test with checking no write permission on file.
-        test_read_file -> Test with checking read permission on file.
-        test_no_read_file -> Test with checking no read permission on file.
-        test_no_print_set -> Test with no_print option set.
-        test_print_file -> Test with printing error messages to file.
-        tearDown -> Cleanup of unit testing.
+        setUp
+        test_no_file_name
+        test_file_not_exist
+        test_create_file
+        test_write_file
+        test_no_write_file
+        test_read_file
+        test_no_read_file
+        test_no_print_set
+        test_print_file
+        tearDown
 
     """
 
@@ -148,9 +152,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        err_msg_chk = "Error: File %s is not writable." % (self.f_name)
+        global PERM1
+
+        err_msg_chk = "Error: File %s is not writeable." % (self.f_name)
         open(self.f_name, "a").close()
-        os.chmod(self.f_name, 0444)
+        os.chmod(self.f_name, int(PERM1, 8))
         status, err_msg = gen_libs.chk_crt_file(self.f_name, write=True,
                                                 no_print=True)
 
@@ -185,9 +191,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        global PERM2
+
         err_msg_chk = "Error: File %s is not readable." % (self.f_name)
         open(self.f_name, "a").close()
-        os.chmod(self.f_name, 0333)
+        os.chmod(self.f_name, int(PERM2, 8))
         status, err_msg = gen_libs.chk_crt_file(self.f_name, read=True,
                                                 no_print=True)
 

@@ -40,12 +40,12 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_list_dirs_one -> Test list one directory.
-        test_list_dirs_multi -> Test list multiple directories.
-        test_no_dirs -> Test with no directories.
-        test_no_path -> Test with path directory that does not exist.
-        tearDown -> Cleanup of unit testing.
+        setUp
+        test_list_dirs_one
+        test_list_dirs_multi
+        test_no_dirs
+        test_no_path
+        tearDown
 
     """
 

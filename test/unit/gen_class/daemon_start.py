@@ -41,9 +41,9 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_pid_not_exists -> Test with pid does not exists.
-        test_pid_exists -> Test with pid exists.
+        setUp
+        test_pid_not_exists
+        test_pid_exists
 
     """
 

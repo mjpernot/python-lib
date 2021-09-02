@@ -62,11 +62,11 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_create_dir_exist -> Test with file exist to create directory.
-        test_create_dir_perm -> Test with permission denied to create dir.
-        test_create_dir_fail -> Test with failing to create directory.
-        test_create_dir -> Test with creating directory.
+        setUp
+        test_create_dir_exist
+        test_create_dir_perm
+        test_create_dir_fail
+        test_create_dir
 
     """
 

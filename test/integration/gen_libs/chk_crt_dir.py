@@ -32,6 +32,10 @@ import version
 
 __version__ = version.__version__
 
+# Global
+PERM1 = "444"
+PERM2 = "333"
+
 
 class UnitTest(unittest.TestCase):
 
@@ -40,18 +44,18 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_no_dir_name -> Test with no directory name passed.
-        test_dir_not_exist -> Test with directory does not exist.
-        test_create_dir -> Test with creating directory.
-        test_write_dir -> Test with checking write permission on directory.
-        test_no_write_dir -> Test with checking no write perm on directory.
-        test_read_dir -> Test with checking read permission on directory.
-        test_no_read_dir -> Test with checking no read permission on directory.
-        test_no_print_set -> Test with no_print option set.
-        test_print_file2 -> Test with printing error messages to file.
-        test_print_file -> Test with printing error messages to file.
-        tearDown -> Cleanup of unit testing.
+        setUp
+        test_no_dir_name
+        test_dir_not_exist
+        test_create_dir
+        test_write_dir
+        test_no_write_dir
+        test_read_dir
+        test_no_read_dir
+        test_no_print_set
+        test_print_file2
+        test_print_file
+        tearDown
 
     """
 
@@ -150,9 +154,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        global PERM1
+
         err_msg_chk = "Error: Directory %s is not writeable." % (self.d_name)
         os.makedirs(self.d_name)
-        os.chmod(self.d_name, 0444)
+        os.chmod(self.d_name, int(PERM1, 8))
         status, err_msg = gen_libs.chk_crt_dir(self.d_name, write=True,
                                                no_print=True)
 
@@ -187,9 +193,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        global PERM2
+
         err_msg_chk = "Error: Directory %s is not readable." % (self.d_name)
         os.makedirs(self.d_name)
-        os.chmod(self.d_name, 0333)
+        os.chmod(self.d_name, int(PERM2, 8))
         status, err_msg = gen_libs.chk_crt_dir(self.d_name, read=True,
                                                no_print=True)
 

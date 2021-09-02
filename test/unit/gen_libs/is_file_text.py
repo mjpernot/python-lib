@@ -41,11 +41,11 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_null_file -> Test with null byte in file.
-        test_binary_file -> Test with binary in file.
-        test_empty_file -> Test with empty file.
-        test_text_file -> Test with text in file.
+        setUp
+        test_null_file
+        test_binary_file
+        test_empty_file
+        test_text_file
 
     """
 
