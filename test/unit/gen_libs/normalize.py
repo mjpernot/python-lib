@@ -40,10 +40,10 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_rng3 -> Test with one range encompassing all ranges.
-        test_rng2 -> Test with two consective sets of ranges.
-        test_rng1 -> Test with two sets of ranges.
+        setUp
+        test_rng3
+        test_rng2
+        test_rng1
 
     """
 

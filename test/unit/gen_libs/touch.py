@@ -33,6 +33,10 @@ import version
 
 __version__ = version.__version__
 
+# Global
+PERM1 = "755"
+PERM2 = "444"
+
 
 class UnitTest(unittest.TestCase):
 
@@ -41,13 +45,13 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_touch_file -> Test creating file.
-        test_existing_file -> Test on existing file.
-        test_create_path -> Test creating part of path to file.
-        test_dir_create_fail -> Test failure to create direcory path.
-        test_file_create_fail -> Test failure to create file.
-        tearDown -> Cleanup of unit testing.
+        setUp
+        test_touch_file
+        test_existing_file
+        test_create_path
+        test_dir_create_fail
+        test_file_create_fail
+        tearDown
 
     """
 
@@ -124,8 +128,10 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        global PERM2
+
         os.makedirs(self.dir_path)
-        os.chmod(self.dir_path, 0444)
+        os.chmod(self.dir_path, int(PERM2, 8))
 
         self.assertEqual((gen_libs.touch(self.dir_fail)),
                          (False, self.dir_msg))
@@ -140,8 +146,10 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        global PERM2
+
         os.makedirs(self.dir_path)
-        os.chmod(self.dir_path, 0444)
+        os.chmod(self.dir_path, int(PERM2, 8))
 
         self.assertEqual((gen_libs.touch(self.file_fail)),
                          (False, self.file_msg))
@@ -156,6 +164,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        global PERM1
+
         if os.path.isfile(self.file_name):
             os.remove(self.file_name)
 
@@ -163,7 +173,7 @@ class UnitTest(unittest.TestCase):
             shutil.rmtree(os.path.join(self.base_path, "touch"))
 
         if os.path.isdir(self.dir_path):
-            os.chmod(self.dir_path, 0755)
+            os.chmod(self.dir_path, int(PERM1, 8))
             shutil.rmtree(self.dir_path)
 
 

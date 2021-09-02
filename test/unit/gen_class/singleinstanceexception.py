@@ -40,7 +40,7 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        test_singleinstanceexception -> Test with no arguments.
+        test_singleinstanceexception
 
     """
 

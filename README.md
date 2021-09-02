@@ -40,7 +40,7 @@ cp requirements-python-lib.txt > {Other_Python_Project}/requirements-python-lib.
 Modify the {Other_Python_Project}/README.md file:
 
 ```
-   pip install -r requirements-python-lib.txt --target lib --trusted-host pypi.appdev.proj.coe.ic.gov
+pip install -r requirements-python-lib.txt --target lib --trusted-host pypi.appdev.proj.coe.ic.gov
 ```
 
 ##### Add the general python-lib requirements to the other program's requirements.txt file.  Remove any duplicates.
@@ -138,23 +138,7 @@ test/unit/machine/code_coverage.sh
 
 ### Installation:
 
-Install the project using git.
-  * Replace **{Python_Project}** with the baseline path of the python program.
-
-```
-cd {Python_Project}
-git clone git@sc.appdev.proj.coe.ic.gov:JAC-DSXD/python-lib.git
-```
-
-Install/upgrade system modules.
-
-```
-cd python-lib
-sudo bash
-umask 022
-pip install -r requirements.txt --upgrade --trusted-host pypi.appdev.proj.coe.ic.gov
-exit
-```
+Install the project using the procedures in the Installation section under Unit Testing.
 
 ### Testing:
 ```

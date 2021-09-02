@@ -41,8 +41,8 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_rename_file -> Test rename_file function.
+        setUp
+        test_rename_file
 
     """
 

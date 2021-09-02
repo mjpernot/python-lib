@@ -33,6 +33,10 @@ import version
 
 __version__ = version.__version__
 
+# Global
+PERM1 = "755"
+PERM2 = "000"
+
 
 class UnitTest(unittest.TestCase):
 
@@ -41,13 +45,13 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_cp_dir -> Test copy of directory to another directory.
-        test_cp_dir_same -> Test copy of directory to same name.
-        test_fail_src_dir -> Test failure on missing source directory.
-        test_fail_dest_dir -> Test failure on destination dir already exists.
-        test_fail_dest_perm -> Test failure on directory permission.
-        tearDown -> Cleanup of unit testing.
+        setUp
+        test_cp_dir
+        test_cp_dir_same
+        test_fail_src_dir
+        test_fail_dest_dir
+        test_fail_dest_perm
+        tearDown
 
     """
 
@@ -140,8 +144,10 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        global PERM2
+
         os.makedirs(self.cp_dir_dir)
-        os.chmod(self.cp_dir_dir, 0000)
+        os.chmod(self.cp_dir_dir, int(PERM2, 8))
 
         self.assertEqual((gen_libs.cp_dir(
             self.cp_dir_dir, self.cp_dir_dir2)), (
@@ -159,8 +165,10 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        global PERM1
+
         if os.path.isdir(self.cp_dir_dir):
-            os.chmod(self.cp_dir_dir, 0755)
+            os.chmod(self.cp_dir_dir, int(PERM1, 8))
             shutil.rmtree(self.cp_dir_dir)
 
         if os.path.isdir(self.cp_dir_dir2):

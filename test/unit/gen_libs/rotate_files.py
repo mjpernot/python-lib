@@ -41,13 +41,13 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_all_default_values -> Test with all default values.
-        test_maxcnt_default_value -> Test with no max_cnt argument passed.
-        test_cnt_default_value -> Test with no cnt argument passed.
-        test_cnt_ltone_maxcnt -> Test with cnt less than max_cnt less one.
-        test_cnt_eq_maxcnt -> Test with cnt equal to max_cnt.
-        test_cnt_gt_maxcnt -> Test with cnt greater than max_cnt.
+        setUp
+        test_all_default_values
+        test_maxcnt_default_value
+        test_cnt_default_value
+        test_cnt_ltone_maxcnt
+        test_cnt_eq_maxcnt
+        test_cnt_gt_maxcnt
 
     """
 

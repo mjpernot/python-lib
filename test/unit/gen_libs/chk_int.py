@@ -40,12 +40,12 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_with_symbol -> Test with symbol.
-        test_with_char -> Test with character.
-        test_with_negative -> Test with -1.
-        test_with_one -> Test with 1.
-        test_with_zero -> Test with 0.
+        setUp
+        test_with_symbol
+        test_with_char
+        test_with_negative
+        test_with_one
+        test_with_zero
 
     """
 

@@ -41,9 +41,9 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_hostname -> Test with hostname argument.
-        test_no_hostname -> Test with no hostname argument.
+        setUp
+        test_hostname
+        test_no_hostname
 
     """
 

@@ -40,13 +40,13 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_no_find_update -> Test with no marker found with update arg.
-        test_no_find -> Test with no marker found.
-        test_update_arg -> Test with update argument set to True.
-        test_empty_marker -> Test with empty marker.
-        test_empty_log -> Test with empty loglist.
-        test_default -> Test with minimum number of arguments.
+        setUp
+        test_no_find_update
+        test_no_find
+        test_update_arg
+        test_empty_marker
+        test_empty_log
+        test_default
 
     """
 

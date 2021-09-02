@@ -40,14 +40,14 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_regex_multiple -> Test with multiple regex expressions.
-        test_no_find_use_marker -> Test no regex found and use_marker is True.
-        test_no_find -> Test with no regex entries found.
-        test_use_marker_arg -> Test with use_marker argument set to True.
-        test_empty_regex -> Test with empty regex.
-        test_empty_log -> Test with empty loglist.
-        test_default -> Test with minimum number of arguments.
+        setUp
+        test_regex_multiple
+        test_no_find_use_marker
+        test_no_find
+        test_use_marker_arg
+        test_empty_regex
+        test_empty_log
+        test_default
 
     """
 

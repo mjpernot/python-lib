@@ -118,6 +118,7 @@ class Daemon:
     """
 
     DEV_NULL = "/dev/null"
+    MASK = "0"
 
     def __init__(self, pidfile, stdin=DEV_NULL, stdout=DEV_NULL,
                  stderr=DEV_NULL, argv_list=None):
@@ -176,7 +177,7 @@ class Daemon:
         # Decouple from parent environment
         os.chdir("/")
         os.setsid()
-        os.umask(0)
+        os.umask(int(MASK))
 
         # Do second fork
         try:

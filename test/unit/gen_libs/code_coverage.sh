@@ -8,6 +8,7 @@ coverage erase
 
 echo ""
 echo "Running unit test modules in conjunction with coverage"
+coverage run -a --source=gen_libs test/unit/gen_libs/add_cmd.py
 coverage run -a --source=gen_libs test/unit/gen_libs/and_is_true.py
 coverage run -a --source=gen_libs test/unit/gen_libs/bytes_2_readable.py
 coverage run -a --source=gen_libs test/unit/gen_libs/chk_crt_dir.py
@@ -18,6 +19,7 @@ coverage run -a --source=gen_libs test/unit/gen_libs/compress.py
 coverage run -a --source=gen_libs test/unit/gen_libs/cp_dir.py
 coverage run -a --source=gen_libs test/unit/gen_libs/cp_file2.py
 coverage run -a --source=gen_libs test/unit/gen_libs/cp_file.py
+coverage run -a --source=gen_libs test/unit/gen_libs/create_cfg_array.py
 coverage run -a --source=gen_libs test/unit/gen_libs/crt_file_time.py
 coverage run -a --source=gen_libs test/unit/gen_libs/date_range.py
 coverage run -a --source=gen_libs test/unit/gen_libs/del_not_and_list.py
@@ -42,6 +44,7 @@ coverage run -a --source=gen_libs test/unit/gen_libs/get_time.py
 coverage run -a --source=gen_libs test/unit/gen_libs/has_whitespace.py
 coverage run -a --source=gen_libs test/unit/gen_libs/help_func.py
 coverage run -a --source=gen_libs test/unit/gen_libs/in_list.py
+coverage run -a --source=gen_libs test/unit/gen_libs/is_add_cmd.py
 coverage run -a --source=gen_libs test/unit/gen_libs/is_empty_file.py
 coverage run -a --source=gen_libs test/unit/gen_libs/is_file_text.py
 coverage run -a --source=gen_libs test/unit/gen_libs/is_missing_lists.py
@@ -87,6 +90,7 @@ coverage run -a --source=gen_libs test/unit/gen_libs/sec_2_hr.py
 coverage run -a --source=gen_libs test/unit/gen_libs/str_2_list.py
 coverage run -a --source=gen_libs test/unit/gen_libs/str_2_type.py
 coverage run -a --source=gen_libs test/unit/gen_libs/touch.py
+coverage run -a --source=gen_libs test/unit/gen_libs/transpose_dict.py
 coverage run -a --source=gen_libs test/unit/gen_libs/validate_date.py
 coverage run -a --source=gen_libs test/unit/gen_libs/validate_int.py
 coverage run -a --source=gen_libs test/unit/gen_libs/write_file.py

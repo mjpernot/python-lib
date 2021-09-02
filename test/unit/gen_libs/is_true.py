@@ -41,11 +41,11 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_is_true_off -> Test with False value.
-        test_is_true_on -> Test with True value.
-        test_is_true_no -> Test with No value.
-        test_is_true_yes -> Test with Yes value.
+        setUp
+        test_is_true_off
+        test_is_true_on
+        test_is_true_no
+        test_is_true_yes
 
     """
 

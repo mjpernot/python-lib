@@ -40,14 +40,14 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_case_insensitive -> Test with case insensitive ignore.
-        test_no_find_use_marker -> Test no ignore found and use_marker is True.
-        test_no_find -> Test with no ignore entries found.
-        test_use_marker_arg -> Test with use_marker argument set to True.
-        test_empty_ignore -> Test with empty ignore.
-        test_empty_log -> Test with empty loglist.
-        test_default -> Test with minimum number of arguments.
+        setUp
+        test_case_insensitive
+        test_no_find_use_marker
+        test_no_find
+        test_use_marker_arg
+        test_empty_ignore
+        test_empty_log
+        test_default
 
     """
 

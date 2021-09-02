@@ -35,6 +35,11 @@ import version
 __version__ = version.__version__
 
 
+# Global
+PERM1 = "755"
+PERM2 = "444"
+
+
 class UnitTest(unittest.TestCase):
 
     """Class:  UnitTest
@@ -42,16 +47,16 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_cp_file -> Test copy of file in same directory.
-        test_cp_file_dir -> Test copy of file in different directory.
-        test_cp_file_same -> Test copy of file to same name.
-        test_cp_file_diff -> Test copy of file to different name.
-        test_fail_src_dir -> Test failure on missing source directory.
-        test_fail_src_file -> Test failure on missing source file.
-        test_fail_dest_dir -> Test failure on missing destination directory.
-        test_fail_dest_perm -> Test failure on directory permission.
-        tearDown -> Cleanup of unit testing.
+        setUp
+        test_cp_file
+        test_cp_file_dir
+        test_cp_file_same
+        test_cp_file_diff
+        test_fail_src_dir
+        test_fail_src_file
+        test_fail_dest_dir
+        test_fail_dest_perm
+        tearDown
 
     """
 
@@ -187,8 +192,10 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        global PERM2
+
         gen_libs.touch(os.path.join(self.cp_file_dir2, self.src_file))
-        os.chmod(self.cp_file_dir2, 0444)
+        os.chmod(self.cp_file_dir2, int(PERM2, 8))
 
         self.assertEqual((gen_libs.cp_file(self.src_file, self.cp_file_dir,
                                            self.cp_file_dir2, self.dest_file)),
@@ -220,10 +227,12 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        global PERM1
+
         shutil.rmtree(self.cp_file_dir)
 
         if os.path.isdir(self.cp_file_dir2):
-            os.chmod(self.cp_file_dir2, 0755)
+            os.chmod(self.cp_file_dir2, int(PERM1, 8))
             shutil.rmtree(self.cp_file_dir2)
 
 

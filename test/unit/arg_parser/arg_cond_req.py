@@ -41,13 +41,13 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_two_args_missing -> Test with two arguments required, but missing.
-        test_one_arg_missing -> Test with one argument required, but missing.
-        test_two_args_required -> Test with 2 arguments required & are present.
-        test_one_arg_required -> Test with 1 argument required and is present.
-        test_empty_optconreqlist -> Test with empty list for opt_con_req_list.
-        test_empty_argsarray -> Test with empty args_array.
+        setUp
+        test_two_args_missing
+        test_one_arg_missing
+        test_two_args_required
+        test_one_arg_required
+        test_empty_optconreqlist
+        test_empty_argsarray
 
     """
 

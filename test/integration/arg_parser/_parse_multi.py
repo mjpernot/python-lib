@@ -41,12 +41,12 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_multilist_two_val -> Test with multi_list set to two values.
-        test_multilist_one_val -> Test with multi_list set to one value.
-        test_multilist_def_arg -> Test with multi_list set to 1 arg using def.
-        test_multilist_two_args -> Test multi_list set to 1 arg & 1 other arg.
-        test_multilist_one_arg -> Test with multi_list set to one argument.
+        setUp
+        test_multilist_two_val
+        test_multilist_one_val
+        test_multilist_def_arg
+        test_multilist_two_args
+        test_multilist_one_arg
 
     """
 

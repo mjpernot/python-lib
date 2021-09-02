@@ -40,11 +40,11 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_yes_yes -> Test with yes and yes values.
-        test_no_no -> Test with no and no values.
-        test_no_yes -> Test with no and yes values.
-        test_yes_no -> Test with yes and no values.
+        setUp
+        test_yes_yes
+        test_no_no
+        test_no_yes
+        test_yes_no
 
     """
 

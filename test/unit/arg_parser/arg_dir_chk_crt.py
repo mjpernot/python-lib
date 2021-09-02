@@ -62,19 +62,19 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_create_dir_perm -> Test with permission denied to create dir.
-        test_create_dir_exist -> Test with file exist to create directory.
-        test_not_subset -> Test with dir_crt_list not subset of dir_chk_list.
-        test_chk_good_crt_fail -> Test check dir good, but create dir failed.
-        test_match_create_dir_fail -> Test with failing to create directory.
-        test_match_create_dir -> Test with creating directory.
-        test_match_no_dir -> Test with directory does not exist.
-        test_match_no_access -> Test match between sets, but no access to dir.
-        test_one_match_between_sets -> Test one match between sets and is dir.
-        test_no_match_between_sets -> Test no match between arguments passed.
-        test_empty_argsarray -> Test with args_array is empty.
-        test_empty_dirchklist -> Test with dir_chk_list is empty.
+        setUp
+        test_create_dir_perm
+        test_create_dir_exist
+        test_not_subset
+        test_chk_good_crt_fail
+        test_match_create_dir_fail
+        test_match_create_dir
+        test_match_no_dir
+        test_match_no_access
+        test_one_match_between_sets
+        test_no_match_between_sets
+        test_empty_argsarray
+        test_empty_dirchklist
 
     """
 

@@ -41,9 +41,9 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_exception -> Test with division by 0.
-        test_float_div -> Test float_div function.
+        setUp
+        test_exception
+        test_float_div
 
     """
 

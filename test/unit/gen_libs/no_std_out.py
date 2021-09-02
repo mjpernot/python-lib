@@ -54,7 +54,7 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        test_get_base_dir -> Test no_std_out function.
+        test_get_base_dir
 
     """
 

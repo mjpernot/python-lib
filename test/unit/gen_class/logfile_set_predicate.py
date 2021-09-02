@@ -40,10 +40,10 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_set_predicate_invalid -> Test with invalid value.
-        test_set_predicate_all -> Test with with all value.
-        test_set_predicate_any -> Test with with any value.
+        setUp
+        test_set_predicate_invalid
+        test_set_predicate_all
+        test_set_predicate_any
 
     """
 

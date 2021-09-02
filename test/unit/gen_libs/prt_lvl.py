@@ -40,10 +40,10 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_set_lvl -> Test with set level.
-        test_default_lvl -> Test with default level.
-        test_zero_lvl -> Test with zero level.
+        setUp
+        test_set_lvl
+        test_default_lvl
+        test_zero_lvl
 
     """
 

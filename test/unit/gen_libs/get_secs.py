@@ -41,7 +41,7 @@ class TD(object):
     Description:  Class is a representation of datetime delta class.
 
     Methods:
-        __init__ -> Initialize configuration environment.
+        __init__
 
     """
 
@@ -66,8 +66,8 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_get_secs -> Test get_secs function.
+        setUp
+        test_get_secs
 
     """
 

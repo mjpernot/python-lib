@@ -41,11 +41,11 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_with_no_args -> Test with no arguments passed.
-        test_with_fhandle_none -> Test with f_handle set to None.
-        test_with_line_none -> Test with line set to None.
-        test_with_data -> Test with data passed.
+        setUp
+        test_with_no_args
+        test_with_fhandle_none
+        test_with_line_none
+        test_with_data
 
     """
 

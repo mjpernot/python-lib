@@ -47,7 +47,7 @@ class Linux(Machine):
 
     """
 
-    defaults_file = "/opt/lampstack/mysql/my.cnf"
+    defaults_file = "/etc/my.cnf"
 
     def __init__(self):
 

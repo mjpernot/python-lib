@@ -40,12 +40,12 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_stderr_arg -> Test with stderr arg passed.
-        test_stdout_arg -> Test with stdout arg passed.
-        test_stdin_arg -> Test with stdin arg passed.
-        test_argv_list -> Test with argv list passed.
-        test_default_setting -> Test with default settings.
+        setUp
+        test_stderr_arg
+        test_stdout_arg
+        test_stdin_arg
+        test_argv_list
+        test_default_setting
 
     """
 

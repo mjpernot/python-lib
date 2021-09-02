@@ -40,12 +40,12 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Initialize testing environment.
-        test_non_string2 -> Test with a dictionary argument.
-        test_non_string -> Test with a list argument.
-        test_empty_test -> Test with empty text line.
-        test_add_exist -> Test with adding data to existing message.
-        test_initial_add -> Test with adding data to empty message.
+        setUp
+        test_non_string2
+        test_non_string
+        test_empty_test
+        test_add_exist
+        test_initial_add
 
     """
 

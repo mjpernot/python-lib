@@ -40,13 +40,13 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_trailing_slash -> Test with trailing slash already present.
-        test_arg_not_present -> Test with argument not present.
-        test_arg_present -> Test with argument present.
-        test_empty_both -> Test with both args empty.
-        test_empty_argopt -> Test with empty string for arg_opt.
-        test_empty_argsarray -> Test with empty dictionary for args_array.
+        setUp
+        test_trailing_slash
+        test_arg_not_present
+        test_arg_present
+        test_empty_both
+        test_empty_argopt
+        test_empty_argsarray
 
     """
 

@@ -41,13 +41,13 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_pct_int6 -> Test with 1 and 1.
-        test_pct_int5 -> Test with 0 and 0.
-        test_pct_int4 -> Test with 2 and 5.
-        test_pct_int3 -> Test with 5 and 2.
-        test_pct_int2 -> Test with 100 and 10.
-        test_pct_int1 -> Test with 10 and 100.
+        setUp
+        test_pct_int6
+        test_pct_int5
+        test_pct_int4
+        test_pct_int3
+        test_pct_int2
+        test_pct_int1
 
     """
 

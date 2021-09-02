@@ -41,9 +41,9 @@ class SubProcess(object):
     Description:  Class which is a representation of the subprocess class.
 
     Methods:
-        __init__ -> Initialization instance.
-        Popen -> Mock representation of subprocess.Popen method.
-        wait -> Mock representation of subprocess.wait method.
+        __init__
+        Popen
+        wait
 
     """
 
@@ -98,15 +98,15 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_to_list2 -> Test to address as a list.
-        test_to_list -> Test to address as a list.
-        test_to_str -> Test to address as a string.
-        test_subj_spaces2 -> Test subject line with white spaces.
-        test_subj_spaces -> Test subject line with white spaces.
-        test_subj_str -> Test subject line as a string.
-        test_send_mailx2 -> Test send_mailx function.
-        test_send_mailx -> Test send_mailx function.
+        setUp
+        test_to_list2
+        test_to_list
+        test_to_str
+        test_subj_spaces2
+        test_subj_spaces
+        test_subj_str
+        test_send_mailx2
+        test_send_mailx
 
     """
 

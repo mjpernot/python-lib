@@ -42,11 +42,11 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_file_search_path -> Test with files matching with path included.
-        test_no_file_search -> Test with no files matching.
-        test_file_search2 -> Test with files matching.
-        test_file_search -> Test with files matching.
+        setUp
+        test_file_search_path
+        test_no_file_search
+        test_file_search2
+        test_file_search
 
     """
 

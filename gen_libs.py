@@ -6,6 +6,7 @@
         general use.
 
     Functions:
+        add_cmd
         and_is_true
         bytes_2_readable
         chk_crt_dir
@@ -16,6 +17,7 @@
         cp_dir
         cp_file
         cp_file2
+        create_cfg_array
         crt_file_time
         date_range
         del_not_and_list
@@ -40,6 +42,7 @@
         has_whitespace
         help_func
         in_list
+        is_add_cmd
         is_empty_file
         is_file_text
         is_missing_lists
@@ -85,6 +88,7 @@
         str_2_list
         str_2_type
         touch
+        transpose_dict
         validate_date
         validate_int
         write_file
@@ -129,6 +133,34 @@ __version__ = version.__version__
 
 # Tuples
 _ntuple_diskusage = collections.namedtuple("usage", "total used free")
+
+
+def add_cmd(cmd, **kwargs):
+
+    """Function:  add_cmd
+
+    Description:  Append name of argument and possibly value for the argument
+        to the command line list.
+
+    Arguments:
+        (input) cmd -> List containing the program command line.
+        (input) **kwargs:
+            arg -> Name of argument being added.
+            val -> Value for argument being added.
+        (output) cmd -> List containing the program command line.
+
+    """
+
+    cmd = list(cmd)
+
+    # Append before returning, appending on return does not make the change.
+    if "val" in kwargs:
+        cmd.append(kwargs["arg"] + kwargs["val"])
+
+    else:
+        cmd.append(kwargs["arg"])
+
+    return cmd
 
 
 def and_is_true(itemx, itemy):
@@ -465,6 +497,59 @@ def cp_file2(fname, src_dir, dest_dir, new_fname=None):
         dest_dir = os.path.join(dest_dir, new_fname)
 
     shutil.copy2(os.path.join(src_dir, fname), dest_dir)
+
+
+def create_cfg_array(cfg_file, **kwargs):
+
+    """Function:  create_cfg_array
+
+    Description:  Parses a configuration file which can contain multiple
+        configuration connections & creates an array of configurations.  This
+        is for general class use and will require the first line of the
+        configuration file to be the "user" entry and the key and the value
+        will be delimited by "=" (equal sign).
+
+    Arguments:
+        (input) cfg_file -> Configuration file.
+        (input) **kwargs:
+            cfg_path - Configuration directory path.
+        (output) cfg_array -> Array of configurations.
+
+    """
+
+    cfg_array = []
+    cfg_dict = {}
+    cfg_path = kwargs.get("cfg_path", "./")
+
+    # Does config file exists in current location.
+    if os.path.isfile(cfg_file):
+        fname = open(cfg_file, "r")
+
+    else:
+        fname = open(os.path.join(cfg_path, cfg_file), "r")
+
+    for line in fname:
+
+        # Ignore comment lines.
+        if line[0] != "#":
+            key, value = line.split("=")
+
+            # Set each entry in the config to it's own array based on 'user'.
+            # If the key is "user" (new slave) and config dictionary exist.
+            if key.strip() == "user" and cfg_dict:
+                cfg_array.append(cfg_dict)
+                cfg_dict = {}
+
+            cfg_dict[key.strip()] = value.strip().rstrip()
+
+    # Execute after 'for' loop.
+    else:
+        # Add last dict to config array.
+        cfg_array.append(cfg_dict)
+
+    fname.close()
+
+    return cfg_array
 
 
 def crt_file_time(fname, path, ext=""):
@@ -1018,6 +1103,45 @@ def in_list(name, array_list):
         return [name]
 
     return []
+
+
+def is_add_cmd(args_array, cmd, opt_arg_list):
+
+    """Function:  is_add_cmd
+
+    Description:  Determine if any additional options need to be added to the
+        command line.
+
+    Arguments:
+        (input) args_array -> Array of command line options and values.
+        (input) cmd -> List array containing the program arguments.
+        (input) opt_arg_list -> Dictionary of additional options.
+        (output) cmd -> List array containing the program arguments.
+
+    """
+
+    cmd = list(cmd)
+    args_array = dict(args_array)
+    opt_arg_list = dict(opt_arg_list)
+
+    for opt in opt_arg_list:
+
+        # Is option in array and is set to True.
+        if opt in args_array and args_array[opt] \
+           and isinstance(args_array[opt], bool):
+
+            if isinstance(opt_arg_list[opt], list):
+
+                for item in opt_arg_list[opt]:
+                    cmd = add_cmd(cmd, arg=item)
+
+            else:
+                cmd = add_cmd(cmd, arg=opt_arg_list[opt])
+
+        elif opt in args_array:
+            cmd = add_cmd(cmd, arg=opt_arg_list[opt], val=args_array[opt])
+
+    return cmd
 
 
 def is_empty_file(f_name):
@@ -2143,6 +2267,42 @@ def touch(f_name):
             err_msg = "ERROR: File create failure. Reason: %s" % (strerror)
 
     return status, err_msg
+
+
+def transpose_dict(data, data_key):
+
+    """Function:  transpose_dict
+
+    Description:  Transpose specified keys in a list of dictionaries
+        to specified data types or None.
+
+    Arguments:
+        (input) data -> Initial list of dictionaries.
+        (input) data_key -> Dictionary of keys and data types.
+        (output) mod_data -> Modified list of dictionaries.
+
+    """
+
+    data = list(data)
+    data_key = dict(data_key)
+    mod_data = list()
+
+    for list_item in data:
+        list_item = dict(list_item)
+
+        for item in set(list_item.keys()) & set(data_key.keys()):
+            if not list_item[item] or list_item[item] == "None":
+                list_item[item] = None
+
+            elif data_key[item] == "int":
+                list_item[item] = int(list_item[item])
+
+            elif data_key[item] == "bool":
+                list_item[item] = ast.literal_eval(list_item[item])
+
+        mod_data.append(list_item)
+
+    return mod_data
 
 
 def validate_date(dtg, **kwargs):

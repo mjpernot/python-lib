@@ -40,15 +40,15 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_sec_2_hr8 -> Test with -3600 seconds.
-        test_sec_2_hr7 -> Test with 3600 seconds.
-        test_sec_2_hr6 -> Test with 3599 seconds.
-        test_sec_2_hr5 -> Test with 1800 seconds.
-        test_sec_2_hr4 -> Test with 1799 seconds.
-        test_sec_2_hr3 -> Test with 36 seconds.
-        test_sec_2_hr2 -> Test with 35 seconds.
-        test_sec_2_hr1 -> Test with 0 seconds.
+        setUp
+        test_sec_2_hr8
+        test_sec_2_hr7
+        test_sec_2_hr6
+        test_sec_2_hr5
+        test_sec_2_hr4
+        test_sec_2_hr3
+        test_sec_2_hr2
+        test_sec_2_hr1
 
     """
 

@@ -40,14 +40,14 @@ class UnitTest(unittest.TestCase):
     Description:  Class which is a representation of a unit testing.
 
     Methods:
-        setUp -> Unit testing initilization.
-        test_milli_2_readadble7 -> Test with -1000000000ms.
-        test_milli_2_readadble6 -> Test with -1ms.
-        test_milli_2_readadble5 -> Test with 1000000000ms.
-        test_milli_2_readadble4 -> Test with 1000000ms.
-        test_milli_2_readadble3 -> Test with 1000ms.
-        test_milli_2_readadble2 -> Test with 1ms.
-        test_milli_2_readadble1 -> Test with 0ms.
+        setUp
+        test_milli_2_readadble7
+        test_milli_2_readadble6
+        test_milli_2_readadble5
+        test_milli_2_readadble4
+        test_milli_2_readadble3
+        test_milli_2_readadble2
+        test_milli_2_readadble1
 
     """
 
