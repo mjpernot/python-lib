@@ -4,8 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
-## [2.8.4] - 2021-03-23
+## [2.8.5] - 2021-10-07
 
+
+## [2.8.4] - 2021-03-23
 ### Added
 - gen_libs.transpose_dict:  Transpose specified keys in a list of dictionaries to specified data types or None.
 - gen_libs.is_add_cmd:  Determine if any additional options need to be added to the command line.
@@ -24,7 +26,6 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 
 ## [2.8.3] - 2020-12-24
-
 ### Fixed
 - gen_libs.chk_crt_file:  Error messages being overwritten if multiple errors encountered.
 - gen_libs.prt_dict:  Print keys for nested dictionaries in the value.
