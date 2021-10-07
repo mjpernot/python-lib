@@ -68,6 +68,7 @@
         not_in_list
         no_std_out
         openfile
+        pascalize
         pct_int
         perm_check
         print_data
@@ -1783,6 +1784,23 @@ def openfile(filename, mode="r"):
         return gzip.open(filename, mode)
 
     return open(filename, mode)
+
+
+def pascalize(data_str):
+
+    """Function:  pascalize
+
+    Description:  Pascal cases a string.
+
+    Arguments:
+        (input) data_str -> String to be pascal cased.
+        (output) Pascal cased string.
+
+    """
+
+    return "".join(item.capitalize() for item in re.split("([^a-zA-Z0-9])",
+                                                          data_str)
+                   if item.isalnum())
 
 
 def pct_int(num1, num2, **kwargs):

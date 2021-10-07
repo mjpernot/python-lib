@@ -8,6 +8,9 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 ### Fixed
 - gen_class.Daemon:  Placed the MASK global in the correct section and referenced in Daemon.daemonize method.
 
+### Added
+- gen_libs.pascalize:  Pascal cases a string.
+
 
 ## [2.8.4] - 2021-03-23
 ### Added
