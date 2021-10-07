@@ -103,6 +103,7 @@ coverage run -a --source=gen_libs test/unit/gen_libs/normalize.py
 coverage run -a --source=gen_libs test/unit/gen_libs/not_in_list.py
 coverage run -a --source=gen_libs test/unit/gen_libs/no_std_out.py
 coverage run -a --source=gen_libs test/unit/gen_libs/openfile.py
+coverage run -a --source=gen_libs test/unit/gen_libs/pascalize.py
 coverage run -a --source=gen_libs test/unit/gen_libs/pct_int.py
 coverage run -a --source=gen_libs test/unit/gen_libs/perm_check.py
 coverage run -a --source=gen_libs test/unit/gen_libs/print_data.py
