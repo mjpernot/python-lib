@@ -5,6 +5,8 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 
 ## [2.8.5] - 2021-10-07
+### Fixed
+- gen_class.Daemon:  Placed the MASK global in the correct section and referenced in Daemon.daemonize method.
 
 
 ## [2.8.4] - 2021-03-23

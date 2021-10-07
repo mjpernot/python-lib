@@ -49,6 +49,9 @@ import version
 
 __version__ = version.__version__
 
+# Global
+MASK = "0"
+
 
 def get_inst(cmd):
 
@@ -118,7 +121,6 @@ class Daemon:
     """
 
     DEV_NULL = "/dev/null"
-    MASK = "0"
 
     def __init__(self, pidfile, stdin=DEV_NULL, stdout=DEV_NULL,
                  stderr=DEV_NULL, argv_list=None):
@@ -160,6 +162,8 @@ class Daemon:
         Arguments:
 
         """
+
+        global MASK
 
         # Do first fork
         try:
