@@ -37,7 +37,6 @@ pipeline {
                 ./test/unit/cmds_gen/disconnect.py
                 ./test/unit/cmds_gen/get_inst.py
                 ./test/unit/cmds_gen/is_add_cmd.py
-                ./test/unit/cmds_gen/run_prog.py
                 ./test/unit/errors/emptyrowerror.py
                 ./test/unit/errors/error.py
                 ./test/unit/errors/nooptionerror.py
