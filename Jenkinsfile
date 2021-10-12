@@ -33,7 +33,6 @@ pipeline {
                 ./test/unit/arg_parser/parse_single.py
                 ./test/unit/arg_parser/file_create.py
                 ./test/unit/cmds_gen/add_cmd.py
-                ./test/unit/cmds_gen/create_cfg_array.py
                 ./test/unit/cmds_gen/disconnect.py
                 ./test/unit/cmds_gen/get_inst.py
                 ./test/unit/cmds_gen/is_add_cmd.py
