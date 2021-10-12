@@ -32,6 +32,7 @@ test/unit/gen_libs/file_cleanup.py
 test/unit/gen_libs/file_search_cnt.py
 test/unit/gen_libs/file_search.py
 test/unit/gen_libs/filename_search.py
+test/unit/gen_libs/find_email_addr.py
 test/unit/gen_libs/float_div.py
 test/unit/gen_libs/get_base_dir.py
 test/unit/gen_libs/get_data.py
