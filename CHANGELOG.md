@@ -14,8 +14,9 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - gen_libs.pascalize:  Pascal cases a string.
 
 ### Removed
-- cmds_gen.run_prog function.
-- machine.Solaris class.
+- cmds_gen.create_cfg_array function
+- cmds_gen.run_prog function
+- machine.Solaris class
 
 
 ## [2.8.4] - 2021-03-23
