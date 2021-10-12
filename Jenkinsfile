@@ -186,7 +186,6 @@ pipeline {
                 ./test/unit/gen_class/mail_send_mailx.py
                 ./test/unit/machine/linux.py
                 ./test/unit/machine/amachine.py
-                ./test/unit/machine/solaris.py
                 deactivate
                 rm -rf test_env
                 """
