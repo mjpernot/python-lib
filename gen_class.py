@@ -903,7 +903,11 @@ class Mail(System):
         if txt_ln:
 
             if isinstance(txt_ln, str):
-                self.msg = self.msg + txt_ln
+                if self.msg:
+                    self.msg = self.msg + "\n" + txt_ln
+
+                else:
+                    self.msg = txt_ln
 
             else:
                 self.msg = self.msg + json.dumps(txt_ln)
