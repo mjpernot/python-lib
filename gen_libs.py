@@ -570,7 +570,7 @@ def crt_file_time(fname, path, ext=""):
     if ext and "." not in ext[0]:
         ext = "." + ext
 
-    return os.path.join(path, fname + "." + time.strftime("%Y%m%d_%I%M") + ext)
+    return os.path.join(path, fname + "." + time.strftime("%Y%m%d_%H%M") + ext)
 
 
 def date_range(start_dt, end_dt):

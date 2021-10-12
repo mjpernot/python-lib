@@ -6,6 +6,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 ## [2.8.5] - 2021-10-07
 ### Fixed
+- gen_libs.crt_file_time:  Change time from 12-hour format to 24-hour format.
 - gen_class.Daemon:  Placed the MASK global in the correct section and referenced in Daemon.daemonize method.
 
 ### Added
