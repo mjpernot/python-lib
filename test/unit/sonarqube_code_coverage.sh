@@ -182,7 +182,6 @@ coverage run -a --source=gen_class test/unit/gen_class/mail_send_mail.py
 coverage run -a --source=gen_class test/unit/gen_class/mail_send_mailx.py
 coverage run -a --source=machine test/unit/machine/linux.py
 coverage run -a --source=machine test/unit/machine/amachine.py
-coverage run -a --source=machine test/unit/machine/solaris.py
 
 echo ""
 echo "Producing code coverage report"
