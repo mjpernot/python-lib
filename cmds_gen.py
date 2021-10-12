@@ -79,22 +79,6 @@ def disconnect(*args):
             server.disconnect()
 
 
-def get_inst(cmd):
-
-    """Function:  get_inst
-
-    Description:  Returns the module instance header.
-
-    Arguments:
-        (input) cmd -> Module library.
-        (output) -> Return module instance.
-
-    """
-    sub = cmd
-
-    return sub
-
-
 def is_add_cmd(args_array, cmd, opt_arg_list):
 
     """Function:  is_add_cmd
