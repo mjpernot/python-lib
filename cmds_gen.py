@@ -12,7 +12,6 @@
         disconnect
         get_sub
         is_add_cmd
-        run_prog
 
 """
 
