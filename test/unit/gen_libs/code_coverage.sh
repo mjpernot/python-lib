@@ -34,6 +34,7 @@ coverage run -a --source=gen_libs test/unit/gen_libs/file_cleanup.py
 coverage run -a --source=gen_libs test/unit/gen_libs/file_search_cnt.py
 coverage run -a --source=gen_libs test/unit/gen_libs/file_search.py
 coverage run -a --source=gen_libs test/unit/gen_libs/filename_search.py
+coverage run -a --source=gen_libs test/unit/gen_libs/find_email_addr.py
 coverage run -a --source=gen_libs test/unit/gen_libs/float_div.py
 coverage run -a --source=gen_libs test/unit/gen_libs/get_base_dir.py
 coverage run -a --source=gen_libs test/unit/gen_libs/get_data.py
