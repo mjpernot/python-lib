@@ -55,30 +55,6 @@ def add_cmd(cmd, **kwargs):
     return cmd
 
 
-def disconnect(*args):
-
-    """Function:  disconnect
-
-    Description:  Disconnects a class database connection.  Will check to see
-        if an argument is an array; if so will loop on the array to disconnect
-        all connections.  Will require a disconnect method within the class.
-        The disconnect method will be particular to that class.
-
-    Arguments:
-        (input) *arg -> One or more connection instances.
-
-    """
-
-    for server in args:
-
-        if isinstance(server, list):
-            for srv in server:
-                srv.disconnect()
-
-        else:
-            server.disconnect()
-
-
 def is_add_cmd(args_array, cmd, opt_arg_list):
 
     """Function:  is_add_cmd
