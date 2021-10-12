@@ -33,7 +33,6 @@ coverage run -a --source=cmds_gen test/unit/cmds_gen/create_cfg_array.py
 coverage run -a --source=cmds_gen test/unit/cmds_gen/disconnect.py
 coverage run -a --source=cmds_gen test/unit/cmds_gen/get_inst.py
 coverage run -a --source=cmds_gen test/unit/cmds_gen/is_add_cmd.py
-coverage run -a --source=cmds_gen test/unit/cmds_gen/run_prog.py
 coverage run -a --source=errors test/unit/errors/emptyrowerror.py
 coverage run -a --source=errors test/unit/errors/error.py
 coverage run -a --source=errors test/unit/errors/nooptionerror.py
