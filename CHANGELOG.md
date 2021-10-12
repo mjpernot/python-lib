@@ -9,6 +9,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - gen_class.Daemon:  Placed the MASK global in the correct section and referenced in Daemon.daemonize method.
 
 ### Added
+- gen_libs.find_email_addr:  Finds all email addresses in a data string.
 - gen_libs.pascalize:  Pascal cases a string.
 
 

@@ -924,6 +924,25 @@ def filename_search(dir_path, file_str, add_path=False):
             if re.search(file_str, item)]
 
 
+def find_email_addr(data):
+
+    """Function:  find_email_addr
+
+    Description:  Finds all email addresses in a data string.
+
+    Known Issue:  If a period (.) is at the end of the email address in the
+        data string the function will return the ending period as part of the
+        email address.
+
+    Arguments:
+        (input) data -> Data string with email addresses.
+        (output) -> List of email addresses.
+
+    """
+
+    return re.findall(r"[\w\.-]+@[\w\.-]+", data)
+
+
 def float_div(num1, num2):
 
     """Function:  float_div
