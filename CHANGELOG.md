@@ -21,7 +21,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - gen_libs.add_cmd:  Append name of arg and value for arg to command line.
 
 ### Changed
-- machine.Solaris:  Changed defaults_file to /etc/my.cnf.
+- machine.Linux:  Changed defaults_file to /etc/my.cnf.
 
 ### Deprecated
 - machine.Solaris class.
