@@ -12,6 +12,9 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - gen_libs.find_email_addr:  Finds all email addresses in a data string.
 - gen_libs.pascalize:  Pascal cases a string.
 
+### Removed
+- machine.Solaris class.
+
 
 ## [2.8.4] - 2021-03-23
 ### Added

@@ -60,30 +60,3 @@ class Linux(Machine):
         """
 
         pass
-
-
-class Solaris(Machine):
-
-    """Class:  Solaris
-
-    Description:  Class with methods and attributes for Solaris operating
-        system.
-
-    Methods:
-        __init__ -> Class instance initilization.
-
-    """
-
-    defaults_file = "None"
-
-    def __init__(self):
-
-        """Method:  __init__
-
-        Description:  Initialization of an instance of the Solaris class.
-
-        Arguments:
-
-        """
-
-        pass
