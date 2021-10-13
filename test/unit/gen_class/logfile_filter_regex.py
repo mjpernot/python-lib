@@ -65,9 +65,9 @@ class UnitTest(unittest.TestCase):
         self.yearmon2 = "2019-11 This"
         self.loglist = [self.yearmon2, "20191-11 is", self.yearmon,
                         "20-11 test"]
-        self.regex = "^\d{4}-\d{2}"
-        self.regex2 = "\d{4}:\d{2}"
-        self.regex3 = "^\d{4}-\d{2}|^\d{2}-\d{2}"
+        self.regex = r"^\d{4}-\d{2}"
+        self.regex2 = r"\d{4}:\d{2}"
+        self.regex3 = r"^\d{4}-\d{2}|^\d{2}-\d{2}"
         self.result = [self.yearmon2, self.yearmon]
         self.result2 = [self.yearmon]
         self.result3 = [self.yearmon2, self.yearmon, "20-11 test"]
