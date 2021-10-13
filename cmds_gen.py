@@ -18,8 +18,6 @@
 # Libraries and Global Variables
 
 # Standard
-import os
-import subprocess
 
 # Local
 import version
