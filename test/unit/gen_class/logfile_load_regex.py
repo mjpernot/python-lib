@@ -76,8 +76,7 @@ class UnitTest(unittest.TestCase):
 
         self.result_str = self.regex
         self.result_str2 = r"\d{4}\-\d{2}\-\d{2}|d{2}:\d{2}:\d{2}"
-        self.result_str3 = \
-            r"\\d{4}\\-\\d{2}\\-\\d{2}\\n\\d{2}:\\d{2}:\\d{2}\\n"
+        self.result_str3 = r"\d{4}\-\d{2}\-\d{2}\n\d{2}:\d{2}:\d{2}\n"
 
     def test_load_str_multiple_raw(self):
 
