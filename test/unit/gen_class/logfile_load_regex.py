@@ -64,9 +64,9 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.regex = "\d{4}\-\d{2}\-\d{2}"
+        self.regex = r"\d{4}\-\d{2}\-\d{2}"
         self.input_list = [self.regex]
-        self.input_list2 = [self.regex, "d{2}:\d{2}:\d{2}"]
+        self.input_list2 = [self.regex, r"d{2}:\d{2}:\d{2}"]
         self.input_str = self.regex
         self.input_str2 = "\d{4}\-\d{2}\-\d{2}\nd{2}:\d{2}:\d{2}\n"
         self.input_str3 = r"\d{4}\-\d{2}\-\d{2}\n\d{2}:\d{2}:\d{2}\n"
@@ -75,8 +75,8 @@ class UnitTest(unittest.TestCase):
         self.input_file3 = "test/unit/gen_class/testfiles/load_regex_file2.txt"
 
         self.result_str = self.regex
-        self.result_str2 = "\d{4}\-\d{2}\-\d{2}|d{2}:\d{2}:\d{2}"
-        self.result_str3 = "\\d{4}\\-\\d{2}\\-\\d{2}\\n\\d{2}:\\d{2}:\\d{2}\\n"
+        self.result_str2 = r"\d{4}\-\d{2}\-\d{2}|d{2}:\d{2}:\d{2}"
+        self.result_str3 = r"\d{4}\-\d{2}\-\d{2}\n\d{2}:\d{2}:\d{2}\n"
 
     def test_load_str_multiple_raw(self):
 

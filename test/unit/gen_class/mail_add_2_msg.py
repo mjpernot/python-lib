@@ -131,7 +131,8 @@ class UnitTest(unittest.TestCase):
         email.add_2_msg(self.msg)
         email.add_2_msg(msg2)
 
-        self.assertEqual((email.to, email.msg), (self.toaddr, self.msg + msg2))
+        self.assertEqual((email.to, email.msg),
+                         (self.toaddr, self.msg + "\n" + msg2))
 
     def test_initial_add(self):
 
