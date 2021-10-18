@@ -8,5 +8,4 @@ echo ""
 echo "Unit test"
 test/unit/machine/linux.py
 test/unit/machine/amachine.py
-test/unit/machine/solaris.py
 

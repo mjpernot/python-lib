@@ -142,8 +142,9 @@ class UnitTest(unittest.TestCase):
         n_array = arg_parser.arg_wildcard(self.args_array5, self.opt_wildcard3)
 
         self.assertEqual(
-            n_array["-a"].sort(), self.test_array5["-a"].sort() and
-            n_array["-b"], self.test_array5["-b"])
+            n_array["-a"].sort(),
+            self.test_array5["-a"].sort() and n_array["-b"],
+            self.test_array5["-b"])
 
     def test_two_wildcard(self):
 

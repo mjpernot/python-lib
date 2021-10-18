@@ -4,8 +4,25 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
-## [2.8.4] - 2021-03-23
+## [2.8.5] - 2021-10-07
+### Fixed
+- gen_class.Mail.add_2_msg:  Add missing newline between lines.
+- gen_libs.crt_file_time:  Change time from 12-hour format to 24-hour format.
+- gen_class.Daemon:  Placed the MASK global in the correct section and referenced in Daemon.daemonize method.
 
+### Added
+- gen_libs.find_email_addr:  Finds all email addresses in a data string.
+- gen_libs.pascalize:  Pascal cases a string.
+
+### Removed
+- cmds_gen.disconnect function
+- cmds_gen.get_inst function
+- cmds_gen.create_cfg_array function
+- cmds_gen.run_prog function
+- machine.Solaris class
+
+
+## [2.8.4] - 2021-03-23
 ### Added
 - gen_libs.transpose_dict:  Transpose specified keys in a list of dictionaries to specified data types or None.
 - gen_libs.is_add_cmd:  Determine if any additional options need to be added to the command line.
@@ -13,7 +30,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - gen_libs.add_cmd:  Append name of arg and value for arg to command line.
 
 ### Changed
-- machine.Solaris:  Changed defaults_file to /etc/my.cnf.
+- machine.Linux:  Changed defaults_file to /etc/my.cnf.
 
 ### Deprecated
 - machine.Solaris class.
@@ -24,7 +41,6 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 
 ## [2.8.3] - 2020-12-24
-
 ### Fixed
 - gen_libs.chk_crt_file:  Error messages being overwritten if multiple errors encountered.
 - gen_libs.prt_dict:  Print keys for nested dictionaries in the value.

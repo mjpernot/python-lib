@@ -33,11 +33,7 @@ pipeline {
                 ./test/unit/arg_parser/parse_single.py
                 ./test/unit/arg_parser/file_create.py
                 ./test/unit/cmds_gen/add_cmd.py
-                ./test/unit/cmds_gen/create_cfg_array.py
-                ./test/unit/cmds_gen/disconnect.py
-                ./test/unit/cmds_gen/get_inst.py
                 ./test/unit/cmds_gen/is_add_cmd.py
-                ./test/unit/cmds_gen/run_prog.py
                 ./test/unit/errors/emptyrowerror.py
                 ./test/unit/errors/error.py
                 ./test/unit/errors/nooptionerror.py
@@ -71,6 +67,7 @@ pipeline {
                 ./test/unit/gen_libs/file_search_cnt.py
                 ./test/unit/gen_libs/file_search.py
                 ./test/unit/gen_libs/filename_search.py
+                ./test/unit/gen_libs/find_email_addr.py
                 ./test/unit/gen_libs/float_div.py
                 ./test/unit/gen_libs/get_base_dir.py
                 ./test/unit/gen_libs/get_data.py
@@ -107,6 +104,7 @@ pipeline {
                 ./test/unit/gen_libs/not_in_list.py
                 ./test/unit/gen_libs/no_std_out.py
                 ./test/unit/gen_libs/openfile.py
+                ./test/unit/gen_libs/pascalize.py
                 ./test/unit/gen_libs/pct_int.py
                 ./test/unit/gen_libs/perm_check.py
                 ./test/unit/gen_libs/print_data.py
@@ -184,7 +182,6 @@ pipeline {
                 ./test/unit/gen_class/mail_send_mailx.py
                 ./test/unit/machine/linux.py
                 ./test/unit/machine/amachine.py
-                ./test/unit/machine/solaris.py
                 deactivate
                 rm -rf test_env
                 """

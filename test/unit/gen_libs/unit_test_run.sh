@@ -32,6 +32,7 @@ test/unit/gen_libs/file_cleanup.py
 test/unit/gen_libs/file_search_cnt.py
 test/unit/gen_libs/file_search.py
 test/unit/gen_libs/filename_search.py
+test/unit/gen_libs/find_email_addr.py
 test/unit/gen_libs/float_div.py
 test/unit/gen_libs/get_base_dir.py
 test/unit/gen_libs/get_data.py
@@ -68,6 +69,7 @@ test/unit/gen_libs/normalize.py
 test/unit/gen_libs/not_in_list.py
 test/unit/gen_libs/no_std_out.py
 test/unit/gen_libs/openfile.py
+test/unit/gen_libs/pascalize.py
 test/unit/gen_libs/pct_int.py
 test/unit/gen_libs/perm_check.py
 test/unit/gen_libs/print_data.py

@@ -29,11 +29,7 @@ coverage run -a --source=arg_parser test/unit/arg_parser/parse_multi.py
 coverage run -a --source=arg_parser test/unit/arg_parser/parse_single.py
 coverage run -a --source=arg_parser test/unit/arg_parser/file_create.py
 coverage run -a --source=cmds_gen test/unit/cmds_gen/add_cmd.py
-coverage run -a --source=cmds_gen test/unit/cmds_gen/create_cfg_array.py
-coverage run -a --source=cmds_gen test/unit/cmds_gen/disconnect.py
-coverage run -a --source=cmds_gen test/unit/cmds_gen/get_inst.py
 coverage run -a --source=cmds_gen test/unit/cmds_gen/is_add_cmd.py
-coverage run -a --source=cmds_gen test/unit/cmds_gen/run_prog.py
 coverage run -a --source=errors test/unit/errors/emptyrowerror.py
 coverage run -a --source=errors test/unit/errors/error.py
 coverage run -a --source=errors test/unit/errors/nooptionerror.py
@@ -67,6 +63,7 @@ coverage run -a --source=gen_libs test/unit/gen_libs/file_cleanup.py
 coverage run -a --source=gen_libs test/unit/gen_libs/file_search_cnt.py
 coverage run -a --source=gen_libs test/unit/gen_libs/file_search.py
 coverage run -a --source=gen_libs test/unit/gen_libs/filename_search.py
+coverage run -a --source=gen_libs test/unit/gen_libs/find_email_addr.py
 coverage run -a --source=gen_libs test/unit/gen_libs/float_div.py
 coverage run -a --source=gen_libs test/unit/gen_libs/get_base_dir.py
 coverage run -a --source=gen_libs test/unit/gen_libs/get_data.py
@@ -103,6 +100,7 @@ coverage run -a --source=gen_libs test/unit/gen_libs/normalize.py
 coverage run -a --source=gen_libs test/unit/gen_libs/not_in_list.py
 coverage run -a --source=gen_libs test/unit/gen_libs/no_std_out.py
 coverage run -a --source=gen_libs test/unit/gen_libs/openfile.py
+coverage run -a --source=gen_libs test/unit/gen_libs/pascalize.py
 coverage run -a --source=gen_libs test/unit/gen_libs/pct_int.py
 coverage run -a --source=gen_libs test/unit/gen_libs/perm_check.py
 coverage run -a --source=gen_libs test/unit/gen_libs/print_data.py
@@ -180,7 +178,6 @@ coverage run -a --source=gen_class test/unit/gen_class/mail_send_mail.py
 coverage run -a --source=gen_class test/unit/gen_class/mail_send_mailx.py
 coverage run -a --source=machine test/unit/machine/linux.py
 coverage run -a --source=machine test/unit/machine/amachine.py
-coverage run -a --source=machine test/unit/machine/solaris.py
 
 echo ""
 echo "Producing code coverage report"
