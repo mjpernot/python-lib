@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [2.8.6] - 2021-12-23
+
+
 ## [2.8.5] - 2021-10-07
 ### Fixed
 - gen_class.Mail.add_2_msg:  Add missing newline between lines.
