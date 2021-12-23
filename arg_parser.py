@@ -10,6 +10,7 @@
         arg_cond_req
         arg_cond_req_or
         arg_default
+        arg_dir_chk
         arg_dir_chk_crt
         arg_file_chk
         arg_noreq_xor
@@ -174,6 +175,48 @@ def arg_default(arg, args_array, opt_def_dict):
 
     else:
         sys.exit("Error: Arg {0} missing value".format(arg))
+
+
+def arg_dir_chk(args_array, dir_chk_list, access="r"):
+
+    """Function:  arg_dir_chk
+
+    Description:  Checks to see if the directory options have access to the
+        directory.
+
+    Arguments:
+        (input) args_array -> Array of command line options and values.
+        (input) dir_chk_list -> Options which will have directories.
+        (input) access -> Type of access required: r | w (read | write).
+        (output) status -> True|False - If directories are accessible.
+
+    """
+
+    args_array = dict(args_array)
+    dir_chk_list = list(dir_chk_list)
+    status = True
+
+    for item in set(dir_chk_list) & set(args_array.keys()):
+
+        if not os.path.isdir(args_array[item]):
+            print("Error: {0} does not exist.".format(args_array[item]))
+            status = False
+
+        elif access == 'r':
+            if not os.access(args_array[item], os.R_OK):
+                print("Error: {0} is not readable.".format(args_array[item]))
+                status = False
+
+        elif access == 'w':
+            if not os.access(args_array[item], os.W_OK):
+                print("Error: {0} is not writable.".format(args_array[item]))
+                status = False
+
+        else:
+            print("Error: {0} is not recongnized.".format(access))
+            status = False
+
+    return status
 
 
 def arg_dir_chk_crt(args_array, dir_chk_list, dir_crt_list=None):

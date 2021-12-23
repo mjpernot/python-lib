@@ -5,6 +5,8 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 
 ## [2.8.6] - 2021-12-23
+### Added
+- arg_parser.arg_dir_chk: Checks the read and write perms on a directory.
 
 
 ## [2.8.5] - 2021-10-07
