@@ -60,15 +60,15 @@ class UnitTest(unittest.TestCase):
         """
 
         self.data = {}
-        self.data2 = {"key1": "val1"}
-        self.data3 = {"key1": "val1", "key2": "val2"}
+        self.data2 = {"data_key1": "val1"}
+        self.data3 = {"data_key1": "val1", "data_key2": "val2"}
         self.key = ""
-        self.key2 = "key2"
-        self.key3 = "key3"
-        self.key4 = "key1"
+        self.key2 = "data_key2"
+        self.key3 = "data_key3"
+        self.key4 = "data_key1"
         self.results = {}
-        self.results2 = {"key1": "val1"}
-        self.results3 = {"key1": "val1", "key2": "val2"}
+        self.results2 = {"data_key1": "val1"}
+        self.results3 = {"data_key1": "val1", "data_key2": "val2"}
 
     def test_one_entry(self):
 
@@ -100,7 +100,7 @@ class UnitTest(unittest.TestCase):
 
         """Function:  test_rm_miss_key
 
-        Description:  Test with missing key to remove.
+        Description:  Test with missing data_key to remove.
 
         Arguments:
 
@@ -126,7 +126,7 @@ class UnitTest(unittest.TestCase):
 
         """Function:  test_rm_key
 
-        Description:  Test removing one key.
+        Description:  Test removing one data_key.
 
         Arguments:
 
