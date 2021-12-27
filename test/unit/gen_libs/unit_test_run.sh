@@ -68,6 +68,7 @@ test/unit/gen_libs/mv_file2.py
 test/unit/gen_libs/normalize.py
 test/unit/gen_libs/not_in_list.py
 test/unit/gen_libs/no_std_out.py
+test/unit/gen_libs/octal_to_str.py
 test/unit/gen_libs/openfile.py
 test/unit/gen_libs/pascalize.py
 test/unit/gen_libs/pct_int.py
