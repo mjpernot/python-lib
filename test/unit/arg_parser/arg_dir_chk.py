@@ -43,6 +43,10 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
+        test_multiple_dirs_no_access3
+        test_multiple_dirs_no_access2
+        test_multiple_dirs_no_access
+        test_multiple_dirs_access
         test_dir_exist_with_rw4
         test_dir_exist_with_rw3
         test_dir_exist_with_rw2
@@ -73,16 +77,92 @@ class UnitTest(unittest.TestCase):
         dir1 = "/test_path/dir1"
         self.args_array = {}
         self.args_array2 = {"-d": dir1}
-#        self.args_array3 = {"-d": dir1, "-g": "/test_path/dir2"}
-#        self.args_array4 = {"-d": "/dir/path/dirname13"}
-#        self.args_array5 = {"-d": "/dir/path/dirname17"}
+        self.args_array3 = {"-d": dir1, "-g": "/test_path/dir2"}
         self.dir_perms_chk = {}
         self.dir_perms_chk2 = {"-d": 1}
         self.dir_perms_chk3 = {"-d": 4}
         self.dir_perms_chk4 = {"-d": 2}
         self.dir_perms_chk5 = {"-g": 1}
-#        self.dir_perms_chk3 = {"-d": 1, "-g": 1}
-#        self.dir_perms_chk4 = {"-d": 1, "-i": 1}
+        self.dir_perms_chk6 = {"-d": 4, "-g": 4}
+
+    @mock.patch("arg_parser.gen_libs.octal_to_str")
+    @mock.patch("arg_parser.os")
+    def test_multiple_dirs_no_access3(self, mock_os, mock_octal):
+
+        """Function:  test_multiple_dirs_no_access3
+
+        Description:  Test with multiple directories with both no access.
+
+        Arguments:
+
+        """
+
+        mock_os.path.isdir.return_value = True
+        mock_os.access.side_effect = [True, False, True, True, False, True]
+        mock_octal.side_effect = ["rwx", "rwx", "rwx", "rwx"]
+
+        with gen_libs.no_std_out():
+            self.assertFalse(
+                arg_parser.arg_dir_chk(self.args_array3, self.dir_perms_chk6))
+
+    @mock.patch("arg_parser.gen_libs.octal_to_str")
+    @mock.patch("arg_parser.os")
+    def test_multiple_dirs_no_access2(self, mock_os, mock_octal):
+
+        """Function:  test_multiple_dirs_no_access2
+
+        Description:  Test with multiple directories with one no access.
+
+        Arguments:
+
+        """
+
+        mock_os.path.isdir.return_value = True
+        mock_os.access.side_effect = [True, True, True, True, False, True]
+        mock_octal.side_effect = ["rwx", "rwx", "rwx", "rwx"]
+
+        with gen_libs.no_std_out():
+            self.assertFalse(
+                arg_parser.arg_dir_chk(self.args_array3, self.dir_perms_chk6))
+
+    @mock.patch("arg_parser.gen_libs.octal_to_str")
+    @mock.patch("arg_parser.os")
+    def test_multiple_dirs_no_access(self, mock_os, mock_octal):
+
+        """Function:  test_multiple_dirs_no_access
+
+        Description:  Test with multiple directories with one no access.
+
+        Arguments:
+
+        """
+
+        mock_os.path.isdir.return_value = True
+        mock_os.access.side_effect = [True, False, True, True, True, True]
+        mock_octal.side_effect = ["rwx", "rwx", "rwx", "rwx"]
+
+        with gen_libs.no_std_out():
+            self.assertFalse(
+                arg_parser.arg_dir_chk(self.args_array3, self.dir_perms_chk6))
+
+    @mock.patch("arg_parser.gen_libs.octal_to_str")
+    @mock.patch("arg_parser.os")
+    def test_multiple_dirs_access(self, mock_os, mock_octal):
+
+        """Function:  test_multiple_dirs_access
+
+        Description:  Test with multiple directories with access.
+
+        Arguments:
+
+        """
+
+        mock_os.path.isdir.return_value = True
+        mock_os.access.side_effect = [True, True, True, True, True, True]
+        mock_octal.side_effect = ["rwx", "rwx", "rwx", "rwx"]
+
+        self.assertTrue(
+            arg_parser.arg_dir_chk(self.args_array3, self.dir_perms_chk6))
 
     @mock.patch("arg_parser.gen_libs.octal_to_str")
     @mock.patch("arg_parser.os")
