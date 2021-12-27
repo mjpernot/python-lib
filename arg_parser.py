@@ -177,44 +177,40 @@ def arg_default(arg, args_array, opt_def_dict):
         sys.exit("Error: Arg {0} missing value".format(arg))
 
 
-def arg_dir_chk(args_array, dir_chk_list, access="r"):
+def arg_dir_chk(args_array, dir_perms_chk):
 
     """Function:  arg_dir_chk
 
-    Description:  Checks to see if the directory options have access to the
-        directory.
+    Description:  Checks to see if the directory has the correct permissions.
 
     Arguments:
         (input) args_array -> Array of command line options and values.
-        (input) dir_chk_list -> Options which will have directories.
-        (input) access -> Type of access required: r | w (read | write).
-        (output) status -> True|False - If directories are accessible.
+        (input) dir_chk_perms -> Options with their directory perms in octal.
+        (output) status -> True|False - If directories have correct perms.
 
     """
 
     args_array = dict(args_array)
-    dir_chk_list = list(dir_chk_list)
+    dir_perms_chk = dict(dir_perms_chk)
     status = True
 
-    for item in set(dir_chk_list) & set(args_array.keys()):
+    for item in set(dir_perms_chk) & set(args_array):
 
-        if not os.path.isdir(args_array[item]):
-            print("Error: {0} does not exist.".format(args_array[item]))
+        if not os.path.isdir(args_array[item]) or \
+           not os.access(args_array[item], os.X_OK):
+            print("Error: {0} does not exist or has permission denied.".format(
+                args_array[item]))
             status = False
 
-        elif access == 'r':
+        if gen_libs.octal_to_str(dir_perms_chk[item])[0] == "r":
             if not os.access(args_array[item], os.R_OK):
                 print("Error: {0} is not readable.".format(args_array[item]))
                 status = False
 
-        elif access == 'w':
+        if gen_libs.octal_to_str(dir_perms_chk[item])[1] == "w":
             if not os.access(args_array[item], os.W_OK):
                 print("Error: {0} is not writable.".format(args_array[item]))
                 status = False
-
-        else:
-            print("Error: {0} is not recongnized.".format(access))
-            status = False
 
     return status
 
