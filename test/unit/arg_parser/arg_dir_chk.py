@@ -43,14 +43,20 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
-        test_dir_not_writeable
-        test_dir_not_readable
-        test_match_no_dir
-        test_match_no_access
-        test_one_match_between_sets
+        test_dir_exist_with_rw4
+        test_dir_exist_with_rw3
+        test_dir_exist_with_rw2
+        test_dir_exist_with_rw
+        test_dir_exist_with_w2
+        test_dir_exist_with_w
+        test_dir_exist_with_r2
+        test_dir_exist_with_r
+        test_dir_exist_with_x
+        test_dir_exist_no_x
+        test_dir_not_exist
         test_no_match_between_sets
         test_empty_args_array
-        test_empty_dir_chk_list
+        test_empty_dir_perms_chk
 
     """
 
@@ -67,115 +73,142 @@ class UnitTest(unittest.TestCase):
         dir1 = "/test_path/dir1"
         self.args_array = {}
         self.args_array2 = {"-d": dir1}
-        self.args_array3 = {"-d": dir1, "-g": "/test_path/dir2"}
-        self.args_array4 = {"-d": "/dir/path/dirname13"}
-        self.args_array5 = {"-d": "/dir/path/dirname17"}
-        self.dir_chk_list = []
-        self.dir_chk_list2 = ["-d"]
-        self.dir_chk_list3 = ["-d", "-g"]
-        self.dir_chk_list4 = ["-d", "-i"]
-        self.dir_chk_list5 = ["-g"]
+#        self.args_array3 = {"-d": dir1, "-g": "/test_path/dir2"}
+#        self.args_array4 = {"-d": "/dir/path/dirname13"}
+#        self.args_array5 = {"-d": "/dir/path/dirname17"}
+        self.dir_perms_chk = {}
+        self.dir_perms_chk2 = {"-d": 1}
+        self.dir_perms_chk3 = {"-d": 4}
+        self.dir_perms_chk4 = {"-d": 2}
+        self.dir_perms_chk5 = {"-g": 1}
+#        self.dir_perms_chk3 = {"-d": 1, "-g": 1}
+#        self.dir_perms_chk4 = {"-d": 1, "-i": 1}
 
+    @mock.patch("arg_parser.gen_libs.octal_to_str")
     @mock.patch("arg_parser.os")
-    def test_dir_not_writeable(self, mock_os):
+    def test_dir_exist_with_rw4(self, mock_os, mock_octal):
 
-        """Function:  test_dir_not_writeable
+        """Function:  test_dir_exist_with_rw4
 
-        Description:  Test with no write access to directory.
+        Description:  Test with directory and with no read or write acess.
 
         Arguments:
 
         """
 
         mock_os.path.isdir.return_value = True
-        mock_os.access.return_value = False
+        mock_os.access.side_effect = [True, False, False]
+        mock_octal.side_effect = ["rwx", "rwx"]
 
         with gen_libs.no_std_out():
             self.assertFalse(
-                arg_parser.arg_dir_chk(
-                    self.args_array2, self.dir_chk_list2, access="w"))
+                arg_parser.arg_dir_chk(self.args_array2, self.dir_perms_chk4))
 
+    @mock.patch("arg_parser.gen_libs.octal_to_str")
     @mock.patch("arg_parser.os")
-    def test_dir_not_readable(self, mock_os):
+    def test_dir_exist_with_rw3(self, mock_os, mock_octal):
 
-        """Function:  test_dir_not_readable
+        """Function:  test_dir_exist_with_rw3
 
-        Description:  Test with no read access to directory.
+        Description:  Test with directory and with no write acess.
 
         Arguments:
 
         """
 
         mock_os.path.isdir.return_value = True
-        mock_os.access.return_value = False
+        mock_os.access.side_effect = [True, True, False]
+        mock_octal.side_effect = ["rwx", "rwx"]
 
         with gen_libs.no_std_out():
             self.assertFalse(
-                arg_parser.arg_dir_chk(
-                    self.args_array2, self.dir_chk_list2, access="r"))
+                arg_parser.arg_dir_chk(self.args_array2, self.dir_perms_chk4))
 
+    @mock.patch("arg_parser.gen_libs.octal_to_str")
     @mock.patch("arg_parser.os")
-    def test_dir_not_readable(self, mock_os):
+    def test_dir_exist_with_rw2(self, mock_os, mock_octal):
 
-        """Function:  test_dir_not_readable
+        """Function:  test_dir_exist_with_rw2
 
-        Description:  Test with match between sets, but no read access to
-            directory.
+        Description:  Test with directory and with no read acess.
 
         Arguments:
 
         """
 
         mock_os.path.isdir.return_value = True
-        mock_os.access.return_value = False
+        mock_os.access.side_effect = [True, False, True]
+        mock_octal.side_effect = ["rwx", "rwx"]
 
         with gen_libs.no_std_out():
             self.assertFalse(
-                arg_parser.arg_dir_chk(
-                    self.args_array2, self.dir_chk_list2, access="r"))
+                arg_parser.arg_dir_chk(self.args_array2, self.dir_perms_chk4))
 
+    @mock.patch("arg_parser.gen_libs.octal_to_str")
     @mock.patch("arg_parser.os")
-    def test_match_no_dir(self, mock_os):
+    def test_dir_exist_with_rw(self, mock_os, mock_octal):
 
-        """Function:  test_match_no_dir
+        """Function:  test_dir_exist_with_rw
 
-        Description:  Test with directory does not exist.
-
-        Arguments:
-
-        """
-
-        mock_os.path.isdir.return_value = False
-
-        with gen_libs.no_std_out():
-            self.assertFalse(
-                arg_parser.arg_dir_chk(self.args_array2, self.dir_chk_list2))
-
-    @mock.patch("arg_parser.os")
-    def test_match_no_access(self, mock_os):
-
-        """Function:  test_match_no_access
-
-        Description:  Test with match between sets, but no read access to
-            directory.
+        Description:  Test with directory and with read and write.
 
         Arguments:
 
         """
 
         mock_os.path.isdir.return_value = True
-        mock_os.access.return_value = False
+        mock_os.access.side_effect = [True, True, True]
+        mock_octal.side_effect = ["rwx", "rwx"]
+
+        self.assertTrue(
+            arg_parser.arg_dir_chk(self.args_array2, self.dir_perms_chk4))
+
+    @mock.patch("arg_parser.gen_libs.octal_to_str")
+    @mock.patch("arg_parser.os")
+    def test_dir_exist_with_w2(self, mock_os, mock_octal):
+
+        """Function:  test_dir_exist_with_w2
+
+        Description:  Test with directory and with no write access.
+
+        Arguments:
+
+        """
+
+        mock_os.path.isdir.return_value = True
+        mock_os.access.side_effect = [True, False]
+        mock_octal.side_effect = ["-wx", "-wx"]
 
         with gen_libs.no_std_out():
             self.assertFalse(
-                arg_parser.arg_dir_chk(self.args_array2, self.dir_chk_list2))
+                arg_parser.arg_dir_chk(self.args_array2, self.dir_perms_chk4))
 
+    @mock.patch("arg_parser.gen_libs.octal_to_str")
     @mock.patch("arg_parser.os")
-    def test_one_match_between_sets(self, mock_os):
+    def test_dir_exist_with_w(self, mock_os, mock_octal):
 
-        """Function:  test_one_match_between_sets
+        """Function:  test_dir_exist_with_w
 
-        Description:  Test with one match between sets and is directory.
+        Description:  Test with directory and with write.
+
+        Arguments:
+
+        """
+
+        mock_os.path.isdir.return_value = True
+        mock_os.access.side_effect = [True, True]
+        mock_octal.side_effect = ["-wx", "-wx"]
+
+        self.assertTrue(
+            arg_parser.arg_dir_chk(self.args_array2, self.dir_perms_chk4))
+
+    @mock.patch("arg_parser.gen_libs.octal_to_str")
+    @mock.patch("arg_parser.os")
+    def test_dir_exist_with_x(self, mock_os, mock_octal):
+
+        """Function:  test_dir_exist_with_x
+
+        Description:  Test with directory and only with execute.
 
         Arguments:
 
@@ -183,9 +216,50 @@ class UnitTest(unittest.TestCase):
 
         mock_os.path.isdir.return_value = True
         mock_os.access.return_value = True
+        mock_octal.side_effect = ["--x", "--x"]
 
         self.assertTrue(
-            arg_parser.arg_dir_chk(self.args_array2, self.dir_chk_list2))
+            arg_parser.arg_dir_chk(self.args_array2, self.dir_perms_chk2))
+
+    @mock.patch("arg_parser.gen_libs.octal_to_str")
+    @mock.patch("arg_parser.os")
+    def test_dir_exist_no_x(self, mock_os, mock_octal):
+
+        """Function:  test_dir_exist_no_x
+
+        Description:  Test with directory and only with execute.
+
+        Arguments:
+
+        """
+
+        mock_os.path.isdir.return_value = True
+        mock_os.access.return_value = False
+        mock_octal.side_effect = ["---", "---"]
+
+        with gen_libs.no_std_out():
+            self.assertFalse(
+                arg_parser.arg_dir_chk(self.args_array2, self.dir_perms_chk2))
+
+    @mock.patch("arg_parser.gen_libs.octal_to_str")
+    @mock.patch("arg_parser.os")
+    def test_dir_not_exist(self, mock_os, mock_octal):
+
+        """Function:  test_dir_not_exist
+
+        Description:  Test with directory and only with execute.
+
+        Arguments:
+
+        """
+
+        mock_os.path.isdir.return_value = False
+        mock_os.access.return_value = True
+        mock_octal.side_effect = ["--x", "--x"]
+
+        with gen_libs.no_std_out():
+            self.assertFalse(
+                arg_parser.arg_dir_chk(self.args_array2, self.dir_perms_chk2))
 
     def test_no_match_between_sets(self):
 
@@ -198,7 +272,7 @@ class UnitTest(unittest.TestCase):
         """
 
         self.assertTrue(
-            arg_parser.arg_dir_chk(self.args_array2, self.dir_chk_list5))
+            arg_parser.arg_dir_chk(self.args_array2, self.dir_perms_chk5))
 
     def test_empty_args_array(self):
 
@@ -211,20 +285,20 @@ class UnitTest(unittest.TestCase):
         """
 
         self.assertTrue(
-            arg_parser.arg_dir_chk(self.args_array, self.dir_chk_list2))
+            arg_parser.arg_dir_chk(self.args_array, self.dir_perms_chk2))
 
-    def test_empty_dir_chk_list(self):
+    def test_empty_dir_perms_chk(self):
 
-        """Function:  test_empty_dir_chk_list
+        """Function:  test_empty_dir_perms_chk
 
-        Description:  Test with dir_chk_list is empty.
+        Description:  Test with dir_perms_chk is empty.
 
         Arguments:
 
         """
 
         self.assertTrue(
-            arg_parser.arg_dir_chk(self.args_array2, self.dir_chk_list))
+            arg_parser.arg_dir_chk(self.args_array2, self.dir_perms_chk))
 
 
 if __name__ == "__main__":
