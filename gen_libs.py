@@ -67,6 +67,7 @@
         normalize
         not_in_list
         no_std_out
+        octal_to_str
         openfile
         pascalize
         pct_int
@@ -1783,6 +1784,35 @@ def no_std_out():
     sys.stdout = io.BytesIO()
     yield
     sys.stdout = save_stdout
+
+
+def octal_to_str(octal):
+
+    """Function:  octal_to_stropenfile
+
+    Description:  Convert an octal number to a string representation of Linux
+        file permissions.
+
+    Arguments:
+        (input) octal -> Octal number (i.e. 755, 644).
+        (output) result -> String representation (i.e. rwxr-xr-x).
+
+    """
+
+    result = ""
+    value_letters = [(4,"r"),(2,"w"),(1,"x")]
+
+    for digit in [int(n) for n in str(octal)]:
+
+        for value, letter in value_letters:
+            if digit >= value:
+                result += letter
+                digit -= value
+
+            else:
+                result += '-'
+
+    return result
 
 
 def openfile(filename, mode="r"):

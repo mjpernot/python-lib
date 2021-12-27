@@ -6,6 +6,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 ## [2.8.6] - 2021-12-23
 ### Added
+- gen_libs.octal_to_str:  Converts an octal to a string representation of a Linux file permission.
 - arg_parser.arg_dir_chk: Checks the read and write perms on a directory.
 
 
