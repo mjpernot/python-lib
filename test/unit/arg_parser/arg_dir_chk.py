@@ -43,7 +43,8 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
-        
+        test_dir_not_writeable
+        test_dir_not_readable
         test_match_no_dir
         test_match_no_access
         test_one_match_between_sets
@@ -74,6 +75,64 @@ class UnitTest(unittest.TestCase):
         self.dir_chk_list3 = ["-d", "-g"]
         self.dir_chk_list4 = ["-d", "-i"]
         self.dir_chk_list5 = ["-g"]
+
+    @mock.patch("arg_parser.os")
+    def test_dir_not_writeable(self, mock_os):
+
+        """Function:  test_dir_not_writeable
+
+        Description:  Test with no write access to directory.
+
+        Arguments:
+
+        """
+
+        mock_os.path.isdir.return_value = True
+        mock_os.access.return_value = False
+
+        with gen_libs.no_std_out():
+            self.assertFalse(
+                arg_parser.arg_dir_chk(
+                    self.args_array2, self.dir_chk_list2, access="w"))
+
+    @mock.patch("arg_parser.os")
+    def test_dir_not_readable(self, mock_os):
+
+        """Function:  test_dir_not_readable
+
+        Description:  Test with no read access to directory.
+
+        Arguments:
+
+        """
+
+        mock_os.path.isdir.return_value = True
+        mock_os.access.return_value = False
+
+        with gen_libs.no_std_out():
+            self.assertFalse(
+                arg_parser.arg_dir_chk(
+                    self.args_array2, self.dir_chk_list2, access="r"))
+
+    @mock.patch("arg_parser.os")
+    def test_dir_not_readable(self, mock_os):
+
+        """Function:  test_dir_not_readable
+
+        Description:  Test with match between sets, but no read access to
+            directory.
+
+        Arguments:
+
+        """
+
+        mock_os.path.isdir.return_value = True
+        mock_os.access.return_value = False
+
+        with gen_libs.no_std_out():
+            self.assertFalse(
+                arg_parser.arg_dir_chk(
+                    self.args_array2, self.dir_chk_list2, access="r"))
 
     @mock.patch("arg_parser.os")
     def test_match_no_dir(self, mock_os):
