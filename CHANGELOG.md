@@ -9,6 +9,9 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - gen_libs.octal_to_str:  Converts an octal to a string representation of a Linux file permission.
 - arg_parser.arg_dir_chk: Checks the directory permissions on a directory.
 
+### Changed
+- gen_class.Mail.add_2_msg:  Add parameter to include newline "\n" between email lines. Note:  This configuration is reverting back to v2.8.4 and before.
+
 
 ## [2.8.5] - 2021-10-07
 ### Fixed
