@@ -261,7 +261,7 @@ class UnitTest(unittest.TestCase):
 
         with gen_libs.no_std_out():
             self.assertFalse(
-                arg_parser.arg_dir_chk(self.args_array2, self.dir_perms_chk4))
+                arg_parser.arg_dir_chk(self.args_array2, self.dir_perms_chk3))
 
     @mock.patch("arg_parser.gen_libs.octal_to_str")
     @mock.patch("arg_parser.os")
@@ -307,7 +307,7 @@ class UnitTest(unittest.TestCase):
 
         """Function:  test_dir_exist_no_x
 
-        Description:  Test with directory and only with execute.
+        Description:  Test with no execute on directory.
 
         Arguments:
 
@@ -321,13 +321,12 @@ class UnitTest(unittest.TestCase):
             self.assertFalse(
                 arg_parser.arg_dir_chk(self.args_array2, self.dir_perms_chk2))
 
-    @mock.patch("arg_parser.gen_libs.octal_to_str")
     @mock.patch("arg_parser.os")
-    def test_dir_not_exist(self, mock_os, mock_octal):
+    def test_dir_not_exist(self, mock_os):
 
         """Function:  test_dir_not_exist
 
-        Description:  Test with directory and only with execute.
+        Description:  Test with no directory.
 
         Arguments:
 
@@ -335,7 +334,6 @@ class UnitTest(unittest.TestCase):
 
         mock_os.path.isdir.return_value = False
         mock_os.access.return_value = True
-        mock_octal.side_effect = ["--x", "--x"]
 
         with gen_libs.no_std_out():
             self.assertFalse(
