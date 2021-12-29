@@ -65,6 +65,7 @@ class UnitTest(unittest.TestCase):
         test_no_match_between_sets
         test_empty_args_array
         test_empty_dir_chk_list
+        tearDown
 
     """
 
