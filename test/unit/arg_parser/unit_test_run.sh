@@ -11,6 +11,7 @@ test/unit/arg_parser/arg_add_def.py
 test/unit/arg_parser/arg_cond_req.py
 test/unit/arg_parser/arg_cond_req_or.py
 test/unit/arg_parser/arg_default.py
+test/unit/arg_parser/arg_dir_chk.py
 test/unit/arg_parser/arg_dir_chk_crt.py
 test/unit/arg_parser/arg_file_chk.py
 test/unit/arg_parser/arg_noreq_xor.py
