@@ -71,6 +71,7 @@ class UnitTest(unittest.TestCase):
         self.msg2 = {1: "Test ", 2: "email ", 3: "line2"}
         self.msg3 = ["Test ", "email ", "line2"]
         self.results = '{"1": "Test ", "2": "email ", "3": "line2"}'
+        self.results2 = '["Test ", "email ", "line2"]'
 
     def test_dictionary_newline2(self):
 
@@ -119,8 +120,7 @@ class UnitTest(unittest.TestCase):
         email = gen_class.Mail(self.toaddr)
         email.add_2_msg(self.msg3, new_line=True)
 
-        self.assertEqual((email.to, email.msg),
-                         (self.toaddr, '["Test ", "email ", "line2"]'))
+        self.assertEqual((email.to, email.msg), (self.toaddr, self.results2))
 
     def test_non_string_newline(self):
 
@@ -137,8 +137,7 @@ class UnitTest(unittest.TestCase):
         email.add_2_msg(self.msg3, new_line=True)
 
         self.assertEqual((email.to, email.msg),
-                         (self.toaddr,
-                          self.msg + "\n" + '["Test ", "email ", "line2"]'))
+                         (self.toaddr, self.msg + "\n" + self.results2))
 
     def test_add_newline2(self):
 
@@ -239,14 +238,12 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        msg2 = ["Test ", "email ", "line2"]
         email = gen_class.Mail(self.toaddr)
         email.add_2_msg(self.msg)
-        email.add_2_msg(msg2)
+        email.add_2_msg(self.msg3)
 
         self.assertEqual((email.to, email.msg),
-                         (self.toaddr,
-                          self.msg + '["Test ", "email ", "line2"]'))
+                         (self.toaddr, self.msg + self.results2))
 
     def test_empty_test(self):
 
