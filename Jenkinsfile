@@ -17,6 +17,7 @@ pipeline {
                 ./test/unit/arg_parser/arg_cond_req.py
                 ./test/unit/arg_parser/arg_cond_req_or.py
                 ./test/unit/arg_parser/arg_default.py
+                ./test/unit/arg_parser/arg_dir_chk.py
                 ./test/unit/arg_parser/arg_dir_chk_crt.py
                 ./test/unit/arg_parser/arg_file_chk.py
                 ./test/unit/arg_parser/arg_noreq_xor.py
@@ -103,6 +104,7 @@ pipeline {
                 ./test/unit/gen_libs/normalize.py
                 ./test/unit/gen_libs/not_in_list.py
                 ./test/unit/gen_libs/no_std_out.py
+                ./test/unit/gen_libs/octal_to_str.py
                 ./test/unit/gen_libs/openfile.py
                 ./test/unit/gen_libs/pascalize.py
                 ./test/unit/gen_libs/pct_int.py
