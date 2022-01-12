@@ -202,15 +202,15 @@ def arg_dir_chk(args_array, dir_perms_chk):
                 args_array[item]))
             status = False
 
-        if gen_libs.octal_to_str(dir_perms_chk[item])[0] == "r":
-            if not os.access(args_array[item], os.R_OK):
-                print("Error: {0} is not readable.".format(args_array[item]))
-                status = False
+        if gen_libs.octal_to_str(dir_perms_chk[item])[0] == "r" and \
+           not os.access(args_array[item], os.R_OK):
+            print("Error: {0} is not readable.".format(args_array[item]))
+            status = False
 
-        if gen_libs.octal_to_str(dir_perms_chk[item])[1] == "w":
-            if not os.access(args_array[item], os.W_OK):
-                print("Error: {0} is not writable.".format(args_array[item]))
-                status = False
+        if gen_libs.octal_to_str(dir_perms_chk[item])[1] == "w" and \
+           not os.access(args_array[item], os.W_OK):
+            print("Error: {0} is not writable.".format(args_array[item]))
+            status = False
 
     return status
 
