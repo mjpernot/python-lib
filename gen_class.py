@@ -889,7 +889,7 @@ class Mail(System):
         self.msg_type = msg_type
         self.msg = ""
 
-    def add_2_msg(self, txt_ln=None):
+    def add_2_msg(self, txt_ln=None, new_line=False):
 
         """Method:  add_2_msg
 
@@ -897,20 +897,27 @@ class Mail(System):
 
         Arguments:
             (input) txt_ln -> Line of text to add to message.
+            (input) new_line -> True | False - Add a newline between lines.
 
         """
+
+        newln = "\n" if new_line else ""
 
         if txt_ln:
 
             if isinstance(txt_ln, str):
                 if self.msg:
-                    self.msg = self.msg + "\n" + txt_ln
+                    self.msg = self.msg + newln + txt_ln
 
                 else:
                     self.msg = txt_ln
 
             else:
-                self.msg = self.msg + json.dumps(txt_ln)
+                if self.msg:
+                    self.msg = self.msg + newln +json.dumps(txt_ln)
+
+                else:
+                    self.msg = json.dumps(txt_ln)
 
     def read_stdin(self):
 

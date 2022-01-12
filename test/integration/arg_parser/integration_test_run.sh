@@ -6,6 +6,7 @@
 
 echo ""
 echo "Unit test:"
+test/integration/arg_parser/arg_dir_chk.py
 test/integration/arg_parser/arg_dir_chk_crt.py
 test/integration/arg_parser/arg_file_chk.py
 test/integration/arg_parser/arg_parse2.py
