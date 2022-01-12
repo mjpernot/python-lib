@@ -70,6 +70,7 @@ class UnitTest(unittest.TestCase):
         self.msg = "Test email line"
         self.msg2 = {1: "Test ", 2: "email ", 3: "line2"}
         self.msg3 = ["Test ", "email ", "line2"]
+        self.msg4 = "Test email line2"
         self.results = '{"1": "Test ", "2": "email ", "3": "line2"}'
         self.results2 = '["Test ", "email ", "line2"]'
 
@@ -150,12 +151,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        msg2 = "Test email line2"
         email = gen_class.Mail(self.toaddr)
-        email.add_2_msg(msg2, new_line=True)
+        email.add_2_msg(self.msg4, new_line=True)
 
         self.assertEqual((email.to, email.msg),
-                         (self.toaddr, msg2))
+                         (self.toaddr, self.msg4))
 
     def test_add_newline(self):
 
@@ -167,13 +167,12 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        msg2 = "Test email line2"
         email = gen_class.Mail(self.toaddr)
         email.add_2_msg(self.msg)
-        email.add_2_msg(msg2, new_line=True)
+        email.add_2_msg(self.msg4, new_line=True)
 
         self.assertEqual((email.to, email.msg),
-                         (self.toaddr, self.msg + "\n" + msg2))
+                         (self.toaddr, self.msg + "\n" + self.msg4))
 
     def test_default_newline2(self):
 
@@ -186,12 +185,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        msg2 = "Test email line2"
         email = gen_class.Mail(self.toaddr)
-        email.add_2_msg(msg2)
+        email.add_2_msg(self.msg4)
 
         self.assertEqual((email.to, email.msg),
-                         (self.toaddr, msg2))
+                         (self.toaddr, self.msg4))
 
     def test_default_newline(self):
 
@@ -203,13 +201,12 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        msg2 = "Test email line2"
         email = gen_class.Mail(self.toaddr)
         email.add_2_msg(self.msg)
-        email.add_2_msg(msg2)
+        email.add_2_msg(self.msg4)
 
         self.assertEqual((email.to, email.msg),
-                         (self.toaddr, self.msg + msg2))
+                         (self.toaddr, self.msg + self.msg4))
 
     def test_non_string2(self):
 
@@ -271,13 +268,12 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        msg2 = "Test email line2"
         email = gen_class.Mail(self.toaddr)
         email.add_2_msg(self.msg)
-        email.add_2_msg(msg2)
+        email.add_2_msg(self.msg4)
 
         self.assertEqual((email.to, email.msg),
-                         (self.toaddr, self.msg + msg2))
+                         (self.toaddr, self.msg + self.msg4))
 
     def test_initial_add(self):
 
