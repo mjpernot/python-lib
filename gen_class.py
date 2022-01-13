@@ -523,7 +523,7 @@ class ArgParser(object):
                 if not os.path.isdir(self.args_array[item]) and \
                    item in dir_crt:
 
-                    status = make_dir(self.args_array[item])
+                    status = gen_libs.make_dir(self.args_array[item])
 
                 elif not os.path.isdir(self.args_array[item]):
                     print("Error: {0} does not exist.".
