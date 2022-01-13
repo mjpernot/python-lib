@@ -6,6 +6,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 ## [2.9.0] - 2022-01-13
 ### Added
+- gen_libs.make_dir:  Tries to create a directory and capture any exceptions.
 - gen_class:  Added ArgParser class, this is the replacement of the arg_parser module libraries.
 
 

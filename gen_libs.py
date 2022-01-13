@@ -55,6 +55,7 @@
         list_2_dict
         list_2_str
         load_module
+        make_dir
         make_md5_hash
         make_zip
         merge_data_types
@@ -1444,6 +1445,35 @@ def load_module(mod_name, mod_path):
 
     sys.path.append(mod_path)
     return __import__(mod_name)
+
+
+def make_dir(dirname):
+
+    """Function:  make_dir
+
+    Description:  Tries to create a directory and capture any exceptions.
+
+    Arguments:
+        (input) dirname -> Directory name
+        (output) status -> True|False - If directory creation is succesful
+
+    """
+
+    status = False
+
+    try:
+        os.makedirs(dirname)
+        status = True
+
+    except OSError as (errno, strerr):
+        if errno == 13 or errno == 17:
+            print("Error:  {0} for {1}".format(strerr, dirname))
+
+        else:
+            print("Error {0}:  Message:  {1} for {2}".format(
+                errno, strerr, dirname))
+
+    return status
 
 
 def make_md5_hash(file_path, to_file=True):
