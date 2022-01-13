@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [2.9.0] - 2022-01-13
+### Added
+- gen_class:  Added ArgParser class, this is the replacement of the arg_parser module libraries.
+
+
 ## [2.8.6] - 2021-12-23
 ### Added
 - gen_libs.octal_to_str:  Converts an octal to a string representation of a Linux file permission.
