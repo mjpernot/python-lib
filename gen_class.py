@@ -581,8 +581,8 @@ class ArgParser(object):
             for name in tmp_list:
                 # Combine these lines?  See below.
                 # tmp_status = self._file_chk_crt(name, option, file_crt)
-                # status = status | tmp_status
-                status = status | self._file_chk_crt(name, option, file_crt)
+                # status = status & tmp_status
+                status = status & self._file_chk_crt(name, option, file_crt)
 
         return status
 
