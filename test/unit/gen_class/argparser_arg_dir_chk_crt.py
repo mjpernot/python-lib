@@ -35,26 +35,6 @@ import version
 __version__ = version.__version__
 
 
-def raise_oserror(dirname):
-
-    """Function:  raise_oserror
-
-    Description:  Stub holder to return a raised OSError exception.
-
-    Arguments:
-
-    """
-
-    if dirname == "/test_path/dir1" or dirname == "/test_path/dir2":
-        raise OSError(21, "Other Error")
-
-    elif dirname == "/dir/path/dirname13":
-        raise OSError(13, "Permission denied")
-
-    elif dirname == "/dir/path/dirname17":
-        raise OSError(17, "File exist")
-
-
 class UnitTest(unittest.TestCase):
 
     """Class:  UnitTest
