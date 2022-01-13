@@ -136,6 +136,13 @@ pipeline {
                 ./test/unit/gen_libs/write_to_log.py
                 ./test/unit/gen_class/get_inst.py
                 ./test/unit/gen_class/setup_mail.py
+                ./test/unit/gen_class/argparser_arg_add_def.py
+                ./test/unit/gen_class/argparser_arg_cond_req.py
+                ./test/unit/gen_class/argparser_arg_cond_req_or.py
+                ./test/unit/gen_class/argparser_arg_default.py
+                ./test/unit/gen_class/argparser_arg_dir_chk.py
+                ./test/unit/gen_class/argparser_arg_dir_chk_crt.py
+                ./test/unit/gen_class/argparser_init.py
                 ./test/unit/gen_class/daemon_delpid.py
                 ./test/unit/gen_class/daemon_init.py
                 ./test/unit/gen_class/daemon_restart.py
