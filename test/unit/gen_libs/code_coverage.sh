@@ -58,6 +58,7 @@ coverage run -a --source=gen_libs test/unit/gen_libs/list_dirs.py
 coverage run -a --source=gen_libs test/unit/gen_libs/list_files.py
 coverage run -a --source=gen_libs test/unit/gen_libs/list_filter_files.py
 coverage run -a --source=gen_libs test/unit/gen_libs/load_module.py
+coverage run -a --source=gen_libs test/unit/gen_libs/make_dir.py
 coverage run -a --source=gen_libs test/unit/gen_libs/make_md5_hash.py
 coverage run -a --source=gen_libs test/unit/gen_libs/make_zip.py
 coverage run -a --source=gen_libs test/unit/gen_libs/merge_data_types.py
