@@ -35,54 +35,6 @@ import version
 __version__ = version.__version__
 
 
-class FileOpen3(object):
-
-    """Class:  FileOpen3
-
-    Description:  Class stub holder for file open class.
-
-    Methods:
-        close
-
-    """
-
-    def close(self):
-
-        """Function:  close
-
-        Description:  Stub holder for close function.
-
-        Arguments:
-
-        """
-
-        raise IOError(2, "No File")
-
-
-class FileOpen2(object):
-
-    """Class:  FileOpen2
-
-    Description:  Class stub holder for file open class.
-
-    Methods:
-        close
-
-    """
-
-    def close(self):
-
-        """Function:  close
-
-        Description:  Stub holder for close function.
-
-        Arguments:
-
-        """
-
-        raise IOError(10, "Some Error")
-
-
 class FileOpen(object):
 
     """Class:  FileOpen
@@ -117,10 +69,10 @@ class UnitTest(unittest.TestCase):
         setUp
         test_second_open_no_error
         test_second_open_error
-        test_filecrtlist_in_list
-        test_filecrtlist_not_in_list
-        test_filecrtlist_empty_list
-        test_filecrtlist_not_passed
+        test_file_crt_in_list
+        test_file_crt_not_in_list
+        test_file_crt_empty_list
+        test_file_crt_not_passed
         test_first_open_error_two
         test_first_open_error_ten
         test_first_open_no_errors
@@ -147,14 +99,6 @@ class UnitTest(unittest.TestCase):
 
         """
 
-#        self.path_file = "test/file1"
-#        self.file_chk_list = ["-f"]
-#        self.args_array = {"-f": [self.path_file], "-m": "Marker"}
-#        self.file_crt_list = ["-f"]
-#        self.open = FileOpen()
-#        self.open2 = FileOpen2()
-#        self.open3 = FileOpen3()
-
         self.path_file = "/path/file1"
 
         self.argv = [
@@ -163,7 +107,7 @@ class UnitTest(unittest.TestCase):
             "program.py", "-f", self.path_file, "-g", "/path/file2"]
         self.argv3 = ["program.py", "-f", self.path_file, "-m", "Marker"]
         self.argv4 = [
-            "program.py", "-f", {self.path_file}, "-m", "Marker"]
+            "program.py", "-f", (self.path_file), "-m", "Marker"]
         self.argv5 = [
             "program.py", "-f", [self.path_file, "/path/file3"],
             "-m", "Marker"]
@@ -176,14 +120,12 @@ class UnitTest(unittest.TestCase):
 
         self.file_crt = ["-f"]
         self.file_crt2 = ["-g"]
+        self.file_crt3 = []
 
         self.open = FileOpen()
-        self.open2 = FileOpen2()
-        self.open3 = FileOpen3()
 
-    @mock.patch("gen_class._file_chk_crt")
-    @mock.patch("gen_class.open")
-    def test_second_open_no_error(self, mock_open, mock_crt):
+    @mock.patch("gen_class.ArgParser._file_chk_crt")
+    def test_second_open_no_error(self, mock_crt):
 
         """Function:  test_second_open_no_error
 
@@ -193,16 +135,16 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_open.side_effect = [self.open3, self.open]
-        mock_crt.return_value = False
+        mock_crt.return_value = True
 
-        self.assertTrue(arg_parser.arg_file_chk(self.args_array,
-                                                 self.file_chk_list,
-                                                 self.file_crt_list))
+        args_array = gen_class.ArgParser(
+            self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
+            file_crt=self.file_crt)
 
-    @mock.patch("gen_class._file_chk_crt")
-    @mock.patch("gen_class.open")
-    def test_second_open_error(self, mock_open, mock_crt):
+        self.assertTrue(args_array.arg_file_chk())
+
+    @mock.patch("gen_class.ArgParser._file_chk_crt")
+    def test_second_open_error(self, mock_crt):
 
         """Function:  test_second_open_error
 
@@ -212,93 +154,88 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_open.side_effect = [self.open3, self.open2]
-        mock_crt.return_value = True
-
-        with gen_libs.no_std_out():
-            self.assertFalse(arg_parser.arg_file_chk(self.args_array,
-                                                    self.file_chk_list,
-                                                    self.file_crt_list))
-
-    @mock.patch("gen_class._file_chk_crt")
-    @mock.patch("gen_class.open")
-    def test_filecrtlist_in_list(self, mock_open, mock_crt):
-
-        """Function:  test_filecrtlist_in_list
-
-        Description:  Test with file_crt_list with option in list.
-
-        Arguments:
-
-        """
-
-        mock_open.side_effect = [self.open3, self.open]
         mock_crt.return_value = False
 
-        self.assertTrue(arg_parser.arg_file_chk(self.args_array,
-                                                 self.file_chk_list,
-                                                 self.file_crt_list))
+        args_array = gen_class.ArgParser(
+            self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
+            file_crt=self.file_crt)
 
-    @mock.patch("gen_class._file_chk_crt")
-    @mock.patch("gen_class.open")
-    def test_filecrtlist_not_in_list(self, mock_open, mock_crt):
+        self.assertFalse(args_array.arg_file_chk())
 
-        """Function:  test_filecrtlist_not_in_list
+    @mock.patch("gen_class.ArgParser._file_chk_crt")
+    def test_file_crt_in_list(self, mock_crt):
 
-        Description:  Test with file_crt_list with option not in list.
+        """Function:  test_file_crt_in_list
 
-        Arguments:
-
-        """
-
-        mock_open.return_value = self.open3
-        mock_crt.return_value = True
-
-        self.file_crt_list = ["-g"]
-
-        with gen_libs.no_std_out():
-            self.assertFalse(arg_parser.arg_file_chk(self.args_array,
-                                                    self.file_chk_list,
-                                                    self.file_crt_list))
-
-    @mock.patch("gen_class._file_chk_crt")
-    @mock.patch("gen_class.open")
-    def test_filecrtlist_empty_list(self, mock_open, mock_crt):
-
-        """Function:  test_filecrtlist_empty_list
-
-        Description:  Test with file_crt_list passed with empty list.
+        Description:  Test with file_crt with option in list.
 
         Arguments:
 
         """
 
-        mock_open.return_value = self.open3
         mock_crt.return_value = True
 
-        with gen_libs.no_std_out():
-            self.assertFalse(arg_parser.arg_file_chk(self.args_array,
-                                                    self.file_chk_list, []))
+        args_array = gen_class.ArgParser(
+            self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
+            file_crt=self.file_crt)
 
-    @mock.patch("gen_class._file_chk_crt")
-    @mock.patch("gen_class.open")
-    def test_filecrtlist_not_passed(self, mock_open, mock_crt):
+        self.assertTrue(args_array.arg_file_chk())
 
-        """Function:  test_filecrtlist_not_passed
+    @mock.patch("gen_class.ArgParser._file_chk_crt")
+    def test_file_crt_not_in_list(self, mock_crt):
 
-        Description:  Test with file_crt_list not being passed.
+        """Function:  test_file_crt_not_in_list
+
+        Description:  Test with file_crt with option not in list.
 
         Arguments:
 
         """
 
-        mock_open.return_value = self.open3
-        mock_crt.return_value = True
+        mock_crt.return_value = False
 
-        with gen_libs.no_std_out():
-            self.assertFalse(arg_parser.arg_file_chk(self.args_array,
-                                                    self.file_chk_list))
-### STOPPED HERE
+        args_array = gen_class.ArgParser(
+            self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
+            file_crt=self.file_crt2)
+
+        self.assertFalse(args_array.arg_file_chk())
+
+    @mock.patch("gen_class.ArgParser._file_chk_crt")
+    def test_file_crt_empty_list(self, mock_crt):
+
+        """Function:  test_file_crt_empty_list
+
+        Description:  Test with file_crt passed with empty list.
+
+        Arguments:
+
+        """
+
+        mock_crt.return_value = False
+
+        args_array = gen_class.ArgParser(
+            self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
+            file_crt=self.file_crt3)
+
+        self.assertFalse(args_array.arg_file_chk())
+
+    @mock.patch("gen_class.ArgParser._file_chk_crt")
+    def test_file_crt_not_passed(self, mock_crt):
+
+        """Function:  test_file_crt_not_passed
+
+        Description:  Test with file_crt not being passed.
+
+        Arguments:
+
+        """
+
+        mock_crt.return_value = False
+
+        args_array = gen_class.ArgParser(
+            self.argv, opt_val=self.opt_val, file_chk=self.file_chk)
+
+        self.assertFalse(args_array.arg_file_chk())
 
     @mock.patch("gen_class.ArgParser._file_chk_crt")
     def test_first_open_error_two(self, mock_crt):
