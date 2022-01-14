@@ -67,6 +67,8 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
+        test_file_crt_override
+        test_file_chk_override
         test_second_open_no_error
         test_second_open_error
         test_file_crt_in_list
@@ -123,6 +125,40 @@ class UnitTest(unittest.TestCase):
         self.file_crt3 = []
 
         self.open = FileOpen()
+
+    @mock.patch("gen_class.ArgParser._file_chk_crt")
+    def test_file_crt_override(self, mock_crt):
+
+        """Function:  test_file_crt_override
+
+        Description:  Test with passing in file_crt to override.
+
+        Arguments:
+
+        """
+
+        mock_crt.return_value = True
+
+        args_array = gen_class.ArgParser(
+            self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
+            file_crt=self.file_crt3)
+
+        self.assertTrue(args_array.arg_file_chk(file_crt=self.file_crt))
+
+    def test_file_chk_override(self):
+
+        """Function:  test_file_chk_override
+
+        Description:  Test with passing in file_chk to override.
+
+        Arguments:
+
+        """
+
+        args_array = gen_class.ArgParser(
+            self.argv, opt_val=self.opt_val, file_chk=self.file_chk)
+
+        self.assertTrue(args_array.arg_file_chk(file_chk=self.file_chk2))
 
     @mock.patch("gen_class.ArgParser._file_chk_crt")
     def test_second_open_no_error(self, mock_crt):
