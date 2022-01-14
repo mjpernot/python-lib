@@ -139,6 +139,7 @@ coverage run -a --source=gen_class test/unit/gen_class/argparser_arg_default.py
 coverage run -a --source=gen_class test/unit/gen_class/argparser_arg_dir_chk.py
 coverage run -a --source=gen_class test/unit/gen_class/argparser_arg_dir_chk_crt.py
 coverage run -a --source=gen_class test/unit/gen_class/argparser_arg_file_chk.py
+coverage run -a --source=gen_class test/unit/gen_class/argparser_arg_noreq_xor.py
 coverage run -a --source=gen_class test/unit/gen_class/argparser_init.py
 coverage run -a --source=gen_class test/unit/gen_class/daemon_delpid.py
 coverage run -a --source=gen_class test/unit/gen_class/daemon_init.py
