@@ -960,17 +960,19 @@ class ArgParser(object):
         Arguments:
             (input) **kwargs:
                 opt_def -> Dictionary with options and default values
+            (output) status -> True|False - If successfully parse argv.
 
         """
 
         opt_def = dict(kwargs.get("opt_def", self.opt_def))
+        status = True
 
         # If no value in argv for option and it's not an integer.
         if len(self.argv) < 2 or (self.argv[1][0] == "-"
                                   and not gen_libs.chk_int(self.argv[1])):
 
             # See if default value is available for argument.
-            self.arg_default(self.argv[0], opt_def=opt_def)
+            status = self.arg_default(self.argv[0], opt_def=opt_def)
 
         else:
             # Handle multiple values for argument.
@@ -992,6 +994,8 @@ class ArgParser(object):
             # Move to argument after the multiple values.
             self.argv = self.argv[cnt:]
 
+        return status
+
 
     def parse_single(self, **kwargs):
 
@@ -1011,14 +1015,13 @@ class ArgParser(object):
         """
 
         opt_def = dict(kwargs.get("opt_def", self.opt_def))
-        opt_val_bin = dict(kwargs.get("opt_val_bin", self.opt_val_bin))
+        opt_val_bin = list(kwargs.get("opt_val_bin", self.opt_val_bin))
         status = True
 
         # If no value in argv for option and it is not an integer.
         if len(self.argv) < 2 or (self.argv[1][0] == "-"
                                   and not gen_libs.chk_int(self.argv[1])):
 
-            print("OPT_VAL_BIN", opt_val_bin)
             if self.argv[0] in opt_val_bin:
                 self.args_array[self.argv[0]] = None
 
