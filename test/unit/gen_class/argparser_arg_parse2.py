@@ -44,14 +44,15 @@ class UnitTest(unittest.TestCase):
     Methods:
         setUp
         test_all_together
-        test_multi_defdict_set
-        test_multilist_two_val
-        test_multilist_one_val
-        test_multilist_def_arg
-        test_multilist_two_args
-        test_multilist_one_arg
-        test_optvalset_arg_int
 
+        test_multiple_opt_def
+        test_multilist_multiple_val
+        test_multi_val_one_val
+        test_multi_val_no_val
+        test_multi_val_def_arg
+        test_multi_val_two_args
+        test_multi_val_one_arg
+        test_opt_val_arg_int
         test_opt_val_bin
         test_opt_def_no_val2
         test_opt_def_no_val
@@ -91,13 +92,22 @@ class UnitTest(unittest.TestCase):
         self.argv4 = ["program.py", "-M", "merge"]
         self.argv5 = ["program.py", "-c", "cfg", "-d", "/path"]
         self.argv6 = ["program.py", "-c", "cfg", "-d"]
-        self.argv7 = [
+        self.argv7 = ["program.py", "-c", "-1"]
+        self.argv8 = ["program.py", "-f", "file1", "file2"]
+        self.argv9 = [
+            "program.py", "-f", "file1", "file2", "-g", "file3", "file4"]
+        self.argv10 = ["program.py", "-f"]
+        self.argv11 = ["program.py", "-f", "file5"]
+        self.argv12 = ["program.py", "-f", "file1", "file2", "file3"]
+        self.argv13 = ["program.py", "-f", "-g"]
+        self.argv14 = [
             "program.py", "-c", "cfg", "-d", "/path", "-M", "-f",
             "file1", "file2"]
 
         self.opt_val = ["-c", "-d", "-f", "-g"]
         self.opt_val2 = ["-M", "-a"]
-        self.opt_def = {"-g": "def_val"}
+        self.opt_def = {"-g": ["def_val"], "-f": ["file1", "file2"]}
+        self.opt_def2 = {"-f": ["file1"]}
         self.multi_val = ["-f", "-g"]
         self.opt_val_bin = ["-d"]
 
@@ -107,6 +117,15 @@ class UnitTest(unittest.TestCase):
         self.results4 = {"-c": "cfg", "-d": "/path"}
         self.results5 = {"-c": "cfg"}
         self.results6 = {"-c": "cfg", "-d": None}
+        self.results7 = {"-c": "-1"}
+        self.results8 = {"-f": ["file1", "file2"]}
+        self.results9 = {"-f": ["file1", "file2"], "-g": ["file3", "file4"]}
+        self.results10 = {"-f": ["file1"]}
+        self.results11 = {"-f": ["file5"]}
+        self.results12 = {"-f": ["file1", "file2", "file3"]}
+        self.results13 = {"-g": ["def_val"], "-f": ["file1", "file2"]}
+        self.results14 = {"-c": "cfg", "-d": "/path", "-M": True,
+                          "-f": ["file1", "file2"]}
 
     @mock.patch("arg_parser.gen_libs.chk_int")
     def test_all_together(self, mock_int):
@@ -121,40 +140,18 @@ class UnitTest(unittest.TestCase):
 
         mock_int.return_value = False
 
-        self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list,
-                                               multi_val=self.multi_list,
-                                               opt_val=self.opt_val),
-                         {"-c": "merge", "-d": None, "-M": True,
-                          "-f": ["file1", "file2"]})
+        args_array = gen_class.ArgParser(
+            self.argv14, opt_val=self.opt_val, multi_val=self.multi_val,
+            opt_def=self.opt_def, do_parse=True)
 
-    @mock.patch("arg_parser.arg_default")
-    @mock.patch("arg_parser.gen_libs.chk_int")
-    def test_multi_defdict_set(self, mock_int, mock_def):
-
-        """Function:  test_multi_defdict_set
-
-        Description:  Test with multi_list and opt_def_dict set.
-
-        Arguments:
-
-        """
-
-        mock_int.return_value = False
-        mock_def.return_value = {"-g": "def_val"}
-
-        self.argv = [self.path_file, "-g"]
-
-        self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list,
-                                               self.opt_def_dict,
-                                               multi_val=self.multi_list),
-                         {"-g": "def_val"})
+        self.assertEqual(args_array.args_array, self.results14)
 
     @mock.patch("arg_parser.gen_libs.chk_int")
-    def test_multilist_two_val(self, mock_int):
+    def test_multiple_opt_def(self, mock_int):
 
-        """Function:  test_multilist_one_val
+        """Function:  test_multiple_opt_def
 
-        Description:  Test with multi_list set to two values.
+        Description:  Test with multiple default values with multi_val.
 
         Arguments:
 
@@ -162,16 +159,35 @@ class UnitTest(unittest.TestCase):
 
         mock_int.return_value = False
 
-        self.argv = [self.path_file, "-f", "file1", "file2"]
+        args_array = gen_class.ArgParser(
+            self.argv13, opt_val=self.opt_val, multi_val=self.multi_val,
+            opt_def=self.opt_def, do_parse=True)
 
-        self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list,
-                                               multi_val=self.multi_list),
-                         {"-f": ["file1", "file2"]})
+        self.assertEqual(args_array.args_array, self.results13)
 
     @mock.patch("arg_parser.gen_libs.chk_int")
-    def test_multilist_one_val(self, mock_int):
+    def test_multilist_multiple_val(self, mock_int):
 
-        """Function:  test_multilist_one_val
+        """Function:  test_multilist_multiple_val
+
+        Description:  Test with multi_list set to multiple values.
+
+        Arguments:
+
+        """
+
+        mock_int.return_value = False
+
+        args_array = gen_class.ArgParser(
+            self.argv12, opt_val=self.opt_val, multi_val=self.multi_val,
+            do_parse=True)
+
+        self.assertEqual(args_array.args_array, self.results12)
+
+    @mock.patch("arg_parser.gen_libs.chk_int")
+    def test_multi_val_one_val(self, mock_int):
+
+        """Function:  test_multi_val_one_val
 
         Description:  Test with multi_list set to one value.
 
@@ -181,39 +197,19 @@ class UnitTest(unittest.TestCase):
 
         mock_int.return_value = False
 
-        self.argv = [self.path_file, "-f", "file1"]
+        args_array = gen_class.ArgParser(
+            self.argv11, opt_val=self.opt_val, multi_val=self.multi_val,
+            do_parse=True)
 
-        self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list,
-                                               multi_val=self.multi_list),
-                         {"-f": ["file1"]})
-
-    @mock.patch("arg_parser.arg_default")
-    @mock.patch("arg_parser.gen_libs.chk_int")
-    def test_multilist_def_arg(self, mock_int, mock_def):
-
-        """Function:  test_multilist_def_arg
-
-        Description:  Test with multi_list set to one arg using default.
-
-        Arguments:
-
-        """
-
-        mock_int.return_value = False
-        mock_def.return_value = "SystemExit: Error: Arg -f missing value"
-
-        self.argv = [self.path_file, "-f"]
-
-        self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list,
-                                               multi_val=self.multi_list),
-                         "SystemExit: Error: Arg -f missing value")
+        self.assertEqual(args_array.args_array, self.results11)
 
     @mock.patch("arg_parser.gen_libs.chk_int")
-    def test_multilist_two_args(self, mock_int):
+    def test_multi_val_no_val(self, mock_int):
 
-        """Function:  test_multilist_two_args
+        """Function:  test_multi_val_no_val
 
-        Description:  Test with multi_list set to one arg and one other arg.
+        Description:  Test with multi_list and setting one of them using
+            default values.
 
         Arguments:
 
@@ -221,18 +217,19 @@ class UnitTest(unittest.TestCase):
 
         mock_int.return_value = False
 
-        self.argv = [self.path_file, "-f", "file1", "file2", "-M"]
+        args_array = gen_class.ArgParser(
+            self.argv10, opt_val=self.opt_val, multi_val=self.multi_val)
 
-        self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list,
-                                               multi_val=self.multi_list),
-                         {"-f": ["file1", "file2"], "-M": True})
+        with gen_libs.no_std_out():
+            self.assertFalse(args_array.arg_parse2())
 
     @mock.patch("arg_parser.gen_libs.chk_int")
-    def test_multilist_one_arg(self, mock_int):
+    def test_multi_val_def_arg(self, mock_int):
 
-        """Function:  test_multilist_one_arg
+        """Function:  test_multi_val_def_arg
 
-        Description:  Test with multi_list set to one argument.
+        Description:  Test with multi_list and setting one of them using
+            default values.
 
         Arguments:
 
@@ -240,16 +237,55 @@ class UnitTest(unittest.TestCase):
 
         mock_int.return_value = False
 
-        self.argv = [self.path_file, "-f", "file1", "file2"]
+        args_array = gen_class.ArgParser(
+            self.argv10, opt_val=self.opt_val, multi_val=self.multi_val,
+            opt_def=self.opt_def2, do_parse=True)
 
-        self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list,
-                                               multi_val=self.multi_list),
-                         {"-f": ["file1", "file2"]})
+        self.assertEqual(args_array.args_array, self.results10)
 
     @mock.patch("arg_parser.gen_libs.chk_int")
-    def test_optvalset_arg_int(self, mock_int):
+    def test_multi_val_two_args(self, mock_int):
 
-        """Function:  test_optvalset_arg_int
+        """Function:  test_multi_val_two_args
+
+        Description:  Test with multi_val set to two arguments with multiple
+            values.
+
+        Arguments:
+
+        """
+
+        mock_int.return_value = False
+
+        args_array = gen_class.ArgParser(
+            self.argv9, opt_val=self.opt_val, multi_val=self.multi_val,
+            do_parse=True)
+
+        self.assertEqual(args_array.args_array, self.results9)
+
+    @mock.patch("arg_parser.gen_libs.chk_int")
+    def test_multi_val_one_arg(self, mock_int):
+
+        """Function:  test_multi_val_one_arg
+
+        Description:  Test with multi_val set to one argument.
+
+        Arguments:
+
+        """
+
+        mock_int.return_value = False
+
+        args_array = gen_class.ArgParser(
+            self.argv8, opt_val=self.opt_val, multi_val=self.multi_val,
+            do_parse=True)
+
+        self.assertEqual(args_array.args_array, self.results8)
+
+    @mock.patch("arg_parser.gen_libs.chk_int")
+    def test_opt_val_arg_int(self, mock_int):
+
+        """Function:  test_opt_val_arg_int
 
         Description:  Test with opt_val_set set to integer value.
 
@@ -259,12 +295,11 @@ class UnitTest(unittest.TestCase):
 
         mock_int.return_value = True
 
-        self.argv = [self.path_file, "-c", "-1"]
+        args_array = gen_class.ArgParser(
+            self.argv7, opt_val=self.opt_val, do_parse=True)
 
-        self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list),
-                         {"-c": "-1"})
+        self.assertEqual(args_array.args_array, self.results7)
 
-### STOPPED HERE - Failing for some reason.  See run for error codes.
     @mock.patch("arg_parser.gen_libs.chk_int")
     def test_opt_val_bin(self, mock_int):
 
