@@ -29,6 +29,7 @@ import mock
 # Local
 sys.path.append(os.getcwd())
 import gen_class
+import gen_libs
 import version
 
 __version__ = version.__version__
@@ -50,8 +51,9 @@ class UnitTest(unittest.TestCase):
         test_multilist_two_args
         test_multilist_one_arg
         test_optvalset_arg_int
-        test_optval_set
 
+        test_opt_val_bin
+        test_opt_def_no_val2
         test_opt_def_no_val
         test_opt_val_two_arg
         test_opt_val_one_arg
@@ -60,6 +62,7 @@ class UnitTest(unittest.TestCase):
         test_with_two_args
         test_with_one_arg
         test_argv_no_args
+        test_empty_argv_list2
         test_empty_argv_list
 
     """
@@ -87,11 +90,13 @@ class UnitTest(unittest.TestCase):
         self.argv3 = ["program.py", "-M", "-a"]
         self.argv4 = ["program.py", "-M", "merge"]
         self.argv5 = ["program.py", "-c", "cfg", "-d", "/path"]
-        self.argv6 = [
+        self.argv6 = ["program.py", "-c", "cfg", "-d"]
+        self.argv7 = [
             "program.py", "-c", "cfg", "-d", "/path", "-M", "-f",
             "file1", "file2"]
 
         self.opt_val = ["-c", "-d", "-f", "-g"]
+        self.opt_val2 = ["-M", "-a"]
         self.opt_def = {"-g": "def_val"}
         self.multi_val = ["-f", "-g"]
         self.opt_val_bin = ["-d"]
@@ -99,7 +104,9 @@ class UnitTest(unittest.TestCase):
         self.results = {"-M": True}
         self.results2 = {"-M": True, "-a": True}
         self.results3 = {"-M": "merge"}
-        self.results4 = {"-c": "cfg", "-d": "config"}
+        self.results4 = {"-c": "cfg", "-d": "/path"}
+        self.results5 = {"-c": "cfg"}
+        self.results6 = {"-c": "cfg", "-d": None}
 
     @mock.patch("arg_parser.gen_libs.chk_int")
     def test_all_together(self, mock_int):
@@ -257,12 +264,14 @@ class UnitTest(unittest.TestCase):
         self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list),
                          {"-c": "-1"})
 
+### STOPPED HERE - Failing for some reason.  See run for error codes.
     @mock.patch("arg_parser.gen_libs.chk_int")
-    def test_optval_set(self, mock_int):
+    def test_opt_val_bin(self, mock_int):
 
-        """Function:  test_optval_set
+        """Function:  test_opt_val_bin
 
-        Description:  Test with opt_val set with no value in arg.
+        Description:  Test with opt_val_bin set with no value passed in for the
+            argument.
 
         Arguments:
 
@@ -270,11 +279,29 @@ class UnitTest(unittest.TestCase):
 
         mock_int.return_value = False
 
-        self.argv = [self.path_file, "-c", "merge", "-d"]
+        args_array = gen_class.ArgParser(
+            self.argv6, opt_val=self.opt_val, opt_val_bin=self.opt_val_bin,
+            do_parse=True)
 
-        self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list,
-                                               opt_val=self.opt_val),
-                         {"-c": "merge", "-d": None})
+        self.assertEqual(args_array.args_array, self.results6)
+
+    @mock.patch("arg_parser.gen_libs.chk_int")
+    def test_opt_def_no_val2(self, mock_int):
+
+        """Function:  test_opt_def_no_val2
+
+        Description:  Test with opt_def but no value.
+
+        Arguments:
+
+        """
+
+        mock_int.return_value = False
+
+        args_array = gen_class.ArgParser(self.argv6, opt_val=self.opt_val)
+
+        with gen_libs.no_std_out():
+            self.assertFalse(args_array.arg_parse2())
 
     @mock.patch("arg_parser.gen_libs.chk_int")
     def test_opt_def_no_val(self, mock_int):
@@ -289,13 +316,13 @@ class UnitTest(unittest.TestCase):
 
         mock_int.return_value = False
 
-        self.argv = [self.path_file, "-c", "merge", "-d"]
+        args_array = gen_class.ArgParser(self.argv6, opt_val=self.opt_val)
 
-        self.assertEqual(arg_parser.arg_parse2(self.argv, self.opt_val_list),
-                         "SystemExit: Error: Arg -d missing value")
-# Trying to figure up what the above test is trying to do: test the default
-#   arg option or test if no value is passed?
-### STOPPED HERE
+        with gen_libs.no_std_out():
+            args_array.arg_parse2()
+
+        self.assertEqual(args_array.args_array, self.results5)
+
     def test_opt_val_two_arg(self):
 
         """Function:  test_opt_val_two_arg
@@ -306,7 +333,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        args_array = gen_class.ArgParser(self.argv5, opt_val=self.opt_val)
+        args_array = gen_class.ArgParser(
+            self.argv5, opt_val=self.opt_val, do_parse=True)
 
         self.assertEqual(args_array.args_array, self.results4)
 
@@ -320,7 +348,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        args_array = gen_class.ArgParser(self.argv4, opt_val=self.opt_val)
+        args_array = gen_class.ArgParser(
+            self.argv4, opt_val=self.opt_val2, do_parse=True)
 
         self.assertEqual(args_array.args_array, self.results3)
 
@@ -334,7 +363,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        args_array = gen_class.ArgParser(self.argv4)
+        args_array = gen_class.ArgParser(self.argv4, do_parse=True)
 
         self.assertEqual(args_array.args_array, self.results)
 
@@ -348,7 +377,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        args_array = gen_class.ArgParser(self.argv2)
+        args_array = gen_class.ArgParser(self.argv2, do_parse=True)
 
         self.assertEqual(args_array.args_array, self.results)
 
@@ -362,7 +391,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        args_array = gen_class.ArgParser(self.argv3)
+        args_array = gen_class.ArgParser(self.argv3, do_parse=True)
 
         self.assertEqual(args_array.args_array, self.results2)
 
@@ -376,7 +405,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        args_array = gen_class.ArgParser(self.argv2)
+        args_array = gen_class.ArgParser(self.argv2, do_parse=True)
 
         self.assertEqual(args_array.args_array, self.results)
 
@@ -390,9 +419,24 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        args_array = gen_class.ArgParser(self.argv)
+        args_array = gen_class.ArgParser(self.argv, do_parse=True)
 
         self.assertEqual(args_array.args_array, {})
+
+    def test_empty_argv_list2(self):
+
+        """Function:  test_empty_argv_list2
+
+        Description:  Test with argv as empty list.
+
+        Arguments:
+
+        """
+
+        args_array = gen_class.ArgParser(self.argv)
+        args_array.argv = []
+
+        self.assertTrue(args_array.arg_parse2())
 
     def test_empty_argv_list(self):
 
@@ -404,7 +448,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        args_array = gen_class.ArgParser(self.argv, do_not_parse=True)
+        args_array = gen_class.ArgParser(self.argv)
         args_array.argv = []
         args_array.arg_parse2()
 
