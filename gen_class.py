@@ -225,8 +225,8 @@ class ArgParser(object):
                     the dictionary key option
                 opt_or -> Dictionary list of options for "or" operator
                 opt_req -> Options that are required
-                opt_val_bin - List of options that may allow 0 or 1 value for
-                    option
+                opt_val_bin - List of options that allow zero values or one
+                    value for the option
                 opt_valid_val -> Dictionary of options & their valid values
                 opt_wildcard -> List of wildcard options
                 opt_xor -> Dictionary of options that are required XOR
@@ -234,7 +234,11 @@ class ArgParser(object):
                     with each other
                 valid_func -> Dictionary list of options & functions
                 xor_noreq -> Dictionary of the two XOR options
-                do_not_parse -> True|False - Do not run the arg_parse2 method
+                do_parse -> True|False - Run the arg_parse2 method during the
+                    initialization process for the class.  Default is False.
+                    NOTE:  If a parsing error occurs, only a print error
+                        message will be displayed.  Not recommended for
+                        automated job runs.
 
         """
 
@@ -288,8 +292,9 @@ class ArgParser(object):
         # For arg_xor_dict method
         self.opt_xor_val = dict(kwargs.get("opt_xor_val", {}))
 
-        if not kwargs.get("do_not_parse", False):
-            self.arg_parse2()
+        if kwargs.get("do_parse", False):
+            if not self.arg_parse2():
+                print("Error:  An error occurred during the parsing of argv.")
 
     def arg_add_def(self, **kwargs):
 
@@ -639,8 +644,9 @@ class ArgParser(object):
                 opt_val -> Options which require values
                 opt_def -> Dict with options and default values
                 multi_val - List of options that may contain multiple values
-                opt_val_bin - List of options that may allow 0 or 1 value for
-                    option
+                opt_val_bin - List of options that allow zero values or one
+                    value for the option
+            (output) status -> True|False - If successfully parse argv.
 
         """
 
@@ -656,21 +662,25 @@ class ArgParser(object):
         multi_val = list(kwargs.get("multi_val", self.multi_val))
         opt_def = dict(kwargs.get("opt_def", self.opt_def))
         opt_val_bin = list(kwargs.get("opt_val_bin", self.opt_val_bin))
+        status = True
 
         while self.argv:
 
             # Look for new option, always begin with "-".
             if self.argv[0][0] == "-":
                 if self.argv[0] in multi_val:
-                    self.parse_multi(opt_def=opt_def)
+                    status = self.parse_multi(opt_def=opt_def)
 
                 elif self.argv[0] in opt_val or self.argv[0] in opt_val_bin:
-                    self.parse_single(opt_def=opt_def, opt_val_bin=opt_val_bin)
+                    status = self.parse_single(
+                        opt_def=opt_def, opt_val_bin=opt_val_bin)
 
                 else:
                     self.args_array[self.argv[0]] = True
 
             self.argv = self.argv[1:]
+
+        return status
 
 
     def arg_require(self, **kwargs):
@@ -994,28 +1004,33 @@ class ArgParser(object):
         Arguments:
             (input) **kwargs:
                 opt_def -> Dictionary with options and default values
-                opt_val_bin -> List of options that allow 0 or 1 for the
-                    option
+                opt_val_bin -> List of options that allow zero values or one
+                    value for the option
+            (output) status -> True|False - If successfully parse argv.
 
         """
 
         opt_def = dict(kwargs.get("opt_def", self.opt_def))
         opt_val_bin = dict(kwargs.get("opt_val_bin", self.opt_val_bin))
+        status = True
 
         # If no value in argv for option and it is not an integer.
         if len(self.argv) < 2 or (self.argv[1][0] == "-"
                                   and not gen_libs.chk_int(self.argv[1])):
 
+            print("OPT_VAL_BIN", opt_val_bin)
             if self.argv[0] in opt_val_bin:
                 self.args_array[self.argv[0]] = None
 
             else:
                 # See if default value is available for argument.
-                self.arg_default(self.argv[0], opt_def=opt_def)
+                status = self.arg_default(self.argv[0], opt_def=opt_def)
 
         else:
             self.args_array[self.argv[0]] = self.argv[1]
             self.argv = self.argv[1:]
+
+        return status
 
 
     def _file_chk_crt(self, name, option, file_crt):
