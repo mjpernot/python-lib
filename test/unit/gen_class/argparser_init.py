@@ -24,10 +24,12 @@ else:
     import unittest
 
 # Third-party
+import mock
 
 # Local
 sys.path.append(os.getcwd())
 import gen_class
+import gen_libs
 import version
 
 __version__ = version.__version__
@@ -74,8 +76,9 @@ class UnitTest(unittest.TestCase):
         test_multi_val
         test_opt_def
         test_opt_val
-        test_do_not_parse2
-        test_do_not_parse
+        test_do_parse_fail
+        test_do_parse2
+        test_do_parse
         test_multiple_boolean_arg
         test_single_boolean_arg
         test_program_only
@@ -152,7 +155,7 @@ class UnitTest(unittest.TestCase):
         """
 
         args_array = gen_class.ArgParser(
-            self.argv3, do_not_parse=True, opt_xor_val=self.opt_xor_val)
+            self.argv3, opt_xor_val=self.opt_xor_val)
 
         self.assertEqual(args_array.opt_xor_val, self.results_opt_xor_val)
 
@@ -167,7 +170,7 @@ class UnitTest(unittest.TestCase):
         """
 
         args_array = gen_class.ArgParser(
-            self.argv3, do_not_parse=True, opt_wildcard=self.opt_wildcard)
+            self.argv3, opt_wildcard=self.opt_wildcard)
 
         self.assertEqual(args_array.opt_wildcard, self.results_opt_wildcard)
 
@@ -182,7 +185,7 @@ class UnitTest(unittest.TestCase):
         """
 
         args_array = gen_class.ArgParser(
-            self.argv3, do_not_parse=True, opt_valid_val=self.opt_valid_val)
+            self.argv3, opt_valid_val=self.opt_valid_val)
 
         self.assertEqual(args_array.opt_valid_val, self.results_opt_valid_val)
 
@@ -197,7 +200,7 @@ class UnitTest(unittest.TestCase):
         """
 
         args_array = gen_class.ArgParser(
-            self.argv3, do_not_parse=True, valid_func=self.valid_func)
+            self.argv3, valid_func=self.valid_func)
 
         self.assertEqual(args_array.valid_func, self.results_valid_func)
 
@@ -211,8 +214,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        args_array = gen_class.ArgParser(
-            self.argv3, do_not_parse=True, opt_xor=self.opt_xor)
+        args_array = gen_class.ArgParser(self.argv3, opt_xor=self.opt_xor)
 
         self.assertEqual(args_array.opt_xor, self.results_opt_xor)
 
@@ -226,8 +228,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        args_array = gen_class.ArgParser(
-            self.argv3, do_not_parse=True, opt_or=self.opt_or)
+        args_array = gen_class.ArgParser(self.argv3, opt_or=self.opt_or)
 
         self.assertEqual(args_array.opt_or, self.results_opt_or)
 
@@ -241,8 +242,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        args_array = gen_class.ArgParser(
-            self.argv3, do_not_parse=True, xor_noreq=self.xor_noreq)
+        args_array = gen_class.ArgParser(self.argv3, xor_noreq=self.xor_noreq)
 
         self.assertEqual(args_array.xor_noreq, self.results_xor_noreq)
 
@@ -256,8 +256,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        args_array = gen_class.ArgParser(
-            self.argv3, do_not_parse=True, file_crt=self.file_crt)
+        args_array = gen_class.ArgParser(self.argv3, file_crt=self.file_crt)
 
         self.assertEqual(args_array.file_crt, self.results_file_crt)
 
@@ -271,8 +270,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        args_array = gen_class.ArgParser(
-            self.argv3, do_not_parse=True, file_chk=self.file_chk)
+        args_array = gen_class.ArgParser(self.argv3, file_chk=self.file_chk)
 
         self.assertEqual(args_array.file_chk, self.results_file_chk)
 
@@ -286,8 +284,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        args_array = gen_class.ArgParser(
-            self.argv3, do_not_parse=True, dir_crt=self.dir_crt)
+        args_array = gen_class.ArgParser(self.argv3, dir_crt=self.dir_crt)
 
         self.assertEqual(args_array.dir_crt, self.results_dir_crt)
 
@@ -301,8 +298,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        args_array = gen_class.ArgParser(
-            self.argv3, do_not_parse=True, dir_chk=self.dir_chk)
+        args_array = gen_class.ArgParser(self.argv3, dir_chk=self.dir_chk)
 
         self.assertEqual(args_array.dir_chk, self.results_dir_chk)
 
@@ -317,7 +313,7 @@ class UnitTest(unittest.TestCase):
         """
 
         args_array = gen_class.ArgParser(
-            self.argv3, do_not_parse=True, dir_perms_chk=self.dir_perms_chk)
+            self.argv3, dir_perms_chk=self.dir_perms_chk)
 
         self.assertEqual(args_array.dir_perms_chk, self.results_dir_perms_chk)
 
@@ -332,7 +328,7 @@ class UnitTest(unittest.TestCase):
         """
 
         args_array = gen_class.ArgParser(
-            self.argv3, do_not_parse=True, opt_con_or=self.opt_con_or)
+            self.argv3, opt_con_or=self.opt_con_or)
 
         self.assertEqual(args_array.opt_con_or, self.results_opt_con_or)
 
@@ -347,7 +343,7 @@ class UnitTest(unittest.TestCase):
         """
 
         args_array = gen_class.ArgParser(
-            self.argv3, do_not_parse=True, opt_con_req=self.opt_con_req)
+            self.argv3, opt_con_req=self.opt_con_req)
 
         self.assertEqual(args_array.opt_con_req, self.results_opt_con_req)
 
@@ -361,8 +357,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        args_array = gen_class.ArgParser(
-            self.argv3, do_not_parse=True, opt_req=self.opt_req)
+        args_array = gen_class.ArgParser(self.argv3, opt_req=self.opt_req)
 
         self.assertEqual(args_array.opt_req, self.results_opt_req)
 
@@ -376,8 +371,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        args_array = gen_class.ArgParser(
-            self.argv3, do_not_parse=True, defaults=self.defaults)
+        args_array = gen_class.ArgParser(self.argv3, defaults=self.defaults)
 
         self.assertEqual(args_array.defaults, self.results_defaults)
 
@@ -392,7 +386,7 @@ class UnitTest(unittest.TestCase):
         """
 
         args_array = gen_class.ArgParser(
-            self.argv3, do_not_parse=True, opt_val_bin=self.opt_val_bin)
+            self.argv3, opt_val_bin=self.opt_val_bin)
 
         self.assertEqual(args_array.opt_val_bin, self.results_opt_val_bin)
 
@@ -406,8 +400,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        args_array = gen_class.ArgParser(
-            self.argv3, do_not_parse=True, multi_val=self.multi_val)
+        args_array = gen_class.ArgParser(self.argv3, multi_val=self.multi_val)
 
         self.assertEqual(args_array.multi_val, self.results_multi_val)
 
@@ -421,8 +414,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        args_array = gen_class.ArgParser(
-            self.argv3, do_not_parse=True, opt_def=self.opt_def)
+        args_array = gen_class.ArgParser(self.argv3, opt_def=self.opt_def)
 
         self.assertEqual(args_array.opt_def, self.results_opt_def)
 
@@ -436,38 +428,55 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        args_array = gen_class.ArgParser(
-            self.argv3, do_not_parse=True, opt_val=self.opt_val)
+        args_array = gen_class.ArgParser(self.argv3, opt_val=self.opt_val)
 
         self.assertEqual(args_array.opt_val, self.results_opt_val)
 
-    def test_do_not_parse2(self):
+    @mock.patch("gen_class.ArgParser.arg_parse2")
+    def test_do_parse_fail(self, mock_parse):
 
-        """Function:  test_do_not_parse2
+        """Function:  test_do_parse_fail
 
-        Description:  Test with do not parse option passed.
-
-        Arguments:
-
-        """
-
-        args_array = gen_class.ArgParser(self.argv4, do_not_parse=True)
-
-        self.assertEqual(args_array.argv, self.argv4)
-
-    def test_do_not_parse(self):
-
-        """Function:  test_do_not_parse
-
-        Description:  Test with do not parse option passed.
+        Description:  Test with do parse option passed, but fails.
 
         Arguments:
 
         """
 
-        args_array = gen_class.ArgParser(self.argv4, do_not_parse=True)
+        mock_parse.return_value = False
+
+        with gen_libs.no_std_out():
+            args_array = gen_class.ArgParser(self.argv4, do_parse=True)
 
         self.assertEqual(args_array.args_array, self.results_arg_array)
+
+    def test_do_parse2(self):
+
+        """Function:  test_do_parse2
+
+        Description:  Test with do parse option passed.
+
+        Arguments:
+
+        """
+
+        args_array = gen_class.ArgParser(self.argv4, do_parse=True)
+
+        self.assertEqual(args_array.argv, [])
+
+    def test_do_parse(self):
+
+        """Function:  test_do_parse
+
+        Description:  Test with do parse option passed.
+
+        Arguments:
+
+        """
+
+        args_array = gen_class.ArgParser(self.argv4, do_parse=True)
+
+        self.assertEqual(args_array.args_array, self.results_arg_array4)
 
     def test_multiple_boolean_arg(self):
 
@@ -479,7 +488,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        args_array = gen_class.ArgParser(self.argv4)
+        args_array = gen_class.ArgParser(self.argv4, do_parse=True)
 
         self.assertEqual(args_array.args_array, self.results_arg_array4)
 
@@ -493,7 +502,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        args_array = gen_class.ArgParser(self.argv3)
+        args_array = gen_class.ArgParser(self.argv3, do_parse=True)
 
         self.assertEqual(args_array.args_array, self.results_arg_array3)
 
@@ -507,7 +516,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        args_array = gen_class.ArgParser(self.argv2)
+        args_array = gen_class.ArgParser(self.argv2, do_parse=True)
 
         self.assertEqual(args_array.args_array, self.results_arg_array)
 
@@ -521,7 +530,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        args_array = gen_class.ArgParser(self.argv)
+        args_array = gen_class.ArgParser(self.argv, do_parse=True)
 
         self.assertEqual(args_array.args_array, self.results_arg_array)
 
