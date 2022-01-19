@@ -939,9 +939,9 @@ class ArgParser(object):
         opt_xor_val = dict(kwargs.get("opt_xor_val", self.opt_xor_val))
         status = True
 
-        for opt in set(opt_xor_dict.keys()) & set(self.args_array.keys()):
+        for opt in set(opt_xor_val.keys()) & set(self.args_array.keys()):
 
-            for item in set(opt_xor_dict[opt]) & set(self.args_array.keys()):
+            for item in set(opt_xor_val[opt]) & set(self.args_array.keys()):
                 print("Option {0} or {1}, but not both.".format(opt, item))
                 status = False
                 break
