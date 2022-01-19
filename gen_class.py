@@ -757,7 +757,7 @@ class ArgParser(object):
 
         """Method:  arg_req_xor
 
-        Description:  Does an XOR check between two options.
+        Description:  Does an XOR check between two required options.
 
         WARNING:  Does not handle multiple xor pairs.
 
