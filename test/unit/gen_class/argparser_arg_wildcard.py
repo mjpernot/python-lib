@@ -68,14 +68,14 @@ class UnitTest(unittest.TestCase):
         file1 = os.path.join(base_dir, "argparser_arg_wildcard.py")
         file2 = os.path.join(base_dir, "unit_test_run.sh")
 
-        self.argv = []
-        self.argv2 = ["-a", [wild1]]
-        self.argv3 = ["-a", [wild1], "-b", [wild2]]
-        self.argv4 = ["-a", [wild1, wild2]]
-        self.argv5 = ["-a", [wild1, wild2], "-b", [wild2]]
-        self.argv6 = ["-a", wild1]
-        self.argv7 = ["-a", wild1, "-b", [wild2]]
-        self.argv8 = ["-a", wild1, "-b", wild2]
+        self.argv = ["program.py"]
+        self.argv2 = ["program.py", "-a", [wild1]]
+        self.argv3 = ["program.py", "-a", [wild1], "-b", [wild2]]
+        self.argv4 = ["program.py", "-a", [wild1, wild2]]
+        self.argv5 = ["program.py", "-a", [wild1, wild2], "-b", [wild2]]
+        self.argv6 = ["program.py", "-a", wild1]
+        self.argv7 = ["program.py", "-a", wild1, "-b", [wild2]]
+        self.argv8 = ["program.py", "-a", wild1, "-b", wild2]
 
         self.opt_val = ["-a", "-b"]
 
