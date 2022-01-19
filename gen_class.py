@@ -747,7 +747,7 @@ class ArgParser(object):
 
             if not tmp_flag:
                 print("Error:  Option: {0} or one of these: {1} is required.".
-                      format(item, opt_or[option]))
+                      format(option, opt_or[option]))
                 status = tmp_flag
 
         return status
