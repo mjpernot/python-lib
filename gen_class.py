@@ -864,8 +864,8 @@ class ArgParser(object):
 
         for option in set(self.args_array.keys()) & set(opt_valid_val.keys()):
 
-            # If passed value is valid for this option.
-            if not self.args_array[option] in opt_valid_val[option]:
+            # If passed value is invalid for this option.
+            if self.args_array[option] not in opt_valid_val[option]:
                 print("Error:  Incorrect value ({0}) for option: {1}".
                       format(self.args_array[option], option))
                 status = False
