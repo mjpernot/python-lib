@@ -77,14 +77,6 @@ class UnitTest(unittest.TestCase):
 
         """
 
-#        self.path_file = "./merge_repo.py"
-#        self.argv = [self.path_file, "-c", "merge", "-d", "-M", "-f",
-#                     "file1", "file2"]
-#        self.opt_val_list = ["-c", "-d", "-f", "-g"]
-#        self.opt_def_dict = {"-g": "def_val"}
-#        self.multi_list = ["-f", "-g"]
-#        self.opt_val = ["-d"]
-
         self.argv = ["program.py"]
         self.argv2 = ["program.py", "-M"]
         self.argv3 = ["program.py", "-M", "-a"]
