@@ -20,6 +20,7 @@ test/unit/gen_class/argparser_arg_require.py
 test/unit/gen_class/argparser_arg_req_or_lst.py
 test/unit/gen_class/argparser_arg_req_xor.py
 test/unit/gen_class/argparser_arg_set_path.py
+test/unit/gen_class/argparser_arg_validate.py
 test/unit/gen_class/argparser_init.py
 test/unit/gen_class/daemon_delpid.py
 test/unit/gen_class/daemon_init.py
