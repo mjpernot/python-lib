@@ -143,6 +143,7 @@ coverage run -a --source=gen_class test/unit/gen_class/argparser_arg_noreq_xor.p
 coverage run -a --source=gen_class test/unit/gen_class/argparser_arg_parse2.py
 coverage run -a --source=gen_class test/unit/gen_class/argparser_arg_require.py
 coverage run -a --source=gen_class test/unit/gen_class/argparser_arg_req_or_lst.py
+coverage run -a --source=gen_class test/unit/gen_class/argparser_arg_req_xor.py
 coverage run -a --source=gen_class test/unit/gen_class/argparser_init.py
 coverage run -a --source=gen_class test/unit/gen_class/daemon_delpid.py
 coverage run -a --source=gen_class test/unit/gen_class/daemon_init.py
