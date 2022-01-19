@@ -151,6 +151,7 @@ pipeline {
                 ./test/unit/gen_class/argparser_arg_set_path.py
                 ./test/unit/gen_class/argparser_arg_validate.py
                 ./test/unit/gen_class/argparser_arg_valid_val.py
+                ./test/unit/gen_class/argparser_arg_wildcard.py
                 ./test/unit/gen_class/argparser_init.py
                 ./test/unit/gen_class/daemon_delpid.py
                 ./test/unit/gen_class/daemon_init.py
