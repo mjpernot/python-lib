@@ -26,6 +26,7 @@ test/unit/gen_class/argparser_arg_wildcard.py
 test/unit/gen_class/argparser_arg_xor_dict.py
 test/unit/gen_class/argparser_init.py
 test/unit/gen_class/argparser_parse_multi.py
+test/unit/gen_class/argparser_parse_single.py
 test/unit/gen_class/daemon_delpid.py
 test/unit/gen_class/daemon_init.py
 test/unit/gen_class/daemon_restart.py
