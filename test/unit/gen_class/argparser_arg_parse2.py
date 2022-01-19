@@ -44,7 +44,6 @@ class UnitTest(unittest.TestCase):
     Methods:
         setUp
         test_all_together
-
         test_multiple_opt_def
         test_multilist_multiple_val
         test_multi_val_one_val
