@@ -85,7 +85,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        args_array = gen_class.ArgParser(self.argv5, xor_noreq=self.xor_noreq3)
+        args_array = gen_class.ArgParser(
+            self.argv5, xor_noreq=self.xor_noreq3, do_parse=True)
 
         self.assertTrue(args_array.arg_noreq_xor(xor_noreq=self.xor_noreq4))
 
@@ -99,7 +100,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        args_array = gen_class.ArgParser(self.argv6, xor_noreq=self.xor_noreq3)
+        args_array = gen_class.ArgParser(
+            self.argv6, xor_noreq=self.xor_noreq3, do_parse=True)
 
         with gen_libs.no_std_out():
             self.assertFalse(args_array.arg_noreq_xor())
@@ -114,7 +116,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        args_array = gen_class.ArgParser(self.argv5, xor_noreq=self.xor_noreq3)
+        args_array = gen_class.ArgParser(
+            self.argv5, xor_noreq=self.xor_noreq3, do_parse=True)
 
         with gen_libs.no_std_out():
             self.assertFalse(args_array.arg_noreq_xor())
@@ -129,7 +132,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        args_array = gen_class.ArgParser(self.argv4, xor_noreq=self.xor_noreq3)
+        args_array = gen_class.ArgParser(
+            self.argv4, xor_noreq=self.xor_noreq3, do_parse=True)
 
         self.assertTrue(args_array.arg_noreq_xor())
 
@@ -143,7 +147,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        args_array = gen_class.ArgParser(self.argv3, xor_noreq=self.xor_noreq2)
+        args_array = gen_class.ArgParser(
+            self.argv3, xor_noreq=self.xor_noreq2, do_parse=True)
 
         with gen_libs.no_std_out():
             self.assertFalse(args_array.arg_noreq_xor())
@@ -158,7 +163,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        args_array = gen_class.ArgParser(self.argv2, xor_noreq=self.xor_noreq2)
+        args_array = gen_class.ArgParser(
+            self.argv2, xor_noreq=self.xor_noreq2, do_parse=True)
 
         self.assertTrue(args_array.arg_noreq_xor())
 
@@ -172,7 +178,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        args_array = gen_class.ArgParser(self.argv2, xor_noreq=self.xor_noreq)
+        args_array = gen_class.ArgParser(
+            self.argv2, xor_noreq=self.xor_noreq, do_parse=True)
 
         self.assertTrue(args_array.arg_noreq_xor())
 
@@ -186,7 +193,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        args_array = gen_class.ArgParser(self.argv, xor_noreq=self.xor_noreq2)
+        args_array = gen_class.ArgParser(
+            self.argv, xor_noreq=self.xor_noreq2, do_parse=True)
 
         self.assertTrue(args_array.arg_noreq_xor())
 
