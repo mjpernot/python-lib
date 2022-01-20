@@ -42,6 +42,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
+        test_opt_xor_override
         test_two_match_fail
         test_one_match_success
         test_empty_opt_xor
@@ -65,6 +66,22 @@ class UnitTest(unittest.TestCase):
 
         self.opt_xor = {}
         self.opt_xor2 = {"-a": "-b"}
+        self.opt_xor3 = {"-a": "-c"}
+
+    def test_opt_xor_override(self):
+
+        """Function:  test_opt_xor_override
+
+        Description:  Test with opt_xor passed in to override.
+
+        Arguments:
+
+        """
+
+        args_array = gen_class.ArgParser(
+            self.argv3, opt_xor=self.opt_xor2, do_parse=True)
+
+        self.assertTrue(args_array.arg_req_xor(opt_xor=self.opt_xor3))
 
     def test_two_match_fail(self):
 
