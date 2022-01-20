@@ -29,6 +29,7 @@ import mock
 # Local
 sys.path.append(os.getcwd())
 import gen_class
+import gen_libs
 import version
 
 __version__ = version.__version__
@@ -42,10 +43,19 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
+        test_opt_def_override2
+        test_opt_def_override
+        test_opt_def_fail2
+        test_opt_def_fail
+        test_multilist_two_val2
         test_multilist_two_val
+        test_multilist_one_val2
         test_multilist_one_val
+        test_multilist_def_arg2
         test_multilist_def_arg
+        test_multilist_two_args2
         test_multilist_two_args
+        test_multilist_one_arg2
         test_multilist_one_arg
 
     """
@@ -65,17 +75,112 @@ class UnitTest(unittest.TestCase):
         self.argv3 = ["-g"]
         self.argv4 = ["-f", "file1"]
 
-        self.opt_def = {"-g": "def_val"}
+        self.opt_def = {"-g": ["def_val"]}
+        self.opt_def2 = {"-h": ["def_val"]}
 
         self.results = ["file2"]
         self.resultsa = {"-f": ["file1", "file2"]}
         self.results2 = ["file2", "-M"]
         self.results3 = ["-g"]
-        self.results3a = {"-g": "def_val"}
+        self.results3a = {"-g": ["def_val"]}
         self.results4 = ["file1"]
         self.results4a = {"-f": ["file1"]}
+        self.results5a = {}
 
-    @mock.patch("arg_parser.gen_libs.chk_int")
+    @mock.patch("gen_class.gen_libs.chk_int")
+    def test_opt_def_override2(self, mock_int):
+
+        """Function:  test_opt_def_override2
+
+        Description:  Test with opt_def passed in to override.
+
+        Arguments:
+
+        """
+
+        mock_int.return_value = False
+
+        args_array = gen_class.ArgParser(self.argv3, opt_def=self.opt_def2)
+
+        self.assertTrue(args_array.parse_multi(opt_def=self.opt_def))
+
+    @mock.patch("gen_class.gen_libs.chk_int")
+    def test_opt_def_override(self, mock_int):
+
+        """Function:  test_opt_def_override
+
+        Description:  Test with opt_def passed in to override.
+
+        Arguments:
+
+        """
+
+        mock_int.return_value = False
+
+        args_array = gen_class.ArgParser(self.argv3, opt_def=self.opt_def2)
+
+        args_array.parse_multi(opt_def=self.opt_def)
+
+        self.assertEqual((args_array.argv, args_array.args_array),
+                         (self.results3, self.results3a))
+
+    @mock.patch("gen_class.gen_libs.chk_int")
+    def test_opt_def_fail2(self, mock_int):
+
+        """Function:  test_opt_def_fail2
+
+        Description:  Test with multi_list set to one arg using default.
+
+        Arguments:
+
+        """
+
+        mock_int.return_value = False
+
+        args_array = gen_class.ArgParser(self.argv3, opt_def=self.opt_def2)
+
+        with gen_libs.no_std_out():
+            self.assertFalse(args_array.parse_multi())
+
+    @mock.patch("gen_class.gen_libs.chk_int")
+    def test_opt_def_fail(self, mock_int):
+
+        """Function:  test_opt_def_fail
+
+        Description:  Test with multi_list set to one arg using default.
+
+        Arguments:
+
+        """
+
+        mock_int.return_value = False
+
+        args_array = gen_class.ArgParser(self.argv3, opt_def=self.opt_def2)
+
+        with gen_libs.no_std_out():
+            args_array.parse_multi()
+
+        self.assertEqual((args_array.argv, args_array.args_array),
+                         (self.results3, self.results5a))
+
+    @mock.patch("gen_class.gen_libs.chk_int")
+    def test_multilist_two_val2(self, mock_int):
+
+        """Function:  test_multilist_one_val2
+
+        Description:  Test with multi_list set to two values.
+
+        Arguments:
+
+        """
+
+        mock_int.return_value = False
+
+        args_array = gen_class.ArgParser(self.argv)
+
+        self.assertTrue(args_array.parse_multi())
+
+    @mock.patch("gen_class.gen_libs.chk_int")
     def test_multilist_two_val(self, mock_int):
 
         """Function:  test_multilist_one_val
@@ -94,7 +199,24 @@ class UnitTest(unittest.TestCase):
         self.assertEqual((args_array.argv, args_array.args_array),
                          (self.results, self.resultsa))
 
-    @mock.patch("arg_parser.gen_libs.chk_int")
+    @mock.patch("gen_class.gen_libs.chk_int")
+    def test_multilist_one_val2(self, mock_int):
+
+        """Function:  test_multilist_one_val2
+
+        Description:  Test with multi_list set to one value.
+
+        Arguments:
+
+        """
+
+        mock_int.return_value = False
+
+        args_array = gen_class.ArgParser(self.argv4)
+
+        self.assertTrue(args_array.parse_multi())
+
+    @mock.patch("gen_class.gen_libs.chk_int")
     def test_multilist_one_val(self, mock_int):
 
         """Function:  test_multilist_one_val
@@ -113,9 +235,25 @@ class UnitTest(unittest.TestCase):
         self.assertEqual((args_array.argv, args_array.args_array),
                          (self.results4, self.results4a))
 
-    @mock.patch("arg_parser.arg_default")
-    @mock.patch("arg_parser.gen_libs.chk_int")
-    def test_multilist_def_arg(self, mock_int, mock_def):
+    @mock.patch("gen_class.gen_libs.chk_int")
+    def test_multilist_def_arg2(self, mock_int):
+
+        """Function:  test_multilist_def_arg2
+
+        Description:  Test with multi_list set to one arg using default.
+
+        Arguments:
+
+        """
+
+        mock_int.return_value = False
+
+        args_array = gen_class.ArgParser(self.argv3, opt_def=self.opt_def)
+
+        self.assertTrue(args_array.parse_multi())
+
+    @mock.patch("gen_class.gen_libs.chk_int")
+    def test_multilist_def_arg(self, mock_int):
 
         """Function:  test_multilist_def_arg
 
@@ -126,7 +264,6 @@ class UnitTest(unittest.TestCase):
         """
 
         mock_int.return_value = False
-        mock_def.return_value = self.opt_def
 
         args_array = gen_class.ArgParser(self.argv3, opt_def=self.opt_def)
         args_array.parse_multi()
@@ -134,7 +271,24 @@ class UnitTest(unittest.TestCase):
         self.assertEqual((args_array.argv, args_array.args_array),
                          (self.results3, self.results3a))
 
-    @mock.patch("arg_parser.gen_libs.chk_int")
+    @mock.patch("gen_class.gen_libs.chk_int")
+    def test_multilist_two_args2(self, mock_int):
+
+        """Function:  test_multilist_two_args2
+
+        Description:  Test with multi_list set to one arg and one other arg.
+
+        Arguments:
+
+        """
+
+        mock_int.return_value = False
+
+        args_array = gen_class.ArgParser(self.argv2)
+
+        self.assertTrue(args_array.parse_multi())
+
+    @mock.patch("gen_class.gen_libs.chk_int")
     def test_multilist_two_args(self, mock_int):
 
         """Function:  test_multilist_two_args
@@ -153,7 +307,24 @@ class UnitTest(unittest.TestCase):
         self.assertEqual((args_array.argv, args_array.args_array),
                          (self.results2, self.resultsa))
 
-    @mock.patch("arg_parser.gen_libs.chk_int")
+    @mock.patch("gen_class.gen_libs.chk_int")
+    def test_multilist_one_arg2(self, mock_int):
+
+        """Function:  test_multilist_one_arg2
+
+        Description:  Test with multi_list set to one argument.
+
+        Arguments:
+
+        """
+
+        mock_int.return_value = False
+
+        args_array = gen_class.ArgParser(self.argv)
+
+        self.assertTrue(args_array.parse_multi())
+
+    @mock.patch("gen_class.gen_libs.chk_int")
     def test_multilist_one_arg(self, mock_int):
 
         """Function:  test_multilist_one_arg
