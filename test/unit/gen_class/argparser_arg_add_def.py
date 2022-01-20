@@ -102,7 +102,8 @@ class UnitTest(unittest.TestCase):
         """
 
         args_array = gen_class.ArgParser(
-            self.argv, defaults=self.defaults3, opt_req=self.opt_req2)
+            self.argv, defaults=self.defaults3, opt_req=self.opt_req2,
+            do_parse=True)
         args_array.arg_add_def(defaults=self.defaults6, opt_req=self.opt_req7)
 
         self.assertEqual(args_array.args_array, self.results7)
@@ -118,7 +119,8 @@ class UnitTest(unittest.TestCase):
         """
 
         args_array = gen_class.ArgParser(
-            self.argv, defaults=self.defaults3, opt_req=self.opt_req2)
+            self.argv, defaults=self.defaults3, opt_req=self.opt_req2,
+            do_parse=True)
         args_array.arg_add_def(defaults=self.defaults6, opt_req=self.opt_req6)
 
         self.assertEqual(args_array.args_array, self.results6)
@@ -134,7 +136,8 @@ class UnitTest(unittest.TestCase):
         """
 
         args_array = gen_class.ArgParser(
-            self.argv, defaults=self.defaults3, opt_req=self.opt_req2)
+            self.argv, defaults=self.defaults3, opt_req=self.opt_req2,
+            do_parse=True)
         args_array.arg_add_def(opt_req=self.opt_req5)
 
         self.assertEqual(args_array.args_array, self.results5)
@@ -150,7 +153,8 @@ class UnitTest(unittest.TestCase):
         """
 
         args_array = gen_class.ArgParser(
-            self.argv, defaults=self.defaults2, opt_req=self.opt_req)
+            self.argv, defaults=self.defaults2, opt_req=self.opt_req,
+            do_parse=True)
         args_array.arg_add_def(defaults=self.defaults5)
 
         self.assertEqual(args_array.args_array, self.results4)
@@ -166,7 +170,8 @@ class UnitTest(unittest.TestCase):
         """
 
         args_array = gen_class.ArgParser(
-            self.argv, defaults=self.defaults4, opt_req=self.opt_req4)
+            self.argv, defaults=self.defaults4, opt_req=self.opt_req4,
+            do_parse=True)
         args_array.arg_add_def()
 
         self.assertEqual(args_array.args_array, self.results3)
@@ -182,7 +187,8 @@ class UnitTest(unittest.TestCase):
         """
 
         args_array = gen_class.ArgParser(
-            self.argv, defaults=self.defaults3, opt_req=self.opt_req4)
+            self.argv, defaults=self.defaults3, opt_req=self.opt_req4,
+            do_parse=True)
         args_array.arg_add_def()
 
         self.assertEqual(args_array.args_array, self.results3)
@@ -198,7 +204,8 @@ class UnitTest(unittest.TestCase):
         """
 
         args_array = gen_class.ArgParser(
-            self.argv, defaults=self.defaults3, opt_req=self.opt_req3)
+            self.argv, defaults=self.defaults3, opt_req=self.opt_req3,
+            do_parse=True)
         args_array.arg_add_def()
 
         self.assertEqual(args_array.args_array, self.results)
@@ -214,7 +221,8 @@ class UnitTest(unittest.TestCase):
         """
 
         args_array = gen_class.ArgParser(
-            self.argv, defaults=self.defaults3, opt_req=self.opt_req2)
+            self.argv, defaults=self.defaults3, opt_req=self.opt_req2,
+            do_parse=True)
         args_array.arg_add_def()
 
         self.assertEqual(args_array.args_array, self.results2)
@@ -229,7 +237,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        args_array = gen_class.ArgParser(self.argv)
+        args_array = gen_class.ArgParser(self.argv, do_parse=True)
 
         self.assertEqual(args_array.args_array, self.results)
 
@@ -244,7 +252,8 @@ class UnitTest(unittest.TestCase):
         """
 
         args_array = gen_class.ArgParser(
-            self.argv, defaults=self.defaults3, opt_req=self.opt_req)
+            self.argv, defaults=self.defaults3, opt_req=self.opt_req,
+            do_parse=True)
         args_array.arg_add_def()
 
         self.assertEqual(args_array.args_array, self.results3)
@@ -260,7 +269,8 @@ class UnitTest(unittest.TestCase):
         """
 
         args_array = gen_class.ArgParser(
-            self.argv, defaults=self.defaults2, opt_req=self.opt_req)
+            self.argv, defaults=self.defaults2, opt_req=self.opt_req,
+            do_parse=True)
         args_array.arg_add_def()
 
         self.assertEqual(args_array.args_array, self.results2)
@@ -276,7 +286,8 @@ class UnitTest(unittest.TestCase):
         """
 
         args_array = gen_class.ArgParser(
-            self.argv, defaults=self.defaults, opt_req=self.opt_req)
+            self.argv, defaults=self.defaults, opt_req=self.opt_req,
+            do_parse=True)
         args_array.arg_add_def()
 
         self.assertEqual(args_array.args_array, self.results)
