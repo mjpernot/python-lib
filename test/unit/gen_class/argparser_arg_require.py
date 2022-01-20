@@ -69,6 +69,22 @@ class UnitTest(unittest.TestCase):
         self.opt_req = []
         self.opt_req2 = ["-a"]
         self.opt_req3 = ["-a", "-c"]
+        self.opt_req4 = ["-a", "-d"]
+
+    def test_opt_req_override(self):
+
+        """Function:  test_opt_req_override
+
+        Description:  Test with opt_req passed in to override.
+
+        Arguments:
+
+        """
+
+        args_array = gen_class.ArgParser(
+            self.argv4, opt_req=self.opt_req3, do_parse=True)
+
+        self.assertTrue(args_array.arg_require(opt_req=self.opt_req4))
 
     def test_two_require_one_fail(self):
 
