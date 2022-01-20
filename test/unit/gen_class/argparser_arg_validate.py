@@ -100,6 +100,23 @@ class UnitTest(unittest.TestCase):
         self.valid_func = {}
         self.valid_func2 = {"-a": validate_value}
         self.valid_func3 = {"-a": validate_value, "-b": validate_value2}
+        self.valid_func4 = {"-a": validate_value2}
+
+    def test_valid_func_override(self):
+
+        """Function:  test_valid_func_override
+
+        Description:  Test with valid_func passed in to override.
+
+        Arguments:
+
+        """
+
+        args_array = gen_class.ArgParser(
+            self.argv2, opt_val=self.opt_val, valid_func=self.valid_func4,
+            do_parse=True)
+
+        self.assertTrue(args_array.arg_validate(valid_func=self.valid_func2))
 
     def test_two_validate_fail2(self):
 
@@ -167,7 +184,6 @@ class UnitTest(unittest.TestCase):
 
         with gen_libs.no_std_out():
             self.assertFalse(args_array.arg_validate())
-
 
     def test_validate_success(self):
 
