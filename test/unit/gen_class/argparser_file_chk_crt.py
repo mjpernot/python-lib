@@ -115,10 +115,12 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
+        test_file_crt_override
         test_open_fail
         test_open_success
         test_errno_not_two
         test_errno_two
+        test_errno_two_success
         test_option_not_in_list
 
     """
@@ -141,6 +143,28 @@ class UnitTest(unittest.TestCase):
         self.open = FileOpen()
         self.open2 = FileOpen2()
         self.open3 = FileOpen3()
+
+    @mock.patch("__builtin__.open")
+    def test_file_crt_override(self, mock_open):
+
+        """Function:  test_file_crt_override
+
+        Description:  Test with passing file_crt to override.
+
+        Arguments:
+
+        """
+
+        mock_open.side_effect = [self.open3, self.open]
+
+        args_array = gen_class.ArgParser(
+            self.argv, opt_val=self.opt_val, file_crt=self.file_crt2,
+            do_parse=True)
+
+        self.assertTrue(
+            args_array._file_chk_crt(
+                args_array.args_array[self.option], self.option,
+                file_crt=self.file_crt))
 
     @mock.patch("__builtin__.open")
     def test_open_fail(self, mock_open):
