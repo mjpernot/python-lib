@@ -42,6 +42,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
+        test_opt_valid_val_override
         test_two_values_fail2
         test_two_values_fail
         test_two_values_success
@@ -75,6 +76,24 @@ class UnitTest(unittest.TestCase):
         self.opt_valid_val = {}
         self.opt_valid_val2 = {"-a": ["value", "value1"]}
         self.opt_valid_val3 = {"-a": ["value", "value1"], "-b": ["value2"]}
+        self.opt_valid_val4 = {"-a": ["value", "value1", "invalid"]}
+
+    def test_opt_valid_val_override(self):
+
+        """Function:  test_opt_valid_val_override
+
+        Description:  Test with opt_valid_val passed in to override.
+
+        Arguments:
+
+        """
+
+        args_array = gen_class.ArgParser(
+            self.argv3, opt_val=self.opt_val,
+            opt_valid_val=self.opt_valid_val2, do_parse=True)
+
+        self.assertTrue(
+            args_array.arg_valid_val(opt_valid_val=self.opt_valid_val4))
 
     def test_two_values_fail2(self):
 
