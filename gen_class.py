@@ -831,10 +831,10 @@ class ArgParser(object):
         valid_func =  dict(kwargs.get("valid_func", self.valid_func))
         status = True
 
-        for opt in set(self.valid_func.keys()) & set(self.args_array.keys()):
+        for opt in set(valid_func.keys()) & set(self.args_array.keys()):
 
             # Call function from function list.
-            if not self.valid_func[opt](self.args_array[opt]):
+            if not valid_func[opt](self.args_array[opt]):
                 print("Error:  Invalid format: {0} '{1}'"
                       .format(opt, self.args_array[opt]))
                 status = False
