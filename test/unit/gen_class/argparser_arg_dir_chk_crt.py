@@ -103,7 +103,7 @@ class UnitTest(unittest.TestCase):
 
         args_array = gen_class.ArgParser(
             self.argv5, opt_val=self.opt_val, dir_chk=self.dir_chk2,
-            dir_crt=self.dir_crt2)
+            dir_crt=self.dir_crt2, do_parse=True)
 
         self.assertFalse(args_array.arg_dir_chk_crt())
 
@@ -124,7 +124,7 @@ class UnitTest(unittest.TestCase):
 
         args_array = gen_class.ArgParser(
             self.argv4, opt_val=self.opt_val, dir_chk=self.dir_chk2,
-            dir_crt=self.dir_crt2)
+            dir_crt=self.dir_crt2, do_parse=True)
 
         self.assertFalse(args_array.arg_dir_chk_crt())
 
@@ -140,7 +140,7 @@ class UnitTest(unittest.TestCase):
 
         args_array = gen_class.ArgParser(
             self.argv3, opt_val=self.opt_val, dir_chk=self.dir_chk4,
-            dir_crt=self.dir_crt3)
+            dir_crt=self.dir_crt3, do_parse=True)
 
         with gen_libs.no_std_out():
             self.assertFalse(args_array.arg_dir_chk_crt())
@@ -163,7 +163,7 @@ class UnitTest(unittest.TestCase):
 
         args_array = gen_class.ArgParser(
             self.argv3, opt_val=self.opt_val, dir_chk=self.dir_chk3,
-            dir_crt=self.dir_crt3)
+            dir_crt=self.dir_crt3, do_parse=True)
 
         self.assertFalse(args_array.arg_dir_chk_crt())
 
@@ -184,7 +184,7 @@ class UnitTest(unittest.TestCase):
 
         args_array = gen_class.ArgParser(
             self.argv2, opt_val=self.opt_val, dir_chk=self.dir_chk2,
-            dir_crt=self.dir_crt2)
+            dir_crt=self.dir_crt2, do_parse=True)
 
         self.assertFalse(args_array.arg_dir_chk_crt())
 
@@ -205,7 +205,7 @@ class UnitTest(unittest.TestCase):
 
         args_array = gen_class.ArgParser(
             self.argv2, opt_val=self.opt_val, dir_chk=self.dir_chk2,
-            dir_crt=self.dir_crt2)
+            dir_crt=self.dir_crt2, do_parse=True)
 
         self.assertTrue(args_array.arg_dir_chk_crt())
 
@@ -223,7 +223,8 @@ class UnitTest(unittest.TestCase):
         mock_os.path.isdir.return_value = False
 
         args_array = gen_class.ArgParser(
-            self.argv2, opt_val=self.opt_val, dir_chk=self.dir_chk2)
+            self.argv2, opt_val=self.opt_val, dir_chk=self.dir_chk2,
+            do_parse=True)
 
         with gen_libs.no_std_out():
             self.assertFalse(args_array.arg_dir_chk_crt())
@@ -243,7 +244,8 @@ class UnitTest(unittest.TestCase):
         mock_os.access.return_value = False
 
         args_array = gen_class.ArgParser(
-            self.argv2, opt_val=self.opt_val, dir_chk=self.dir_chk2)
+            self.argv2, opt_val=self.opt_val, dir_chk=self.dir_chk2,
+            do_parse=True)
 
         with gen_libs.no_std_out():
             self.assertFalse(args_array.arg_dir_chk_crt())
@@ -263,7 +265,8 @@ class UnitTest(unittest.TestCase):
         mock_os.access.return_value = True
 
         args_array = gen_class.ArgParser(
-            self.argv2, opt_val=self.opt_val, dir_chk=self.dir_chk2)
+            self.argv2, opt_val=self.opt_val, dir_chk=self.dir_chk2,
+            do_parse=True)
 
         self.assertTrue(args_array.arg_dir_chk_crt())
 
@@ -278,7 +281,8 @@ class UnitTest(unittest.TestCase):
         """
 
         args_array = gen_class.ArgParser(
-            self.argv2, opt_val=self.opt_val, dir_chk=self.dir_chk5)
+            self.argv2, opt_val=self.opt_val, dir_chk=self.dir_chk5,
+            do_parse=True)
 
         self.assertTrue(args_array.arg_dir_chk_crt())
 
@@ -293,7 +297,8 @@ class UnitTest(unittest.TestCase):
         """
 
         args_array = gen_class.ArgParser(
-            self.argv, opt_val=self.opt_val, dir_chk=self.dir_chk2)
+            self.argv, opt_val=self.opt_val, dir_chk=self.dir_chk2,
+            do_parse=True)
 
         self.assertTrue(args_array.arg_dir_chk_crt())
 
@@ -308,7 +313,8 @@ class UnitTest(unittest.TestCase):
         """
 
         args_array = gen_class.ArgParser(
-            self.argv2, opt_val=self.opt_val, dir_chk=self.dir_chk)
+            self.argv2, opt_val=self.opt_val, dir_chk=self.dir_chk,
+            do_parse=True)
 
         self.assertTrue(args_array.arg_dir_chk_crt())
 
