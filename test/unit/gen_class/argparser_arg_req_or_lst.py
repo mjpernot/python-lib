@@ -42,6 +42,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
+        test_opt_or_override
         test_multiple_miss2
         test_multiple_miss
         test_multiple_mix
@@ -80,6 +81,21 @@ class UnitTest(unittest.TestCase):
         self.opt_or = {}
         self.opt_or2 = {"-a": ["-b"]}
         self.opt_or3 = {"-a": ["-b", "-c"], "-d": ["-e"]}
+
+    def test_opt_or_override(self):
+
+        """Function:  test_opt_or_override
+
+        Description:  Test with opt_or passed in to override.
+
+        Arguments:
+
+        """
+
+        args_array = gen_class.ArgParser(
+            self.argv2, opt_or=self.opt_or3, do_parse=True)
+
+        self.assertTrue(args_array.arg_req_or_lst(opt_or=self.opt_or))
 
     def test_multiple_miss2(self):
 
