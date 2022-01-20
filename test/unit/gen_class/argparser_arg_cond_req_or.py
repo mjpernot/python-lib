@@ -90,7 +90,7 @@ class UnitTest(unittest.TestCase):
         """
 
         args_array = gen_class.ArgParser(
-            self.argv6, opt_con_or=self.opt_con_or6)
+            self.argv6, opt_con_or=self.opt_con_or6, do_parse=True)
 
         self.assertTrue(
             args_array.arg_cond_req_or(opt_con_or=self.opt_con_or3))
@@ -106,7 +106,7 @@ class UnitTest(unittest.TestCase):
         """
 
         args_array = gen_class.ArgParser(
-            self.argv6, opt_con_or=self.opt_con_or6)
+            self.argv6, opt_con_or=self.opt_con_or6, do_parse=True)
 
         with gen_libs.no_std_out():
             self.assertFalse(args_array.arg_cond_req_or())
@@ -122,7 +122,7 @@ class UnitTest(unittest.TestCase):
         """
 
         args_array = gen_class.ArgParser(
-            self.argv5, opt_con_or=self.opt_con_or5)
+            self.argv5, opt_con_or=self.opt_con_or5, do_parse=True)
 
         self.assertTrue(args_array.arg_cond_req_or())
 
@@ -137,7 +137,7 @@ class UnitTest(unittest.TestCase):
         """
 
         args_array = gen_class.ArgParser(
-            self.argv3, opt_con_or=self.opt_con_or4)
+            self.argv3, opt_con_or=self.opt_con_or4, do_parse=True)
 
         with gen_libs.no_std_out():
             self.assertFalse(args_array.arg_cond_req_or())
@@ -153,7 +153,7 @@ class UnitTest(unittest.TestCase):
         """
 
         args_array = gen_class.ArgParser(
-            self.argv4, opt_con_or=self.opt_con_or4)
+            self.argv4, opt_con_or=self.opt_con_or4, do_parse=True)
 
         self.assertTrue(args_array.arg_cond_req_or())
 
@@ -168,7 +168,7 @@ class UnitTest(unittest.TestCase):
         """
 
         args_array = gen_class.ArgParser(
-            self.argv4, opt_con_or=self.opt_con_or3)
+            self.argv4, opt_con_or=self.opt_con_or3, do_parse=True)
 
         self.assertTrue(args_array.arg_cond_req_or())
 
@@ -183,7 +183,7 @@ class UnitTest(unittest.TestCase):
         """
 
         args_array = gen_class.ArgParser(
-            self.argv3, opt_con_or=self.opt_con_or2)
+            self.argv3, opt_con_or=self.opt_con_or2, do_parse=True)
 
         self.assertTrue(args_array.arg_cond_req_or())
 
@@ -198,7 +198,7 @@ class UnitTest(unittest.TestCase):
         """
 
         args_array = gen_class.ArgParser(
-            self.argv2, opt_con_or=self.opt_con_or)
+            self.argv2, opt_con_or=self.opt_con_or, do_parse=True)
 
         self.assertTrue(args_array.arg_cond_req_or())
 
@@ -213,7 +213,7 @@ class UnitTest(unittest.TestCase):
         """
 
         args_array = gen_class.ArgParser(
-            self.argv, opt_con_or=self.opt_con_or2)
+            self.argv, opt_con_or=self.opt_con_or2, do_parse=True)
 
         self.assertTrue(args_array.arg_cond_req_or())
 
