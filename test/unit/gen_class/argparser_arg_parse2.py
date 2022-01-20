@@ -43,6 +43,12 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
+        test_multi_val_override2
+        test_multi_val_override
+        test_opt_def_override2
+        test_opt_def_override
+        test_opt_val_override2
+        test_opt_val_override
         test_all_together
         test_multiple_opt_def
         test_multilist_multiple_val
@@ -100,7 +106,9 @@ class UnitTest(unittest.TestCase):
         self.opt_def = {"-g": ["def_val"], "-f": ["file1", "file2"]}
         self.opt_def2 = {"-f": ["file1"]}
         self.multi_val = ["-f", "-g"]
+        self.multi_val2 = ["-g"]
         self.opt_val_bin = ["-d"]
+        self.opt_val_bin2 = ["-M", "-a"]
 
         self.results = {"-M": True}
         self.results2 = {"-M": True, "-a": True}
@@ -117,6 +125,150 @@ class UnitTest(unittest.TestCase):
         self.results13 = {"-g": ["def_val"], "-f": ["file1", "file2"]}
         self.results14 = {"-c": "cfg", "-d": "/path", "-M": True,
                           "-f": ["file1", "file2"]}
+        self.results15 = {"-f": "file5"}
+        self.results16 = {"-M": None, "-a": None}
+
+    @mock.patch("gen_class.gen_libs.chk_int")
+    def test_opt_val_bin_override2(self, mock_int):
+
+        """Function:  test_opt_val_bin_override2
+
+        Description:  Test with opt_val_bin passed in to override.
+
+        Arguments:
+
+        """
+
+        mock_int.return_value = False
+
+        args_array = gen_class.ArgParser(
+            self.argv3, opt_val_bin=self.opt_val_bin)
+
+        self.assertTrue(args_array.arg_parse2(opt_val_bin=self.opt_val_bin2))
+
+    @mock.patch("gen_class.gen_libs.chk_int")
+    def test_opt_val_bin_override(self, mock_int):
+
+        """Function:  test_opt_val_bin_override
+
+        Description:  Test with opt_val_bin passed in to override.
+
+        Arguments:
+
+        """
+
+        mock_int.return_value = False
+
+        args_array = gen_class.ArgParser(
+            self.argv3, opt_val_bin=self.opt_val_bin)
+        args_array.arg_parse2(opt_val_bin=self.opt_val_bin2)
+
+        self.assertEqual(args_array.args_array, self.results16)
+
+    @mock.patch("gen_class.gen_libs.chk_int")
+    def test_multi_val_override2(self, mock_int):
+
+        """Function:  test_multi_val_override2
+
+        Description:  Test with multi_val passed in to override.
+
+        Arguments:
+
+        """
+
+        mock_int.return_value = False
+
+        args_array = gen_class.ArgParser(
+            self.argv11, opt_val=self.opt_val, multi_val=self.multi_val)
+
+        self.assertTrue(args_array.arg_parse2(multi_val=self.multi_val2))
+
+    @mock.patch("gen_class.gen_libs.chk_int")
+    def test_multi_val_override(self, mock_int):
+
+        """Function:  test_multi_val_override
+
+        Description:  Test with multi_val passed in to override.
+
+        Arguments:
+
+        """
+
+        mock_int.return_value = False
+
+        args_array = gen_class.ArgParser(
+            self.argv11, opt_val=self.opt_val, multi_val=self.multi_val)
+        args_array.arg_parse2(multi_val=self.multi_val2)
+
+        self.assertEqual(args_array.args_array, self.results15)
+
+    @mock.patch("gen_class.gen_libs.chk_int")
+    def test_opt_def_override2(self, mock_int):
+
+        """Function:  test_opt_def_override2
+
+        Description:  Test with opt_def passed in to override.
+
+        Arguments:
+
+        """
+
+        mock_int.return_value = False
+
+        args_array = gen_class.ArgParser(
+            self.argv10, opt_val=self.opt_val, multi_val=self.multi_val,
+            opt_def=self.opt_def2)
+
+        self.assertTrue(args_array.arg_parse2(opt_def=self.opt_def))
+
+    @mock.patch("gen_class.gen_libs.chk_int")
+    def test_opt_def_override(self, mock_int):
+
+        """Function:  test_opt_def_override
+
+        Description:  Test with opt_def passed in to override.
+
+        Arguments:
+
+        """
+
+        mock_int.return_value = False
+
+        args_array = gen_class.ArgParser(
+            self.argv10, opt_val=self.opt_val, multi_val=self.multi_val,
+            opt_def=self.opt_def2)
+        args_array.arg_parse2(opt_def=self.opt_def)
+
+        self.assertEqual(args_array.args_array, self.results8)
+
+    def test_opt_val_override2(self):
+
+        """Function:  test_opt_val_override2
+
+        Description:  Test with opt_val passed in to override.
+
+        Arguments:
+
+        """
+
+        args_array = gen_class.ArgParser(self.argv2, opt_val=self.opt_val2)
+
+        self.assertTrue(args_array.arg_parse2(opt_val=self.opt_val))
+
+    def test_opt_val_override(self):
+
+        """Function:  test_opt_val_override
+
+        Description:  Test with opt_val passed in to override.
+
+        Arguments:
+
+        """
+
+        args_array = gen_class.ArgParser(self.argv2, opt_val=self.opt_val2)
+        args_array.arg_parse2(opt_val=self.opt_val)
+
+        self.assertEqual(args_array.args_array, self.results)
 
     @mock.patch("gen_class.gen_libs.chk_int")
     def test_all_together(self, mock_int):
