@@ -157,7 +157,7 @@ class UnitTest(unittest.TestCase):
         self.assertEqual((args_array.argv, args_array.args_array),
                          (self.results5, self.results5a))
 
-    @mock.patch("arg_parser.gen_libs.chk_int")
+    @mock.patch("gen_class.gen_libs.chk_int")
     def test_opt_val_arg_int2(self, mock_int):
 
         """Function:  test_opt_val_arg_int2
@@ -174,7 +174,7 @@ class UnitTest(unittest.TestCase):
 
         self.assertTrue(args_array.parse_single())
 
-    @mock.patch("arg_parser.gen_libs.chk_int")
+    @mock.patch("gen_class.gen_libs.chk_int")
     def test_opt_val_arg_int(self, mock_int):
 
         """Function:  test_opt_val_arg_int
@@ -193,7 +193,7 @@ class UnitTest(unittest.TestCase):
         self.assertEqual((args_array.argv, args_array.args_array),
                          (self.results4, self.results4a))
 
-    @mock.patch("arg_parser.gen_libs.chk_int")
+    @mock.patch("gen_class.gen_libs.chk_int")
     def test_opt_val2(self, mock_int):
 
         """Function:  test_opt_val2
@@ -211,7 +211,7 @@ class UnitTest(unittest.TestCase):
 
         self.assertTrue(args_array.parse_single())
 
-    @mock.patch("arg_parser.gen_libs.chk_int")
+    @mock.patch("gen_class.gen_libs.chk_int")
     def test_opt_val(self, mock_int):
 
         """Function:  test_opt_val
