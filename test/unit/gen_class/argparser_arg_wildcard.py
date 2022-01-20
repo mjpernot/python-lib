@@ -41,6 +41,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
+        test_opt_wildcard_override
         test_two_string_wildcard
         test_str_list_wildcard
         test_string_wildcard
@@ -88,6 +89,23 @@ class UnitTest(unittest.TestCase):
         self.results3 = {"-a": [file1], "-b": [file2]}
         self.results4 = {"-a": [file1, file2]}
         self.results5 = {"-a": [file1, file2], "-b": [file2]}
+
+    def test_opt_wildcard_override(self):
+
+        """Function:  test_opt_wildcard_override
+
+        Description:  Test with opt_wildcard passed in to override.
+
+        Arguments:
+
+        """
+
+        args_array = gen_class.ArgParser(
+            self.argv7, opt_val=self.opt_val, opt_wildcard=self.opt_wildcard2,
+            do_parse=True)
+        args_array.arg_wildcard(opt_wildcard=self.opt_wildcard3)
+
+        self.assertEqual(args_array.args_array, self.results3)
 
     def test_two_string_wildcard(self):
 
