@@ -68,6 +68,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
+        test_valid_func_override
         test_two_validate_fail2
         test_two_validate_fail
         test_two_validate_success
