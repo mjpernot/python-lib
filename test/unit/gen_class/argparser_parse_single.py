@@ -43,6 +43,10 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
+        test_opt_val_bin_override2
+        test_opt_val_bin_override
+        test_opt_def_override2
+        test_opt_def_override
         test_opt_def2
         test_opt_def
         test_opt_val_arg_int2
@@ -79,6 +83,7 @@ class UnitTest(unittest.TestCase):
         self.opt_def2 = {"-h": "def_val"}
 
         self.opt_val_bin = ["-d"]
+        self.opt_val_bin2 = ["-a"]
 
         self.results = ["merge"]
         self.resultsa = {"-c": "merge"}
@@ -90,6 +95,77 @@ class UnitTest(unittest.TestCase):
         self.results5 = ["-g"]
         self.results5a = {"-g": "def_val"}
         self.results6a = {}
+
+    @mock.patch("gen_class.gen_libs.chk_int")
+    def test_opt_val_bin_override2(self, mock_int):
+
+        """Function:  test_opt_val_bin_override2
+
+        Description:  Test with opt_val_bin passed in as override.
+
+        Arguments:
+
+        """
+
+        mock_int.return_value = False
+
+        args_array = gen_class.ArgParser(
+            self.argv4, opt_val=self.opt_val, opt_val_bin=self.opt_val_bin2)
+
+        self.assertTrue(args_array.parse_single(opt_val_bin=self.opt_val_bin))
+
+    @mock.patch("gen_class.gen_libs.chk_int")
+    def test_opt_val_bin_override(self, mock_int):
+
+        """Function:  test_opt_val_bin_override2
+
+        Description:  Test with opt_val_bin passed in as override.
+
+        Arguments:
+
+        """
+
+        mock_int.return_value = False
+
+        args_array = gen_class.ArgParser(
+            self.argv4, opt_val=self.opt_val, opt_val_bin=self.opt_val_bin2)
+        args_array.parse_single(opt_val_bin=self.opt_val_bin)
+
+        self.assertEqual((args_array.argv, args_array.args_array),
+                         (self.results3, self.results3a))
+
+    def test_opt_def_override2(self):
+
+        """Function:  test_opt_def_override2
+
+        Description:  Test with opt_def passed in as an override.
+
+        Arguments:
+
+        """
+
+        args_array = gen_class.ArgParser(
+            self.argv6, opt_val=self.opt_val, opt_def=self.opt_def2)
+
+        self.assertTrue(args_array.parse_single(opt_def=self.opt_def))
+
+    def test_opt_def_override(self):
+
+        """Function:  test_opt_def_override
+
+        Description:  Test with opt_def passed in as an override.
+
+        Arguments:
+
+        """
+
+        args_array = gen_class.ArgParser(
+            self.argv6, opt_val=self.opt_val, opt_def=self.opt_def2)
+
+        args_array.parse_single(opt_def=self.opt_def)
+
+        self.assertEqual((args_array.argv, args_array.args_array),
+                         (self.results5, self.results5a))
 
     def test_opt_def_fail2(self):
 
