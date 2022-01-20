@@ -105,7 +105,7 @@ class UnitTest(unittest.TestCase):
 
         args_array = gen_class.ArgParser(
             self.argv2, opt_val=self.opt_val,
-            dir_perms_chk=self.dir_perms_chk)
+            dir_perms_chk=self.dir_perms_chk, do_parse=True)
 
         self.assertTrue(
             args_array.arg_dir_chk(dir_perms_chk=self.dir_perms_chk4))
@@ -128,7 +128,7 @@ class UnitTest(unittest.TestCase):
 
         args_array = gen_class.ArgParser(
             self.argv3, opt_val=self.opt_val,
-            dir_perms_chk=self.dir_perms_chk6)
+            dir_perms_chk=self.dir_perms_chk6, do_parse=True)
 
         with gen_libs.no_std_out():
             self.assertFalse(args_array.arg_dir_chk())
@@ -151,7 +151,7 @@ class UnitTest(unittest.TestCase):
 
         args_array = gen_class.ArgParser(
             self.argv3, opt_val=self.opt_val,
-            dir_perms_chk=self.dir_perms_chk6)
+            dir_perms_chk=self.dir_perms_chk6, do_parse=True)
 
         with gen_libs.no_std_out():
             self.assertFalse(args_array.arg_dir_chk())
@@ -174,7 +174,7 @@ class UnitTest(unittest.TestCase):
 
         args_array = gen_class.ArgParser(
             self.argv3, opt_val=self.opt_val,
-            dir_perms_chk=self.dir_perms_chk6)
+            dir_perms_chk=self.dir_perms_chk6, do_parse=True)
 
         with gen_libs.no_std_out():
             self.assertFalse(args_array.arg_dir_chk())
@@ -197,7 +197,7 @@ class UnitTest(unittest.TestCase):
 
         args_array = gen_class.ArgParser(
             self.argv3, opt_val=self.opt_val,
-            dir_perms_chk=self.dir_perms_chk6)
+            dir_perms_chk=self.dir_perms_chk6, do_parse=True)
 
         self.assertTrue(args_array.arg_dir_chk())
 
@@ -219,7 +219,7 @@ class UnitTest(unittest.TestCase):
 
         args_array = gen_class.ArgParser(
             self.argv2, opt_val=self.opt_val,
-            dir_perms_chk=self.dir_perms_chk4)
+            dir_perms_chk=self.dir_perms_chk4, do_parse=True)
 
         with gen_libs.no_std_out():
             self.assertFalse(args_array.arg_dir_chk())
@@ -242,7 +242,7 @@ class UnitTest(unittest.TestCase):
 
         args_array = gen_class.ArgParser(
             self.argv2, opt_val=self.opt_val,
-            dir_perms_chk=self.dir_perms_chk4)
+            dir_perms_chk=self.dir_perms_chk4, do_parse=True)
 
         with gen_libs.no_std_out():
             self.assertFalse(args_array.arg_dir_chk())
@@ -265,7 +265,7 @@ class UnitTest(unittest.TestCase):
 
         args_array = gen_class.ArgParser(
             self.argv2, opt_val=self.opt_val,
-            dir_perms_chk=self.dir_perms_chk4)
+            dir_perms_chk=self.dir_perms_chk4, do_parse=True)
 
         with gen_libs.no_std_out():
             self.assertFalse(args_array.arg_dir_chk())
@@ -288,7 +288,7 @@ class UnitTest(unittest.TestCase):
 
         args_array = gen_class.ArgParser(
             self.argv2, opt_val=self.opt_val,
-            dir_perms_chk=self.dir_perms_chk4)
+            dir_perms_chk=self.dir_perms_chk4, do_parse=True)
 
         self.assertTrue(args_array.arg_dir_chk())
 
@@ -310,7 +310,7 @@ class UnitTest(unittest.TestCase):
 
         args_array = gen_class.ArgParser(
             self.argv2, opt_val=self.opt_val,
-            dir_perms_chk=self.dir_perms_chk3)
+            dir_perms_chk=self.dir_perms_chk3, do_parse=True)
 
         with gen_libs.no_std_out():
             self.assertFalse(args_array.arg_dir_chk())
@@ -333,7 +333,7 @@ class UnitTest(unittest.TestCase):
 
         args_array = gen_class.ArgParser(
             self.argv2, opt_val=self.opt_val,
-            dir_perms_chk=self.dir_perms_chk4)
+            dir_perms_chk=self.dir_perms_chk4, do_parse=True)
 
         self.assertTrue(args_array.arg_dir_chk())
 
@@ -355,7 +355,7 @@ class UnitTest(unittest.TestCase):
 
         args_array = gen_class.ArgParser(
             self.argv2, opt_val=self.opt_val,
-            dir_perms_chk=self.dir_perms_chk2)
+            dir_perms_chk=self.dir_perms_chk2, do_parse=True)
 
         self.assertTrue(args_array.arg_dir_chk())
 
@@ -377,7 +377,7 @@ class UnitTest(unittest.TestCase):
 
         args_array = gen_class.ArgParser(
             self.argv2, opt_val=self.opt_val,
-            dir_perms_chk=self.dir_perms_chk2)
+            dir_perms_chk=self.dir_perms_chk2, do_parse=True)
 
         with gen_libs.no_std_out():
             self.assertFalse(args_array.arg_dir_chk())
@@ -398,7 +398,7 @@ class UnitTest(unittest.TestCase):
 
         args_array = gen_class.ArgParser(
             self.argv2, opt_val=self.opt_val,
-            dir_perms_chk=self.dir_perms_chk2)
+            dir_perms_chk=self.dir_perms_chk2, do_parse=True)
 
         with gen_libs.no_std_out():
             self.assertFalse(args_array.arg_dir_chk())
@@ -415,7 +415,7 @@ class UnitTest(unittest.TestCase):
 
         args_array = gen_class.ArgParser(
             self.argv2, opt_val=self.opt_val,
-            dir_perms_chk=self.dir_perms_chk5)
+            dir_perms_chk=self.dir_perms_chk5, do_parse=True)
 
         self.assertTrue(args_array.arg_dir_chk())
 
@@ -430,7 +430,8 @@ class UnitTest(unittest.TestCase):
         """
 
         args_array = gen_class.ArgParser(
-            self.argv, opt_val=self.opt_val, dir_perms_chk=self.dir_perms_chk2)
+            self.argv, opt_val=self.opt_val, dir_perms_chk=self.dir_perms_chk2,
+            do_parse=True)
 
         self.assertTrue(args_array.arg_dir_chk())
 
@@ -445,7 +446,8 @@ class UnitTest(unittest.TestCase):
         """
 
         args_array = gen_class.ArgParser(
-            self.argv2, opt_val=self.opt_val, dir_perms_chk=self.dir_perms_chk)
+            self.argv2, opt_val=self.opt_val, dir_perms_chk=self.dir_perms_chk,
+            do_parse=True)
 
         self.assertTrue(args_array.arg_dir_chk())
 
