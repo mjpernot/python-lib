@@ -141,7 +141,7 @@ class UnitTest(unittest.TestCase):
 
         args_array = gen_class.ArgParser(
             self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
-            file_crt=self.file_crt3)
+            file_crt=self.file_crt3, do_parse=True)
 
         self.assertTrue(args_array.arg_file_chk(file_crt=self.file_crt))
 
@@ -156,7 +156,8 @@ class UnitTest(unittest.TestCase):
         """
 
         args_array = gen_class.ArgParser(
-            self.argv, opt_val=self.opt_val, file_chk=self.file_chk)
+            self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
+            do_parse=True)
 
         self.assertTrue(args_array.arg_file_chk(file_chk=self.file_chk2))
 
@@ -175,7 +176,7 @@ class UnitTest(unittest.TestCase):
 
         args_array = gen_class.ArgParser(
             self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
-            file_crt=self.file_crt)
+            file_crt=self.file_crt, do_parse=True)
 
         self.assertTrue(args_array.arg_file_chk())
 
@@ -194,7 +195,7 @@ class UnitTest(unittest.TestCase):
 
         args_array = gen_class.ArgParser(
             self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
-            file_crt=self.file_crt)
+            file_crt=self.file_crt, do_parse=True)
 
         self.assertFalse(args_array.arg_file_chk())
 
@@ -213,7 +214,7 @@ class UnitTest(unittest.TestCase):
 
         args_array = gen_class.ArgParser(
             self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
-            file_crt=self.file_crt)
+            file_crt=self.file_crt, do_parse=True)
 
         self.assertTrue(args_array.arg_file_chk())
 
@@ -232,7 +233,7 @@ class UnitTest(unittest.TestCase):
 
         args_array = gen_class.ArgParser(
             self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
-            file_crt=self.file_crt2)
+            file_crt=self.file_crt2, do_parse=True)
 
         self.assertFalse(args_array.arg_file_chk())
 
@@ -251,7 +252,7 @@ class UnitTest(unittest.TestCase):
 
         args_array = gen_class.ArgParser(
             self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
-            file_crt=self.file_crt3)
+            file_crt=self.file_crt3, do_parse=True)
 
         self.assertFalse(args_array.arg_file_chk())
 
@@ -269,7 +270,8 @@ class UnitTest(unittest.TestCase):
         mock_crt.return_value = False
 
         args_array = gen_class.ArgParser(
-            self.argv, opt_val=self.opt_val, file_chk=self.file_chk)
+            self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
+            do_parse=True)
 
         self.assertFalse(args_array.arg_file_chk())
 
@@ -288,7 +290,7 @@ class UnitTest(unittest.TestCase):
 
         args_array = gen_class.ArgParser(
             self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
-            file_crt=self.file_crt)
+            file_crt=self.file_crt, do_parse=True)
 
         self.assertTrue(args_array.arg_file_chk())
 
@@ -306,7 +308,8 @@ class UnitTest(unittest.TestCase):
         mock_crt.return_value = False
 
         args_array = gen_class.ArgParser(
-            self.argv, opt_val=self.opt_val, file_chk=self.file_chk)
+            self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
+            do_parse=True)
 
         self.assertFalse(args_array.arg_file_chk())
 
@@ -324,7 +327,8 @@ class UnitTest(unittest.TestCase):
         mock_open.return_value = self.open
 
         args_array = gen_class.ArgParser(
-            self.argv, opt_val=self.opt_val, file_chk=self.file_chk)
+            self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
+            do_parse=True)
 
         self.assertTrue(args_array.arg_file_chk())
 
@@ -339,7 +343,8 @@ class UnitTest(unittest.TestCase):
         """
 
         args_array = gen_class.ArgParser(
-            self.argv, opt_val=self.opt_val, file_chk=self.file_chk)
+            self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
+            do_parse=True)
         args_array.args_array["-f"] = []
 
         self.assertTrue(args_array.arg_file_chk())
@@ -358,7 +363,8 @@ class UnitTest(unittest.TestCase):
         mock_open.return_value = self.open
 
         args_array = gen_class.ArgParser(
-            self.argv5, opt_val=self.opt_val, file_chk=self.file_chk)
+            self.argv5, opt_val=self.opt_val, file_chk=self.file_chk,
+            do_parse=True)
 
         self.assertTrue(args_array.arg_file_chk())
 
@@ -376,7 +382,8 @@ class UnitTest(unittest.TestCase):
         mock_open.return_value = self.open
 
         args_array = gen_class.ArgParser(
-            self.argv, opt_val=self.opt_val, file_chk=self.file_chk)
+            self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
+            do_parse=True)
 
         self.assertTrue(args_array.arg_file_chk())
 
@@ -394,7 +401,8 @@ class UnitTest(unittest.TestCase):
         mock_open.return_value = self.open
 
         args_array = gen_class.ArgParser(
-            self.argv4, opt_val=self.opt_val, file_chk=self.file_chk)
+            self.argv4, opt_val=self.opt_val, file_chk=self.file_chk,
+            do_parse=True)
 
         self.assertTrue(args_array.arg_file_chk())
 
@@ -412,7 +420,8 @@ class UnitTest(unittest.TestCase):
         mock_open.return_value = self.open
 
         args_array = gen_class.ArgParser(
-            self.argv3, opt_val=self.opt_val, file_chk=self.file_chk)
+            self.argv3, opt_val=self.opt_val, file_chk=self.file_chk,
+            do_parse=True)
 
         self.assertTrue(args_array.arg_file_chk())
 
@@ -430,7 +439,8 @@ class UnitTest(unittest.TestCase):
         mock_open.return_value = self.open
 
         args_array = gen_class.ArgParser(
-            self.argv, opt_val=self.opt_val, file_chk=self.file_chk)
+            self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
+            do_parse=True)
 
         self.assertTrue(args_array.arg_file_chk())
 
@@ -448,7 +458,8 @@ class UnitTest(unittest.TestCase):
         mock_open.return_value = self.open
 
         args_array = gen_class.ArgParser(
-            self.argv2, opt_val=self.opt_val, file_chk=self.file_chk3)
+            self.argv2, opt_val=self.opt_val, file_chk=self.file_chk3,
+            do_parse=True)
 
         self.assertTrue(args_array.arg_file_chk())
 
@@ -466,7 +477,8 @@ class UnitTest(unittest.TestCase):
         mock_open.return_value = self.open
 
         args_array = gen_class.ArgParser(
-            self.argv, opt_val=self.opt_val, file_chk=self.file_chk)
+            self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
+            do_parse=True)
 
         self.assertTrue(args_array.arg_file_chk())
 
@@ -481,7 +493,8 @@ class UnitTest(unittest.TestCase):
         """
 
         args_array = gen_class.ArgParser(
-            self.argv, opt_val=self.opt_val, file_chk=self.file_chk)
+            self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
+            do_parse=True)
         args_array.args_array["-f"] = []
 
         self.assertTrue(args_array.arg_file_chk())
@@ -497,7 +510,8 @@ class UnitTest(unittest.TestCase):
         """
 
         args_array = gen_class.ArgParser(
-            self.argv, opt_val=self.opt_val, file_chk=self.file_chk2)
+            self.argv, opt_val=self.opt_val, file_chk=self.file_chk2,
+            do_parse=True)
 
         self.assertTrue(args_array.arg_file_chk())
 
