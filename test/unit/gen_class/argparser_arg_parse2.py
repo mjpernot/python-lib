@@ -118,7 +118,7 @@ class UnitTest(unittest.TestCase):
         self.results14 = {"-c": "cfg", "-d": "/path", "-M": True,
                           "-f": ["file1", "file2"]}
 
-    @mock.patch("arg_parser.gen_libs.chk_int")
+    @mock.patch("gen_class.gen_libs.chk_int")
     def test_all_together(self, mock_int):
 
         """Function:  test_all_together
@@ -137,7 +137,7 @@ class UnitTest(unittest.TestCase):
 
         self.assertEqual(args_array.args_array, self.results14)
 
-    @mock.patch("arg_parser.gen_libs.chk_int")
+    @mock.patch("gen_class.gen_libs.chk_int")
     def test_multiple_opt_def(self, mock_int):
 
         """Function:  test_multiple_opt_def
@@ -156,7 +156,7 @@ class UnitTest(unittest.TestCase):
 
         self.assertEqual(args_array.args_array, self.results13)
 
-    @mock.patch("arg_parser.gen_libs.chk_int")
+    @mock.patch("gen_class.gen_libs.chk_int")
     def test_multilist_multiple_val(self, mock_int):
 
         """Function:  test_multilist_multiple_val
@@ -175,7 +175,7 @@ class UnitTest(unittest.TestCase):
 
         self.assertEqual(args_array.args_array, self.results12)
 
-    @mock.patch("arg_parser.gen_libs.chk_int")
+    @mock.patch("gen_class.gen_libs.chk_int")
     def test_multi_val_one_val(self, mock_int):
 
         """Function:  test_multi_val_one_val
@@ -194,7 +194,7 @@ class UnitTest(unittest.TestCase):
 
         self.assertEqual(args_array.args_array, self.results11)
 
-    @mock.patch("arg_parser.gen_libs.chk_int")
+    @mock.patch("gen_class.gen_libs.chk_int")
     def test_multi_val_no_val(self, mock_int):
 
         """Function:  test_multi_val_no_val
@@ -214,7 +214,7 @@ class UnitTest(unittest.TestCase):
         with gen_libs.no_std_out():
             self.assertFalse(args_array.arg_parse2())
 
-    @mock.patch("arg_parser.gen_libs.chk_int")
+    @mock.patch("gen_class.gen_libs.chk_int")
     def test_multi_val_def_arg(self, mock_int):
 
         """Function:  test_multi_val_def_arg
@@ -234,7 +234,7 @@ class UnitTest(unittest.TestCase):
 
         self.assertEqual(args_array.args_array, self.results10)
 
-    @mock.patch("arg_parser.gen_libs.chk_int")
+    @mock.patch("gen_class.gen_libs.chk_int")
     def test_multi_val_two_args(self, mock_int):
 
         """Function:  test_multi_val_two_args
@@ -254,7 +254,7 @@ class UnitTest(unittest.TestCase):
 
         self.assertEqual(args_array.args_array, self.results9)
 
-    @mock.patch("arg_parser.gen_libs.chk_int")
+    @mock.patch("gen_class.gen_libs.chk_int")
     def test_multi_val_one_arg(self, mock_int):
 
         """Function:  test_multi_val_one_arg
@@ -273,7 +273,7 @@ class UnitTest(unittest.TestCase):
 
         self.assertEqual(args_array.args_array, self.results8)
 
-    @mock.patch("arg_parser.gen_libs.chk_int")
+    @mock.patch("gen_class.gen_libs.chk_int")
     def test_opt_val_arg_int(self, mock_int):
 
         """Function:  test_opt_val_arg_int
@@ -291,7 +291,7 @@ class UnitTest(unittest.TestCase):
 
         self.assertEqual(args_array.args_array, self.results7)
 
-    @mock.patch("arg_parser.gen_libs.chk_int")
+    @mock.patch("gen_class.gen_libs.chk_int")
     def test_opt_val_bin(self, mock_int):
 
         """Function:  test_opt_val_bin
@@ -311,7 +311,7 @@ class UnitTest(unittest.TestCase):
 
         self.assertEqual(args_array.args_array, self.results6)
 
-    @mock.patch("arg_parser.gen_libs.chk_int")
+    @mock.patch("gen_class.gen_libs.chk_int")
     def test_opt_def_no_val2(self, mock_int):
 
         """Function:  test_opt_def_no_val2
@@ -329,7 +329,7 @@ class UnitTest(unittest.TestCase):
         with gen_libs.no_std_out():
             self.assertFalse(args_array.arg_parse2())
 
-    @mock.patch("arg_parser.gen_libs.chk_int")
+    @mock.patch("gen_class.gen_libs.chk_int")
     def test_opt_def_no_val(self, mock_int):
 
         """Function:  test_opt_def_no_val
