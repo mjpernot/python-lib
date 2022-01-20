@@ -81,7 +81,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        args_array = gen_class.ArgParser(self.argv, opt_def=self.opt_def)
+        args_array = gen_class.ArgParser(
+            self.argv, opt_def=self.opt_def, do_parse=True)
 
         self.assertTrue(args_array.arg_default(
             arg=self.arg, opt_def=self.opt_def2))
@@ -96,7 +97,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        args_array = gen_class.ArgParser(self.argv2, opt_def=self.opt_def2)
+        args_array = gen_class.ArgParser(
+            self.argv2, opt_def=self.opt_def2, do_parse=True)
         args_array.arg_default(arg=self.arg)
 
         self.assertEqual(args_array.args_array, self.results)
@@ -111,7 +113,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        args_array = gen_class.ArgParser(self.argv2, opt_def=self.opt_def2)
+        args_array = gen_class.ArgParser(
+            self.argv2, opt_def=self.opt_def2, do_parse=True)
 
         self.assertTrue(args_array.arg_default(arg=self.arg))
 
@@ -125,7 +128,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        args_array = gen_class.ArgParser(self.argv, opt_def=self.opt_def2)
+        args_array = gen_class.ArgParser(
+            self.argv, opt_def=self.opt_def2, do_parse=True)
 
         self.assertTrue(args_array.arg_default(arg=self.arg))
 
@@ -139,7 +143,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        args_array = gen_class.ArgParser(self.argv, opt_def=self.opt_def2)
+        args_array = gen_class.ArgParser(
+            self.argv, opt_def=self.opt_def2, do_parse=True)
 
         with gen_libs.no_std_out():
             self.assertFalse(args_array.arg_default(arg=self.arg2))
@@ -154,7 +159,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        args_array = gen_class.ArgParser(self.argv, opt_def=self.opt_def)
+        args_array = gen_class.ArgParser(
+            self.argv, opt_def=self.opt_def, do_parse=True)
 
         with gen_libs.no_std_out():
             self.assertFalse(args_array.arg_default(arg=self.arg))
