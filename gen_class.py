@@ -587,7 +587,8 @@ class ArgParser(object):
                 # Combine these lines?  See below.
                 # tmp_status = self._file_chk_crt(name, option, file_crt)
                 # status = status & tmp_status
-                status = status & self._file_chk_crt(name, option, file_crt)
+                status = status & self._file_chk_crt(
+                    name, option, file_crt=file_crt)
 
         return status
 
@@ -1036,7 +1037,7 @@ class ArgParser(object):
         return status
 
 
-    def _file_chk_crt(self, name, option, file_crt):
+    def _file_chk_crt(self, name, option, **kwargs):
 
         """Method:  _file_chk_crt
 
@@ -1047,7 +1048,8 @@ class ArgParser(object):
         Arguments:
             (input) name -> File path and name
             (input) option -> Option being checked
-            (input) file_crt -> Options that require files to be created
+            (input) **kwargs:
+                file_crt -> Options that require files to be created
             (output) status -> True|False - If file exists or file creation
                 is succesful
 
@@ -1060,7 +1062,7 @@ class ArgParser(object):
 #       status to True then.
 #
 
-        file_crt = list(file_crt)
+        file_crt = list(kwargs.get("file_crt", self.file_crt))
         status = False
 
         try:
