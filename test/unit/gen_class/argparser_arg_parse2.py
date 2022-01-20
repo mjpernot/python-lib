@@ -43,6 +43,8 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
+        test_opt_val_bin_override2
+        test_opt_val_bin_override
         test_multi_val_override2
         test_multi_val_override
         test_opt_def_override2
