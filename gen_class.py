@@ -111,7 +111,7 @@ class ArgParser(object):
     Note:  The ArgParser class was originally a set of libraries and were
         converted to this class.  Below is a mapping of the library
         variables to the class attributes.  There were a number of renames
-        to simplfy the naming scheme and also a naming conflict.  The
+        to simplfy the naming scheme and also resolve naming conflicts.  The
         mapping is broken out by the method they are used in.
 
         Method
