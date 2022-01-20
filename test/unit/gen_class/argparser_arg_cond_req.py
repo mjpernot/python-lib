@@ -82,7 +82,7 @@ class UnitTest(unittest.TestCase):
         """
 
         args_array = gen_class.ArgParser(
-            self.argv3, opt_con_req=self.opt_con_req4)
+            self.argv3, opt_con_req=self.opt_con_req4, do_parse=True)
 
         self.assertTrue(args_array.arg_cond_req(opt_con_req=self.opt_con_req3))
 
@@ -97,7 +97,7 @@ class UnitTest(unittest.TestCase):
         """
 
         args_array = gen_class.ArgParser(
-            self.argv, opt_con_req=self.opt_con_req3)
+            self.argv, opt_con_req=self.opt_con_req3, do_parse=True)
 
         with gen_libs.no_std_out():
             self.assertFalse(args_array.arg_cond_req())
@@ -113,7 +113,7 @@ class UnitTest(unittest.TestCase):
         """
 
         args_array = gen_class.ArgParser(
-            self.argv, opt_con_req=self.opt_con_req2)
+            self.argv, opt_con_req=self.opt_con_req2, do_parse=True)
 
         with gen_libs.no_std_out():
             self.assertFalse(args_array.arg_cond_req())
@@ -129,7 +129,7 @@ class UnitTest(unittest.TestCase):
         """
 
         args_array = gen_class.ArgParser(
-            self.argv3, opt_con_req=self.opt_con_req3)
+            self.argv3, opt_con_req=self.opt_con_req3, do_parse=True)
 
         self.assertTrue(args_array.arg_cond_req())
 
@@ -144,7 +144,7 @@ class UnitTest(unittest.TestCase):
         """
 
         args_array = gen_class.ArgParser(
-            self.argv2, opt_con_req=self.opt_con_req2)
+            self.argv2, opt_con_req=self.opt_con_req2, do_parse=True)
 
         self.assertTrue(args_array.arg_cond_req())
 
@@ -159,7 +159,7 @@ class UnitTest(unittest.TestCase):
         """
 
         args_array = gen_class.ArgParser(
-            self.argv2, opt_con_req=self.opt_con_req)
+            self.argv2, opt_con_req=self.opt_con_req, do_parse=True)
 
         self.assertTrue(args_array.arg_cond_req())
 
@@ -174,7 +174,7 @@ class UnitTest(unittest.TestCase):
         """
 
         args_array = gen_class.ArgParser(
-            self.argv4, opt_con_req=self.opt_con_req2)
+            self.argv4, opt_con_req=self.opt_con_req2, do_parse=True)
 
         self.assertTrue(args_array.arg_cond_req())
 
