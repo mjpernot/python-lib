@@ -43,6 +43,8 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
+        test_dir_crt_override
+        test_dir_chk_override
         test_create_dir_perm
         test_create_dir_exist
         test_not_subset
@@ -85,6 +87,44 @@ class UnitTest(unittest.TestCase):
         self.dir_crt = []
         self.dir_crt2 = ["-d"]
         self.dir_crt3 = ["-g"]
+
+    @mock.patch("gen_class.os")
+    def test_dir_crt_override(self, mock_os):
+
+        """Function:  test_dir_crt_override
+
+        Description:  Test with dir_crt passed in to override.
+
+        Arguments:
+
+        """
+
+        mock_os.path.isdir.return_value = True
+
+        args_array = gen_class.ArgParser(
+            self.argv3, opt_val=self.opt_val, dir_chk=self.dir_chk4,
+            dir_crt=self.dir_crt3, do_parse=True)
+
+        self.assertTrue(args_array.arg_dir_chk_crt(dir_crt=self.dir_crt2))
+
+    @mock.patch("gen_class.os")
+    def test_dir_chk_override(self, mock_os):
+
+        """Function:  test_dir_chk_override
+
+        Description:  Test with dir_chk passed in to override.
+
+        Arguments:
+
+        """
+
+        mock_os.path.isdir.return_value = True
+
+        args_array = gen_class.ArgParser(
+            self.argv3, opt_val=self.opt_val, dir_chk=self.dir_chk4,
+            dir_crt=self.dir_crt3, do_parse=True)
+
+        self.assertTrue(args_array.arg_dir_chk_crt(dir_chk=self.dir_chk5))
 
     @mock.patch("gen_libs.make_dir")
     @mock.patch("gen_class.os")
