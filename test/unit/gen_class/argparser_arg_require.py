@@ -42,6 +42,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
+        test_opt_req_override
         test_two_require_one_fail
         test_two_require
         test_one_require
