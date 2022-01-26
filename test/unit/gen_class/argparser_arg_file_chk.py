@@ -29,7 +29,6 @@ import mock
 # Local
 sys.path.append(os.getcwd())
 import gen_class
-import gen_libs
 import version
 
 __version__ = version.__version__
