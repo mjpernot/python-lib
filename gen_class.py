@@ -196,7 +196,7 @@ class ArgParser(object):
         arg_xor_dict
         parse_multi
         parse_single
-        _file_chk_crt            
+        _file_chk_crt
 
     """
 
@@ -281,7 +281,7 @@ class ArgParser(object):
         self.opt_xor = dict(kwargs.get("opt_xor", {}))
 
         # For arg_validate method
-        self.valid_func =  dict(kwargs.get("valid_func", {}))
+        self.valid_func = dict(kwargs.get("valid_func", {}))
 
         # For arg_valid_val method
         self.opt_valid_val = dict(kwargs.get("opt_valid_val", {}))
@@ -313,10 +313,6 @@ class ArgParser(object):
 
         """
 
-# arg_add_def
-#   def_array           -> defaults
-#   opt_req_list        -> opt_req
-
         defaults = dict(kwargs.get("defaults", self.defaults))
         opt_req = list(kwargs.get("opt_req", self.opt_req))
 
@@ -334,13 +330,12 @@ class ArgParser(object):
             for item in set(defaults.keys()) - set(self.args_array.keys()):
                 self.args_array[item] = defaults[item]
 
-
     def arg_cond_req(self, **kwargs):
 
         """Method:  arg_cond_req
 
-        Description:  This checks a dictionary list array for options that require
-            other options to be included in the argument list.
+        Description:  This checks a dictionary list array for options that
+            require other options to be included in the argument list.
 
         Arguments:
             (input) **kwargs:
@@ -350,11 +345,6 @@ class ArgParser(object):
             (output) status -> True|False - If required args are included
 
         """
-
-# Status -> Returns True if successful.  No change required.
-#
-# arg_cond_req
-#   opt_con_req         -> opt_con_req
 
         opt_con_req = dict(kwargs.get("opt_con_req", self.opt_con_req))
         status = True
@@ -369,7 +359,6 @@ class ArgParser(object):
 
         return status
 
-
     def arg_cond_req_or(self, **kwargs):
 
         """Method:  arg_cond_req_or
@@ -383,11 +372,6 @@ class ArgParser(object):
             (output) status -> True|False - If options are the argument list
 
         """
-
-# Status -> Returns True if successful.  No change required.
-#
-# arg_cond_req_or
-#   opt_con_req_dict    -> opt_con_or
 
         opt_con_or = dict(kwargs.get("opt_con_or", self.opt_con_or))
         status = True
@@ -406,7 +390,6 @@ class ArgParser(object):
 
         return status
 
-
     def arg_default(self, arg, **kwargs):
 
         """Method:  arg_default
@@ -422,16 +405,6 @@ class ArgParser(object):
 
         """
 
-# Change here - DONE.
-#   parse_multi - ????
-#   parse_single - ????
-# There is no status returned and there should be if it fails?
-#   Referenced by:  parse_multi and parse_single.
-#
-# arg_default
-#   opt_def_dict        -> opt_def
-# self.opt_def_dict -> Already covered under arg_parse2.opt_def
-
         opt_def = dict(kwargs.get("opt_def", self.opt_def))
         status = True
 
@@ -443,7 +416,6 @@ class ArgParser(object):
             status = False
 
         return status
-
 
     def arg_dir_chk(self, **kwargs):
 
@@ -458,11 +430,6 @@ class ArgParser(object):
             (output) status -> True|False - If directories have correct perms
 
         """
-
-# Status -> Returns True if successful.  No change required.
-#
-# arg_dir_chk
-#   dir_perms_chk       -> dir_perms_chk
 
         dir_perms_chk = dict(kwargs.get("dir_perms_chk", self.dir_perms_chk))
         status = True
@@ -493,7 +460,6 @@ class ArgParser(object):
 
         return status
 
-
     def arg_dir_chk_crt(self, **kwargs):
 
         """Method:  arg_dir_chk_crt
@@ -508,14 +474,6 @@ class ArgParser(object):
             (output) status -> True|False - If directories are available
 
         """
-
-# Change here - DONE.
-# Status -> Changed required.  Returns True if it fails.
-#   No other references.
-#
-# arg_dir_chk_crt
-#   dir_chk_list        -> dir_chk
-#   dir_crt_list        -> dir_crt
 
         dir_chk = list(kwargs.get("dir_chk", self.dir_chk))
         dir_crt = list(kwargs.get("dir_crt", self.dir_crt))
@@ -547,7 +505,6 @@ class ArgParser(object):
 
         return status
 
-
     def arg_file_chk(self, **kwargs):
 
         """Method:  arg_file_chk
@@ -562,14 +519,6 @@ class ArgParser(object):
             (output) status -> True|False - If files are available
 
         """
-
-# Change here - DONE.
-# Status -> Changed required.  Returns True if it fails.
-#   Reference to _file_chk_crt - DONE.
-#
-# arg_file_chk
-#   file_chk_list       -> file_chk
-#   file_crt_list       -> file_crt
 
         file_chk = list(kwargs.get("file_chk", self.file_chk))
         file_crt = list(kwargs.get("file_crt", self.file_crt))
@@ -592,7 +541,6 @@ class ArgParser(object):
 
         return status
 
-
     def arg_noreq_xor(self, **kwargs):
 
         """Method:  arg_noreq_xor
@@ -607,11 +555,6 @@ class ArgParser(object):
                 selected
 
         """
-
-# Status -> Returns True if successful.  No change required.
-#
-# arg_noreq_xor
-#   xor_noreq           -> xor_noreq
 
         xor_noreq = dict(kwargs.get("xor_noreq", self.xor_noreq))
         status = True
@@ -629,7 +572,6 @@ class ArgParser(object):
                 status = False
 
         return status
-
 
     def arg_parse2(self, **kwargs):
 
@@ -650,14 +592,6 @@ class ArgParser(object):
             (output) status -> True|False - If successfully parse argv.
 
         """
-
-# arg_parse2
-#   argv                -> argv
-#   args_array          -> args_array
-#   opt_val_list        -> opt_val
-#   opt_def_dict        -> opt_def
-#   multi_val           -> multi_val
-#   opt_val             -> opt_val_bin
 
         opt_val = list(kwargs.get("opt_val", self.opt_val))
         multi_val = list(kwargs.get("multi_val", self.multi_val))
@@ -683,7 +617,6 @@ class ArgParser(object):
 
         return status
 
-
     def arg_require(self, **kwargs):
 
         """Method:  arg_require
@@ -697,13 +630,6 @@ class ArgParser(object):
                 included
 
         """
-
-# Change here - DONE.
-# Status -> Changed required.  Returns True if it fails.
-#   No other references to this method.
-#
-# arg_require
-#   opt_req_list        -> opt_req
 
         opt_req = list(kwargs.get("opt_req", self.opt_req))
         status = True
@@ -730,12 +656,6 @@ class ArgParser(object):
 
         """
 
-# Status -> Returns True if successful.  No change required.
-#
-# Need to look at this and possibly refactor it.
-# arg_req_or_list
-#   opt_or_dict         -> opt_or
-
         opt_or = dict(kwargs.get("opt_or", self.opt_or))
         status = True
 
@@ -753,7 +673,6 @@ class ArgParser(object):
 
         return status
 
-
     def arg_req_xor(self, **kwargs):
 
         """Method:  arg_req_xor
@@ -769,11 +688,6 @@ class ArgParser(object):
 
         """
 
-# Status -> Returns True if successful.  No change required.
-#
-# arg_req_xor
-#   opt_xor             -> opt_xor
-
         opt_xor = dict(kwargs.get("opt_xor", self.opt_xor))
         status = True
 
@@ -788,7 +702,6 @@ class ArgParser(object):
                 status = False
 
         return status
-
 
     def arg_set_path(self, arg_opt):
 
@@ -808,7 +721,6 @@ class ArgParser(object):
 
         return path
 
-
     def arg_validate(self, **kwargs):
 
         """Method:  arg_validate
@@ -823,12 +735,7 @@ class ArgParser(object):
 
         """
 
-# Status -> Returns True if successful.  No change required.
-#
-# arg_validate
-#   valid_func          -> valid_func
-
-        valid_func =  dict(kwargs.get("valid_func", self.valid_func))
+        valid_func = dict(kwargs.get("valid_func", self.valid_func))
         status = True
 
         for opt in set(valid_func.keys()) & set(self.args_array.keys()):
@@ -840,7 +747,6 @@ class ArgParser(object):
                 status = False
 
         return status
-
 
     def arg_valid_val(self, **kwargs):
 
@@ -855,11 +761,6 @@ class ArgParser(object):
 
         """
 
-# Status -> Returns True if successful.  No change required.
-#
-# arg_valid_val
-#   opt_valid_val       -> opt_valid_val
-
         opt_valid_val = dict(kwargs.get("opt_valid_val", self.opt_valid_val))
         status = True
 
@@ -872,7 +773,6 @@ class ArgParser(object):
                 status = False
 
         return status
-
 
     def arg_wildcard(self, **kwargs):
 
@@ -891,13 +791,11 @@ class ArgParser(object):
                               "-c": "*class*"}
                 opt_wildcard = ["-a", "-b", "-c"]
             Output:
-                {'-a': ['cmds_gen.py', 'arg_parser.py'], '-c': ['gen_class.py'],
+                {'-a': ['cmds_gen.py', 'arg_parser.py'],
+                 '-c': ['gen_class.py'],
                  '-b': ['gen_libs.py', 'gen_class.py']}
 
         """
-
-# opt_wildcard
-#   opt_wildcard        -> opt_wildcard
 
         opt_wildcard = list(kwargs.get("opt_wildcard", self.opt_wildcard))
 
@@ -907,13 +805,12 @@ class ArgParser(object):
 
                 t_list = [glob.glob(item) for item in self.args_array[opt]]
                 self.args_array[opt] = [item1 for item2 in t_list
-                                   for item1 in item2]
+                                        for item1 in item2]
 
             elif opt in self.args_array.keys() and \
-                 isinstance(self.args_array[opt], str):
+               isinstance(self.args_array[opt], str):
 
                 self.args_array[opt] = glob.glob(self.args_array[opt])
-
 
     def arg_xor_dict(self, **kwargs):
 
@@ -932,11 +829,6 @@ class ArgParser(object):
 
         """
 
-# Status -> Returns True if successful.  No change required.
-#
-# arg_xor_dict
-#   opt_xor_dict        -> opt_xor_val
-
         opt_xor_val = dict(kwargs.get("opt_xor_val", self.opt_xor_val))
         status = True
 
@@ -948,7 +840,6 @@ class ArgParser(object):
                 break
 
         return status
-
 
     def parse_multi(self, **kwargs):
 
@@ -997,7 +888,6 @@ class ArgParser(object):
 
         return status
 
-
     def parse_single(self, **kwargs):
 
         """Method:  parse_single
@@ -1036,7 +926,6 @@ class ArgParser(object):
 
         return status
 
-
     def _file_chk_crt(self, name, option, **kwargs):
 
         """Method:  _file_chk_crt
@@ -1054,13 +943,6 @@ class ArgParser(object):
                 is succesful
 
         """
-
-# Change here - DONE.
-# Status -> Changed required.  Returns True if it fails.
-#   Referenced by: arg_file_chk
-#   Notes:  Leave initial status alone, but when successful, then set
-#       status to True then.
-#
 
         file_crt = list(kwargs.get("file_crt", self.file_crt))
         status = False
@@ -1908,7 +1790,7 @@ class Mail(System):
 
             else:
                 if self.msg:
-                    self.msg = self.msg + newln +json.dumps(txt_ln)
+                    self.msg = self.msg + newln + json.dumps(txt_ln)
 
                 else:
                     self.msg = json.dumps(txt_ln)
