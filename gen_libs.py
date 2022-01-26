@@ -1830,7 +1830,7 @@ def octal_to_str(octal):
     """
 
     result = ""
-    value_letters = [(4,"r"),(2,"w"),(1,"x")]
+    value_letters = [(4, "r"), (2, "w"), (1, "x")]
 
     for digit in [int(n) for n in str(octal)]:
 
