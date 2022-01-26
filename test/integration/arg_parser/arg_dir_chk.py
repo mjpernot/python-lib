@@ -332,7 +332,6 @@ class UnitTest(unittest.TestCase):
 
         """
 
-
         with gen_libs.no_std_out():
             self.assertFalse(
                 arg_parser.arg_dir_chk(self.args_array4, self.dir_perms_chk2))
