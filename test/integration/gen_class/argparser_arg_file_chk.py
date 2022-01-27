@@ -25,7 +25,6 @@ else:
     import unittest
 
 # Third-party
-import mock
 
 # Local
 sys.path.append(os.getcwd())
@@ -34,31 +33,6 @@ import gen_libs
 import version
 
 __version__ = version.__version__
-
-### Remove once done with conversion.
-class FileOpen(object):
-
-    """Class:  FileOpen
-
-    Description:  Class stub holder for file open class.
-
-    Methods:
-        close
-
-    """
-
-    def close(self):
-
-        """Function:  close
-
-        Description:  Stub holder for close function.
-
-        Arguments:
-
-        """
-
-        return True
-
 
 class UnitTest(unittest.TestCase):
 
@@ -71,7 +45,6 @@ class UnitTest(unittest.TestCase):
         test_file_crt_override
         test_file_chk_override
         test_second_open_no_error
-        test_second_open_error
         test_file_crt_in_list
         test_file_crt_not_in_list
         test_file_crt_empty_list
@@ -124,11 +97,7 @@ class UnitTest(unittest.TestCase):
         self.file_crt2 = ["-g"]
         self.file_crt3 = []
 
-# Remove once done with conversion
-        self.open = FileOpen()
-
-    @mock.patch("gen_class.ArgParser._file_chk_crt")
-    def test_file_crt_override(self, mock_crt):
+    def test_file_crt_override(self):
 
         """Function:  test_file_crt_override
 
@@ -137,8 +106,6 @@ class UnitTest(unittest.TestCase):
         Arguments:
 
         """
-
-        mock_crt.return_value = True
 
         args_array = gen_class.ArgParser(
             self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
@@ -162,8 +129,7 @@ class UnitTest(unittest.TestCase):
 
         self.assertTrue(args_array.arg_file_chk(file_chk=self.file_chk2))
 
-    @mock.patch("gen_class.ArgParser._file_chk_crt")
-    def test_second_open_no_error(self, mock_crt):
+    def test_second_open_no_error(self):
 
         """Function:  test_second_open_no_error
 
@@ -173,35 +139,13 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_crt.return_value = True
-
         args_array = gen_class.ArgParser(
             self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
             file_crt=self.file_crt, do_parse=True)
 
         self.assertTrue(args_array.arg_file_chk())
 
-    @mock.patch("gen_class.ArgParser._file_chk_crt")
-    def test_second_open_error(self, mock_crt):
-
-        """Function:  test_second_open_error
-
-        Description:  Test with second open but returns error.
-
-        Arguments:
-
-        """
-
-        mock_crt.return_value = False
-
-        args_array = gen_class.ArgParser(
-            self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
-            file_crt=self.file_crt, do_parse=True)
-
-        self.assertFalse(args_array.arg_file_chk())
-
-    @mock.patch("gen_class.ArgParser._file_chk_crt")
-    def test_file_crt_in_list(self, mock_crt):
+    def test_file_crt_in_list(self):
 
         """Function:  test_file_crt_in_list
 
@@ -211,16 +155,13 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_crt.return_value = True
-
         args_array = gen_class.ArgParser(
             self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
             file_crt=self.file_crt, do_parse=True)
 
         self.assertTrue(args_array.arg_file_chk())
 
-    @mock.patch("gen_class.ArgParser._file_chk_crt")
-    def test_file_crt_not_in_list(self, mock_crt):
+    def test_file_crt_not_in_list(self):
 
         """Function:  test_file_crt_not_in_list
 
@@ -230,16 +171,14 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_crt.return_value = False
-
         args_array = gen_class.ArgParser(
             self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
             file_crt=self.file_crt2, do_parse=True)
 
-        self.assertFalse(args_array.arg_file_chk())
+        with gen_libs.no_std_out():
+            self.assertFalse(args_array.arg_file_chk())
 
-    @mock.patch("gen_class.ArgParser._file_chk_crt")
-    def test_file_crt_empty_list(self, mock_crt):
+    def test_file_crt_empty_list(self):
 
         """Function:  test_file_crt_empty_list
 
@@ -249,16 +188,14 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_crt.return_value = False
-
         args_array = gen_class.ArgParser(
             self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
             file_crt=self.file_crt3, do_parse=True)
 
-        self.assertFalse(args_array.arg_file_chk())
+        with gen_libs.no_std_out():
+            self.assertFalse(args_array.arg_file_chk())
 
-    @mock.patch("gen_class.ArgParser._file_chk_crt")
-    def test_file_crt_not_passed(self, mock_crt):
+    def test_file_crt_not_passed(self):
 
         """Function:  test_file_crt_not_passed
 
@@ -268,15 +205,12 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_crt.return_value = False
-
         args_array = gen_class.ArgParser(
             self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
             do_parse=True)
 
-        self.assertFalse(args_array.arg_file_chk())
-
-# STOPPED HERE
+        with gen_libs.no_std_out():
+            self.assertFalse(args_array.arg_file_chk())
 
     def test_first_open_error_two(self):
 
