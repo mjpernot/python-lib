@@ -146,6 +146,9 @@ class ArgParser(object):
             dir_chk_list        -> dir_chk
             dir_crt_list        -> dir_crt
 
+        arg_dir_crt
+            dir_perms_crt       -> dir_perms_crt
+
         arg_file_chk
             file_chk_list       -> file_chk
             file_crt_list       -> file_crt
@@ -183,6 +186,7 @@ class ArgParser(object):
         arg_default
         arg_dir_chk
         arg_dir_chk_crt
+        arg_dir_crt
         arg_file_chk
         arg_noreq_xor
         arg_parse2
@@ -214,7 +218,10 @@ class ArgParser(object):
                 defaults -> List of options with their default values
                 dir_chk -> Options which will have directories
                 dir_crt -> Options to create directories if not present
-                dir_perms_chk -> Options with their directory perms in octal
+                dir_perms_chk -> Directory check options with their directory
+                    perms in octal
+                dir_perms_crt -> Directory creation options with their
+                    directory perms in octal
                 file_chk -> Options which will have files included
                 file_crt -> Options require files to be created
                 multi_val - List of options that may contain multiple values
@@ -266,6 +273,9 @@ class ArgParser(object):
         # For arg_dir_chk_crt method
         self.dir_chk = list(kwargs.get("dir_chk", []))
         self.dir_crt = list(kwargs.get("dir_crt", []))
+
+        # For arg_dir_crt method
+        self.dir_perms_crt = dict(kwargs.get("dir_perms_crt", {}))
 
         # For arg_file_chk method
         self.file_chk = list(kwargs.get("file_chk", []))
@@ -426,7 +436,8 @@ class ArgParser(object):
 
         Arguments:
             (input) **kwargs:
-                dir_perms_chk -> Options with their directory perms in octal
+                dir_perms_chk -> Directory check options with their directory
+                    perms in octal
             (output) status -> True|False - If directories have correct perms
 
         """
@@ -502,6 +513,58 @@ class ArgParser(object):
             print("Error:  dir_crt_list: {0} is not a subset of dir_chk: {1}"
                   .format(dir_crt, dir_chk))
             status = False
+
+        return status
+
+    def arg_dir_crt(self, **kwargs):
+
+        """Method:  arg_dir_crt
+
+        Description:  Creates a directory if it doesn't exist and also checks
+            to see if the directory has the correct permissions.
+
+        Arguments:
+            (input) **kwargs:
+                dir_perms_crt -> Directory creation options with their
+                    directory perms in octal
+            (output) status -> True|False - If directories have correct perms
+                and/or was created successfully
+
+        """
+
+        dir_perms_crt = list(kwargs.get("dir_perms_crt", self.dir_perms_crt))
+        status = True
+
+        for item in set(dir_perms_crt) & set(self.args_array.keys()):
+
+            if not os.path.isdir(self.args_array[item]):
+                status = gen_libs.make_dir(self.args_array[item])
+
+            if status:
+                if gen_libs.octal_to_str(dir_perms_crt[item])[0] == "x":
+
+                    if not os.access(self.args_array[item], os.X_OK):
+                        print("Error: {0} is not executable.".
+                              format(self.args_array[item]))
+                        status = False
+
+                if gen_libs.octal_to_str(dir_perms_crt[item])[0] == "r":
+
+                    if not os.access(self.args_array[item], os.R_OK):
+                        print("Error: {0} is not readable.".
+                              format(self.args_array[item]))
+                        status = False
+
+                if gen_libs.octal_to_str(dir_perms_crt[item])[1] == "w":
+
+                    if not os.access(self.args_array[item], os.W_OK):
+
+                        print("Error: {0} is not writable.".
+                              format(self.args_array[item]))
+                        status = False
+            else:
+                print("Error: {0} was not created.".
+                      format(self.args_array[item]))
 
         return status
 
