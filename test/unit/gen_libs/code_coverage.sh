@@ -14,6 +14,7 @@ coverage run -a --source=gen_libs test/unit/gen_libs/bytes_2_readable.py
 coverage run -a --source=gen_libs test/unit/gen_libs/chk_crt_dir.py
 coverage run -a --source=gen_libs test/unit/gen_libs/chk_crt_file.py
 coverage run -a --source=gen_libs test/unit/gen_libs/chk_int.py
+coverage run -a --source=gen_libs test/unit/gen_libs/chk_perm.py
 coverage run -a --source=gen_libs test/unit/gen_libs/clear_file.py
 coverage run -a --source=gen_libs test/unit/gen_libs/compress.py
 coverage run -a --source=gen_libs test/unit/gen_libs/cp_dir.py
