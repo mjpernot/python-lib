@@ -12,6 +12,7 @@ test/unit/gen_libs/bytes_2_readable.py
 test/unit/gen_libs/chk_crt_dir.py
 test/unit/gen_libs/chk_crt_file.py
 test/unit/gen_libs/chk_int.py
+test/unit/gen_libs/chk_perm.py
 test/unit/gen_libs/clear_file.py
 test/unit/gen_libs/compress.py
 test/unit/gen_libs/cp_dir.py
