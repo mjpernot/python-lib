@@ -12,6 +12,7 @@
         chk_crt_dir
         chk_crt_file
         chk_int
+        chk_perm
         clear_file
         compress
         cp_dir
@@ -358,6 +359,44 @@ def chk_int(line):
         return line[1:].isdigit()
 
     return line.isdigit()
+
+
+def chk_perm(item, oct_perm):
+
+    """Method:  chk_perm
+
+    Description:  Checks to see a permission is turned on for an object based
+        on an octal argument.
+
+    Note:  This will only check the owner of the object and only checks to see
+        if the permission is on, does not check for permissions set to off.
+
+    Arguments:
+        (input) item -> Path and name of object to be checked
+        (input) oct_perm -> Permission of object in octal format: 7 (rwx),
+            6 (rw-), 5 (r-x), 4 (r--), 3 (-wx), 2 (-w-), 1 (--x), 0 (---)
+        (output) status -> True|False - If object has correct permissions
+
+    """
+
+    status = True
+
+    if octal_to_str(oct_perm)[2] == "x":
+        if not os.access(item, os.X_OK):
+            print("Error: {0} is not executable.".format(item))
+            status = False
+
+    if octal_to_str(oct_perm)[0] == "r":
+        if not os.access(item, os.R_OK):
+            print("Error: {0} is not readable.".format(item))
+            status = False
+
+    if octal_to_str(oct_perm)[1] == "w":
+        if not os.access(item, os.W_OK):
+            print("Error: {0} is not writable.".format(item))
+            status = False
+
+    return status
 
 
 def clear_file(f_name):
