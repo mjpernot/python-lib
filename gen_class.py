@@ -541,7 +541,11 @@ class ArgParser(object):
                 status = gen_libs.make_dir(self.args_array[item])
 
             if status:
-                if gen_libs.octal_to_str(dir_perms_crt[item])[0] == "x":
+                status = status & gen_libs.chk_perm(
+                    self.args_array[item], dir_perms_crt[item])
+
+                """
+                if gen_libs.octal_to_str(dir_perms_crt[item])[2] == "x":
 
                     if not os.access(self.args_array[item], os.X_OK):
                         print("Error: {0} is not executable.".
@@ -562,11 +566,14 @@ class ArgParser(object):
                         print("Error: {0} is not writable.".
                               format(self.args_array[item]))
                         status = False
+                """
+
             else:
                 print("Error: {0} was not created.".
                       format(self.args_array[item]))
 
         return status
+
 
     def arg_file_chk(self, **kwargs):
 
