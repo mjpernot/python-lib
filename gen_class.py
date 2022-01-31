@@ -532,41 +532,28 @@ class ArgParser(object):
 
         """
 
-        dir_perms_crt = list(kwargs.get("dir_perms_crt", self.dir_perms_crt))
+        dir_perms_crt = dict(kwargs.get("dir_perms_crt", self.dir_perms_crt))
         status = True
 
         for item in set(dir_perms_crt) & set(self.args_array.keys()):
 
             if not os.path.isdir(self.args_array[item]):
-                status = gen_libs.make_dir(self.args_array[item])
+                tmp_status = gen_libs.make_dir(self.args_array[item])
 
-            if status:
-                if gen_libs.octal_to_str(dir_perms_crt[item])[0] == "x":
-
-                    if not os.access(self.args_array[item], os.X_OK):
-                        print("Error: {0} is not executable.".
-                              format(self.args_array[item]))
-                        status = False
-
-                if gen_libs.octal_to_str(dir_perms_crt[item])[0] == "r":
-
-                    if not os.access(self.args_array[item], os.R_OK):
-                        print("Error: {0} is not readable.".
-                              format(self.args_array[item]))
-                        status = False
-
-                if gen_libs.octal_to_str(dir_perms_crt[item])[1] == "w":
-
-                    if not os.access(self.args_array[item], os.W_OK):
-
-                        print("Error: {0} is not writable.".
-                              format(self.args_array[item]))
-                        status = False
             else:
+                tmp_status = True
+
+            if tmp_status:
+                status = status & gen_libs.chk_perm(
+                    self.args_array[item], dir_perms_crt[item])
+
+            else:
+                status = status & tmp_status
                 print("Error: {0} was not created.".
                       format(self.args_array[item]))
 
         return status
+
 
     def arg_file_chk(self, **kwargs):
 
