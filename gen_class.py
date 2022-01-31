@@ -447,27 +447,14 @@ class ArgParser(object):
 
         for item in set(dir_perms_chk) & set(self.args_array):
 
-            if not os.path.isdir(self.args_array[item]) or \
-               not os.access(self.args_array[item], os.X_OK):
-
-                print("Error: {0} does not exist or has permission denied.".
+            if not os.path.isdir(self.args_array[item]):
+                print("Error: {0} does not exist.".
                       format(self.args_array[item]))
                 status = False
 
-            if gen_libs.octal_to_str(dir_perms_chk[item])[0] == "r":
-
-                if not os.access(self.args_array[item], os.R_OK):
-                    print("Error: {0} is not readable.".
-                          format(self.args_array[item]))
-                    status = False
-
-            if gen_libs.octal_to_str(dir_perms_chk[item])[1] == "w":
-
-                if not os.access(self.args_array[item], os.W_OK):
-
-                    print("Error: {0} is not writable.".
-                          format(self.args_array[item]))
-                    status = False
+            else:
+                status = status & gen_libs.chk_perm(
+                    self.args_array[item], dir_perms_chk[item])
 
         return status
 
