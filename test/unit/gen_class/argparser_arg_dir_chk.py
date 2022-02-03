@@ -72,8 +72,7 @@ class UnitTest(unittest.TestCase):
 
         self.argv = ["program.py"]
         self.argv2 = ["program.py", "-d", "/path/dir1"]
-        self.argv3 = [
-            "program.py", "-d", "/path/dir1", "-g", "/path/dir2"]
+        self.argv3 = ["program.py", "-d", "/path/dir1", "-g", "/path/dir2"]
         self.opt_val = ["-d", "-g"]
         self.dir_perms_chk = {}
         self.dir_perms_chk2 = {"-d": 1}
