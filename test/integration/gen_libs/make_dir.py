@@ -3,10 +3,10 @@
 
 """Program:  make_dir.py
 
-    Description:  Unit testing of make_dir in gen_class.py.
+    Description:  Integration testing of make_dir in gen_libs.py.
 
     Usage:
-        test/unit/gen_class/make_dir.py
+        test/integration/gen_libs/make_dir.py
 
     Arguments:
 
