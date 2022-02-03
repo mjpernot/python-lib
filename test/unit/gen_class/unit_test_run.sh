@@ -13,6 +13,7 @@ test/unit/gen_class/argparser_arg_cond_req_or.py
 test/unit/gen_class/argparser_arg_default.py
 test/unit/gen_class/argparser_arg_dir_chk.py
 test/unit/gen_class/argparser_arg_dir_chk_crt.py
+test/unit/gen_class/argparser_arg_dir_crt.py
 test/unit/gen_class/argparser_arg_file_chk.py
 test/unit/gen_class/argparser_arg_noreq_xor.py
 test/unit/gen_class/argparser_arg_parse2.py
