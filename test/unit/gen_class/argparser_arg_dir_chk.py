@@ -43,6 +43,9 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
+        test_multiple_perms_two_fail
+        test_multiple_perms_one_fail
+        test_multiple_perms_success
         test_dir_perms_chk_override
         test_multiple_dirs_fail6
         test_multiple_dirs_fail5
@@ -80,6 +83,76 @@ class UnitTest(unittest.TestCase):
         self.dir_perms_chk4 = {"-d": 2}
         self.dir_perms_chk5 = {"-g": 1}
         self.dir_perms_chk6 = {"-d": 4, "-g": 4}
+        self.dir_perms_chk7 = {"-d": 5}
+        self.dir_perms_chk8 = {"-d": 7}
+
+    @mock.patch("gen_class.gen_libs.octal_to_str")
+    @mock.patch("gen_class.os")
+    def test_multiple_perms_two_fail(self, mock_os, mock_octal):
+
+        """Function:  test_multiple_perms_two_fail
+
+        Description:  Test with multiple perms and one failure.
+
+        Arguments:
+
+        """
+
+        mock_os.path.isdir.return_value = True
+        mock_os.access.side_effect = [True, False, False]
+        mock_octal.side_effect = ["rwx", "rwx"]
+
+        args_array = gen_class.ArgParser(
+            self.argv2, opt_val=self.opt_val,
+            dir_perms_chk=self.dir_perms_chk2, do_parse=True)
+
+        with gen_libs.no_std_out():
+            self.assertFalse(args_array.arg_dir_chk())
+
+    @mock.patch("gen_class.gen_libs.octal_to_str")
+    @mock.patch("gen_class.os")
+    def test_multiple_perms_one_fail(self, mock_os, mock_octal):
+
+        """Function:  test_multiple_perms_one_fail
+
+        Description:  Test with multiple perms and one failure.
+
+        Arguments:
+
+        """
+
+        mock_os.path.isdir.return_value = True
+        mock_os.access.side_effect = [True, False]
+        mock_octal.side_effect = ["r-x", "r-x"]
+
+        args_array = gen_class.ArgParser(
+            self.argv2, opt_val=self.opt_val,
+            dir_perms_chk=self.dir_perms_chk2, do_parse=True)
+
+        with gen_libs.no_std_out():
+            self.assertFalse(args_array.arg_dir_chk())
+
+    @mock.patch("gen_class.gen_libs.octal_to_str")
+    @mock.patch("gen_class.os")
+    def test_multiple_perms_success(self, mock_os, mock_octal):
+
+        """Function:  test_multiple_perms_success
+
+        Description:  Test with multiple perms and all successful.
+
+        Arguments:
+
+        """
+
+        mock_os.path.isdir.return_value = True
+        mock_os.access.side_effect = [True, True]
+        mock_octal.side_effect = ["r-x", "r-x"]
+
+        args_array = gen_class.ArgParser(
+            self.argv2, opt_val=self.opt_val,
+            dir_perms_chk=self.dir_perms_chk2, do_parse=True)
+
+        self.assertTrue(args_array.arg_dir_chk())
 
     @mock.patch("gen_class.os.path.isdir")
     @mock.patch("gen_libs.chk_perm")
