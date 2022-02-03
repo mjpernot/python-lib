@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # Classification (U)
 
-"""Program:  argparser_file_create.py
+"""Program:  argparser_file_chk_crt.py
 
-    Description:  Unit testing of _file_create in gen_class.ArgParser class.
+    Description:  Unit testing of _file_chk_crt in gen_class.ArgParser class.
 
     Usage:
-        test/unit/gen_class/argparser_file_create.py
+        test/unit/gen_class/argparser_file_chk_crt.py
 
     Arguments:
 
