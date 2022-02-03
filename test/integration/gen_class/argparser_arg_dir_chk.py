@@ -123,9 +123,9 @@ class UnitTest(unittest.TestCase):
         """
 
         os.mkdir(self.dir1)
-        os.chmod(self.dir1, 0o444)
+        os.chmod(self.dir1, 0o111)
         os.mkdir(self.dir2)
-        os.chmod(self.dir2, 0o444)
+        os.chmod(self.dir2, 0o111)
         args_array = gen_class.ArgParser(
             self.argv3, opt_val=self.opt_val,
             dir_perms_chk=self.dir_perms_chk6, do_parse=True)
@@ -145,7 +145,7 @@ class UnitTest(unittest.TestCase):
 
         os.mkdir(self.dir1)
         os.mkdir(self.dir2)
-        os.chmod(self.dir2, 0o444)
+        os.chmod(self.dir2, 0o111)
         args_array = gen_class.ArgParser(
             self.argv3, opt_val=self.opt_val,
             dir_perms_chk=self.dir_perms_chk6, do_parse=True)
@@ -164,7 +164,7 @@ class UnitTest(unittest.TestCase):
         """
 
         os.mkdir(self.dir1)
-        os.chmod(self.dir1, 0o444)
+        os.chmod(self.dir1, 0o111)
         os.mkdir(self.dir2)
         args_array = gen_class.ArgParser(
             self.argv3, opt_val=self.opt_val,
