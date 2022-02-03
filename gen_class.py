@@ -570,9 +570,6 @@ class ArgParser(object):
                 tmp_list = [self.args_array[option]]
 
             for name in tmp_list:
-                # Combine these lines?  See below.
-                # tmp_status = self._file_chk_crt(name, option, file_crt)
-                # status = status & tmp_status
                 status = status & self._file_chk_crt(
                     name, option, file_crt=file_crt)
 
