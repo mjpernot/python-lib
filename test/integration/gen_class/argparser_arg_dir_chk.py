@@ -92,7 +92,6 @@ class UnitTest(unittest.TestCase):
         self.dir_perms_chk6 = {"-d": 4, "-g": 4}
         self.dir_perms_chk7 = {"-d": 6}
 
-
     def test_dir_perms_chk_override(self):
 
         """Function:  test_dir_perms_chk_override
