@@ -877,17 +877,18 @@ def file_cleanup(dir_path, days):
             os.remove(fullname)
 
 
-def file_search(f_name, string):
+def file_search(f_name, data_str):
 
     """Function:  file_search
 
     Description:  Search for a string in a file and return the line it was
         found in a line.
-        NOTE:  Returns only the first instance found in the file.
+
+    NOTE:  Returns only the first instance found in the file.
 
     Arguments:
         (input) f_name -> File name searching.
-        (input) string -> Search string.
+        (input) data_str -> Search string.
         (output) line - > Full line string was found in or None, if not found.
 
     """
@@ -896,7 +897,7 @@ def file_search(f_name, string):
 
     with open(f_name, "r") as s_file:
         for item in s_file:
-            if string in item:
+            if data_str in item:
                 line = item
                 break
 
@@ -1112,7 +1113,7 @@ def has_whitespace(data):
     return False
 
 
-def help_func(args_array, version, func_name=None):
+def help_func(args_array, ver, func_name=None):
 
     """Function:  help_func
 
@@ -1124,7 +1125,7 @@ def help_func(args_array, version, func_name=None):
 
     Arguments:
         (input) args_array -> Array of command line options and values.
-        (input) version -> Version information on the calling program.
+        (input) ver -> Version information on the calling program.
         (input) func_name -> Function that will contain help message.
         (output) Return True or False whether an option is detected.
 
@@ -1138,7 +1139,7 @@ def help_func(args_array, version, func_name=None):
         exit_flag = True
 
     if "-v" in args_array:
-        print(version)
+        print(ver)
         exit_flag = True
 
     return exit_flag
@@ -1256,7 +1257,7 @@ def is_file_text(f_name):
     non_text = f_head.translate(_null_trans, text_chars)
 
     # If > 30% non-text characters, then a binary file.
-    if float(len(non_text))/float(len(f_head)) > 0.30:
+    if float(len(non_text)) / float(len(f_head)) > 0.30:
         return False
 
     return True
@@ -1533,7 +1534,7 @@ def make_md5_hash(file_path, to_file=True):
 
     inst = get_inst(subprocess)
     proc1 = inst.Popen(["/usr/bin/md5sum", file_path], stdout=inst.PIPE)
-    hash_results, status = proc1.communicate()
+    hash_results, _ = proc1.communicate()
     hash_results = hash_results.split("  ")[0]
 
     if to_file:
@@ -2331,7 +2332,7 @@ def sec_2_hr(sec):
 
     """
 
-    return (sec/36)/float(100)
+    return (sec / 36) / float(100)
 
 
 def str_2_list(del_str, fld_del):
