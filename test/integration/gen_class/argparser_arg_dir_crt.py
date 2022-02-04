@@ -97,7 +97,6 @@ class UnitTest(unittest.TestCase):
         self.dir_perms_crt6 = {"-d": 4, "-g": 4}
         self.dir_perms_crt7 = {"-d": 6}
 
-
     def test_create_two_dir2(self):
 
         """Function:  test_create_two_dir2
