@@ -204,7 +204,7 @@ class ArgParser(object):
 
     """
 
-    def __init__(self, argv, opt_val=[], opt_def={}, **kwargs):
+    def __init__(self, argv, opt_val=None, opt_def=None, **kwargs):
 
         """Method:  __init__
 
@@ -252,8 +252,8 @@ class ArgParser(object):
         # For arg_parse2 and arg_default methods
         self.argv = list(argv)
         self.args_array = dict()
-        self.opt_val = list(opt_val)
-        self.opt_def = dict(opt_def)
+        self.opt_val = list() if opt_val is None else list(opt_val)
+        self.opt_def = dict() if opt_def is None else dict(opt_def)
         self.multi_val = list(kwargs.get("multi_val", []))
         self.opt_val_bin = list(kwargs.get("opt_val_bin", []))
 
@@ -541,7 +541,6 @@ class ArgParser(object):
 
         return status
 
-
     def arg_file_chk(self, **kwargs):
 
         """Method:  arg_file_chk
@@ -570,6 +569,9 @@ class ArgParser(object):
                 tmp_list = [self.args_array[option]]
 
             for name in tmp_list:
+                # Combine these lines?  See below.
+                # tmp_status = self._file_chk_crt(name, option, file_crt)
+                # status = status & tmp_status
                 status = status & self._file_chk_crt(
                     name, option, file_crt=file_crt)
 
@@ -838,11 +840,11 @@ class ArgParser(object):
                isinstance(self.args_array[opt], list):
 
                 t_list = [glob.glob(item) for item in self.args_array[opt]]
-                self.args_array[opt] = [item1 for item2 in t_list
-                                        for item1 in item2]
+                self.args_array[opt] = [
+                    item1 for item2 in t_list for item1 in item2]
 
-            elif opt in self.args_array.keys() and \
-               isinstance(self.args_array[opt], str):
+            elif opt in self.args_array.keys() and isinstance(
+                    self.args_array[opt], str):
 
                 self.args_array[opt] = glob.glob(self.args_array[opt])
 
@@ -894,8 +896,8 @@ class ArgParser(object):
         status = True
 
         # If no value in argv for option and it's not an integer.
-        if len(self.argv) < 2 or (self.argv[1][0] == "-"
-                                  and not gen_libs.chk_int(self.argv[1])):
+        if len(self.argv) < 2 or (
+                self.argv[1][0] == "-" and not gen_libs.chk_int(self.argv[1])):
 
             # See if default value is available for argument.
             status = self.arg_default(self.argv[0], opt_def=opt_def)
@@ -944,8 +946,8 @@ class ArgParser(object):
         status = True
 
         # If no value in argv for option and it is not an integer.
-        if len(self.argv) < 2 or (self.argv[1][0] == "-"
-                                  and not gen_libs.chk_int(self.argv[1])):
+        if len(self.argv) < 2 or (
+                self.argv[1][0] == "-" and not gen_libs.chk_int(self.argv[1])):
 
             if self.argv[0] in opt_val_bin:
                 self.args_array[self.argv[0]] = None
