@@ -28,7 +28,6 @@ else:
 # Local
 sys.path.append(os.getcwd())
 import gen_class
-import gen_libs
 import version
 
 __version__ = version.__version__
@@ -42,6 +41,10 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
+        test_arg_not_exist2
+        test_arg_not_exist
+        test_arg_exist2
+        test_arg_exist
         test_empty_args_array
 
     """
@@ -63,6 +66,62 @@ class UnitTest(unittest.TestCase):
         self.arg = "-a"
         self.arg2 = "-b"
         self.arg3 = "-c"
+
+    def test_arg_not_exist2(self):
+
+        """Function:  test_arg_not_exist2
+
+        Description:  Test with argument does not exist.
+
+        Arguments:
+
+        """
+
+        args_array = gen_class.ArgParser(self.argv3, do_parse=True)
+
+        self.assertFalse(args_array.arg_exist(self.arg3))
+
+    def test_arg_not_exist(self):
+
+        """Function:  test_arg_not_exist
+
+        Description:  Test with argument does not exist.
+
+        Arguments:
+
+        """
+
+        args_array = gen_class.ArgParser(self.argv2, do_parse=True)
+
+        self.assertFalse(args_array.arg_exist(self.arg2))
+
+    def test_arg_exist2(self):
+
+        """Function:  test_arg_exist2
+
+        Description:  Test with argument exist.
+
+        Arguments:
+
+        """
+
+        args_array = gen_class.ArgParser(self.argv3, do_parse=True)
+
+        self.assertTrue(args_array.arg_exist(self.arg))
+
+    def test_arg_exist(self):
+
+        """Function:  test_arg_exist
+
+        Description:  Test with argument exist.
+
+        Arguments:
+
+        """
+
+        args_array = gen_class.ArgParser(self.argv2, do_parse=True)
+
+        self.assertTrue(args_array.arg_exist(self.arg))
 
     def test_empty_args_array(self):
 
