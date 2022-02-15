@@ -187,6 +187,7 @@ class ArgParser(object):
         arg_dir_chk
         arg_dir_chk_crt
         arg_dir_crt
+        arg_exist
         arg_file_chk
         arg_noreq_xor
         arg_parse2
@@ -540,6 +541,24 @@ class ArgParser(object):
                       format(self.args_array[item]))
 
         return status
+
+    def arg_exist(self, arg):
+
+        """Method:  arg_exist
+
+        Description:  Checks to see if argument option exists in the arg_array.
+
+        Arguments:
+            (input) arg -> Argument option being checked
+            (output) True|False - If argument exist
+
+        """
+
+        if arg in self.args_array:
+            return True
+
+        else:
+            return False
 
     def arg_file_chk(self, **kwargs):
 
