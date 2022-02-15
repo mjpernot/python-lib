@@ -2423,6 +2423,7 @@ def transpose_dict(data, data_key):
     data = list(data)
     data_key = dict(data_key)
     mod_data = list()
+    literal_list = ["bool", "list"]
 
     for list_item in data:
         list_item = dict(list_item)
@@ -2434,7 +2435,7 @@ def transpose_dict(data, data_key):
             elif data_key[item] == "int":
                 list_item[item] = int(list_item[item])
 
-            elif data_key[item] == "bool":
+            elif data_key[item] in literal_list:
                 list_item[item] = ast.literal_eval(list_item[item])
 
         mod_data.append(list_item)
