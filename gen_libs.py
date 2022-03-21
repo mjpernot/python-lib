@@ -594,24 +594,32 @@ def create_cfg_array(cfg_file, **kwargs):
     return cfg_array
 
 
-def crt_file_time(fname, path, ext=""):
+def crt_file_time(fname, path, ext="", **kwargs):
 
     """Function:  crt_file_time
 
     Description:  Creates a file name with timestamp along with directory path.
 
     Arguments:
-        (input) fname -> File name.
-        (input) path -> Directory path.
-        (input) ext -> Extension of file.
-        (output) -> Directory path/file_name.time.extension.
+        (input) fname -> File name
+        (input) path -> Directory path
+        (input) ext -> Extension of file
+        (input) kwargs:
+            secs -> True|False - Add seconds to timestamp
+        (output) -> Directory path/file_name.time.extension
 
     """
 
     if ext and "." not in ext[0]:
         ext = "." + ext
 
-    return os.path.join(path, fname + "." + time.strftime("%Y%m%d_%H%M") + ext)
+    if kwargs.get("secs", False):
+        time_fmt = "%Y%m%d_%H%M%S"
+
+    else:
+        time_fmt = "%Y%m%d_%H%M"
+
+    return os.path.join(path, fname + "." + time.strftime(time_fmt) + ext)
 
 
 def date_range(start_dt, end_dt):
