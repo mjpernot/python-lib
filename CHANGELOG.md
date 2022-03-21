@@ -11,6 +11,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - gen_class:  Added ArgParser class, this is the replacement of the arg_parser module libraries.
 
 ### Changed
+- gen_libs.crt_file_time: Added option to add seconds to timestamp.
 - gen_libs.transpose_dict:  Added list to the specified data types to convert to.
 
 ### Deprecated
