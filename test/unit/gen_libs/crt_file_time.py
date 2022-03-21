@@ -43,7 +43,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
-        
+        test_true_seconds
         test_false_seconds
         test_default_seconds
         test_no_trailing_slash
