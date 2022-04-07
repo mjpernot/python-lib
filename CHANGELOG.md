@@ -4,6 +4,25 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [2.9.0] - 2022-01-13
+### Added
+- gen_libs.chk_perm:  Checks to see a permission is turned on for an object based on an octal argument.
+- gen_libs.make_dir:  Tries to create a directory and capture any exceptions.
+- gen_class:  Added ArgParser class, this is the replacement of the arg_parser module libraries.
+
+### Changed
+- gen_class.ArgParser.arg_exist: Refactored "if" statement.
+- gen_class.LogFile.load_loglist: Refactored "if isinstance" check.
+- gen_class.Mail:  Changed self.to to self.toaddr.
+- gen_class.Yum:  Changed self.os to self.os_name.
+- gen_libs.crt_file_time: Added option to add seconds to timestamp.
+- gen_libs.transpose_dict:  Added list to the specified data types to convert to.
+- Documentation changes.
+
+### Deprecated
+- arg_parser:  Will be replaced with the gen_class.ArgParser class.
+
+
 ## [2.8.6] - 2021-12-23
 ### Added
 - gen_libs.octal_to_str:  Converts an octal to a string representation of a Linux file permission.

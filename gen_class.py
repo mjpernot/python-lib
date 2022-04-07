@@ -9,6 +9,7 @@
         setup_mail
 
     Classes:
+        ArgParser
         Daemon
         LogFile
         ProgressBar
@@ -37,6 +38,8 @@ import atexit
 import signal
 import platform
 import getpass
+import operator
+import glob
 
 # Third-party
 import gzip
@@ -45,6 +48,7 @@ import re
 import yum
 
 # Local
+import gen_libs
 import version
 
 __version__ = version.__version__
@@ -97,6 +101,928 @@ def setup_mail(to_line, subj=None, frm_line=None):
     return Mail(to_line, subj, frm_line)
 
 
+class ArgParser(object):
+
+    """Class:  ArgParser
+
+    Description:  Class which holds a parsed argument list and has a number of
+        methods that parse the argument list from the command line.
+
+    Note:  The ArgParser class was originally a set of libraries and were
+        converted to this class.  Below is a mapping of the library
+        variables to the class attributes.  There were a number of renames
+        to simplfy the naming scheme and also resolve naming conflicts.  The
+        mapping is broken out by the method they are used in.
+
+        Method
+            Old name            -> New name
+
+        arg_parse2
+            argv                -> argv
+            args_array          -> args_array
+            opt_val_list        -> opt_val
+            opt_def_dict        -> opt_def
+            multi_val           -> multi_val
+            opt_val             -> opt_val_bin
+
+        arg_add_def
+            def_array           -> defaults
+            opt_req_list        -> opt_req
+
+        arg_cond_req
+            opt_con_req         -> opt_con_req
+
+        arg_cond_req_or
+            opt_con_req_dict    -> opt_con_or
+
+        arg_default
+            opt_def_dict        -> opt_def
+                Same as the arg_parse2.opt_def
+
+        arg_dir_chk
+            dir_perms_chk       -> dir_perms_chk
+
+        arg_dir_chk_crt
+            dir_chk_list        -> dir_chk
+            dir_crt_list        -> dir_crt
+
+        arg_dir_crt
+            dir_perms_crt       -> dir_perms_crt
+
+        arg_file_chk
+            file_chk_list       -> file_chk
+            file_crt_list       -> file_crt
+
+        arg_noreq_xor
+            xor_noreq           -> xor_noreq
+
+        arg_require
+            opt_req_list        -> opt_req
+                Same as the arg_add_def.opt_req
+
+        arg_req_or_lst
+            opt_or_dict         -> opt_or
+
+        arg_req_xor
+            opt_xor             -> opt_xor
+
+        arg_validate
+            valid_func          -> valid_func
+
+        arg_valid_val
+            opt_valid_val       -> opt_valid_val
+
+        opt_wildcard
+            opt_wildcard        -> opt_wildcard
+
+        arg_xor_dict
+            opt_xor_dict        -> opt_xor_val
+
+    Methods:
+        __init__
+        arg_add_def
+        arg_cond_req
+        arg_cond_req_or
+        arg_default
+        arg_dir_chk
+        arg_dir_chk_crt
+        arg_dir_crt
+        arg_exist
+        arg_file_chk
+        arg_noreq_xor
+        arg_parse2
+        arg_require
+        arg_req_or_lst
+        arg_req_xor
+        arg_set_path
+        arg_validate
+        arg_valid_val
+        arg_wildcard
+        arg_xor_dict
+        parse_multi
+        parse_single
+        _file_chk_crt
+
+    """
+
+    def __init__(self, argv, opt_val=None, opt_def=None, **kwargs):
+
+        """Method:  __init__
+
+        Description:  Initialization of an instance of the ArgParser class.
+
+        Arguments:
+            (input) argv -> Arguments from the command line
+            (input) opt_val -> Options which require values
+            (input) opt_def -> Dict with options and default values
+            (input) **kwargs:
+                defaults -> List of options with their default values
+                dir_chk -> Options which will have directories
+                dir_crt -> Options to create directories if not present
+                dir_perms_chk -> Directory check options with their directory
+                    perms in octal
+                dir_perms_crt -> Directory creation options with their
+                    directory perms in octal
+                file_chk -> Options which will have files included
+                file_crt -> Options require files to be created
+                multi_val - List of options that may contain multiple values
+                opt_con_or -> Dictionary of options that require one or more
+                    options
+                opt_con_req -> Dictionary list containing the option as the
+                    dictionary key to a list of arguments that are required for
+                    the dictionary key option
+                opt_or -> Dictionary list of options for "or" operator
+                opt_req -> Options that are required
+                opt_val_bin - List of options that allow zero values or one
+                    value for the option
+                opt_valid_val -> Dictionary of options & their valid values
+                opt_wildcard -> List of wildcard options
+                opt_xor -> Dictionary of options that are required XOR
+                opt_xor_val -> Dictionary with key and values that will be xor
+                    with each other
+                valid_func -> Dictionary list of options & functions
+                xor_noreq -> Dictionary of the two XOR options
+                do_parse -> True|False - Run the arg_parse2 method during the
+                    initialization process for the class.  Default is False.
+                    NOTE:  If a parsing error occurs, only a print error
+                        message will be displayed.  Not recommended for
+                        automated job runs.
+
+        """
+
+        # For arg_parse2 and arg_default methods
+        self.argv = list(argv)
+        self.args_array = dict()
+        self.opt_val = list() if opt_val is None else list(opt_val)
+        self.opt_def = dict() if opt_def is None else dict(opt_def)
+        self.multi_val = list(kwargs.get("multi_val", []))
+        self.opt_val_bin = list(kwargs.get("opt_val_bin", []))
+
+        # For arg_add def and arg_require methods
+        self.defaults = dict(kwargs.get("defaults", {}))
+        self.opt_req = list(kwargs.get("opt_req", []))
+
+        # For arg_cond_req method
+        self.opt_con_req = dict(kwargs.get("opt_con_req", {}))
+
+        # For arg_cond_req_or method
+        self.opt_con_or = dict(kwargs.get("opt_con_or", {}))
+
+        # For arg_dir_chk method
+        self.dir_perms_chk = dict(kwargs.get("dir_perms_chk", {}))
+
+        # For arg_dir_chk_crt method
+        self.dir_chk = list(kwargs.get("dir_chk", []))
+        self.dir_crt = list(kwargs.get("dir_crt", []))
+
+        # For arg_dir_crt method
+        self.dir_perms_crt = dict(kwargs.get("dir_perms_crt", {}))
+
+        # For arg_file_chk method
+        self.file_chk = list(kwargs.get("file_chk", []))
+        self.file_crt = list(kwargs.get("file_crt", []))
+
+        # For arg_noreq_xor method
+        self.xor_noreq = dict(kwargs.get("xor_noreq", {}))
+
+        # For arg_req_or_lst method
+        self.opt_or = dict(kwargs.get("opt_or", {}))
+
+        # For arg_req_xor method
+        self.opt_xor = dict(kwargs.get("opt_xor", {}))
+
+        # For arg_validate method
+        self.valid_func = dict(kwargs.get("valid_func", {}))
+
+        # For arg_valid_val method
+        self.opt_valid_val = dict(kwargs.get("opt_valid_val", {}))
+
+        # For opt_wildcard method
+        self.opt_wildcard = list(kwargs.get("opt_wildcard", []))
+
+        # For arg_xor_dict method
+        self.opt_xor_val = dict(kwargs.get("opt_xor_val", {}))
+
+        if kwargs.get("do_parse", False) and not self.arg_parse2():
+            print("Error:  An error occurred during the parsing of argv.")
+
+    def arg_add_def(self, **kwargs):
+
+        """Method:  arg_add_def
+
+        Description:  Adds options along with their default values to the
+            argument array if they are missing.  Can also add in the required
+            argument list to the function call and this will add only those
+            required argument options if they are missing and have default
+            values in the default array list.
+
+        Arguments:
+            (input) **kwargs:
+                defaults -> List of options with their default values
+                opt_req -> Options that are required
+
+        """
+
+        defaults = dict(kwargs.get("defaults", self.defaults))
+        opt_req = list(kwargs.get("opt_req", self.opt_req))
+
+        if defaults and opt_req:
+
+            # Add missing required options with default values to arg_array.
+            for item in set(opt_req) & (
+                    set(defaults.keys()) - set(self.args_array.keys())):
+
+                self.args_array[item] = defaults[item]
+
+        elif defaults:
+
+            # Add any missing default values to arg_array.
+            for item in set(defaults.keys()) - set(self.args_array.keys()):
+                self.args_array[item] = defaults[item]
+
+    def arg_cond_req(self, **kwargs):
+
+        """Method:  arg_cond_req
+
+        Description:  This checks a dictionary list array for options that
+            require other options to be included in the argument list.
+
+        Arguments:
+            (input) **kwargs:
+                opt_con_req -> Dictionary list containing the option as the
+                    dictionary key to a list of arguments that are required for
+                    the dictionary key option
+            (output) status -> True|False - If required args are included
+
+        """
+
+        opt_con_req = dict(kwargs.get("opt_con_req", self.opt_con_req))
+        status = True
+
+        for item in set(self.args_array.keys()) & set(opt_con_req.keys()):
+
+            for _ in set(opt_con_req[item]) - set(self.args_array.keys()):
+                status = False
+                print("Error:  Option {0} requires options {1}.".
+                      format(item, opt_con_req[item]))
+                break
+
+        return status
+
+    def arg_cond_req_or(self, **kwargs):
+
+        """Method:  arg_cond_req_or
+
+        Description:  Checks a dictionary list array for options that require
+            one or more options to be included in the argument list.
+
+        Arguments:
+            (input) **kwargs:
+                opt_con_or -> Dict of options that might be required
+            (output) status -> True|False - If options are the argument list
+
+        """
+
+        opt_con_or = dict(kwargs.get("opt_con_or", self.opt_con_or))
+        status = True
+
+        for item in set(opt_con_or.keys()) & set(self.args_array.keys()):
+            tmp_flag = False
+
+            for _ in set(opt_con_or[item]) & set(self.args_array.keys()):
+                tmp_flag = True
+                break
+
+            if not tmp_flag:
+                print("Error: Option {0} requires one of these options {1}".
+                      format(item, opt_con_or[item]))
+                status = tmp_flag
+
+        return status
+
+    def arg_default(self, arg, **kwargs):
+
+        """Method:  arg_default
+
+        Description:  Checks to see if an argument has a default value and if
+            so assigns that value to the option in the args_array list.
+
+        Arguments:
+            (input) arg -> Argument option.
+            (input) **kwargs:
+                opt_def -> Dict with options and default values
+            (output) status -> True|False - If default was added successfully
+
+        """
+
+        opt_def = dict(kwargs.get("opt_def", self.opt_def))
+        status = True
+
+        if arg in opt_def and arg not in self.args_array:
+            self.args_array[arg] = opt_def[arg]
+
+        elif arg not in opt_def:
+            print("Warning: Arg {0} missing default value".format(arg))
+            status = False
+
+        return status
+
+    def arg_dir_chk(self, **kwargs):
+
+        """Method:  arg_dir_chk
+
+        Description:  Checks to see if the directory has the correct
+            permissions.
+
+        Arguments:
+            (input) **kwargs:
+                dir_perms_chk -> Directory check options with their directory
+                    perms in octal
+            (output) status -> True|False - If directories have correct perms
+
+        """
+
+        dir_perms_chk = dict(kwargs.get("dir_perms_chk", self.dir_perms_chk))
+        status = True
+
+        for item in set(dir_perms_chk) & set(self.args_array):
+
+            if not os.path.isdir(self.args_array[item]):
+                print("Error: {0} does not exist.".
+                      format(self.args_array[item]))
+                status = False
+
+            else:
+                status = status & gen_libs.chk_perm(
+                    self.args_array[item], dir_perms_chk[item])
+
+        return status
+
+    def arg_dir_chk_crt(self, **kwargs):
+
+        """Method:  arg_dir_chk_crt
+
+        Description:  Checks to see if the directory options have access to the
+            directories and create directory if requested.
+
+        Arguments:
+            (input) **kwargs:
+                dir_chk -> Options which will have directories
+                dir_crt -> Options to create directories if not present
+            (output) status -> True|False - If directories are available
+
+        """
+
+        dir_chk = list(kwargs.get("dir_chk", self.dir_chk))
+        dir_crt = list(kwargs.get("dir_crt", self.dir_crt))
+        status = True
+
+        if set(dir_crt).issubset(set(dir_chk)):
+
+            for item in set(dir_chk) & set(self.args_array.keys()):
+
+                if not os.path.isdir(self.args_array[item]) and \
+                   item in dir_crt:
+
+                    status = gen_libs.make_dir(self.args_array[item])
+
+                elif not os.path.isdir(self.args_array[item]):
+                    print("Error: {0} does not exist.".
+                          format(self.args_array[item]))
+                    status = False
+
+                elif not os.access(self.args_array[item], os.W_OK):
+                    print("Error: {0} is not writable.".
+                          format(self.args_array[item]))
+                    status = False
+
+        else:
+            print("Error:  dir_crt_list: {0} is not a subset of dir_chk: {1}"
+                  .format(dir_crt, dir_chk))
+            status = False
+
+        return status
+
+    def arg_dir_crt(self, **kwargs):
+
+        """Method:  arg_dir_crt
+
+        Description:  Creates a directory if it doesn't exist and also checks
+            to see if the directory has the correct permissions.
+
+        Arguments:
+            (input) **kwargs:
+                dir_perms_crt -> Directory creation options with their
+                    directory perms in octal
+            (output) status -> True|False - If directories have correct perms
+                and/or was created successfully
+
+        """
+
+        dir_perms_crt = dict(kwargs.get("dir_perms_crt", self.dir_perms_crt))
+        status = True
+
+        for item in set(dir_perms_crt) & set(self.args_array.keys()):
+
+            if not os.path.isdir(self.args_array[item]):
+                tmp_status = gen_libs.make_dir(self.args_array[item])
+
+            else:
+                tmp_status = True
+
+            if tmp_status:
+                status = status & gen_libs.chk_perm(
+                    self.args_array[item], dir_perms_crt[item])
+
+            else:
+                status = status & tmp_status
+                print("Error: {0} was not created.".
+                      format(self.args_array[item]))
+
+        return status
+
+    def arg_exist(self, arg):
+
+        """Method:  arg_exist
+
+        Description:  Checks to see if argument option exists in the arg_array.
+
+        Arguments:
+            (input) arg -> Argument option being checked
+            (output) True|False - If argument exist
+
+        """
+
+        return True if arg in self.args_array else False
+
+    def arg_file_chk(self, **kwargs):
+
+        """Method:  arg_file_chk
+
+        Description:  Checks to see if the file options have access to the
+            files.
+
+        Arguments:
+            (input) **kwargs:
+                file_chk -> Options which will have files included
+                file_crt -> Options require files to be created
+            (output) status -> True|False - If files are available
+
+        """
+
+        file_chk = list(kwargs.get("file_chk", self.file_chk))
+        file_crt = list(kwargs.get("file_crt", self.file_crt))
+        status = True
+
+        for option in set(self.args_array.keys()) & set(file_chk):
+
+            if isinstance(self.args_array[option], list):
+                tmp_list = list(self.args_array[option])
+
+            else:
+                tmp_list = [self.args_array[option]]
+
+            for name in tmp_list:
+                # Combine these lines?  See below.
+                # tmp_status = self._file_chk_crt(name, option, file_crt)
+                # status = status & tmp_status
+                status = status & self._file_chk_crt(
+                    name, option, file_crt=file_crt)
+
+        return status
+
+    def arg_noreq_xor(self, **kwargs):
+
+        """Method:  arg_noreq_xor
+
+        Description:  Does an XOR check between two options or if neither one
+            is part of the argument list.
+
+        Arguments:
+            (input) **kwargs:
+                xor_noreq -> Dictionary of the two XOR options
+            (output) status -> True|False - If only one option has been
+                selected
+
+        """
+
+        xor_noreq = dict(kwargs.get("xor_noreq", self.xor_noreq))
+        status = True
+
+        for opt in xor_noreq:
+
+            # Xor between key and values in dictionary.
+            if not (operator.xor((opt in self.args_array),
+                                 (xor_noreq[opt] in self.args_array)) or
+                    (opt not in self.args_array and
+                     xor_noreq[opt] not in self.args_array)):
+
+                print("Options: {0} or {1}, not both.".
+                      format(opt, xor_noreq[opt]))
+                status = False
+
+        return status
+
+    def arg_parse2(self, **kwargs):
+
+        """Method:  arg_parse2
+
+        Description:  Parses the command line arguments into arg_array, but
+            includes an option for a dictionary which allows arguments to have
+            default values if no value is passed with the argument.  It assumes
+            anything not in opt_val is valid and sets the option to True.
+
+        Arguments:
+            (input) **kwargs:
+                opt_val -> Options which require values
+                opt_def -> Dict with options and default values
+                multi_val - List of options that may contain multiple values
+                opt_val_bin - List of options that allow zero values or one
+                    value for the option
+            (output) status -> True|False - If successfully parse argv.
+
+        """
+
+        opt_val = list(kwargs.get("opt_val", self.opt_val))
+        multi_val = list(kwargs.get("multi_val", self.multi_val))
+        opt_def = dict(kwargs.get("opt_def", self.opt_def))
+        opt_val_bin = list(kwargs.get("opt_val_bin", self.opt_val_bin))
+        status = True
+
+        while self.argv:
+
+            # Look for new option, always begin with "-".
+            if self.argv[0][0] == "-":
+                if self.argv[0] in multi_val:
+                    status = self.parse_multi(opt_def=opt_def)
+
+                elif self.argv[0] in opt_val or self.argv[0] in opt_val_bin:
+                    status = self.parse_single(
+                        opt_def=opt_def, opt_val_bin=opt_val_bin)
+
+                else:
+                    self.args_array[self.argv[0]] = True
+
+            self.argv = self.argv[1:]
+
+        return status
+
+    def arg_require(self, **kwargs):
+
+        """Method:  arg_require
+
+        Description:  Checks to see if the required options are included.
+
+        Arguments:
+            (input) **kwargs:
+                opt_req -> Options that are required
+            (output) status -> True|False - It required options are
+                included
+
+        """
+
+        opt_req = list(kwargs.get("opt_req", self.opt_req))
+        status = True
+
+        for item in set(opt_req) - set(self.args_array.keys()):
+            print("Error:  The '{0}' option is required".format(item))
+            status = False
+
+        return status
+
+    def arg_req_or_lst(self, **kwargs):
+
+        """Method:  arg_req_or_lst
+
+        Description:  Does a check on the dictionary list that requires the
+            first option of the dictionary list to be in the argument list OR
+            one or more of the options in the associated list to be in the
+            argument list.
+
+        Arguments:
+            (input) **kwargs:
+                opt_or -> Dictionary list of options for "or" operator
+            (output) status -> True|False - If requirements have been meet
+
+        """
+
+        opt_or = dict(kwargs.get("opt_or", self.opt_or))
+        status = True
+
+        for option in set(opt_or.keys()) - set(self.args_array.keys()):
+            tmp_flag = False
+
+            for _ in set(opt_or[option]) & set(self.args_array.keys()):
+                tmp_flag = True
+                break
+
+            if not tmp_flag:
+                print("Error:  Option: {0} or one of these: {1} is required.".
+                      format(option, opt_or[option]))
+                status = tmp_flag
+
+        return status
+
+    def arg_req_xor(self, **kwargs):
+
+        """Method:  arg_req_xor
+
+        Description:  Does an XOR check between two required options.
+
+        WARNING:  Does not handle multiple xor pairs.
+
+        Arguments:
+            (input) **kwargs:
+                opt_xor -> Dictionary of options that are required XOR
+            (output) status -> True|False - If one option has been selected
+
+        """
+
+        opt_xor = dict(kwargs.get("opt_xor", self.opt_xor))
+        status = True
+
+        for option in opt_xor:
+
+            # Xor between key and values in dictionary.
+            if not operator.xor((option in self.args_array),
+                                (opt_xor[option] in self.args_array)):
+
+                print("Option {0} or {1}, but not both.".
+                      format(option, opt_xor[option]))
+                status = False
+
+        return status
+
+    def arg_set_path(self, arg_opt):
+
+        """Method:  arg_set_path
+
+        Description:  Return dir path from argument list or return empty
+            string.
+
+        Arguments:
+            (input) arg_opt -> Argument option holding directory path
+            (output) path -> Returns directory path, if detected
+
+        """
+
+        path = os.path.join(
+            self.args_array[arg_opt] if arg_opt in self.args_array else "")
+
+        return path
+
+    def arg_validate(self, **kwargs):
+
+        """Method:  arg_validate
+
+        Description:  Validates data for certain options based on a dictionary
+            list.
+
+        Arguments:
+            (input) **kwargs:
+                valid_func -> Dictionary list of options & functions
+            (output) status -> True|False - If format is valid
+
+        """
+
+        valid_func = dict(kwargs.get("valid_func", self.valid_func))
+        status = True
+
+        for opt in set(valid_func.keys()) & set(self.args_array.keys()):
+
+            # Call function from function list.
+            if not valid_func[opt](self.args_array[opt]):
+                print("Error:  Invalid format: {0} '{1}'"
+                      .format(opt, self.args_array[opt]))
+                status = False
+
+        return status
+
+    def arg_valid_val(self, **kwargs):
+
+        """Method:  arg_valid_val
+
+        Description:  Validates data for options based on a dictionary list.
+
+        Arguments:
+            (input) **kwargs:
+                opt_valid_val -> Dictionary of options & their valid values
+            (output) status -> True|False - If format is valid
+
+        """
+
+        opt_valid_val = dict(kwargs.get("opt_valid_val", self.opt_valid_val))
+        status = True
+
+        for option in set(self.args_array.keys()) & set(opt_valid_val.keys()):
+
+            # If passed value is invalid for this option.
+            if self.args_array[option] not in opt_valid_val[option]:
+                print("Error:  Incorrect value ({0}) for option: {1}".
+                      format(self.args_array[option], option))
+                status = False
+
+        return status
+
+    def arg_wildcard(self, **kwargs):
+
+        """Method:  arg_wildcard
+
+        Description:  Expand wildcard file argument and replace the wildcard
+            value with a list of file names.
+
+        Arguments:
+            (input) **kwargs:
+                opt_wildcard -> List of wildcard options
+
+        Example:
+            Input:
+                args_array = {"-a": ["cmds*", "arg*"], "-b": ["gen*"],
+                              "-c": "*class*"}
+                opt_wildcard = ["-a", "-b", "-c"]
+            Output:
+                {'-a': ['cmds_gen.py', 'arg_parser.py'],
+                 '-c': ['gen_class.py'],
+                 '-b': ['gen_libs.py', 'gen_class.py']}
+
+        """
+
+        opt_wildcard = list(kwargs.get("opt_wildcard", self.opt_wildcard))
+
+        for opt in opt_wildcard:
+            if opt in self.args_array.keys() and \
+               isinstance(self.args_array[opt], list):
+
+                t_list = [glob.glob(item) for item in self.args_array[opt]]
+                self.args_array[opt] = [
+                    item1 for item2 in t_list for item1 in item2]
+
+            elif opt in self.args_array.keys() and isinstance(
+                    self.args_array[opt], str):
+
+                self.args_array[opt] = glob.glob(self.args_array[opt])
+
+    def arg_xor_dict(self, **kwargs):
+
+        """Method:  arg_xor_dict
+
+        Description:  Does a Xor check between a key in opt_xor_val and its
+            values using args_array for the check.  Therefore, the key can be
+            in args_array or one or more of its values can be in arg_array, but
+            both can not appear in args_array.
+
+        Arguments:
+            (input) **kwargs:
+                opt_xor_val -> Dictionary with key and values that will be xor
+                    with each other
+            (output) status -> True|False - If one option is in args_array
+
+        """
+
+        opt_xor_val = dict(kwargs.get("opt_xor_val", self.opt_xor_val))
+        status = True
+
+        for opt in set(opt_xor_val.keys()) & set(self.args_array.keys()):
+
+            for item in set(opt_xor_val[opt]) & set(self.args_array.keys()):
+                print("Option {0} or {1}, but not both.".format(opt, item))
+                status = False
+                break
+
+        return status
+
+    def parse_multi(self, **kwargs):
+
+        """Method:  parse_multi
+
+        Description:  Processes a multi-value argument in command line
+            arguments.  Modifies the args_array attribute by adding a
+            dictionary key and a list of values.
+
+        Arguments:
+            (input) **kwargs:
+                opt_def -> Dictionary with options and default values
+            (output) status -> True|False - If successfully parse argv.
+
+        """
+
+        opt_def = dict(kwargs.get("opt_def", self.opt_def))
+        status = True
+
+        # If no value in argv for option and it's not an integer.
+        if len(self.argv) < 2 or (
+                self.argv[1][0] == "-" and not gen_libs.chk_int(self.argv[1])):
+
+            # See if default value is available for argument.
+            status = self.arg_default(self.argv[0], opt_def=opt_def)
+
+        else:
+            # Handle multiple values for argument.
+            self.args_array[self.argv[0]] = list()
+            cnt = 0
+            tmp_argv = self.argv[1:]
+
+            # Process values until next argument.
+            while tmp_argv:
+                if tmp_argv[0][0] == "-":
+                    break
+
+                else:
+                    self.args_array[self.argv[0]].append(tmp_argv[0])
+
+                cnt += 1
+                tmp_argv = tmp_argv[1:]
+
+            # Move to argument after the multiple values.
+            self.argv = self.argv[cnt:]
+
+        return status
+
+    def parse_single(self, **kwargs):
+
+        """Method:  parse_single
+
+        Description:  Processes a single-value argument in command line
+            arguments.  Modifies the args_array attribute by adding a
+            dictionary key and a value.
+
+        Arguments:
+            (input) **kwargs:
+                opt_def -> Dictionary with options and default values
+                opt_val_bin -> List of options that allow zero values or one
+                    value for the option
+            (output) status -> True|False - If successfully parse argv.
+
+        """
+
+        opt_def = dict(kwargs.get("opt_def", self.opt_def))
+        opt_val_bin = list(kwargs.get("opt_val_bin", self.opt_val_bin))
+        status = True
+
+        # If no value in argv for option and it is not an integer.
+        if len(self.argv) < 2 or (
+                self.argv[1][0] == "-" and not gen_libs.chk_int(self.argv[1])):
+
+            if self.argv[0] in opt_val_bin:
+                self.args_array[self.argv[0]] = None
+
+            else:
+                # See if default value is available for argument.
+                status = self.arg_default(self.argv[0], opt_def=opt_def)
+
+        else:
+            self.args_array[self.argv[0]] = self.argv[1]
+            self.argv = self.argv[1:]
+
+        return status
+
+    def _file_chk_crt(self, name, option, **kwargs):
+
+        """Method:  _file_chk_crt
+
+        Description:  Private method for ArgParser class.  Will determine if
+            file exists and if not create the file if is in the file create
+            list.
+
+        Arguments:
+            (input) name -> File path and name
+            (input) option -> Option being checked
+            (input) **kwargs:
+                file_crt -> Options that require files to be created
+            (output) status -> True|False - If file exists or file creation
+                is succesful
+
+        """
+
+        file_crt = list(kwargs.get("file_crt", self.file_crt))
+        status = False
+
+        try:
+            fname = open(name, "r")
+            fname.close()
+            status = True
+
+        except IOError as (errno, strerror):
+
+            if option in file_crt and errno == 2:
+
+                try:
+                    fname = open(name, "w")
+                    fname.close()
+                    status = True
+
+                except IOError as (err, strerr):
+                    print("I/O Error: ({0}): {1}".format(err, strerr))
+                    print("Check option: '{0}', file: '{1}'".
+                          format(option, name))
+
+            else:
+                print("File Error: ({0}): {1}".format(errno, strerror))
+                print("Check option: '{0}', file: '{1}'".format(option, name))
+
+        return status
+
+
 class Daemon:
 
     """Class:  Daemon
@@ -105,13 +1031,13 @@ class Daemon:
         program in include starting, stopping and restarting the process.
 
     Methods:
-        __init__ -> Class instance initilization.
-        daemonize -> Background the process and create a pidfile for tracking.
-        delpid -> Remove pidfile from the file system.
-        start -> Start the daemon process
-        stop -> Kill the daemon process
-        restart -> Restart the daemon process
-        run -> Stub method holder, instance will contain the code to execute.
+        __init__
+        daemonize
+        delpid
+        start
+        stop
+        restart
+        run
 
     Possible Bug:  Sometimes during start and stop operations an error is
         encountered on a sys.stderr.write command that states: "unsupported
@@ -330,19 +1256,19 @@ class LogFile(object):
         searching of log entries based on regex, keyword, and ignore.
 
     Methods:
-        __init__ -> Initialization of an instance of the LogFile class.
-        get_marker -> Return the last line of the loglist array.
-        find_marker -> Find the marker in the loglist array.
-        filter_ignore -> Removed ignore entries from loglist array.
-        filter_keyword -> Keep only keyword entries in loglist array.
-        filter_regex -> Keep only regex entries that match in loglist array.
-        load_ignore -> Load ignore list from object.
-        load_keyword -> Load keyword list from object.
-        load_loglist -> Load log entries into loglist array from object.
-        load_marker -> Load marker entry from object.
-        load_regex -> Load regext entries from object.
-        set_marker -> Set lastline attribute to last entry in loglist array.
-        set_predicate -> Set search predicate for keyword search.
+        __init__
+        get_marker
+        find_marker
+        filter_ignore
+        filter_keyword
+        filter_regex
+        load_ignore
+        load_keyword
+        load_loglist
+        load_marker
+        load_regex
+        set_marker
+        set_predicate
 
     """
 
@@ -525,7 +1451,7 @@ class LogFile(object):
 
         """
 
-        if isinstance(data, file) or isinstance(data, gzip.GzipFile):
+        if isinstance(data, (file, gzip.GzipFile)):
             self.loglist.extend([x.rstrip().rstrip("\n") for x in data])
 
         elif isinstance(data, list):
@@ -623,9 +1549,9 @@ class ProgressBar(object):
         operation.
 
     Methods:
-        __init__ -> Class instance initilization.
-        update -> Calculates how the total number of blocks completed.
-        calc_and_update -> Calculate the percentage completed.
+        __init__
+        update
+        calc_and_update
 
     """
 
@@ -721,8 +1647,8 @@ class ProgramLock(object):
         present and prevent a second program instance from starting.
 
     Methods:
-        __init__ -> Class instance initilization.
-        __del__ -> Deletion of the ProgramLock instance.
+        __init__
+        __del__
 
     """
 
@@ -790,8 +1716,8 @@ class System(object):
         server.
 
     Methods:
-        __init__ -> Class instance initilization.
-        set_host_name -> Set the hostname attribute.
+        __init__
+        set_host_name
 
     """
 
@@ -839,14 +1765,14 @@ class Mail(System):
         and sending the email.
 
     Methods:
-        __init__ -> Class instance initilization.
-        add_2_msg -> Add text to text string if data is present.
-        read_stdin -> Add standard in to mail message.
-        create_body -> Combines subject line & message into a single entity.
-        create_subject -> Creates or overwrites a subject to the email.
-        send_mail -> Emails message out via smtp connection.
-        send_mailx -> Emails message out using mailx.
-        print_email -> Print email to standard out.
+        __init__
+        add_2_msg
+        read_stdin
+        create_body
+        create_subject
+        send_mail
+        send_mailx
+        print_email
 
     """
 
@@ -873,10 +1799,10 @@ class Mail(System):
             subj = list(subj)
 
         if isinstance(toaddr, list):
-            self.to = list(toaddr)
+            self.toaddr = list(toaddr)
 
         else:
-            self.to = toaddr
+            self.toaddr = toaddr
 
         if frm:
             self.frm = frm
@@ -914,7 +1840,7 @@ class Mail(System):
 
             else:
                 if self.msg:
-                    self.msg = self.msg + newln +json.dumps(txt_ln)
+                    self.msg = self.msg + newln + json.dumps(txt_ln)
 
                 else:
                     self.msg = json.dumps(txt_ln)
@@ -992,7 +1918,7 @@ class Mail(System):
         else:
             inst = get_inst(smtplib)
             server = inst.SMTP("localhost")
-            server.sendmail(self.frm, self.to, self.create_body())
+            server.sendmail(self.frm, self.toaddr, self.create_body())
             server.quit()
 
     def send_mailx(self):
@@ -1011,12 +1937,12 @@ class Mail(System):
 
         self.subj = self.subj.replace(" ", "")
 
-        if isinstance(self.to, list):
-            self.to = " ".join(str(item) for item in list(self.to))
+        if isinstance(self.toaddr, list):
+            self.toaddr = " ".join(str(item) for item in list(self.toaddr))
 
         inst = get_inst(subprocess)
         proc1 = inst.Popen(['echo', self.msg], stdout=inst.PIPE)
-        proc2 = inst.Popen(['mailx', '-s', self.subj, self.to],
+        proc2 = inst.Popen(['mailx', '-s', self.subj, self.toaddr],
                            stdin=proc1.stdout)
         proc2.wait()
 
@@ -1030,7 +1956,8 @@ class Mail(System):
 
         """
 
-        return "To: %s\nFrom: %s\n%s" % (self.to, self.frm, self.create_body())
+        return "To: %s\nFrom: %s\n%s" % (
+            self.toaddr, self.frm, self.create_body())
 
 
 class Logger(object):
@@ -1042,13 +1969,13 @@ class Logger(object):
         writing to, and closing of a log file.
 
     Methods:
-        __init__ -> Class instance initilization.
-        log_debug -> Write a debug message to log file.
-        log_info -> Write a information message to log file.
-        log_warn -> Write a warning message to log file.
-        log_err -> Write a error message to log file.
-        log_crit -> Write a critical message to log file.
-        log_close -> Close the log file and drop the file handler.
+        __init__
+        log_debug
+        log_info
+        log_warn
+        log_err
+        log_crit
+        log_close
 
     """
 
@@ -1186,14 +2113,14 @@ class Yum(yum.YumBase):
         yum object is used as a proxy for using the yum command.
 
     Methods:
-        __init__ -> Class instance initilization.
-        get_hostname -> Return the class' hostname
-        get_os -> Return the class' OS platform.
-        get_release -> Return the class' OS release version.
-        get_distro -> Reuturn class' linux_distribution.
-        fetch_repos -> Return a list of repos
-        fetch_install_pkgs -> Return a dict of installed packages in a list.
-        fetch_update_pkgs -> Return a dict of packages to be updated in a list.
+        __init__
+        get_hostname
+        get_os
+        get_release
+        get_distro
+        fetch_repos
+        fetch_install_pkgs
+        fetch_update_pkgs
 
     """
 
@@ -1216,7 +2143,7 @@ class Yum(yum.YumBase):
         else:
             self.host_name = socket.gethostname()
 
-        self.os = platform.system()
+        self.os_name = platform.system()
         self.release = platform.release()
         self.distro = platform.linux_distribution()
 
@@ -1253,11 +2180,11 @@ class Yum(yum.YumBase):
         Description:  Return the class' OS platform.
 
         Arguments:
-            (output) self.os -> Server's Operating system name.
+            (output) self.os_name -> Server's Operating system name.
 
         """
 
-        return self.os
+        return self.os_name
 
     def get_release(self):
 
