@@ -75,10 +75,12 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        p_name = "programname.py"
+
         self.argv = []
-        self.argv2 = ["programname.py"]
-        self.argv3 = ["programname.py", "-a"]
-        self.argv4 = ["programname.py", "-a", "-b"]
+        self.argv2 = [p_name]
+        self.argv3 = [p_name, "-a"]
+        self.argv4 = [p_name, "-a", "-b"]
 
         self.opt_val = ["-a"]
 

@@ -88,13 +88,15 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        p_name = "program.py"
+
         self.base_path = "test/integration/gen_class/tmp"
         self.dir1 = os.path.join(self.base_path, "dir1")
         self.dir2 = os.path.join(self.base_path, "dir2")
 
-        self.argv = ["program.py"]
-        self.argv2 = ["program.py", "-d", self.dir1]
-        self.argv3 = ["program.py", "-d", self.dir1, "-g", self.dir2]
+        self.argv = [p_name]
+        self.argv2 = [p_name, "-d", self.dir1]
+        self.argv3 = [p_name, "-d", self.dir1, "-g", self.dir2]
         self.opt_val = ["-d", "-g"]
         self.dir_perms_crt = {}
         self.dir_perms_crt2 = {"-d": 1}

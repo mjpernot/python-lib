@@ -68,17 +68,19 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        p_name = "program.py"
+
         self.base_path = "test/integration/gen_class/tmp"
         self.dir3 = os.path.join(self.base_path, "dir3")
         self.dir4 = os.path.join(self.base_path, "dir4")
         self.dir5 = os.path.join(self.base_path, "dir5")
         self.dir6 = os.path.join(self.base_path, "dir6")
 
-        self.argv = ["program.py"]
-        self.argv2 = ["program.py", "-d", self.dir3]
-        self.argv3 = ["program.py", "-d", self.dir3, "-g", self.dir4]
-        self.argv4 = ["program.py", "-d", self.dir5]
-        self.argv5 = ["program.py", "-d", self.dir6]
+        self.argv = [p_name]
+        self.argv2 = [p_name, "-d", self.dir3]
+        self.argv3 = [p_name, "-d", self.dir3, "-g", self.dir4]
+        self.argv4 = [p_name, "-d", self.dir5]
+        self.argv5 = [p_name, "-d", self.dir6]
 
         self.opt_val = ["-d", "-g"]
 

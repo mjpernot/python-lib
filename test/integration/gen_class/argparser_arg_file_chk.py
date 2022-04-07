@@ -76,17 +76,18 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        p_name = "program.py"
+
         self.base_path = "test/integration/gen_class/tmp"
         self.file = os.path.join(self.base_path, "file1")
         self.file2 = os.path.join(self.base_path, "file2")
         self.file3 = os.path.join(self.base_path, "file3")
 
-        self.argv = ["program.py", "-f", [self.file], "-m", "Marker"]
-        self.argv2 = ["program.py", "-f", self.file, "-g", self.file2]
-        self.argv3 = ["program.py", "-f", self.file, "-m", "Marker"]
-        self.argv4 = ["program.py", "-f", (self.file), "-m", "Marker"]
-        self.argv5 = [
-            "program.py", "-f", [self.file, self.file3], "-m", "Marker"]
+        self.argv = [p_name, "-f", [self.file], "-m", "Marker"]
+        self.argv2 = [p_name, "-f", self.file, "-g", self.file2]
+        self.argv3 = [p_name, "-f", self.file, "-m", "Marker"]
+        self.argv4 = [p_name, "-f", (self.file), "-m", "Marker"]
+        self.argv5 = [p_name, "-f", [self.file, self.file3], "-m", "Marker"]
 
         self.opt_val = ["-f", "-m", "-g"]
 
