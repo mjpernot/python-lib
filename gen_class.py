@@ -303,9 +303,8 @@ class ArgParser(object):
         # For arg_xor_dict method
         self.opt_xor_val = dict(kwargs.get("opt_xor_val", {}))
 
-        if kwargs.get("do_parse", False):
-            if not self.arg_parse2():
-                print("Error:  An error occurred during the parsing of argv.")
+        if kwargs.get("do_parse", False) and not self.arg_parse2():
+            print("Error:  An error occurred during the parsing of argv.")
 
     def arg_add_def(self, **kwargs):
 
