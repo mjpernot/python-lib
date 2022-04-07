@@ -75,7 +75,7 @@ class UnitTest(unittest.TestCase):
 
         mail = gen_class.setup_mail([self.to_line], [self.subj], self.frm_line)
 
-        self.assertEqual((mail.to, mail.subj, mail.frm),
+        self.assertEqual((mail.toaddr, mail.subj, mail.frm),
                          ([self.to_line], self.subj, self.frm_line))
 
     def test_with_from_line(self):
@@ -90,7 +90,7 @@ class UnitTest(unittest.TestCase):
 
         mail = gen_class.setup_mail([self.to_line], [self.subj], self.frm_line)
 
-        self.assertEqual((mail.to, mail.subj, mail.frm),
+        self.assertEqual((mail.toaddr, mail.subj, mail.frm),
                          ([self.to_line], self.subj, self.frm_line))
 
     def test_no_from_line(self):
@@ -106,7 +106,7 @@ class UnitTest(unittest.TestCase):
         mail = gen_class.setup_mail([self.to_line])
         from_line = getpass.getuser() + "@" + socket.gethostname()
 
-        self.assertEqual((mail.to, mail.subj, mail.frm),
+        self.assertEqual((mail.toaddr, mail.subj, mail.frm),
                          ([self.to_line], None, from_line))
 
 
