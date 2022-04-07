@@ -41,6 +41,11 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
+        test_int_bool_list
+        test_multiple_bool_list
+        test_bool_list
+        test_multiple_lists
+        test_single_list
         test_no_matches2
         test_no_matches
         test_empty_data
@@ -69,6 +74,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        p_list = '["item1", "item2"]'
+
         self.data = [{}]
         self.data2 = [{"a": "None"}]
         self.data3 = [{"a": ""}]
@@ -79,12 +86,21 @@ class UnitTest(unittest.TestCase):
         self.data7 = [{"a": "1"}, {"a": "1"}]
         self.data8 = [{"a": "True"}, {"a": "True"}]
         self.data8a = [{"a": "False"}, {"a": "False"}]
+        self.data9 = [{"a": p_list}]
+        self.data10 = [{"a": p_list}, {"a": '["item3", "item4"]'}]
+        self.data11 = [{"a": "True", "b": p_list}]
+        self.data12 = [{"a": "True", "b": p_list},
+                       {"a": "False", "b": '["item3", "item4"]'}]
+        self.data13 = [{"a": "True", "b": p_list, "c": "12"}]
 
         self.data_key = {}
         self.data_key2 = {"a": "None"}
         self.data_key3 = {"a": "int"}
         self.data_key4 = {"a": "bool"}
         self.data_key5 = {"b": "None"}
+        self.data_key6 = {"a": "list"}
+        self.data_key7 = {"a": "bool", "b": "list"}
+        self.data_key8 = {"a": "bool", "b": "list", "c": "int"}
 
         self.results = [{"a": "None"}]
         self.results2 = [{"a": None}]
@@ -97,6 +113,82 @@ class UnitTest(unittest.TestCase):
         self.results8 = [{"a": 1}, {"a": 1}]
         self.results9 = [{"a": True}, {"a": True}]
         self.results9a = [{"a": False}, {"a": False}]
+        self.results10 = [{"a": ["item1", "item2"]}]
+        self.results11 = [{"a": ["item1", "item2"]}, {"a": ["item3", "item4"]}]
+        self.results12 = [{"a": True, "b": ["item1", "item2"]}]
+        self.results13 = [{"a": True, "b": ["item1", "item2"]},
+                          {"a": False, "b": ["item3", "item4"]}]
+        self.results14 = [{"a": True, "b": ["item1", "item2"], "c": 12}]
+
+    def test_int_bool_list(self):
+
+        """Function:  test_int_bool_list
+
+        Description:  Test with a boolean and list entry.
+
+        Arguments:
+
+        """
+
+        self.assertEqual(
+            gen_libs.transpose_dict(
+                self.data13, self.data_key8), self.results14)
+
+    def test_multiple_bool_list(self):
+
+        """Function:  test_multiple_bool_list
+
+        Description:  Test with multiple boolean and list entries.
+
+        Arguments:
+
+        """
+
+        self.assertEqual(
+            gen_libs.transpose_dict(
+                self.data12, self.data_key7), self.results13)
+
+    def test_bool_list(self):
+
+        """Function:  test_bool_list
+
+        Description:  Test with a boolean and list entry.
+
+        Arguments:
+
+        """
+
+        self.assertEqual(
+            gen_libs.transpose_dict(
+                self.data11, self.data_key7), self.results12)
+
+    def test_multiple_lists(self):
+
+        """Function:  test_multiple_lists
+
+        Description:  Test with a multiple list entries.
+
+        Arguments:
+
+        """
+
+        self.assertEqual(
+            gen_libs.transpose_dict(
+                self.data10, self.data_key6), self.results11)
+
+    def test_single_list(self):
+
+        """Function:  test_single_list
+
+        Description:  Test with a single list entry.
+
+        Arguments:
+
+        """
+
+        self.assertEqual(
+            gen_libs.transpose_dict(
+                self.data9, self.data_key6), self.results10)
 
     def test_no_matches2(self):
 

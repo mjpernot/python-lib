@@ -48,6 +48,7 @@ pipeline {
                 ./test/unit/gen_libs/chk_crt_dir.py
                 ./test/unit/gen_libs/chk_crt_file.py
                 ./test/unit/gen_libs/chk_int.py
+                ./test/unit/gen_libs/chk_perm.py
                 ./test/unit/gen_libs/clear_file.py
                 ./test/unit/gen_libs/compress.py
                 ./test/unit/gen_libs/cp_dir.py
@@ -92,6 +93,7 @@ pipeline {
                 ./test/unit/gen_libs/list_files.py
                 ./test/unit/gen_libs/list_filter_files.py
                 ./test/unit/gen_libs/load_module.py
+                ./test/unit/gen_libs/make_dir.py
                 ./test/unit/gen_libs/make_md5_hash.py
                 ./test/unit/gen_libs/make_zip.py
                 ./test/unit/gen_libs/merge_data_types.py
@@ -135,6 +137,29 @@ pipeline {
                 ./test/unit/gen_libs/write_to_log.py
                 ./test/unit/gen_class/get_inst.py
                 ./test/unit/gen_class/setup_mail.py
+                ./test/unit/gen_class/argparser_arg_add_def.py
+                ./test/unit/gen_class/argparser_arg_cond_req.py
+                ./test/unit/gen_class/argparser_arg_cond_req_or.py
+                ./test/unit/gen_class/argparser_arg_default.py
+                ./test/unit/gen_class/argparser_arg_dir_chk.py
+                ./test/unit/gen_class/argparser_arg_dir_chk_crt.py
+                ./test/unit/gen_class/argparser_arg_dir_crt.py
+                ./test/unit/gen_class/argparser_arg_exist.py
+                ./test/unit/gen_class/argparser_arg_file_chk.py
+                ./test/unit/gen_class/argparser_arg_noreq_xor.py
+                ./test/unit/gen_class/argparser_arg_parse2.py
+                ./test/unit/gen_class/argparser_arg_require.py
+                ./test/unit/gen_class/argparser_arg_req_or_lst.py
+                ./test/unit/gen_class/argparser_arg_req_xor.py
+                ./test/unit/gen_class/argparser_arg_set_path.py
+                ./test/unit/gen_class/argparser_arg_validate.py
+                ./test/unit/gen_class/argparser_arg_valid_val.py
+                ./test/unit/gen_class/argparser_arg_wildcard.py
+                ./test/unit/gen_class/argparser_arg_xor_dict.py
+                ./test/unit/gen_class/argparser_file_chk_crt.py
+                ./test/unit/gen_class/argparser_init.py
+                ./test/unit/gen_class/argparser_parse_multi.py
+                ./test/unit/gen_class/argparser_parse_single.py
                 ./test/unit/gen_class/daemon_delpid.py
                 ./test/unit/gen_class/daemon_init.py
                 ./test/unit/gen_class/daemon_restart.py

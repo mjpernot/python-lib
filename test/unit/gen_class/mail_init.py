@@ -115,8 +115,8 @@ class UnitTest(unittest.TestCase):
         email = gen_class.Mail(self.toaddr, subj=self.subj4, frm=self.frm2)
 
         self.assertEqual(
-            (email.to, email.subj, email.frm, email.host_name, email.host),
-            (email.to, self.subj4a, self.frm2, None, None))
+            (email.toaddr, email.subj, email.frm, email.host_name, email.host),
+            (email.toaddr, self.subj4a, self.frm2, None, None))
 
     def test_subj_string(self):
 
@@ -131,8 +131,8 @@ class UnitTest(unittest.TestCase):
         email = gen_class.Mail(self.toaddr, subj=self.subj3, frm=self.frm2)
 
         self.assertEqual(
-            (email.to, email.subj, email.frm, email.host_name, email.host),
-            (email.to, self.subj3, self.frm2, None, None))
+            (email.toaddr, email.subj, email.frm, email.host_name, email.host),
+            (email.toaddr, self.subj3, self.frm2, None, None))
 
     def test_with_data(self):
 
@@ -147,8 +147,8 @@ class UnitTest(unittest.TestCase):
         email = gen_class.Mail(self.toaddr, subj=self.subj2, frm=self.frm2)
 
         self.assertEqual(
-            (email.to, email.subj, email.frm, email.host_name, email.host),
-            (email.to, self.subj2, self.frm2, None, None))
+            (email.toaddr, email.subj, email.frm, email.host_name, email.host),
+            (email.toaddr, self.subj2, self.frm2, None, None))
 
     def test_to_string(self):
 
@@ -179,7 +179,7 @@ class UnitTest(unittest.TestCase):
         email = gen_class.Mail(self.toaddr)
 
         self.assertEqual(
-            (email.to, email.subj, email.host_name, email.host),
+            (email.toaddr, email.subj, email.host_name, email.host),
             (self.toaddr, None, None, None))
 
     def test_default(self):
@@ -195,7 +195,7 @@ class UnitTest(unittest.TestCase):
         email = gen_class.Mail(self.toaddr)
 
         self.assertEqual(
-            (email.to, email.subj, email.host_name, email.host),
+            (email.toaddr, email.subj, email.host_name, email.host),
             (self.toaddr, None, None, None))
 
 

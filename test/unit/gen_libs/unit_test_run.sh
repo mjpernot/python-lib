@@ -12,6 +12,7 @@ test/unit/gen_libs/bytes_2_readable.py
 test/unit/gen_libs/chk_crt_dir.py
 test/unit/gen_libs/chk_crt_file.py
 test/unit/gen_libs/chk_int.py
+test/unit/gen_libs/chk_perm.py
 test/unit/gen_libs/clear_file.py
 test/unit/gen_libs/compress.py
 test/unit/gen_libs/cp_dir.py
@@ -56,6 +57,7 @@ test/unit/gen_libs/list_dirs.py
 test/unit/gen_libs/list_files.py
 test/unit/gen_libs/list_filter_files.py
 test/unit/gen_libs/load_module.py
+test/unit/gen_libs/make_dir.py
 test/unit/gen_libs/make_md5_hash.py
 test/unit/gen_libs/make_zip.py
 test/unit/gen_libs/merge_data_types.py

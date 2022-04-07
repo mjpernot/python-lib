@@ -74,8 +74,8 @@ class UnitTest(unittest.TestCase):
 
         email.read_stdin()
 
-        self.assertEqual((email.to, email.msg), (self.toaddr,
-                                                 '"Test email line"'))
+        self.assertEqual(
+            (email.toaddr, email.msg), (self.toaddr, '"Test email line"'))
 
 
 if __name__ == "__main__":

@@ -12,6 +12,7 @@
         chk_crt_dir
         chk_crt_file
         chk_int
+        chk_perm
         clear_file
         compress
         cp_dir
@@ -55,6 +56,7 @@
         list_2_dict
         list_2_str
         load_module
+        make_dir
         make_md5_hash
         make_zip
         merge_data_types
@@ -359,6 +361,41 @@ def chk_int(line):
     return line.isdigit()
 
 
+def chk_perm(item, oct_perm):
+
+    """Method:  chk_perm
+
+    Description:  Checks to see a permission is turned on for an object based
+        on an octal argument.
+
+    Note:  This will only check the owner of the object and only checks to see
+        if the permission is on, does not check for permissions set to off.
+
+    Arguments:
+        (input) item -> Path and name of object to be checked
+        (input) oct_perm -> Permission of object in octal format: 7 (rwx),
+            6 (rw-), 5 (r-x), 4 (r--), 3 (-wx), 2 (-w-), 1 (--x), 0 (---)
+        (output) status -> True|False - If object has correct permissions
+
+    """
+
+    status = True
+
+    if octal_to_str(oct_perm)[2] == "x" and not os.access(item, os.X_OK):
+        print("Error: {0} is not executable.".format(item))
+        status = False
+
+    if octal_to_str(oct_perm)[0] == "r" and not os.access(item, os.R_OK):
+        print("Error: {0} is not readable.".format(item))
+        status = False
+
+    if octal_to_str(oct_perm)[1] == "w" and not os.access(item, os.W_OK):
+        print("Error: {0} is not writable.".format(item))
+        status = False
+
+    return status
+
+
 def clear_file(f_name):
 
     """Function:  clear_file
@@ -554,24 +591,32 @@ def create_cfg_array(cfg_file, **kwargs):
     return cfg_array
 
 
-def crt_file_time(fname, path, ext=""):
+def crt_file_time(fname, path, ext="", **kwargs):
 
     """Function:  crt_file_time
 
     Description:  Creates a file name with timestamp along with directory path.
 
     Arguments:
-        (input) fname -> File name.
-        (input) path -> Directory path.
-        (input) ext -> Extension of file.
-        (output) -> Directory path/file_name.time.extension.
+        (input) fname -> File name
+        (input) path -> Directory path
+        (input) ext -> Extension of file
+        (input) kwargs:
+            secs -> True|False - Add seconds to timestamp
+        (output) -> Directory path/file_name.time.extension
 
     """
 
     if ext and "." not in ext[0]:
         ext = "." + ext
 
-    return os.path.join(path, fname + "." + time.strftime("%Y%m%d_%H%M") + ext)
+    if kwargs.get("secs", False):
+        time_fmt = "%Y%m%d_%H%M%S"
+
+    else:
+        time_fmt = "%Y%m%d_%H%M"
+
+    return os.path.join(path, fname + "." + time.strftime(time_fmt) + ext)
 
 
 def date_range(start_dt, end_dt):
@@ -837,17 +882,18 @@ def file_cleanup(dir_path, days):
             os.remove(fullname)
 
 
-def file_search(f_name, string):
+def file_search(f_name, data_str):
 
     """Function:  file_search
 
     Description:  Search for a string in a file and return the line it was
         found in a line.
-        NOTE:  Returns only the first instance found in the file.
+
+    NOTE:  Returns only the first instance found in the file.
 
     Arguments:
         (input) f_name -> File name searching.
-        (input) string -> Search string.
+        (input) data_str -> Search string.
         (output) line - > Full line string was found in or None, if not found.
 
     """
@@ -856,7 +902,7 @@ def file_search(f_name, string):
 
     with open(f_name, "r") as s_file:
         for item in s_file:
-            if string in item:
+            if data_str in item:
                 line = item
                 break
 
@@ -1072,7 +1118,7 @@ def has_whitespace(data):
     return False
 
 
-def help_func(args_array, version, func_name=None):
+def help_func(args_array, ver, func_name=None):
 
     """Function:  help_func
 
@@ -1084,7 +1130,7 @@ def help_func(args_array, version, func_name=None):
 
     Arguments:
         (input) args_array -> Array of command line options and values.
-        (input) version -> Version information on the calling program.
+        (input) ver -> Version information on the calling program.
         (input) func_name -> Function that will contain help message.
         (output) Return True or False whether an option is detected.
 
@@ -1098,7 +1144,7 @@ def help_func(args_array, version, func_name=None):
         exit_flag = True
 
     if "-v" in args_array:
-        print(version)
+        print(ver)
         exit_flag = True
 
     return exit_flag
@@ -1216,7 +1262,7 @@ def is_file_text(f_name):
     non_text = f_head.translate(_null_trans, text_chars)
 
     # If > 30% non-text characters, then a binary file.
-    if float(len(non_text))/float(len(f_head)) > 0.30:
+    if float(len(non_text)) / float(len(f_head)) > 0.30:
         return False
 
     return True
@@ -1446,6 +1492,35 @@ def load_module(mod_name, mod_path):
     return __import__(mod_name)
 
 
+def make_dir(dirname):
+
+    """Function:  make_dir
+
+    Description:  Tries to create a directory and capture any exceptions.
+
+    Arguments:
+        (input) dirname -> Directory name
+        (output) status -> True|False - If directory creation is succesful
+
+    """
+
+    status = False
+
+    try:
+        os.makedirs(dirname)
+        status = True
+
+    except OSError as (errno, strerr):
+        if errno == 13 or errno == 17:
+            print("Error:  {0} for {1}".format(strerr, dirname))
+
+        else:
+            print("Error {0}:  Message:  {1} for {2}".format(
+                errno, strerr, dirname))
+
+    return status
+
+
 def make_md5_hash(file_path, to_file=True):
 
     """Function:  make_md5_hash
@@ -1464,7 +1539,7 @@ def make_md5_hash(file_path, to_file=True):
 
     inst = get_inst(subprocess)
     proc1 = inst.Popen(["/usr/bin/md5sum", file_path], stdout=inst.PIPE)
-    hash_results, status = proc1.communicate()
+    hash_results, _ = proc1.communicate()
     hash_results = hash_results.split("  ")[0]
 
     if to_file:
@@ -1800,7 +1875,7 @@ def octal_to_str(octal):
     """
 
     result = ""
-    value_letters = [(4,"r"),(2,"w"),(1,"x")]
+    value_letters = [(4, "r"), (2, "w"), (1, "x")]
 
     for digit in [int(n) for n in str(octal)]:
 
@@ -2262,7 +2337,7 @@ def sec_2_hr(sec):
 
     """
 
-    return (sec/36)/float(100)
+    return (sec / 36) / float(100)
 
 
 def str_2_list(del_str, fld_del):
@@ -2353,6 +2428,7 @@ def transpose_dict(data, data_key):
     data = list(data)
     data_key = dict(data_key)
     mod_data = list()
+    literal_list = ["bool", "list"]
 
     for list_item in data:
         list_item = dict(list_item)
@@ -2364,7 +2440,7 @@ def transpose_dict(data, data_key):
             elif data_key[item] == "int":
                 list_item[item] = int(list_item[item])
 
-            elif data_key[item] == "bool":
+            elif data_key[item] in literal_list:
                 list_item[item] = ast.literal_eval(list_item[item])
 
         mod_data.append(list_item)
