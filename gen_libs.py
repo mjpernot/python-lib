@@ -381,20 +381,17 @@ def chk_perm(item, oct_perm):
 
     status = True
 
-    if octal_to_str(oct_perm)[2] == "x":
-        if not os.access(item, os.X_OK):
-            print("Error: {0} is not executable.".format(item))
-            status = False
+    if octal_to_str(oct_perm)[2] == "x" and not os.access(item, os.X_OK):
+        print("Error: {0} is not executable.".format(item))
+        status = False
 
-    if octal_to_str(oct_perm)[0] == "r":
-        if not os.access(item, os.R_OK):
-            print("Error: {0} is not readable.".format(item))
-            status = False
+    if octal_to_str(oct_perm)[0] == "r" and not os.access(item, os.R_OK):
+        print("Error: {0} is not readable.".format(item))
+        status = False
 
-    if octal_to_str(oct_perm)[1] == "w":
-        if not os.access(item, os.W_OK):
-            print("Error: {0} is not writable.".format(item))
-            status = False
+    if octal_to_str(oct_perm)[1] == "w" and not os.access(item, os.W_OK):
+        print("Error: {0} is not writable.".format(item))
+        status = False
 
     return status
 
