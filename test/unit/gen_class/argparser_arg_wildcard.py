@@ -63,20 +63,22 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        p_name = "program.py"
+
         base_dir = "./test/unit/gen_class"
         wild1 = os.path.join(base_dir, "argparser_arg_wild*")
         wild2 = os.path.join(base_dir, "unit*")
         file1 = os.path.join(base_dir, "argparser_arg_wildcard.py")
         file2 = os.path.join(base_dir, "unit_test_run.sh")
 
-        self.argv = ["program.py"]
-        self.argv2 = ["program.py", "-a", [wild1]]
-        self.argv3 = ["program.py", "-a", [wild1], "-b", [wild2]]
-        self.argv4 = ["program.py", "-a", [wild1, wild2]]
-        self.argv5 = ["program.py", "-a", [wild1, wild2], "-b", [wild2]]
-        self.argv6 = ["program.py", "-a", wild1]
-        self.argv7 = ["program.py", "-a", wild1, "-b", [wild2]]
-        self.argv8 = ["program.py", "-a", wild1, "-b", wild2]
+        self.argv = [p_name]
+        self.argv2 = [p_name, "-a", [wild1]]
+        self.argv3 = [p_name, "-a", [wild1], "-b", [wild2]]
+        self.argv4 = [p_name, "-a", [wild1, wild2]]
+        self.argv5 = [p_name, "-a", [wild1, wild2], "-b", [wild2]]
+        self.argv6 = [p_name, "-a", wild1]
+        self.argv7 = [p_name, "-a", wild1, "-b", [wild2]]
+        self.argv8 = [p_name, "-a", wild1, "-b", wild2]
 
         self.opt_val = ["-a", "-b"]
 

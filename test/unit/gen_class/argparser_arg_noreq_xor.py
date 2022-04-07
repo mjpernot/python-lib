@@ -63,12 +63,14 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.argv = ["program.py"]
-        self.argv2 = ["program.py", "-a"]
-        self.argv3 = ["program.py", "-a", "-b"]
-        self.argv4 = ["program.py", "-a" "-c"]
-        self.argv5 = ["program.py", "-a", "-c", "-d"]
-        self.argv6 = ["program.py", "-a", "-b", "-c", "-d"]
+        p_name = "program.py"
+
+        self.argv = [p_name]
+        self.argv2 = [p_name, "-a"]
+        self.argv3 = [p_name, "-a", "-b"]
+        self.argv4 = [p_name, "-a" "-c"]
+        self.argv5 = [p_name, "-a", "-c", "-d"]
+        self.argv6 = [p_name, "-a", "-b", "-c", "-d"]
 
         self.xor_noreq = {}
         self.xor_noreq2 = {"-a": "-b"}

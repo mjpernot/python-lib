@@ -60,10 +60,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.argv = ["program.py"]
-        self.argv2 = [
-            "program.py", "-a", "/dir/path", "-c", "/dir/diff_path"]
-        self.argv3 = ["program.py", "-a", "/dir/path/"]
+        p_name = "program.py"
+
+        self.argv = [p_name]
+        self.argv2 = [p_name, "-a", "/dir/path", "-c", "/dir/diff_path"]
+        self.argv3 = [p_name, "-a", "/dir/path/"]
 
         self.opt_val = ["-a", "-c"]
 

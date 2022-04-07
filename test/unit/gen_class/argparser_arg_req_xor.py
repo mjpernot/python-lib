@@ -60,9 +60,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.argv = ["program.py"]
-        self.argv2 = ["program.py", "-a"]
-        self.argv3 = ["program.py", "-a", "-b"]
+        p_name = "program.py"
+
+        self.argv = [p_name]
+        self.argv2 = [p_name, "-a"]
+        self.argv3 = [p_name, "-a", "-b"]
 
         self.opt_xor = {}
         self.opt_xor2 = {"-a": "-b"}

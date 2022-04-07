@@ -70,12 +70,13 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.argv = ["program.py"]
-        self.argv2 = ["program.py", "-d", "/path/dir1"]
-        self.argv3 = [
-            "program.py", "-d", "/path/dir1", "-g", "/path/dir2"]
-        self.argv4 = ["program.py", "-d", "/path/dir13"]
-        self.argv5 = ["program.py", "-d", "/path/dir17"]
+        p_name = "program.py"
+
+        self.argv = [p_name]
+        self.argv2 = [p_name, "-d", "/path/dir1"]
+        self.argv3 = [p_name, "-d", "/path/dir1", "-g", "/path/dir2"]
+        self.argv4 = [p_name, "-d", "/path/dir13"]
+        self.argv5 = [p_name, "-d", "/path/dir17"]
         self.opt_val = ["-d", "-g"]
 
         self.dir_chk = []

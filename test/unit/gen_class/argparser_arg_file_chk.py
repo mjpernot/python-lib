@@ -100,18 +100,16 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        p_name = "program.py"
+
         self.path_file = "/path/file1"
 
-        self.argv = [
-            "program.py", "-f", [self.path_file], "-m", "Marker"]
-        self.argv2 = [
-            "program.py", "-f", self.path_file, "-g", "/path/file2"]
-        self.argv3 = ["program.py", "-f", self.path_file, "-m", "Marker"]
-        self.argv4 = [
-            "program.py", "-f", (self.path_file), "-m", "Marker"]
+        self.argv = [p_name, "-f", [self.path_file], "-m", "Marker"]
+        self.argv2 = [p_name, "-f", self.path_file, "-g", "/path/file2"]
+        self.argv3 = [p_name, "-f", self.path_file, "-m", "Marker"]
+        self.argv4 = [p_name, "-f", (self.path_file), "-m", "Marker"]
         self.argv5 = [
-            "program.py", "-f", [self.path_file, "/path/file3"],
-            "-m", "Marker"]
+            p_name, "-f", [self.path_file, "/path/file3"], "-m", "Marker"]
 
         self.opt_val = ["-f", "-m", "-g"]
 

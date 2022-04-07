@@ -96,12 +96,14 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        p_name = "programname.py"
+
         self.argv = []
-        self.argv2 = ["programname.py"]
+        self.argv2 = [p_name]
         self.results_arg_array = {}
-        self.argv3 = ["programname.py", "-a"]
+        self.argv3 = [p_name, "-a"]
         self.results_arg_array3 = {"-a": True}
-        self.argv4 = ["programname.py", "-a", "-b"]
+        self.argv4 = [p_name, "-a", "-b"]
         self.results_arg_array4 = {"-a": True, "-b": True}
         self.opt_val = ["-c", "-d", "-o", "-t", "-s", "-y"]
         self.results_opt_val = ["-c", "-d", "-o", "-t", "-s", "-y"]

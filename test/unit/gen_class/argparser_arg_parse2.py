@@ -85,23 +85,24 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.argv = ["program.py"]
-        self.argv2 = ["program.py", "-M"]
-        self.argv3 = ["program.py", "-M", "-a"]
-        self.argv4 = ["program.py", "-M", "merge"]
-        self.argv5 = ["program.py", "-c", "cfg", "-d", "/path"]
-        self.argv6 = ["program.py", "-c", "cfg", "-d"]
-        self.argv7 = ["program.py", "-c", "-1"]
-        self.argv8 = ["program.py", "-f", "file1", "file2"]
-        self.argv9 = [
-            "program.py", "-f", "file1", "file2", "-g", "file3", "file4"]
-        self.argv10 = ["program.py", "-f"]
-        self.argv11 = ["program.py", "-f", "file5"]
-        self.argv12 = ["program.py", "-f", "file1", "file2", "file3"]
-        self.argv13 = ["program.py", "-f", "-g"]
+        p_name = "program.py"
+        p_path = "/path"
+
+        self.argv = [p_name]
+        self.argv2 = [p_name, "-M"]
+        self.argv3 = [p_name, "-M", "-a"]
+        self.argv4 = [p_name, "-M", "merge"]
+        self.argv5 = [p_name, "-c", "cfg", "-d", p_path]
+        self.argv6 = [p_name, "-c", "cfg", "-d"]
+        self.argv7 = [p_name, "-c", "-1"]
+        self.argv8 = [p_name, "-f", "file1", "file2"]
+        self.argv9 = [p_name, "-f", "file1", "file2", "-g", "file3", "file4"]
+        self.argv10 = [p_name, "-f"]
+        self.argv11 = [p_name, "-f", "file5"]
+        self.argv12 = [p_name, "-f", "file1", "file2", "file3"]
+        self.argv13 = [p_name, "-f", "-g"]
         self.argv14 = [
-            "program.py", "-c", "cfg", "-d", "/path", "-M", "-f",
-            "file1", "file2"]
+            p_name, "-c", "cfg", "-d", p_path, "-M", "-f", "file1", "file2"]
 
         self.opt_val = ["-c", "-d", "-f", "-g"]
         self.opt_val2 = ["-M", "-a"]
@@ -115,7 +116,7 @@ class UnitTest(unittest.TestCase):
         self.results = {"-M": True}
         self.results2 = {"-M": True, "-a": True}
         self.results3 = {"-M": "merge"}
-        self.results4 = {"-c": "cfg", "-d": "/path"}
+        self.results4 = {"-c": "cfg", "-d": p_path}
         self.results5 = {"-c": "cfg"}
         self.results6 = {"-c": "cfg", "-d": None}
         self.results7 = {"-c": "-1"}
@@ -125,7 +126,7 @@ class UnitTest(unittest.TestCase):
         self.results11 = {"-f": ["file5"]}
         self.results12 = {"-f": ["file1", "file2", "file3"]}
         self.results13 = {"-g": ["def_val"], "-f": ["file1", "file2"]}
-        self.results14 = {"-c": "cfg", "-d": "/path", "-M": True,
+        self.results14 = {"-c": "cfg", "-d": p_path, "-M": True,
                           "-f": ["file1", "file2"]}
         self.results15 = {"-f": "file5"}
         self.results16 = {"-M": None, "-a": None}
