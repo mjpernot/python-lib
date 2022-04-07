@@ -32,6 +32,10 @@ import version
 
 __version__ = version.__version__
 
+# Global
+PERM = "000"
+PERM1 = "111"
+
 
 class UnitTest(unittest.TestCase):
 
@@ -90,8 +94,10 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        global PERM
+
         os.mkdir(self.dir1)
-        os.chmod(self.dir1, 0o000)
+        os.chmod(self.dir1, int(PERM, 8))
 
         with gen_libs.no_std_out():
             self.assertFalse(gen_libs.chk_perm(self.dir1, self.oct_perm7))
@@ -106,8 +112,10 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        global PERM
+
         os.mkdir(self.dir1)
-        os.chmod(self.dir1, 0o000)
+        os.chmod(self.dir1, int(PERM1, 8))
 
         with gen_libs.no_std_out():
             self.assertFalse(gen_libs.chk_perm(self.dir1, self.oct_perm5))
@@ -122,8 +130,10 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        global PERM
+
         os.mkdir(self.dir1)
-        os.chmod(self.dir1, 0o000)
+        os.chmod(self.dir1, int(PERM1, 8))
 
         with gen_libs.no_std_out():
             self.assertFalse(gen_libs.chk_perm(self.dir1, self.oct_perm3))
@@ -138,8 +148,10 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        global PERM1
+
         os.mkdir(self.dir1)
-        os.chmod(self.dir1, 0o111)
+        os.chmod(self.dir1, int(PERM1, 8))
 
         with gen_libs.no_std_out():
             self.assertFalse(gen_libs.chk_perm(self.dir1, self.oct_perm2))
@@ -154,8 +166,10 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        global PERM
+
         os.mkdir(self.dir1)
-        os.chmod(self.dir1, 0o000)
+        os.chmod(self.dir1, int(PERM, 8))
 
         with gen_libs.no_std_out():
             self.assertFalse(gen_libs.chk_perm(self.dir1, self.oct_perm7))
@@ -170,8 +184,10 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        global PERM1
+
         os.mkdir(self.dir1)
-        os.chmod(self.dir1, 0o111)
+        os.chmod(self.dir1, int(PERM1, 8))
 
         with gen_libs.no_std_out():
             self.assertFalse(gen_libs.chk_perm(self.dir1, self.oct_perm6))
@@ -186,8 +202,10 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        global PERM1
+
         os.mkdir(self.dir1)
-        os.chmod(self.dir1, 0o111)
+        os.chmod(self.dir1, int(PERM1, 8))
 
         with gen_libs.no_std_out():
             self.assertFalse(gen_libs.chk_perm(self.dir1, self.oct_perm4))
