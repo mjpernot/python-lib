@@ -149,7 +149,7 @@ class UnitTest(unittest.TestCase):
 
         mail.send_mailx()
 
-        self.assertEqual((mail.subj, mail.to), (self.subj, self.toaddr3a))
+        self.assertEqual((mail.subj, mail.toaddr), (self.subj, self.toaddr3a))
 
     @mock.patch("gen_class.subprocess")
     def test_to_list(self, mock_subp):
@@ -167,7 +167,7 @@ class UnitTest(unittest.TestCase):
 
         mail.send_mailx()
 
-        self.assertEqual((mail.subj, mail.to), (self.subj, self.toaddr))
+        self.assertEqual((mail.subj, mail.toaddr), (self.subj, self.toaddr))
 
     @mock.patch("gen_class.subprocess")
     def test_to_str(self, mock_subp):
@@ -185,7 +185,7 @@ class UnitTest(unittest.TestCase):
 
         mail.send_mailx()
 
-        self.assertEqual((mail.subj, mail.to), (self.subj, self.toaddr))
+        self.assertEqual((mail.subj, mail.toaddr), (self.subj, self.toaddr))
 
     @mock.patch("gen_class.subprocess")
     def test_subj_spaces2(self, mock_subp):
@@ -203,7 +203,7 @@ class UnitTest(unittest.TestCase):
 
         mail.send_mailx()
 
-        self.assertEqual((mail.subj, mail.to), (self.subj3a, self.toaddr))
+        self.assertEqual((mail.subj, mail.toaddr), (self.subj3a, self.toaddr))
 
     @mock.patch("gen_class.subprocess")
     def test_subj_spaces(self, mock_subp):
@@ -221,7 +221,7 @@ class UnitTest(unittest.TestCase):
 
         mail.send_mailx()
 
-        self.assertEqual((mail.subj, mail.to), (self.subj2a, self.toaddr))
+        self.assertEqual((mail.subj, mail.toaddr), (self.subj2a, self.toaddr))
 
     @mock.patch("gen_class.subprocess")
     def test_subj_str(self, mock_subp):
@@ -239,7 +239,7 @@ class UnitTest(unittest.TestCase):
 
         mail.send_mailx()
 
-        self.assertEqual((mail.subj, mail.to), (self.subj, self.toaddr))
+        self.assertEqual((mail.subj, mail.toaddr), (self.subj, self.toaddr))
 
     @mock.patch("gen_class.subprocess")
     def test_send_mailx2(self, mock_subp):
@@ -257,7 +257,7 @@ class UnitTest(unittest.TestCase):
 
         mail.send_mailx()
 
-        self.assertEqual((mail.subj, mail.to), (self.subj, self.toaddr))
+        self.assertEqual((mail.subj, mail.toaddr), (self.subj, self.toaddr))
 
     @mock.patch("gen_class.subprocess")
     def test_send_mailx(self, mock_subp):

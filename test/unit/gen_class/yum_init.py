@@ -82,7 +82,7 @@ class UnitTest(unittest.TestCase):
         yum = gen_class.Yum(self.host_name)
 
         self.assertEqual(
-            (yum.host_name, yum.os, yum.release, yum.distro),
+            (yum.host_name, yum.os_name, yum.release, yum.distro),
             (self.host_name, self.osys, self.release, self.distro))
 
     @mock.patch("platform.linux_distribution")
@@ -108,7 +108,7 @@ class UnitTest(unittest.TestCase):
         yum = gen_class.Yum()
 
         self.assertEqual(
-            (yum.host_name, yum.os, yum.release, yum.distro),
+            (yum.host_name, yum.os_name, yum.release, yum.distro),
             (self.host_name, self.osys, self.release, self.distro))
 
 

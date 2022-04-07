@@ -303,9 +303,8 @@ class ArgParser(object):
         # For arg_xor_dict method
         self.opt_xor_val = dict(kwargs.get("opt_xor_val", {}))
 
-        if kwargs.get("do_parse", False):
-            if not self.arg_parse2():
-                print("Error:  An error occurred during the parsing of argv.")
+        if kwargs.get("do_parse", False) and not self.arg_parse2():
+            print("Error:  An error occurred during the parsing of argv.")
 
     def arg_add_def(self, **kwargs):
 
@@ -554,11 +553,7 @@ class ArgParser(object):
 
         """
 
-        if arg in self.args_array:
-            return True
-
-        else:
-            return False
+        return True if arg in self.args_array else False
 
     def arg_file_chk(self, **kwargs):
 
@@ -1036,13 +1031,13 @@ class Daemon:
         program in include starting, stopping and restarting the process.
 
     Methods:
-        __init__ -> Class instance initilization.
-        daemonize -> Background the process and create a pidfile for tracking.
-        delpid -> Remove pidfile from the file system.
-        start -> Start the daemon process
-        stop -> Kill the daemon process
-        restart -> Restart the daemon process
-        run -> Stub method holder, instance will contain the code to execute.
+        __init__
+        daemonize
+        delpid
+        start
+        stop
+        restart
+        run
 
     Possible Bug:  Sometimes during start and stop operations an error is
         encountered on a sys.stderr.write command that states: "unsupported
@@ -1261,19 +1256,19 @@ class LogFile(object):
         searching of log entries based on regex, keyword, and ignore.
 
     Methods:
-        __init__ -> Initialization of an instance of the LogFile class.
-        get_marker -> Return the last line of the loglist array.
-        find_marker -> Find the marker in the loglist array.
-        filter_ignore -> Removed ignore entries from loglist array.
-        filter_keyword -> Keep only keyword entries in loglist array.
-        filter_regex -> Keep only regex entries that match in loglist array.
-        load_ignore -> Load ignore list from object.
-        load_keyword -> Load keyword list from object.
-        load_loglist -> Load log entries into loglist array from object.
-        load_marker -> Load marker entry from object.
-        load_regex -> Load regext entries from object.
-        set_marker -> Set lastline attribute to last entry in loglist array.
-        set_predicate -> Set search predicate for keyword search.
+        __init__
+        get_marker
+        find_marker
+        filter_ignore
+        filter_keyword
+        filter_regex
+        load_ignore
+        load_keyword
+        load_loglist
+        load_marker
+        load_regex
+        set_marker
+        set_predicate
 
     """
 
@@ -1456,7 +1451,7 @@ class LogFile(object):
 
         """
 
-        if isinstance(data, file) or isinstance(data, gzip.GzipFile):
+        if isinstance(data, (file, gzip.GzipFile)):
             self.loglist.extend([x.rstrip().rstrip("\n") for x in data])
 
         elif isinstance(data, list):
@@ -1554,9 +1549,9 @@ class ProgressBar(object):
         operation.
 
     Methods:
-        __init__ -> Class instance initilization.
-        update -> Calculates how the total number of blocks completed.
-        calc_and_update -> Calculate the percentage completed.
+        __init__
+        update
+        calc_and_update
 
     """
 
@@ -1652,8 +1647,8 @@ class ProgramLock(object):
         present and prevent a second program instance from starting.
 
     Methods:
-        __init__ -> Class instance initilization.
-        __del__ -> Deletion of the ProgramLock instance.
+        __init__
+        __del__
 
     """
 
@@ -1721,8 +1716,8 @@ class System(object):
         server.
 
     Methods:
-        __init__ -> Class instance initilization.
-        set_host_name -> Set the hostname attribute.
+        __init__
+        set_host_name
 
     """
 
@@ -1770,14 +1765,14 @@ class Mail(System):
         and sending the email.
 
     Methods:
-        __init__ -> Class instance initilization.
-        add_2_msg -> Add text to text string if data is present.
-        read_stdin -> Add standard in to mail message.
-        create_body -> Combines subject line & message into a single entity.
-        create_subject -> Creates or overwrites a subject to the email.
-        send_mail -> Emails message out via smtp connection.
-        send_mailx -> Emails message out using mailx.
-        print_email -> Print email to standard out.
+        __init__
+        add_2_msg
+        read_stdin
+        create_body
+        create_subject
+        send_mail
+        send_mailx
+        print_email
 
     """
 
@@ -1804,10 +1799,10 @@ class Mail(System):
             subj = list(subj)
 
         if isinstance(toaddr, list):
-            self.to = list(toaddr)
+            self.toaddr = list(toaddr)
 
         else:
-            self.to = toaddr
+            self.toaddr = toaddr
 
         if frm:
             self.frm = frm
@@ -1923,7 +1918,7 @@ class Mail(System):
         else:
             inst = get_inst(smtplib)
             server = inst.SMTP("localhost")
-            server.sendmail(self.frm, self.to, self.create_body())
+            server.sendmail(self.frm, self.toaddr, self.create_body())
             server.quit()
 
     def send_mailx(self):
@@ -1942,12 +1937,12 @@ class Mail(System):
 
         self.subj = self.subj.replace(" ", "")
 
-        if isinstance(self.to, list):
-            self.to = " ".join(str(item) for item in list(self.to))
+        if isinstance(self.toaddr, list):
+            self.toaddr = " ".join(str(item) for item in list(self.toaddr))
 
         inst = get_inst(subprocess)
         proc1 = inst.Popen(['echo', self.msg], stdout=inst.PIPE)
-        proc2 = inst.Popen(['mailx', '-s', self.subj, self.to],
+        proc2 = inst.Popen(['mailx', '-s', self.subj, self.toaddr],
                            stdin=proc1.stdout)
         proc2.wait()
 
@@ -1961,7 +1956,8 @@ class Mail(System):
 
         """
 
-        return "To: %s\nFrom: %s\n%s" % (self.to, self.frm, self.create_body())
+        return "To: %s\nFrom: %s\n%s" % (
+            self.toaddr, self.frm, self.create_body())
 
 
 class Logger(object):
@@ -1973,13 +1969,13 @@ class Logger(object):
         writing to, and closing of a log file.
 
     Methods:
-        __init__ -> Class instance initilization.
-        log_debug -> Write a debug message to log file.
-        log_info -> Write a information message to log file.
-        log_warn -> Write a warning message to log file.
-        log_err -> Write a error message to log file.
-        log_crit -> Write a critical message to log file.
-        log_close -> Close the log file and drop the file handler.
+        __init__
+        log_debug
+        log_info
+        log_warn
+        log_err
+        log_crit
+        log_close
 
     """
 
@@ -2117,14 +2113,14 @@ class Yum(yum.YumBase):
         yum object is used as a proxy for using the yum command.
 
     Methods:
-        __init__ -> Class instance initilization.
-        get_hostname -> Return the class' hostname
-        get_os -> Return the class' OS platform.
-        get_release -> Return the class' OS release version.
-        get_distro -> Reuturn class' linux_distribution.
-        fetch_repos -> Return a list of repos
-        fetch_install_pkgs -> Return a dict of installed packages in a list.
-        fetch_update_pkgs -> Return a dict of packages to be updated in a list.
+        __init__
+        get_hostname
+        get_os
+        get_release
+        get_distro
+        fetch_repos
+        fetch_install_pkgs
+        fetch_update_pkgs
 
     """
 
@@ -2147,7 +2143,7 @@ class Yum(yum.YumBase):
         else:
             self.host_name = socket.gethostname()
 
-        self.os = platform.system()
+        self.os_name = platform.system()
         self.release = platform.release()
         self.distro = platform.linux_distribution()
 
@@ -2184,11 +2180,11 @@ class Yum(yum.YumBase):
         Description:  Return the class' OS platform.
 
         Arguments:
-            (output) self.os -> Server's Operating system name.
+            (output) self.os_name -> Server's Operating system name.
 
         """
 
-        return self.os
+        return self.os_name
 
     def get_release(self):
 

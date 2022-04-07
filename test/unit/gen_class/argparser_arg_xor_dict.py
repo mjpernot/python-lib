@@ -67,14 +67,16 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.argv = ["program.py"]
-        self.argv2 = ["program.py", "-a"]
-        self.argv3 = ["program.py", "-b"]
-        self.argv4 = ["program.py", "-a", "-b"]
-        self.argv5 = ["program.py", "-a", "-d"]
-        self.argv6 = ["program.py", "-c", "-e"]
-        self.argv7 = ["program.py", "-d", "-e"]
-        self.argv8 = ["program.py", "-a", "-e"]
+        p_name = "program.py"
+
+        self.argv = [p_name]
+        self.argv2 = [p_name, "-a"]
+        self.argv3 = [p_name, "-b"]
+        self.argv4 = [p_name, "-a", "-b"]
+        self.argv5 = [p_name, "-a", "-d"]
+        self.argv6 = [p_name, "-c", "-e"]
+        self.argv7 = [p_name, "-d", "-e"]
+        self.argv8 = [p_name, "-a", "-e"]
 
         self.opt_xor_val = {}
         self.opt_xor_val2 = {"-a": ["-b"]}

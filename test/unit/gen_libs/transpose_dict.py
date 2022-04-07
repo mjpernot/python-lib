@@ -74,6 +74,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        p_list = '["item1", "item2"]'
+
         self.data = [{}]
         self.data2 = [{"a": "None"}]
         self.data3 = [{"a": ""}]
@@ -84,13 +86,12 @@ class UnitTest(unittest.TestCase):
         self.data7 = [{"a": "1"}, {"a": "1"}]
         self.data8 = [{"a": "True"}, {"a": "True"}]
         self.data8a = [{"a": "False"}, {"a": "False"}]
-        self.data9 = [{"a": '["item1", "item2"]'}]
-        self.data10 = [{"a": '["item1", "item2"]'},
-                       {"a": '["item3", "item4"]'}]
-        self.data11 = [{"a": "True", "b": '["item1", "item2"]'}]
-        self.data12 = [{"a": "True", "b": '["item1", "item2"]'},
+        self.data9 = [{"a": p_list}]
+        self.data10 = [{"a": p_list}, {"a": '["item3", "item4"]'}]
+        self.data11 = [{"a": "True", "b": p_list}]
+        self.data12 = [{"a": "True", "b": p_list},
                        {"a": "False", "b": '["item3", "item4"]'}]
-        self.data13 = [{"a": "True", "b": '["item1", "item2"]', "c": "12"}]
+        self.data13 = [{"a": "True", "b": p_list, "c": "12"}]
 
         self.data_key = {}
         self.data_key2 = {"a": "None"}

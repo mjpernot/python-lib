@@ -64,12 +64,14 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.argv = ["program.py"]
-        self.argv2 = ["program.py", "-c"]
-        self.argv3 = ["program.py", "-c", "-f"]
-        self.argv4 = ["program.py", "-c", "-f", "-m"]
-        self.argv5 = ["program.py", "-c", "-d", "-f", "-m"]
-        self.argv6 = ["program.py", "-c", "-d", "-f"]
+        p_name = "program.py"
+
+        self.argv = [p_name]
+        self.argv2 = [p_name, "-c"]
+        self.argv3 = [p_name, "-c", "-f"]
+        self.argv4 = [p_name, "-c", "-f", "-m"]
+        self.argv5 = [p_name, "-c", "-d", "-f", "-m"]
+        self.argv6 = [p_name, "-c", "-d", "-f"]
 
         self.opt_con_or = {}
         self.opt_con_or2 = {"-c": ["-f"]}

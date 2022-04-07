@@ -11,8 +11,13 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - gen_class:  Added ArgParser class, this is the replacement of the arg_parser module libraries.
 
 ### Changed
+- gen_class.ArgParser.arg_exist: Refactored "if" statement.
+- gen_class.LogFile.load_loglist: Refactored "if isinstance" check.
+- gen_class.Mail:  Changed self.to to self.toaddr.
+- gen_class.Yum:  Changed self.os to self.os_name.
 - gen_libs.crt_file_time: Added option to add seconds to timestamp.
 - gen_libs.transpose_dict:  Added list to the specified data types to convert to.
+- Documentation changes.
 
 ### Deprecated
 - arg_parser:  Will be replaced with the gen_class.ArgParser class.
