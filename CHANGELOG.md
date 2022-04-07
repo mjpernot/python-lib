@@ -16,6 +16,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - gen_class.Yum:  Changed self.os to self.os_name.
 - gen_libs.crt_file_time: Added option to add seconds to timestamp.
 - gen_libs.transpose_dict:  Added list to the specified data types to convert to.
+- Documentation changes.
 
 ### Deprecated
 - arg_parser:  Will be replaced with the gen_class.ArgParser class.

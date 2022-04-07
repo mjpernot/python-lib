@@ -1035,13 +1035,13 @@ class Daemon:
         program in include starting, stopping and restarting the process.
 
     Methods:
-        __init__ -> Class instance initilization.
-        daemonize -> Background the process and create a pidfile for tracking.
-        delpid -> Remove pidfile from the file system.
-        start -> Start the daemon process
-        stop -> Kill the daemon process
-        restart -> Restart the daemon process
-        run -> Stub method holder, instance will contain the code to execute.
+        __init__
+        daemonize
+        delpid
+        start
+        stop
+        restart
+        run
 
     Possible Bug:  Sometimes during start and stop operations an error is
         encountered on a sys.stderr.write command that states: "unsupported
@@ -1553,9 +1553,9 @@ class ProgressBar(object):
         operation.
 
     Methods:
-        __init__ -> Class instance initilization.
-        update -> Calculates how the total number of blocks completed.
-        calc_and_update -> Calculate the percentage completed.
+        __init__
+        update
+        calc_and_update
 
     """
 
@@ -1651,8 +1651,8 @@ class ProgramLock(object):
         present and prevent a second program instance from starting.
 
     Methods:
-        __init__ -> Class instance initilization.
-        __del__ -> Deletion of the ProgramLock instance.
+        __init__
+        __del__
 
     """
 
@@ -1720,8 +1720,8 @@ class System(object):
         server.
 
     Methods:
-        __init__ -> Class instance initilization.
-        set_host_name -> Set the hostname attribute.
+        __init__
+        set_host_name
 
     """
 
@@ -1769,14 +1769,14 @@ class Mail(System):
         and sending the email.
 
     Methods:
-        __init__ -> Class instance initilization.
-        add_2_msg -> Add text to text string if data is present.
-        read_stdin -> Add standard in to mail message.
-        create_body -> Combines subject line & message into a single entity.
-        create_subject -> Creates or overwrites a subject to the email.
-        send_mail -> Emails message out via smtp connection.
-        send_mailx -> Emails message out using mailx.
-        print_email -> Print email to standard out.
+        __init__
+        add_2_msg
+        read_stdin
+        create_body
+        create_subject
+        send_mail
+        send_mailx
+        print_email
 
     """
 
@@ -1973,13 +1973,13 @@ class Logger(object):
         writing to, and closing of a log file.
 
     Methods:
-        __init__ -> Class instance initilization.
-        log_debug -> Write a debug message to log file.
-        log_info -> Write a information message to log file.
-        log_warn -> Write a warning message to log file.
-        log_err -> Write a error message to log file.
-        log_crit -> Write a critical message to log file.
-        log_close -> Close the log file and drop the file handler.
+        __init__
+        log_debug
+        log_info
+        log_warn
+        log_err
+        log_crit
+        log_close
 
     """
 
@@ -2117,14 +2117,14 @@ class Yum(yum.YumBase):
         yum object is used as a proxy for using the yum command.
 
     Methods:
-        __init__ -> Class instance initilization.
-        get_hostname -> Return the class' hostname
-        get_os -> Return the class' OS platform.
-        get_release -> Return the class' OS release version.
-        get_distro -> Reuturn class' linux_distribution.
-        fetch_repos -> Return a list of repos
-        fetch_install_pkgs -> Return a dict of installed packages in a list.
-        fetch_update_pkgs -> Return a dict of packages to be updated in a list.
+        __init__
+        get_hostname
+        get_os
+        get_release
+        get_distro
+        fetch_repos
+        fetch_install_pkgs
+        fetch_update_pkgs
 
     """
 
