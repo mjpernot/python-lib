@@ -68,7 +68,7 @@ class UnitTest(unittest.TestCase):
         self.argv = [p_name]
         self.argv2 = [p_name, "-a"]
         self.argv3 = [p_name, "-a", "-b"]
-        self.argv4 = [p_name, "-a" "-c"]
+        self.argv4 = [p_name, "-a", "-c"]
         self.argv5 = [p_name, "-a", "-c", "-d"]
         self.argv6 = [p_name, "-a", "-b", "-c", "-d"]
 
