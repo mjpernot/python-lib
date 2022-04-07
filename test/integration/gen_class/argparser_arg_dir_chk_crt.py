@@ -34,6 +34,9 @@ import version
 
 __version__ = version.__version__
 
+# Global
+PERM4 = "444"
+
 
 class UnitTest(unittest.TestCase):
 
@@ -149,8 +152,10 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        global PERM4
+
         os.mkdir(self.dir3)
-        os.chmod(self.dir3, 0o444)
+        os.chmod(self.dir3, int(PERM4, 8))
         args_array = gen_class.ArgParser(
             self.argv2, opt_val=self.opt_val, dir_chk=self.dir_chk2,
             do_parse=True)
