@@ -553,11 +553,7 @@ class ArgParser(object):
 
         """
 
-        if arg in self.args_array:
-            return True
-
-        else:
-            return False
+        return True if arg in self.args_array else False
 
     def arg_file_chk(self, **kwargs):
 
