@@ -1260,19 +1260,19 @@ class LogFile(object):
         searching of log entries based on regex, keyword, and ignore.
 
     Methods:
-        __init__ -> Initialization of an instance of the LogFile class.
-        get_marker -> Return the last line of the loglist array.
-        find_marker -> Find the marker in the loglist array.
-        filter_ignore -> Removed ignore entries from loglist array.
-        filter_keyword -> Keep only keyword entries in loglist array.
-        filter_regex -> Keep only regex entries that match in loglist array.
-        load_ignore -> Load ignore list from object.
-        load_keyword -> Load keyword list from object.
-        load_loglist -> Load log entries into loglist array from object.
-        load_marker -> Load marker entry from object.
-        load_regex -> Load regext entries from object.
-        set_marker -> Set lastline attribute to last entry in loglist array.
-        set_predicate -> Set search predicate for keyword search.
+        __init__
+        get_marker
+        find_marker
+        filter_ignore
+        filter_keyword
+        filter_regex
+        load_ignore
+        load_keyword
+        load_loglist
+        load_marker
+        load_regex
+        set_marker
+        set_predicate
 
     """
 
@@ -1455,7 +1455,7 @@ class LogFile(object):
 
         """
 
-        if isinstance(data, file) or isinstance(data, gzip.GzipFile):
+        if isinstance(data, (file, gzip.GzipFile)):
             self.loglist.extend([x.rstrip().rstrip("\n") for x in data])
 
         elif isinstance(data, list):
@@ -1803,10 +1803,10 @@ class Mail(System):
             subj = list(subj)
 
         if isinstance(toaddr, list):
-            self.to = list(toaddr)
+            self.toaddr = list(toaddr)
 
         else:
-            self.to = toaddr
+            self.toaddr = toaddr
 
         if frm:
             self.frm = frm
@@ -1922,7 +1922,7 @@ class Mail(System):
         else:
             inst = get_inst(smtplib)
             server = inst.SMTP("localhost")
-            server.sendmail(self.frm, self.to, self.create_body())
+            server.sendmail(self.frm, self.toaddr, self.create_body())
             server.quit()
 
     def send_mailx(self):
@@ -1941,12 +1941,12 @@ class Mail(System):
 
         self.subj = self.subj.replace(" ", "")
 
-        if isinstance(self.to, list):
-            self.to = " ".join(str(item) for item in list(self.to))
+        if isinstance(self.toaddr, list):
+            self.toaddr = " ".join(str(item) for item in list(self.toaddr))
 
         inst = get_inst(subprocess)
         proc1 = inst.Popen(['echo', self.msg], stdout=inst.PIPE)
-        proc2 = inst.Popen(['mailx', '-s', self.subj, self.to],
+        proc2 = inst.Popen(['mailx', '-s', self.subj, self.toaddr],
                            stdin=proc1.stdout)
         proc2.wait()
 
@@ -1960,7 +1960,8 @@ class Mail(System):
 
         """
 
-        return "To: %s\nFrom: %s\n%s" % (self.to, self.frm, self.create_body())
+        return "To: %s\nFrom: %s\n%s" % (
+            self.toaddr, self.frm, self.create_body())
 
 
 class Logger(object):
@@ -2146,7 +2147,7 @@ class Yum(yum.YumBase):
         else:
             self.host_name = socket.gethostname()
 
-        self.os = platform.system()
+        self.os_name = platform.system()
         self.release = platform.release()
         self.distro = platform.linux_distribution()
 
@@ -2183,11 +2184,11 @@ class Yum(yum.YumBase):
         Description:  Return the class' OS platform.
 
         Arguments:
-            (output) self.os -> Server's Operating system name.
+            (output) self.os_name -> Server's Operating system name.
 
         """
 
-        return self.os
+        return self.os_name
 
     def get_release(self):
 
