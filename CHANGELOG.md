@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [2.9.1] - 2022-05-06
+
+
 ## [2.9.0] - 2022-01-13
 ### Added
 - gen_libs.chk_perm:  Checks to see a permission is turned on for an object based on an octal argument.
