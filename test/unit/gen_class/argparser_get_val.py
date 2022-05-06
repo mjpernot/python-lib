@@ -62,7 +62,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.opt_val = ["-a"] 
+        self.opt_val = ["-a"]
 
         self.argv = ["program.py", "-a", "value", "-b"]
 
@@ -177,7 +177,6 @@ class UnitTest(unittest.TestCase):
             self.argv, opt_val=self.opt_val, do_parse=True)
 
         self.assertEqual(args_array.get_val(self.key2), None)
-
 
     def test_get_val2(self):
 
