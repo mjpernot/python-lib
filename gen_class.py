@@ -199,6 +199,7 @@ class ArgParser(object):
         arg_valid_val
         arg_wildcard
         arg_xor_dict
+        get_val
         parse_multi
         parse_single
         _file_chk_crt
@@ -890,6 +891,32 @@ class ArgParser(object):
                 break
 
         return status
+
+    def get_val(self, skey, **kwargs):
+
+        """Method:  get_val
+
+        Description:  Looks for the search key in args_array and returns the
+            value for that key, otherwise returns a default value.
+
+        Notes:  Default return value is None.
+
+        Arguments:
+            (input) **kwargs:
+                def_val -> Default value if search key is not found
+            (output) Return value for search key or default value.
+
+        """
+
+        def_val = kwargs.get("def_val", None)
+
+        if isinstance(def_val, list):
+            def_val = list(def_val)
+
+        elif isinstance(def_val, dict):
+            def_val = dict(def_val)
+
+        return self.args_array.get(skey, def_val)
 
     def parse_multi(self, **kwargs):
 
