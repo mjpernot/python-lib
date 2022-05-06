@@ -41,6 +41,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
+        test_passed_empty_string
         test_passed_tuple
         test_passed_dict
         test_passed_list
@@ -74,12 +75,31 @@ class UnitTest(unittest.TestCase):
         self.def_val2 = [1, 2, 3]
         self.def_val3 = {"key1": "value"}
         self.def_val4 = ("a", "b", "c")
+        self.def_val5 = ""
 
         self.results = "value"
         self.results2 = "default_val"
         self.results3 = [1, 2, 3]
         self.results4 = {"key1": "value"}
         self.results5 = ("a", "b", "c")
+        self.results6 = ""
+
+    def test_passed_empty_string(self):
+
+        """Function:  test_passed_empty_string
+
+        Description:  Test with passed empty string return.
+
+        Arguments:
+
+        """
+
+        args_array = gen_class.ArgParser(
+            self.argv, opt_val=self.opt_val, do_parse=True)
+
+        self.assertEqual(
+            args_array.get_val(
+                self.key2, def_val=self.def_val5), self.results6)
 
     def test_passed_tuple(self):
 
