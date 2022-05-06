@@ -5,6 +5,8 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 
 ## [2.9.1] - 2022-05-06
+### Added
+- gen_class.ArgParser.get_val: Look for key in args_array and return value or default value.
 
 
 ## [2.9.0] - 2022-01-13
