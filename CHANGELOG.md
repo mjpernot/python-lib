@@ -5,6 +5,8 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 
 ## [2.9.1] - 2022-05-18
+### Added
+- gen_class.ArgParser.get_arg: Returns the args_array attribute.
 
 
 ## [2.9.1] - 2022-05-06
