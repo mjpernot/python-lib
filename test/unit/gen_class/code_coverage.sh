@@ -30,6 +30,7 @@ coverage run -a --source=gen_class test/unit/gen_class/argparser_arg_valid_val.p
 coverage run -a --source=gen_class test/unit/gen_class/argparser_arg_wildcard.py
 coverage run -a --source=gen_class test/unit/gen_class/argparser_arg_xor_dict.py
 coverage run -a --source=gen_class test/unit/gen_class/argparser_file_chk_crt.py
+coverage run -a --source=gen_class test/unit/gen_class/argparser_get_args.py
 coverage run -a --source=gen_class test/unit/gen_class/argparser_get_val.py
 coverage run -a --source=gen_class test/unit/gen_class/argparser_init.py
 coverage run -a --source=gen_class test/unit/gen_class/argparser_parse_multi.py
