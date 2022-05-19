@@ -202,6 +202,7 @@ class ArgParser(object):
         get_args
         get_args_keys
         get_val
+        insert_arg
         parse_multi
         parse_single
         _file_chk_crt
@@ -894,7 +895,6 @@ class ArgParser(object):
 
         return status
 
-
     def get_args(self):
 
         """Method:  get_args
@@ -902,12 +902,11 @@ class ArgParser(object):
         Description:  Return the args_array attribute.
 
         Arguments:
-            (output) Return args_array attribute in dictionary format.
+            (output) Return args_array attribute in dictionary format
 
         """
 
         return self.args_array
-
 
     def get_args_keys(self):
 
@@ -916,12 +915,11 @@ class ArgParser(object):
         Description:  Return the keys from the args_array attribute.
 
         Arguments:
-            (output) Return args_array attribute keys in list format.
+            (output) Return args_array attribute keys in list format
 
         """
 
         return self.args_array.keys()
-
 
     def get_val(self, skey, **kwargs):
 
@@ -935,7 +933,7 @@ class ArgParser(object):
         Arguments:
             (input) **kwargs:
                 def_val -> Default value if search key is not found
-            (output) Return value for search key or default value.
+            (output) Return value for search key or default value
 
         """
 
@@ -948,6 +946,37 @@ class ArgParser(object):
             def_val = dict(def_val)
 
         return self.args_array.get(skey, def_val)
+
+    def insert_arg(self, arg_key, arg_val, **kwargs):
+
+        """Method:  insert_arg
+
+        Description:  Inserts a key and value into the args_array attribute.
+            Will not overwrite an existing key unless with the overwrite
+            option set.
+
+        Arguments:
+            (input) arg_key -> Key for dictionary
+            (input) arg_value -> Value for dictionary
+            (input) **kwargs:
+                overwrite -> True|False - Overwrite existing data
+            (output) status -> True|False - If successfully inserted data
+            (output) err -> Error message if insertion failed
+
+        """
+
+        err = None
+        status = True
+        overwrite = kwargs.get("overwrite", False)
+
+        if arg_key in self.args_array and not overwrite:
+            status = False
+            err = "Key already exists"
+
+        else:
+            self.args_array[arg_key] = arg_val
+
+        return status, err
 
     def parse_multi(self, **kwargs):
 
