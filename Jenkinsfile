@@ -158,6 +158,7 @@ pipeline {
                 ./test/unit/gen_class/argparser_arg_xor_dict.py
                 ./test/unit/gen_class/argparser_file_chk_crt.py
                 ./test/unit/gen_class/argparser_get_args.py
+                ./test/unit/gen_class/argparser_get_args_keys.py
                 ./test/unit/gen_class/argparser_get_val.py
                 ./test/unit/gen_class/argparser_init.py
                 ./test/unit/gen_class/argparser_parse_multi.py
