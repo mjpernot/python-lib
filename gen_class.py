@@ -200,6 +200,7 @@ class ArgParser(object):
         arg_wildcard
         arg_xor_dict
         get_args
+        get_args_keys
         get_val
         parse_multi
         parse_single
@@ -893,6 +894,7 @@ class ArgParser(object):
 
         return status
 
+
     def get_args(self):
 
         """Method:  get_args
@@ -905,6 +907,20 @@ class ArgParser(object):
         """
 
         return self.args_array
+
+
+    def get_args_keys(self):
+
+        """Method:  get_args_keys
+
+        Description:  Return the keys from the args_array attribute.
+
+        Arguments:
+            (output) Return args_array attribute keys in list format.
+
+        """
+
+        return self.args_array.keys()
 
 
     def get_val(self, skey, **kwargs):
