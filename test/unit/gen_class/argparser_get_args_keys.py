@@ -42,7 +42,7 @@ class UnitTest(unittest.TestCase):
     Methods:
         setUp
         test_empty_args_array
-        test_get_args_keys_array
+        test_get_arg
 
     """
 
