@@ -161,6 +161,7 @@ pipeline {
                 ./test/unit/gen_class/argparser_get_args_keys.py
                 ./test/unit/gen_class/argparser_get_val.py
                 ./test/unit/gen_class/argparser_init.py
+                ./test/unit/gen_class/argparser_insert_arg.py
                 ./test/unit/gen_class/argparser_parse_multi.py
                 ./test/unit/gen_class/argparser_parse_single.py
                 ./test/unit/gen_class/daemon_delpid.py
