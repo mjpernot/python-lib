@@ -205,6 +205,7 @@ class ArgParser(object):
         insert_arg
         parse_multi
         parse_single
+        update_arg
         _file_chk_crt
 
     """
@@ -1062,6 +1063,37 @@ class ArgParser(object):
             self.argv = self.argv[1:]
 
         return status
+
+    def update_arg(self, arg_key, arg_val, **kwargs):
+
+        """Method:  update_arg
+
+        Description:  Updates a value in the args_array attribute.  Will not
+            insert into args_array unless the insert option is set.
+
+        Arguments:
+            (input) arg_key -> Key for dictionary
+            (input) arg_value -> Value for dictionary
+            (input) **kwargs:
+                insert -> True|False - Insert data if no entry exists
+            (output) status -> True|False - If successfully updated
+            (output) err -> Error message if update failed
+
+        """
+
+        err = None
+        status = True
+        insert = kwargs.get("insert", False)
+
+        if arg_key in self.args_array \
+           or (arg_key not in self.args_array and insert):
+            self.args_array[arg_key] = arg_val
+
+        else:
+            status = False
+            err = "Arg key does not exists"
+
+        return status, err
 
     def _file_chk_crt(self, name, option, **kwargs):
 
