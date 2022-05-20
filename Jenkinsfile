@@ -156,6 +156,7 @@ pipeline {
                 ./test/unit/gen_class/argparser_arg_valid_val.py
                 ./test/unit/gen_class/argparser_arg_wildcard.py
                 ./test/unit/gen_class/argparser_arg_xor_dict.py
+                ./test/unit/gen_class/argparser_delete_arg.py
                 ./test/unit/gen_class/argparser_file_chk_crt.py
                 ./test/unit/gen_class/argparser_get_args.py
                 ./test/unit/gen_class/argparser_get_args_keys.py
@@ -164,6 +165,7 @@ pipeline {
                 ./test/unit/gen_class/argparser_insert_arg.py
                 ./test/unit/gen_class/argparser_parse_multi.py
                 ./test/unit/gen_class/argparser_parse_single.py
+                ./test/unit/gen_class/argparser_update_arg.py
                 ./test/unit/gen_class/daemon_delpid.py
                 ./test/unit/gen_class/daemon_init.py
                 ./test/unit/gen_class/daemon_restart.py
