@@ -896,6 +896,31 @@ class ArgParser(object):
 
         return status
 
+    def delete_arg(self, arg_key):
+
+        """Method:  delete_arg
+
+        Description:  Deletes a key from the args_array attribute.
+
+        Arguments:
+            (input) arg_key -> Key for dictionary
+            (output) status -> True|False - If successfully updated
+            (output) err -> Error message if update failed
+
+        """
+
+        err = None
+        status = True
+
+        if arg_key in self.args_array:
+            del self.args_array[arg_key]
+
+        else:
+            status = False
+            err = "Arg key does not exists"
+
+        return status, err
+
     def get_args(self):
 
         """Method:  get_args
