@@ -198,6 +198,11 @@ pipeline {
                 ./test/unit/gen_class/singleinstanceexception.py
                 ./test/unit/gen_class/system_init.py
                 ./test/unit/gen_class/system_set_host_name.py
+                ./test/unit/gen_class/timeformat_add_format.py
+                ./test/unit/gen_class/timeformat_create_adhoc_hack.py
+                ./test/unit/gen_class/timeformat_create_hack.py
+                ./test/unit/gen_class/timeformat_get_hack.py
+                ./test/unit/gen_class/timeformat_init.py
                 ./test/unit/gen_class/yum_init.py
                 ./test/unit/gen_class/yum_get_hostname.py
                 ./test/unit/gen_class/yum_get_release.py
