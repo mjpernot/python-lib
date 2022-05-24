@@ -17,6 +17,7 @@
         ProgramLock
         System
             Mail
+        TimeFormat
         Logger
         Yum
 
@@ -40,6 +41,7 @@ import platform
 import getpass
 import operator
 import glob
+import datetime
 
 # Third-party
 import gzip
@@ -2102,6 +2104,146 @@ class Mail(System):
 
         return "To: %s\nFrom: %s\n%s" % (
             self.toaddr, self.frm, self.create_body())
+
+
+class TimeFormat(object):
+
+    """Class:  TimeFormat
+
+    Description:  Class which represents different time formats which can be
+        formatted with pre-defined time formats or user-defined time formats.
+        Formats are held in an attribute and then can create time hacks using
+        these different formats.  To include microseconds to be added to the
+        time formats.
+
+    Notes:
+        Pre-defined time format expressions:
+            Time Expression     Reference   Description
+            %Y%m%d              ymd         YearMonthDay
+            %d%m%Y              dmy         DayMonthYear
+
+        Most common time format variables:
+            %Y  Four digit year
+            %y  Two digit year
+            %m  Month as decimal number
+            %d  Day of the month
+            %M  Minutes
+            %H  Hours in a day based on 24 hour clock
+            %I  Hours in a day based on 12 hour clock
+            %p  AM or PM
+            %S  Seconds
+
+    Methods:
+        __init__
+        add_format
+        create_adhoc_hack
+        create_hack
+        get_hack
+
+    """
+
+    def __init__(self):
+
+        """Method:  __init__
+
+        Description:  Initialization of an instance of the TimeFormat class.
+
+        Arguments:
+
+        """
+
+        self.rdtg = datetime.datetime.now()
+        self.msecs = str(self.rdtg.microsecond / 100)
+        self.delimit = "."
+        self.micro = False
+        self.thacks = {}
+        self.tformats = {
+            "ymd": {"format": "%Y%m%d", "del": "", "micro": False},
+            "dmy": {"format": "%d%m%Y", "del": "", "micro": False}}
+
+    def add_format(self, tformat, texpr, **kwargs):
+
+        """Method:  add_format
+
+        Description:  Add a time format expression to the class.
+
+        Arguments:
+            (input) tformat -> Name of the time format for referencing
+            (input) texpr -> Time format expression
+            (input) **kwargs:
+                micro -> True|False -> Include microseconds
+                delimit -> Delimiter between time and microseconds
+
+        """
+
+        micro = kwargs.get("micro", self.micro)
+        delimit = kwargs.get("delimit", self.delimit)
+        self.tformats[tformat] = {
+            "format": texpr, "del": delimit, "micro": micro}
+
+    def create_adhoc_hack(self, tformat, texpr, **kwargs):
+
+        """Method:  create_adhoc_hack
+
+        Description:  Creates an adhoc time hack and stores in class.
+
+        Arguments:
+            (input) tformat -> Name of the time format for referencing
+            (input) texpr -> Time format expression
+            (input) **kwargs:
+                micro -> True|False -> Include microseconds
+                delimit -> Delimiter between time and microseconds
+
+        """
+
+        ext = kwargs.get("delimit", self.delimit) + self.msecs \
+              if kwargs.get("micro", self.micro) else ""
+
+        self.thacks[tformat] = datetime.datetime.strftime(
+            self.rdtg, texpr) + ext
+
+    def create_hack(self, tformat):
+
+        """Method:  create_hack
+
+        Description:  Lookup up the time format in the class and create a time
+            hack on that format and store in class.
+
+        Arguments:
+            (input) tformat -> Name of the time format for referencing
+            (input) **kwargs:
+                micro -> True|False -> Include microseconds
+                delimit -> Delimiter between time and microseconds
+            (output) status -> True|False - Success of time hack
+
+        """
+
+        status = True
+
+        if tformat in self.tformats:
+            self.create_adhoc_hack(
+                tformat, self.tformats[tformat]["format"],
+                micro=self.tformats[tformat]["micro"],
+                delimit=self.tformats[tformat]["del"])
+
+        else:
+            status = False
+
+        return status
+
+    def get_hack(self, tformat):
+
+        """Method:  get_hack
+
+        Description:  Lookup up the time reference and return the time hack.
+
+        Arguments:
+            (input) tformat -> Name of the time reference
+            (output) Time hack or None if reference not found
+
+        """
+
+        return self.thacks[tformat] if tformat in self.thacks else None
 
 
 class Logger(object):
