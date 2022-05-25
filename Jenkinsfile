@@ -156,11 +156,16 @@ pipeline {
                 ./test/unit/gen_class/argparser_arg_valid_val.py
                 ./test/unit/gen_class/argparser_arg_wildcard.py
                 ./test/unit/gen_class/argparser_arg_xor_dict.py
+                ./test/unit/gen_class/argparser_delete_arg.py
                 ./test/unit/gen_class/argparser_file_chk_crt.py
+                ./test/unit/gen_class/argparser_get_args.py
+                ./test/unit/gen_class/argparser_get_args_keys.py
                 ./test/unit/gen_class/argparser_get_val.py
                 ./test/unit/gen_class/argparser_init.py
+                ./test/unit/gen_class/argparser_insert_arg.py
                 ./test/unit/gen_class/argparser_parse_multi.py
                 ./test/unit/gen_class/argparser_parse_single.py
+                ./test/unit/gen_class/argparser_update_arg.py
                 ./test/unit/gen_class/daemon_delpid.py
                 ./test/unit/gen_class/daemon_init.py
                 ./test/unit/gen_class/daemon_restart.py
@@ -193,6 +198,11 @@ pipeline {
                 ./test/unit/gen_class/singleinstanceexception.py
                 ./test/unit/gen_class/system_init.py
                 ./test/unit/gen_class/system_set_host_name.py
+                ./test/unit/gen_class/timeformat_add_format.py
+                ./test/unit/gen_class/timeformat_create_adhoc_hack.py
+                ./test/unit/gen_class/timeformat_create_hack.py
+                ./test/unit/gen_class/timeformat_get_hack.py
+                ./test/unit/gen_class/timeformat_init.py
                 ./test/unit/gen_class/yum_init.py
                 ./test/unit/gen_class/yum_get_hostname.py
                 ./test/unit/gen_class/yum_get_release.py
