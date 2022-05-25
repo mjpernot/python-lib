@@ -17,6 +17,7 @@
         ProgramLock
         System
             Mail
+        TimeFormat
         Logger
         Yum
 
@@ -40,6 +41,7 @@ import platform
 import getpass
 import operator
 import glob
+import datetime
 
 # Third-party
 import gzip
@@ -199,9 +201,13 @@ class ArgParser(object):
         arg_valid_val
         arg_wildcard
         arg_xor_dict
+        get_args
+        get_args_keys
         get_val
+        insert_arg
         parse_multi
         parse_single
+        update_arg
         _file_chk_crt
 
     """
@@ -892,6 +898,57 @@ class ArgParser(object):
 
         return status
 
+    def delete_arg(self, arg_key):
+
+        """Method:  delete_arg
+
+        Description:  Deletes a key from the args_array attribute.
+
+        Arguments:
+            (input) arg_key -> Key for dictionary
+            (output) status -> True|False - If successfully updated
+            (output) err -> Error message if update failed
+
+        """
+
+        err = None
+        status = True
+
+        if arg_key in self.args_array:
+            del self.args_array[arg_key]
+
+        else:
+            status = False
+            err = "Arg key does not exists"
+
+        return status, err
+
+    def get_args(self):
+
+        """Method:  get_args
+
+        Description:  Return the args_array attribute.
+
+        Arguments:
+            (output) Return args_array attribute in dictionary format
+
+        """
+
+        return self.args_array
+
+    def get_args_keys(self):
+
+        """Method:  get_args_keys
+
+        Description:  Return the keys from the args_array attribute.
+
+        Arguments:
+            (output) Return args_array attribute keys in list format
+
+        """
+
+        return self.args_array.keys()
+
     def get_val(self, skey, **kwargs):
 
         """Method:  get_val
@@ -904,7 +961,7 @@ class ArgParser(object):
         Arguments:
             (input) **kwargs:
                 def_val -> Default value if search key is not found
-            (output) Return value for search key or default value.
+            (output) Return value for search key or default value
 
         """
 
@@ -917,6 +974,37 @@ class ArgParser(object):
             def_val = dict(def_val)
 
         return self.args_array.get(skey, def_val)
+
+    def insert_arg(self, arg_key, arg_val, **kwargs):
+
+        """Method:  insert_arg
+
+        Description:  Inserts a key and value into the args_array attribute.
+            Will not overwrite an existing key unless with the overwrite
+            option set.
+
+        Arguments:
+            (input) arg_key -> Key for dictionary
+            (input) arg_value -> Value for dictionary
+            (input) **kwargs:
+                overwrite -> True|False - Overwrite existing data
+            (output) status -> True|False - If successfully inserted data
+            (output) err -> Error message if insertion failed
+
+        """
+
+        err = None
+        status = True
+        overwrite = kwargs.get("overwrite", False)
+
+        if arg_key in self.args_array and not overwrite:
+            status = False
+            err = "Key already exists"
+
+        else:
+            self.args_array[arg_key] = arg_val
+
+        return status, err
 
     def parse_multi(self, **kwargs):
 
@@ -1002,6 +1090,37 @@ class ArgParser(object):
             self.argv = self.argv[1:]
 
         return status
+
+    def update_arg(self, arg_key, arg_val, **kwargs):
+
+        """Method:  update_arg
+
+        Description:  Updates a value in the args_array attribute.  Will not
+            insert into args_array unless the insert option is set.
+
+        Arguments:
+            (input) arg_key -> Key for dictionary
+            (input) arg_value -> Value for dictionary
+            (input) **kwargs:
+                insert -> True|False - Insert data if no entry exists
+            (output) status -> True|False - If successfully updated
+            (output) err -> Error message if update failed
+
+        """
+
+        err = None
+        status = True
+        insert = kwargs.get("insert", False)
+
+        if arg_key in self.args_array \
+           or (arg_key not in self.args_array and insert):
+            self.args_array[arg_key] = arg_val
+
+        else:
+            status = False
+            err = "Arg key does not exists"
+
+        return status, err
 
     def _file_chk_crt(self, name, option, **kwargs):
 
@@ -1985,6 +2104,146 @@ class Mail(System):
 
         return "To: %s\nFrom: %s\n%s" % (
             self.toaddr, self.frm, self.create_body())
+
+
+class TimeFormat(object):
+
+    """Class:  TimeFormat
+
+    Description:  Class which represents different time formats which can be
+        formatted with pre-defined time formats or user-defined time formats.
+        Formats are held in an attribute and then can create time hacks using
+        these different formats.  To include microseconds to be added to the
+        time formats.
+
+    Notes:
+        Pre-defined time format expressions:
+            Time Expression     Reference   Description
+            %Y%m%d              ymd         YearMonthDay
+            %d%m%Y              dmy         DayMonthYear
+
+        Most common time format variables:
+            %Y  Four digit year
+            %y  Two digit year
+            %m  Month as decimal number
+            %d  Day of the month
+            %M  Minutes
+            %H  Hours in a day based on 24 hour clock
+            %I  Hours in a day based on 12 hour clock
+            %p  AM or PM
+            %S  Seconds
+
+    Methods:
+        __init__
+        add_format
+        create_adhoc_hack
+        create_hack
+        get_hack
+
+    """
+
+    def __init__(self):
+
+        """Method:  __init__
+
+        Description:  Initialization of an instance of the TimeFormat class.
+
+        Arguments:
+
+        """
+
+        self.rdtg = datetime.datetime.now()
+        self.msecs = str(self.rdtg.microsecond / 100)
+        self.delimit = "."
+        self.micro = False
+        self.thacks = {}
+        self.tformats = {
+            "ymd": {"format": "%Y%m%d", "del": "", "micro": False},
+            "dmy": {"format": "%d%m%Y", "del": "", "micro": False}}
+
+    def add_format(self, tformat, texpr, **kwargs):
+
+        """Method:  add_format
+
+        Description:  Add a time format expression to the class.
+
+        Arguments:
+            (input) tformat -> Name of the time format for referencing
+            (input) texpr -> Time format expression
+            (input) **kwargs:
+                micro -> True|False -> Include microseconds
+                delimit -> Delimiter between time and microseconds
+
+        """
+
+        micro = kwargs.get("micro", self.micro)
+        delimit = kwargs.get("delimit", self.delimit)
+        self.tformats[tformat] = {
+            "format": texpr, "del": delimit, "micro": micro}
+
+    def create_adhoc_hack(self, tformat, texpr, **kwargs):
+
+        """Method:  create_adhoc_hack
+
+        Description:  Creates an adhoc time hack and stores in class.
+
+        Arguments:
+            (input) tformat -> Name of the time format for referencing
+            (input) texpr -> Time format expression
+            (input) **kwargs:
+                micro -> True|False -> Include microseconds
+                delimit -> Delimiter between time and microseconds
+
+        """
+
+        ext = kwargs.get("delimit", self.delimit) + self.msecs \
+              if kwargs.get("micro", self.micro) else ""
+
+        self.thacks[tformat] = datetime.datetime.strftime(
+            self.rdtg, texpr) + ext
+
+    def create_hack(self, tformat):
+
+        """Method:  create_hack
+
+        Description:  Lookup up the time format in the class and create a time
+            hack on that format and store in class.
+
+        Arguments:
+            (input) tformat -> Name of the time format for referencing
+            (input) **kwargs:
+                micro -> True|False -> Include microseconds
+                delimit -> Delimiter between time and microseconds
+            (output) status -> True|False - Success of time hack
+
+        """
+
+        status = True
+
+        if tformat in self.tformats:
+            self.create_adhoc_hack(
+                tformat, self.tformats[tformat]["format"],
+                micro=self.tformats[tformat]["micro"],
+                delimit=self.tformats[tformat]["del"])
+
+        else:
+            status = False
+
+        return status
+
+    def get_hack(self, tformat):
+
+        """Method:  get_hack
+
+        Description:  Lookup up the time reference and return the time hack.
+
+        Arguments:
+            (input) tformat -> Name of the time reference
+            (output) Time hack or None if reference not found
+
+        """
+
+        return self.thacks[tformat] if tformat in self.thacks else None
 
 
 class Logger(object):
