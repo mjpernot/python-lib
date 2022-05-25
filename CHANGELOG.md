@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
-## [2.9.1] - 2022-05-18
+## [2.9.2] - 2022-05-18
 ### Added
 - gen_class.TimeFormat: Class to store times in pre-defined or user-defined time formats and retrieve with the same time setting. 
 - gen_class.ArgParser.delete_arg: Deletes a value from the args_array attribute.
