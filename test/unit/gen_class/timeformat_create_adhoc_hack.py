@@ -75,7 +75,6 @@ class UnitTest(unittest.TestCase):
         """
 
         self.tform.create_adhoc_hack(self.name, self.texpr, micro=True)
-        print(self.tform.thacks[self.name])
 
         self.assertEqual(len(self.tform.thacks[self.name]), 18)
 
