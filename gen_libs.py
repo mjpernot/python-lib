@@ -25,6 +25,7 @@
         del_not_in_list
         dict_2_list
         dict_2_std
+        dict_out
         dir_file_match
         disk_usage
         display_data
@@ -33,6 +34,7 @@
         file_search_cnt
         file_2_list
         filename_search
+        find_email_addr
         float_div
         get_base_dir
         get_data
@@ -745,6 +747,51 @@ def dict_2_std(data, ofile=False, mode="w", **kwargs):
 
     if ofile:
         outfile.close()
+
+
+def dict_out(data, **kwargs):
+
+    """Function:  dict_out
+
+    Description:  Print dictionary to a file, standard out, and/or an email
+        instance either in expanded or flatten JSON format.
+
+    Arguments:
+        (input) data -> Dictionary document
+        (input) kwargs:
+            expand -> True|False - Expand JSON format
+            mail -> Mail instance
+            ofile -> Name of output file name
+            mode -> w|a => Write or append mode for file
+            no_std -> True|False - Do not print to standard out
+        (output) err_flag -> True|False - If error has occurred
+        (output) err_msg -> Error message
+
+    """
+
+    err_flag = False
+    err_msg = None
+    mail = kwargs.get("mail", None)
+    indent = 4 if kwargs.get("expand", False) else None
+    ofile = kwargs.get("ofile", None)
+
+    if isinstance(data, dict):
+        if ofile:
+            print_data(
+                json.dumps(data, indent=indent), ofile=ofile,
+                mode=kwargs.get("mode", "w"))
+
+        if not kwargs.get("no_std", False):
+            print_data(json.dumps(data, indent=indent))
+
+        if mail:
+            mail.add_2_msg(json.dumps(data, indent=indent))
+
+    else:
+        err_flag = True
+        err_msg = "Error: Is not a dictionary: %s" % (data)
+
+    return err_flag, err_msg
 
 
 def dir_file_match(dir_path, file_str, add_path=False):

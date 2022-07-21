@@ -5,6 +5,8 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 
 ## [2.9.3] - 2022-07-21
+### Added
+- gen_libs.dict_out: Print dictionary to a file, standard out, and/or an email.
 
 
 ## [2.9.2] - 2022-05-18
