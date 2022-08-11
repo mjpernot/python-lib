@@ -35,6 +35,30 @@ import version
 __version__ = version.__version__
 
 
+class FileOpen2(object):
+
+    """Class:  FileOpen2
+
+    Description:  Class stub holder for file open class.
+
+    Methods:
+        close
+
+    """
+
+    def close(self):
+
+        """Function:  close
+
+        Description:  Stub holder for close function.
+
+        Arguments:
+
+        """
+
+        raise IOError(2, "Some Error")
+
+
 class FileOpen(object):
 
     """Class:  FileOpen
@@ -69,8 +93,7 @@ class UnitTest(unittest.TestCase):
         setUp
         test_file_crt_override
         test_file_chk_override
-        test_second_open_no_error
-        test_second_open_error
+        test_open_error
         test_file_crt_in_list
         test_file_crt_not_in_list
         test_file_crt_empty_list
@@ -121,9 +144,11 @@ class UnitTest(unittest.TestCase):
         self.file_crt3 = []
 
         self.open = FileOpen()
+        self.open2 = FileOpen2()
 
-    @mock.patch("gen_class.ArgParser._file_chk_crt")
-    def test_file_crt_override(self, mock_crt):
+    @mock.patch("gen_class.os.path.isfile", mock.Mock(return_value=False))
+    @mock.patch("__builtin__.open")
+    def test_file_crt_override(self, mock_open):
 
         """Function:  test_file_crt_override
 
@@ -133,7 +158,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_crt.return_value = True
+        mock_open.return_value = self.open
 
         args_array = gen_class.ArgParser(
             self.argv, opt_val=self.opt_val, file_perm_chk=self.file_chk,
@@ -157,46 +182,27 @@ class UnitTest(unittest.TestCase):
 
         self.assertTrue(args_array.arg_file_chk(file_perm_chk=self.file_chk2))
 
-    @mock.patch("gen_class.ArgParser._file_chk_crt")
-    def test_second_open_no_error(self, mock_crt):
+    @mock.patch("gen_class.os.path.isfile", mock.Mock(return_value=False))
+    @mock.patch("__builtin__.open")
+    def test_open_error(self, mock_open):
 
-        """Function:  test_second_open_no_error
+        """Function:  test_open_error
 
-        Description:  Test with second open no error.
-
-        Arguments:
-
-        """
-
-        mock_crt.return_value = True
-
-        args_array = gen_class.ArgParser(
-            self.argv, opt_val=self.opt_val, file_perm_chk=self.file_chk,
-            file_crt=self.file_crt, do_parse=True)
-
-        self.assertTrue(args_array.arg_file_chk())
-
-    @mock.patch("gen_class.ArgParser._file_chk_crt")
-    def test_second_open_error(self, mock_crt):
-
-        """Function:  test_second_open_error
-
-        Description:  Test with second open but returns error.
+        Description:  Test with open but returns error.
 
         Arguments:
 
         """
 
-        mock_crt.return_value = False
+        mock_open.return_value = self.open2
 
         args_array = gen_class.ArgParser(
             self.argv, opt_val=self.opt_val, file_perm_chk=self.file_chk,
             file_crt=self.file_crt, do_parse=True)
 
-        self.assertFalse(args_array.arg_file_chk())
+        with gen_libs.no_std_out():
+            self.assertFalse(args_array.arg_file_chk())
 
-# STOPPED HERE
-# Failing why?
     @mock.patch("gen_class.os.path.isfile", mock.Mock(return_value=False))
     @mock.patch("__builtin__.open")
     def test_file_crt_in_list(self, mock_open):

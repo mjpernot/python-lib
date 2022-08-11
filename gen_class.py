@@ -230,7 +230,6 @@ class ArgParser(object):
                     perms in octal
                 dir_perms_crt -> Directory creation options with their
                     directory perms in octal
-#                file_chk -> Options which will have files included
                 file_perm_chk -> File check options with their perms in octal
                 file_crt -> Options require files to be created
                 multi_val - List of options that may contain multiple values
@@ -287,7 +286,6 @@ class ArgParser(object):
         self.dir_perms_crt = dict(kwargs.get("dir_perms_crt", {}))
 
         # For arg_file_chk method
-#        self.file_chk = list(kwargs.get("file_chk", []))
         self.file_perm_chk = dict(kwargs.get("file_perm_chk", {}))
         self.file_crt = list(kwargs.get("file_crt", []))
 
@@ -573,48 +571,27 @@ class ArgParser(object):
 
         Arguments:
             (input) **kwargs:
-#                file_chk -> Options which will have files included
                 file_perm_chk -> File check options with their perms in octal
                 file_crt -> Options require files to be created
             (output) status -> True|False - If files are available
 
         """
 
-#        file_chk = list(kwargs.get("file_chk", self.file_chk))
         file_perm_chk = dict(kwargs.get("file_perm_chk", self.file_perm_chk))
         file_crt = list(kwargs.get("file_crt", self.file_crt))
         status = True
 
-#        for option in set(self.args_array.keys()) & set(file_chk):
-#        print('A')
-#        print(set(self.args_array))
-#        print(set(file_perm_chk))
         for option in set(self.args_array) & set(file_perm_chk):
-#            print('B')
-
-#            if isinstance(self.args_array[option], list):
-#                tmp_list = list(self.args_array[option])
-#
-#            else:
-#                tmp_list = [self.args_array[option]]
             f_list = list(self.args_array[option])                  \
                      if isinstance(self.args_array[option], list)   \
                      else [self.args_array[option]]
 
-#            for name in tmp_list:
-#                # Combine these lines?  See below.
-#                # tmp_status = self._file_chk_crt(name, option, file_crt)
-#                # status = status & tmp_status
-#                status = status & self._file_chk_crt(
-#                    name, option, file_crt=file_crt)
             for fname in f_list:
                 if os.path.isfile(fname):
-#                    print('Here1')
                     status = status & gen_libs.chk_perm(
                         fname, file_perm_chk[option])
 
-                elif fname in file_crt:
-                    print('Here2')
+                elif option in file_crt:
                     try:
                         fhldr = open(fname, "w")
                         fhldr.close()
