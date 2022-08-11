@@ -5,8 +5,14 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 
 ## [2.9.3] - 2022-07-21
+### Fixed
+- gen_class.ArgParser.arg_file_chk:  Added octal permissions settings to the file checks, also refactored the method to remove the \_file_chk_crt method call.
+
 ### Added
 - gen_libs.dict_out: Print dictionary to a file, standard out, and/or an email.
+
+### Deprecated
+- gen_class.ArgParser.\_file_chk_crt
 
 
 ## [2.9.2] - 2022-05-18
