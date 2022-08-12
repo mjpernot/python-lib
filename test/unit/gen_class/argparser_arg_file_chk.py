@@ -29,9 +29,34 @@ import mock
 # Local
 sys.path.append(os.getcwd())
 import gen_class
+import gen_libs
 import version
 
 __version__ = version.__version__
+
+
+class FileOpen2(object):
+
+    """Class:  FileOpen2
+
+    Description:  Class stub holder for file open class.
+
+    Methods:
+        close
+
+    """
+
+    def close(self):
+
+        """Function:  close
+
+        Description:  Stub holder for close function.
+
+        Arguments:
+
+        """
+
+        raise IOError(2, "Some Error")
 
 
 class FileOpen(object):
@@ -68,18 +93,15 @@ class UnitTest(unittest.TestCase):
         setUp
         test_file_crt_override
         test_file_chk_override
-        test_second_open_no_error
-        test_second_open_error
+        test_open_error
         test_file_crt_in_list
         test_file_crt_not_in_list
         test_file_crt_empty_list
         test_file_crt_not_passed
-        test_first_open_error_two
-        test_first_open_error_ten
         test_first_open_no_errors
-        test_name_loop_zero_items
-        test_name_loop_two_items
-        test_name_loop_one_item
+        test_fname_loop_zero_items
+        test_fname_loop_two_items
+        test_fname_loop_one_item
         test_isinstance_is_set
         test_isinstance_is_string
         test_isinstance_is_list
@@ -113,18 +135,20 @@ class UnitTest(unittest.TestCase):
 
         self.opt_val = ["-f", "-m", "-g"]
 
-        self.file_chk = ["-f"]
-        self.file_chk2 = ["-a"]
-        self.file_chk3 = ["-f", "-g"]
+        self.file_chk = {"-f": 6}
+        self.file_chk2 = {"-a": 6}
+        self.file_chk3 = {"-f": 6, "-g": 6}
 
         self.file_crt = ["-f"]
         self.file_crt2 = ["-g"]
         self.file_crt3 = []
 
         self.open = FileOpen()
+        self.open2 = FileOpen2()
 
-    @mock.patch("gen_class.ArgParser._file_chk_crt")
-    def test_file_crt_override(self, mock_crt):
+    @mock.patch("gen_class.os.path.isfile", mock.Mock(return_value=False))
+    @mock.patch("__builtin__.open")
+    def test_file_crt_override(self, mock_open):
 
         """Function:  test_file_crt_override
 
@@ -134,10 +158,10 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_crt.return_value = True
+        mock_open.return_value = self.open
 
         args_array = gen_class.ArgParser(
-            self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
+            self.argv, opt_val=self.opt_val, file_perm_chk=self.file_chk,
             file_crt=self.file_crt3, do_parse=True)
 
         self.assertTrue(args_array.arg_file_chk(file_crt=self.file_crt))
@@ -153,51 +177,35 @@ class UnitTest(unittest.TestCase):
         """
 
         args_array = gen_class.ArgParser(
-            self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
+            self.argv, opt_val=self.opt_val, file_perm_chk=self.file_chk,
             do_parse=True)
 
-        self.assertTrue(args_array.arg_file_chk(file_chk=self.file_chk2))
+        self.assertTrue(args_array.arg_file_chk(file_perm_chk=self.file_chk2))
 
-    @mock.patch("gen_class.ArgParser._file_chk_crt")
-    def test_second_open_no_error(self, mock_crt):
+    @mock.patch("gen_class.os.path.isfile", mock.Mock(return_value=False))
+    @mock.patch("__builtin__.open")
+    def test_open_error(self, mock_open):
 
-        """Function:  test_second_open_no_error
+        """Function:  test_open_error
 
-        Description:  Test with second open no error.
-
-        Arguments:
-
-        """
-
-        mock_crt.return_value = True
-
-        args_array = gen_class.ArgParser(
-            self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
-            file_crt=self.file_crt, do_parse=True)
-
-        self.assertTrue(args_array.arg_file_chk())
-
-    @mock.patch("gen_class.ArgParser._file_chk_crt")
-    def test_second_open_error(self, mock_crt):
-
-        """Function:  test_second_open_error
-
-        Description:  Test with second open but returns error.
+        Description:  Test with open but returns error.
 
         Arguments:
 
         """
 
-        mock_crt.return_value = False
+        mock_open.return_value = self.open2
 
         args_array = gen_class.ArgParser(
-            self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
+            self.argv, opt_val=self.opt_val, file_perm_chk=self.file_chk,
             file_crt=self.file_crt, do_parse=True)
 
-        self.assertFalse(args_array.arg_file_chk())
+        with gen_libs.no_std_out():
+            self.assertFalse(args_array.arg_file_chk())
 
-    @mock.patch("gen_class.ArgParser._file_chk_crt")
-    def test_file_crt_in_list(self, mock_crt):
+    @mock.patch("gen_class.os.path.isfile", mock.Mock(return_value=False))
+    @mock.patch("__builtin__.open")
+    def test_file_crt_in_list(self, mock_open):
 
         """Function:  test_file_crt_in_list
 
@@ -207,16 +215,16 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_crt.return_value = True
+        mock_open.return_value = self.open
 
         args_array = gen_class.ArgParser(
-            self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
+            self.argv, opt_val=self.opt_val, file_perm_chk=self.file_chk,
             file_crt=self.file_crt, do_parse=True)
 
         self.assertTrue(args_array.arg_file_chk())
 
-    @mock.patch("gen_class.ArgParser._file_chk_crt")
-    def test_file_crt_not_in_list(self, mock_crt):
+    @mock.patch("gen_class.os.path.isfile", mock.Mock(return_value=False))
+    def test_file_crt_not_in_list(self):
 
         """Function:  test_file_crt_not_in_list
 
@@ -226,16 +234,15 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_crt.return_value = False
-
         args_array = gen_class.ArgParser(
-            self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
+            self.argv, opt_val=self.opt_val, file_perm_chk=self.file_chk,
             file_crt=self.file_crt2, do_parse=True)
 
-        self.assertFalse(args_array.arg_file_chk())
+        with gen_libs.no_std_out():
+            self.assertFalse(args_array.arg_file_chk())
 
-    @mock.patch("gen_class.ArgParser._file_chk_crt")
-    def test_file_crt_empty_list(self, mock_crt):
+    @mock.patch("gen_class.os.path.isfile", mock.Mock(return_value=False))
+    def test_file_crt_empty_list(self):
 
         """Function:  test_file_crt_empty_list
 
@@ -245,16 +252,15 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_crt.return_value = False
-
         args_array = gen_class.ArgParser(
-            self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
+            self.argv, opt_val=self.opt_val, file_perm_chk=self.file_chk,
             file_crt=self.file_crt3, do_parse=True)
 
-        self.assertFalse(args_array.arg_file_chk())
+        with gen_libs.no_std_out():
+            self.assertFalse(args_array.arg_file_chk())
 
-    @mock.patch("gen_class.ArgParser._file_chk_crt")
-    def test_file_crt_not_passed(self, mock_crt):
+    @mock.patch("gen_class.os.path.isfile", mock.Mock(return_value=False))
+    def test_file_crt_not_passed(self):
 
         """Function:  test_file_crt_not_passed
 
@@ -264,54 +270,16 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_crt.return_value = False
-
         args_array = gen_class.ArgParser(
-            self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
+            self.argv, opt_val=self.opt_val, file_perm_chk=self.file_chk,
             do_parse=True)
 
-        self.assertFalse(args_array.arg_file_chk())
+        with gen_libs.no_std_out():
+            self.assertFalse(args_array.arg_file_chk())
 
-    @mock.patch("gen_class.ArgParser._file_chk_crt")
-    def test_first_open_error_two(self, mock_crt):
-
-        """Function:  test_first_open_error_two
-
-        Description:  Test with first open and error 2 returned.
-
-        Arguments:
-
-        """
-
-        mock_crt.return_value = True
-
-        args_array = gen_class.ArgParser(
-            self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
-            file_crt=self.file_crt, do_parse=True)
-
-        self.assertTrue(args_array.arg_file_chk())
-
-    @mock.patch("gen_class.ArgParser._file_chk_crt")
-    def test_first_open_error_ten(self, mock_crt):
-
-        """Function:  test_first_open_error_ten
-
-        Description:  Test with first open and error 10 returned.
-
-        Arguments:
-
-        """
-
-        mock_crt.return_value = False
-
-        args_array = gen_class.ArgParser(
-            self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
-            do_parse=True)
-
-        self.assertFalse(args_array.arg_file_chk())
-
-    @mock.patch("gen_class.open")
-    def test_first_open_no_errors(self, mock_open):
+    @mock.patch("gen_class.gen_libs.chk_perm", mock.Mock(return_value=True))
+    @mock.patch("gen_class.os.path.isfile", mock.Mock(return_value=True))
+    def test_first_open_no_errors(self):
 
         """Function:  test_first_open_no_errors
 
@@ -321,71 +289,68 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_open.return_value = self.open
-
         args_array = gen_class.ArgParser(
-            self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
+            self.argv, opt_val=self.opt_val, file_perm_chk=self.file_chk,
             do_parse=True)
 
         self.assertTrue(args_array.arg_file_chk())
 
-    def test_name_loop_zero_items(self):
+    def test_fname_loop_zero_items(self):
 
-        """Function:  test_name_loop_zero_items
+        """Function:  test_fname_loop_zero_items
 
-        Description:  Test with name loop on zero items.
+        Description:  Test with fname loop on zero items.
 
         Arguments:
 
         """
 
         args_array = gen_class.ArgParser(
-            self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
+            self.argv, opt_val=self.opt_val, file_perm_chk=self.file_chk,
             do_parse=True)
         args_array.args_array["-f"] = []
 
         self.assertTrue(args_array.arg_file_chk())
 
-    @mock.patch("gen_class.open")
-    def test_name_loop_two_items(self, mock_open):
+    @mock.patch("gen_class.gen_libs.chk_perm", mock.Mock(return_value=True))
+    @mock.patch("gen_class.os.path.isfile", mock.Mock(return_value=True))
+    def test_fname_loop_two_items(self):
 
-        """Function:  test_name_loop_two_items
+        """Function:  test_fname_loop_two_items
 
-        Description:  Test with name loop on two items.
-
-        Arguments:
-
-        """
-
-        mock_open.return_value = self.open
-
-        args_array = gen_class.ArgParser(
-            self.argv5, opt_val=self.opt_val, file_chk=self.file_chk,
-            do_parse=True)
-
-        self.assertTrue(args_array.arg_file_chk())
-
-    @mock.patch("gen_class.open")
-    def test_name_loop_one_item(self, mock_open):
-
-        """Function:  test_name_loop_one_item
-
-        Description:  Test with name loop on one item.
+        Description:  Test with fname loop on two items.
 
         Arguments:
 
         """
 
-        mock_open.return_value = self.open
-
         args_array = gen_class.ArgParser(
-            self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
+            self.argv5, opt_val=self.opt_val, file_perm_chk=self.file_chk,
             do_parse=True)
 
         self.assertTrue(args_array.arg_file_chk())
 
-    @mock.patch("gen_class.open")
-    def test_isinstance_is_set(self, mock_open):
+    @mock.patch("gen_class.gen_libs.chk_perm", mock.Mock(return_value=True))
+    @mock.patch("gen_class.os.path.isfile", mock.Mock(return_value=True))
+    def test_fname_loop_one_item(self):
+
+        """Function:  test_fname_loop_one_item
+
+        Description:  Test with fname loop on one item.
+
+        Arguments:
+
+        """
+
+        args_array = gen_class.ArgParser(
+            self.argv, opt_val=self.opt_val, file_perm_chk=self.file_chk,
+            do_parse=True)
+
+        self.assertTrue(args_array.arg_file_chk())
+
+    @mock.patch("gen_class.gen_libs.chk_perm", mock.Mock(return_value=True))
+    @mock.patch("gen_class.os.path.isfile", mock.Mock(return_value=True))
+    def test_isinstance_is_set(self):
 
         """Function:  test_isinstance_is_set
 
@@ -395,16 +360,15 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_open.return_value = self.open
-
         args_array = gen_class.ArgParser(
-            self.argv4, opt_val=self.opt_val, file_chk=self.file_chk,
+            self.argv4, opt_val=self.opt_val, file_perm_chk=self.file_chk,
             do_parse=True)
 
         self.assertTrue(args_array.arg_file_chk())
 
-    @mock.patch("gen_class.open")
-    def test_isinstance_is_string(self, mock_open):
+    @mock.patch("gen_class.gen_libs.chk_perm", mock.Mock(return_value=True))
+    @mock.patch("gen_class.os.path.isfile", mock.Mock(return_value=True))
+    def test_isinstance_is_string(self,):
 
         """Function:  test_isinstance_is_string
 
@@ -414,16 +378,15 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_open.return_value = self.open
-
         args_array = gen_class.ArgParser(
-            self.argv3, opt_val=self.opt_val, file_chk=self.file_chk,
+            self.argv3, opt_val=self.opt_val, file_perm_chk=self.file_chk,
             do_parse=True)
 
         self.assertTrue(args_array.arg_file_chk())
 
-    @mock.patch("gen_class.open")
-    def test_isinstance_is_list(self, mock_open):
+    @mock.patch("gen_class.gen_libs.chk_perm", mock.Mock(return_value=True))
+    @mock.patch("gen_class.os.path.isfile", mock.Mock(return_value=True))
+    def test_isinstance_is_list(self):
 
         """Function:  test_isinstance_is_list
 
@@ -433,16 +396,15 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_open.return_value = self.open
-
         args_array = gen_class.ArgParser(
-            self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
+            self.argv, opt_val=self.opt_val, file_perm_chk=self.file_chk,
             do_parse=True)
 
         self.assertTrue(args_array.arg_file_chk())
 
-    @mock.patch("gen_class.open")
-    def test_two_match_between_sets(self, mock_open):
+    @mock.patch("gen_class.gen_libs.chk_perm", mock.Mock(return_value=True))
+    @mock.patch("gen_class.os.path.isfile", mock.Mock(return_value=True))
+    def test_two_match_between_sets(self):
 
         """Function:  test_two_match_between_sets
 
@@ -452,16 +414,15 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_open.return_value = self.open
-
         args_array = gen_class.ArgParser(
-            self.argv2, opt_val=self.opt_val, file_chk=self.file_chk3,
+            self.argv2, opt_val=self.opt_val, file_perm_chk=self.file_chk3,
             do_parse=True)
 
         self.assertTrue(args_array.arg_file_chk())
 
-    @mock.patch("gen_class.open")
-    def test_one_match_between_sets(self, mock_open):
+    @mock.patch("gen_class.gen_libs.chk_perm", mock.Mock(return_value=True))
+    @mock.patch("gen_class.os.path.isfile", mock.Mock(return_value=True))
+    def test_one_match_between_sets(self,):
 
         """Function:  test_one_match_between_sets
 
@@ -471,10 +432,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_open.return_value = self.open
-
         args_array = gen_class.ArgParser(
-            self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
+            self.argv, opt_val=self.opt_val, file_perm_chk=self.file_chk,
             do_parse=True)
 
         self.assertTrue(args_array.arg_file_chk())
@@ -490,7 +449,7 @@ class UnitTest(unittest.TestCase):
         """
 
         args_array = gen_class.ArgParser(
-            self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
+            self.argv, opt_val=self.opt_val, file_perm_chk=self.file_chk,
             do_parse=True)
         args_array.args_array["-f"] = []
 
@@ -507,7 +466,7 @@ class UnitTest(unittest.TestCase):
         """
 
         args_array = gen_class.ArgParser(
-            self.argv, opt_val=self.opt_val, file_chk=self.file_chk2,
+            self.argv, opt_val=self.opt_val, file_perm_chk=self.file_chk2,
             do_parse=True)
 
         self.assertTrue(args_array.arg_file_chk())
