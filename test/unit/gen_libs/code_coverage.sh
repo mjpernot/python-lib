@@ -27,6 +27,7 @@ coverage run -a --source=gen_libs test/unit/gen_libs/del_not_and_list.py
 coverage run -a --source=gen_libs test/unit/gen_libs/del_not_in_list.py
 coverage run -a --source=gen_libs test/unit/gen_libs/dict_2_list.py
 coverage run -a --source=gen_libs test/unit/gen_libs/dict_2_std.py
+coverage run -a --source=gen_libs test/unit/gen_libs/dict_out.py
 coverage run -a --source=gen_libs test/unit/gen_libs/dir_file_match.py
 coverage run -a --source=gen_libs test/unit/gen_libs/disk_usage.py
 coverage run -a --source=gen_libs test/unit/gen_libs/display_data.py

@@ -64,7 +64,7 @@ class UnitTest(unittest.TestCase):
         test_opt_or
         test_xor_noreq
         test_file_crt
-        test_file_chk
+        test_file_perm_chk
         test_dir_crt
         test_dir_chk
         test_dir_perms_chk
@@ -127,8 +127,8 @@ class UnitTest(unittest.TestCase):
         self.results_dir_chk = ["-o", "-d", "-p"]
         self.dir_crt = ["-o"]
         self.results_dir_crt = ["-o"]
-        self.file_chk = ["-a", "-e", "-q"]
-        self.results_file_chk = ["-a", "-e", "-q"]
+        self.file_perm_chk = {"-a": 6, "-e": 4, "-q": 1}
+        self.results_file_perm_chk = {"-a": 6, "-e": 4, "-q": 1}
         self.file_crt = ["-f"]
         self.results_file_crt = ["-f"]
         self.xor_noreq = {"-l": "-b"}
@@ -262,19 +262,20 @@ class UnitTest(unittest.TestCase):
 
         self.assertEqual(args_array.file_crt, self.results_file_crt)
 
-    def test_file_chk(self):
+    def test_file_perm_chk(self):
 
-        """Function:  test_file_chk
+        """Function:  test_file_perm_chk
 
-        Description:  Test with file_chk argument.
+        Description:  Test with file_perm_chk argument.
 
         Arguments:
 
         """
 
-        args_array = gen_class.ArgParser(self.argv3, file_chk=self.file_chk)
+        args_array = gen_class.ArgParser(
+            self.argv3, file_perm_chk=self.file_perm_chk)
 
-        self.assertEqual(args_array.file_chk, self.results_file_chk)
+        self.assertEqual(args_array.file_perm_chk, self.results_file_perm_chk)
 
     def test_dir_crt(self):
 

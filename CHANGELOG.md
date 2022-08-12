@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [2.9.3] - 2022-07-21
+### Fixed
+- gen_class.ArgParser.arg_file_chk:  Added octal permissions settings to the file checks, also refactored the method to remove the \_file_chk_crt method call.
+
+### Added
+- gen_libs.dict_out: Print dictionary to a file, standard out, and/or an email.
+
+### Deprecated
+- gen_class.ArgParser.arg_dir_chk_crt:  Replaced with arg_dir_chk and arg_dir_crt methods.
+- gen_class.ArgParser.\_file_chk_crt
+
+
 ## [2.9.2] - 2022-05-18
 ### Added
 - gen_class.TimeFormat: Class to store times in pre-defined or user-defined time formats and retrieve with the same time setting. 

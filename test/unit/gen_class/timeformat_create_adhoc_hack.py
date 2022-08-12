@@ -32,6 +32,7 @@ import version
 
 __version__ = version.__version__
 
+
 class UnitTest(unittest.TestCase):
 
     """Class:  UnitTest
@@ -76,7 +77,7 @@ class UnitTest(unittest.TestCase):
 
         self.tform.create_adhoc_hack(self.name, self.texpr, micro=True)
 
-        self.assertEqual(len(self.tform.thacks[self.name]), 18)
+        self.assertTrue(self.tform.thacks[self.name].split(".")[1])
 
     def test_delimit(self):
 
