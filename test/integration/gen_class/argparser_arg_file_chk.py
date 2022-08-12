@@ -43,15 +43,15 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
+        test_incorrect_perms
         test_file_crt_override
         test_file_chk_override
-        test_second_open_no_error
         test_file_crt_in_list
         test_file_crt_not_in_list
         test_file_crt_empty_list
         test_file_crt_not_passed
-        test_first_open_error_two
-        test_first_open_no_errors
+        test_open_error_two
+        test_open_no_errors
         test_name_loop_zero_items
         test_name_loop_two_items
         test_name_loop_one_item
@@ -91,13 +91,33 @@ class UnitTest(unittest.TestCase):
 
         self.opt_val = ["-f", "-m", "-g"]
 
-        self.file_chk = ["-f"]
-        self.file_chk2 = ["-a"]
-        self.file_chk3 = ["-f", "-g"]
+        self.file_chk = {"-f": 6}
+        self.file_chk2 = {"-a": 6}
+        self.file_chk3 = {"-f": 6, "-g": 6}
+        self.file_chk4 = {"-f": 7}
 
         self.file_crt = ["-f"]
         self.file_crt2 = ["-g"]
         self.file_crt3 = []
+
+    def test_incorrect_perms(self):
+
+        """Function:  test_incorrect_perms
+
+        Description:  Test with incorrect permissions.
+
+        Arguments:
+
+        """
+
+        fname = open(self.file, "w")
+        fname.close()
+        args_array = gen_class.ArgParser(
+            self.argv, opt_val=self.opt_val, file_perm_chk=self.file_chk4,
+            do_parse=True)
+
+        with gen_libs.no_std_out():
+            self.assertFalse(args_array.arg_file_chk())
 
     def test_file_crt_override(self):
 
@@ -110,7 +130,7 @@ class UnitTest(unittest.TestCase):
         """
 
         args_array = gen_class.ArgParser(
-            self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
+            self.argv, opt_val=self.opt_val, file_perm_chk=self.file_chk,
             file_crt=self.file_crt3, do_parse=True)
 
         self.assertTrue(args_array.arg_file_chk(file_crt=self.file_crt))
@@ -126,26 +146,10 @@ class UnitTest(unittest.TestCase):
         """
 
         args_array = gen_class.ArgParser(
-            self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
+            self.argv, opt_val=self.opt_val, file_perm_chk=self.file_chk,
             do_parse=True)
 
-        self.assertTrue(args_array.arg_file_chk(file_chk=self.file_chk2))
-
-    def test_second_open_no_error(self):
-
-        """Function:  test_second_open_no_error
-
-        Description:  Test with second open no error.
-
-        Arguments:
-
-        """
-
-        args_array = gen_class.ArgParser(
-            self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
-            file_crt=self.file_crt, do_parse=True)
-
-        self.assertTrue(args_array.arg_file_chk())
+        self.assertTrue(args_array.arg_file_chk(file_perm_chk=self.file_chk2))
 
     def test_file_crt_in_list(self):
 
@@ -158,7 +162,7 @@ class UnitTest(unittest.TestCase):
         """
 
         args_array = gen_class.ArgParser(
-            self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
+            self.argv, opt_val=self.opt_val, file_perm_chk=self.file_chk,
             file_crt=self.file_crt, do_parse=True)
 
         self.assertTrue(args_array.arg_file_chk())
@@ -174,7 +178,7 @@ class UnitTest(unittest.TestCase):
         """
 
         args_array = gen_class.ArgParser(
-            self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
+            self.argv, opt_val=self.opt_val, file_perm_chk=self.file_chk,
             file_crt=self.file_crt2, do_parse=True)
 
         with gen_libs.no_std_out():
@@ -191,7 +195,7 @@ class UnitTest(unittest.TestCase):
         """
 
         args_array = gen_class.ArgParser(
-            self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
+            self.argv, opt_val=self.opt_val, file_perm_chk=self.file_chk,
             file_crt=self.file_crt3, do_parse=True)
 
         with gen_libs.no_std_out():
@@ -208,33 +212,33 @@ class UnitTest(unittest.TestCase):
         """
 
         args_array = gen_class.ArgParser(
-            self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
+            self.argv, opt_val=self.opt_val, file_perm_chk=self.file_chk,
             do_parse=True)
 
         with gen_libs.no_std_out():
             self.assertFalse(args_array.arg_file_chk())
 
-    def test_first_open_error_two(self):
+    def test_open_error_two(self):
 
-        """Function:  test_first_open_error_two
+        """Function:  test_open_error_two
 
-        Description:  Test with first open and error 2 returned.
+        Description:  Test with open and error 2 returned.
 
         Arguments:
 
         """
 
         args_array = gen_class.ArgParser(
-            self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
+            self.argv, opt_val=self.opt_val, file_perm_chk=self.file_chk,
             file_crt=self.file_crt, do_parse=True)
 
         self.assertTrue(args_array.arg_file_chk())
 
-    def test_first_open_no_errors(self):
+    def test_open_no_errors(self):
 
-        """Function:  test_first_open_no_errors
+        """Function:  test_open_no_errors
 
-        Description:  Test with first open and no errors.
+        Description:  Test with open and no errors.
 
         Arguments:
 
@@ -243,7 +247,7 @@ class UnitTest(unittest.TestCase):
         fname = open(self.file, "w")
         fname.close()
         args_array = gen_class.ArgParser(
-            self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
+            self.argv, opt_val=self.opt_val, file_perm_chk=self.file_chk,
             do_parse=True)
 
         self.assertTrue(args_array.arg_file_chk())
@@ -259,7 +263,7 @@ class UnitTest(unittest.TestCase):
         """
 
         args_array = gen_class.ArgParser(
-            self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
+            self.argv, opt_val=self.opt_val, file_perm_chk=self.file_chk,
             do_parse=True)
         args_array.args_array["-f"] = []
 
@@ -280,7 +284,7 @@ class UnitTest(unittest.TestCase):
         fname3 = open(self.file3, "w")
         fname3.close()
         args_array = gen_class.ArgParser(
-            self.argv5, opt_val=self.opt_val, file_chk=self.file_chk,
+            self.argv5, opt_val=self.opt_val, file_perm_chk=self.file_chk,
             do_parse=True)
 
         self.assertTrue(args_array.arg_file_chk())
@@ -298,7 +302,7 @@ class UnitTest(unittest.TestCase):
         fname = open(self.file, "w")
         fname.close()
         args_array = gen_class.ArgParser(
-            self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
+            self.argv, opt_val=self.opt_val, file_perm_chk=self.file_chk,
             do_parse=True)
 
         self.assertTrue(args_array.arg_file_chk())
@@ -316,7 +320,7 @@ class UnitTest(unittest.TestCase):
         fname = open(self.file, "w")
         fname.close()
         args_array = gen_class.ArgParser(
-            self.argv4, opt_val=self.opt_val, file_chk=self.file_chk,
+            self.argv4, opt_val=self.opt_val, file_perm_chk=self.file_chk,
             do_parse=True)
 
         self.assertTrue(args_array.arg_file_chk())
@@ -334,7 +338,7 @@ class UnitTest(unittest.TestCase):
         fname = open(self.file, "w")
         fname.close()
         args_array = gen_class.ArgParser(
-            self.argv3, opt_val=self.opt_val, file_chk=self.file_chk,
+            self.argv3, opt_val=self.opt_val, file_perm_chk=self.file_chk,
             do_parse=True)
 
         self.assertTrue(args_array.arg_file_chk())
@@ -352,7 +356,7 @@ class UnitTest(unittest.TestCase):
         fname = open(self.file, "w")
         fname.close()
         args_array = gen_class.ArgParser(
-            self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
+            self.argv, opt_val=self.opt_val, file_perm_chk=self.file_chk,
             do_parse=True)
 
         self.assertTrue(args_array.arg_file_chk())
@@ -372,7 +376,7 @@ class UnitTest(unittest.TestCase):
         fname2 = open(self.file2, "w")
         fname2.close()
         args_array = gen_class.ArgParser(
-            self.argv2, opt_val=self.opt_val, file_chk=self.file_chk3,
+            self.argv2, opt_val=self.opt_val, file_perm_chk=self.file_chk3,
             do_parse=True)
 
         self.assertTrue(args_array.arg_file_chk())
@@ -390,7 +394,7 @@ class UnitTest(unittest.TestCase):
         fname = open(self.file, "w")
         fname.close()
         args_array = gen_class.ArgParser(
-            self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
+            self.argv, opt_val=self.opt_val, file_perm_chk=self.file_chk,
             do_parse=True)
 
         self.assertTrue(args_array.arg_file_chk())
@@ -406,7 +410,7 @@ class UnitTest(unittest.TestCase):
         """
 
         args_array = gen_class.ArgParser(
-            self.argv, opt_val=self.opt_val, file_chk=self.file_chk,
+            self.argv, opt_val=self.opt_val, file_perm_chk=self.file_chk,
             do_parse=True)
         args_array.args_array["-f"] = []
 
@@ -423,7 +427,7 @@ class UnitTest(unittest.TestCase):
         """
 
         args_array = gen_class.ArgParser(
-            self.argv, opt_val=self.opt_val, file_chk=self.file_chk2,
+            self.argv, opt_val=self.opt_val, file_perm_chk=self.file_chk2,
             do_parse=True)
 
         self.assertTrue(args_array.arg_file_chk())

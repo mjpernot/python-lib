@@ -230,7 +230,7 @@ class ArgParser(object):
                     perms in octal
                 dir_perms_crt -> Directory creation options with their
                     directory perms in octal
-                file_chk -> Options which will have files included
+                file_perm_chk -> File check options with their perms in octal
                 file_crt -> Options require files to be created
                 multi_val - List of options that may contain multiple values
                 opt_con_or -> Dictionary of options that require one or more
@@ -286,7 +286,7 @@ class ArgParser(object):
         self.dir_perms_crt = dict(kwargs.get("dir_perms_crt", {}))
 
         # For arg_file_chk method
-        self.file_chk = list(kwargs.get("file_chk", []))
+        self.file_perm_chk = dict(kwargs.get("file_perm_chk", {}))
         self.file_crt = list(kwargs.get("file_crt", []))
 
         # For arg_noreq_xor method
@@ -571,30 +571,40 @@ class ArgParser(object):
 
         Arguments:
             (input) **kwargs:
-                file_chk -> Options which will have files included
+                file_perm_chk -> File check options with their perms in octal
                 file_crt -> Options require files to be created
             (output) status -> True|False - If files are available
 
         """
 
-        file_chk = list(kwargs.get("file_chk", self.file_chk))
+        file_perm_chk = dict(kwargs.get("file_perm_chk", self.file_perm_chk))
         file_crt = list(kwargs.get("file_crt", self.file_crt))
         status = True
 
-        for option in set(self.args_array.keys()) & set(file_chk):
+        for option in set(self.args_array) & set(file_perm_chk):
+            f_list = list(self.args_array[option])                  \
+                     if isinstance(self.args_array[option], list)   \
+                     else [self.args_array[option]]
 
-            if isinstance(self.args_array[option], list):
-                tmp_list = list(self.args_array[option])
+            for fname in f_list:
+                if os.path.isfile(fname):
+                    status = status & gen_libs.chk_perm(
+                        fname, file_perm_chk[option])
 
-            else:
-                tmp_list = [self.args_array[option]]
+                elif option in file_crt:
+                    try:
+                        fhldr = open(fname, "w")
+                        fhldr.close()
 
-            for name in tmp_list:
-                # Combine these lines?  See below.
-                # tmp_status = self._file_chk_crt(name, option, file_crt)
-                # status = status & tmp_status
-                status = status & self._file_chk_crt(
-                    name, option, file_crt=file_crt)
+                    except IOError as err_msg:
+                        (err, strerr) = err_msg.args
+                        print("I/O Error: ({0}): {1}".format(err, strerr))
+                        print("Option: '{0}' File: '{1}'".format(option, fname))
+                        status = status & False
+
+                else:
+                    print("Error - File: '{0}' is missing.".format(fname))
+                    status = status & False
 
         return status
 
