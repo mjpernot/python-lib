@@ -12,6 +12,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - gen_libs.dict_out: Print dictionary to a file, standard out, and/or an email.
 
 ### Deprecated
+- gen_class.ArgParser.arg_dir_chk_crt:  Replaced with arg_dir_chk and arg_dir_crt methods.
 - gen_class.ArgParser.\_file_chk_crt
 
 
