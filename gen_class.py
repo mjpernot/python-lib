@@ -599,7 +599,8 @@ class ArgParser(object):
                     except IOError as err_msg:
                         (err, strerr) = err_msg.args
                         print("I/O Error: ({0}): {1}".format(err, strerr))
-                        print("Option: '{0}' File: '{1}'".format(option, fname))
+                        print("Option: '{0}' File: '{1}'".format(option,
+                                                                 fname))
                         status = status & False
 
                 else:
@@ -2207,7 +2208,7 @@ class TimeFormat(object):
         """
 
         ext = kwargs.get("delimit", self.delimit) + self.msecs \
-              if kwargs.get("micro", self.micro) else ""
+            if kwargs.get("micro", self.micro) else ""
 
         self.thacks[tformat] = datetime.datetime.strftime(
             self.rdtg, texpr) + ext
