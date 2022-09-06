@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [2.9.4] - 2022-09-06
+
+### Removed
+- Removed support for Python 2.6
+
+
 ## [2.9.3] - 2022-07-21
 ### Fixed
 - gen_class.ArgParser.arg_file_chk:  Added octal permissions settings to the file checks, also refactored the method to remove the \_file_chk_crt method call.
