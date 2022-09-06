@@ -5,6 +5,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 
 ## [2.9.4] - 2022-09-06
+- Updating to work in Python 3
 
 ### Removed
 - Removed support for Python 2.6
