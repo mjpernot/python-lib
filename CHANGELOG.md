@@ -7,6 +7,9 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 ## [2.9.4] - 2022-09-06
 - Updating to work in Python 3
 
+### Changed
+- gen_libs: cp_file, make_dir, touch: Modified exception handler to Python 3 format.
+
 ### Removed
 - Removed support for Python 2.6
 

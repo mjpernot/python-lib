@@ -109,8 +109,10 @@
 # Libraries and Global Variables
 
 # Standard
-# For Python 2.6/2.7: Redirection of stdout in a print command.
+# For Python 2.7: Future imports to Python 3
 from __future__ import print_function
+from __future__ import absolute_import
+
 import subprocess
 import os
 import time
@@ -494,7 +496,8 @@ def cp_file(fname, src_dir, dest_dir, new_fname=None):
     try:
         shutil.copy2(os.path.join(src_dir, fname), new_fname)
 
-    except IOError as (errno, errmsg):
+    except IOError as err_msg:
+        (errno, errmsg) = err_msg.args
         status = False
 
         if errmsg == "No such file or directory":
@@ -1557,7 +1560,8 @@ def make_dir(dirname):
         os.makedirs(dirname)
         status = True
 
-    except OSError as (errno, strerr):
+    except OSError as err_msg:
+        (errno, strerr) = err_msg.args
         if errno == 13 or errno == 17:
             print("Error:  {0} for {1}".format(strerr, dirname))
 
@@ -2441,7 +2445,8 @@ def touch(f_name):
         try:
             os.makedirs(base_dir)
 
-        except OSError as (errno, strerror):
+        except OSError as err_msg:
+            (errno, strerror) = err_msg.args
             status = False
             err_msg = "ERROR: Directory create failure. Reason: %s" \
                       % (strerror)
@@ -2451,7 +2456,8 @@ def touch(f_name):
             with open(f_name, "a"):
                 os.utime(f_name, None)
 
-        except IOError as (errno, strerror):
+        except IOError as err_msg:
+            (errno, strerror) = err_msg.args
             status = False
             err_msg = "ERROR: File create failure. Reason: %s" % (strerror)
 
