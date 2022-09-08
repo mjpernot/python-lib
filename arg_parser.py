@@ -590,11 +590,13 @@ def arg_wildcard(args_array, opt_wildcard):
     opt_wildcard = list(opt_wildcard)
 
     for opt in opt_wildcard:
-        if opt in args_array.keys() and isinstance(args_array[opt], list):
+        if opt in list(args_array.keys()) \
+           and isinstance(args_array[opt], list):
             t_list = [glob.glob(item) for item in args_array[opt]]
             args_array[opt] = [item1 for item2 in t_list for item1 in item2]
 
-        elif opt in args_array.keys() and isinstance(args_array[opt], str):
+        elif opt in list(args_array.keys()) \
+           and isinstance(args_array[opt], str):
             args_array[opt] = glob.glob(args_array[opt])
 
     return args_array

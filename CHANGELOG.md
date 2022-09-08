@@ -8,6 +8,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - Updating to work in Python 3
 
 ### Changed
+- arg_parser.arg_wildcard: Converted a dict.keys() to a list.
 - arg_parser: arg_file_chk, arg_file_chk, \_file_create: Modified exception handler to Python 3 format.
 - gen_libs.merge_data_types:  Replaced basestring with str.
 - gen_libs.is_file_text: Converted results of map() and range() to lists.
