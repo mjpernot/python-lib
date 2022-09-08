@@ -107,12 +107,10 @@
 """
 
 # Libraries and Global Variables
-
-# Standard
-# For Python 2.7: Future imports to Python 3
 from __future__ import print_function
 from __future__ import absolute_import
 
+# Standard
 import subprocess
 import os
 import time
