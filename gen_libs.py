@@ -1132,7 +1132,7 @@ def get_secs(tdd):
 
     """
 
-    return (tdd.seconds + tdd.days * 24 * 3600) * 10**6 / 10**6
+    return (tdd.seconds + tdd.days * 24 * 3600) * 10**6 // 10**6
 
 
 def get_time():
