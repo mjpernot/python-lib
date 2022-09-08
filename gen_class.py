@@ -1752,7 +1752,7 @@ class ProgressBar(object):
         """
 
         total_blocks = self.width
-        filled_blocks = int(round(progress / (100 / float(total_blocks))))
+        filled_blocks = int(round(progress // (100 / float(total_blocks))))
         empty_blocks = total_blocks - filled_blocks
 
         # Compile the progress bar of completed and uncompleted blocks.
@@ -2168,7 +2168,7 @@ class TimeFormat(object):
         """
 
         self.rdtg = datetime.datetime.now()
-        self.msecs = str(self.rdtg.microsecond / 100)
+        self.msecs = str(self.rdtg.microsecond // 100)
         self.delimit = "."
         self.micro = False
         self.thacks = {}
