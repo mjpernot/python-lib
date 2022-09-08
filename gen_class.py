@@ -870,14 +870,14 @@ class ArgParser(object):
         opt_wildcard = list(kwargs.get("opt_wildcard", self.opt_wildcard))
 
         for opt in opt_wildcard:
-            if opt in self.args_array.keys() and \
+            if opt in list(self.args_array.keys()) and \
                isinstance(self.args_array[opt], list):
 
                 t_list = [glob.glob(item) for item in self.args_array[opt]]
                 self.args_array[opt] = [
                     item1 for item2 in t_list for item1 in item2]
 
-            elif opt in self.args_array.keys() and isinstance(
+            elif opt in list(self.args_array.keys()) and isinstance(
                     self.args_array[opt], str):
 
                 self.args_array[opt] = glob.glob(self.args_array[opt])
@@ -960,7 +960,7 @@ class ArgParser(object):
 
         """
 
-        return self.args_array.keys()
+        return list(self.args_array.keys())
 
     def get_val(self, skey, **kwargs):
 

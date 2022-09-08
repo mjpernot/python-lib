@@ -8,6 +8,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - Updating to work in Python 3
 
 ### Changed
+- gen_class.ArgParser: get_args_keys, arg_wildcard: Converted a dict.keys() to a list.
 - gen_class.Daemon: Set class to use the superclass object.
 - gen_class: TimeFormat.\_\_init\_\_, ProgressBar.update: Changed division to floor division.
 - gen_class: Daemon.stop, Daemon.daemonize, Arg_parser.\_file_chk_crt: Modified exception handler to Python 3 format.
