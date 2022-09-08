@@ -8,6 +8,8 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - Updating to work in Python 3
 
 ### Changed
+- gen_libs.is_file_text: Converted results of map() and range() to lists.
+- gen_libs.key_cleaner: Converted results of map() to a list.
 - gen_libs: prt_dict, key_cleaner:  Replaced dict.iteritems with dict.items and converted to a list.
 - gen_libs: get_secs, sec_2_hr, milli_2_readadble: Changed division to floor division.
 - gen_libs: cp_file, make_dir, touch: Modified exception handler to Python 3 format.

@@ -1296,7 +1296,8 @@ def is_file_text(f_name):
     """
 
     f_head = open(f_name).read(512)
-    text_chars = "".join(map(chr, range(32, 127)) + list("\n\r\t\b"))
+    text_chars = "".join(
+        list(map(chr, list(range(32, 127)))) + list("\n\r\t\b"))
     _null_trans = string.maketrans("", "")
 
     # Empty files are text.
@@ -1407,10 +1408,10 @@ def key_cleaner(data, char, repl):
 
     if type(data) is list:
         data = list(data)
-        return map(key_cleaner, data, char, repl)
+        return list(map(key_cleaner, data, char, repl))
 
     if type(data) is tuple:
-        return tuple(map(key_cleaner, data, char, repl))
+        return tuple(list(map(key_cleaner, data, char, repl)))
 
     return data
 
