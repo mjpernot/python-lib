@@ -1728,13 +1728,13 @@ def milli_2_readadble(msecs):
 
     """
 
-    data = msecs / 1000
+    data = msecs // 1000
     seconds = data % 60
-    data /= 60
+    data //= 60
     minutes = data % 60
-    data /= 60
+    data //= 60
     hours = data % 24
-    data /= 24
+    data //= 24
     days = data
 
     return "%d days %d hours %d minutes %d seconds" \
@@ -2388,7 +2388,7 @@ def sec_2_hr(sec):
 
     """
 
-    return (sec / 36) / float(100)
+    return (sec // 36) / float(100)
 
 
 def str_2_list(del_str, fld_del):

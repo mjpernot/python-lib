@@ -8,7 +8,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - Updating to work in Python 3
 
 ### Changed
-- gen_libs.get_secs: Changed division to floor division.
+- gen_libs: get_secs, sec_2_hr, milli_2_readadble: Changed division to floor division.
 - gen_libs: cp_file, make_dir, touch: Modified exception handler to Python 3 format.
 
 ### Removed
