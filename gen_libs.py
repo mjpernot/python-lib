@@ -1645,6 +1645,8 @@ def merge_data_types(data_1, data_2):
     Description:  Merges two similar data type together.  The data types that
         can be merged are:  strings, dictionaries, lists, and tuples.
 
+    Warning:  Unicode strings in Python 2.7 will not be detected as a string.
+
     Note:  Any duplicate keys between the two dictionaries will be overwritten
         by data_2 keys.
 
@@ -1663,7 +1665,7 @@ def merge_data_types(data_1, data_2):
 
     if type(data_1) == type(data_2):
 
-        if isinstance(data_1, (basestring, list, tuple)):
+        if isinstance(data_1, (str, list, tuple)):
             data = data_1 + data_2
 
         elif isinstance(data_1, dict):

@@ -8,6 +8,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - Updating to work in Python 3
 
 ### Changed
+- gen_libs.merge_data_types:  Replaced basestring with str.
 - gen_libs.is_file_text: Converted results of map() and range() to lists.
 - gen_libs.key_cleaner: Converted results of map() to a list.
 - gen_libs: prt_dict, key_cleaner:  Replaced dict.iteritems with dict.items and converted to a list.
