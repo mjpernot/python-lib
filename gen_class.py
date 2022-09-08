@@ -1184,7 +1184,7 @@ class ArgParser(object):
         return status
 
 
-class Daemon:
+class Daemon(object):
 
     """Class:  Daemon
 
