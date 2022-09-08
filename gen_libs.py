@@ -1393,7 +1393,7 @@ def key_cleaner(data, char, repl):
     if type(data) is dict:
         data = dict(data)
 
-        for key, value in data.iteritems():
+        for key, value in list(data.items()):
 
             # Recursive call on dictionary's value.
             data[key] = key_cleaner(value, char, repl)
@@ -2177,7 +2177,7 @@ def prt_dict(data, fhandler=sys.stdout, **kwargs):
     indent = kwargs.get("indent", 0)
     spc = " "
 
-    for key, val in data.iteritems():
+    for key, val in list(data.items()):
 
         if isinstance(val, dict):
             print("{0}{1}:".format(spc * indent, key), file=fhandler)
