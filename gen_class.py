@@ -24,6 +24,8 @@
 """
 
 # Libraries and Global Variables
+from __future__ import print_function
+from __future__ import absolute_import
 
 # Standard
 import os
@@ -1159,7 +1161,8 @@ class ArgParser(object):
             fname.close()
             status = True
 
-        except IOError as (errno, strerror):
+        except IOError as err_msg:
+            (errno, strerror) = err_msg.args
 
             if option in file_crt and errno == 2:
 
@@ -1168,7 +1171,8 @@ class ArgParser(object):
                     fname.close()
                     status = True
 
-                except IOError as (err, strerr):
+                except IOError as err_msg:
+                    (err, strerr) = err_msg.args
                     print("I/O Error: ({0}): {1}".format(err, strerr))
                     print("Check option: '{0}', file: '{1}'".
                           format(option, name))
@@ -1256,7 +1260,7 @@ class Daemon:
                 # Exit first parent
                 sys.exit(0)
 
-        except OSError, err:
+        except OSError as err:
             sys.stderr.write("Fork #1 failed: %d (%s)\n" %
                              (err.errno, err.strerror))
             sys.exit(1)
@@ -1274,7 +1278,7 @@ class Daemon:
                 # Exit from second parent
                 sys.exit(0)
 
-        except OSError, err:
+        except OSError as err:
             sys.stderr.write("Fork #2 failed: %d (%s)\n" %
                              (err.errno, err.strerror))
             sys.exit(1)
@@ -1368,7 +1372,7 @@ class Daemon:
                 inst.kill(pid, signal.SIGTERM)
                 time.sleep(0.1)
 
-        except OSError, err:
+        except OSError as err:
             err = str(err)
             if err.find("No such process") > 0:
                 if os.path.exists(self.pidfile):
