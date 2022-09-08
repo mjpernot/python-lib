@@ -6,6 +6,10 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 ## [2.9.4] - 2022-09-06
 - Updating to work in Python 3
+- Made gen_class.Yum work only in Python 2
+
+### Fixed
+- gen_class.Yum: Added python version check so class will only work in Python 2.7, yum==3.4.3 does not work in Python 3.
 
 ### Changed
 - gen_class.ArgParser: get_args_keys, arg_wildcard: Converted a dict.keys() to a list.
