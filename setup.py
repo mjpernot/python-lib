@@ -7,6 +7,7 @@
 """
 
 # Libraries and Global Variables
+from __future__ import absolute_import
 
 # Standard
 import os
@@ -57,5 +58,4 @@ setuptools.setup(
         "Operating System :: Linux :: Centos",
         "Operating System :: Linux :: Ubuntu",
         "Programming Language :: Python",
-        "Programming Language :: Python :: 2.6",
         "Programming Language :: Python :: 2.7"])

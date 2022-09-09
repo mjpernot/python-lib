@@ -4,6 +4,31 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [2.9.4] - 2022-09-06
+- Updating to work in Python 3
+- Note: gen_class.Yum class will only work in Python 2
+
+### Fixed
+- gen_class.Yum: Added python version check so class will only work in Python 2.7, yum==3.4.3 does not work in Python 3.
+
+### Changed
+- gen_class.ArgParser: get_args_keys, arg_wildcard: Converted a dict.keys() to a list.
+- gen_class.Daemon: Set class to use the superclass object.
+- gen_class: TimeFormat.\_\_init\_\_, ProgressBar.update: Changed division to floor division.
+- gen_class: Daemon.stop, Daemon.daemonize, Arg_parser.\_file_chk_crt: Modified exception handler to Python 3 format.
+- arg_parser.arg_wildcard: Converted a dict.keys() to a list.
+- arg_parser: arg_file_chk, arg_file_chk, \_file_create: Modified exception handler to Python 3 format.
+- gen_libs.merge_data_types:  Replaced basestring with str.
+- gen_libs.is_file_text: Converted results of map() and range() to lists.
+- gen_libs.key_cleaner: Converted results of map() to a list.
+- gen_libs: prt_dict, key_cleaner:  Replaced dict.iteritems with dict.items and converted to a list.
+- gen_libs: get_secs, sec_2_hr, milli_2_readadble: Changed division to floor division.
+- gen_libs: cp_file, make_dir, touch: Modified exception handler to Python 3 format.
+
+### Removed
+- Removed support for Python 2.6
+
+
 ## [2.9.3] - 2022-07-21
 ### Fixed
 - gen_class.ArgParser.arg_file_chk:  Added octal permissions settings to the file checks, also refactored the method to remove the \_file_chk_crt method call.

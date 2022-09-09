@@ -107,10 +107,10 @@
 """
 
 # Libraries and Global Variables
+from __future__ import print_function
+from __future__ import absolute_import
 
 # Standard
-# For Python 2.6/2.7: Redirection of stdout in a print command.
-from __future__ import print_function
 import subprocess
 import os
 import time
@@ -494,7 +494,8 @@ def cp_file(fname, src_dir, dest_dir, new_fname=None):
     try:
         shutil.copy2(os.path.join(src_dir, fname), new_fname)
 
-    except IOError as (errno, errmsg):
+    except IOError as err_msg:
+        (errno, errmsg) = err_msg.args
         status = False
 
         if errmsg == "No such file or directory":
@@ -1129,7 +1130,7 @@ def get_secs(tdd):
 
     """
 
-    return (tdd.seconds + tdd.days * 24 * 3600) * 10**6 / 10**6
+    return (tdd.seconds + tdd.days * 24 * 3600) * 10**6 // 10**6
 
 
 def get_time():
@@ -1293,7 +1294,8 @@ def is_file_text(f_name):
     """
 
     f_head = open(f_name).read(512)
-    text_chars = "".join(map(chr, range(32, 127)) + list("\n\r\t\b"))
+    text_chars = "".join(
+        list(map(chr, list(range(32, 127)))) + list("\n\r\t\b"))
     _null_trans = string.maketrans("", "")
 
     # Empty files are text.
@@ -1390,7 +1392,7 @@ def key_cleaner(data, char, repl):
     if type(data) is dict:
         data = dict(data)
 
-        for key, value in data.iteritems():
+        for key, value in list(data.items()):
 
             # Recursive call on dictionary's value.
             data[key] = key_cleaner(value, char, repl)
@@ -1404,10 +1406,10 @@ def key_cleaner(data, char, repl):
 
     if type(data) is list:
         data = list(data)
-        return map(key_cleaner, data, char, repl)
+        return list(map(key_cleaner, data, char, repl))
 
     if type(data) is tuple:
-        return tuple(map(key_cleaner, data, char, repl))
+        return tuple(list(map(key_cleaner, data, char, repl)))
 
     return data
 
@@ -1557,7 +1559,8 @@ def make_dir(dirname):
         os.makedirs(dirname)
         status = True
 
-    except OSError as (errno, strerr):
+    except OSError as err_msg:
+        (errno, strerr) = err_msg.args
         if errno == 13 or errno == 17:
             print("Error:  {0} for {1}".format(strerr, dirname))
 
@@ -1640,6 +1643,8 @@ def merge_data_types(data_1, data_2):
     Description:  Merges two similar data type together.  The data types that
         can be merged are:  strings, dictionaries, lists, and tuples.
 
+    Warning:  Unicode strings in Python 2.7 will not be detected as a string.
+
     Note:  Any duplicate keys between the two dictionaries will be overwritten
         by data_2 keys.
 
@@ -1658,7 +1663,7 @@ def merge_data_types(data_1, data_2):
 
     if type(data_1) == type(data_2):
 
-        if isinstance(data_1, (basestring, list, tuple)):
+        if isinstance(data_1, (str, list, tuple)):
             data = data_1 + data_2
 
         elif isinstance(data_1, dict):
@@ -1724,13 +1729,13 @@ def milli_2_readadble(msecs):
 
     """
 
-    data = msecs / 1000
+    data = msecs // 1000
     seconds = data % 60
-    data /= 60
+    data //= 60
     minutes = data % 60
-    data /= 60
+    data //= 60
     hours = data % 24
-    data /= 24
+    data //= 24
     days = data
 
     return "%d days %d hours %d minutes %d seconds" \
@@ -2173,7 +2178,7 @@ def prt_dict(data, fhandler=sys.stdout, **kwargs):
     indent = kwargs.get("indent", 0)
     spc = " "
 
-    for key, val in data.iteritems():
+    for key, val in list(data.items()):
 
         if isinstance(val, dict):
             print("{0}{1}:".format(spc * indent, key), file=fhandler)
@@ -2384,7 +2389,7 @@ def sec_2_hr(sec):
 
     """
 
-    return (sec / 36) / float(100)
+    return (sec // 36) / float(100)
 
 
 def str_2_list(del_str, fld_del):
@@ -2441,7 +2446,8 @@ def touch(f_name):
         try:
             os.makedirs(base_dir)
 
-        except OSError as (errno, strerror):
+        except OSError as err_msg:
+            (errno, strerror) = err_msg.args
             status = False
             err_msg = "ERROR: Directory create failure. Reason: %s" \
                       % (strerror)
@@ -2451,7 +2457,8 @@ def touch(f_name):
             with open(f_name, "a"):
                 os.utime(f_name, None)
 
-        except IOError as (errno, strerror):
+        except IOError as err_msg:
+            (errno, strerror) = err_msg.args
             status = False
             err_msg = "ERROR: File create failure. Reason: %s" % (strerror)
 

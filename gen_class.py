@@ -24,8 +24,11 @@
 """
 
 # Libraries and Global Variables
+from __future__ import print_function
+from __future__ import absolute_import
 
 # Standard
+import sys
 import os
 import subprocess
 import fcntl
@@ -47,7 +50,9 @@ import datetime
 import gzip
 import json
 import re
-import yum
+
+if sys.version_info < (3, 0):
+    import yum
 
 # Local
 import gen_libs
@@ -868,14 +873,14 @@ class ArgParser(object):
         opt_wildcard = list(kwargs.get("opt_wildcard", self.opt_wildcard))
 
         for opt in opt_wildcard:
-            if opt in self.args_array.keys() and \
+            if opt in list(self.args_array.keys()) and \
                isinstance(self.args_array[opt], list):
 
                 t_list = [glob.glob(item) for item in self.args_array[opt]]
                 self.args_array[opt] = [
                     item1 for item2 in t_list for item1 in item2]
 
-            elif opt in self.args_array.keys() and isinstance(
+            elif opt in list(self.args_array.keys()) and isinstance(
                     self.args_array[opt], str):
 
                 self.args_array[opt] = glob.glob(self.args_array[opt])
@@ -958,7 +963,7 @@ class ArgParser(object):
 
         """
 
-        return self.args_array.keys()
+        return list(self.args_array.keys())
 
     def get_val(self, skey, **kwargs):
 
@@ -1159,7 +1164,8 @@ class ArgParser(object):
             fname.close()
             status = True
 
-        except IOError as (errno, strerror):
+        except IOError as err_msg:
+            (errno, strerror) = err_msg.args
 
             if option in file_crt and errno == 2:
 
@@ -1168,7 +1174,8 @@ class ArgParser(object):
                     fname.close()
                     status = True
 
-                except IOError as (err, strerr):
+                except IOError as err_msg:
+                    (err, strerr) = err_msg.args
                     print("I/O Error: ({0}): {1}".format(err, strerr))
                     print("Check option: '{0}', file: '{1}'".
                           format(option, name))
@@ -1180,7 +1187,7 @@ class ArgParser(object):
         return status
 
 
-class Daemon:
+class Daemon(object):
 
     """Class:  Daemon
 
@@ -1256,7 +1263,7 @@ class Daemon:
                 # Exit first parent
                 sys.exit(0)
 
-        except OSError, err:
+        except OSError as err:
             sys.stderr.write("Fork #1 failed: %d (%s)\n" %
                              (err.errno, err.strerror))
             sys.exit(1)
@@ -1274,7 +1281,7 @@ class Daemon:
                 # Exit from second parent
                 sys.exit(0)
 
-        except OSError, err:
+        except OSError as err:
             sys.stderr.write("Fork #2 failed: %d (%s)\n" %
                              (err.errno, err.strerror))
             sys.exit(1)
@@ -1368,7 +1375,7 @@ class Daemon:
                 inst.kill(pid, signal.SIGTERM)
                 time.sleep(0.1)
 
-        except OSError, err:
+        except OSError as err:
             err = str(err)
             if err.find("No such process") > 0:
                 if os.path.exists(self.pidfile):
@@ -1748,7 +1755,7 @@ class ProgressBar(object):
         """
 
         total_blocks = self.width
-        filled_blocks = int(round(progress / (100 / float(total_blocks))))
+        filled_blocks = int(round(progress // (100 / float(total_blocks))))
         empty_blocks = total_blocks - filled_blocks
 
         # Compile the progress bar of completed and uncompleted blocks.
@@ -2164,7 +2171,7 @@ class TimeFormat(object):
         """
 
         self.rdtg = datetime.datetime.now()
-        self.msecs = str(self.rdtg.microsecond / 100)
+        self.msecs = str(self.rdtg.microsecond // 100)
         self.delimit = "."
         self.micro = False
         self.thacks = {}
@@ -2401,143 +2408,145 @@ class Logger(object):
             handle.close()
             self.log.removeHandler(handle)
 
+# The package yum==3.4.3 only works with Python 2.7
+if sys.version_info < (3, 0):
+    class Yum(yum.YumBase):
 
-class Yum(yum.YumBase):
+        """Class:  Yum
 
-    """Class:  Yum
+        Description:  Class which is a representation for YumBase system class.  A
+            yum object is used as a proxy for using the yum command.
 
-    Description:  Class which is a representation for YumBase system class.  A
-        yum object is used as a proxy for using the yum command.
-
-    Methods:
-        __init__
-        get_hostname
-        get_os
-        get_release
-        get_distro
-        fetch_repos
-        fetch_install_pkgs
-        fetch_update_pkgs
-
-    """
-
-    def __init__(self, host_name=None):
-
-        """Method:  __init__
-
-        Description:  Initialization of an instance of the Yum class.
-
-        Arguments:
-            (input) host_name -> Host name of server.
+        Methods:
+            __init__
+            get_hostname
+            get_os
+            get_release
+            get_distro
+            fetch_repos
+            fetch_install_pkgs
+            fetch_update_pkgs
 
         """
 
-        yum.YumBase.__init__(self)
+        def __init__(self, host_name=None):
 
-        if host_name:
-            self.host_name = host_name
+            """Method:  __init__
 
-        else:
-            self.host_name = socket.gethostname()
+            Description:  Initialization of an instance of the Yum class.
 
-        self.os_name = platform.system()
-        self.release = platform.release()
-        self.distro = platform.linux_distribution()
+            Arguments:
+                (input) host_name -> Host name of server
 
-    def get_distro(self):
+            """
 
-        """Method:  get_distro
+            yum.YumBase.__init__(self)
 
-        Description:  Reuturn class' linux_distribution.
+            if host_name:
+                self.host_name = host_name
 
-        Arguments:
-            (output) self.distro -> Linux distribution tuple value.
+            else:
+                self.host_name = socket.gethostname()
 
-        """
+            self.os_name = platform.system()
+            self.release = platform.release()
+            self.distro = platform.linux_distribution()
 
-        return self.distro
+        def get_distro(self):
 
-    def get_hostname(self):
+            """Method:  get_distro
 
-        """Method:  get_hostname
+            Description:  Reuturn class' linux_distribution.
 
-        Description:  Return the class' hostname.
+            Arguments:
+                (output) self.distro -> Linux distribution tuple value
 
-        Arguments:
-            (output) self.host_name -> Server's host name.
+            """
 
-        """
+            return self.distro
 
-        return self.host_name
+        def get_hostname(self):
 
-    def get_os(self):
+            """Method:  get_hostname
 
-        """Method:  get_os
+            Description:  Return the class' hostname.
 
-        Description:  Return the class' OS platform.
+            Arguments:
+                (output) self.host_name -> Server's host name
 
-        Arguments:
-            (output) self.os_name -> Server's Operating system name.
+            """
 
-        """
+            return self.host_name
 
-        return self.os_name
+        def get_os(self):
 
-    def get_release(self):
+            """Method:  get_os
 
-        """Method:  get_release
+            Description:  Return the class' OS platform
 
-        Description:  Return the class' OS release version.
+            Arguments:
+                (output) self.os_name -> Server's Operating system name.
 
-        Arguments:
-            (output) self.release -> Kernel release version.
+            """
 
-        """
+            return self.os_name
 
-        return self.release
+        def get_release(self):
 
-    def fetch_repos(self):
+            """Method:  get_release
 
-        """Method:  fetch_repos
+            Description:  Return the class' OS release version.
 
-        Description:  Return a list of repos.
+            Arguments:
+                (output) self.release -> Kernel release version
 
-        Arguments:
-            (output) List of repositories.
+            """
 
-        """
+            return self.release
 
-        self.doRepoSetup()
+        def fetch_repos(self):
 
-        return [repo.name for repo in self.repos.listEnabled()]
+            """Method:  fetch_repos
 
-    def fetch_install_pkgs(self):
+            Description:  Return a list of repos.
 
-        """Method:  fetch_install_pkgs
+            Arguments:
+                (output) List of repositories
 
-        Description:  Return a dictionary of installed packages in a list.
+            """
 
-        Arguments:
-            (output) List of installed of packages in JSON format.
+            self.doRepoSetup()
 
-        """
+            return [repo.name for repo in self.repos.listEnabled()]
 
-        return [{"package": pkg.name, "ver": pkg.version, "arch": pkg.arch}
-                for pkg in self.rpmdb]
+        def fetch_install_pkgs(self):
 
-    def fetch_update_pkgs(self):
+            """Method:  fetch_install_pkgs
 
-        """Method:  fetch_update_pkgs
+            Description:  Return a dictionary of installed packages in a list.
 
-        Description:  Return a dictionary of packages to be updated in a list.
+            Arguments:
+                (output) List of installed of packages in JSON format
 
-        Arguments:
-            (output) List of packages to be installed/updated in JSON format.
+            """
 
-        """
+            return [{"package": pkg.name, "ver": pkg.version, "arch": pkg.arch}
+                    for pkg in self.rpmdb]
 
-        return [{"package": pkg.name, "ver": pkg.version, "arch": pkg.arch,
-                 "repo": str(getattr(pkg, "repo"))}
-                for pkg in self.doPackageLists(pkgnarrow="updates",
-                                               patterns="",
-                                               ignore_case=True)]
+        def fetch_update_pkgs(self):
+
+            """Method:  fetch_update_pkgs
+
+            Description:  Return a dictionary of packages to be updated in a
+                list.
+
+            Arguments:
+                (output) List of packages to be installed/updated in JSON format
+
+            """
+
+            return [{"package": pkg.name, "ver": pkg.version, "arch": pkg.arch,
+                     "repo": str(getattr(pkg, "repo"))}
+                    for pkg in self.doPackageLists(pkgnarrow="updates",
+                                                   patterns="",
+                                                   ignore_case=True)]
