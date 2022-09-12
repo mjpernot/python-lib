@@ -5,14 +5,13 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 
 ## [2.9.4] - 2022-09-06
-- Updating to work in Python 3
-- Note: gen_class.Yum class will only work in Python 2
-
-### Fixed
-- gen_class.Yum: Added python version check so class will only work in Python 2.7, yum==3.4.3 does not work in Python 3.
+- Updating to work in Python 3 along with Python 2 in most cases.
+-     Note: gen_class.Yum class will only work in Python 2.
 
 ### Changed
-- gen_libs.file_search_cnt: Refactored function to work in Python 3.
+- gen_list.is_file_text:  Replaced open with io.open, str.translate with bytes.translate, and string.maketrans with a lambda function.
+- gen_libs.file_search_cnt: Replaced single open call with a "with open" loop.
+- gen_class.Yum: Added python version check so class will only work in Python 2.7, yum==3.4.3 does not work in Python 3.
 - gen_class.ArgParser: get_args_keys, arg_wildcard: Converted a dict.keys() to a list.
 - gen_class.Daemon: Set class to use the superclass object.
 - gen_class: TimeFormat.\_\_init\_\_, ProgressBar.update: Changed division to floor division.

@@ -1270,8 +1270,8 @@ def is_empty_file(f_name):
         NOTE:  Returns None if file does not exist.
 
     Arguments:
-        (input) f_name -> File being checked.
-        (output) status -> True|False|None -> True if file is empty.
+        (input) f_name -> File being checked
+        (output) status -> True|False|None -> True if file is empty
 
     """
 
@@ -1288,36 +1288,25 @@ def is_file_text(f_name):
 
     """Function:  is_file_text
 
-    Description:  Returns True|False on whether the file is a text file.
+    Description:  Returns True or False on whether the file is a text file.
+
+    Note:  If a BOM (Byte-Order Mark) UTF-16 LE (Little Endian) set is used in
+        a text file, this function will detect it as a binary file.
 
     Arguments:
-        (input) f_name -> File being checked.
-        (output) True|False -> Is the file a text file.
+        (input) f_name -> File being checked
+        (output) True|False -> Is the file a text file
 
     """
 
-    f_head = open(f_name).read(512)
-    text_chars = "".join(
-        list(map(chr, list(range(32, 127)))) + list("\n\r\t\b"))
-    _null_trans = string.maketrans("", "")
+    with io.open(f_name, "rb") as f_hldr:
+        f_head = f_hldr.read(512)
 
-    # Empty files are text.
-    if not f_head:
-        return True
+    textchars = bytearray(
+        {7,8,9,10,12,13,27} | set(range(0x20, 0x100)) - {0x7f})
+    is_binary_string = lambda bytes: bool(bytes.translate(None, textchars))
 
-    # Files with null bytes are binary.
-    if "\0" in f_head:
-        return False
-
-    # Get the non-text characters.
-    #   Maps char to itself then use 'remove' option to get rid of text chars.
-    non_text = f_head.translate(_null_trans, text_chars)
-
-    # If > 30% non-text characters, then a binary file.
-    if float(len(non_text)) / float(len(f_head)) > 0.30:
-        return False
-
-    return True
+    return not(is_binary_string(f_head))
 
 
 def is_missing_lists(list1, list2):
@@ -1328,9 +1317,9 @@ def is_missing_lists(list1, list2):
         list1 not found in list2.
 
     Arguments:
-        (input) list1 -> List 1.
-        (input) list2 -> List 2.
-        (output) Return list of missing values.
+        (input) list1 -> List 1
+        (input) list2 -> List 2
+        (output) Return list of missing values
 
     """
 
