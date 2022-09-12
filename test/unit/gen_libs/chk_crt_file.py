@@ -424,7 +424,10 @@ class UnitTest(unittest.TestCase):
         _, _ = gen_libs.chk_crt_file(self.f_name, f_hdlr=f_hdlr, no_print=True)
         f_hdlr.close()
 
-        self.assertFalse(err_msg_chk in open(self.l_name).read())
+        with open(self.l_name) as f_hdlr:
+            contents = f_hdlr.read()
+
+        self.assertFalse(err_msg_chk in contents)
 
     def test_print_file(self):
 
