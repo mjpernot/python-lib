@@ -79,8 +79,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertEqual(gen_libs.file_search_cnt(self.f_name, self.pattern),
-                         0)
+        self.assertEqual(
+            gen_libs.file_search_cnt(self.f_name, self.pattern), 0)
 
     def test_file_search_cnt2(self):
 
@@ -93,8 +93,8 @@ class UnitTest(unittest.TestCase):
         """
 
         self.pattern = "test"
-        self.assertEqual(gen_libs.file_search_cnt(self.f_name, self.pattern),
-                         1)
+        self.assertEqual(
+            gen_libs.file_search_cnt(self.f_name, self.pattern), 1)
 
     def test_file_search_cnt3(self):
 
@@ -107,8 +107,8 @@ class UnitTest(unittest.TestCase):
         """
 
         self.pattern = "file"
-        self.assertEqual(gen_libs.file_search_cnt(self.f_name, self.pattern),
-                         2)
+        self.assertEqual(
+            gen_libs.file_search_cnt(self.f_name, self.pattern), 2)
 
     def test_file_search_cnt4(self):
 
@@ -120,8 +120,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertEqual(gen_libs.file_search_cnt(self.f_name2,
-                                                  self.pattern), 0)
+        self.assertEqual(
+            gen_libs.file_search_cnt(self.f_name2, self.pattern), 0)
 
     def tearDown(self):
 

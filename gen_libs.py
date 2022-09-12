@@ -940,9 +940,9 @@ def file_search(f_name, data_str):
     NOTE:  Returns only the first instance found in the file.
 
     Arguments:
-        (input) f_name -> File name searching.
-        (input) data_str -> Search string.
-        (output) line - > Full line string was found in or None, if not found.
+        (input) f_name -> File name searching
+        (input) data_str -> Search string
+        (output) line - > Full line string was found in or None, if not found
 
     """
 
@@ -965,13 +965,16 @@ def file_search_cnt(f_name, pattern):
         the pattern is found in.
 
     Arguments:
-        (input) f_name -> File name.
-        (input) pattern -> Pattern searching for.
-        (output) Number of lines found with the pattern in it.
+        (input) f_name -> File name
+        (input) pattern -> Pattern searching for
+        (output) cnt -> Number of lines found with the pattern in it
 
     """
 
-    return open(f_name, "r").read().count(pattern)
+    with open(f_name) as f_hdlr:
+        cnt = f_hdlr.read().count(pattern)
+
+    return cnt
 
 
 def file_2_list(filename):
@@ -982,8 +985,8 @@ def file_2_list(filename):
         NOTE: Will remove any newlines "\n" at the end of each line.
 
     Arguments:
-        (input) filename -> File name to be read.
-        (output) lines -> The file lines in a list.
+        (input) filename -> File name to be read
+        (output) lines -> The file lines in a list
 
     """
 
