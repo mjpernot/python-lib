@@ -45,6 +45,7 @@ import getpass
 import operator
 import glob
 import datetime
+import io
 
 # Third-party
 import gzip
@@ -1660,11 +1661,12 @@ class LogFile(object):
             "\n" (newlines) will not be split upon in the string operation.
 
         Arguments:
-            (input) data -> Holds marker entry as a file, list, or string.
+            (input) data -> Marker entry as a file handler, list, or string.
 
         """
 
-        if isinstance(data, file):
+        if (sys.version_info < (3, 0) and isinstance(data, file)) \
+           or (sys.version_info > (2, 8) and isinstance(data, io.IOBase)):
             self.regex = "|".join(str(x.strip().strip("\n")) for x in data)
 
         elif isinstance(data, list):
