@@ -73,13 +73,14 @@ python3 test/unit/gen_class/timeformat_create_adhoc_hack.py
 python3 test/unit/gen_class/timeformat_create_hack.py
 python3 test/unit/gen_class/timeformat_get_hack.py
 python3 test/unit/gen_class/timeformat_init.py
-python3 test/unit/gen_class/yum_init.py
-python3 test/unit/gen_class/yum_get_hostname.py
-python3 test/unit/gen_class/yum_get_os.py
-python3 test/unit/gen_class/yum_get_distro.py
-python3 test/unit/gen_class/yum_get_release.py
-python3 test/unit/gen_class/yum_fetch_install_pkgs.py
-python3 test/unit/gen_class/yum_fetch_update_pkgs.py
+# The package yum==3.4.3 only works with Python 2.7
+# python3 test/unit/gen_class/yum_init.py
+# python3 test/unit/gen_class/yum_get_hostname.py
+# python3 test/unit/gen_class/yum_get_os.py
+# python3 test/unit/gen_class/yum_get_distro.py
+# python3 test/unit/gen_class/yum_get_release.py
+# python3 test/unit/gen_class/yum_fetch_install_pkgs.py
+# python3 test/unit/gen_class/yum_fetch_update_pkgs.py
 python3 test/unit/gen_class/mail_init.py
 python3 test/unit/gen_class/mail_add_2_msg.py
 python3 test/unit/gen_class/mail_create_body.py

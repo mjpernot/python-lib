@@ -55,6 +55,10 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        if sys.version_info > (2, 8):
+            print("Error: Python 3 does not support yum==3.4.3, skipping test")
+            self.skipTest("Pre-conditions not met.")
+
         self.host_name = "HOSTNAME"
         self.osys = "Linux"
         self.release = "2.6"

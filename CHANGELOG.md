@@ -5,10 +5,11 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 
 ## [2.9.4] - 2022-09-06
-- Updating to work in Python 3 along with Python 2 in most cases.
+- Updated to work in Python 3 too.
 -     Note: gen_class.Yum class will only work in Python 2.
 
 ### Changed
+- gen_class.ProgramLock.\_\_del\_\_: Closed lock file before deleting the file.
 - gen_libs.no_std_out: Added Python version check to run specific code.
 - gen_libs.is_file_text:  Replaced open with io.open, str.translate with bytes.translate, and string.maketrans with a lambda function.
 - gen_libs.file_search_cnt: Replaced single open call with a "with open" loop.

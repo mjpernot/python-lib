@@ -1865,6 +1865,7 @@ class ProgramLock(object):
             return
 
         fcntl.lockf(self.f_ptr, fcntl.LOCK_UN)
+        self.f_ptr.close()
 
         if os.path.isfile(self.lock_file):
             os.unlink(self.lock_file)
