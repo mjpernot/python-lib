@@ -1641,7 +1641,7 @@ class LogFile(object):
         Description:  Load marker entry from object.
 
         Arguments:
-            (input) data -> Holds marker entry as a file or string.
+            (input) data -> Holds marker entry as a file or string
 
         """
 
@@ -1661,7 +1661,7 @@ class LogFile(object):
             "\n" (newlines) will not be split upon in the string operation.
 
         Arguments:
-            (input) data -> Marker entry as a file handler, list, or string.
+            (input) data -> Marker entry as a file handler, list, or string
 
         """
 
@@ -1696,7 +1696,7 @@ class LogFile(object):
         Description:  Set search predicate for keyword search.
 
         Arguments:
-            (input) predicate -> and|or:  Corresponds to all and any functions.
+            (input) predicate -> and|or:  Corresponds to all and any functions
 
         """
 
