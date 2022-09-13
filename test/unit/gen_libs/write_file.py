@@ -39,7 +39,7 @@ def create_file(f_name, mode):
     Description:  Used as stub test function for test_create_file function..
 
     Arguments:
-        (input) f_name -> Name of file
+        (input) f_name
         (input) mode w|a
         (output) True|False
 
@@ -57,15 +57,17 @@ def write_file(f_name, mode):
     Description:  Used as stub test function for test_write_file function..
 
     Arguments:
-        (input) f_name -> Name of file
+        (input) f_name
         (input) mode w|a
         (output) True|False
 
     """
 
     gen_libs.write_file(f_name, mode, "TEST")
+    with open(f_name) as f_hdlr:
+        contents = f_hdlr.read()
 
-    return os.path.isfile(f_name) and "TEST" in open(f_name).read()
+    return os.path.isfile(f_name) and "TEST" in contents
 
 
 class UnitTest(unittest.TestCase):
@@ -92,8 +94,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.f_path = os.path.join(os.getcwd(),
-                                   "test/unit/gen_libs/tmp/w_file.txt")
+        self.f_path = os.path.join(
+            os.getcwd(), "test/unit/gen_libs/tmp/w_file.txt")
 
     def test_create_file(self):
 

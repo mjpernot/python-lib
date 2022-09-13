@@ -494,8 +494,8 @@ def cp_file(fname, src_dir, dest_dir, new_fname=None):
     try:
         shutil.copy2(os.path.join(src_dir, fname), new_fname)
 
-    except IOError as err_msg:
-        (errno, errmsg) = err_msg.args
+    except IOError as err:
+        (errno, errmsg) = err.args
         status = False
 
         if errmsg == "No such file or directory":
@@ -1551,8 +1551,8 @@ def make_dir(dirname):
         os.makedirs(dirname)
         status = True
 
-    except OSError as err_msg:
-        (errno, strerr) = err_msg.args
+    except OSError as err:
+        (errno, strerr) = err.args
         if errno == 13 or errno == 17:
             print("Error:  {0} for {1}".format(strerr, dirname))
 
@@ -1900,7 +1900,13 @@ def no_std_out():
     """
 
     save_stdout = sys.stdout
-    sys.stdout = io.BytesIO()
+
+    if sys.version_info < (3, 0):
+        sys.stdout = io.BytesIO()
+
+    else:
+        sys.stdout = io.StringIO()
+
     yield
     sys.stdout = save_stdout
 
@@ -2438,8 +2444,8 @@ def touch(f_name):
         try:
             os.makedirs(base_dir)
 
-        except OSError as err_msg:
-            (errno, strerror) = err_msg.args
+        except OSError as err:
+            (errno, strerror) = err.args
             status = False
             err_msg = "ERROR: Directory create failure. Reason: %s" \
                       % (strerror)
@@ -2449,8 +2455,8 @@ def touch(f_name):
             with open(f_name, "a"):
                 os.utime(f_name, None)
 
-        except IOError as err_msg:
-            (errno, strerror) = err_msg.args
+        except IOError as err:
+            (errno, strerror) = err.args
             status = False
             err_msg = "ERROR: File create failure. Reason: %s" % (strerror)
 

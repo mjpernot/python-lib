@@ -9,7 +9,8 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 -     Note: gen_class.Yum class will only work in Python 2.
 
 ### Changed
-- gen_list.is_file_text:  Replaced open with io.open, str.translate with bytes.translate, and string.maketrans with a lambda function.
+- gen_libs.no_std_out: Added Python version check to run specific code.
+- gen_libs.is_file_text:  Replaced open with io.open, str.translate with bytes.translate, and string.maketrans with a lambda function.
 - gen_libs.file_search_cnt: Replaced single open call with a "with open" loop.
 - gen_class.Yum: Added python version check so class will only work in Python 2.7, yum==3.4.3 does not work in Python 3.
 - gen_class.ArgParser: get_args_keys, arg_wildcard: Converted a dict.keys() to a list.
