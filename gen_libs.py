@@ -851,9 +851,9 @@ def display_data(data, level=0, f_hdlr=sys.stdout):
         format, prints to a file handler.
 
     Arguments:
-        (input) data -> Data object.
-        (input) level -> Number of tabs to print.
-        (input) f_hdlr -> File handler (e.g. file or standard out).
+        (input) data -> Data object
+        (input) level -> Number of tabs to print
+        (input) f_hdlr -> File handler (e.g. file or standard out)
 
     """
 
@@ -864,8 +864,8 @@ def display_data(data, level=0, f_hdlr=sys.stdout):
         Description:  Print the number of levels (i.e. tabs) required for line.
 
         Arguments:
-            (input)  level -> Number of tabs to print.
-            (input) f_hdlr -> File handler (e.g. file or standard out).
+            (input)  level -> Number of tabs to print
+            (input) f_hdlr -> File handler (e.g. file or standard out)
 
         """
 
@@ -914,8 +914,8 @@ def file_cleanup(dir_path, days):
         days old.  Check is based on the last modified date for the file.
 
     Arguments:
-        (input) dir_path -> Directory path.
-        (input) days -> Number of days to be retained for.
+        (input) dir_path -> Directory path
+        (input) days -> Number of days to be retained for
 
     """
 
