@@ -101,6 +101,7 @@ class UnitTest(unittest.TestCase):
         f_hdlr = open(os.devnull, "w")
         status, err_msg = gen_libs.perm_check(
             self.f_name, "File", f_hdlr, exe=True)
+        f_hdlr.close()
 
         self.assertTrue(status)
         self.assertEqual(err_msg, err_msg_chk)
@@ -123,6 +124,7 @@ class UnitTest(unittest.TestCase):
         f_hdlr = open(os.devnull, "w")
         status, err_msg = gen_libs.perm_check(
             self.f_name, "File", f_hdlr, exe=True)
+        f_hdlr.close()
 
         self.assertFalse(status)
         self.assertEqual(err_msg, err_msg_chk)
@@ -147,6 +149,7 @@ class UnitTest(unittest.TestCase):
         f_hdlr = open(os.devnull, "w")
         status, err_msg = gen_libs.perm_check(
             self.f_name, "File", f_hdlr, exe=True, write=True)
+        f_hdlr.close()
 
         self.assertFalse(status)
         self.assertEqual(err_msg, err_msg_chk)
@@ -171,6 +174,7 @@ class UnitTest(unittest.TestCase):
         f_hdlr = open(os.devnull, "w")
         status, err_msg = gen_libs.perm_check(
             self.f_name, "File", f_hdlr, exe=True, read=True)
+        f_hdlr.close()
 
         self.assertFalse(status)
         self.assertEqual(err_msg, err_msg_chk)
@@ -195,6 +199,7 @@ class UnitTest(unittest.TestCase):
         f_hdlr = open(os.devnull, "w")
         status, err_msg = gen_libs.perm_check(
             self.f_name, "File", f_hdlr, write=True, read=True)
+        f_hdlr.close()
 
         self.assertFalse(status)
         self.assertEqual(err_msg, err_msg_chk)
@@ -214,6 +219,7 @@ class UnitTest(unittest.TestCase):
         f_hdlr = open(os.devnull, "w")
         status, err_msg = gen_libs.perm_check(
             self.f_name, "File", f_hdlr, write=True)
+        f_hdlr.close()
 
         self.assertTrue(status)
         self.assertEqual(err_msg, err_msg_chk)
@@ -236,6 +242,7 @@ class UnitTest(unittest.TestCase):
         f_hdlr = open(os.devnull, "w")
         status, err_msg = gen_libs.perm_check(
             self.f_name, "File", f_hdlr, write=True)
+        f_hdlr.close()
 
         self.assertFalse(status)
         self.assertEqual(err_msg, err_msg_chk)
@@ -255,6 +262,7 @@ class UnitTest(unittest.TestCase):
         f_hdlr = open(os.devnull, "w")
         status, err_msg = gen_libs.perm_check(
             self.f_name, "File", f_hdlr, read=True)
+        f_hdlr.close()
 
         self.assertTrue(status)
         self.assertEqual(err_msg, err_msg_chk)
@@ -277,6 +285,7 @@ class UnitTest(unittest.TestCase):
         f_hdlr = open(os.devnull, "w")
         status, err_msg = gen_libs.perm_check(
             self.f_name, "File", f_hdlr, read=True)
+        f_hdlr.close()
 
         self.assertFalse(status)
         self.assertEqual(err_msg, err_msg_chk)

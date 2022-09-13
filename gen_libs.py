@@ -420,7 +420,7 @@ def compress(fname):
         it completes.
 
     Arguments:
-        (input) fname -> File name.
+        (input) fname -> File name
 
     """
 
@@ -436,10 +436,10 @@ def cp_dir(src_dir, dest_dir):
     Description:  Copies a directory from source to destination.
 
     Arguments:
-        (input) src_dir -> Source directory.
-        (input) dest_dir -> Destination directory.
-        (output) status -> True|False - True if copy was successful.
-        (output) err_msg -> Error message from copytree exception or None.
+        (input) src_dir -> Source directory
+        (input) dest_dir -> Destination directory
+        (output) status -> True|False - True if copy was successful
+        (output) err_msg -> Error message from copytree exception or None
 
     """
 
@@ -473,12 +473,12 @@ def cp_file(fname, src_dir, dest_dir, new_fname=None):
             shutil.copy2 errors.
 
     Arguments:
-        (input) fname -> File name.
-        (input) src_dir -> Source directory.
-        (input) dest_dir -> Destination directory.
-        (input) new_fname -> New file name or None if staying the same.
-        (output) status -> True|False - True if copy was successful.
-        (output) err_msg -> Error message from shutil.copy2 exception or None.
+        (input) fname -> File name
+        (input) src_dir -> Source directory
+        (input) dest_dir -> Destination directory
+        (input) new_fname -> New file name or None if staying the same
+        (output) status -> True|False - True if copy was successful
+        (output) err_msg -> Error message from shutil.copy2 exception or None
 
     """
 
@@ -528,10 +528,10 @@ def cp_file2(fname, src_dir, dest_dir, new_fname=None):
             the cp_file function if error handling is required.
 
     Arguments:
-        (input) fname -> File name.
-        (input) src_dir -> Source directory.
-        (input) dest_dir -> Destination directory.
-        (input) new_fname -> New file name or None if staying the same.
+        (input) fname -> File name
+        (input) src_dir -> Source directory
+        (input) dest_dir -> Destination directory
+        (input) new_fname -> New file name or None if staying the same
 
     """
 
@@ -552,10 +552,10 @@ def create_cfg_array(cfg_file, **kwargs):
         will be delimited by "=" (equal sign).
 
     Arguments:
-        (input) cfg_file -> Configuration file.
+        (input) cfg_file -> Configuration file
         (input) **kwargs:
-            cfg_path - Configuration directory path.
-        (output) cfg_array -> Array of configurations.
+            cfg_path - Configuration directory path
+        (output) cfg_array -> Array of configurations
 
     """
 
@@ -1523,9 +1523,9 @@ def load_module(mod_name, mod_path):
     Description:  Load a Python module dynamically.
 
     Arguments:
-        (input) mod_name -> Name of the module to load.
-        (input) mod_path -> Directory path to the module to load.
-        (output) Returns the module handler.
+        (input) mod_name -> Name of the module to load
+        (input) mod_path -> Directory path to the module to load
+        (output) Returns the module handler
 
     """
 
@@ -1573,9 +1573,9 @@ def make_md5_hash(file_path, to_file=True):
     Note:  The file the hash will be written to will be file_name.md5.txt.
 
     Arguments:
-        (input) file_path -> Full path and file name being hashed.
-        (input) to_file -> True|False -> To write hash to a file?
-        (output) hash_results | hash_file -> Hash of the file/Hash file name.
+        (input) file_path -> Full path and file name being hashed
+        (input) to_file -> True|False -> To write hash to a file
+        (output) hash_results | hash_file -> Hash of the file/Hash file name
 
     """
 
@@ -1870,9 +1870,9 @@ def not_in_list(name, array_list):
         returns the value or an empty list.
 
     Arguments:
-        (input) name -> Value.
-        (input) array_list -> Array List.
-        (output) Return name in a list or empty list.
+        (input) name -> Value
+        (input) array_list -> Array List
+        (output) Return name in a list or empty list
 
     """
 
@@ -1891,7 +1891,7 @@ def no_std_out():
 
     Description:  Suppresses standard output of a function.
 
-    Arguments:  Function name passed to decorator using "with" statement.
+    Arguments:  Function name passed to decorator using "with" statement
 
     Example:
         with no_std_out():
@@ -1919,8 +1919,8 @@ def octal_to_str(octal):
         file permissions.
 
     Arguments:
-        (input) octal -> Octal number (i.e. 755, 644).
-        (output) result -> String representation (i.e. rwxr-xr-x).
+        (input) octal -> Octal number (i.e. 755, 644)
+        (output) result -> String representation (i.e. rwxr-xr-x)
 
     """
 
@@ -2246,8 +2246,8 @@ def rm_dup_list(orig_list):
     Description:  Remove duplicate entries in a list.
 
     Arguments:
-        (input) orig_list -> List of elements to be processed.
-        (output) Returns an unique list.
+        (input) orig_list -> List of elements to be processed
+        (output) Returns an unique list
 
     """
 
@@ -2263,9 +2263,9 @@ def rm_file(file_path):
     Description:  Remove a file, return error code and message, if necessary.
 
     Arguments:
-        (input) file_path -> Full path and file name being hashed.
-        (output) err_flag -> True|False - An error has occurred during remove.
-        (output) err_msg -> Error message if an error has occurred.
+        (input) file_path -> Full path and file name being hashed
+        (output) err_flag -> True|False - An error has occurred during remove
+        (output) err_msg -> Error message if an error has occurred
 
     """
 
@@ -2290,9 +2290,9 @@ def rm_key(data, key):
         copy of the modified dictionary.
 
     Arguments:
-        (input) data -> Original dictionary.
-        (input) key -> Name of key to be removed.
-        (output) mod_data -> Modified dictionary of original dictionary.
+        (input) data -> Original dictionary
+        (input) key -> Name of key to be removed
+        (output) mod_data -> Modified dictionary of original dictionary
 
     """
 
@@ -2415,8 +2415,8 @@ def str_2_type(lit_str):
         numbers, tuples, lists, dicts, booleans, and None.
 
     Arguments:
-        (input) lit_str -> Literal string to be converted.
-        (output) new_struct -> Structure the string was converted to.
+        (input) lit_str -> Literal string to be converted
+        (output) new_struct -> Structure the string was converted to
 
     """
 
@@ -2430,9 +2430,9 @@ def touch(f_name):
     Description:  Implements the Linux "touch" command.
 
     Arguments:
-        (input) f_name -> File name, can include path name.
-        (output) status -> True|False -> True if successful.
-        (output) err_msg -> Error message or None.
+        (input) f_name -> File name, can include path name
+        (output) status -> True|False -> True if successful
+        (output) err_msg -> Error message or None
 
     """
 
@@ -2471,9 +2471,9 @@ def transpose_dict(data, data_key):
         to specified data types or None.
 
     Arguments:
-        (input) data -> Initial list of dictionaries.
-        (input) data_key -> Dictionary of keys and data types.
-        (output) mod_data -> Modified list of dictionaries.
+        (input) data -> Initial list of dictionaries
+        (input) data_key -> Dictionary of keys and data types
+        (output) mod_data -> Modified list of dictionaries
 
     """
 

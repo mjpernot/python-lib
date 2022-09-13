@@ -48,6 +48,7 @@ class UnitTest(unittest.TestCase):
         test_multi_dict
         test_one_item
         test_empty_dict
+        tearDown
 
     """
 
@@ -80,8 +81,9 @@ class UnitTest(unittest.TestCase):
         """
 
         with gen_libs.no_std_out():
-            self.assertFalse(gen_libs.prt_dict(self.data4, self.f_hldr,
-                                               indent=self.indent2))
+            self.assertFalse(
+                gen_libs.prt_dict(
+                    self.data4, self.f_hldr, indent=self.indent2))
 
     def test_indent_multi_dict(self):
 
@@ -94,8 +96,9 @@ class UnitTest(unittest.TestCase):
         """
 
         with gen_libs.no_std_out():
-            self.assertFalse(gen_libs.prt_dict(self.data3, self.f_hldr,
-                                               indent=self.indent2))
+            self.assertFalse(
+                gen_libs.prt_dict(
+                    self.data3, self.f_hldr, indent=self.indent2))
 
     def test_indent2(self):
 
@@ -108,8 +111,9 @@ class UnitTest(unittest.TestCase):
         """
 
         with gen_libs.no_std_out():
-            self.assertFalse(gen_libs.prt_dict(self.data2, self.f_hldr,
-                                               indent=self.indent2))
+            self.assertFalse(
+                gen_libs.prt_dict(
+                    self.data2, self.f_hldr, indent=self.indent2))
 
     def test_indent(self):
 
@@ -122,8 +126,8 @@ class UnitTest(unittest.TestCase):
         """
 
         with gen_libs.no_std_out():
-            self.assertFalse(gen_libs.prt_dict(self.data2, self.f_hldr,
-                                               indent=self.indent))
+            self.assertFalse(
+                gen_libs.prt_dict(self.data2, self.f_hldr, indent=self.indent))
 
     def test_multi_lvl(self):
 
@@ -175,6 +179,18 @@ class UnitTest(unittest.TestCase):
         """
 
         self.assertFalse(gen_libs.prt_dict(self.data))
+
+    def tearDown(self):
+
+        """Function:  tearDown
+
+        Description:  Clean up of unit testing.
+
+        Arguments:
+
+        """
+
+        self.f_hldr.close()
 
 
 if __name__ == "__main__":
