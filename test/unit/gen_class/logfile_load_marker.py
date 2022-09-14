@@ -79,6 +79,7 @@ class UnitTest(unittest.TestCase):
         log = gen_class.LogFile()
         finst = open(self.input_file2)
         log.load_marker(finst)
+        finst.close()
 
         self.assertEqual(log.marker, "")
 
@@ -110,6 +111,7 @@ class UnitTest(unittest.TestCase):
         log = gen_class.LogFile()
         finst = open(self.input_file)
         log.load_marker(finst)
+        finst.close()
 
         self.assertEqual(log.marker, self.result_str)
 

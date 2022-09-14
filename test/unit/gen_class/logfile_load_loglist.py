@@ -106,6 +106,8 @@ class UnitTest(unittest.TestCase):
         finst2 = open(self.input_file3)
         log.load_loglist(finst)
         log.load_loglist(finst2)
+        finst.close()
+        finst2.close()
 
         self.assertEqual((log.loglist, log.lastline), (self.result_file2,
                                                        self.result_file2[-1]))
@@ -185,6 +187,7 @@ class UnitTest(unittest.TestCase):
         log = gen_class.LogFile()
         finst = open(self.input_file2)
         log.load_loglist(finst)
+        finst.close()
 
         self.assertEqual((log.loglist, log.lastline), ([], None))
 
@@ -231,6 +234,7 @@ class UnitTest(unittest.TestCase):
         log = gen_class.LogFile()
         finst = open(self.input_file)
         log.load_loglist(finst)
+        finst.close()
 
         self.assertEqual((log.loglist, log.lastline), (self.result_file,
                                                        self.result_file[-1]))

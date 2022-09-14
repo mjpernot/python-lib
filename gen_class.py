@@ -1567,7 +1567,8 @@ class LogFile(object):
 
         """
 
-        if isinstance(data, file):
+        if (sys.version_info < (3, 0) and isinstance(data, file)) \
+           or (sys.version_info > (2, 8) and isinstance(data, io.IOBase)):
             self.ignore.extend(
                 [item.lower().rstrip().rstrip("\n") for item in data])
 
@@ -1591,7 +1592,8 @@ class LogFile(object):
 
         """
 
-        if isinstance(data, file):
+        if (sys.version_info < (3, 0) and isinstance(data, file)) \
+           or (sys.version_info > (2, 8) and isinstance(data, io.IOBase)):
             self.keyword.extend([x.lower().rstrip().rstrip("\n")
                                  for x in data])
 
@@ -1616,7 +1618,10 @@ class LogFile(object):
 
         """
 
-        if isinstance(data, (file, gzip.GzipFile)):
+        if (sys.version_info < (3, 0) \
+           and isinstance(data, (file, gzip.GzipFile))) \
+           or (sys.version_info > (2, 8) \
+           and isinstance(data, (io.IOBase, gzip.GzipFile))):
             self.loglist.extend([x.rstrip().rstrip("\n") for x in data])
 
         elif isinstance(data, list):
@@ -1645,7 +1650,8 @@ class LogFile(object):
 
         """
 
-        if isinstance(data, file):
+        if (sys.version_info < (3, 0) and isinstance(data, file)) \
+           or (sys.version_info > (2, 8) and isinstance(data, io.IOBase)):
             self.marker = data.readline().rstrip().rstrip("\n")
 
         elif isinstance(data, str):

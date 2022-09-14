@@ -105,6 +105,7 @@ class UnitTest(unittest.TestCase):
         log = gen_class.LogFile()
         finst = open(self.input_file3)
         log.load_regex(finst)
+        finst.close()
 
         self.assertEqual(log.regex, self.result_str2)
 
@@ -121,6 +122,7 @@ class UnitTest(unittest.TestCase):
         log = gen_class.LogFile()
         finst = open(self.input_file2)
         log.load_regex(finst)
+        finst.close()
 
         self.assertEqual(log.regex, "")
 
@@ -152,6 +154,7 @@ class UnitTest(unittest.TestCase):
         log = gen_class.LogFile()
         finst = open(self.input_file)
         log.load_regex(finst)
+        finst.close()
 
         self.assertEqual(log.regex, self.result_str)
 

@@ -80,6 +80,7 @@ class UnitTest(unittest.TestCase):
         log = gen_class.LogFile()
         finst = open(self.input_file2)
         log.load_ignore(finst)
+        finst.close()
 
         self.assertEqual(log.ignore, [])
 
@@ -126,6 +127,7 @@ class UnitTest(unittest.TestCase):
         log = gen_class.LogFile()
         finst = open(self.input_file)
         log.load_ignore(finst)
+        finst.close()
 
         self.assertEqual(log.ignore, self.result_file)
 

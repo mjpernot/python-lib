@@ -9,7 +9,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 -     Note: gen_class.Yum class will only work in Python 2.
 
 ### Changed
-- gen_class.LogFile.load_regex: Added Python version check and io.IOBase as a isinstance check.
+- gen_class.LogFile: load_regex, load_marker, load_ignore, load_keyword, load_loglist: Added Python version check and io.IOBase as a isinstance check.
 - gen_class.ProgramLock.\_\_del\_\_: Closed lock file before deleting the file.
 - gen_libs.no_std_out: Added Python version check to run specific code.
 - gen_libs.is_file_text:  Replaced open with io.open, str.translate with bytes.translate, and string.maketrans with a lambda function.
