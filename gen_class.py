@@ -52,6 +52,7 @@ import gzip
 import json
 import re
 
+# yum==3.4.3 does not work in Python3
 if sys.version_info < (3, 0):
     import yum
 
@@ -1221,11 +1222,11 @@ class Daemon(object):
         Description:  Initialization of an instance of the Daemon class.
 
         Arguments:
-            (input) pidfile -> Path and name of pidfile for program.
-            (input) stdin -> Standard in setting.
-            (input) stdout -> Standard out setting.
-            (input) stderr -> Standard error setting.
-            (input) argv_list -> List of command line options and values.
+            (input) pidfile -> Path and name of pidfile for program
+            (input) stdin -> Standard in setting
+            (input) stdout -> Standard out setting
+            (input) stderr -> Standard error setting
+            (input) argv_list -> List of command line options and values
 
         """
 
@@ -1290,9 +1291,16 @@ class Daemon(object):
         # Redirect standard file descriptors
         sys.stdout.flush()
         sys.stderr.flush()
-        sdi = file(self.stdin, "r")
-        sdo = file(self.stdout, "a+")
-        sde = file(self.stderr, "a+", 0)
+        sdi = open(self.stdin, "r")
+        sdo = open(self.stdout, "a+")
+
+        # Cannot open unbuffered writes in Python 3
+        if sys.version_info < (3, 0):
+            sde = open(self.stderr, "a+", 0)
+
+        else:
+            sde = open(self.stderr, "a+")
+
         os.dup2(sdi.fileno(), sys.stdin.fileno())
         os.dup2(sdo.fileno(), sys.stdout.fileno())
         os.dup2(sde.fileno(), sys.stderr.fileno())
@@ -1300,7 +1308,8 @@ class Daemon(object):
         # Write pidfile
         atexit.register(self.delpid)
         pid = str(os.getpid())
-        file(self.pidfile, "w+").write("%s\n" % pid)
+        with open(self.pidfile, "w+") as fhdr:
+            fhdr.write(pid + "\n")
 
     def delpid(self):
 
@@ -1326,9 +1335,8 @@ class Daemon(object):
 
         # Check for a pidfile to see if the daemon already runs.
         try:
-            pfile = file(self.pidfile, "r")
-            pid = int(pfile.read().strip())
-            pfile.close()
+            with open(self.pidfile, "r") as pfile:
+                pid = int(pfile.read().strip())
 
         except IOError:
             pid = None
@@ -1354,9 +1362,8 @@ class Daemon(object):
 
         # Get the pid from the pidfile
         try:
-            pfile = file(self.pidfile, "r")
-            pid = int(pfile.read().strip())
-            pfile.close()
+            with open(self.pidfile,'r') as pfile:
+                pid = int(pfile.read().strip())
 
         except IOError:
             pid = None
@@ -1376,14 +1383,14 @@ class Daemon(object):
                 inst.kill(pid, signal.SIGTERM)
                 time.sleep(0.1)
 
-        except OSError as err:
-            err = str(err)
+        except OSError as msg:
+            err = str(msg.args)
             if err.find("No such process") > 0:
                 if os.path.exists(self.pidfile):
                     os.remove(self.pidfile)
 
             else:
-                print(str(err))
+                print(str(msg.args))
                 sys.exit(1)
 
     def restart(self):
@@ -1478,7 +1485,7 @@ class LogFile(object):
         Description:  Find the marker in the loglist array.
 
         Arguments:
-            (input) update -> True|False: Update loglist based on marker found.
+            (input) update -> True|False: Update loglist based on marker found
 
         """
 
@@ -2418,144 +2425,144 @@ class Logger(object):
             self.log.removeHandler(handle)
 
 # The package yum==3.4.3 only works with Python 2.7
-if sys.version_info < (3, 0):
-    class Yum(yum.YumBase):
+#if sys.version_info < (3, 0):
+class Yum(yum.YumBase):
 
-        """Class:  Yum
+    """Class:  Yum
 
-        Description:  Class which is a representation for YumBase system class.  A
-            yum object is used as a proxy for using the yum command.
+    Description:  Class which is a representation for YumBase system class.  A
+        yum object is used as a proxy for using the yum command.
 
-        Methods:
-            __init__
-            get_hostname
-            get_os
-            get_release
-            get_distro
-            fetch_repos
-            fetch_install_pkgs
-            fetch_update_pkgs
+    Methods:
+        __init__
+        get_hostname
+        get_os
+        get_release
+        get_distro
+        fetch_repos
+        fetch_install_pkgs
+        fetch_update_pkgs
+
+    """
+
+    def __init__(self, host_name=None):
+
+        """Method:  __init__
+
+        Description:  Initialization of an instance of the Yum class.
+
+        Arguments:
+            (input) host_name -> Host name of server
 
         """
 
-        def __init__(self, host_name=None):
+        yum.YumBase.__init__(self)
 
-            """Method:  __init__
+        if host_name:
+            self.host_name = host_name
 
-            Description:  Initialization of an instance of the Yum class.
+        else:
+            self.host_name = socket.gethostname()
 
-            Arguments:
-                (input) host_name -> Host name of server
+        self.os_name = platform.system()
+        self.release = platform.release()
+        self.distro = platform.linux_distribution()
 
-            """
+    def get_distro(self):
 
-            yum.YumBase.__init__(self)
+        """Method:  get_distro
 
-            if host_name:
-                self.host_name = host_name
+        Description:  Reuturn class' linux_distribution.
 
-            else:
-                self.host_name = socket.gethostname()
+        Arguments:
+            (output) self.distro -> Linux distribution tuple value
 
-            self.os_name = platform.system()
-            self.release = platform.release()
-            self.distro = platform.linux_distribution()
+        """
 
-        def get_distro(self):
+        return self.distro
 
-            """Method:  get_distro
+    def get_hostname(self):
 
-            Description:  Reuturn class' linux_distribution.
+        """Method:  get_hostname
 
-            Arguments:
-                (output) self.distro -> Linux distribution tuple value
+        Description:  Return the class' hostname.
 
-            """
+        Arguments:
+            (output) self.host_name -> Server's host name
 
-            return self.distro
+        """
 
-        def get_hostname(self):
+        return self.host_name
 
-            """Method:  get_hostname
+    def get_os(self):
 
-            Description:  Return the class' hostname.
+        """Method:  get_os
 
-            Arguments:
-                (output) self.host_name -> Server's host name
+        Description:  Return the class' OS platform
 
-            """
+        Arguments:
+            (output) self.os_name -> Server's Operating system name.
 
-            return self.host_name
+        """
 
-        def get_os(self):
+        return self.os_name
 
-            """Method:  get_os
+    def get_release(self):
 
-            Description:  Return the class' OS platform
+        """Method:  get_release
 
-            Arguments:
-                (output) self.os_name -> Server's Operating system name.
+        Description:  Return the class' OS release version.
 
-            """
+        Arguments:
+            (output) self.release -> Kernel release version
 
-            return self.os_name
+        """
 
-        def get_release(self):
+        return self.release
 
-            """Method:  get_release
+    def fetch_repos(self):
 
-            Description:  Return the class' OS release version.
+        """Method:  fetch_repos
 
-            Arguments:
-                (output) self.release -> Kernel release version
+        Description:  Return a list of repos.
 
-            """
+        Arguments:
+            (output) List of repositories
 
-            return self.release
+        """
 
-        def fetch_repos(self):
+        self.doRepoSetup()
 
-            """Method:  fetch_repos
+        return [repo.name for repo in self.repos.listEnabled()]
 
-            Description:  Return a list of repos.
+    def fetch_install_pkgs(self):
 
-            Arguments:
-                (output) List of repositories
+        """Method:  fetch_install_pkgs
 
-            """
+        Description:  Return a dictionary of installed packages in a list.
 
-            self.doRepoSetup()
+        Arguments:
+            (output) List of installed of packages in JSON format
 
-            return [repo.name for repo in self.repos.listEnabled()]
+        """
 
-        def fetch_install_pkgs(self):
+        return [{"package": pkg.name, "ver": pkg.version, "arch": pkg.arch}
+                for pkg in self.rpmdb]
 
-            """Method:  fetch_install_pkgs
+    def fetch_update_pkgs(self):
 
-            Description:  Return a dictionary of installed packages in a list.
+        """Method:  fetch_update_pkgs
 
-            Arguments:
-                (output) List of installed of packages in JSON format
+        Description:  Return a dictionary of packages to be updated in a
+            list.
 
-            """
+        Arguments:
+            (output) List of packages to be installed/updated in JSON format
 
-            return [{"package": pkg.name, "ver": pkg.version, "arch": pkg.arch}
-                    for pkg in self.rpmdb]
+        """
 
-        def fetch_update_pkgs(self):
-
-            """Method:  fetch_update_pkgs
-
-            Description:  Return a dictionary of packages to be updated in a
-                list.
-
-            Arguments:
-                (output) List of packages to be installed/updated in JSON format
-
-            """
-
-            return [{"package": pkg.name, "ver": pkg.version, "arch": pkg.arch,
-                     "repo": str(getattr(pkg, "repo"))}
-                    for pkg in self.doPackageLists(pkgnarrow="updates",
-                                                   patterns="",
-                                                   ignore_case=True)]
+        return [{"package": pkg.name, "ver": pkg.version, "arch": pkg.arch,
+                 "repo": str(getattr(pkg, "repo"))}
+                for pkg in self.doPackageLists(pkgnarrow="updates",
+                                               patterns="",
+                                               ignore_case=True)]

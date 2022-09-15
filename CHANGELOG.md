@@ -6,9 +6,11 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 ## [2.9.4] - 2022-09-06
 - Updated to work in Python 3 too.
--     Note: gen_class.Yum class will only work in Python 2.
+-     Note: gen_class.Yum class will only work in Python 2.7.
 
 ### Changed
+- gen_class.Daemon: start, stop: Replaced file() call to open() call.
+- gen_class.Daemon.daemonize: Changed file() calls to open() calls and added Python version check to open standard error out with the correct settings.
 - gen_class.LogFile: load_regex, load_marker, load_ignore, load_keyword, load_loglist: Added Python version check and io.IOBase as a isinstance check.
 - gen_class.ProgramLock.\_\_del\_\_: Closed lock file before deleting the file.
 - gen_libs.no_std_out: Added Python version check to run specific code.
