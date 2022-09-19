@@ -215,7 +215,6 @@ class ArgParser(object):
         parse_multi
         parse_single
         update_arg
-        _file_chk_crt
 
     """
 
@@ -1139,55 +1138,6 @@ class ArgParser(object):
             err = "Arg key does not exists"
 
         return status, err
-
-    def _file_chk_crt(self, name, option, **kwargs):
-
-        """Method:  _file_chk_crt
-
-        Description:  Private method for ArgParser class.  Will determine if
-            file exists and if not create the file if is in the file create
-            list.
-
-        Arguments:
-            (input) name -> File path and name
-            (input) option -> Option being checked
-            (input) **kwargs:
-                file_crt -> Options that require files to be created
-            (output) status -> True|False - If file exists or file creation
-                is succesful
-
-        """
-
-        file_crt = list(kwargs.get("file_crt", self.file_crt))
-        status = False
-
-        try:
-            fname = open(name, "r")
-            fname.close()
-            status = True
-
-        except IOError as err_msg:
-            (errno, strerror) = err_msg.args
-
-            if option in file_crt and errno == 2:
-
-                try:
-                    fname = open(name, "w")
-                    fname.close()
-                    status = True
-
-                except IOError as err_msg:
-                    (err, strerr) = err_msg.args
-                    print("I/O Error: ({0}): {1}".format(err, strerr))
-                    print("Check option: '{0}', file: '{1}'".
-                          format(option, name))
-
-            else:
-                print("File Error: ({0}): {1}".format(errno, strerror))
-                print("Check option: '{0}', file: '{1}'".format(option, name))
-
-        return status
-
 
 class Daemon(object):
 

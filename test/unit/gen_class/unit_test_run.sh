@@ -27,7 +27,6 @@ python test/unit/gen_class/argparser_arg_valid_val.py
 python test/unit/gen_class/argparser_arg_wildcard.py
 python test/unit/gen_class/argparser_arg_xor_dict.py
 python test/unit/gen_class/argparser_delete_arg.py
-python test/unit/gen_class/argparser_file_chk_crt.py
 python test/unit/gen_class/argparser_get_args.py
 python test/unit/gen_class/argparser_get_args_keys.py
 python test/unit/gen_class/argparser_get_val.py

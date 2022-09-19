@@ -31,6 +31,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - gen_libs: cp_file, make_dir, touch: Modified exception handler to Python 3 format.
 
 ### Removed
+- gen_class.ArgParser.\_file_chk_crt method
 - Removed support for Python 2.6
 
 
