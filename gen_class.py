@@ -32,7 +32,6 @@ import sys
 import os
 import subprocess
 import fcntl
-import sys
 import tempfile
 import logging
 import socket
@@ -1576,9 +1575,9 @@ class LogFile(object):
 
         """
 
-        if (sys.version_info < (3, 0)
+        if (sys.version_info < (3, 0) \
            and isinstance(data, (file, gzip.GzipFile))) \
-           or (sys.version_info > (2, 8)
+           or (sys.version_info > (2, 8) \
            and isinstance(data, (io.IOBase, gzip.GzipFile))):
             self.loglist.extend([x.rstrip().rstrip("\n") for x in data])
 
