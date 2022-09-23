@@ -9,6 +9,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 -     Note: gen_class.Yum class will only work in Python 2.7.
 
 ### Changed
+- gen_libs.make_md5_hash: Added decoding option from byte to string and included encoding check to ensure correct encode is used.
 - gen_class.Daemon: start, stop: Replaced file() call to open() call.
 - gen_class.Daemon.daemonize: Changed file() calls to open() calls and added Python version check to open standard error out with the correct settings.
 - gen_class.LogFile: load_regex, load_marker, load_ignore, load_keyword, load_loglist: Added Python version check and io.IOBase as a isinstance check.

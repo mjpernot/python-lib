@@ -130,6 +130,7 @@ import json
 import ast
 import gzip
 import calendar
+import chardet
 
 # Local
 import version
@@ -1582,6 +1583,11 @@ def make_md5_hash(file_path, to_file=True):
     inst = get_inst(subprocess)
     proc1 = inst.Popen(["/usr/bin/md5sum", file_path], stdout=inst.PIPE)
     hash_results, _ = proc1.communicate()
+
+    if sys.version_info > (2, 7):
+        encoding = chardet.detect(hash_results)["encoding"]
+        hash_results = hash_results.decode(encoding)
+
     hash_results = hash_results.split("  ")[0]
 
     if to_file:
