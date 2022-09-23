@@ -6,6 +6,6 @@
 
 echo ""
 echo "Unit test"
-python3 test/unit/cmds_gen/add_cmd.py
-python3 test/unit/cmds_gen/is_add_cmd.py
+/usr/bin/python3 ./test/unit/cmds_gen/add_cmd.py
+/usr/bin/python3 ./test/unit/cmds_gen/is_add_cmd.py
 

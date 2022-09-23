@@ -6,11 +6,11 @@
 
 echo ""
 echo "Unit test"
-python3 test/unit/errors/emptyrowerror.py
-python3 test/unit/errors/error.py
-python3 test/unit/errors/nooptionerror.py
-python3 test/unit/errors/notmastererror.py
-python3 test/unit/errors/notslaveerror.py
-python3 test/unit/errors/notyetimplementederror.py
-python3 test/unit/errors/slavenotrunningerror.py
+/usr/bin/python3 ./test/unit/errors/emptyrowerror.py
+/usr/bin/python3 ./test/unit/errors/error.py
+/usr/bin/python3 ./test/unit/errors/nooptionerror.py
+/usr/bin/python3 ./test/unit/errors/notmastererror.py
+/usr/bin/python3 ./test/unit/errors/notslaveerror.py
+/usr/bin/python3 ./test/unit/errors/notyetimplementederror.py
+/usr/bin/python3 ./test/unit/errors/slavenotrunningerror.py
 

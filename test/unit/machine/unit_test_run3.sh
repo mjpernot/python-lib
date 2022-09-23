@@ -6,6 +6,6 @@
 
 echo ""
 echo "Unit test"
-python3 test/unit/machine/linux.py
-python3 test/unit/machine/amachine.py
+/usr/bin/python3 ./test/unit/machine/linux.py
+/usr/bin/python3 ./test/unit/machine/amachine.py
 
