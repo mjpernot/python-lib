@@ -12,27 +12,27 @@ pipeline {
                 virtualenv test_env
                 source test_env/bin/activate
                 pip2 install mock==2.0.0 --user
-                python ./test/unit/arg_parser/_make_dir.py
-                python ./test/unit/arg_parser/arg_add_def.py
-                python ./test/unit/arg_parser/arg_cond_req.py
-                python ./test/unit/arg_parser/arg_cond_req_or.py
-                python ./test/unit/arg_parser/arg_default.py
-                python ./test/unit/arg_parser/arg_dir_chk.py
-                python ./test/unit/arg_parser/arg_dir_chk_crt.py
-                python ./test/unit/arg_parser/arg_file_chk.py
-                python ./test/unit/arg_parser/arg_noreq_xor.py
-                python ./test/unit/arg_parser/arg_parse2.py
-                python ./test/unit/arg_parser/arg_require.py
-                python ./test/unit/arg_parser/arg_req_or_lst.py
-                python ./test/unit/arg_parser/arg_req_xor.py
-                python ./test/unit/arg_parser/arg_set_path.py
-                python ./test/unit/arg_parser/arg_validate.py
-                python ./test/unit/arg_parser/arg_valid_val.py
-                python ./test/unit/arg_parser/arg_wildcard.py
-                python ./test/unit/arg_parser/arg_xor_dict.py
-                python ./test/unit/arg_parser/parse_multi.py
-                python ./test/unit/arg_parser/parse_single.py
-                python ./test/unit/arg_parser/file_create.py
+                /usr/bin/python ./test/unit/arg_parser/_make_dir.py
+                /usr/bin/python ./test/unit/arg_parser/arg_add_def.py
+                /usr/bin/python ./test/unit/arg_parser/arg_cond_req.py
+                /usr/bin/python ./test/unit/arg_parser/arg_cond_req_or.py
+                /usr/bin/python ./test/unit/arg_parser/arg_default.py
+                /usr/bin/python ./test/unit/arg_parser/arg_dir_chk.py
+                /usr/bin/python ./test/unit/arg_parser/arg_dir_chk_crt.py
+                /usr/bin/python ./test/unit/arg_parser/arg_file_chk.py
+                /usr/bin/python ./test/unit/arg_parser/arg_noreq_xor.py
+                /usr/bin/python ./test/unit/arg_parser/arg_parse2.py
+                /usr/bin/python ./test/unit/arg_parser/arg_require.py
+                /usr/bin/python ./test/unit/arg_parser/arg_req_or_lst.py
+                /usr/bin/python ./test/unit/arg_parser/arg_req_xor.py
+                /usr/bin/python ./test/unit/arg_parser/arg_set_path.py
+                /usr/bin/python ./test/unit/arg_parser/arg_validate.py
+                /usr/bin/python ./test/unit/arg_parser/arg_valid_val.py
+                /usr/bin/python ./test/unit/arg_parser/arg_wildcard.py
+                /usr/bin/python ./test/unit/arg_parser/arg_xor_dict.py
+                /usr/bin/python ./test/unit/arg_parser/parse_multi.py
+                /usr/bin/python ./test/unit/arg_parser/parse_single.py
+                /usr/bin/python ./test/unit/arg_parser/file_create.py
                 ./test/unit/cmds_gen/unit_test_run.sh
                 ./test/unit/errors/unit_test_run.sh
                 ./test/unit/gen_libs/unit_test_run.sh
