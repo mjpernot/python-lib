@@ -1139,6 +1139,7 @@ class ArgParser(object):
 
         return status, err
 
+
 class Daemon(object):
 
     """Class:  Daemon
@@ -1312,7 +1313,7 @@ class Daemon(object):
 
         # Get the pid from the pidfile
         try:
-            with open(self.pidfile,'r') as pfile:
+            with open(self.pidfile, "r") as pfile:
                 pid = int(pfile.read().strip())
 
         except IOError:
@@ -1575,9 +1576,9 @@ class LogFile(object):
 
         """
 
-        if (sys.version_info < (3, 0) \
+        if (sys.version_info < (3, 0)
            and isinstance(data, (file, gzip.GzipFile))) \
-           or (sys.version_info > (2, 8) \
+           or (sys.version_info > (2, 8)
            and isinstance(data, (io.IOBase, gzip.GzipFile))):
             self.loglist.extend([x.rstrip().rstrip("\n") for x in data])
 
@@ -2374,14 +2375,15 @@ class Logger(object):
             handle.close()
             self.log.removeHandler(handle)
 
+
 # The package yum==3.4.3 only works with Python 2.7
 if sys.version_info < (3, 0):
     class Yum(yum.YumBase):
 
         """Class:  Yum
 
-        Description:  Class which is a representation for YumBase system class.  A
-            yum object is used as a proxy for using the yum command.
+        Description:  Class which is a representation for YumBase system class.
+            A yum object is used as a proxy for using the yum command.
 
         Methods:
             __init__
@@ -2507,7 +2509,7 @@ if sys.version_info < (3, 0):
                 list.
 
             Arguments:
-                (output) List of packages to be installed/updated in JSON format
+                (output) List of packages for installation in JSON format
 
             """
 

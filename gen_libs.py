@@ -1304,7 +1304,7 @@ def is_file_text(f_name):
         f_head = f_hldr.read(512)
 
     textchars = bytearray(
-        {7,8,9,10,12,13,27} | set(range(0x20, 0x100)) - {0x7f})
+        {7, 8, 9, 10, 12, 13, 27} | set(range(0x20, 0x100)) - {0x7f})
     is_binary_string = lambda bytes: bool(bytes.translate(None, textchars))
 
     return not(is_binary_string(f_head))
