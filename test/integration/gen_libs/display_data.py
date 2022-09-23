@@ -41,11 +41,6 @@ def display_data_check(b_name, f_name, data, level=0):
         check test data files to baseline data files.
 
     Arguments:
-        (input) b_name
-        (input) f_name
-        (input) data
-        (input) level
-        (output) True|False
 
     """
 
@@ -112,18 +107,27 @@ class UnitTest(unittest.TestCase):
         self.b_name5 = os.path.join(
             os.getcwd(),
             "test/integration/gen_libs/basefiles/display_data_base5.out")
+        self.b_name53 = os.path.join(
+            os.getcwd(),
+            "test/integration/gen_libs/basefiles/display_data_base53.out")
 
         self.data6 = {"A": 1, "B": ["a", "b"], "C": 3,
                       "D": {"a": "i", "b": "ii"}}
         self.b_name6 = os.path.join(
             os.getcwd(),
             "test/integration/gen_libs/basefiles/display_data_base6.out")
+        self.b_name63 = os.path.join(
+            os.getcwd(),
+            "test/integration/gen_libs/basefiles/display_data_base63.out")
 
         self.data7 = {"A": 1, "B": ["a", "b"], "C": 3,
                       "D": {"a": "i", "b": "ii"}}
         self.b_name7 = os.path.join(
             os.getcwd(),
             "test/integration/gen_libs/basefiles/display_data_base7.out")
+        self.b_name73 = os.path.join(
+            os.getcwd(),
+            "test/integration/gen_libs/basefiles/display_data_base73.out")
 
         #######################################################################
 
@@ -193,8 +197,15 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertTrue(display_data_check(self.b_name5, self.f_name,
-                                           self.data5, level=0))
+        if sys.version_info < (3, 0):
+            self.assertTrue(
+                display_data_check(
+                    self.b_name5, self.f_name, self.data5, level=0))
+
+        else:
+            self.assertTrue(
+                display_data_check(
+                    self.b_name53, self.f_name, self.data5, level=0))
 
     def test_dict_dict(self):
 
@@ -206,8 +217,15 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertTrue(display_data_check(self.b_name6, self.f_name,
-                                           self.data6, level=0))
+        if sys.version_info < (3, 0):
+            self.assertTrue(
+                display_data_check(
+                    self.b_name6, self.f_name, self.data6, level=0))
+
+        else:
+            self.assertTrue(
+                display_data_check(
+                    self.b_name63, self.f_name, self.data6, level=0))
 
     def test_level_is_one(self):
 
@@ -219,8 +237,15 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertTrue(display_data_check(self.b_name7, self.f_name,
-                                           self.data7, level=1))
+        if sys.version_info < (3, 0):
+            self.assertTrue(
+                display_data_check(
+                    self.b_name7, self.f_name, self.data7, level=1))
+
+        else:
+            self.assertTrue(
+                display_data_check(
+                    self.b_name73, self.f_name, self.data7, level=1))
 
     def tearDown(self):
 

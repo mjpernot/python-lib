@@ -233,7 +233,10 @@ class UnitTest(unittest.TestCase):
                                                 no_print=True)
         f_hdlr.close()
 
-        self.assertFalse(err_msg_chk in open(self.l_name).read())
+        with open(self.l_name) as f_hdlr:
+            contents = f_hdlr.read()
+
+        self.assertFalse(err_msg_chk in contents)
         self.assertFalse(status)
         self.assertEqual(err_msg, err_msg_chk)
 
