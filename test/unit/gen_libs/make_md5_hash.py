@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # Classification (U)
 
 """Program:  make_md5_hash.py
@@ -32,6 +31,43 @@ import gen_libs
 import version
 
 __version__ = version.__version__
+
+
+class SubProcess3(object):
+
+    """Class:  SubProcess3
+
+    Description:  Class which is a representation of the subprocess class.
+
+    Methods:
+        __init__
+        communicate
+
+    """
+
+    def __init__(self):
+
+        """Method:  __init__
+
+        Description:  Initialization instance of the ZipFile class.
+
+        Arguments:
+
+        """
+
+        pass
+
+    def communicate(self):
+
+        """Method:  communicate
+
+        Description:  Mock representation of subprocess.communicate method.
+
+        Arguments:
+
+        """
+
+        return b"Hash_Results", True
 
 
 class SubProcess(object):
@@ -112,7 +148,12 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_popen.return_value = SubProcess()
+        if sys.version_info >= (3, 0):
+            mock_popen.return_value = SubProcess3()
+
+        else:
+            mock_popen.return_value = SubProcess()
+
         mock_pipe.return_value = "Pipe_to_process"
         mock_write.return_value = True
 
@@ -132,7 +173,12 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_popen.return_value = SubProcess()
+        if sys.version_info >= (3, 0):
+            mock_popen.return_value = SubProcess3()
+
+        else:
+            mock_popen.return_value = SubProcess()
+
         mock_pipe.return_value = "Pipe_to_process"
         mock_write.return_value = True
 

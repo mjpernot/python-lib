@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # Classification (U)
 
 """Program:  print_list.py
@@ -42,11 +41,14 @@ def linecnt(fname):
 
     Arguments:
         (input) fname
-        (output) Number of lines in the file.
+        (output) Number of lines in the file
 
     """
 
-    return sum(1 for _ in open(fname))
+    with open(fname, "r") as fhdr:
+        lines = sum(1 for _ in fhdr)
+
+    return lines
 
 
 class UnitTest(unittest.TestCase):
@@ -63,9 +65,9 @@ class UnitTest(unittest.TestCase):
         test_mode_a_empty3
         test_mode_a_empty2
         test_mode_a_empty
-        test_mode_w_empty3 -> Test with write mode with empty list
-        test_mode_w_empty2 -> Test with write mode with empty list
-        test_mode_w_empty -> Test with write mode with empty list
+        test_mode_w_empty3
+        test_mode_w_empty2
+        test_mode_w_empty
         test_mode_a_passed3
         test_mode_a_passed2
         test_mode_a_passed

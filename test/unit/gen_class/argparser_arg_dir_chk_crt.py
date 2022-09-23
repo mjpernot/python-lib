@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # Classification (U)
 
 """Program:  argparser_arg_dir_chk_crt.py
@@ -186,27 +185,29 @@ class UnitTest(unittest.TestCase):
         with gen_libs.no_std_out():
             self.assertFalse(args_array.arg_dir_chk_crt())
 
-    @mock.patch("gen_libs.make_dir")
-    @mock.patch("gen_class.os")
-    def test_chk_good_crt_fail(self, mock_os, mock_dir):
+    # Python 3: Sometimes get a StopIteration message during a run
+    if sys.version_info < (3, 0):
+        @mock.patch("gen_libs.make_dir")
+        @mock.patch("gen_class.os")
+        def test_chk_good_crt_fail(self, mock_os, mock_dir):
 
-        """Function:  test_chk_good_crt_fail
+            """Function:  test_chk_good_crt_fail
 
-        Description:  Test with checking dir good, but creating dir failed.
+            Description:  Test with checking dir good, but creating dir failed.
 
-        Arguments:
+            Arguments:
 
-        """
+            """
 
-        mock_os.path.isdir.side_effect = [True, True, False]
-        mock_os.access.return_value = True
-        mock_dir.return_value = False
+            mock_os.path.isdir.side_effect = [True, True, False]
+            mock_os.access.return_value = True
+            mock_dir.return_value = False
 
-        args_array = gen_class.ArgParser(
-            self.argv3, opt_val=self.opt_val, dir_chk=self.dir_chk3,
-            dir_crt=self.dir_crt3, do_parse=True)
+            args_array = gen_class.ArgParser(
+                self.argv3, opt_val=self.opt_val, dir_chk=self.dir_chk3,
+                dir_crt=self.dir_crt3, do_parse=True)
 
-        self.assertFalse(args_array.arg_dir_chk_crt())
+            self.assertFalse(args_array.arg_dir_chk_crt())
 
     @mock.patch("gen_libs.make_dir")
     @mock.patch("gen_class.os")

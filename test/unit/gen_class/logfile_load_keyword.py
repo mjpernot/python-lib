@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # Classification (U)
 
 """Program:  logfile_load_keyword.py
@@ -81,6 +80,7 @@ class UnitTest(unittest.TestCase):
         log = gen_class.LogFile()
         finst = open(self.input_file2)
         log.load_keyword(finst)
+        finst.close()
 
         self.assertEqual(log.keyword, [])
 
@@ -127,6 +127,7 @@ class UnitTest(unittest.TestCase):
         log = gen_class.LogFile()
         finst = open(self.input_file)
         log.load_keyword(finst)
+        finst.close()
 
         self.assertEqual(log.keyword, self.result_file)
 

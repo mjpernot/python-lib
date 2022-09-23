@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # Classification (U)
 
 """Program:  prt_dict.py
@@ -73,9 +72,11 @@ class UnitTest(unittest.TestCase):
         self.ofile = "test/integration/gen_libs/tmp/test_prt_dict.txt"
         self.basefile = "test/integration/gen_libs/basefiles/prt_dict.txt"
         self.basefile2 = "test/integration/gen_libs/basefiles/prt_dict2.txt"
+        self.basefile23 = "test/integration/gen_libs/basefiles/prt_dict2-3.txt"
         self.basefile3 = "test/integration/gen_libs/basefiles/prt_dict3.txt"
         self.basefile4 = "test/integration/gen_libs/basefiles/prt_dict4.txt"
         self.basefile5 = "test/integration/gen_libs/basefiles/prt_dict5.txt"
+        self.basefile53 = "test/integration/gen_libs/basefiles/prt_dict5-3.txt"
         self.basefile6 = "test/integration/gen_libs/basefiles/prt_dict6.txt"
         self.fname = open(self.ofile, "w")
 
@@ -107,7 +108,11 @@ class UnitTest(unittest.TestCase):
         gen_libs.prt_dict(self.data3, self.fname, indent=self.indent2)
         self.fname.close()
 
-        self.assertTrue(filecmp.cmp(self.basefile5, self.ofile))
+        if sys.version_info < (3, 0):
+            self.assertTrue(filecmp.cmp(self.basefile5, self.ofile))
+
+        else:
+            self.assertTrue(filecmp.cmp(self.basefile53, self.ofile))
 
     def test_indent2(self):
 
@@ -167,7 +172,11 @@ class UnitTest(unittest.TestCase):
         gen_libs.prt_dict(self.data3, self.fname)
         self.fname.close()
 
-        self.assertTrue(filecmp.cmp(self.basefile2, self.ofile))
+        if sys.version_info < (3, 0):
+            self.assertTrue(filecmp.cmp(self.basefile2, self.ofile))
+
+        else:
+            self.assertTrue(filecmp.cmp(self.basefile23, self.ofile))
 
     def test_one_item(self):
 
@@ -193,6 +202,8 @@ class UnitTest(unittest.TestCase):
         Arguments:
 
         """
+
+        self.fname.close()
 
         self.assertFalse(gen_libs.prt_dict(self.data))
 

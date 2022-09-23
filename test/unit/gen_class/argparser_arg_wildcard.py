@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # Classification (U)
 
 """Program:  argparser_arg_wildcard.py
@@ -70,6 +69,7 @@ class UnitTest(unittest.TestCase):
         wild2 = os.path.join(base_dir, "unit*")
         file1 = os.path.join(base_dir, "argparser_arg_wildcard.py")
         file2 = os.path.join(base_dir, "unit_test_run.sh")
+        file3 = os.path.join(base_dir, "unit_test_run3.sh")
 
         self.argv = [p_name]
         self.argv2 = [p_name, "-a", [wild1]]
@@ -88,9 +88,9 @@ class UnitTest(unittest.TestCase):
 
         self.results = {}
         self.results2 = {"-a": [file1]}
-        self.results3 = {"-a": [file1], "-b": [file2]}
-        self.results4 = {"-a": [file1, file2]}
-        self.results5 = {"-a": [file1, file2], "-b": [file2]}
+        self.results3 = {"-a": [file1], "-b": [file2, file3]}
+        self.results4 = {"-a": [file1, file2, file3]}
+        self.results5 = {"-a": [file1, file2, file3], "-b": [file2, file3]}
 
     def test_opt_wildcard_override(self):
 

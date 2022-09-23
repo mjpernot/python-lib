@@ -6,98 +6,98 @@
 
 echo ""
 echo "Unit test:  gen_libs.py"
-test/unit/gen_libs/add_cmd.py
-test/unit/gen_libs/and_is_true.py
-test/unit/gen_libs/bytes_2_readable.py
-test/unit/gen_libs/chk_crt_dir.py
-test/unit/gen_libs/chk_crt_file.py
-test/unit/gen_libs/chk_int.py
-test/unit/gen_libs/chk_perm.py
-test/unit/gen_libs/clear_file.py
-test/unit/gen_libs/compress.py
-test/unit/gen_libs/cp_dir.py
-test/unit/gen_libs/cp_file2.py
-test/unit/gen_libs/cp_file.py
-test/unit/gen_libs/create_cfg_array.py
-test/unit/gen_libs/crt_file_time.py
-test/unit/gen_libs/date_range.py
-test/unit/gen_libs/del_not_and_list.py
-test/unit/gen_libs/del_not_in_list.py
-test/unit/gen_libs/dict_2_list.py
-test/unit/gen_libs/dict_2_std.py
-test/unit/gen_libs/dict_out.py
-test/unit/gen_libs/dir_file_match.py
-test/unit/gen_libs/disk_usage.py
-test/unit/gen_libs/display_data.py
-test/unit/gen_libs/file_2_list.py
-test/unit/gen_libs/file_cleanup.py
-test/unit/gen_libs/file_search_cnt.py
-test/unit/gen_libs/file_search.py
-test/unit/gen_libs/filename_search.py
-test/unit/gen_libs/find_email_addr.py
-test/unit/gen_libs/float_div.py
-test/unit/gen_libs/get_base_dir.py
-test/unit/gen_libs/get_data.py
-test/unit/gen_libs/get_inst.py
-test/unit/gen_libs/get_date.py
-test/unit/gen_libs/get_secs.py
-test/unit/gen_libs/get_time.py
-test/unit/gen_libs/has_whitespace.py
-test/unit/gen_libs/help_func.py
-test/unit/gen_libs/in_list.py
-test/unit/gen_libs/is_add_cmd.py
-test/unit/gen_libs/is_empty_file.py
-test/unit/gen_libs/is_file_text.py
-test/unit/gen_libs/is_missing_lists.py
-test/unit/gen_libs/is_pos_int.py
-test/unit/gen_libs/is_true.py
-test/unit/gen_libs/key_cleaner.py
-test/unit/gen_libs/list_2_dict.py
-test/unit/gen_libs/list_2_str.py
-test/unit/gen_libs/list_dirs.py
-test/unit/gen_libs/list_files.py
-test/unit/gen_libs/list_filter_files.py
-test/unit/gen_libs/load_module.py
-test/unit/gen_libs/make_dir.py
-test/unit/gen_libs/make_md5_hash.py
-test/unit/gen_libs/make_zip.py
-test/unit/gen_libs/merge_data_types.py
-test/unit/gen_libs/merge_two_dicts.py
-test/unit/gen_libs/milli_2_readadble.py
-test/unit/gen_libs/month_days.py
-test/unit/gen_libs/month_delta.py
-test/unit/gen_libs/mv_file.py
-test/unit/gen_libs/mv_file2.py
-test/unit/gen_libs/normalize.py
-test/unit/gen_libs/not_in_list.py
-test/unit/gen_libs/no_std_out.py
-test/unit/gen_libs/octal_to_str.py
-test/unit/gen_libs/openfile.py
-test/unit/gen_libs/pascalize.py
-test/unit/gen_libs/pct_int.py
-test/unit/gen_libs/perm_check.py
-test/unit/gen_libs/print_data.py
-test/unit/gen_libs/print_dict.py
-test/unit/gen_libs/print_list.py
-test/unit/gen_libs/prt_dict.py
-test/unit/gen_libs/prt_lvl.py
-test/unit/gen_libs/prt_msg.py
-test/unit/gen_libs/rename_file.py
-test/unit/gen_libs/rm_dup_list.py
-test/unit/gen_libs/rm_file.py
-test/unit/gen_libs/rm_key.py
-test/unit/gen_libs/rm_newline_list.py
-test/unit/gen_libs/rm_whitespace.py
-test/unit/gen_libs/root_run.py
-test/unit/gen_libs/rotate_files.py
-test/unit/gen_libs/sec_2_hr.py
-test/unit/gen_libs/str_2_list.py
-test/unit/gen_libs/str_2_type.py
-test/unit/gen_libs/touch.py
-test/unit/gen_libs/transpose_dict.py
-test/unit/gen_libs/validate_date.py
-test/unit/gen_libs/validate_int.py
-test/unit/gen_libs/write_file.py
-test/unit/gen_libs/write_file2.py
-test/unit/gen_libs/write_to_log.py
+python test/unit/gen_libs/add_cmd.py
+python test/unit/gen_libs/and_is_true.py
+python test/unit/gen_libs/bytes_2_readable.py
+python test/unit/gen_libs/chk_crt_dir.py
+python test/unit/gen_libs/chk_crt_file.py
+python test/unit/gen_libs/chk_int.py
+python test/unit/gen_libs/chk_perm.py
+python test/unit/gen_libs/clear_file.py
+python test/unit/gen_libs/compress.py
+python test/unit/gen_libs/cp_dir.py
+python test/unit/gen_libs/cp_file2.py
+python test/unit/gen_libs/cp_file.py
+python test/unit/gen_libs/create_cfg_array.py
+python test/unit/gen_libs/crt_file_time.py
+python test/unit/gen_libs/date_range.py
+python test/unit/gen_libs/del_not_and_list.py
+python test/unit/gen_libs/del_not_in_list.py
+python test/unit/gen_libs/dict_2_list.py
+python test/unit/gen_libs/dict_2_std.py
+python test/unit/gen_libs/dict_out.py
+python test/unit/gen_libs/dir_file_match.py
+python test/unit/gen_libs/disk_usage.py
+python test/unit/gen_libs/display_data.py
+python test/unit/gen_libs/file_2_list.py
+python test/unit/gen_libs/file_cleanup.py
+python test/unit/gen_libs/file_search_cnt.py
+python test/unit/gen_libs/file_search.py
+python test/unit/gen_libs/filename_search.py
+python test/unit/gen_libs/find_email_addr.py
+python test/unit/gen_libs/float_div.py
+python test/unit/gen_libs/get_base_dir.py
+python test/unit/gen_libs/get_data.py
+python test/unit/gen_libs/get_inst.py
+python test/unit/gen_libs/get_date.py
+python test/unit/gen_libs/get_secs.py
+python test/unit/gen_libs/get_time.py
+python test/unit/gen_libs/has_whitespace.py
+python test/unit/gen_libs/help_func.py
+python test/unit/gen_libs/in_list.py
+python test/unit/gen_libs/is_add_cmd.py
+python test/unit/gen_libs/is_empty_file.py
+python test/unit/gen_libs/is_file_text.py
+python test/unit/gen_libs/is_missing_lists.py
+python test/unit/gen_libs/is_pos_int.py
+python test/unit/gen_libs/is_true.py
+python test/unit/gen_libs/key_cleaner.py
+python test/unit/gen_libs/list_2_dict.py
+python test/unit/gen_libs/list_2_str.py
+python test/unit/gen_libs/list_dirs.py
+python test/unit/gen_libs/list_files.py
+python test/unit/gen_libs/list_filter_files.py
+python test/unit/gen_libs/load_module.py
+python test/unit/gen_libs/make_dir.py
+python test/unit/gen_libs/make_md5_hash.py
+python test/unit/gen_libs/make_zip.py
+python test/unit/gen_libs/merge_data_types.py
+python test/unit/gen_libs/merge_two_dicts.py
+python test/unit/gen_libs/milli_2_readadble.py
+python test/unit/gen_libs/month_days.py
+python test/unit/gen_libs/month_delta.py
+python test/unit/gen_libs/mv_file.py
+python test/unit/gen_libs/mv_file2.py
+python test/unit/gen_libs/normalize.py
+python test/unit/gen_libs/not_in_list.py
+python test/unit/gen_libs/no_std_out.py
+python test/unit/gen_libs/octal_to_str.py
+python test/unit/gen_libs/openfile.py
+python test/unit/gen_libs/pascalize.py
+python test/unit/gen_libs/pct_int.py
+python test/unit/gen_libs/perm_check.py
+python test/unit/gen_libs/print_data.py
+python test/unit/gen_libs/print_dict.py
+python test/unit/gen_libs/print_list.py
+python test/unit/gen_libs/prt_dict.py
+python test/unit/gen_libs/prt_lvl.py
+python test/unit/gen_libs/prt_msg.py
+python test/unit/gen_libs/rename_file.py
+python test/unit/gen_libs/rm_dup_list.py
+python test/unit/gen_libs/rm_file.py
+python test/unit/gen_libs/rm_key.py
+python test/unit/gen_libs/rm_newline_list.py
+python test/unit/gen_libs/rm_whitespace.py
+python test/unit/gen_libs/root_run.py
+python test/unit/gen_libs/rotate_files.py
+python test/unit/gen_libs/sec_2_hr.py
+python test/unit/gen_libs/str_2_list.py
+python test/unit/gen_libs/str_2_type.py
+python test/unit/gen_libs/touch.py
+python test/unit/gen_libs/transpose_dict.py
+python test/unit/gen_libs/validate_date.py
+python test/unit/gen_libs/validate_int.py
+python test/unit/gen_libs/write_file.py
+python test/unit/gen_libs/write_file2.py
+python test/unit/gen_libs/write_to_log.py
 

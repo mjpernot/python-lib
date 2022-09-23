@@ -32,7 +32,6 @@ import sys
 import os
 import subprocess
 import fcntl
-import sys
 import tempfile
 import logging
 import socket
@@ -45,12 +44,14 @@ import getpass
 import operator
 import glob
 import datetime
+import io
 
 # Third-party
 import gzip
 import json
 import re
 
+# yum==3.4.3 does not work in Python 3
 if sys.version_info < (3, 0):
     import yum
 
@@ -213,7 +214,6 @@ class ArgParser(object):
         parse_multi
         parse_single
         update_arg
-        _file_chk_crt
 
     """
 
@@ -1138,54 +1138,6 @@ class ArgParser(object):
 
         return status, err
 
-    def _file_chk_crt(self, name, option, **kwargs):
-
-        """Method:  _file_chk_crt
-
-        Description:  Private method for ArgParser class.  Will determine if
-            file exists and if not create the file if is in the file create
-            list.
-
-        Arguments:
-            (input) name -> File path and name
-            (input) option -> Option being checked
-            (input) **kwargs:
-                file_crt -> Options that require files to be created
-            (output) status -> True|False - If file exists or file creation
-                is succesful
-
-        """
-
-        file_crt = list(kwargs.get("file_crt", self.file_crt))
-        status = False
-
-        try:
-            fname = open(name, "r")
-            fname.close()
-            status = True
-
-        except IOError as err_msg:
-            (errno, strerror) = err_msg.args
-
-            if option in file_crt and errno == 2:
-
-                try:
-                    fname = open(name, "w")
-                    fname.close()
-                    status = True
-
-                except IOError as err_msg:
-                    (err, strerr) = err_msg.args
-                    print("I/O Error: ({0}): {1}".format(err, strerr))
-                    print("Check option: '{0}', file: '{1}'".
-                          format(option, name))
-
-            else:
-                print("File Error: ({0}): {1}".format(errno, strerror))
-                print("Check option: '{0}', file: '{1}'".format(option, name))
-
-        return status
-
 
 class Daemon(object):
 
@@ -1220,11 +1172,11 @@ class Daemon(object):
         Description:  Initialization of an instance of the Daemon class.
 
         Arguments:
-            (input) pidfile -> Path and name of pidfile for program.
-            (input) stdin -> Standard in setting.
-            (input) stdout -> Standard out setting.
-            (input) stderr -> Standard error setting.
-            (input) argv_list -> List of command line options and values.
+            (input) pidfile -> Path and name of pidfile for program
+            (input) stdin -> Standard in setting
+            (input) stdout -> Standard out setting
+            (input) stderr -> Standard error setting
+            (input) argv_list -> List of command line options and values
 
         """
 
@@ -1289,9 +1241,16 @@ class Daemon(object):
         # Redirect standard file descriptors
         sys.stdout.flush()
         sys.stderr.flush()
-        sdi = file(self.stdin, "r")
-        sdo = file(self.stdout, "a+")
-        sde = file(self.stderr, "a+", 0)
+        sdi = open(self.stdin, "r")
+        sdo = open(self.stdout, "a+")
+
+        # Cannot open unbuffered writes in Python 3
+        if sys.version_info < (3, 0):
+            sde = open(self.stderr, "a+", 0)
+
+        else:
+            sde = open(self.stderr, "a+")
+
         os.dup2(sdi.fileno(), sys.stdin.fileno())
         os.dup2(sdo.fileno(), sys.stdout.fileno())
         os.dup2(sde.fileno(), sys.stderr.fileno())
@@ -1299,7 +1258,8 @@ class Daemon(object):
         # Write pidfile
         atexit.register(self.delpid)
         pid = str(os.getpid())
-        file(self.pidfile, "w+").write("%s\n" % pid)
+        with open(self.pidfile, "w+") as fhdr:
+            fhdr.write(pid + "\n")
 
     def delpid(self):
 
@@ -1325,9 +1285,8 @@ class Daemon(object):
 
         # Check for a pidfile to see if the daemon already runs.
         try:
-            pfile = file(self.pidfile, "r")
-            pid = int(pfile.read().strip())
-            pfile.close()
+            with open(self.pidfile, "r") as pfile:
+                pid = int(pfile.read().strip())
 
         except IOError:
             pid = None
@@ -1353,9 +1312,8 @@ class Daemon(object):
 
         # Get the pid from the pidfile
         try:
-            pfile = file(self.pidfile, "r")
-            pid = int(pfile.read().strip())
-            pfile.close()
+            with open(self.pidfile, "r") as pfile:
+                pid = int(pfile.read().strip())
 
         except IOError:
             pid = None
@@ -1375,14 +1333,14 @@ class Daemon(object):
                 inst.kill(pid, signal.SIGTERM)
                 time.sleep(0.1)
 
-        except OSError as err:
-            err = str(err)
+        except OSError as msg:
+            err = str(msg.args)
             if err.find("No such process") > 0:
                 if os.path.exists(self.pidfile):
                     os.remove(self.pidfile)
 
             else:
-                print(str(err))
+                print(str(msg.args))
                 sys.exit(1)
 
     def restart(self):
@@ -1477,7 +1435,7 @@ class LogFile(object):
         Description:  Find the marker in the loglist array.
 
         Arguments:
-            (input) update -> True|False: Update loglist based on marker found.
+            (input) update -> True|False: Update loglist based on marker found
 
         """
 
@@ -1566,7 +1524,8 @@ class LogFile(object):
 
         """
 
-        if isinstance(data, file):
+        if (sys.version_info < (3, 0) and isinstance(data, file)) \
+           or (sys.version_info > (2, 8) and isinstance(data, io.IOBase)):
             self.ignore.extend(
                 [item.lower().rstrip().rstrip("\n") for item in data])
 
@@ -1590,7 +1549,8 @@ class LogFile(object):
 
         """
 
-        if isinstance(data, file):
+        if (sys.version_info < (3, 0) and isinstance(data, file)) \
+           or (sys.version_info > (2, 8) and isinstance(data, io.IOBase)):
             self.keyword.extend([x.lower().rstrip().rstrip("\n")
                                  for x in data])
 
@@ -1615,7 +1575,10 @@ class LogFile(object):
 
         """
 
-        if isinstance(data, (file, gzip.GzipFile)):
+        if (sys.version_info < (3, 0) \
+           and isinstance(data, (file, gzip.GzipFile))) \
+           or (sys.version_info > (2, 8) \
+           and isinstance(data, (io.IOBase, gzip.GzipFile))):
             self.loglist.extend([x.rstrip().rstrip("\n") for x in data])
 
         elif isinstance(data, list):
@@ -1640,11 +1603,12 @@ class LogFile(object):
         Description:  Load marker entry from object.
 
         Arguments:
-            (input) data -> Holds marker entry as a file or string.
+            (input) data -> Holds marker entry as a file or string
 
         """
 
-        if isinstance(data, file):
+        if (sys.version_info < (3, 0) and isinstance(data, file)) \
+           or (sys.version_info > (2, 8) and isinstance(data, io.IOBase)):
             self.marker = data.readline().rstrip().rstrip("\n")
 
         elif isinstance(data, str):
@@ -1660,11 +1624,12 @@ class LogFile(object):
             "\n" (newlines) will not be split upon in the string operation.
 
         Arguments:
-            (input) data -> Holds marker entry as a file, list, or string.
+            (input) data -> Marker entry as a file handler, list, or string
 
         """
 
-        if isinstance(data, file):
+        if (sys.version_info < (3, 0) and isinstance(data, file)) \
+           or (sys.version_info > (2, 8) and isinstance(data, io.IOBase)):
             self.regex = "|".join(str(x.strip().strip("\n")) for x in data)
 
         elif isinstance(data, list):
@@ -1694,7 +1659,7 @@ class LogFile(object):
         Description:  Set search predicate for keyword search.
 
         Arguments:
-            (input) predicate -> and|or:  Corresponds to all and any functions.
+            (input) predicate -> and|or:  Corresponds to all and any functions
 
         """
 
@@ -1865,6 +1830,7 @@ class ProgramLock(object):
             return
 
         fcntl.lockf(self.f_ptr, fcntl.LOCK_UN)
+        self.f_ptr.close()
 
         if os.path.isfile(self.lock_file):
             os.unlink(self.lock_file)
@@ -2408,14 +2374,15 @@ class Logger(object):
             handle.close()
             self.log.removeHandler(handle)
 
+
 # The package yum==3.4.3 only works with Python 2.7
 if sys.version_info < (3, 0):
     class Yum(yum.YumBase):
 
         """Class:  Yum
 
-        Description:  Class which is a representation for YumBase system class.  A
-            yum object is used as a proxy for using the yum command.
+        Description:  Class which is a representation for YumBase system class.
+            A yum object is used as a proxy for using the yum command.
 
         Methods:
             __init__
@@ -2541,7 +2508,7 @@ if sys.version_info < (3, 0):
                 list.
 
             Arguments:
-                (output) List of packages to be installed/updated in JSON format
+                (output) List of packages for installation in JSON format
 
             """
 

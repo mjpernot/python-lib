@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # Classification (U)
 
 """Program:  logger_log_err.py
@@ -73,8 +72,10 @@ class UnitTest(unittest.TestCase):
         log_file = gen_class.Logger(self.name, self.f_name, level="ERROR")
         log_file.log_err("TEST")
 
-        self.assertEqual(open(self.f_name, 'r').read().count('ERROR TEST'),
-                         1)
+        with open(self.f_name, 'r') as fhdr:
+            cnt = fhdr.read().count('ERROR TEST')
+
+        self.assertEqual(cnt, 1)
 
     def tearDown(self):
 

@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # Classification (U)
 
 """Program:  chk_crt_dir.py
@@ -235,7 +234,10 @@ class UnitTest(unittest.TestCase):
         _, _ = gen_libs.chk_crt_dir(self.d_name, f_hdlr=f_hdlr, no_print=True)
         f_hdlr.close()
 
-        self.assertFalse(err_msg_chk in open(self.f_name).read())
+        with open(self.f_name) as f_hdlr:
+            contents = f_hdlr.read()
+
+        self.assertFalse(err_msg_chk in contents)
 
     def test_print_file(self):
 
