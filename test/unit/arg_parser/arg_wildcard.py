@@ -98,6 +98,8 @@ class UnitTest(unittest.TestCase):
         """
 
         n_array = arg_parser.arg_wildcard(self.args_array8, self.opt_wildcard3)
+        n_array["-b"].sort()
+        self.test_array3["-b"].sort()
 
         self.assertEqual(n_array, self.test_array3)
 
@@ -112,6 +114,8 @@ class UnitTest(unittest.TestCase):
         """
 
         n_array = arg_parser.arg_wildcard(self.args_array7, self.opt_wildcard3)
+        n_array["-b"].sort()
+        self.test_array3["-b"].sort()
 
         self.assertEqual(n_array, self.test_array3)
 
@@ -157,6 +161,8 @@ class UnitTest(unittest.TestCase):
         """
 
         n_array = arg_parser.arg_wildcard(self.args_array3, self.opt_wildcard3)
+        n_array["-b"].sort()
+        self.test_array3["-b"].sort()
 
         self.assertEqual(n_array, self.test_array3)
 
