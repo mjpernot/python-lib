@@ -16,6 +16,7 @@
 # Standard
 import sys
 import os
+import io
 
 if sys.version_info < (2, 7):
     import unittest2 as unittest
@@ -72,7 +73,7 @@ class UnitTest(unittest.TestCase):
         log_file = gen_class.Logger(self.name, self.f_name, level="DEBUG")
         log_file.log_debug("TEST")
 
-        with open(self.f_name, 'r') as fhdr:
+        with io.open(self.f_name, 'r') as fhdr:
             cnt = fhdr.read().count('DEBUG TEST')
 
         self.assertEqual(cnt, 1)

@@ -16,6 +16,7 @@
 # Standard
 import sys
 import os
+import io
 
 if sys.version_info < (2, 7):
     import unittest2 as unittest
@@ -102,8 +103,8 @@ class UnitTest(unittest.TestCase):
         """
 
         log = gen_class.LogFile()
-        finst = open(self.input_file)
-        finst2 = open(self.input_file3)
+        finst = io.open(self.input_file)
+        finst2 = io.open(self.input_file3)
         log.load_loglist(finst)
         log.load_loglist(finst2)
         finst.close()
@@ -185,7 +186,7 @@ class UnitTest(unittest.TestCase):
         """
 
         log = gen_class.LogFile()
-        finst = open(self.input_file2)
+        finst = io.open(self.input_file2)
         log.load_loglist(finst)
         finst.close()
 
@@ -232,7 +233,7 @@ class UnitTest(unittest.TestCase):
         """
 
         log = gen_class.LogFile()
-        finst = open(self.input_file)
+        finst = io.open(self.input_file)
         log.load_loglist(finst)
         finst.close()
 

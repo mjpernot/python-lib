@@ -145,27 +145,27 @@ class UnitTest(unittest.TestCase):
         self.open = FileOpen()
         self.open2 = FileOpen2()
 
-    # Python 3: There is no __builtin__.open module, will work with io.open
-    if sys.version_info < (3, 0):
-        @mock.patch("gen_class.os.path.isfile", mock.Mock(return_value=False))
-        @mock.patch("__builtin__.open")
-        def test_file_crt_override(self, mock_open):
+#    # Python 3: There is no __builtin__.open module, will work with io.open
+#    if sys.version_info < (3, 0):
+    @mock.patch("gen_class.os.path.isfile", mock.Mock(return_value=False))
+    @mock.patch("gen_class.io.open")
+    def test_file_crt_override(self, mock_open):
 
-            """Function:  test_file_crt_override
+        """Function:  test_file_crt_override
 
-            Description:  Test with passing in file_crt to override.
+        Description:  Test with passing in file_crt to override.
 
-            Arguments:
+        Arguments:
 
-            """
+        """
 
-            mock_open.return_value = self.open
+        mock_open.return_value = self.open
 
-            args_array = gen_class.ArgParser(
-                self.argv, opt_val=self.opt_val, file_perm_chk=self.file_chk,
-                file_crt=self.file_crt3, do_parse=True)
+        args_array = gen_class.ArgParser(
+            self.argv, opt_val=self.opt_val, file_perm_chk=self.file_chk,
+            file_crt=self.file_crt3, do_parse=True)
 
-            self.assertTrue(args_array.arg_file_chk(file_crt=self.file_crt))
+        self.assertTrue(args_array.arg_file_chk(file_crt=self.file_crt))
 
     def test_file_chk_override(self):
 
@@ -183,50 +183,50 @@ class UnitTest(unittest.TestCase):
 
         self.assertTrue(args_array.arg_file_chk(file_perm_chk=self.file_chk2))
 
-    # Python 3: There is no __builtin__.open module, will work with io.open
-    if sys.version_info < (3, 0):
-        @mock.patch("gen_class.os.path.isfile", mock.Mock(return_value=False))
-        @mock.patch("__builtin__.open")
-        def test_open_error(self, mock_open):
+#    # Python 3: There is no __builtin__.open module, will work with io.open
+#    if sys.version_info < (3, 0):
+    @mock.patch("gen_class.os.path.isfile", mock.Mock(return_value=False))
+    @mock.patch("gen_class.io.open")
+    def test_open_error(self, mock_open):
 
-            """Function:  test_open_error
+        """Function:  test_open_error
 
-            Description:  Test with open but returns error.
+        Description:  Test with open but returns error.
 
-            Arguments:
+        Arguments:
 
-            """
+        """
 
-            mock_open.return_value = self.open2
+        mock_open.return_value = self.open2
 
-            args_array = gen_class.ArgParser(
-                self.argv, opt_val=self.opt_val, file_perm_chk=self.file_chk,
-                file_crt=self.file_crt, do_parse=True)
+        args_array = gen_class.ArgParser(
+            self.argv, opt_val=self.opt_val, file_perm_chk=self.file_chk,
+            file_crt=self.file_crt, do_parse=True)
 
-            with gen_libs.no_std_out():
-                self.assertFalse(args_array.arg_file_chk())
+        with gen_libs.no_std_out():
+            self.assertFalse(args_array.arg_file_chk())
 
-    # Python 3: There is no __builtin__.open module, will work with io.open
-    if sys.version_info < (3, 0):
-        @mock.patch("gen_class.os.path.isfile", mock.Mock(return_value=False))
-        @mock.patch("__builtin__.open")
-        def test_file_crt_in_list(self, mock_open):
+#    # Python 3: There is no __builtin__.open module, will work with io.open
+#    if sys.version_info < (3, 0):
+    @mock.patch("gen_class.os.path.isfile", mock.Mock(return_value=False))
+    @mock.patch("gen_class.io.open")
+    def test_file_crt_in_list(self, mock_open):
 
-            """Function:  test_file_crt_in_list
+        """Function:  test_file_crt_in_list
 
-            Description:  Test with file_crt with option in list.
+        Description:  Test with file_crt with option in list.
 
-            Arguments:
+        Arguments:
 
-            """
+        """
 
-            mock_open.return_value = self.open
+        mock_open.return_value = self.open
 
-            args_array = gen_class.ArgParser(
-                self.argv, opt_val=self.opt_val, file_perm_chk=self.file_chk,
-                file_crt=self.file_crt, do_parse=True)
+        args_array = gen_class.ArgParser(
+            self.argv, opt_val=self.opt_val, file_perm_chk=self.file_chk,
+            file_crt=self.file_crt, do_parse=True)
 
-            self.assertTrue(args_array.arg_file_chk())
+        self.assertTrue(args_array.arg_file_chk())
 
     @mock.patch("gen_class.os.path.isfile", mock.Mock(return_value=False))
     def test_file_crt_not_in_list(self):
