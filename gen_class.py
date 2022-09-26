@@ -598,7 +598,7 @@ class ArgParser(object):
 
                 elif option in file_crt:
                     try:
-                        fhldr = open(fname, "w")
+                        fhldr = io.open(fname, "w")
                         fhldr.close()
 
                     except IOError as err_msg:
@@ -1241,15 +1241,15 @@ class Daemon(object):
         # Redirect standard file descriptors
         sys.stdout.flush()
         sys.stderr.flush()
-        sdi = open(self.stdin, "r")
-        sdo = open(self.stdout, "a+")
+        sdi = io.open(self.stdin, "r")
+        sdo = io.open(self.stdout, "a+")
 
         # Cannot open unbuffered writes in Python 3
         if sys.version_info < (3, 0):
-            sde = open(self.stderr, "a+", 0)
+            sde = io.open(self.stderr, "a+", 0)
 
         else:
-            sde = open(self.stderr, "a+")
+            sde = io.open(self.stderr, "a+")
 
         os.dup2(sdi.fileno(), sys.stdin.fileno())
         os.dup2(sdo.fileno(), sys.stdout.fileno())
@@ -1258,7 +1258,7 @@ class Daemon(object):
         # Write pidfile
         atexit.register(self.delpid)
         pid = str(os.getpid())
-        with open(self.pidfile, "w+") as fhdr:
+        with io.open(self.pidfile, "w+") as fhdr:
             fhdr.write(pid + "\n")
 
     def delpid(self):
@@ -1285,7 +1285,7 @@ class Daemon(object):
 
         # Check for a pidfile to see if the daemon already runs.
         try:
-            with open(self.pidfile, "r") as pfile:
+            with io.open(self.pidfile, "r") as pfile:
                 pid = int(pfile.read().strip())
 
         except IOError:
@@ -1312,7 +1312,7 @@ class Daemon(object):
 
         # Get the pid from the pidfile
         try:
-            with open(self.pidfile, "r") as pfile:
+            with io.open(self.pidfile, "r") as pfile:
                 pid = int(pfile.read().strip())
 
         except IOError:
@@ -1804,7 +1804,7 @@ class ProgramLock(object):
         self.lock_file = os.path.normpath(tempfile.gettempdir()) + "/" \
             + basename
 
-        self.f_ptr = open(self.lock_file, "w")
+        self.f_ptr = io.open(self.lock_file, "w")
         self.f_ptr.flush()
 
         # Creates a lock on the file, will fail if one is already present.

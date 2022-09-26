@@ -16,6 +16,7 @@
 # Standard
 import sys
 import os
+import io
 
 if sys.version_info < (2, 7):
     import unittest2 as unittest
@@ -60,7 +61,7 @@ class UnitTest(unittest.TestCase):
 
         self.test_path = os.path.join(os.getcwd(), "test/unit/gen_class")
         self.test_file = os.path.join(self.test_path, "test_file.txt")
-        self.f_ptr = open(self.test_file, "w")
+        self.f_ptr = io.open(self.test_file, "w")
         self.tmp_path = os.path.join("/", "tmp")
         self.argv = ["/opt/local/python/ProgramLock_init.py"]
         self.flavor_id = "TEST"
@@ -72,7 +73,7 @@ class UnitTest(unittest.TestCase):
 
     @mock.patch("gen_class.tempfile.gettempdir")
     @mock.patch("gen_class.fcntl.lockf")
-    @mock.patch("gen_class.open")
+    @mock.patch("gen_class.io.open")
     @mock.patch("gen_class.os.path.abspath")
     def test_default(self, mock_path, mock_open, mock_lock, mock_tmp):
 
@@ -97,7 +98,7 @@ class UnitTest(unittest.TestCase):
 
     @mock.patch("gen_class.tempfile.gettempdir")
     @mock.patch("gen_class.fcntl.lockf")
-    @mock.patch("gen_class.open")
+    @mock.patch("gen_class.io.open")
     @mock.patch("gen_class.os.path.abspath")
     def test_flavor(self, mock_path, mock_open, mock_lock, mock_tmp):
 
@@ -122,7 +123,7 @@ class UnitTest(unittest.TestCase):
 
     @mock.patch("gen_class.tempfile.gettempdir")
     @mock.patch("gen_class.fcntl.lockf")
-    @mock.patch("gen_class.open")
+    @mock.patch("gen_class.io.open")
     @mock.patch("gen_class.os.path.abspath")
     def test_lock(self, mock_path, mock_open, mock_lock, mock_tmp):
 
