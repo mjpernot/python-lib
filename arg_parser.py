@@ -39,6 +39,7 @@ import sys
 import os
 import operator
 import glob
+import io
 
 # Local
 import gen_libs
@@ -301,7 +302,7 @@ def arg_file_chk(args_array, file_chk_list, file_crt_list=None):
         for name in tmp_list:
 
             try:
-                fname = open(name, "r")
+                fname = io.open(name, "r")
                 fname.close()
 
             except IOError as err_msg:
@@ -658,7 +659,7 @@ def _file_create(name, option, file_crt_list, errno, strerror, status):
     if option in file_crt_list and errno == 2:
 
         try:
-            fname = open(name, "w")
+            fname = io.open(name, "w")
             fname.close()
 
         # Unable to create file.

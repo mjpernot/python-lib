@@ -116,7 +116,7 @@ class UnitTest(unittest.TestCase):
         self.open = FileOpen()
         self.open2 = FileOpen2()
 
-    @mock.patch("arg_parser.open")
+    @mock.patch("arg_parser.io.open")
     def test_open_fail(self, mock_open):
 
         """Function:  test_open_fail
@@ -135,7 +135,7 @@ class UnitTest(unittest.TestCase):
                                                     self.errno, self.strerror,
                                                     self.exit_flag))
 
-    @mock.patch("arg_parser.open")
+    @mock.patch("arg_parser.io.open")
     def test_open_success(self, mock_open):
 
         """Function:  test_open_success
