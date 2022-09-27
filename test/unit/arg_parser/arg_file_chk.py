@@ -155,7 +155,7 @@ class UnitTest(unittest.TestCase):
         self.open3 = FileOpen3()
 
     @mock.patch("arg_parser._file_create")
-    @mock.patch("arg_parser.io.open")
+    @mock.patch("arg_parser.open")
     def test_second_open_no_error(self, mock_open, mock_crt):
 
         """Function:  test_second_open_no_error
@@ -174,7 +174,7 @@ class UnitTest(unittest.TestCase):
                                                  self.file_crt_list))
 
     @mock.patch("arg_parser._file_create")
-    @mock.patch("arg_parser.io.open")
+    @mock.patch("arg_parser.open")
     def test_second_open_error(self, mock_open, mock_crt):
 
         """Function:  test_second_open_error
@@ -194,7 +194,7 @@ class UnitTest(unittest.TestCase):
                                                     self.file_crt_list))
 
     @mock.patch("arg_parser._file_create")
-    @mock.patch("arg_parser.io.open")
+    @mock.patch("arg_parser.open")
     def test_filecrtlist_in_list(self, mock_open, mock_crt):
 
         """Function:  test_filecrtlist_in_list
@@ -213,7 +213,7 @@ class UnitTest(unittest.TestCase):
                                                  self.file_crt_list))
 
     @mock.patch("arg_parser._file_create")
-    @mock.patch("arg_parser.io.open")
+    @mock.patch("arg_parser.open")
     def test_filecrtlist_not_in_list(self, mock_open, mock_crt):
 
         """Function:  test_filecrtlist_not_in_list
@@ -235,7 +235,7 @@ class UnitTest(unittest.TestCase):
                                                     self.file_crt_list))
 
     @mock.patch("arg_parser._file_create")
-    @mock.patch("arg_parser.io.open")
+    @mock.patch("arg_parser.open")
     def test_filecrtlist_empty_list(self, mock_open, mock_crt):
 
         """Function:  test_filecrtlist_empty_list
@@ -254,7 +254,7 @@ class UnitTest(unittest.TestCase):
                                                     self.file_chk_list, []))
 
     @mock.patch("arg_parser._file_create")
-    @mock.patch("arg_parser.io.open")
+    @mock.patch("arg_parser.open")
     def test_filecrtlist_not_passed(self, mock_open, mock_crt):
 
         """Function:  test_filecrtlist_not_passed
@@ -273,7 +273,7 @@ class UnitTest(unittest.TestCase):
                                                     self.file_chk_list))
 
     @mock.patch("arg_parser._file_create")
-    @mock.patch("arg_parser.io.open")
+    @mock.patch("arg_parser.open")
     def test_first_open_error_two(self, mock_open, mock_crt):
 
         """Function:  test_first_open_error_two
@@ -292,7 +292,7 @@ class UnitTest(unittest.TestCase):
                                                  self.file_crt_list))
 
     @mock.patch("arg_parser._file_create")
-    @mock.patch("arg_parser.io.open")
+    @mock.patch("arg_parser.open")
     def test_first_open_error_ten(self, mock_open, mock_crt):
 
         """Function:  test_first_open_error_ten
@@ -310,7 +310,7 @@ class UnitTest(unittest.TestCase):
             self.assertTrue(arg_parser.arg_file_chk(self.args_array,
                                                     self.file_chk_list))
 
-    @mock.patch("arg_parser.io.open")
+    @mock.patch("arg_parser.open")
     def test_first_open_no_errors(self, mock_open):
 
         """Function:  test_first_open_no_errors
@@ -341,7 +341,7 @@ class UnitTest(unittest.TestCase):
         self.assertFalse(arg_parser.arg_file_chk(self.args_array,
                                                  self.file_chk_list))
 
-    @mock.patch("arg_parser.io.open")
+    @mock.patch("arg_parser.open")
     def test_name_loop_two_items(self, mock_open):
 
         """Function:  test_name_loop_two_items
@@ -357,7 +357,7 @@ class UnitTest(unittest.TestCase):
         self.assertFalse(arg_parser.arg_file_chk(self.args_array,
                                                  self.file_chk_list))
 
-    @mock.patch("arg_parser.io.open")
+    @mock.patch("arg_parser.open")
     def test_name_loop_one_item(self, mock_open):
 
         """Function:  test_name_loop_one_item
@@ -373,7 +373,7 @@ class UnitTest(unittest.TestCase):
         self.assertFalse(arg_parser.arg_file_chk(self.args_array,
                                                  self.file_chk_list))
 
-    @mock.patch("arg_parser.io.open")
+    @mock.patch("arg_parser.open")
     def test_isinstance_is_set(self, mock_open):
 
         """Function:  test_isinstance_is_set
@@ -391,7 +391,7 @@ class UnitTest(unittest.TestCase):
         self.assertFalse(arg_parser.arg_file_chk(self.args_array,
                                                  self.file_chk_list))
 
-    @mock.patch("arg_parser.io.open")
+    @mock.patch("arg_parser.open")
     def test_isinstance_is_string(self, mock_open):
 
         """Function:  test_isinstance_is_string
@@ -409,7 +409,7 @@ class UnitTest(unittest.TestCase):
         self.assertFalse(arg_parser.arg_file_chk(self.args_array,
                                                  self.file_chk_list))
 
-    @mock.patch("arg_parser.io.open")
+    @mock.patch("arg_parser.open")
     def test_isinstance_is_list(self, mock_open):
 
         """Function:  test_isinstance_is_list
@@ -425,7 +425,7 @@ class UnitTest(unittest.TestCase):
         self.assertFalse(arg_parser.arg_file_chk(self.args_array,
                                                  self.file_chk_list))
 
-    @mock.patch("arg_parser.io.open")
+    @mock.patch("arg_parser.open")
     def test_two_match_between_sets(self, mock_open):
 
         """Function:  test_two_match_between_sets
@@ -444,7 +444,7 @@ class UnitTest(unittest.TestCase):
         self.assertFalse(arg_parser.arg_file_chk(self.args_array,
                                                  self.file_chk_list))
 
-    @mock.patch("arg_parser.io.open")
+    @mock.patch("arg_parser.open")
     def test_one_match_between_sets(self, mock_open):
 
         """Function:  test_one_match_between_sets
