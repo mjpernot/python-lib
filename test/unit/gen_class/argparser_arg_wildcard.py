@@ -89,8 +89,12 @@ class UnitTest(unittest.TestCase):
         self.results = {}
         self.results2 = {"-a": [file1]}
         self.results3 = {"-a": [file1], "-b": [file2, file3]}
+        self.results3["-b"].sort()
         self.results4 = {"-a": [file1, file2, file3]}
+        self.results4["-a"].sort()
         self.results5 = {"-a": [file1, file2, file3], "-b": [file2, file3]}
+        self.results5["-a"].sort()
+        self.results5["-b"].sort()
 
     def test_opt_wildcard_override(self):
 
@@ -106,6 +110,7 @@ class UnitTest(unittest.TestCase):
             self.argv7, opt_val=self.opt_val, opt_wildcard=self.opt_wildcard2,
             do_parse=True)
         args_array.arg_wildcard(opt_wildcard=self.opt_wildcard3)
+        args_array.args_array["-b"].sort()
 
         self.assertEqual(args_array.args_array, self.results3)
 
@@ -123,6 +128,7 @@ class UnitTest(unittest.TestCase):
             self.argv8, opt_val=self.opt_val, opt_wildcard=self.opt_wildcard3,
             do_parse=True)
         args_array.arg_wildcard()
+        args_array.args_array["-b"].sort()
 
         self.assertEqual(args_array.args_array, self.results3)
 
@@ -140,6 +146,7 @@ class UnitTest(unittest.TestCase):
             self.argv7, opt_val=self.opt_val, opt_wildcard=self.opt_wildcard3,
             do_parse=True)
         args_array.arg_wildcard()
+        args_array.args_array["-b"].sort()
 
         self.assertEqual(args_array.args_array, self.results3)
 
@@ -194,6 +201,7 @@ class UnitTest(unittest.TestCase):
             self.argv3, opt_val=self.opt_val, opt_wildcard=self.opt_wildcard3,
             do_parse=True)
         args_array.arg_wildcard()
+        args_array.args_array["-b"].sort()
 
         self.assertEqual(args_array.args_array, self.results3)
 
