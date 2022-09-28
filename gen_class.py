@@ -587,9 +587,9 @@ class ArgParser(object):
         status = True
 
         for option in set(self.args_array) & set(file_perm_chk):
-            f_list = list(self.args_array[option])                  \
-                     if isinstance(self.args_array[option], list)   \
-                     else [self.args_array[option]]
+            f_list = list(self.args_array[option])             \
+                if isinstance(self.args_array[option], list)   \
+                else [self.args_array[option]]
 
             for fname in f_list:
                 if os.path.isfile(fname):
@@ -1575,10 +1575,10 @@ class LogFile(object):
 
         """
 
-        if (sys.version_info < (3, 0) \
-           and isinstance(data, (file, gzip.GzipFile))) \
-           or (sys.version_info > (2, 8) \
-           and isinstance(data, (io.IOBase, gzip.GzipFile))):
+        if (sys.version_info < (3, 0) and
+           isinstance(data, (file, gzip.GzipFile))) \
+           or (sys.version_info > (2, 8) and
+           isinstance(data, (io.IOBase, gzip.GzipFile))):
             self.loglist.extend([x.rstrip().rstrip("\n") for x in data])
 
         elif isinstance(data, list):

@@ -6,7 +6,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 ## [2.9.4] - 2022-09-06
 - Updated to work in Python 3 too.
--     Note: gen_class.Yum class will only work in Python 2.7.
+-     Note: gen_class.Yum class will only work in Python 2.7 at this time.
 
 ### Changed
 - gen_libs.make_md5_hash: Added decoding option from byte to string and included encoding check to ensure correct encode is used.
@@ -21,7 +21,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - gen_class.ArgParser: get_args_keys, arg_wildcard: Converted a dict.keys() to a list.
 - gen_class.Daemon: Set class to use the superclass object.
 - gen_class: TimeFormat.\_\_init\_\_, ProgressBar.update: Changed division to floor division.
-- gen_class: Daemon.stop, Daemon.daemonize, Arg_parser.\_file_chk_crt: Modified exception handler to Python 3 format.
+- gen_class: Daemon.stop, Daemon.daemonize: Modified exception handler to Python 3 format.
 - arg_parser.arg_wildcard: Converted a dict.keys() to a list.
 - arg_parser: arg_file_chk, arg_file_chk, \_file_create: Modified exception handler to Python 3 format.
 - gen_libs.merge_data_types:  Replaced basestring with str.
