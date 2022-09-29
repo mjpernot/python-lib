@@ -108,7 +108,6 @@
 
 # Libraries and Global Variables
 from __future__ import print_function
-from __future__ import absolute_import
 
 # Standard
 import subprocess
