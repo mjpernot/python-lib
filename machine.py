@@ -18,7 +18,13 @@ from __future__ import absolute_import
 # Standard
 
 # Local
-import version
+try:
+    from . import version
+except (ValueError, ImportError) as err:
+    msg = err.args
+    if msg[0] == "Attempted relative import in non-package" or \
+       msg[0] == "attempted relative import with no known parent package":
+        import version
 
 __version__ = version.__version__
 

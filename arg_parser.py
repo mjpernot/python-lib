@@ -41,8 +41,15 @@ import operator
 import glob
 
 # Local
-import gen_libs
-import version
+try:
+    from . import gen_libs
+    from . import version
+except (ValueError, ImportError) as err:
+    msg = err.args
+    if msg[0] == "Attempted relative import in non-package" or \
+       msg[0] == "attempted relative import with no known parent package":
+        import gen_libs
+        import version
 
 __version__ = version.__version__
 
