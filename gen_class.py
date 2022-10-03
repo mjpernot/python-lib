@@ -59,10 +59,10 @@ if sys.version_info < (3, 0):
 try:
     from . import gen_libs
     from . import version
+
 except (ValueError, ImportError) as err:
-    msg = err.args
-    if msg[0] == "Attempted relative import in non-package" or \
-       msg[0] == "attempted relative import with no known parent package":
+    if err.args[0] == "Attempted relative import in non-package" or \
+       err.args[0] == "attempted relative import with no known parent package":
         import gen_libs
         import version
 
@@ -609,8 +609,8 @@ class ArgParser(object):
                         fhldr.close()
 
                     except IOError as err_msg:
-                        (err, strerr) = err_msg.args
-                        print("I/O Error: ({0}): {1}".format(err, strerr))
+                        print("I/O Error: ({0}): {1}".format(
+                            err_msg.args[0], err_msg.args[1]))
                         print("Option: '{0}' File: '{1}'".format(option,
                                                                  fname))
                         status = status & False
@@ -934,7 +934,7 @@ class ArgParser(object):
 
         """
 
-        err = None
+        errmsg = None
         status = True
 
         if arg_key in self.args_array:
@@ -942,9 +942,9 @@ class ArgParser(object):
 
         else:
             status = False
-            err = "Arg key does not exists"
+            errmsg = "Arg key does not exists"
 
-        return status, err
+        return status, errmsg
 
     def get_args(self):
 
@@ -1016,18 +1016,18 @@ class ArgParser(object):
 
         """
 
-        err = None
+        errmsg = None
         status = True
         overwrite = kwargs.get("overwrite", False)
 
         if arg_key in self.args_array and not overwrite:
             status = False
-            err = "Key already exists"
+            errmsg = "Key already exists"
 
         else:
             self.args_array[arg_key] = arg_val
 
-        return status, err
+        return status, errmsg
 
     def parse_multi(self, **kwargs):
 
@@ -1131,7 +1131,7 @@ class ArgParser(object):
 
         """
 
-        err = None
+        errmsg = None
         status = True
         insert = kwargs.get("insert", False)
 
@@ -1141,9 +1141,9 @@ class ArgParser(object):
 
         else:
             status = False
-            err = "Arg key does not exists"
+            errmsg = "Arg key does not exists"
 
-        return status, err
+        return status, errmsg
 
 
 class Daemon(object):
@@ -1341,13 +1341,13 @@ class Daemon(object):
                 time.sleep(0.1)
 
         except OSError as msg:
-            err = str(msg.args)
-            if err.find("No such process") > 0:
+            errmsg = str(msg.args)
+            if errmsg.find("No such process") > 0:
                 if os.path.exists(self.pidfile):
                     os.remove(self.pidfile)
 
             else:
-                print(str(msg.args))
+                print(errmsg)
                 sys.exit(1)
 
     def restart(self):
@@ -1582,10 +1582,10 @@ class LogFile(object):
 
         """
 
-        if (sys.version_info < (3, 0) and
-           isinstance(data, (file, gzip.GzipFile))) \
-           or (sys.version_info > (2, 8) and
-           isinstance(data, (io.IOBase, gzip.GzipFile))):
+        if (sys.version_info < (3, 0) and isinstance(
+                data, (file, gzip.GzipFile))) or (
+                    sys.version_info > (2, 8) and isinstance(
+                        data, (io.IOBase, gzip.GzipFile))):
             self.loglist.extend([x.rstrip().rstrip("\n") for x in data])
 
         elif isinstance(data, list):

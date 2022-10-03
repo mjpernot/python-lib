@@ -44,10 +44,10 @@ import glob
 try:
     from . import gen_libs
     from . import version
+
 except (ValueError, ImportError) as err:
-    msg = err.args
-    if msg[0] == "Attempted relative import in non-package" or \
-       msg[0] == "attempted relative import with no known parent package":
+    if err.args[0] == "Attempted relative import in non-package" or \
+       err.args[0] == "attempted relative import with no known parent package":
         import gen_libs
         import version
 
@@ -312,10 +312,9 @@ def arg_file_chk(args_array, file_chk_list, file_crt_list=None):
                 fname.close()
 
             except IOError as err_msg:
-                (errno, strerror) = err_msg.args
-
-                status = _file_create(name, item, file_crt_list, errno,
-                                      strerror, status)
+                status = _file_create(
+                    name, item, file_crt_list, err_msg.args[0],
+                    err_msg.args[1], status)
 
     return status
 
@@ -670,8 +669,8 @@ def _file_create(name, option, file_crt_list, errno, strerror, status):
 
         # Unable to create file.
         except IOError as err_msg:
-            (err, strerr) = err_msg.args
-            print("I/O Error: ({0}): {1}".format(err, strerr))
+            print("I/O Error: ({0}): {1}".format(
+                err_msg.args[0], err_msg.args[1]))
             print("Check option: '{0}', file: '{1}'".format(option, name))
             status = True
 
@@ -703,15 +702,13 @@ def _make_dir(dirname, status):
         os.makedirs(dirname)
 
     except OSError as err_msg:
-        (errno, strerr) = err_msg.args
-
-        if errno == 13 or errno == 17:
-            print("Error:  {0} for {1}".format(strerr, dirname))
+        if err_msg.args[0] == 13 or err_msg.args[0] == 17:
+            print("Error:  {0} for {1}".format(err_msg.args[1], dirname))
             status = True
 
         else:
             print("Error {0}:  Message:  {1} for {2}".format(
-                errno, strerr, dirname))
+                err_msg.args[0], err_msg.args[1], dirname))
             status = True
 
     return status

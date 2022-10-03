@@ -135,10 +135,10 @@ import chardet
 # Local
 try:
     from . import version
+
 except (ValueError, ImportError) as err:
-    msg = err.args
-    if msg[0] == "Attempted relative import in non-package" or \
-       msg[0] == "attempted relative import with no known parent package":
+    if err.args[0] == "Attempted relative import in non-package" or \
+       err.args[0] == "attempted relative import with no known parent package":
         import version
 
 __version__ = version.__version__
@@ -502,7 +502,7 @@ def cp_file(fname, src_dir, dest_dir, new_fname=None):
         shutil.copy2(os.path.join(src_dir, fname), new_fname)
 
     except IOError as err:
-        (errno, errmsg) = err.args
+        errmsg = err.args[1]
         status = False
 
         if errmsg == "No such file or directory":
@@ -1559,13 +1559,12 @@ def make_dir(dirname):
         status = True
 
     except OSError as err:
-        (errno, strerr) = err.args
-        if errno == 13 or errno == 17:
-            print("Error:  {0} for {1}".format(strerr, dirname))
+        if err.args[0] == 13 or err.args[0] == 17:
+            print("Error:  {0} for {1}".format(err.args[1], dirname))
 
         else:
             print("Error {0}:  Message:  {1} for {2}".format(
-                errno, strerr, dirname))
+                err.args[0], err.args[1], dirname))
 
     return status
 
@@ -2457,10 +2456,9 @@ def touch(f_name):
             os.makedirs(base_dir)
 
         except OSError as err:
-            (errno, strerror) = err.args
             status = False
             err_msg = "ERROR: Directory create failure. Reason: %s" \
-                      % (strerror)
+                      % (err.args[1])
 
     if status:
         try:
@@ -2468,9 +2466,8 @@ def touch(f_name):
                 os.utime(f_name, None)
 
         except IOError as err:
-            (errno, strerror) = err.args
             status = False
-            err_msg = "ERROR: File create failure. Reason: %s" % (strerror)
+            err_msg = "ERROR: File create failure. Reason: %s" % (err.args[1])
 
     return status, err_msg
 
