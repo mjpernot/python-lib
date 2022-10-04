@@ -137,9 +137,7 @@ try:
     from . import version
 
 except (ValueError, ImportError) as err:
-    if err.args[0] == "Attempted relative import in non-package" or \
-       err.args[0] == "attempted relative import with no known parent package":
-        import version
+    import version
 
 __version__ = version.__version__
 
