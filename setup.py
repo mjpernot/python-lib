@@ -13,8 +13,6 @@ from __future__ import absolute_import
 import os
 import setuptools
 
-# Third-party
-
 # Local
 import version
 

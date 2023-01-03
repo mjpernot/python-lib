@@ -45,8 +45,6 @@ import operator
 import glob
 import datetime
 import io
-
-# Third-party
 import gzip
 import json
 import re
