@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # Classification (U)
 
 """Program:  get_date.py
@@ -24,7 +23,6 @@ if sys.version_info < (2, 7):
 else:
     import unittest
 
-# Third-party
 import mock
 
 # Local

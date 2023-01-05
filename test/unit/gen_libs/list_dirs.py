@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # Classification (U)
 
 """Program:  list_dirs.py
@@ -22,8 +21,6 @@ if sys.version_info < (2, 7):
     import unittest2 as unittest
 else:
     import unittest
-
-# Third-party
 
 # Local
 sys.path.append(os.getcwd())
@@ -75,8 +72,12 @@ class UnitTest(unittest.TestCase):
         """
 
         os.makedirs(self.dir_1)
+        dirs = gen_libs.list_dirs(self.base_path)
 
-        self.assertEqual(gen_libs.list_dirs(self.base_path), ["list_dir_1"])
+        if "__pycache__" in dirs:
+            dirs.remove("__pycache__")
+
+        self.assertEqual(dirs, ["list_dir_1"])
 
     def test_list_dirs_multi(self):
 
@@ -90,13 +91,15 @@ class UnitTest(unittest.TestCase):
 
         os.makedirs(self.dir_1)
         os.makedirs(self.dir_2)
-
         data_list = gen_libs.list_dirs(self.base_path)
 
+        if "__pycache__" in data_list:
+            data_list.remove("__pycache__")
+
         self.assertTrue(
-            data_list == ["list_dir_1",
-                          "list_dir_2"] or data_list == ["list_dir_2",
-                                                         "list_dir_1"])
+            data_list == [
+                "list_dir_1", "list_dir_2"] or data_list == [
+                    "list_dir_2", "list_dir_1"])
 
     def test_no_dirs(self):
 
@@ -108,7 +111,12 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertEqual(gen_libs.list_dirs(self.base_path), [])
+        dirs = gen_libs.list_dirs(self.base_path)
+
+        if "__pycache__" in dirs:
+            dirs.remove("__pycache__")
+
+        self.assertEqual(dirs, [])
 
     def test_no_path(self):
 

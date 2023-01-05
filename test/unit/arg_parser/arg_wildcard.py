@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # Classification (U)
 
 """Program:  arg_wildcard.py
@@ -22,8 +21,6 @@ if sys.version_info < (2, 7):
     import unittest2 as unittest
 else:
     import unittest
-
-# Third-party
 
 # Local
 sys.path.append(os.getcwd())
@@ -67,6 +64,7 @@ class UnitTest(unittest.TestCase):
         wild2 = os.path.join(base_dir, "unit*")
         file1 = os.path.join(base_dir, "arg_wildcard.py")
         file2 = os.path.join(base_dir, "unit_test_run.sh")
+        file3 = os.path.join(base_dir, "unit_test_run3.sh")
 
         self.args_array = {}
         self.args_array2 = {"-a": [wild1]}
@@ -83,9 +81,9 @@ class UnitTest(unittest.TestCase):
 
         self.test_array = {}
         self.test_array2 = {"-a": [file1]}
-        self.test_array3 = {"-a": [file1], "-b": [file2]}
-        self.test_array4 = {"-a": [file1, file2]}
-        self.test_array5 = {"-a": [file1, file2], "-b": [file2]}
+        self.test_array3 = {"-a": [file1], "-b": [file2, file3]}
+        self.test_array4 = {"-a": [file1, file2, file3]}
+        self.test_array5 = {"-a": [file1, file2, file3], "-b": [file2, file3]}
 
     def test_two_string_wildcard(self):
 
@@ -98,6 +96,8 @@ class UnitTest(unittest.TestCase):
         """
 
         n_array = arg_parser.arg_wildcard(self.args_array8, self.opt_wildcard3)
+        n_array["-b"].sort()
+        self.test_array3["-b"].sort()
 
         self.assertEqual(n_array, self.test_array3)
 
@@ -112,6 +112,8 @@ class UnitTest(unittest.TestCase):
         """
 
         n_array = arg_parser.arg_wildcard(self.args_array7, self.opt_wildcard3)
+        n_array["-b"].sort()
+        self.test_array3["-b"].sort()
 
         self.assertEqual(n_array, self.test_array3)
 
@@ -157,6 +159,8 @@ class UnitTest(unittest.TestCase):
         """
 
         n_array = arg_parser.arg_wildcard(self.args_array3, self.opt_wildcard3)
+        n_array["-b"].sort()
+        self.test_array3["-b"].sort()
 
         self.assertEqual(n_array, self.test_array3)
 

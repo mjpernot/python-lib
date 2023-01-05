@@ -31,6 +31,8 @@
 """
 
 # Libraries and Global Variables
+from __future__ import print_function
+from __future__ import absolute_import
 
 # Standard
 import sys
@@ -39,8 +41,13 @@ import operator
 import glob
 
 # Local
-import gen_libs
-import version
+try:
+    from . import gen_libs
+    from . import version
+
+except (ValueError, ImportError) as err:
+    import gen_libs
+    import version
 
 __version__ = version.__version__
 
@@ -302,10 +309,10 @@ def arg_file_chk(args_array, file_chk_list, file_crt_list=None):
                 fname = open(name, "r")
                 fname.close()
 
-            except IOError as (errno, strerror):
-
-                status = _file_create(name, item, file_crt_list, errno,
-                                      strerror, status)
+            except IOError as err_msg:
+                status = _file_create(
+                    name, item, file_crt_list, err_msg.args[0],
+                    err_msg.args[1], status)
 
     return status
 
@@ -587,11 +594,13 @@ def arg_wildcard(args_array, opt_wildcard):
     opt_wildcard = list(opt_wildcard)
 
     for opt in opt_wildcard:
-        if opt in args_array.keys() and isinstance(args_array[opt], list):
+        if opt in list(args_array.keys()) \
+           and isinstance(args_array[opt], list):
             t_list = [glob.glob(item) for item in args_array[opt]]
             args_array[opt] = [item1 for item2 in t_list for item1 in item2]
 
-        elif opt in args_array.keys() and isinstance(args_array[opt], str):
+        elif opt in list(args_array.keys()) \
+           and isinstance(args_array[opt], str):
             args_array[opt] = glob.glob(args_array[opt])
 
     return args_array
@@ -656,9 +665,10 @@ def _file_create(name, option, file_crt_list, errno, strerror, status):
             fname = open(name, "w")
             fname.close()
 
-        except IOError as (err, strerr):
-            # Unable to create file.
-            print("I/O Error: ({0}): {1}".format(err, strerr))
+        # Unable to create file.
+        except IOError as err_msg:
+            print("I/O Error: ({0}): {1}".format(
+                err_msg.args[0], err_msg.args[1]))
             print("Check option: '{0}', file: '{1}'".format(option, name))
             status = True
 
@@ -689,14 +699,14 @@ def _make_dir(dirname, status):
     try:
         os.makedirs(dirname)
 
-    except OSError as (errno, strerr):
-        if errno == 13 or errno == 17:
-            print("Error:  {0} for {1}".format(strerr, dirname))
+    except OSError as err_msg:
+        if err_msg.args[0] == 13 or err_msg.args[0] == 17:
+            print("Error:  {0} for {1}".format(err_msg.args[1], dirname))
             status = True
 
         else:
             print("Error {0}:  Message:  {1} for {2}".format(
-                errno, strerr, dirname))
+                err_msg.args[0], err_msg.args[1], dirname))
             status = True
 
     return status

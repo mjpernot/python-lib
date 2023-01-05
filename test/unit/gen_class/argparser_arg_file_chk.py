@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # Classification (U)
 
 """Program:  argparser_arg_file_chk.py
@@ -23,7 +22,6 @@ if sys.version_info < (2, 7):
 else:
     import unittest
 
-# Third-party
 import mock
 
 # Local
@@ -147,7 +145,7 @@ class UnitTest(unittest.TestCase):
         self.open2 = FileOpen2()
 
     @mock.patch("gen_class.os.path.isfile", mock.Mock(return_value=False))
-    @mock.patch("__builtin__.open")
+    @mock.patch("gen_class.open")
     def test_file_crt_override(self, mock_open):
 
         """Function:  test_file_crt_override
@@ -183,7 +181,7 @@ class UnitTest(unittest.TestCase):
         self.assertTrue(args_array.arg_file_chk(file_perm_chk=self.file_chk2))
 
     @mock.patch("gen_class.os.path.isfile", mock.Mock(return_value=False))
-    @mock.patch("__builtin__.open")
+    @mock.patch("gen_class.open")
     def test_open_error(self, mock_open):
 
         """Function:  test_open_error
@@ -204,7 +202,7 @@ class UnitTest(unittest.TestCase):
             self.assertFalse(args_array.arg_file_chk())
 
     @mock.patch("gen_class.os.path.isfile", mock.Mock(return_value=False))
-    @mock.patch("__builtin__.open")
+    @mock.patch("gen_class.open")
     def test_file_crt_in_list(self, mock_open):
 
         """Function:  test_file_crt_in_list

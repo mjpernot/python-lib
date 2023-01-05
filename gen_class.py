@@ -24,12 +24,14 @@
 """
 
 # Libraries and Global Variables
+from __future__ import print_function
+from __future__ import absolute_import
 
 # Standard
+import sys
 import os
 import subprocess
 import fcntl
-import sys
 import tempfile
 import logging
 import socket
@@ -42,16 +44,23 @@ import getpass
 import operator
 import glob
 import datetime
-
-# Third-party
+import io
 import gzip
 import json
 import re
-import yum
+
+# yum==3.4.3 does not work in Python 3
+if sys.version_info < (3, 0):
+    import yum
 
 # Local
-import gen_libs
-import version
+try:
+    from . import gen_libs
+    from . import version
+
+except (ValueError, ImportError) as err:
+    import gen_libs
+    import version
 
 __version__ = version.__version__
 
@@ -208,7 +217,6 @@ class ArgParser(object):
         parse_multi
         parse_single
         update_arg
-        _file_chk_crt
 
     """
 
@@ -582,9 +590,9 @@ class ArgParser(object):
         status = True
 
         for option in set(self.args_array) & set(file_perm_chk):
-            f_list = list(self.args_array[option])                  \
-                     if isinstance(self.args_array[option], list)   \
-                     else [self.args_array[option]]
+            f_list = list(self.args_array[option])             \
+                if isinstance(self.args_array[option], list)   \
+                else [self.args_array[option]]
 
             for fname in f_list:
                 if os.path.isfile(fname):
@@ -597,8 +605,8 @@ class ArgParser(object):
                         fhldr.close()
 
                     except IOError as err_msg:
-                        (err, strerr) = err_msg.args
-                        print("I/O Error: ({0}): {1}".format(err, strerr))
+                        print("I/O Error: ({0}): {1}".format(
+                            err_msg.args[0], err_msg.args[1]))
                         print("Option: '{0}' File: '{1}'".format(option,
                                                                  fname))
                         status = status & False
@@ -868,14 +876,14 @@ class ArgParser(object):
         opt_wildcard = list(kwargs.get("opt_wildcard", self.opt_wildcard))
 
         for opt in opt_wildcard:
-            if opt in self.args_array.keys() and \
+            if opt in list(self.args_array.keys()) and \
                isinstance(self.args_array[opt], list):
 
                 t_list = [glob.glob(item) for item in self.args_array[opt]]
                 self.args_array[opt] = [
                     item1 for item2 in t_list for item1 in item2]
 
-            elif opt in self.args_array.keys() and isinstance(
+            elif opt in list(self.args_array.keys()) and isinstance(
                     self.args_array[opt], str):
 
                 self.args_array[opt] = glob.glob(self.args_array[opt])
@@ -922,7 +930,7 @@ class ArgParser(object):
 
         """
 
-        err = None
+        errmsg = None
         status = True
 
         if arg_key in self.args_array:
@@ -930,9 +938,9 @@ class ArgParser(object):
 
         else:
             status = False
-            err = "Arg key does not exists"
+            errmsg = "Arg key does not exists"
 
-        return status, err
+        return status, errmsg
 
     def get_args(self):
 
@@ -958,7 +966,7 @@ class ArgParser(object):
 
         """
 
-        return self.args_array.keys()
+        return list(self.args_array.keys())
 
     def get_val(self, skey, **kwargs):
 
@@ -1004,18 +1012,18 @@ class ArgParser(object):
 
         """
 
-        err = None
+        errmsg = None
         status = True
         overwrite = kwargs.get("overwrite", False)
 
         if arg_key in self.args_array and not overwrite:
             status = False
-            err = "Key already exists"
+            errmsg = "Key already exists"
 
         else:
             self.args_array[arg_key] = arg_val
 
-        return status, err
+        return status, errmsg
 
     def parse_multi(self, **kwargs):
 
@@ -1119,7 +1127,7 @@ class ArgParser(object):
 
         """
 
-        err = None
+        errmsg = None
         status = True
         insert = kwargs.get("insert", False)
 
@@ -1129,58 +1137,12 @@ class ArgParser(object):
 
         else:
             status = False
-            err = "Arg key does not exists"
+            errmsg = "Arg key does not exists"
 
-        return status, err
-
-    def _file_chk_crt(self, name, option, **kwargs):
-
-        """Method:  _file_chk_crt
-
-        Description:  Private method for ArgParser class.  Will determine if
-            file exists and if not create the file if is in the file create
-            list.
-
-        Arguments:
-            (input) name -> File path and name
-            (input) option -> Option being checked
-            (input) **kwargs:
-                file_crt -> Options that require files to be created
-            (output) status -> True|False - If file exists or file creation
-                is succesful
-
-        """
-
-        file_crt = list(kwargs.get("file_crt", self.file_crt))
-        status = False
-
-        try:
-            fname = open(name, "r")
-            fname.close()
-            status = True
-
-        except IOError as (errno, strerror):
-
-            if option in file_crt and errno == 2:
-
-                try:
-                    fname = open(name, "w")
-                    fname.close()
-                    status = True
-
-                except IOError as (err, strerr):
-                    print("I/O Error: ({0}): {1}".format(err, strerr))
-                    print("Check option: '{0}', file: '{1}'".
-                          format(option, name))
-
-            else:
-                print("File Error: ({0}): {1}".format(errno, strerror))
-                print("Check option: '{0}', file: '{1}'".format(option, name))
-
-        return status
+        return status, errmsg
 
 
-class Daemon:
+class Daemon(object):
 
     """Class:  Daemon
 
@@ -1213,11 +1175,11 @@ class Daemon:
         Description:  Initialization of an instance of the Daemon class.
 
         Arguments:
-            (input) pidfile -> Path and name of pidfile for program.
-            (input) stdin -> Standard in setting.
-            (input) stdout -> Standard out setting.
-            (input) stderr -> Standard error setting.
-            (input) argv_list -> List of command line options and values.
+            (input) pidfile -> Path and name of pidfile for program
+            (input) stdin -> Standard in setting
+            (input) stdout -> Standard out setting
+            (input) stderr -> Standard error setting
+            (input) argv_list -> List of command line options and values
 
         """
 
@@ -1256,7 +1218,7 @@ class Daemon:
                 # Exit first parent
                 sys.exit(0)
 
-        except OSError, err:
+        except OSError as err:
             sys.stderr.write("Fork #1 failed: %d (%s)\n" %
                              (err.errno, err.strerror))
             sys.exit(1)
@@ -1274,7 +1236,7 @@ class Daemon:
                 # Exit from second parent
                 sys.exit(0)
 
-        except OSError, err:
+        except OSError as err:
             sys.stderr.write("Fork #2 failed: %d (%s)\n" %
                              (err.errno, err.strerror))
             sys.exit(1)
@@ -1282,9 +1244,16 @@ class Daemon:
         # Redirect standard file descriptors
         sys.stdout.flush()
         sys.stderr.flush()
-        sdi = file(self.stdin, "r")
-        sdo = file(self.stdout, "a+")
-        sde = file(self.stderr, "a+", 0)
+        sdi = open(self.stdin, "r")
+        sdo = open(self.stdout, "a+")
+
+        # Cannot open unbuffered writes in Python 3
+        if sys.version_info < (3, 0):
+            sde = open(self.stderr, "a+", 0)
+
+        else:
+            sde = open(self.stderr, "a+")
+
         os.dup2(sdi.fileno(), sys.stdin.fileno())
         os.dup2(sdo.fileno(), sys.stdout.fileno())
         os.dup2(sde.fileno(), sys.stderr.fileno())
@@ -1292,7 +1261,8 @@ class Daemon:
         # Write pidfile
         atexit.register(self.delpid)
         pid = str(os.getpid())
-        file(self.pidfile, "w+").write("%s\n" % pid)
+        with open(self.pidfile, "w+") as fhdr:
+            fhdr.write(pid + "\n")
 
     def delpid(self):
 
@@ -1318,9 +1288,8 @@ class Daemon:
 
         # Check for a pidfile to see if the daemon already runs.
         try:
-            pfile = file(self.pidfile, "r")
-            pid = int(pfile.read().strip())
-            pfile.close()
+            with open(self.pidfile, "r") as pfile:
+                pid = int(pfile.read().strip())
 
         except IOError:
             pid = None
@@ -1346,9 +1315,8 @@ class Daemon:
 
         # Get the pid from the pidfile
         try:
-            pfile = file(self.pidfile, "r")
-            pid = int(pfile.read().strip())
-            pfile.close()
+            with open(self.pidfile, "r") as pfile:
+                pid = int(pfile.read().strip())
 
         except IOError:
             pid = None
@@ -1368,14 +1336,14 @@ class Daemon:
                 inst.kill(pid, signal.SIGTERM)
                 time.sleep(0.1)
 
-        except OSError, err:
-            err = str(err)
-            if err.find("No such process") > 0:
+        except OSError as msg:
+            errmsg = str(msg.args)
+            if errmsg.find("No such process") > 0:
                 if os.path.exists(self.pidfile):
                     os.remove(self.pidfile)
 
             else:
-                print(str(err))
+                print(errmsg)
                 sys.exit(1)
 
     def restart(self):
@@ -1470,7 +1438,7 @@ class LogFile(object):
         Description:  Find the marker in the loglist array.
 
         Arguments:
-            (input) update -> True|False: Update loglist based on marker found.
+            (input) update -> True|False: Update loglist based on marker found
 
         """
 
@@ -1559,7 +1527,8 @@ class LogFile(object):
 
         """
 
-        if isinstance(data, file):
+        if (sys.version_info < (3, 0) and isinstance(data, file)) \
+           or (sys.version_info > (2, 8) and isinstance(data, io.IOBase)):
             self.ignore.extend(
                 [item.lower().rstrip().rstrip("\n") for item in data])
 
@@ -1583,7 +1552,8 @@ class LogFile(object):
 
         """
 
-        if isinstance(data, file):
+        if (sys.version_info < (3, 0) and isinstance(data, file)) \
+           or (sys.version_info > (2, 8) and isinstance(data, io.IOBase)):
             self.keyword.extend([x.lower().rstrip().rstrip("\n")
                                  for x in data])
 
@@ -1608,7 +1578,10 @@ class LogFile(object):
 
         """
 
-        if isinstance(data, (file, gzip.GzipFile)):
+        if (sys.version_info < (3, 0) and isinstance(
+                data, (file, gzip.GzipFile))) or (
+                    sys.version_info > (2, 8) and isinstance(
+                        data, (io.IOBase, gzip.GzipFile))):
             self.loglist.extend([x.rstrip().rstrip("\n") for x in data])
 
         elif isinstance(data, list):
@@ -1633,11 +1606,12 @@ class LogFile(object):
         Description:  Load marker entry from object.
 
         Arguments:
-            (input) data -> Holds marker entry as a file or string.
+            (input) data -> Holds marker entry as a file or string
 
         """
 
-        if isinstance(data, file):
+        if (sys.version_info < (3, 0) and isinstance(data, file)) \
+           or (sys.version_info > (2, 8) and isinstance(data, io.IOBase)):
             self.marker = data.readline().rstrip().rstrip("\n")
 
         elif isinstance(data, str):
@@ -1653,11 +1627,12 @@ class LogFile(object):
             "\n" (newlines) will not be split upon in the string operation.
 
         Arguments:
-            (input) data -> Holds marker entry as a file, list, or string.
+            (input) data -> Marker entry as a file handler, list, or string
 
         """
 
-        if isinstance(data, file):
+        if (sys.version_info < (3, 0) and isinstance(data, file)) \
+           or (sys.version_info > (2, 8) and isinstance(data, io.IOBase)):
             self.regex = "|".join(str(x.strip().strip("\n")) for x in data)
 
         elif isinstance(data, list):
@@ -1687,7 +1662,7 @@ class LogFile(object):
         Description:  Set search predicate for keyword search.
 
         Arguments:
-            (input) predicate -> and|or:  Corresponds to all and any functions.
+            (input) predicate -> and|or:  Corresponds to all and any functions
 
         """
 
@@ -1748,7 +1723,7 @@ class ProgressBar(object):
         """
 
         total_blocks = self.width
-        filled_blocks = int(round(progress / (100 / float(total_blocks))))
+        filled_blocks = int(round(progress // (100 / float(total_blocks))))
         empty_blocks = total_blocks - filled_blocks
 
         # Compile the progress bar of completed and uncompleted blocks.
@@ -1858,6 +1833,7 @@ class ProgramLock(object):
             return
 
         fcntl.lockf(self.f_ptr, fcntl.LOCK_UN)
+        self.f_ptr.close()
 
         if os.path.isfile(self.lock_file):
             os.unlink(self.lock_file)
@@ -2164,7 +2140,7 @@ class TimeFormat(object):
         """
 
         self.rdtg = datetime.datetime.now()
-        self.msecs = str(self.rdtg.microsecond / 100)
+        self.msecs = str(self.rdtg.microsecond // 100)
         self.delimit = "."
         self.micro = False
         self.thacks = {}
@@ -2402,142 +2378,145 @@ class Logger(object):
             self.log.removeHandler(handle)
 
 
-class Yum(yum.YumBase):
+# The package yum==3.4.3 only works with Python 2.7
+if sys.version_info < (3, 0):
+    class Yum(yum.YumBase):
 
-    """Class:  Yum
+        """Class:  Yum
 
-    Description:  Class which is a representation for YumBase system class.  A
-        yum object is used as a proxy for using the yum command.
+        Description:  Class which is a representation for YumBase system class.
+            A yum object is used as a proxy for using the yum command.
 
-    Methods:
-        __init__
-        get_hostname
-        get_os
-        get_release
-        get_distro
-        fetch_repos
-        fetch_install_pkgs
-        fetch_update_pkgs
-
-    """
-
-    def __init__(self, host_name=None):
-
-        """Method:  __init__
-
-        Description:  Initialization of an instance of the Yum class.
-
-        Arguments:
-            (input) host_name -> Host name of server.
+        Methods:
+            __init__
+            get_hostname
+            get_os
+            get_release
+            get_distro
+            fetch_repos
+            fetch_install_pkgs
+            fetch_update_pkgs
 
         """
 
-        yum.YumBase.__init__(self)
+        def __init__(self, host_name=None):
 
-        if host_name:
-            self.host_name = host_name
+            """Method:  __init__
 
-        else:
-            self.host_name = socket.gethostname()
+            Description:  Initialization of an instance of the Yum class.
 
-        self.os_name = platform.system()
-        self.release = platform.release()
-        self.distro = platform.linux_distribution()
+            Arguments:
+                (input) host_name -> Host name of server
 
-    def get_distro(self):
+            """
 
-        """Method:  get_distro
+            yum.YumBase.__init__(self)
 
-        Description:  Reuturn class' linux_distribution.
+            if host_name:
+                self.host_name = host_name
 
-        Arguments:
-            (output) self.distro -> Linux distribution tuple value.
+            else:
+                self.host_name = socket.gethostname()
 
-        """
+            self.os_name = platform.system()
+            self.release = platform.release()
+            self.distro = platform.linux_distribution()
 
-        return self.distro
+        def get_distro(self):
 
-    def get_hostname(self):
+            """Method:  get_distro
 
-        """Method:  get_hostname
+            Description:  Reuturn class' linux_distribution.
 
-        Description:  Return the class' hostname.
+            Arguments:
+                (output) self.distro -> Linux distribution tuple value
 
-        Arguments:
-            (output) self.host_name -> Server's host name.
+            """
 
-        """
+            return self.distro
 
-        return self.host_name
+        def get_hostname(self):
 
-    def get_os(self):
+            """Method:  get_hostname
 
-        """Method:  get_os
+            Description:  Return the class' hostname.
 
-        Description:  Return the class' OS platform.
+            Arguments:
+                (output) self.host_name -> Server's host name
 
-        Arguments:
-            (output) self.os_name -> Server's Operating system name.
+            """
 
-        """
+            return self.host_name
 
-        return self.os_name
+        def get_os(self):
 
-    def get_release(self):
+            """Method:  get_os
 
-        """Method:  get_release
+            Description:  Return the class' OS platform
 
-        Description:  Return the class' OS release version.
+            Arguments:
+                (output) self.os_name -> Server's Operating system name.
 
-        Arguments:
-            (output) self.release -> Kernel release version.
+            """
 
-        """
+            return self.os_name
 
-        return self.release
+        def get_release(self):
 
-    def fetch_repos(self):
+            """Method:  get_release
 
-        """Method:  fetch_repos
+            Description:  Return the class' OS release version.
 
-        Description:  Return a list of repos.
+            Arguments:
+                (output) self.release -> Kernel release version
 
-        Arguments:
-            (output) List of repositories.
+            """
 
-        """
+            return self.release
 
-        self.doRepoSetup()
+        def fetch_repos(self):
 
-        return [repo.name for repo in self.repos.listEnabled()]
+            """Method:  fetch_repos
 
-    def fetch_install_pkgs(self):
+            Description:  Return a list of repos.
 
-        """Method:  fetch_install_pkgs
+            Arguments:
+                (output) List of repositories
 
-        Description:  Return a dictionary of installed packages in a list.
+            """
 
-        Arguments:
-            (output) List of installed of packages in JSON format.
+            self.doRepoSetup()
 
-        """
+            return [repo.name for repo in self.repos.listEnabled()]
 
-        return [{"package": pkg.name, "ver": pkg.version, "arch": pkg.arch}
-                for pkg in self.rpmdb]
+        def fetch_install_pkgs(self):
 
-    def fetch_update_pkgs(self):
+            """Method:  fetch_install_pkgs
 
-        """Method:  fetch_update_pkgs
+            Description:  Return a dictionary of installed packages in a list.
 
-        Description:  Return a dictionary of packages to be updated in a list.
+            Arguments:
+                (output) List of installed of packages in JSON format
 
-        Arguments:
-            (output) List of packages to be installed/updated in JSON format.
+            """
 
-        """
+            return [{"package": pkg.name, "ver": pkg.version, "arch": pkg.arch}
+                    for pkg in self.rpmdb]
 
-        return [{"package": pkg.name, "ver": pkg.version, "arch": pkg.arch,
-                 "repo": str(getattr(pkg, "repo"))}
-                for pkg in self.doPackageLists(pkgnarrow="updates",
-                                               patterns="",
-                                               ignore_case=True)]
+        def fetch_update_pkgs(self):
+
+            """Method:  fetch_update_pkgs
+
+            Description:  Return a dictionary of packages to be updated in a
+                list.
+
+            Arguments:
+                (output) List of packages for installation in JSON format
+
+            """
+
+            return [{"package": pkg.name, "ver": pkg.version, "arch": pkg.arch,
+                     "repo": str(getattr(pkg, "repo"))}
+                    for pkg in self.doPackageLists(pkgnarrow="updates",
+                                                   patterns="",
+                                                   ignore_case=True)]

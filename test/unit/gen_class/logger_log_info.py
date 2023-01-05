@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # Classification (U)
 
 """Program:  logger_log_info.py
@@ -22,8 +21,6 @@ if sys.version_info < (2, 7):
     import unittest2 as unittest
 else:
     import unittest
-
-# Third-party
 
 # Local
 sys.path.append(os.getcwd())
@@ -73,7 +70,10 @@ class UnitTest(unittest.TestCase):
         log_file = gen_class.Logger(self.name, self.f_name, level="INFO")
         log_file.log_info("TEST")
 
-        self.assertEqual(open(self.f_name, 'r').read().count('INFO TEST'), 1)
+        with open(self.f_name, 'r') as fhdr:
+            cnt = fhdr.read().count('INFO TEST')
+
+        self.assertEqual(cnt, 1)
 
     def tearDown(self):
 

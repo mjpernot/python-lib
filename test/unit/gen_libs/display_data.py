@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # Classification (U)
 
 """Program:  display_data.py
@@ -23,8 +22,6 @@ if sys.version_info < (2, 7):
     import unittest2 as unittest
 else:
     import unittest
-
-# Third-party
 
 # Local
 sys.path.append(os.getcwd())
@@ -108,16 +105,25 @@ class UnitTest(unittest.TestCase):
         self.data5 = {"A": 1, "B": ["a", "b"], "C": 3}
         self.b_name5 = os.path.join(
             os.getcwd(), "test/unit/gen_libs/baseline/display_data_base5.out")
+        self.b_name5_3 = os.path.join(
+            os.getcwd(),
+            "test/unit/gen_libs/baseline/display_data_base5_3.out")
 
-        self.data6 = {"A": 1, "B": ["a", "b"], "C": 3,
-                      "D": {"a": "i", "b": "ii"}}
+        self.data6 = {
+            "A": 1, "B": ["a", "b"], "C": 3, "D": {"a": "i", "b": "ii"}}
         self.b_name6 = os.path.join(
             os.getcwd(), "test/unit/gen_libs/baseline/display_data_base6.out")
+        self.b_name6_3 = os.path.join(
+            os.getcwd(),
+            "test/unit/gen_libs/baseline/display_data_base6_3.out")
 
-        self.data7 = {"A": 1, "B": ["a", "b"], "C": 3,
-                      "D": {"a": "i", "b": "ii"}}
+        self.data7 = {
+            "A": 1, "B": ["a", "b"], "C": 3, "D": {"a": "i", "b": "ii"}}
         self.b_name7 = os.path.join(
             os.getcwd(), "test/unit/gen_libs/baseline/display_data_base7.out")
+        self.b_name7_3 = os.path.join(
+            os.getcwd(),
+            "test/unit/gen_libs/baseline/display_data_base7_3.out")
 
         #######################################################################
 
@@ -134,8 +140,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertTrue(display_data_check(self.b_name1, self.f_name,
-                                           self.data1, level=0))
+        self.assertTrue(
+            display_data_check(self.b_name1, self.f_name, self.data1, level=0))
 
     def test_only_list(self):
 
@@ -148,8 +154,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertTrue(display_data_check(self.b_name2, self.f_name,
-                                           self.data2, level=0))
+        self.assertTrue(
+            display_data_check(self.b_name2, self.f_name, self.data2, level=0))
 
     def test_empty_list(self):
 
@@ -161,8 +167,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertTrue(display_data_check(self.b_name3, self.f_name,
-                                           self.data3, level=0))
+        self.assertTrue(
+            display_data_check(self.b_name3, self.f_name, self.data3, level=0))
 
     def test_only_dict(self):
 
@@ -174,8 +180,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertTrue(display_data_check(self.b_name4, self.f_name,
-                                           self.data4, level=0))
+        self.assertTrue(
+            display_data_check(self.b_name4, self.f_name, self.data4, level=0))
 
     def test_dict_list(self):
 
@@ -187,8 +193,14 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertTrue(display_data_check(self.b_name5, self.f_name,
-                                           self.data5, level=0))
+        if sys.version_info < (3, 0):
+            b_name = self.b_name5
+
+        else:
+            b_name = self.b_name5_3
+
+        self.assertTrue(
+            display_data_check(b_name, self.f_name, self.data5, level=0))
 
     def test_dict_dict(self):
 
@@ -200,8 +212,14 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertTrue(display_data_check(self.b_name6, self.f_name,
-                                           self.data6, level=0))
+        if sys.version_info < (3, 0):
+            b_name = self.b_name6
+
+        else:
+            b_name = self.b_name6_3
+
+        self.assertTrue(
+            display_data_check(b_name, self.f_name, self.data6, level=0))
 
     def test_level_is_one(self):
 
@@ -213,8 +231,14 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertTrue(display_data_check(self.b_name7, self.f_name,
-                                           self.data7, level=1))
+        if sys.version_info < (3, 0):
+            b_name = self.b_name7
+
+        else:
+            b_name = self.b_name7_3
+
+        self.assertTrue(
+            display_data_check(b_name, self.f_name, self.data7, level=1))
 
     def tearDown(self):
 
