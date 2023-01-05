@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # Classification (U)
 
 """Program:  logfile_load_regex.py
@@ -22,8 +21,6 @@ if sys.version_info < (2, 7):
     import unittest2 as unittest
 else:
     import unittest
-
-# Third-party
 
 # Local
 sys.path.append(os.getcwd())
@@ -106,6 +103,7 @@ class UnitTest(unittest.TestCase):
         log = gen_class.LogFile()
         finst = open(self.input_file3)
         log.load_regex(finst)
+        finst.close()
 
         self.assertEqual(log.regex, self.result_str2)
 
@@ -122,6 +120,7 @@ class UnitTest(unittest.TestCase):
         log = gen_class.LogFile()
         finst = open(self.input_file2)
         log.load_regex(finst)
+        finst.close()
 
         self.assertEqual(log.regex, "")
 
@@ -153,6 +152,7 @@ class UnitTest(unittest.TestCase):
         log = gen_class.LogFile()
         finst = open(self.input_file)
         log.load_regex(finst)
+        finst.close()
 
         self.assertEqual(log.regex, self.result_str)
 

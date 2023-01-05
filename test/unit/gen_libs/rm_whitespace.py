@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # Classification (U)
 
 """Program:  rm_whitespace.py
@@ -24,7 +23,6 @@ if sys.version_info < (2, 7):
 else:
     import unittest
 
-# Third-party
 
 # Local
 sys.path.append(os.getcwd())

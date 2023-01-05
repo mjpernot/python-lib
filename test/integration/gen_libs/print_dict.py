@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # Classification (U)
 
 """Program:  print_dict.py
@@ -23,7 +22,6 @@ if sys.version_info < (2, 7):
 else:
     import unittest
 
-# Third-party
 import filecmp
 
 # Local
@@ -74,9 +72,12 @@ class UnitTest(unittest.TestCase):
         self.data2 = {"key1": "value1", "key2": "value2"}
         self.ofile = "test/integration/gen_libs/tmp/test_print_dict.txt"
         self.basefile = "test/integration/gen_libs/basefiles/print_dict.txt"
+        self.basefile3 = "test/integration/gen_libs/basefiles/print_dict3.txt"
         self.mail = gen_class.Mail("to_address", "subject_line")
         self.msg = '{\n    "key2": "value2", \n    "key1": "value1"\n}'
+        self.msg3 = '{\n    "key1": "value1",\n    "key2": "value2"\n}'
         self.msg2 = '{"key2": "value2", "key1": "value1"}'
+        self.msg23 = '{"key1": "value1", "key2": "value2"}'
 
     def test_mail_std2(self):
 
@@ -104,7 +105,11 @@ class UnitTest(unittest.TestCase):
 
         gen_libs.print_dict(self.data2, mail=self.mail, no_std=True)
 
-        self.assertEqual(self.mail.msg, self.msg2)
+        if sys.version_info < (3, 0):
+            self.assertEqual(self.mail.msg, self.msg2)
+
+        else:
+            self.assertEqual(self.mail.msg, self.msg23)
 
     def test_mail_json2(self):
 
@@ -121,7 +126,11 @@ class UnitTest(unittest.TestCase):
                 self.data2, mail=self.mail, json_fmt=True, no_std=True),
             (False, None))
 
-        self.assertEqual(self.mail.msg, self.msg)
+        if sys.version_info < (3, 0):
+            self.assertEqual(self.mail.msg, self.msg)
+
+        else:
+            self.assertEqual(self.mail.msg, self.msg3)
 
     def test_mail_json(self):
 
@@ -136,7 +145,11 @@ class UnitTest(unittest.TestCase):
         gen_libs.print_dict(self.data2, mail=self.mail, json_fmt=True,
                             no_std=True)
 
-        self.assertEqual(self.mail.msg, self.msg)
+        if sys.version_info < (3, 0):
+            self.assertEqual(self.mail.msg, self.msg)
+
+        else:
+            self.assertEqual(self.mail.msg, self.msg3)
 
     def test_non_dict(self):
 
@@ -178,7 +191,11 @@ class UnitTest(unittest.TestCase):
         gen_libs.print_dict(self.data, ofile=self.ofile, json_fmt=True,
                             no_std=True)
 
-        self.assertTrue(filecmp.cmp(self.basefile, self.ofile))
+        if sys.version_info < (3, 0):
+            self.assertTrue(filecmp.cmp(self.basefile, self.ofile))
+
+        else:
+            self.assertTrue(filecmp.cmp(self.basefile3, self.ofile))
 
     def test_set_no_std(self):
 
@@ -220,7 +237,11 @@ class UnitTest(unittest.TestCase):
         gen_libs.print_dict(self.data, ofile=self.ofile, json_fmt=True,
                             no_std=True)
 
-        self.assertTrue(filecmp.cmp(self.basefile, self.ofile))
+        if sys.version_info < (3, 0):
+            self.assertTrue(filecmp.cmp(self.basefile, self.ofile))
+
+        else:
+            self.assertTrue(filecmp.cmp(self.basefile3, self.ofile))
 
     def test_set_ofile2(self):
 

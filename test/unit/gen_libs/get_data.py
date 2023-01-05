@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # Classification (U)
 
 """Program:  get_data.py
@@ -22,8 +21,6 @@ if sys.version_info < (2, 7):
     import unittest2 as unittest
 else:
     import unittest
-
-# Third-party
 
 # Local
 sys.path.append(os.getcwd())
@@ -50,6 +47,7 @@ def compare_list_check(f_name):
 
     f_hdlr = open(f_name, "r")
     test_list = gen_libs.get_data(f_hdlr)
+    f_hdlr.close()
 
     return base_list == test_list
 

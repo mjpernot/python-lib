@@ -4,6 +4,39 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [2.9.4] - 2022-09-06
+- Updated to work in Python 3 too.
+-     Note: gen_class.Yum class will only work in Python 2.7 at this time.
+
+### Changed
+- Changed to use "from . import" or "import" for local modules depending on Python version and environment configuration.
+- gen_libs.make_md5_hash: Added decoding option from byte to string and included encoding check to ensure correct encode is used.
+- gen_class.Daemon: start, stop: Replaced file() call to open() call.
+- gen_class.Daemon.daemonize: Changed file() calls to open() calls and added Python version check to open standard error out with the correct settings.
+- gen_class.LogFile: load_regex, load_marker, load_ignore, load_keyword, load_loglist: Added Python version check and io.IOBase as a isinstance check.
+- gen_class.ProgramLock.\_\_del\_\_: Closed lock file before deleting the file.
+- gen_libs.no_std_out: Added Python version check to run specific code.
+- gen_libs.is_file_text:  Replaced open with io.open, str.translate with bytes.translate, and string.maketrans with a lambda function.
+- gen_libs.file_search_cnt: Replaced single open call with a "with open" loop.
+- gen_class.Yum: Added python version check so class will only work in Python 2.7, yum==3.4.3 does not work in Python 3.
+- gen_class.ArgParser: get_args_keys, arg_wildcard: Converted a dict.keys() to a list.
+- gen_class.Daemon: Set class to use the superclass object.
+- gen_class: TimeFormat.\_\_init\_\_, ProgressBar.update: Changed division to floor division.
+- gen_class: Daemon.stop, Daemon.daemonize: Modified exception handler to Python 3 format.
+- arg_parser.arg_wildcard: Converted a dict.keys() to a list.
+- arg_parser: arg_file_chk, arg_file_chk, \_file_create: Modified exception handler to Python 3 format.
+- gen_libs.merge_data_types:  Replaced basestring with str.
+- gen_libs.is_file_text: Converted results of map() and range() to lists.
+- gen_libs.key_cleaner: Converted results of map() to a list.
+- gen_libs: prt_dict, key_cleaner:  Replaced dict.iteritems with dict.items and converted to a list.
+- gen_libs: get_secs, sec_2_hr, milli_2_readadble: Changed division to floor division.
+- gen_libs: cp_file, make_dir, touch: Modified exception handler to Python 3 format.
+
+### Removed
+- gen_class.ArgParser.\_file_chk_crt method
+- Removed support for Python 2.6
+
+
 ## [2.9.3] - 2022-07-21
 ### Fixed
 - gen_class.ArgParser.arg_file_chk:  Added octal permissions settings to the file checks, also refactored the method to remove the \_file_chk_crt method call.

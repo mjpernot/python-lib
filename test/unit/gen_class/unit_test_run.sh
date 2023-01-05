@@ -5,87 +5,86 @@
 #   is located at.
 
 echo "Unit test: gen_class module"  
-test/unit/gen_class/get_inst.py
-test/unit/gen_class/setup_mail.py
-test/unit/gen_class/argparser_arg_add_def.py
-test/unit/gen_class/argparser_arg_cond_req.py
-test/unit/gen_class/argparser_arg_cond_req_or.py
-test/unit/gen_class/argparser_arg_default.py
-test/unit/gen_class/argparser_arg_dir_chk.py
-test/unit/gen_class/argparser_arg_dir_chk_crt.py
-test/unit/gen_class/argparser_arg_dir_crt.py
-test/unit/gen_class/argparser_arg_exist.py
-test/unit/gen_class/argparser_arg_file_chk.py
-test/unit/gen_class/argparser_arg_noreq_xor.py
-test/unit/gen_class/argparser_arg_parse2.py
-test/unit/gen_class/argparser_arg_require.py
-test/unit/gen_class/argparser_arg_req_or_lst.py
-test/unit/gen_class/argparser_arg_req_xor.py
-test/unit/gen_class/argparser_arg_set_path.py
-test/unit/gen_class/argparser_arg_validate.py
-test/unit/gen_class/argparser_arg_valid_val.py
-test/unit/gen_class/argparser_arg_wildcard.py
-test/unit/gen_class/argparser_arg_xor_dict.py
-test/unit/gen_class/argparser_delete_arg.py
-test/unit/gen_class/argparser_file_chk_crt.py
-test/unit/gen_class/argparser_get_args.py
-test/unit/gen_class/argparser_get_args_keys.py
-test/unit/gen_class/argparser_get_val.py
-test/unit/gen_class/argparser_init.py
-test/unit/gen_class/argparser_insert_arg.py
-test/unit/gen_class/argparser_parse_multi.py
-test/unit/gen_class/argparser_parse_single.py
-test/unit/gen_class/argparser_update_arg.py
-test/unit/gen_class/daemon_delpid.py
-test/unit/gen_class/daemon_init.py
-test/unit/gen_class/daemon_restart.py
-test/unit/gen_class/daemon_start.py
-test/unit/gen_class/logfile_filter_ignore.py
-test/unit/gen_class/logfile_filter_keyword.py
-test/unit/gen_class/logfile_filter_regex.py
-test/unit/gen_class/logfile_find_marker.py
-test/unit/gen_class/logfile_get_marker.py
-test/unit/gen_class/logfile_init.py
-test/unit/gen_class/logfile_load_ignore.py
-test/unit/gen_class/logfile_load_keyword.py
-test/unit/gen_class/logfile_load_loglist.py
-test/unit/gen_class/logfile_load_marker.py
-test/unit/gen_class/logfile_load_regex.py
-test/unit/gen_class/logfile_set_marker.py
-test/unit/gen_class/logfile_set_predicate.py
-test/unit/gen_class/logger_init.py
-test/unit/gen_class/logger_log_close.py
-test/unit/gen_class/logger_log_crit.py
-test/unit/gen_class/logger_log_debug.py
-test/unit/gen_class/logger_log_err.py
-test/unit/gen_class/logger_log_info.py
-test/unit/gen_class/logger_log_warn.py
-test/unit/gen_class/progressbar_init.py
-test/unit/gen_class/progressbar_update.py
-test/unit/gen_class/progressbar_calc_and_update.py
-test/unit/gen_class/singleinstanceexception.py
-test/unit/gen_class/programlock_init.py
-test/unit/gen_class/programlock_del.py
-test/unit/gen_class/system_init.py
-test/unit/gen_class/system_set_host_name.py
-test/unit/gen_class/timeformat_add_format.py
-test/unit/gen_class/timeformat_create_adhoc_hack.py
-test/unit/gen_class/timeformat_create_hack.py
-test/unit/gen_class/timeformat_get_hack.py
-test/unit/gen_class/timeformat_init.py
-test/unit/gen_class/yum_init.py
-test/unit/gen_class/yum_get_hostname.py
-test/unit/gen_class/yum_get_os.py
-test/unit/gen_class/yum_get_distro.py
-test/unit/gen_class/yum_get_release.py
-test/unit/gen_class/yum_fetch_install_pkgs.py
-test/unit/gen_class/yum_fetch_update_pkgs.py
-test/unit/gen_class/mail_init.py
-test/unit/gen_class/mail_add_2_msg.py
-test/unit/gen_class/mail_create_body.py
-test/unit/gen_class/mail_create_subject.py
-test/unit/gen_class/mail_print_email.py
-test/unit/gen_class/mail_read_stdin.py
-test/unit/gen_class/mail_send_mail.py
-test/unit/gen_class/mail_send_mailx.py
+/usr/bin/python2 ./test/unit/gen_class/get_inst.py
+/usr/bin/python2 ./test/unit/gen_class/setup_mail.py
+/usr/bin/python2 ./test/unit/gen_class/argparser_arg_add_def.py
+/usr/bin/python2 ./test/unit/gen_class/argparser_arg_cond_req.py
+/usr/bin/python2 ./test/unit/gen_class/argparser_arg_cond_req_or.py
+/usr/bin/python2 ./test/unit/gen_class/argparser_arg_default.py
+/usr/bin/python2 ./test/unit/gen_class/argparser_arg_dir_chk.py
+/usr/bin/python2 ./test/unit/gen_class/argparser_arg_dir_chk_crt.py
+/usr/bin/python2 ./test/unit/gen_class/argparser_arg_dir_crt.py
+/usr/bin/python2 ./test/unit/gen_class/argparser_arg_exist.py
+/usr/bin/python2 ./test/unit/gen_class/argparser_arg_file_chk.py
+/usr/bin/python2 ./test/unit/gen_class/argparser_arg_noreq_xor.py
+/usr/bin/python2 ./test/unit/gen_class/argparser_arg_parse2.py
+/usr/bin/python2 ./test/unit/gen_class/argparser_arg_require.py
+/usr/bin/python2 ./test/unit/gen_class/argparser_arg_req_or_lst.py
+/usr/bin/python2 ./test/unit/gen_class/argparser_arg_req_xor.py
+/usr/bin/python2 ./test/unit/gen_class/argparser_arg_set_path.py
+/usr/bin/python2 ./test/unit/gen_class/argparser_arg_validate.py
+/usr/bin/python2 ./test/unit/gen_class/argparser_arg_valid_val.py
+/usr/bin/python2 ./test/unit/gen_class/argparser_arg_wildcard.py
+/usr/bin/python2 ./test/unit/gen_class/argparser_arg_xor_dict.py
+/usr/bin/python2 ./test/unit/gen_class/argparser_delete_arg.py
+/usr/bin/python2 ./test/unit/gen_class/argparser_get_args.py
+/usr/bin/python2 ./test/unit/gen_class/argparser_get_args_keys.py
+/usr/bin/python2 ./test/unit/gen_class/argparser_get_val.py
+/usr/bin/python2 ./test/unit/gen_class/argparser_init.py
+/usr/bin/python2 ./test/unit/gen_class/argparser_insert_arg.py
+/usr/bin/python2 ./test/unit/gen_class/argparser_parse_multi.py
+/usr/bin/python2 ./test/unit/gen_class/argparser_parse_single.py
+/usr/bin/python2 ./test/unit/gen_class/argparser_update_arg.py
+/usr/bin/python2 ./test/unit/gen_class/daemon_delpid.py
+/usr/bin/python2 ./test/unit/gen_class/daemon_init.py
+/usr/bin/python2 ./test/unit/gen_class/daemon_restart.py
+/usr/bin/python2 ./test/unit/gen_class/daemon_start.py
+/usr/bin/python2 ./test/unit/gen_class/logfile_filter_ignore.py
+/usr/bin/python2 ./test/unit/gen_class/logfile_filter_keyword.py
+/usr/bin/python2 ./test/unit/gen_class/logfile_filter_regex.py
+/usr/bin/python2 ./test/unit/gen_class/logfile_find_marker.py
+/usr/bin/python2 ./test/unit/gen_class/logfile_get_marker.py
+/usr/bin/python2 ./test/unit/gen_class/logfile_init.py
+/usr/bin/python2 ./test/unit/gen_class/logfile_load_ignore.py
+/usr/bin/python2 ./test/unit/gen_class/logfile_load_keyword.py
+/usr/bin/python2 ./test/unit/gen_class/logfile_load_loglist.py
+/usr/bin/python2 ./test/unit/gen_class/logfile_load_marker.py
+/usr/bin/python2 ./test/unit/gen_class/logfile_load_regex.py
+/usr/bin/python2 ./test/unit/gen_class/logfile_set_marker.py
+/usr/bin/python2 ./test/unit/gen_class/logfile_set_predicate.py
+/usr/bin/python2 ./test/unit/gen_class/logger_init.py
+/usr/bin/python2 ./test/unit/gen_class/logger_log_close.py
+/usr/bin/python2 ./test/unit/gen_class/logger_log_crit.py
+/usr/bin/python2 ./test/unit/gen_class/logger_log_debug.py
+/usr/bin/python2 ./test/unit/gen_class/logger_log_err.py
+/usr/bin/python2 ./test/unit/gen_class/logger_log_info.py
+/usr/bin/python2 ./test/unit/gen_class/logger_log_warn.py
+/usr/bin/python2 ./test/unit/gen_class/progressbar_init.py
+/usr/bin/python2 ./test/unit/gen_class/progressbar_update.py
+/usr/bin/python2 ./test/unit/gen_class/progressbar_calc_and_update.py
+/usr/bin/python2 ./test/unit/gen_class/singleinstanceexception.py
+/usr/bin/python2 ./test/unit/gen_class/programlock_init.py
+/usr/bin/python2 ./test/unit/gen_class/programlock_del.py
+/usr/bin/python2 ./test/unit/gen_class/system_init.py
+/usr/bin/python2 ./test/unit/gen_class/system_set_host_name.py
+/usr/bin/python2 ./test/unit/gen_class/timeformat_add_format.py
+/usr/bin/python2 ./test/unit/gen_class/timeformat_create_adhoc_hack.py
+/usr/bin/python2 ./test/unit/gen_class/timeformat_create_hack.py
+/usr/bin/python2 ./test/unit/gen_class/timeformat_get_hack.py
+/usr/bin/python2 ./test/unit/gen_class/timeformat_init.py
+/usr/bin/python2 ./test/unit/gen_class/yum_init.py
+/usr/bin/python2 ./test/unit/gen_class/yum_get_hostname.py
+/usr/bin/python2 ./test/unit/gen_class/yum_get_os.py
+/usr/bin/python2 ./test/unit/gen_class/yum_get_distro.py
+/usr/bin/python2 ./test/unit/gen_class/yum_get_release.py
+/usr/bin/python2 ./test/unit/gen_class/yum_fetch_install_pkgs.py
+/usr/bin/python2 ./test/unit/gen_class/yum_fetch_update_pkgs.py
+/usr/bin/python2 ./test/unit/gen_class/mail_init.py
+/usr/bin/python2 ./test/unit/gen_class/mail_add_2_msg.py
+/usr/bin/python2 ./test/unit/gen_class/mail_create_body.py
+/usr/bin/python2 ./test/unit/gen_class/mail_create_subject.py
+/usr/bin/python2 ./test/unit/gen_class/mail_print_email.py
+/usr/bin/python2 ./test/unit/gen_class/mail_read_stdin.py
+/usr/bin/python2 ./test/unit/gen_class/mail_send_mail.py
+/usr/bin/python2 ./test/unit/gen_class/mail_send_mailx.py
 
