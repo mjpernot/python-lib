@@ -124,8 +124,6 @@ import collections
 import contextlib
 import io
 import string
-
-# Third party
 import json
 import ast
 import gzip
