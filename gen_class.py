@@ -1149,6 +1149,9 @@ class Daemon(object):
     Description:  Class that creates and runs a Python program as a daemon
         program in include starting, stopping and restarting the process.
 
+    Based on
+    http://www.jejik.com/articles/2007/02/a_simple_unix_linux_daemon_in_python/
+
     Methods:
         __init__
         daemonize
@@ -1202,7 +1205,7 @@ class Daemon(object):
             a pidfile to track the process.
 
         Note:  Will do the UNIX double-fork magic (see Stevens, "Advanced
-            Programming in the UNIX Environment" for details.
+            Programming in the UNIX Environment" for details).
 
         Arguments:
 
@@ -1370,6 +1373,168 @@ class Daemon(object):
         Arguments:
 
         """
+
+
+class Daemon2(object):
+
+    """Class:  Daemon2
+
+    Description:  Class that creates and runs a Python program as a daemon
+        program in include starting, stopping and restarting the process.
+
+    Base on https://gist.github.com/slor/5946334
+
+    Methods:
+        __init__
+        del_pid
+        daemonize
+        get_pid_by_file
+        start
+        stop
+        restart
+        run
+
+    """
+
+    def __init__(self, pid_file, stdout="/var/log/daemon2_default_out.log",
+                 stderr="/var/log/daemon2_default_err.log", argv_list=None):
+
+        """Method:  __init__
+
+        Description:  Initialization of an instance of the Daemon class.
+
+        Arguments:
+            (input) pidfile -> Path and name of pidfile for program
+            (input) stdout -> Standard out file name
+            (input) stderr -> Standard error file name
+            (input) argv_list -> List of command line options and values
+
+        """
+
+        self.stdout = stdout
+        self.stderr = stderr
+        self.pid_file = pid_file
+        self.argv_list = list() if argv_list is None else list(argv_list)
+
+    def del_pid(self):
+
+        """Method:  delpid
+
+        Description:  Remove pidfile from the file system.
+
+        Arguments:
+
+        """
+
+        os.remove(self.pid_file)
+
+    def daemonize(self):
+
+### STOPPED HERE
+        global MASK
+
+        # fork 1 to spin off the child that will spawn the deamon.
+        if os.fork():
+            sys.exit()
+
+        # This is the child.
+        # 1. cd to root for a guarenteed working dir.
+        # 2. clear the session id to clear the controlling TTY.
+        # 3. set the umask so we have access to all files created by the daemon.
+        os.chdir("/")
+        os.setsid()
+        os.umask(0)
+
+        # fork 2 ensures we can't get a controlling ttd.
+        if os.fork():
+            sys.exit()
+
+        # This is a child that can't ever have a controlling TTY.
+        # Now we shut down stdin and point stdout/stderr at log files.
+
+        # stdin
+        with open("/dev/null", "r") as dev_null:
+            os.dup2(dev_null.fileno(), sys.stdin.fileno())
+
+        # stderr - do this before stdout so that errors about setting stdout
+        #   write to the log file.
+        #
+        # Exceptions raised after this point will be written to the log file.
+        sys.stderr.flush()
+
+        with open(self.stderr, "a+", 0) as stderr:
+            os.dup2(stderr.fileno(), sys.stderr.fileno())
+
+        # stdout
+        #
+        # Print statements after this step will not work. Use sys.stdout
+        # instead.
+        sys.stdout.flush()
+
+        with open(self.stdout, "a+", 0) as stdout:
+            os.dup2(stdout.fileno(), sys.stdout.fileno())
+
+        # Write pid file
+        # Before file creation, make sure we'll delete the pid file on exit!
+        atexit.register(self.del_pid)
+        pid = str(os.getpid())
+
+        with open(self.pid_file, "w+") as pid_file:
+            pid_file.write('{0}'.format(pid))
+
+    def get_pid_by_file(self):
+        """ Return the pid read from the pid file. """
+        try:
+            with open(self.pid_file, "r") as pid_file:
+                pid = int(pid_file.read().strip())
+            return pid
+
+        except IOError:
+            return
+
+    def start(self):
+        """ Start the daemon. """
+        print "Starting..."
+
+        if self.get_pid_by_file():
+            print("PID file {0} exists. Is the deamon already running?"
+                  .format(self.pid_file))
+            sys.exit(1)
+
+        self.daemonize()
+        self.run()
+
+    def stop(self):
+        """ Stop the daemon. """
+        print "Stopping..."
+        pid = self.get_pid_by_file()
+
+        if not pid:
+            print("PID file {0} doesn't exist. Is the daemon not running?"
+                  .format(self.pid_file))
+            return
+
+        # Time to kill.
+        try:
+            while 1:
+                os.kill(pid, signal.SIGTERM)
+                time.sleep(0.1)
+
+        except OSError as err:
+            if "No such process" in err.strerror \
+               and os.path.exists(self.pid_file):
+                os.remove(self.pid_file)
+
+            else:
+                print(err)
+                sys.exit(1)
+
+    def restart(self):
+        """ Restart the deamon. """
+        self.stop()
+        self.start()
+
+    def run(self):
 
 
 class LogFile(object):
