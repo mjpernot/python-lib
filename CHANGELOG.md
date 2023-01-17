@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [2.9.5] - 2023-01-17
+- Added new class called Daemon2.
+
+
 ## [2.9.4] - 2022-09-06
 - Updated to work in Python 3 too.
 -     Note: gen_class.Yum class will only work in Python 2.7 at this time.
