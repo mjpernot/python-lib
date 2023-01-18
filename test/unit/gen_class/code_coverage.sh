@@ -48,6 +48,7 @@ coverage run -a --source=gen_class test/unit/gen_class/daemon_delpid.py
 coverage run -a --source=gen_class test/unit/gen_class/daemon_init.py
 coverage run -a --source=gen_class test/unit/gen_class/daemon_restart.py
 coverage run -a --source=gen_class test/unit/gen_class/daemon_start.py
+coverage run -a --source=gen_class test/unit/gen_class/daemon2_init.py
 coverage run -a --source=gen_class test/unit/gen_class/logfile_filter_ignore.py
 coverage run -a --source=gen_class test/unit/gen_class/logfile_filter_keyword.py
 coverage run -a --source=gen_class test/unit/gen_class/logfile_filter_regex.py

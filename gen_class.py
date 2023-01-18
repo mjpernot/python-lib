@@ -1529,7 +1529,7 @@ class Daemon2(object):
 
         """
 
-        print "Starting..."
+        print("Starting...")
 
         if self.get_pid_by_file():
             print("PID file {0} exists. Is the deamon already running?"
@@ -1549,7 +1549,7 @@ class Daemon2(object):
 
         """
 
-        print "Stopping..."
+        print("Stopping...")
         pid = self.get_pid_by_file()
 
         if not pid:

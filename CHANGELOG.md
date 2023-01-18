@@ -7,6 +7,9 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 ## [2.9.5] - 2023-01-17
 - Added new class called Daemon2.
 
+### Added
+- gen_class.Daemon2: Cleaner daemon code than the current Daemon class.
+
 
 ## [2.9.4] - 2022-09-06
 - Updated to work in Python 3 too.
