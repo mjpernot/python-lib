@@ -1430,60 +1430,87 @@ class Daemon2(object):
 
     def daemonize(self):
 
-### STOPPED HERE
+        """Method:  daemonize
+
+        Description:  Fork the program into a background process and create
+            a pidfile to track the process.
+
+        Note:  Will do the UNIX double-fork magic (see Stevens, "Advanced
+            Programming in the UNIX Environment" for details).
+
+        Arguments:
+
+        """
+
         global MASK
 
-        # fork 1 to spin off the child that will spawn the deamon.
+        # Fork 1: Spin off the child that will spawn the deamon
         if os.fork():
             sys.exit()
 
-        # This is the child.
-        # 1. cd to root for a guarenteed working dir.
-        # 2. clear the session id to clear the controlling TTY.
-        # 3. set the umask so we have access to all files created by the daemon.
+        # This is the child process
+        #   Change directory for a guarenteed working dir
+        #   Clear the session id to clear the controlling TTY
+        #   Set the umask so we have access to all files created by the daemon
         os.chdir("/")
         os.setsid()
-        os.umask(0)
+        os.umask(MASK)
 
-        # fork 2 ensures we can't get a controlling ttd.
+        # Fork 2: Ensures we cannot get a controlling ttd
+        #   This is a child that cannot ever have a controlling TTY
         if os.fork():
             sys.exit()
 
-        # This is a child that can't ever have a controlling TTY.
-        # Now we shut down stdin and point stdout/stderr at log files.
-
-        # stdin
+        # Stdin: Shutdown standard in
         with open("/dev/null", "r") as dev_null:
             os.dup2(dev_null.fileno(), sys.stdin.fileno())
 
-        # stderr - do this before stdout so that errors about setting stdout
-        #   write to the log file.
-        #
-        # Exceptions raised after this point will be written to the log file.
+        # Stderr: Point standard error to a log file
+        # Do this before stdout so any errors about setting stdout are
+        #   written to the log file
+        # Exceptions raised after this point will be written to the log file
         sys.stderr.flush()
 
-        with open(self.stderr, "a+", 0) as stderr:
-            os.dup2(stderr.fileno(), sys.stderr.fileno())
+        # Cannot open unbuffered writes in Python 3
+        if sys.version_info < (3, 0):
+            with open(self.stderr, "a+", 0) as stderr:
+                os.dup2(stderr.fileno(), sys.stderr.fileno())
 
-        # stdout
-        #
-        # Print statements after this step will not work. Use sys.stdout
-        # instead.
+        else:
+            with open(self.stderr, "a+") as stderr:
+                os.dup2(stderr.fileno(), sys.stderr.fileno())
+
+        # Stdout: Point standard out to a log file
+        # Print statements after this will not work, use sys.stdout instead
         sys.stdout.flush()
 
-        with open(self.stdout, "a+", 0) as stdout:
-            os.dup2(stdout.fileno(), sys.stdout.fileno())
+        # Cannot open unbuffered writes in Python 3
+        if sys.version_info < (3, 0):
+            with open(self.stdout, "a+", 0) as stdout:
+                os.dup2(stdout.fileno(), sys.stdout.fileno())
 
-        # Write pid file
-        # Before file creation, make sure we'll delete the pid file on exit!
+        else:
+            with open(self.stdout, "a+") as stdout:
+                os.dup2(stdout.fileno(), sys.stdout.fileno())
+
+        # Create pid file and before file creation, make sure to delete the pid
+        #   file on exit
         atexit.register(self.del_pid)
         pid = str(os.getpid())
 
         with open(self.pid_file, "w+") as pid_file:
-            pid_file.write('{0}'.format(pid))
+            pid_file.write("{0}".format(pid))
 
     def get_pid_by_file(self):
-        """ Return the pid read from the pid file. """
+
+        """Method:  get_pid_by_file
+
+        Description:  Return the pid read from the pid file.
+
+        Arguments:
+
+        """
+
         try:
             with open(self.pid_file, "r") as pid_file:
                 pid = int(pid_file.read().strip())
@@ -1493,7 +1520,15 @@ class Daemon2(object):
             return
 
     def start(self):
-        """ Start the daemon. """
+
+        """Method:  start
+
+        Description:  Start the daemon process.
+
+        Arguments:
+
+        """
+
         print "Starting..."
 
         if self.get_pid_by_file():
@@ -1505,7 +1540,15 @@ class Daemon2(object):
         self.run()
 
     def stop(self):
-        """ Stop the daemon. """
+
+        """Method:  stop
+
+        Description:  Kill the daemon process.
+
+        Arguments:
+
+        """
+
         print "Stopping..."
         pid = self.get_pid_by_file()
 
@@ -1514,7 +1557,7 @@ class Daemon2(object):
                   .format(self.pid_file))
             return
 
-        # Time to kill.
+        # Killing the daemon process
         try:
             while 1:
                 os.kill(pid, signal.SIGTERM)
@@ -1530,11 +1573,42 @@ class Daemon2(object):
                 sys.exit(1)
 
     def restart(self):
-        """ Restart the deamon. """
+
+        """Method:  restart
+
+        Description:  Stop and restart the daemon process.
+
+        Arguments:
+
+        """
+
         self.stop()
         self.start()
 
     def run(self):
+
+        """Method:  run
+
+        Description:  Stub method holder, will contain the code to execute.
+            Override this method when subclassing Daemon.  It will be called
+            after the process has been daemonized by start() or restart().
+
+        Example 1: Writes datetime to log file.
+
+            while True:
+                with open(self.stdout, "w") as stdout:
+                    stdout.write(datetime.datetime.now().isoformat() + "\n")
+                time.sleep(1)
+
+        Example 2: Calls outside program with command line options.
+
+            while True:
+                rmq_metadata.main(argv_list=self.argv_list)
+                time.sleep(1)
+
+        Arguments:
+
+        """
 
 
 class LogFile(object):
