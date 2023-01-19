@@ -11,6 +11,7 @@
     Classes:
         ArgParser
         Daemon
+        Daemon2
         LogFile
         ProgressBar
         SingleInstanceException
