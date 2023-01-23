@@ -35,6 +35,7 @@ echo "Unit test: gen_class module"
 /usr/bin/python2 ./test/unit/gen_class/argparser_parse_multi.py
 /usr/bin/python2 ./test/unit/gen_class/argparser_parse_single.py
 /usr/bin/python2 ./test/unit/gen_class/argparser_update_arg.py
+/usr/bin/python2 ./test/unit/gen_class/daemon_daemonize.py
 /usr/bin/python2 ./test/unit/gen_class/daemon_delpid.py
 /usr/bin/python2 ./test/unit/gen_class/daemon_init.py
 /usr/bin/python2 ./test/unit/gen_class/daemon_restart.py

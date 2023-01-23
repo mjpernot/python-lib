@@ -1,11 +1,11 @@
 # Classification (U)
 
-"""Program:  daemon2_daemonize.py
+"""Program:  daemon_daemonize.py
 
-    Description:  Unit testing of Daemon2.daemonize in gen_class.py.
+    Description:  Unit testing of Daemon.daemonize in gen_class.py.
 
     Usage:
-        test/unit/gen_class/daemon2_daemonize.py
+        test/unit/gen_class/daemon_daemonize.py
 
     Arguments:
 
@@ -51,11 +51,16 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.stderr = "test/unit/gen_class/tmp/daemonize2_stderr.txt"
-        self.stdout = "test/unit/gen_class/tmp/daemonize2_stdout.txt"
-        self.pid_file = "test/unit/gen_class/tmp/daemonize2_pid_file.txt"
-        self.daemon = gen_class.Daemon2(
-            self.pid_file, stdout=self.stdout, stderr=self.stderr)
+        self.stdin = "test/unit/gen_class/tmp/daemonize_stdin.txt"
+        self.stderr = "test/unit/gen_class/tmp/daemonize_stderr.txt"
+        self.stdout = "test/unit/gen_class/tmp/daemonize_stdout.txt"
+        self.pid_file = "test/unit/gen_class/tmp/daemonize_pid_file.txt"
+        self.daemon = gen_class.Daemon(
+            self.pid_file, stdin=self.stdin, stdout=self.stdout,
+            stderr=self.stderr)
+
+        with open(self.stdin, "w") as pfile:
+            pfile.write("\n")
 
     @mock.patch("os.umask", mock.Mock(return_value=True))
     @mock.patch("os.setsid", mock.Mock(return_value=True))
@@ -73,7 +78,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_fork.side_effect = [False, False]
+        mock_fork.side_effect = [0, 0]
 
         self.assertFalse(self.daemon.daemonize())
 
@@ -95,6 +100,9 @@ class UnitTest(unittest.TestCase):
 
         if os.path.isfile(self.pid_file):
             os.remove(self.pid_file)
+
+        if os.path.isfile(self.stdin):
+            os.remove(self.stdin)
 
 
 if __name__ == "__main__":

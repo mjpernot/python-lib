@@ -44,6 +44,7 @@ coverage run -a --source=gen_class test/unit/gen_class/argparser_insert_arg.py
 coverage run -a --source=gen_class test/unit/gen_class/argparser_parse_multi.py
 coverage run -a --source=gen_class test/unit/gen_class/argparser_parse_single.py
 coverage run -a --source=gen_class test/unit/gen_class/argparser_update_arg.py
+coverage run -a --source=gen_class test/unit/gen_class/daemon_daemonize.py
 coverage run -a --source=gen_class test/unit/gen_class/daemon_delpid.py
 coverage run -a --source=gen_class test/unit/gen_class/daemon_init.py
 coverage run -a --source=gen_class test/unit/gen_class/daemon_restart.py
