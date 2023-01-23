@@ -171,6 +171,7 @@ pipeline {
                 /usr/bin/python2 ./test/unit/gen_class/daemon_restart.py
                 /usr/bin/python2 ./test/unit/gen_class/daemon_start.py
                 /usr/bin/python2 ./test/unit/gen_class/daemon2_init.py
+                /usr/bin/python2 ./test/unit/gen_class/daemon2_daemonize.py
                 /usr/bin/python2 ./test/unit/gen_class/daemon2_del_pid.py
                 /usr/bin/python2 ./test/unit/gen_class/daemon2_restart.py
                 /usr/bin/python2 ./test/unit/gen_class/daemon2_start.py

@@ -40,6 +40,11 @@ echo "Unit test: gen_class module"
 /usr/bin/python2 ./test/unit/gen_class/daemon_restart.py
 /usr/bin/python2 ./test/unit/gen_class/daemon_start.py
 /usr/bin/python2 ./test/unit/gen_class/daemon2_init.py
+/usr/bin/python2 ./test/unit/gen_class/daemon2_daemonize.py
+/usr/bin/python2 ./test/unit/gen_class/daemon2_del_pid.py
+/usr/bin/python2 ./test/unit/gen_class/daemon2_restart.py
+/usr/bin/python2 ./test/unit/gen_class/daemon2_start.py
+/usr/bin/python2 ./test/unit/gen_class/daemon2_stop.py
 /usr/bin/python2 ./test/unit/gen_class/logfile_filter_ignore.py
 /usr/bin/python2 ./test/unit/gen_class/logfile_filter_keyword.py
 /usr/bin/python2 ./test/unit/gen_class/logfile_filter_regex.py

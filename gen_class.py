@@ -1466,9 +1466,6 @@ class Daemon2(object):
         with open("/dev/null", "r") as dev_null:
             os.dup2(dev_null.fileno(), sys.stdin.fileno())
 
-STOPPED HERE
-        return
-
         # Stderr: Point standard error to a log file
         # Do this before stdout so any errors about setting stdout are
         #   written to the log file
