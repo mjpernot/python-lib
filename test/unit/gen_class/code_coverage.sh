@@ -30,7 +30,6 @@ coverage run -a --source=gen_class test/unit/gen_class/argparser_arg_valid_val.p
 coverage run -a --source=gen_class test/unit/gen_class/argparser_arg_wildcard.py
 coverage run -a --source=gen_class test/unit/gen_class/argparser_arg_xor_dict.py
 coverage run -a --source=gen_class test/unit/gen_class/argparser_delete_arg.py
-coverage run -a --source=gen_class test/unit/gen_class/argparser_file_chk_crt.py
 coverage run -a --source=gen_class test/unit/gen_class/timeformat_add_format.py
 coverage run -a --source=gen_class test/unit/gen_class/timeformat_create_adhoc_hack.py
 coverage run -a --source=gen_class test/unit/gen_class/timeformat_create_hack.py

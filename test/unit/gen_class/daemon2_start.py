@@ -22,6 +22,7 @@ import mock
 # Local
 sys.path.append(os.getcwd())
 import gen_class
+import gen_libs
 import version
 
 __version__ = version.__version__
@@ -71,7 +72,8 @@ class UnitTest(unittest.TestCase):
 
         mock_write.write.return_value = True
 
-        self.assertFalse(self.daemon2.start())
+        with gen_libs.no_std_out():
+            self.assertFalse(self.daemon2.start())
 
     @mock.patch("sys.exit", mock.Mock(return_value=True))
     @mock.patch("gen_class.Daemon2.daemonize", mock.Mock(return_value=True))
@@ -89,7 +91,8 @@ class UnitTest(unittest.TestCase):
 
         mock_write.write.return_value = True
 
-        self.assertFalse(self.daemon.start())
+        with gen_libs.no_std_out():
+            self.assertFalse(self.daemon2.start())
 
 
 if __name__ == "__main__":
