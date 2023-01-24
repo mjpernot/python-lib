@@ -48,6 +48,7 @@ coverage run -a --source=gen_class test/unit/gen_class/daemon_delpid.py
 coverage run -a --source=gen_class test/unit/gen_class/daemon_init.py
 coverage run -a --source=gen_class test/unit/gen_class/daemon_restart.py
 coverage run -a --source=gen_class test/unit/gen_class/daemon_start.py
+coverage run -a --source=gen_class test/unit/gen_class/daemon_stop.py
 coverage run -a --source=gen_class test/unit/gen_class/daemon2_init.py
 coverage run -a --source=gen_class test/unit/gen_class/daemon2_daemonize.py
 coverage run -a --source=gen_class test/unit/gen_class/daemon2_del_pid.py
