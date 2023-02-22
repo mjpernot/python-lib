@@ -7,8 +7,14 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 ## [2.9.5] - 2023-01-17
 - Added new class called Daemon2.
 
+### Fixed
+- gen_class.TimeFormat:  Moved initial time hack from \_\_init\_\_ to create_adhoc_hack method.
+
 ### Added
-- gen_class.Daemon2: Cleaner daemon code than the current Daemon class.
+- gen_class.Daemon2: Cleaner daemon code than the current Daemon class and works better in Python 3.
+
+### Changed
+- gen_class.TimeFormat.\_\_init\_\_: Added two new pre-defined data formats.
 
 
 ## [2.9.4] - 2022-09-06

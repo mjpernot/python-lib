@@ -2345,9 +2345,11 @@ class TimeFormat(object):
 
     Notes:
         Pre-defined time format expressions:
-            Time Expression     Reference   Description
-            %Y%m%d              ymd         YearMonthDay
-            %d%m%Y              dmy         DayMonthYear
+            Reference   Time Expression
+            ymd         %Y%m%d
+            dmy         %d%m%Y
+            zulu        %Y-%m-%dT%H:%M:%SZ
+            dtg         %Y%m%d_%H%M%S
 
         Most common time format variables:
             %Y  Four digit year
@@ -2379,14 +2381,15 @@ class TimeFormat(object):
 
         """
 
-        self.rdtg = datetime.datetime.now()
-        self.msecs = str(self.rdtg.microsecond // 100)
         self.delimit = "."
         self.micro = False
         self.thacks = {}
         self.tformats = {
             "ymd": {"format": "%Y%m%d", "del": "", "micro": False},
-            "dmy": {"format": "%d%m%Y", "del": "", "micro": False}}
+            "dmy": {"format": "%d%m%Y", "del": "", "micro": False},
+            "zulu": {
+                "format": "%Y-%m-%dT%H:%M:%SZ", "del": "", "micro": False},
+            "dtg": {"format": "%Y%m%d_%H%M%S", "del": "", "micro": False}}
 
     def add_format(self, tformat, texpr, **kwargs):
 
@@ -2423,11 +2426,12 @@ class TimeFormat(object):
 
         """
 
-        ext = kwargs.get("delimit", self.delimit) + self.msecs \
+        rdtg = datetime.datetime.now()
+        msecs = str(rdtg.microsecond // 100)
+        ext = kwargs.get("delimit", self.delimit) + msecs \
             if kwargs.get("micro", self.micro) else ""
 
-        self.thacks[tformat] = datetime.datetime.strftime(
-            self.rdtg, texpr) + ext
+        self.thacks[tformat] = datetime.datetime.strftime(rdtg, texpr) + ext
 
     def create_hack(self, tformat):
 
