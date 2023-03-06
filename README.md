@@ -6,18 +6,11 @@
 
 
 ### This README file is broken down into the following sections:
- *  Prerequisites
  *  Installation
     - Pip Installation
  *  Testing
     - Unit
     - Integration
-
-
-# Prerequisites:
-  * List of Linux packages that need to be installed on the server.
-    - git
-    - python-pip
 
 
 # Installation
