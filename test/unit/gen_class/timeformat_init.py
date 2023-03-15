@@ -16,12 +16,7 @@
 # Standard
 import sys
 import os
-import datetime
-
-if sys.version_info < (2, 7):
-    import unittest2 as unittest
-else:
-    import unittest
+import unittest
 
 # Local
 sys.path.append(os.getcwd())
@@ -39,8 +34,6 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
-        test_rdtg
-        test_msecs
         test_delimit
         test_micro
         test_thacks
@@ -64,31 +57,10 @@ class UnitTest(unittest.TestCase):
         self.thacks = dict()
         self.tformats = {
             "ymd": {"format": "%Y%m%d", "del": "", "micro": False},
-            "dmy": {"format": "%d%m%Y", "del": "", "micro": False}}
-
-    def test_rdtg(self):
-
-        """Function:  test_rdtg
-
-        Description:  Test the rdtg attribute.
-
-        Arguments:
-
-        """
-
-        self.assertTrue(isinstance(self.tform.rdtg, datetime.datetime))
-
-    def test_msecs(self):
-
-        """Function:  test_msecs
-
-        Description:  Test the msecs attribute.
-
-        Arguments:
-
-        """
-
-        self.assertTrue(isinstance(self.tform.msecs, str))
+            "dmy": {"format": "%d%m%Y", "del": "", "micro": False},
+            "zulu": {
+                "format": "%Y-%m-%dT%H:%M:%SZ", "del": "", "micro": False},
+            "dtg": {"format": "%Y%m%d_%H%M%S", "del": "", "micro": False}}
 
     def test_delimit(self):
 

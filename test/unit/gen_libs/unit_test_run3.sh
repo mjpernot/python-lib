@@ -91,6 +91,7 @@ echo "Unit test:  gen_libs.py"
 /usr/bin/python3 ./test/unit/gen_libs/root_run.py
 /usr/bin/python3 ./test/unit/gen_libs/rotate_files.py
 /usr/bin/python3 ./test/unit/gen_libs/sec_2_hr.py
+/usr/bin/python3 ./test/unit/gen_libs/str_type.py
 /usr/bin/python3 ./test/unit/gen_libs/str_2_list.py
 /usr/bin/python3 ./test/unit/gen_libs/str_2_type.py
 /usr/bin/python3 ./test/unit/gen_libs/touch.py
