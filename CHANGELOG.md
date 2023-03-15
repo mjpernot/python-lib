@@ -11,6 +11,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - gen_class.TimeFormat:  Moved initial time hack from \_\_init\_\_ to create_adhoc_hack method.
 
 ### Added
+- gen_libs.str_types: Returns basestring if pre-Python 3 or string if Python 3.
 - gen_class.Daemon2: Cleaner daemon code than the current Daemon class and works better in Python 3.
 
 ### Changed
