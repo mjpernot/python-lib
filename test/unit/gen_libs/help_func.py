@@ -70,7 +70,7 @@ class UnitTest(unittest.TestCase):
         self.args_array3 = {"-v": True}
         self.args_array4 = {"-v": True, "-h": True}
         self.version = "1.0.0"
-        self.func_name = holder
+        self.funct_names = holder
 
     def test_help_option(self):
 
@@ -82,8 +82,9 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertTrue(gen_libs.help_func(self.args_array2, self.version,
-                                           self.func_name))
+        self.assertTrue(
+            gen_libs.help_func(
+                self.args_array2, self.version, self.funct_names))
 
     def test_version_option(self):
 
@@ -96,8 +97,9 @@ class UnitTest(unittest.TestCase):
         """
 
         with gen_libs.no_std_out():
-            self.assertTrue(gen_libs.help_func(self.args_array3, self.version,
-                                               self.func_name))
+            self.assertTrue(
+                gen_libs.help_func(
+                    self.args_array3, self.version, self.funct_names))
 
     def test_both_options(self):
 
@@ -110,8 +112,9 @@ class UnitTest(unittest.TestCase):
         """
 
         with gen_libs.no_std_out():
-            self.assertTrue(gen_libs.help_func(self.args_array4, self.version,
-                                               self.func_name))
+            self.assertTrue(
+                gen_libs.help_func(
+                    self.args_array4, self.version, self.funct_names))
 
     def test_no_options(self):
 
@@ -123,8 +126,9 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertFalse(gen_libs.help_func(self.args_array, self.version,
-                                            self.func_name))
+        self.assertFalse(
+            gen_libs.help_func(
+                self.args_array, self.version, self.funct_names))
 
 
 if __name__ == "__main__":
