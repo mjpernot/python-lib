@@ -11,6 +11,7 @@
     Classes:
         ArgParser
         Daemon
+        Daemon2
         LogFile
         ProgressBar
         SingleInstanceException
@@ -1149,6 +1150,9 @@ class Daemon(object):
     Description:  Class that creates and runs a Python program as a daemon
         program in include starting, stopping and restarting the process.
 
+    Based on
+    http://www.jejik.com/articles/2007/02/a_simple_unix_linux_daemon_in_python/
+
     Methods:
         __init__
         daemonize
@@ -1202,7 +1206,7 @@ class Daemon(object):
             a pidfile to track the process.
 
         Note:  Will do the UNIX double-fork magic (see Stevens, "Advanced
-            Programming in the UNIX Environment" for details.
+            Programming in the UNIX Environment" for details).
 
         Arguments:
 
@@ -1366,6 +1370,243 @@ class Daemon(object):
         Description:  Stub method holder, will contain the code to execute.
             Override this method when subclassing Daemon.  It will be called
             after the process has been daemonized by start() or restart().
+
+        Arguments:
+
+        """
+
+
+class Daemon2(object):
+
+    """Class:  Daemon2
+
+    Description:  Class that creates and runs a Python program as a daemon
+        program in include starting, stopping and restarting the process.
+
+    Base on https://gist.github.com/slor/5946334
+
+    Methods:
+        __init__
+        del_pid
+        daemonize
+        get_pid_by_file
+        start
+        stop
+        restart
+        run
+
+    """
+
+    def __init__(self, pid_file, stdout="/var/log/daemon2_default_out.log",
+                 stderr="/var/log/daemon2_default_err.log", argv_list=None):
+
+        """Method:  __init__
+
+        Description:  Initialization of an instance of the Daemon class.
+
+        Arguments:
+            (input) pidfile -> Path and name of pidfile for program
+            (input) stdout -> Standard out file name
+            (input) stderr -> Standard error file name
+            (input) argv_list -> List of command line options and values
+
+        """
+
+        self.stdout = stdout
+        self.stderr = stderr
+        self.pid_file = pid_file
+        self.argv_list = list() if argv_list is None else list(argv_list)
+
+    def del_pid(self):
+
+        """Method:  delpid
+
+        Description:  Remove pidfile from the file system.
+
+        Arguments:
+
+        """
+
+        os.remove(self.pid_file)
+
+    def daemonize(self):
+
+        """Method:  daemonize
+
+        Description:  Fork the program into a background process and create
+            a pidfile to track the process.
+
+        Note:  Will do the UNIX double-fork magic (see Stevens, "Advanced
+            Programming in the UNIX Environment" for details).
+
+        Arguments:
+
+        """
+
+        global MASK
+
+        # Fork 1: Spin off the child that will spawn the deamon
+        if os.fork():
+            sys.exit()
+
+        # This is the child process
+        #   Change directory for a guarenteed working dir
+        #   Clear the session id to clear the controlling TTY
+        #   Set the umask so we have access to all files created by the daemon
+        os.chdir("/")
+        os.setsid()
+        os.umask(MASK)
+
+        # Fork 2: Ensures we cannot get a controlling ttd
+        #   This is a child that cannot ever have a controlling TTY
+        if os.fork():
+            sys.exit()
+
+        # Stdin: Shutdown standard in
+        with open("/dev/null", "r") as dev_null:
+            os.dup2(dev_null.fileno(), sys.stdin.fileno())
+
+        # Stderr: Point standard error to a log file
+        # Do this before stdout so any errors about setting stdout are
+        #   written to the log file
+        # Exceptions raised after this point will be written to the log file
+        sys.stderr.flush()
+
+        # Cannot open unbuffered writes in Python 3
+        if sys.version_info < (3, 0):
+            with open(self.stderr, "a+", 0) as stderr:
+                os.dup2(stderr.fileno(), sys.stderr.fileno())
+
+        else:
+            with open(self.stderr, "a+") as stderr:
+                os.dup2(stderr.fileno(), sys.stderr.fileno())
+
+        # Stdout: Point standard out to a log file
+        # Print statements after this will not work, use sys.stdout instead
+        sys.stdout.flush()
+
+        # Cannot open unbuffered writes in Python 3
+        if sys.version_info < (3, 0):
+            with open(self.stdout, "a+", 0) as stdout:
+                os.dup2(stdout.fileno(), sys.stdout.fileno())
+
+        else:
+            with open(self.stdout, "a+") as stdout:
+                os.dup2(stdout.fileno(), sys.stdout.fileno())
+
+        # Create pid file and before file creation, make sure to delete the pid
+        #   file on exit
+        atexit.register(self.del_pid)
+        pid = str(os.getpid())
+
+        with open(self.pid_file, "w+") as pid_file:
+            pid_file.write("{0}".format(pid))
+
+    def get_pid_by_file(self):
+
+        """Method:  get_pid_by_file
+
+        Description:  Return the pid read from the pid file.
+
+        Arguments:
+
+        """
+
+        try:
+            with open(self.pid_file, "r") as pid_file:
+                pid = int(pid_file.read().strip())
+            return pid
+
+        except IOError:
+            return
+
+    def start(self):
+
+        """Method:  start
+
+        Description:  Start the daemon process.
+
+        Arguments:
+
+        """
+
+        print("Starting...")
+
+        if self.get_pid_by_file():
+            print("PID file {0} exists. Is the deamon already running?"
+                  .format(self.pid_file))
+            sys.exit(1)
+
+        self.daemonize()
+        self.run()
+
+    def stop(self):
+
+        """Method:  stop
+
+        Description:  Kill the daemon process.
+
+        Arguments:
+
+        """
+
+        print("Stopping...")
+        pid = self.get_pid_by_file()
+
+        if not pid:
+            print("PID file {0} doesn't exist. Is the daemon not running?"
+                  .format(self.pid_file))
+            return
+
+        # Killing the daemon process
+        try:
+            while 1:
+                inst = get_inst(os)
+                inst.kill(pid, signal.SIGTERM)
+                time.sleep(0.1)
+
+        except OSError as err:
+            if "No such process" in err.strerror \
+               and os.path.exists(self.pid_file):
+                os.remove(self.pid_file)
+
+            else:
+                print(err)
+                sys.exit(1)
+
+    def restart(self):
+
+        """Method:  restart
+
+        Description:  Stop and restart the daemon process.
+
+        Arguments:
+
+        """
+
+        self.stop()
+        self.start()
+
+    def run(self):
+
+        """Method:  run
+
+        Description:  Stub method holder, will contain the code to execute.
+            Override this method when subclassing Daemon.  It will be called
+            after the process has been daemonized by start() or restart().
+
+        Example 1: Writes datetime to log file.
+
+            while True:
+                with open(self.stdout, "w") as stdout:
+                    stdout.write(datetime.datetime.now().isoformat() + "\n")
+                time.sleep(1)
+
+        Example 2: Calls outside program with command line options.
+
+            while True:
+                rmq_metadata.main(argv_list=self.argv_list)
+                time.sleep(1)
 
         Arguments:
 
@@ -2105,9 +2346,11 @@ class TimeFormat(object):
 
     Notes:
         Pre-defined time format expressions:
-            Time Expression     Reference   Description
-            %Y%m%d              ymd         YearMonthDay
-            %d%m%Y              dmy         DayMonthYear
+            Reference   Time Expression
+            ymd         %Y%m%d
+            dmy         %d%m%Y
+            zulu        %Y-%m-%dT%H:%M:%SZ
+            dtg         %Y%m%d_%H%M%S
 
         Most common time format variables:
             %Y  Four digit year
@@ -2139,14 +2382,15 @@ class TimeFormat(object):
 
         """
 
-        self.rdtg = datetime.datetime.now()
-        self.msecs = str(self.rdtg.microsecond // 100)
         self.delimit = "."
         self.micro = False
         self.thacks = {}
         self.tformats = {
             "ymd": {"format": "%Y%m%d", "del": "", "micro": False},
-            "dmy": {"format": "%d%m%Y", "del": "", "micro": False}}
+            "dmy": {"format": "%d%m%Y", "del": "", "micro": False},
+            "zulu": {
+                "format": "%Y-%m-%dT%H:%M:%SZ", "del": "", "micro": False},
+            "dtg": {"format": "%Y%m%d_%H%M%S", "del": "", "micro": False}}
 
     def add_format(self, tformat, texpr, **kwargs):
 
@@ -2183,11 +2427,12 @@ class TimeFormat(object):
 
         """
 
-        ext = kwargs.get("delimit", self.delimit) + self.msecs \
+        rdtg = datetime.datetime.now()
+        msecs = str(rdtg.microsecond // 100)
+        ext = kwargs.get("delimit", self.delimit) + msecs \
             if kwargs.get("micro", self.micro) else ""
 
-        self.thacks[tformat] = datetime.datetime.strftime(
-            self.rdtg, texpr) + ext
+        self.thacks[tformat] = datetime.datetime.strftime(rdtg, texpr) + ext
 
     def create_hack(self, tformat):
 
