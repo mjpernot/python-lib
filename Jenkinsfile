@@ -127,6 +127,7 @@ pipeline {
                 /usr/bin/python2 ./test/unit/gen_libs/root_run.py
                 /usr/bin/python2 ./test/unit/gen_libs/rotate_files.py
                 /usr/bin/python2 ./test/unit/gen_libs/sec_2_hr.py
+                /usr/bin/python2 ./test/unit/gen_libs/str_type.py
                 /usr/bin/python2 ./test/unit/gen_libs/str_2_list.py
                 /usr/bin/python2 ./test/unit/gen_libs/str_2_type.py
                 /usr/bin/python2 ./test/unit/gen_libs/touch.py
@@ -166,10 +167,18 @@ pipeline {
                 /usr/bin/python2 ./test/unit/gen_class/argparser_parse_multi.py
                 /usr/bin/python2 ./test/unit/gen_class/argparser_parse_single.py
                 /usr/bin/python2 ./test/unit/gen_class/argparser_update_arg.py
+                /usr/bin/python2 ./test/unit/gen_class/daemon_daemonize.py
                 /usr/bin/python2 ./test/unit/gen_class/daemon_delpid.py
                 /usr/bin/python2 ./test/unit/gen_class/daemon_init.py
                 /usr/bin/python2 ./test/unit/gen_class/daemon_restart.py
                 /usr/bin/python2 ./test/unit/gen_class/daemon_start.py
+                /usr/bin/python2 ./test/unit/gen_class/daemon_stop.py
+                /usr/bin/python2 ./test/unit/gen_class/daemon2_init.py
+                /usr/bin/python2 ./test/unit/gen_class/daemon2_daemonize.py
+                /usr/bin/python2 ./test/unit/gen_class/daemon2_del_pid.py
+                /usr/bin/python2 ./test/unit/gen_class/daemon2_restart.py
+                /usr/bin/python2 ./test/unit/gen_class/daemon2_start.py
+                /usr/bin/python2 ./test/unit/gen_class/daemon2_stop.py
                 /usr/bin/python2 ./test/unit/gen_class/logfile_filter_ignore.py
                 /usr/bin/python2 ./test/unit/gen_class/logfile_filter_keyword.py
                 /usr/bin/python2 ./test/unit/gen_class/logfile_filter_regex.py
