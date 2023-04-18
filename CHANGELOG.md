@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [2.10.1] - 2023-04-18
+
+
 ## [2.10.0] - 2023-01-17
 - Added new class called Daemon2.
 
