@@ -1161,8 +1161,8 @@ def has_whitespace(data):
     Description:  Returns True|False on whether a string has a white space.
 
     Arguments:
-        (input) data -> Data string.
-        (output) True|False - Has a white space.
+        (input) data -> Data string
+        (output) True|False - Has a white space
 
     """
 
@@ -1184,25 +1184,26 @@ def help_func(args_array, ver, func_name=None):
         options is detected.
 
     Arguments:
-        (input) args_array -> Array of command line options and values.
-        (input) ver -> Version information on the calling program.
-        (input) func_name -> Function that will contain help message.
-        (output) Return True or False whether an option is detected.
+        (input) args_array -> Array of command line options and values
+        (input) ver -> Version information on the calling program
+        (input) func_name -> Function that will contain help message
+        (output) status -> Returns success of operation
 
     """
 
-    args_array = dict(args_array)
-    exit_flag = False
+    status = False
+    args = dict(args_array) if isinstance(args_array, dict) \
+           else dict(args_array.args_array)
 
-    if "-h" in args_array:
+    if "-h" in args:
         func_name()
-        exit_flag = True
+        status = True
 
-    if "-v" in args_array:
+    if "-v" in args:
         print(ver)
-        exit_flag = True
+        status = True
 
-    return exit_flag
+    return status
 
 
 def in_list(name, array_list):
@@ -1213,9 +1214,9 @@ def in_list(name, array_list):
         the value or an empty list.
 
     Arguments:
-        (input) name -> Value.
-        (input) array_list -> Array List.
-        (output) Return name in a list or empty list.
+        (input) name -> Value
+        (input) array_list -> Array List
+        (output) Return name in a list or empty list
 
     """
 

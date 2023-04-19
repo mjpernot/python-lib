@@ -9,6 +9,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - gen_class.ArgParser.arg_set_path: Fixed missing trailing slash on path.
 
 ### Changed
+- gen_libs.help_func: Added ability to pass an args_array or an ArgParser instance.
 - gen_class.ArgParser.arg_set_path: Added command argument to be added to path if present.
 
 
