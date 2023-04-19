@@ -5,6 +5,11 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 
 ## [2.10.1] - 2023-04-18
+### Fixed
+- gen_class.ArgParser.arg_set_path: Fixed missing trailing slash on path.
+
+### Changed
+- gen_class.ArgParser.arg_set_path: Added command argument to be added to path if present.
 
 
 ## [2.10.0] - 2023-01-17
