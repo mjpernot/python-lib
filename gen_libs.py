@@ -1194,7 +1194,7 @@ def help_func(args_array, ver, func_name=None):
 
     status = False
     args = dict(args_array) if isinstance(args_array, dict) \
-           else dict(args_array.args_array)
+        else dict(args_array.args_array)
 
     if "-h" in args:
         func_name()
@@ -1247,7 +1247,7 @@ def is_add_cmd(args_array, cmd, opt_arg_list):
 
     cmd = list(cmd)
     args = dict(args_array) if isinstance(args_array, dict) \
-           else dict(args_array.args_array)
+        else dict(args_array.args_array)
     opt_arg_list = dict(opt_arg_list)
 
     for opt in opt_arg_list:
