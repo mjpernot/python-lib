@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [2.10.1] - 2023-04-18
+### Fixed
+- gen_class.ArgParser.arg_set_path: Fixed missing trailing slash on path.
+
+### Changed
+- gen_libs.help_func, gen_libs.is_add_cmd: Added ability to pass an args_array or an gen_class.ArgParser instance.
+- gen_class.ArgParser.arg_set_path: Added command argument to be added to path if present.
+
+
 ## [2.10.0] - 2023-01-17
 - Added new class called Daemon2.
 

@@ -780,7 +780,7 @@ class ArgParser(object):
 
         return status
 
-    def arg_set_path(self, arg_opt):
+    def arg_set_path(self, arg_opt, **kwargs):
 
         """Method:  arg_set_path
 
@@ -789,14 +789,15 @@ class ArgParser(object):
 
         Arguments:
             (input) arg_opt -> Argument option holding directory path
-            (output) path -> Returns directory path, if detected
+            (input) **kwargs:
+                cmd -> Command to add to the path
+            (output) Returns path, path/cmd, cmd, or ""
 
         """
 
-        path = os.path.join(
-            self.args_array[arg_opt] if arg_opt in self.args_array else "")
-
-        return path
+        return os.path.join(
+            self.args_array[arg_opt] if arg_opt in self.args_array else "",
+            kwargs.get("cmd", ""))
 
     def arg_validate(self, **kwargs):
 

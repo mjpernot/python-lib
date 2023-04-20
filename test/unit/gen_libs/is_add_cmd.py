@@ -21,6 +21,7 @@ import unittest
 # Local
 sys.path.append(os.getcwd())
 import gen_libs
+import gen_class
 import version
 
 __version__ = version.__version__
@@ -52,6 +53,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.args = gen_class.ArgParser(["program"])
         self.setvalue = "--setvalue=OFF"
         self.args_array = {}
         self.args_array2 = {"-a": "value1"}
@@ -68,6 +70,85 @@ class UnitTest(unittest.TestCase):
         self.base3 = ["--test", self.setvalue]
         self.base4 = ["--test", self.setvalue, "--setstd=ON"]
 
+    def test_args_list_boolean(self):
+
+        """Function:  test_args_list_boolean
+
+        Description:  Test with ArgParser instance with single argument with a
+            list.
+
+        Arguments:
+
+        """
+
+        self.args.args_array = self.args_array4
+
+        self.assertEqual(
+            gen_libs.is_add_cmd(
+                self.args, self.cmd, self.opt_arg_list4), self.base4)
+
+    def test_args_single_boolean(self):
+
+        """Function:  test_args_single_boolean
+
+        Description:  Test with ArgParser instance with single argument with a
+            boolean.
+
+        Arguments:
+
+        """
+
+        self.args.args_array = self.args_array3
+
+        self.assertEqual(
+            gen_libs.is_add_cmd(
+                self.args, self.cmd, self.opt_arg_list3), self.base3)
+
+    def test_args_single_value(self):
+
+        """Function:  test_args_single_value
+
+        Description:  Test with ArgParser instance with single argument with a
+            value.
+
+        Arguments:
+
+        """
+
+        self.args.args_array = self.args_array2
+
+        self.assertEqual(
+            gen_libs.is_add_cmd(
+                self.args, self.cmd, self.opt_arg_list2), self.base2)
+
+    def test_args_empty_argsarray(self):
+
+        """Function:  test_args_empty_argsarray
+
+        Description:  Test with ArgParser instance with empty args_array.
+
+        Arguments:
+
+        """
+
+        self.assertEqual(
+            gen_libs.is_add_cmd(
+                self.args, self.cmd, self.opt_arg_list2), self.base)
+
+    def test_args_empty_optarglist(self):
+
+        """Function:  test_args_empty_optarglist
+
+        Description:  Test with ArgParser instance with empty opt_arg_list.
+
+        Arguments:
+
+        """
+
+        self.assertEqual(
+            gen_libs.is_add_cmd(
+                self.args, self.cmd, self.opt_arg_list), self.base)
+
     def test_list_boolean(self):
 
         """Function:  test_list_boolean
@@ -78,8 +159,9 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertEqual(gen_libs.is_add_cmd(self.args_array4, self.cmd,
-                                             self.opt_arg_list4), self.base4)
+        self.assertEqual(
+            gen_libs.is_add_cmd(
+                self.args_array4, self.cmd, self.opt_arg_list4), self.base4)
 
     def test_single_boolean(self):
 
@@ -91,8 +173,9 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertEqual(gen_libs.is_add_cmd(self.args_array3, self.cmd,
-                                             self.opt_arg_list3), self.base3)
+        self.assertEqual(
+            gen_libs.is_add_cmd(
+                self.args_array3, self.cmd, self.opt_arg_list3), self.base3)
 
     def test_single_value(self):
 
@@ -104,8 +187,9 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertEqual(gen_libs.is_add_cmd(self.args_array2, self.cmd,
-                                             self.opt_arg_list2), self.base2)
+        self.assertEqual(
+            gen_libs.is_add_cmd(
+                self.args_array2, self.cmd, self.opt_arg_list2), self.base2)
 
     def test_empty_argsarray(self):
 
@@ -117,8 +201,9 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertEqual(gen_libs.is_add_cmd(self.args_array, self.cmd,
-                                             self.opt_arg_list2), self.base)
+        self.assertEqual(
+            gen_libs.is_add_cmd(
+                self.args_array, self.cmd, self.opt_arg_list2), self.base)
 
     def test_empty_optarglist(self):
 
@@ -130,8 +215,9 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertEqual(gen_libs.is_add_cmd(self.args_array, self.cmd,
-                                             self.opt_arg_list), self.base)
+        self.assertEqual(
+            gen_libs.is_add_cmd(
+                self.args_array, self.cmd, self.opt_arg_list), self.base)
 
 
 if __name__ == "__main__":
