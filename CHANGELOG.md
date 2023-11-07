@@ -7,6 +7,11 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 ## [3.0.0] - 2023-11-07
 Breaking Changes
 
+- Removed cmds_gen module.
+
+### Removed
+- Removed cmds_gen module and all testing units for cmds_gen module.
+
 
 ## [2.10.1] - 2023-04-18
 ### Fixed

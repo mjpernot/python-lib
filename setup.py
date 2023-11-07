@@ -35,7 +35,6 @@ setuptools.setup(
 
     py_modules=[
         "arg_parser",
-        "cmds_gen",
         "errors",
         "gen_class",
         "gen_libs",

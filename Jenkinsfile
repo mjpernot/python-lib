@@ -33,8 +33,6 @@ pipeline {
                 /usr/bin/python2 ./test/unit/arg_parser/parse_multi.py
                 /usr/bin/python2 ./test/unit/arg_parser/parse_single.py
                 /usr/bin/python2 ./test/unit/arg_parser/file_create.py
-                /usr/bin/python2 ./test/unit/cmds_gen/add_cmd.py
-                /usr/bin/python2 ./test/unit/cmds_gen/is_add_cmd.py
                 /usr/bin/python2 ./test/unit/errors/emptyrowerror.py
                 /usr/bin/python2 ./test/unit/errors/error.py
                 /usr/bin/python2 ./test/unit/errors/nooptionerror.py
