@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [3.0.0] - 2023-11-07
+Breaking Changes
+
+
 ## [2.10.1] - 2023-04-18
 ### Fixed
 - gen_class.ArgParser.arg_set_path: Fixed missing trailing slash on path.
