@@ -7,7 +7,11 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 ## [3.0.0] - 2023-11-07
 Breaking Changes
 
+- Added new class: Mail2.
 - Removed cmds_gen module.
+
+### Added
+- Added class: Mail2 along with methods: add_attachment, add_text, send_email.
 
 ### Removed
 - Removed cmds_gen module and all testing units for cmds_gen module.

@@ -36,7 +36,7 @@ import fcntl
 import tempfile
 import logging
 import socket
-import smtplib
+import base64
 import time
 import atexit
 import signal
@@ -49,6 +49,11 @@ import io
 import gzip
 import json
 import re
+import smtplib
+from email import encoders
+from email.mime.base import MIMEBase
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 
 # yum==3.4.3 does not work in Python 3
 if sys.version_info < (3, 0):
@@ -2130,6 +2135,105 @@ class System(object):
             self.host_name = socket.gethostname()
 
 
+class Mail2(object):
+
+    """Class:  Mail2
+
+    Description:  Improved version of the Mail class.  Much cleaner and uses
+        the email and smtplib modules for creating and sending the email.  Also
+        allows for attachments to the email.
+
+    Methods:
+        __init__
+        add_attachment
+        add_text
+        send_email
+
+    """
+
+    def __init__(self, subject, toaddrs, fromaddr=None):
+
+        """Method:  __init__
+
+        Description:  Initialization of an instance of the Mail2 class.
+
+        Arguments:
+            (input) subject -> Subject line of mail
+            (input) toaddrs -> To email addresses
+            (input) fromaddr -> From email address
+
+        """
+
+        # Dictionary of file types/extensions and their associated MIME types
+        self.ftypes = {
+            "plain": "plain", "text": "plain", "sh": "x-sh", "x-sh": "x-sh",
+            "tar": "x-tar", "x-tar": "x-tar", "pdf": "pdf", "json": "json",
+            "gz": "gzip", "gzip": "gzip"}
+        subj = " ".join(subject) if type(subject) is list else subject
+        toaddrs = ",".join(toaddrs) if type(toaddrs) is list else toaddrs
+        fromaddr = fromaddr if fromaddr else \
+                   getpass.getuser() + "@" + socket.gethostname()
+
+        self.msg = MIMEMultipart()
+        self.msg["From"] = fromaddr
+        self.msg["To"] = toaddrs
+        self.msg["Subject"] = subj
+
+    def add_attachment(self, fname, ftype, data):
+
+        """Method:  add_attachment
+
+        Description:  Converts the file data into base64 format and attaches
+            the data and filename to the email.
+
+        Arguments:
+            (input) fname -> File name          # Include directory path?
+            (input) ftype -> File extension name
+            (input) data -> Data from the file (i.e. already read into python)
+
+        """
+
+        ftype = self.ftypes[ftype] if ftype in self.ftypes else None
+
+        if ftype:
+            attach = MIMEBase("application", ftype)
+            attach.set_payload(str(data))
+            encoders.encode_base64(attach)
+            attach.add_header(
+                "Content-Disposition", "attachment", filename=fname)
+            self.msg.attach(attach)
+
+    def add_text(self, data, ftype="plain"):
+
+        """Method:  add_text
+
+        Description:  Adds the data to the mail body.
+
+        Arguments:
+            (input) data -> Data in a string format
+            (input) ftype -> File extension name (e.g. plain, text)
+
+        """
+
+        self.msg.attach(MIMEText(data, ftype))
+
+    def send_email(self, host="localhost"):
+
+        """Method:  send_email
+
+        Description:  Converts the mail content to a string and mails out the
+            message using SMTP.sendmail.
+
+        Arguments:
+            (input) host -> Only set if the server cannot send emails
+
+        """
+
+        text = self.msg.as_string()
+        mail = smtplib.SMTP(host)
+        mail.sendmail(self.fromaddr, self.toaddrs, text)
+
+
 class Mail(System):
 
     """Class:  Mail
@@ -2159,12 +2263,12 @@ class Mail(System):
         Description:  Initialization of an instance of the Mail class.
 
         Arguments:
-            (input) toaddr -> To email address.
-            (input) subj -> Subject line of mail.
-            (input) msg_type -> Type of email being sent.
-            (input) frm -> From email address.
-            (input) host -> 'localhost' or IP.
-            (input) host_name -> Host name of server.
+            (input) toaddr -> To email address
+            (input) subj -> Subject line of mail
+            (input) msg_type -> Type of email being sent
+            (input) frm -> From email address
+            (input) host -> 'localhost' or IP
+            (input) host_name -> Host name of server
 
         """
 
@@ -2197,8 +2301,8 @@ class Mail(System):
         Description:  Add text to text string if data is present.
 
         Arguments:
-            (input) txt_ln -> Line of text to add to message.
-            (input) new_line -> True | False - Add a newline between lines.
+            (input) txt_ln -> Line of text to add to message
+            (input) new_line -> True | False - Add a newline between lines
 
         """
 
@@ -2259,8 +2363,8 @@ class Mail(System):
         Description:  Creates or overwrites a subject to the email.
 
         Arguments:
-            (input) subj -> Subject line.
-            (input) delimiter -> Subject line delimiter if using a list.
+            (input) subj -> Subject line
+            (input) delimiter -> Subject line delimiter if using a list
 
         """
 
@@ -2283,7 +2387,7 @@ class Mail(System):
             send_mail to need only an argument option.
 
         Arguments:
-            (input) use_mailx -> True|False - To use mailx command.
+            (input) use_mailx -> True|False - To use mailx command
 
         """
 
