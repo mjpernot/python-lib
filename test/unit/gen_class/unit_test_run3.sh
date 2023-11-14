@@ -67,6 +67,10 @@ echo "Unit test: gen_class module"
 /usr/bin/python3 ./test/unit/gen_class/logger_log_err.py
 /usr/bin/python3 ./test/unit/gen_class/logger_log_info.py
 /usr/bin/python3 ./test/unit/gen_class/logger_log_warn.py
+/usr/bin/python3 ./test/unit/gen_class/mail2_init.py
+/usr/bin/python3 ./test/unit/gen_class/mail2_add_attachment.py
+/usr/bin/python3 ./test/unit/gen_class/mail2_add_text.py
+/usr/bin/python3 ./test/unit/gen_class/mail2_send_mail.py
 /usr/bin/python3 ./test/unit/gen_class/progressbar_init.py
 /usr/bin/python3 ./test/unit/gen_class/progressbar_update.py
 /usr/bin/python3 ./test/unit/gen_class/progressbar_calc_and_update.py

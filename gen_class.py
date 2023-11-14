@@ -2169,15 +2169,15 @@ class Mail2(object):
             "plain": "plain", "text": "plain", "sh": "x-sh", "x-sh": "x-sh",
             "tar": "x-tar", "x-tar": "x-tar", "pdf": "pdf", "json": "json",
             "gz": "gzip", "gzip": "gzip"}
-        subj = " ".join(subject) if type(subject) is list else subject
-        toaddrs = ",".join(toaddrs) if type(toaddrs) is list else toaddrs
-        fromaddr = fromaddr if fromaddr else \
-                   getpass.getuser() + "@" + socket.gethostname()
+        self.subj = " ".join(subject) if type(subject) is list else subject
+        self.toaddrs = ",".join(toaddrs) if type(toaddrs) is list else toaddrs
+        self.fromaddr = fromaddr if fromaddr else \
+                        getpass.getuser() + "@" + socket.gethostname()
 
         self.msg = MIMEMultipart()
-        self.msg["From"] = fromaddr
-        self.msg["To"] = toaddrs
-        self.msg["Subject"] = subj
+        self.msg["From"] = self.fromaddr
+        self.msg["To"] = self.toaddrs
+        self.msg["Subject"] = self.subj
 
     def add_attachment(self, fname, ftype, data):
 
@@ -2232,6 +2232,7 @@ class Mail2(object):
         text = self.msg.as_string()
         mail = smtplib.SMTP(host)
         mail.sendmail(self.fromaddr, self.toaddrs, text)
+        mail.quit()
 
 
 class Mail(System):
