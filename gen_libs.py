@@ -1173,7 +1173,7 @@ def has_whitespace(data):
     return False
 
 
-def help_func(args_array, ver, func_name=None):
+def help_func(args, ver, func_name=None):
 
     """Function:  help_func
 
@@ -1184,8 +1184,7 @@ def help_func(args_array, ver, func_name=None):
         options is detected.
 
     Arguments:
-        (input) args_array -> Array of command line options and values or an
-            gen_class.ArgParser class instance
+        (input) args -> A gen_class.ArgParser class instance
         (input) ver -> Version information on the calling program
         (input) func_name -> Function that will contain help message
         (output) status -> Returns success of operation
@@ -1193,14 +1192,12 @@ def help_func(args_array, ver, func_name=None):
     """
 
     status = False
-    args = dict(args_array) if isinstance(args_array, dict) \
-        else dict(args_array.args_array)
 
-    if "-h" in args:
+    if args.arg_exist("-h"):
         func_name()
         status = True
 
-    if "-v" in args:
+    if args.arg_exist("-v"):
         print(ver)
         status = True
 
@@ -1229,7 +1226,7 @@ def in_list(name, array_list):
     return []
 
 
-def is_add_cmd(args_array, cmd, opt_arg_list):
+def is_add_cmd(args, cmd, opt_arg_list):
 
     """Function:  is_add_cmd
 
@@ -1237,24 +1234,21 @@ def is_add_cmd(args_array, cmd, opt_arg_list):
         command line.
 
     Arguments:
-        (input) args_array -> Array of command line options and values or an
-            gen_class.ArgParser class instance
-        (input) cmd -> List array containing the program arguments.
-        (input) opt_arg_list -> Dictionary of additional options.
-        (output) cmd -> List array containing the program arguments.
+        (input) args_array -> A gen_class.ArgParser class instance
+        (input) cmd -> List array containing the program arguments
+        (input) opt_arg_list -> Dictionary of additional options
+        (output) cmd -> List array containing the program arguments
 
     """
 
     cmd = list(cmd)
-    args = dict(args_array) if isinstance(args_array, dict) \
-        else dict(args_array.args_array)
     opt_arg_list = dict(opt_arg_list)
 
     for opt in opt_arg_list:
 
-        # Is option in array and is set to True.
-        if opt in args and args[opt] \
-           and isinstance(args[opt], bool):
+        # Is option in array and is set to True
+        if args.arg_exist(opt) and args.get_val(opt) \
+           and isinstance(args.get_val(opt), bool):
 
             if isinstance(opt_arg_list[opt], list):
 
@@ -1264,8 +1258,8 @@ def is_add_cmd(args_array, cmd, opt_arg_list):
             else:
                 cmd = add_cmd(cmd, arg=opt_arg_list[opt])
 
-        elif opt in args:
-            cmd = add_cmd(cmd, arg=opt_arg_list[opt], val=args[opt])
+        elif args.arg_exist(opt):
+            cmd = add_cmd(cmd, arg=opt_arg_list[opt], val=args.get_val(opt))
 
     return cmd
 

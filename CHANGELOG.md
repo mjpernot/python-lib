@@ -13,6 +13,9 @@ Breaking Changes
 ### Added
 - Added class: Mail2 along with methods: add_attachment, add_text, send_email.
 
+### Changed
+- gen_libs: help_func, is_add_cmd: Removed references to args_array and use only gen_class.ArgsParser.
+
 ### Removed
 - Removed cmds_gen module and all testing units for cmds_gen module.
 
