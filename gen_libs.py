@@ -46,6 +46,7 @@
         help_func
         in_list
         is_add_cmd
+        is_base64
         is_empty_file
         is_file_text
         is_missing_lists
@@ -130,6 +131,8 @@ import ast
 import gzip
 import calendar
 import chardet
+import base64
+import binascii
 
 # Local
 try:
@@ -1262,6 +1265,52 @@ def is_add_cmd(args, cmd, opt_arg_list):
             cmd = add_cmd(cmd, arg=opt_arg_list[opt], val=args.get_val(opt))
 
     return cmd
+
+
+def is_base64(data):
+
+    """Function:  is_base64
+
+    Description:  Determines if the data is base64 encoded.
+
+    Warning:  Unicode strings in Python 3 will not be detected as a string.
+
+    Note: Python 3:  If data string has unicode in it, an exception will be
+        thrown and the function will return false.
+
+    Arguments:
+        (input) data -> Data string to be checked
+        (output) status -> True|False - Is base64 encoded
+
+    """
+
+    if sys.version_info[0] == 3:
+        try:
+            if isinstance(data, str):
+                data_bytes = bytes(data, 'ascii')
+
+            elif isinstance(data, bytes):
+                data_bytes = data
+
+            else:
+                raise ValueError("Argument must be string or bytes")
+                status = False
+
+            status = base64.b64encode(
+                base64.b64decode(data_bytes))[1:70] == data_bytes[1:70]
+
+        except binascii.Error:
+            status = False
+
+    else:
+        try:
+            status = base64.b64encode(
+                base64.b64decode(data))[1:70] == data[1:70]
+
+        except TypeError:
+            status = False
+
+    return status
 
 
 def is_empty_file(f_name):
