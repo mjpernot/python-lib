@@ -50,12 +50,13 @@ import gzip
 import json
 import re
 import smtplib
+import dnf
 from email import encoders
 from email.mime.base import MIMEBase
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
-# yum==3.4.3 does not work in Python 3
+# Yum for Python 2.7 only
 if sys.version_info < (3, 0):
     import yum
 
@@ -1617,6 +1618,150 @@ class Daemon2(object):
         Arguments:
 
         """
+
+class Dnf(object):
+    """Class:  Dnf
+
+    Description: Class which is a representation for python3-dnf class.  A dnf
+        object is used as a proxy for using the dnf command.
+
+    Methods:
+        __init__
+        capture_pkgs
+        capture_repos
+        get_all_repos
+        get_enabled_repos
+        get_installed
+        get_updates
+        
+    """
+
+    def __init__(self):
+
+        """Method:  __init__
+
+        Description:  Initialization of an instance of the Dnf class.
+
+        Arguments:
+
+        """
+
+        self.base = dnf.Base()
+        self.packages = None
+
+    def capture_pkgs(self):
+
+        """Method:  capture_pkgs
+
+        Description:  Query for all installed packages on the system.
+
+        Arguments:
+
+        """
+
+        self.base.fill_sack()
+        self.packages = self.base.sack.query() 
+        
+
+    def capture_repos(self):
+
+        """Method:  capture_repos
+
+        Description:  Query for all of the repos on the system.
+
+        Arguments:
+
+        """
+
+        self.base.read_all_repos()
+        self.base.fill_sack()
+
+    def get_all_repos(self, url=False):
+
+        """Method:  get_all_repos
+
+        Description:  Return a list of all the repos on the system.
+
+        Note: If including the url, then each item in the list will be a set:
+            Postition:
+                0: Repository Name
+                1: Reposirory Base URL
+
+        Arguments:
+            (input) url -> True|False - Include the repos base URL
+            (output) data -> List of repositories on the system
+
+        """
+
+        self.capture_repos()
+
+        if url:
+            data = [(rep.name, str(rep.baseurl))
+                    for rep in self.base.repos.all()]
+
+        else:
+            data = [rep.name for rep in self.base.repos.all()]
+
+        return data
+
+    def get_enabled_repos(self, url=False):
+
+        """Method:  get_enabled_repos
+
+        Description:  Return a list of enabled repos on the system.
+
+        Note: If including the url, then each item in the list will be a set:
+            Postition:
+                0: Repository Name
+                1: Reposirory Base URL
+
+        Arguments:
+            (input) url -> True|False - Include the repos base URL
+            (output) data -> List of enabled repositories on the system
+
+        """
+
+        self.capture_repos()
+
+        if url:
+            data = [(rep.name, str(rep.baseurl))
+                    for rep in self.base.repos.iter_enabled()]
+
+        else:
+            data = [rep.name for rep in self.base.repos.iter_enabled()]
+
+        return data
+
+    def get_installed(self):
+
+        """Method:  get_installed
+
+        Description:  Return list of installed packages.
+
+        Arguments:
+
+        """
+
+        self.capture_pkgs()
+        ins_pkg = self.packages.installed()
+
+        return [str(pkg) for pkg in ins_pkg]
+
+    def get_updates(self):
+
+        """Method:  get_updates
+
+        Description:  Return list of packages that have updates available.
+
+        Arguments:
+
+        """
+
+        self.capture_repos()
+        query = self.base.sack.query()
+        upd_pkg = query.upgrades()
+
+        return [str(pkg) for pkg in upd_pkg]
 
 
 class LogFile(object):

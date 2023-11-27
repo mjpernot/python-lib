@@ -11,7 +11,8 @@ Breaking Changes
 - Removed cmds_gen module.
 
 ### Added
-- Added class: Mail2 along with methods: add_attachment, add_text, send_email.
+- gen_libs: is_base64: Determine if data is base64.
+- gen_class: Mail2 along with methods: add_attachment, add_text, send_email.
 
 ### Changed
 - gen_libs: help_func, is_add_cmd: Removed references to args_array and use only gen_class.ArgsParser.
