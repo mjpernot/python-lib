@@ -48,6 +48,7 @@ echo "Unit test: gen_class module"
 /usr/bin/python2 ./test/unit/gen_class/daemon2_start.py
 /usr/bin/python2 ./test/unit/gen_class/daemon2_stop.py
 /usr/bin/python2 ./test/unit/gen_class/dnf_init.py
+/usr/bin/python2 ./test/unit/gen_class/dnf_capture_pkgs.py
 /usr/bin/python2 ./test/unit/gen_class/logfile_filter_ignore.py
 /usr/bin/python2 ./test/unit/gen_class/logfile_filter_keyword.py
 /usr/bin/python2 ./test/unit/gen_class/logfile_filter_regex.py

@@ -1,11 +1,11 @@
 # Classification (U)
 
-"""Program:  dnf_init.py
+"""Program:  dnf_capture_pkgs.py
 
-    Description:  Unit testing of Dnf.__init__ in gen_class.py.
+    Description:  Unit testing of Dnf.capture_pkgs in gen_class.py.
 
     Usage:
-        test/unit/gen_class/dnf_init.py
+        test/unit/gen_class/dnf_capture_pkgs.py
 
     Arguments:
 
@@ -34,7 +34,6 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
-        test_base
         test_packages
 
     """
@@ -51,29 +50,19 @@ class UnitTest(unittest.TestCase):
 
         self.dnf = gen_class.Dnf()
 
-    def test_base(self):
-
-        """Function:  test_base
-
-        Description:  Test __init__ method.
-
-        Arguments:
-
-        """
-
-        self.assertTrue(isinstance(self.dnf, gen_class.Dnf))
-
     def test_packages(self):
 
         """Function:  test_packages
 
-        Description:  Test __init__ method.
+        Description:  Test capture_pkgs method.
 
         Arguments:
 
         """
 
-        self.assertEqual(self.dnf.packages, None)
+        self.dnf.capture_pkgs()
+
+        self.assertTrue(self.dnf.packages)
 
 
 if __name__ == "__main__":
