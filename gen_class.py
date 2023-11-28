@@ -1759,9 +1759,8 @@ class Dnf(object):
 
         self.capture_repos()
         query = self.base.sack.query()
-        upd_pkg = query.upgrades()
 
-        return [str(pkg) for pkg in upd_pkg]
+        return [str(pkg) for pkg in query.upgrades().latest(1)]
 
 
 class LogFile(object):

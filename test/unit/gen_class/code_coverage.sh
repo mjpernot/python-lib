@@ -55,6 +55,7 @@ coverage run -a --source=gen_class test/unit/gen_class/daemon2_del_pid.py
 coverage run -a --source=gen_class test/unit/gen_class/daemon2_restart.py
 coverage run -a --source=gen_class test/unit/gen_class/daemon2_start.py
 coverage run -a --source=gen_class test/unit/gen_class/daemon2_stop.py
+coverage run -a --source=gen_class test/unit/gen_class/dnf_init.py
 coverage run -a --source=gen_class test/unit/gen_class/logfile_filter_ignore.py
 coverage run -a --source=gen_class test/unit/gen_class/logfile_filter_keyword.py
 coverage run -a --source=gen_class test/unit/gen_class/logfile_filter_regex.py
