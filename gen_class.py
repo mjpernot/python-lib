@@ -12,6 +12,7 @@
         ArgParser
         Daemon
         Daemon2
+        Dnf
         LogFile
         ProgressBar
         SingleInstanceException
