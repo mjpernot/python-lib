@@ -8,7 +8,6 @@ echo ""
 echo "Integration test:"
 python test/integration/gen_class/argparser_init.py
 python test/integration/gen_class/argparser_arg_dir_chk.py
-python test/integration/gen_class/argparser_arg_dir_chk_crt.py
 python test/integration/gen_class/argparser_arg_dir_crt.py
 python test/integration/gen_class/argparser_arg_file_chk.py
 python test/integration/gen_class/argparser_arg_parse2.py

@@ -12,7 +12,6 @@ echo "Unit test: gen_class module"
 /usr/bin/python3 ./test/unit/gen_class/argparser_arg_cond_req_or.py
 /usr/bin/python3 ./test/unit/gen_class/argparser_arg_default.py
 /usr/bin/python3 ./test/unit/gen_class/argparser_arg_dir_chk.py
-/usr/bin/python3 ./test/unit/gen_class/argparser_arg_dir_chk_crt.py
 /usr/bin/python3 ./test/unit/gen_class/argparser_arg_dir_crt.py
 /usr/bin/python3 ./test/unit/gen_class/argparser_arg_exist.py
 /usr/bin/python3 ./test/unit/gen_class/argparser_arg_file_chk.py

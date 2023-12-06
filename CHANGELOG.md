@@ -9,6 +9,7 @@ Breaking Changes
 
 - Added new class: Mail2.
 - Removed cmds_gen module.
+- Removed gen_class.ArgParser.arg_dir_chk_crt method.
 
 ### Added
 - gen_libs: is_base64: Determine if data is base64.
@@ -18,6 +19,7 @@ Breaking Changes
 - gen_libs: help_func, is_add_cmd: Removed references to args_array and use only gen_class.ArgsParser.
 
 ### Removed
+- gen_class.ArgParser.arg_dir_chk_crt
 - Removed cmds_gen module and all testing units for cmds_gen module.
 
 

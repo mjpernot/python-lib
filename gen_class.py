@@ -161,10 +161,6 @@ class ArgParser(object):
         arg_dir_chk
             dir_perms_chk       -> dir_perms_chk
 
-        arg_dir_chk_crt
-            dir_chk_list        -> dir_chk
-            dir_crt_list        -> dir_crt
-
         arg_dir_crt
             dir_perms_crt       -> dir_perms_crt
 
@@ -204,7 +200,6 @@ class ArgParser(object):
         arg_cond_req_or
         arg_default
         arg_dir_chk
-        arg_dir_chk_crt
         arg_dir_crt
         arg_exist
         arg_file_chk
@@ -293,10 +288,6 @@ class ArgParser(object):
 
         # For arg_dir_chk method
         self.dir_perms_chk = dict(kwargs.get("dir_perms_chk", {}))
-
-        # For arg_dir_chk_crt method
-        self.dir_chk = list(kwargs.get("dir_chk", []))
-        self.dir_crt = list(kwargs.get("dir_crt", []))
 
         # For arg_dir_crt method
         self.dir_perms_crt = dict(kwargs.get("dir_perms_crt", {}))
@@ -478,51 +469,6 @@ class ArgParser(object):
             else:
                 status = status & gen_libs.chk_perm(
                     self.args_array[item], dir_perms_chk[item])
-
-        return status
-
-    def arg_dir_chk_crt(self, **kwargs):
-
-        """Method:  arg_dir_chk_crt
-
-        Description:  Checks to see if the directory options have access to the
-            directories and create directory if requested.
-
-        Arguments:
-            (input) **kwargs:
-                dir_chk -> Options which will have directories
-                dir_crt -> Options to create directories if not present
-            (output) status -> True|False - If directories are available
-
-        """
-
-        dir_chk = list(kwargs.get("dir_chk", self.dir_chk))
-        dir_crt = list(kwargs.get("dir_crt", self.dir_crt))
-        status = True
-
-        if set(dir_crt).issubset(set(dir_chk)):
-
-            for item in set(dir_chk) & set(self.args_array.keys()):
-
-                if not os.path.isdir(self.args_array[item]) and \
-                   item in dir_crt:
-
-                    status = gen_libs.make_dir(self.args_array[item])
-
-                elif not os.path.isdir(self.args_array[item]):
-                    print("Error: {0} does not exist.".
-                          format(self.args_array[item]))
-                    status = False
-
-                elif not os.access(self.args_array[item], os.W_OK):
-                    print("Error: {0} is not writable.".
-                          format(self.args_array[item]))
-                    status = False
-
-        else:
-            print("Error:  dir_crt_list: {0} is not a subset of dir_chk: {1}"
-                  .format(dir_crt, dir_chk))
-            status = False
 
         return status
 
