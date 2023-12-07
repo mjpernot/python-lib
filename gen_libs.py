@@ -1605,7 +1605,6 @@ def make_dir(dirname):
 
     except OSError as err:
         if err.errno == errno.EEXIST or err.errno == errno.EACCES:
-#           if err.args[0] == 13 or err.args[0] == 17:
             print("Error:  {0} for {1}".format(err.args[1], dirname))
 
         else:

@@ -16,6 +16,7 @@ Breaking Changes
 - gen_class: Mail2 along with methods: add_attachment, add_text, send_email.
 
 ### Changed
+- gen_libs.make_dir: Changed checking error numbers to using the errno module.
 - gen_libs: help_func, is_add_cmd: Removed references to args_array and use only gen_class.ArgsParser.
 
 ### Removed
