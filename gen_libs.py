@@ -1238,7 +1238,7 @@ def is_add_cmd(args, cmd, opt_arg_list):
         command line.
 
     Arguments:
-        (input) args_array -> A gen_class.ArgParser class instance
+        (input) args -> A gen_class.ArgParser class instance
         (input) cmd -> List array containing the program arguments
         (input) opt_arg_list -> Dictionary of additional options
         (output) cmd -> List array containing the program arguments
@@ -1684,7 +1684,7 @@ def make_zip(zip_file_path, cur_file_dir, files_to_zip, is_rel_path=False):
         newzip.close()
 
 
-def merge_data_types(data_1, data_2):
+def merge_data_types(data1, data2):
 
     """Function:  merge_data_types
 
@@ -1697,8 +1697,8 @@ def merge_data_types(data_1, data_2):
         by data_2 keys.
 
     Arguments:
-        (input) data_1 -> Data item.
-        (input) data_2 -> Data item.
+        (input) data1 -> Data item.
+        (input) data2 -> Data item.
         (output) data -> Merged data.
         (output) status -> True|False - Status of the merge.
         (output) err_msg -> Error message if merge fails.
@@ -1709,6 +1709,27 @@ def merge_data_types(data_1, data_2):
     err_msg = ""
     data = None
 
+    if isinstance(data1, str_type()) \
+         and (isinstance(data1, str_type()) == isinstance(data2, str_type())):
+        data = data1 + data2
+
+    elif isinstance(data1, list) \
+         and (isinstance(data1, list) == isinstance(data2, list)):
+        data = list(data1) + list(data2)
+
+    elif isinstance(data1, tuple) \
+         and (isinstance(data1, tuple) == isinstance(data2, tuple)):
+        data = data1 + data2
+
+    elif isinstance(data1, dict) \
+         and (isinstance(data1, dict) == isinstance(data2, dict)):
+        data, _, _ = merge_two_dicts(dict(data1), dict(data2))
+
+    else:
+        status = False
+        err_msg = "Inconsistent data types or not correct data type"
+
+    """
     if type(data_1) == type(data_2):
 
         if isinstance(data_1, (str, list, tuple)):
@@ -1726,6 +1747,7 @@ def merge_data_types(data_1, data_2):
     else:
         status = False
         err_msg = "Inconsistent data types"
+    """
 
     return data, status, err_msg
 

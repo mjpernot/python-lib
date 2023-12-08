@@ -11,6 +11,9 @@ Breaking Changes
 - Removed cmds_gen module.
 - Removed gen_class.ArgParser.arg_dir_chk_crt method.
 
+### Fixed
+- gen_libs.merge_data_types: Fixed to allow str and unicode strings to be merged in Python 2.7.
+
 ### Added
 - gen_libs: is_base64: Determine if data is base64.
 - gen_class: Mail2 along with methods: add_attachment, add_text, send_email.
