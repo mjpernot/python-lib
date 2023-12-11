@@ -21,6 +21,7 @@ Breaking Changes
 ### Changed
 - gen_libs.make_dir: Changed checking error numbers to using the errno module.
 - gen_libs: help_func, is_add_cmd: Removed references to args_array and use only gen_class.ArgsParser.
+- Documentation changes.
 
 ### Removed
 - gen_class.ArgParser.arg_dir_chk_crt

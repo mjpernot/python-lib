@@ -39,6 +39,8 @@ pip install -r requirements-python-lib.txt --target lib --trusted-host pypi.appd
 Add/modify the following lines to the {Other_Python_Project}/requirements.txt file:
 
 ```
+chardet==4.0.0
+email==4.0.3
 simplejson==2.0.9
 ```
 
@@ -52,24 +54,26 @@ simplejson==2.0.9
 Install the project using git.
 
 ```
-cd {Python_Project}
 git clone git@sc.appdev.proj.coe.ic.gov:JAC-DSXD/python-lib.git
 ```
 
 Install/upgrade system modules.
 
+Centos 7:
+
 ```
-cd python-lib
-sudo bash
-umask 022
-pip install -r requirements.txt --upgrade --trusted-host pypi.appdev.proj.coe.ic.gov
-exit
+sudo pip install -r requirements.txt --upgrade --trusted-host pypi.appdev.proj.coe.ic.gov
+```
+
+Redhat 8 (Running Python 3):
+```
+sudo python -m pip install --user -r requirements.txt --upgrade --trusted-host pypi.appdev.proj.coe.ic.gov
 ```
 
 ### Testing:
 
 ```
-cd {Python_Project}/python-lib
+cd python-lib
 test/unit/gen_libs/unit_test_run.sh
 test/unit/arg_parser/unit_test_run.sh
 test/unit/gen_class/unit_test_run.sh
@@ -80,7 +84,7 @@ test/unit/machine/unit_test_run.sh
 ### Code Coverage:
 
 ```
-cd {Python_Project}/python-lib
+cd python-lib
 test/unit/gen_libs/code_coverage.sh
 test/unit/arg_parser/code_coverage.sh
 test/unit/gen_class/code_coverage.sh
@@ -96,7 +100,7 @@ Install the project using the procedures in the Installation section under Unit 
 
 ### Testing:
 ```
-cd {Python_Project}/python-lib
+cd python-lib
 test/unit/arg_parser/integration_test_run.sh
 test/unit/gen_libs/integration_test_run.sh
 ```
