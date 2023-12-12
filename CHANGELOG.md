@@ -8,6 +8,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 Breaking Changes
 
 - Added new class: Mail2.
+- Added new class: KeyCaseInsensitiveDict.
 - Removed cmds_gen module.
 - Removed gen_class.ArgParser.arg_dir_chk_crt method.
 
@@ -15,6 +16,7 @@ Breaking Changes
 - gen_libs.merge_data_types: Fixed to allow str and unicode strings to be merged in Python 2.7.
 
 ### Added
+- gen_class: KeyCaseInsensitiveDict: Is a key case-insensitive dictionary/
 - gen_libs: is_base64: Determine if data is base64.
 - gen_class: Mail2 along with methods: add_attachment, add_text, send_email.
 

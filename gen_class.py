@@ -13,6 +13,7 @@
         Daemon
         Daemon2
         Dnf
+        KeyCaseInsensitiveDict
         LogFile
         ProgressBar
         SingleInstanceException
@@ -1708,6 +1709,181 @@ class Dnf(object):
         query = self.base.sack.query()
 
         return [str(pkg) for pkg in query.upgrades().latest(1)]
+
+
+class KeyCaseInsensitiveDict(dict):
+
+    """Class:  KeyCaseInsensitiveDict
+
+    Description:  Is a key case insensitive dictionary.  Takes a dictionary and
+        converts all the keys to lower-case, then all further methods operate
+        on this lower-case mode.
+
+    Methods:
+        _keylower
+        __init__
+        __getitem__
+        __setitem__
+        __delitem__
+        __contains__
+        has_key
+        pop
+        get
+        setdefault
+        update
+        _convert_keys
+
+    """
+STOPPED HERE
+    @classmethod
+    def _keylower(cls, key):
+
+        """Class Method:  _keylower
+
+        Description:  Converts the dictionary key to lower case.
+
+        Arguments:
+
+        """
+
+        return key.lower() if isinstance(key, str_type()) else key
+
+    def __init__(self, *args, **kwargs):
+
+        """Method:  __init__
+
+        Description:  Initialization of an instance of the
+            KeyCaseInsensitiveDict class.
+
+        Arguments:
+
+        """
+
+        super(KeyCaseInsensitiveDict, self).__init__(*args, **kwargs)
+        self._convert_keys()
+
+    def __getitem__(self, key):
+ 
+        """Method:  __getitem__
+
+        Description:  .
+
+        Arguments:
+
+        """
+
+       return super(KeyCaseInsensitiveDict, self).__getitem__(self.__class__._keylower(key))
+
+    def __setitem__(self, key, value):
+
+        """Method:  __setitem__
+
+        Description:  .
+
+        Arguments:
+
+        """
+
+        super(KeyCaseInsensitiveDict, self).__setitem__(self.__class__._keylower(key), value)
+
+    def __delitem__(self, key):
+
+        """Method:  __delitem__
+
+        Description:  .
+
+        Arguments:
+
+        """
+
+        return super(KeyCaseInsensitiveDict, self).__delitem__(self.__class__._keylower(key))
+
+    def __contains__(self, key):
+
+        """Method:  __contains__
+
+        Description:  .
+
+        Arguments:
+
+        """
+
+        return super(KeyCaseInsensitiveDict, self).__contains__(self.__class__._keylower(key))
+
+    def has_key(self, key):
+
+        """Method:  has_key
+
+        Description:  Returns True or False if key is present.
+
+        Arguments:
+
+        """
+
+        return super(KeyCaseInsensitiveDict, self).has_key(self.__class__._keylower(key))
+
+    def pop(self, key, *args, **kwargs):
+
+        """Method:  pop
+
+        Description:  Remove one item from a dictionary (i.e. stack).
+
+        Arguments:
+
+        """
+
+        return super(KeyCaseInsensitiveDict, self).pop(self.__class__._keylower(key), *args, **kwargs)
+
+    def get(self, key, *args, **kwargs):
+
+        """Method:  get
+
+        Description:  Get the value for key.
+
+        Arguments:
+
+        """
+
+        return super(KeyCaseInsensitiveDict, self).get(self.__class__._keylower(key), *args, **kwargs)
+
+    def setdefault(self, key, *args, **kwargs):
+
+        """Method:  setdefault
+
+        Description:  Sets the default value for key.
+
+        Arguments:
+
+        """
+
+        return super(KeyCaseInsensitiveDict, self).setdefault(self.__class__._keylower(key), *args, **kwargs)
+
+    def update(self, updatedict={}, **keyword):
+
+        """Method:  update
+
+        Description:  Update the value for key.
+
+        Arguments:
+
+        """
+
+        super(KeyCaseInsensitiveDict, self).update(self.__class__(updatedict))
+        super(KeyCaseInsensitiveDict, self).update(self.__class__(**keyword))
+
+    def _convert_keys(self):
+
+        """Method:  _convert_keys
+
+        Description:  Converts all of the keys in a dictionary to lower case.
+
+        Arguments:
+
+        """
+
+        for key in list(self.keys()):
+            val = super(KeyCaseInsensitiveDict, self).pop(key)
+            self.__setitem__(key, val)
 
 
 class LogFile(object):
