@@ -1734,7 +1734,7 @@ class KeyCaseInsensitiveDict(dict):
         _convert_keys
 
     """
-STOPPED HERE
+
     @classmethod
     def _keylower(cls, key):
 
@@ -1746,7 +1746,7 @@ STOPPED HERE
 
         """
 
-        return key.lower() if isinstance(key, str_type()) else key
+        return key.lower() if isinstance(key, gen_libs.str_type()) else key
 
     def __init__(self, *args, **kwargs):
 
@@ -1766,49 +1766,57 @@ STOPPED HERE
  
         """Method:  __getitem__
 
-        Description:  .
+        Description:  Return the key's value.
 
         Arguments:
 
         """
 
-       return super(KeyCaseInsensitiveDict, self).__getitem__(self.__class__._keylower(key))
+        return super(
+           KeyCaseInsensitiveDict, self).__getitem__(
+               self.__class__._keylower(key))
 
     def __setitem__(self, key, value):
 
         """Method:  __setitem__
 
-        Description:  .
+        Description:  Sets the value for a key.
 
         Arguments:
 
         """
 
-        super(KeyCaseInsensitiveDict, self).__setitem__(self.__class__._keylower(key), value)
+        super(
+            KeyCaseInsensitiveDict, self).__setitem__(
+                self.__class__._keylower(key), value)
 
     def __delitem__(self, key):
 
         """Method:  __delitem__
 
-        Description:  .
+        Description:  Deletes a key from the dictionary using the del command.
 
         Arguments:
 
         """
 
-        return super(KeyCaseInsensitiveDict, self).__delitem__(self.__class__._keylower(key))
+        return super(
+            KeyCaseInsensitiveDict, self).__delitem__(
+                self.__class__._keylower(key))
 
     def __contains__(self, key):
 
         """Method:  __contains__
 
-        Description:  .
+        Description:  Returns True or False whether a key exist.
 
         Arguments:
 
         """
 
-        return super(KeyCaseInsensitiveDict, self).__contains__(self.__class__._keylower(key))
+        return super(
+            KeyCaseInsensitiveDict, self).__contains__(
+                self.__class__._keylower(key))
 
     def has_key(self, key):
 
@@ -1820,49 +1828,58 @@ STOPPED HERE
 
         """
 
-        return super(KeyCaseInsensitiveDict, self).has_key(self.__class__._keylower(key))
+        return super(
+            KeyCaseInsensitiveDict, self).has_key(
+                self.__class__._keylower(key))
 
     def pop(self, key, *args, **kwargs):
 
         """Method:  pop
 
-        Description:  Remove one item from a dictionary (i.e. stack).
+        Description:  Deletes key from dictionary using the pop command.
 
         Arguments:
 
         """
 
-        return super(KeyCaseInsensitiveDict, self).pop(self.__class__._keylower(key), *args, **kwargs)
+        return super(
+            KeyCaseInsensitiveDict, self).pop(
+                self.__class__._keylower(key), *args, **kwargs)
 
     def get(self, key, *args, **kwargs):
 
         """Method:  get
 
-        Description:  Get the value for key.
+        Description:  Returns the value for a key.
 
         Arguments:
 
         """
 
-        return super(KeyCaseInsensitiveDict, self).get(self.__class__._keylower(key), *args, **kwargs)
+        return super(
+            KeyCaseInsensitiveDict, self).get(
+                self.__class__._keylower(key), *args, **kwargs)
 
     def setdefault(self, key, *args, **kwargs):
 
         """Method:  setdefault
 
-        Description:  Sets the default value for key.
+        Description:  Sets the default value for a key which does not exist
+            in the dictionary.
 
         Arguments:
 
         """
 
-        return super(KeyCaseInsensitiveDict, self).setdefault(self.__class__._keylower(key), *args, **kwargs)
+        return super(
+            KeyCaseInsensitiveDict, self).setdefault(
+                self.__class__._keylower(key), *args, **kwargs)
 
     def update(self, updatedict={}, **keyword):
 
         """Method:  update
 
-        Description:  Update the value for key.
+        Description:  Updates the value for key(s) passing a dictionary.
 
         Arguments:
 

@@ -61,6 +61,7 @@ coverage run -a --source=gen_class test/unit/gen_class/dnf_get_all_repos.py
 coverage run -a --source=gen_class test/unit/gen_class/dnf_get_enabled_repos.py
 coverage run -a --source=gen_class test/unit/gen_class/dnf_get_installed.py
 coverage run -a --source=gen_class test/unit/gen_class/dnf_get_updates.py
+coverage run -a --source=gen_class test/unit/gen_class/keycaseinsensitivedict_init.py
 coverage run -a --source=gen_class test/unit/gen_class/logfile_filter_ignore.py
 coverage run -a --source=gen_class test/unit/gen_class/logfile_filter_keyword.py
 coverage run -a --source=gen_class test/unit/gen_class/logfile_filter_regex.py

@@ -53,6 +53,7 @@ echo "Unit test: gen_class module"
 /usr/bin/python2 ./test/unit/gen_class/dnf_get_enabled_repos.py
 /usr/bin/python2 ./test/unit/gen_class/dnf_get_installed.py
 /usr/bin/python2 ./test/unit/gen_class/dnf_get_updates.py
+/usr/bin/python2 ./test/unit/gen_class/keycaseinsensitivedict_init.py
 /usr/bin/python2 ./test/unit/gen_class/logfile_filter_ignore.py
 /usr/bin/python2 ./test/unit/gen_class/logfile_filter_keyword.py
 /usr/bin/python2 ./test/unit/gen_class/logfile_filter_regex.py
