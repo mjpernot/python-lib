@@ -1719,6 +1719,26 @@ class KeyCaseInsensitiveDict(dict):
         converts all the keys to lower-case, then all further methods operate
         on this lower-case mode.
 
+    Note: This class will only convert the base dictionary keys to lowercase,
+        any embedded dictionaries within the base dictionary will not be
+        converted.  You would need to create an instantation of the
+        KeyCaseInsensitiveDict class within the base class instantation.
+
+        Example:
+        # Base Instance:
+        data = {"THis": "Test", "AnD": "Line"}
+        data2 = {'Four': 'Fourth'}
+        mine = cidict.KeyCaseInsensitiveDict(data)
+        # Inner Instance:
+        mine['Five'] = cidict.KeyCaseInsensitiveDict(data2)
+        mine
+        {'this': 'Test', 'and': 'Line', 'five': {'four': 'Fourth'}}
+        # Adding to Inner Instance:
+        mine['Five']["Six"] = "Sixth"
+        mine
+        {'this': 'Test', 'and': 'Line', 'five': {
+            'four': 'Fourth', 'six': 'Sixth'}}
+
     Methods:
         _keylower
         __init__
