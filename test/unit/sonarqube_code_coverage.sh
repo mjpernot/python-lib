@@ -189,6 +189,7 @@ coverage run -a --source=gen_class test/unit/gen_class/keycaseinsensitivedict_ke
 coverage run -a --source=gen_class test/unit/gen_class/keycaseinsensitivedict_pop.py
 coverage run -a --source=gen_class test/unit/gen_class/keycaseinsensitivedict_setdefault.py
 coverage run -a --source=gen_class test/unit/gen_class/keycaseinsensitivedict_setitem.py
+coverage run -a --source=gen_class test/unit/gen_class/keycaseinsensitivedict_update.py
 coverage run -a --source=gen_class test/unit/gen_class/logfile_filter_ignore.py
 coverage run -a --source=gen_class test/unit/gen_class/logfile_filter_keyword.py
 coverage run -a --source=gen_class test/unit/gen_class/logfile_filter_regex.py

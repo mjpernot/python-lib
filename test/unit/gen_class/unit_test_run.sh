@@ -63,6 +63,7 @@ echo "Unit test: gen_class module"
 /usr/bin/python2 ./test/unit/gen_class/keycaseinsensitivedict_pop.py
 /usr/bin/python2 ./test/unit/gen_class/keycaseinsensitivedict_setdefault.py
 /usr/bin/python2 ./test/unit/gen_class/keycaseinsensitivedict_setitem.py
+/usr/bin/python2 ./test/unit/gen_class/keycaseinsensitivedict_update.py
 /usr/bin/python2 ./test/unit/gen_class/logfile_filter_ignore.py
 /usr/bin/python2 ./test/unit/gen_class/logfile_filter_keyword.py
 /usr/bin/python2 ./test/unit/gen_class/logfile_filter_regex.py
