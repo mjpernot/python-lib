@@ -66,6 +66,7 @@ sudo pip install -r requirements.txt --upgrade --trusted-host pypi.appdev.proj.c
 ```
 
 Redhat 8 (Running Python 3.6):
+NOTE: Install as the user that will use the package.
 ```
 python -m pip install --user -r requirements-python3.txt --upgrade --trusted-host pypi.appdev.proj.coe.ic.gov
 ```
