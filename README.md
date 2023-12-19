@@ -59,15 +59,15 @@ git clone git@sc.appdev.proj.coe.ic.gov:JAC-DSXD/python-lib.git
 
 Install/upgrade system modules.
 
-Centos 7:
+Centos 7 (Running Python 2.7):
 
 ```
 sudo pip install -r requirements.txt --upgrade --trusted-host pypi.appdev.proj.coe.ic.gov
 ```
 
-Redhat 8 (Running Python 3):
+Redhat 8 (Running Python 3.6):
 ```
-sudo python -m pip install --user -r requirements.txt --upgrade --trusted-host pypi.appdev.proj.coe.ic.gov
+python -m pip install --user -r requirements-python3.txt --upgrade --trusted-host pypi.appdev.proj.coe.ic.gov
 ```
 
 ### Testing:
