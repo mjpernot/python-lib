@@ -130,10 +130,10 @@ import json
 import ast
 import gzip
 import calendar
-import chardet
 import base64
 import binascii
 import errno
+import chardet
 
 # Local
 try:
@@ -1710,44 +1710,24 @@ def merge_data_types(data1, data2):
     data = None
 
     if isinstance(data1, str_type()) \
-         and (isinstance(data1, str_type()) == isinstance(data2, str_type())):
+       and (isinstance(data1, str_type()) == isinstance(data2, str_type())):
         data = data1 + data2
 
     elif isinstance(data1, list) \
-         and (isinstance(data1, list) == isinstance(data2, list)):
+       and (isinstance(data1, list) == isinstance(data2, list)):
         data = list(data1) + list(data2)
 
     elif isinstance(data1, tuple) \
-         and (isinstance(data1, tuple) == isinstance(data2, tuple)):
+       and (isinstance(data1, tuple) == isinstance(data2, tuple)):
         data = data1 + data2
 
     elif isinstance(data1, dict) \
-         and (isinstance(data1, dict) == isinstance(data2, dict)):
+       and (isinstance(data1, dict) == isinstance(data2, dict)):
         data, _, _ = merge_two_dicts(dict(data1), dict(data2))
 
     else:
         status = False
         err_msg = "Inconsistent data types or not correct data type"
-
-    """
-    if type(data_1) == type(data_2):
-
-        if isinstance(data_1, (str, list, tuple)):
-            data = data_1 + data_2
-
-        elif isinstance(data_1, dict):
-            data_1 = dict(data_1)
-            data_2 = dict(data_2)
-            data, _, _ = merge_two_dicts(data_1, data_2)
-
-        else:
-            status = False
-            err_msg = "Not string, dictionary, list, or tuple data type"
-
-    else:
-        status = False
-        err_msg = "Inconsistent data types"
-    """
 
     return data, status, err_msg
 
