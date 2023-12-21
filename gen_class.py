@@ -1844,13 +1844,21 @@ class KeyCaseInsensitiveDict(dict):
 
         Description:  Returns True or False if key is present.
 
+        Note: The dictionary's has_key method has been removed in Python 3.
+
         Arguments:
 
         """
 
-        return super(
-            KeyCaseInsensitiveDict, self).has_key(
-                self.__class__._keylower(key))
+        if sys.version_info < (3, 0):
+            return super(
+                KeyCaseInsensitiveDict, self).has_key(
+                    self.__class__._keylower(key))
+
+        else:
+            return super(
+                KeyCaseInsensitiveDict, self).__contains__(
+                    self.__class__._keylower(key))
 
     def pop(self, key, *args, **kwargs):
 
