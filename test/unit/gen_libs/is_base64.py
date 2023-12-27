@@ -34,6 +34,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
+        test_with_bytes_data
         test_with_str_data5
         test_with_str_data4
         test_with_str_data3
@@ -59,6 +60,78 @@ class UnitTest(unittest.TestCase):
         self.data4 = 'this is a testa over and over12'
         self.data5 = 'this is a testa over and over123'
         self.data6 = 'this is a testa over and over1234'
+
+        if sys.version_info[0] == 3:
+            self.bytes = bytes(self.data2, "utf-8")
+            self.bytes2 = bytes(self.data3, "utf-8")
+            self.bytes3 = bytes(self.data4, "utf-8")
+            self.bytes4 = bytes(self.data5, "utf-8")
+            self.bytes5 = bytes(self.data6, "utf-8")
+
+    if sys.version_info[0] == 3:
+        def test_with_bytes_data5(self):
+
+            """Function:  test_with_bytes_data5
+
+            Description:  Test with bytes data of different lengths.
+
+            Arguments:
+
+            """
+
+            self.assertFalse(gen_libs.is_base64(self.bytes5))
+
+    if sys.version_info[0] == 3:
+        def test_with_bytes_data4(self):
+
+            """Function:  test_with_bytes_data4
+
+            Description:  Test with bytes data of different lengths.
+
+            Arguments:
+
+            """
+
+            self.assertFalse(gen_libs.is_base64(self.bytes4))
+
+    if sys.version_info[0] == 3:
+        def test_with_bytes_data3(self):
+
+            """Function:  test_with_bytes_data3
+
+            Description:  Test with bytes data of different lengths.
+
+            Arguments:
+
+            """
+
+            self.assertFalse(gen_libs.is_base64(self.bytes3))
+
+    if sys.version_info[0] == 3:
+        def test_with_bytes_data2(self):
+
+            """Function:  test_with_bytes_data2
+
+            Description:  Test with bytes data of different lengths.
+
+            Arguments:
+
+            """
+
+            self.assertFalse(gen_libs.is_base64(self.bytes2))
+
+    if sys.version_info[0] == 3:
+        def test_with_bytes_data(self):
+
+            """Function:  test_with_bytes_data
+
+            Description:  Test with bytes data of different lengths.
+
+            Arguments:
+
+            """
+
+            self.assertFalse(gen_libs.is_base64(self.bytes))
 
     def test_with_str_data5(self):
 
