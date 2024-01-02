@@ -1294,7 +1294,7 @@ def is_base64(data):
                 data_bytes = data
 
             else:
-                raise ValueError("Argument must be string or bytes")
+                #raise ValueError("Argument must be string or bytes")
                 status = False
 
             status = base64.b64encode(
