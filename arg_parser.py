@@ -559,7 +559,7 @@ def arg_valid_val(args_array, opt_valid_val):
     for item in set(args_array.keys()) & set(opt_valid_val.keys()):
 
         # If passed value is valid for this option.
-        if not args_array[item] in opt_valid_val[item]:
+        if args_array[item] not in opt_valid_val[item]:
             print("Error:  Incorrect value ({0}) for option: {1}".
                   format(args_array[item], item))
             status = False
