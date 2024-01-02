@@ -34,6 +34,11 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
+        test_with_int_data
+        test_with_bytes_data5
+        test_with_bytes_data4
+        test_with_bytes_data3
+        test_with_bytes_data2
         test_with_bytes_data
         test_with_str_data5
         test_with_str_data4
@@ -67,8 +72,21 @@ class UnitTest(unittest.TestCase):
             self.bytes3 = bytes(self.data4, "utf-8")
             self.bytes4 = bytes(self.data5, "utf-8")
             self.bytes5 = bytes(self.data6, "utf-8")
+            self.bytes6 = 12345
 
     if sys.version_info[0] == 3:
+        def test_with_int_data(self):
+
+            """Function:  test_with_int_data
+
+            Description:  Test with integer data.
+
+            Arguments:
+
+            """
+
+            self.assertFalse(gen_libs.is_base64(self.bytes6))
+
         def test_with_bytes_data5(self):
 
             """Function:  test_with_bytes_data5
