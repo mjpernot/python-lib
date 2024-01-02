@@ -34,6 +34,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
+        test_merge_str_unicode
         test_data1_notequal_data2
         test_data1_equal_data2
         test_merge_string
@@ -58,6 +59,7 @@ class UnitTest(unittest.TestCase):
         self.data_2_i = 2
         self.data_1_s = "Good "
         self.data_2_s = "test"
+        self.data_3_s = u"test2"
         self.data_1_d = {"a": 1, "b": 2}
         self.data_2_d = {"c": 3, "d": 4}
         self.data_1_t = (1, 2, 3)
@@ -67,15 +69,30 @@ class UnitTest(unittest.TestCase):
 
         self.status_f = False
         self.status_t = True
-        self.err_msg_1 = "Not string, dictionary, list, or tuple data type"
-        self.err_msg_2 = "Inconsistent data types"
+        self.err_msg_1 = "Inconsistent data types or not correct data type"
         self.err_msg_n = ""
 
         self.data_s = "Good test"
+        self.data2_s = "Good test2"
         self.data_t = (1, 2, 3, 4, 5, 6)
         self.data_l = [1, 2, 3, 4, 5, 6]
         self.data_d = {"a": 1, "b": 2, "c": 3, "d": 4}
         self.data_n = None
+
+    def test_merge_str_unicode(self):
+
+        """Function:  test_merge_str_unicode
+
+        Description:  Test with merge a string and unicode string.
+
+        Arguments:
+
+        """
+
+        self.assertEqual(
+            gen_libs.merge_data_types(
+                self.data_1_s, self.data_3_s), (
+                    self.data2_s, self.status_t, self.err_msg_n))
 
     def test_data1_notequal_data2(self):
 
@@ -87,9 +104,10 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertEqual(gen_libs.merge_data_types(self.data_1_i,
-                                                   self.data_2_s),
-                         (self.data_n, self.status_f, self.err_msg_2))
+        self.assertEqual(
+            gen_libs.merge_data_types(
+                self.data_1_i, self.data_2_s), (
+                    self.data_n, self.status_f, self.err_msg_1))
 
     def test_data1_equal_data2(self):
 
@@ -101,9 +119,10 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertEqual(gen_libs.merge_data_types(self.data_1_s,
-                                                   self.data_2_s),
-                         (self.data_s, self.status_t, self.err_msg_n))
+        self.assertEqual(
+            gen_libs.merge_data_types(
+                self.data_1_s, self.data_2_s), (
+                    self.data_s, self.status_t, self.err_msg_n))
 
     def test_merge_string(self):
 
@@ -115,9 +134,10 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertEqual(gen_libs.merge_data_types(self.data_1_s,
-                                                   self.data_2_s),
-                         (self.data_s, self.status_t, self.err_msg_n))
+        self.assertEqual(
+            gen_libs.merge_data_types(
+                self.data_1_s, self.data_2_s), (
+                    self.data_s, self.status_t, self.err_msg_n))
 
     def test_merge_list(self):
 
@@ -129,9 +149,10 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertEqual(gen_libs.merge_data_types(self.data_1_l,
-                                                   self.data_2_l),
-                         (self.data_l, self.status_t, self.err_msg_n))
+        self.assertEqual(
+            gen_libs.merge_data_types(
+                self.data_1_l, self.data_2_l), (
+                    self.data_l, self.status_t, self.err_msg_n))
 
     def test_merge_tuple(self):
 
@@ -143,9 +164,10 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertEqual(gen_libs.merge_data_types(self.data_1_t,
-                                                   self.data_2_t),
-                         (self.data_t, self.status_t, self.err_msg_n))
+        self.assertEqual(
+            gen_libs.merge_data_types(
+                self.data_1_t, self.data_2_t), (
+                    self.data_t, self.status_t, self.err_msg_n))
 
     def test_merge_dict(self):
 
@@ -157,9 +179,10 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertEqual(gen_libs.merge_data_types(self.data_1_d,
-                                                   self.data_2_d),
-                         (self.data_d, self.status_t, self.err_msg_n))
+        self.assertEqual(
+            gen_libs.merge_data_types(
+                self.data_1_d, self.data_2_d), (
+                    self.data_d, self.status_t, self.err_msg_n))
 
     def test_non_merge(self):
 
@@ -171,9 +194,10 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertEqual(gen_libs.merge_data_types(self.data_1_i,
-                                                   self.data_2_i),
-                         (self.data_n, self.status_f, self.err_msg_1))
+        self.assertEqual(
+            gen_libs.merge_data_types(
+                self.data_1_i, self.data_2_i), (
+                    self.data_n, self.status_f, self.err_msg_1))
 
 
 if __name__ == "__main__":

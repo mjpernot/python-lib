@@ -12,6 +12,8 @@
         ArgParser
         Daemon
         Daemon2
+        Dnf
+        KeyCaseInsensitiveDict
         LogFile
         ProgressBar
         SingleInstanceException
@@ -36,7 +38,6 @@ import fcntl
 import tempfile
 import logging
 import socket
-import smtplib
 import time
 import atexit
 import signal
@@ -49,8 +50,14 @@ import io
 import gzip
 import json
 import re
+import smtplib
+from email import encoders
+from email.mime.base import MIMEBase
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+import dnf
 
-# yum==3.4.3 does not work in Python 3
+# Yum for Python 2.7 only
 if sys.version_info < (3, 0):
     import yum
 
@@ -154,10 +161,6 @@ class ArgParser(object):
         arg_dir_chk
             dir_perms_chk       -> dir_perms_chk
 
-        arg_dir_chk_crt
-            dir_chk_list        -> dir_chk
-            dir_crt_list        -> dir_crt
-
         arg_dir_crt
             dir_perms_crt       -> dir_perms_crt
 
@@ -197,7 +200,6 @@ class ArgParser(object):
         arg_cond_req_or
         arg_default
         arg_dir_chk
-        arg_dir_chk_crt
         arg_dir_crt
         arg_exist
         arg_file_chk
@@ -286,10 +288,6 @@ class ArgParser(object):
 
         # For arg_dir_chk method
         self.dir_perms_chk = dict(kwargs.get("dir_perms_chk", {}))
-
-        # For arg_dir_chk_crt method
-        self.dir_chk = list(kwargs.get("dir_chk", []))
-        self.dir_crt = list(kwargs.get("dir_crt", []))
 
         # For arg_dir_crt method
         self.dir_perms_crt = dict(kwargs.get("dir_perms_crt", {}))
@@ -471,51 +469,6 @@ class ArgParser(object):
             else:
                 status = status & gen_libs.chk_perm(
                     self.args_array[item], dir_perms_chk[item])
-
-        return status
-
-    def arg_dir_chk_crt(self, **kwargs):
-
-        """Method:  arg_dir_chk_crt
-
-        Description:  Checks to see if the directory options have access to the
-            directories and create directory if requested.
-
-        Arguments:
-            (input) **kwargs:
-                dir_chk -> Options which will have directories
-                dir_crt -> Options to create directories if not present
-            (output) status -> True|False - If directories are available
-
-        """
-
-        dir_chk = list(kwargs.get("dir_chk", self.dir_chk))
-        dir_crt = list(kwargs.get("dir_crt", self.dir_crt))
-        status = True
-
-        if set(dir_crt).issubset(set(dir_chk)):
-
-            for item in set(dir_chk) & set(self.args_array.keys()):
-
-                if not os.path.isdir(self.args_array[item]) and \
-                   item in dir_crt:
-
-                    status = gen_libs.make_dir(self.args_array[item])
-
-                elif not os.path.isdir(self.args_array[item]):
-                    print("Error: {0} does not exist.".
-                          format(self.args_array[item]))
-                    status = False
-
-                elif not os.access(self.args_array[item], os.W_OK):
-                    print("Error: {0} is not writable.".
-                          format(self.args_array[item]))
-                    status = False
-
-        else:
-            print("Error:  dir_crt_list: {0} is not a subset of dir_chk: {1}"
-                  .format(dir_crt, dir_chk))
-            status = False
 
         return status
 
@@ -1614,6 +1567,371 @@ class Daemon2(object):
         """
 
 
+class Dnf(object):
+    """Class:  Dnf
+
+    Description: Class which is a representation for python3-dnf class.  A dnf
+        object is used as a proxy for using the dnf command.
+
+    Methods:
+        __init__
+        capture_pkgs
+        capture_repos
+        get_all_repos
+        get_enabled_repos
+        get_installed
+        get_updates
+
+    """
+
+    def __init__(self):
+
+        """Method:  __init__
+
+        Description:  Initialization of an instance of the Dnf class.
+
+        Arguments:
+
+        """
+
+        self.base = dnf.Base()
+        self.packages = None
+
+    def capture_pkgs(self):
+
+        """Method:  capture_pkgs
+
+        Description:  Query for all installed packages on the system.
+
+        Arguments:
+
+        """
+
+        self.base.fill_sack()
+        self.packages = self.base.sack.query()
+
+    def capture_repos(self):
+
+        """Method:  capture_repos
+
+        Description:  Query for all of the repos on the system.
+
+        Arguments:
+
+        """
+
+        self.base.read_all_repos()
+        self.base.fill_sack()
+
+    def get_all_repos(self, url=False):
+
+        """Method:  get_all_repos
+
+        Description:  Return a list of all the repos on the system.
+
+        Note: If including the url, then each item in the list will be a set:
+            Postition:
+                0: Repository Name
+                1: Reposirory Base URL
+
+        Arguments:
+            (input) url -> True|False - Include the repos base URL
+            (output) data -> List of repositories on the system
+
+        """
+
+        self.capture_repos()
+
+        if url:
+            data = [(rep.name, str(rep.baseurl))
+                    for rep in self.base.repos.all()]
+
+        else:
+            data = [rep.name for rep in self.base.repos.all()]
+
+        return data
+
+    def get_enabled_repos(self, url=False):
+
+        """Method:  get_enabled_repos
+
+        Description:  Return a list of enabled repos on the system.
+
+        Note: If including the url, then each item in the list will be a set:
+            Postition:
+                0: Repository Name
+                1: Reposirory Base URL
+
+        Arguments:
+            (input) url -> True|False - Include the repos base URL
+            (output) data -> List of enabled repositories on the system
+
+        """
+
+        self.capture_repos()
+
+        if url:
+            data = [(rep.name, str(rep.baseurl))
+                    for rep in self.base.repos.iter_enabled()]
+
+        else:
+            data = [rep.name for rep in self.base.repos.iter_enabled()]
+
+        return data
+
+    def get_installed(self):
+
+        """Method:  get_installed
+
+        Description:  Return list of installed packages.
+
+        Arguments:
+
+        """
+
+        self.capture_pkgs()
+        ins_pkg = self.packages.installed()
+
+        return [str(pkg) for pkg in ins_pkg]
+
+    def get_updates(self):
+
+        """Method:  get_updates
+
+        Description:  Return list of packages that have updates available.
+
+        Arguments:
+
+        """
+
+        self.capture_repos()
+        query = self.base.sack.query()
+
+        return [str(pkg) for pkg in query.upgrades().latest(1)]
+
+
+class KeyCaseInsensitiveDict(dict):
+
+    """Class:  KeyCaseInsensitiveDict
+
+    Description:  Is a key case insensitive dictionary.  Takes a dictionary and
+        converts all the keys to lower-case, then all further methods operate
+        on this lower-case mode.
+
+    Note: This class will only convert the base dictionary keys to lowercase,
+        any embedded dictionaries within the base dictionary will not be
+        converted.  You would need to create an instantation of the
+        KeyCaseInsensitiveDict class within the base class instantation.
+
+        Example:
+        # Base Instance:
+        data = {"THis": "Test", "AnD": "Line"}
+        data2 = {'Four': 'Fourth'}
+        mine = cidict.KeyCaseInsensitiveDict(data)
+        # Inner Instance:
+        mine['Five'] = cidict.KeyCaseInsensitiveDict(data2)
+        mine
+        {'this': 'Test', 'and': 'Line', 'five': {'four': 'Fourth'}}
+        # Adding to Inner Instance:
+        mine['Five']["Six"] = "Sixth"
+        mine
+        {'this': 'Test', 'and': 'Line', 'five': {
+            'four': 'Fourth', 'six': 'Sixth'}}
+
+    Methods:
+        _keylower
+        __init__
+        __getitem__
+        __setitem__
+        __delitem__
+        __contains__
+        has_key
+        pop
+        get
+        setdefault
+        update
+        _convert_keys
+
+    """
+
+    @classmethod
+    def _keylower(cls, key):
+
+        """Class Method:  _keylower
+
+        Description:  Converts the dictionary key to lower case.
+
+        Arguments:
+
+        """
+
+        return key.lower() if isinstance(key, gen_libs.str_type()) else key
+
+    def __init__(self, *args, **kwargs):
+
+        """Method:  __init__
+
+        Description:  Initialization of an instance of the
+            KeyCaseInsensitiveDict class.
+
+        Arguments:
+
+        """
+
+        super(KeyCaseInsensitiveDict, self).__init__(*args, **kwargs)
+        self._convert_keys()
+
+    def __getitem__(self, key):
+
+        """Method:  __getitem__
+
+        Description:  Return the key's value.
+
+        Arguments:
+
+        """
+
+        return super(
+            KeyCaseInsensitiveDict, self).__getitem__(
+                self.__class__._keylower(key))
+
+    def __setitem__(self, key, value):
+
+        """Method:  __setitem__
+
+        Description:  Sets the value for a key.
+
+        Arguments:
+
+        """
+
+        super(
+            KeyCaseInsensitiveDict, self).__setitem__(
+                self.__class__._keylower(key), value)
+
+    def __delitem__(self, key):
+
+        """Method:  __delitem__
+
+        Description:  Deletes a key from the dictionary using the del command.
+
+        Arguments:
+
+        """
+
+        return super(
+            KeyCaseInsensitiveDict, self).__delitem__(
+                self.__class__._keylower(key))
+
+    def __contains__(self, key):
+
+        """Method:  __contains__
+
+        Description:  Returns True or False whether a key exist.
+
+        Arguments:
+
+        """
+
+        return super(
+            KeyCaseInsensitiveDict, self).__contains__(
+                self.__class__._keylower(key))
+
+    def has_key(self, key):
+
+        """Method:  has_key
+
+        Description:  Returns True or False if key is present.
+
+        Note: The dictionary's has_key method has been removed in Python 3.
+
+        Arguments:
+
+        """
+
+        if sys.version_info < (3, 0):
+            return super(
+                KeyCaseInsensitiveDict, self).has_key(
+                    self.__class__._keylower(key))
+
+        else:
+            return super(
+                KeyCaseInsensitiveDict, self).__contains__(
+                    self.__class__._keylower(key))
+
+    def pop(self, key, *args, **kwargs):
+
+        """Method:  pop
+
+        Description:  Deletes key from dictionary using the pop command.
+
+        Arguments:
+
+        """
+
+        return super(
+            KeyCaseInsensitiveDict, self).pop(
+                self.__class__._keylower(key), *args, **kwargs)
+
+    def get(self, key, *args, **kwargs):
+
+        """Method:  get
+
+        Description:  Returns the value for a key.
+
+        Arguments:
+
+        """
+
+        return super(
+            KeyCaseInsensitiveDict, self).get(
+                self.__class__._keylower(key), *args, **kwargs)
+
+    def setdefault(self, key, *args, **kwargs):
+
+        """Method:  setdefault
+
+        Description:  Sets the default value for a key which does not exist
+            in the dictionary.
+
+        Arguments:
+
+        """
+
+        return super(
+            KeyCaseInsensitiveDict, self).setdefault(
+                self.__class__._keylower(key), *args, **kwargs)
+
+    def update(self, updatedict=None, **keyword):
+
+        """Method:  update
+
+        Description:  Updates the value for key(s) passing a dictionary.
+
+        Arguments:
+
+        """
+
+        updatedict = dict() if updatedict is None else dict(updatedict)
+
+        super(KeyCaseInsensitiveDict, self).update(self.__class__(updatedict))
+        super(KeyCaseInsensitiveDict, self).update(self.__class__(**keyword))
+
+    def _convert_keys(self):
+
+        """Method:  _convert_keys
+
+        Description:  Converts all of the keys in a dictionary to lower case.
+
+        Arguments:
+
+        """
+
+        for key in list(self.keys()):
+            val = super(KeyCaseInsensitiveDict, self).pop(key)
+            self.__setitem__(key, val)
+
+
 class LogFile(object):
 
     """Class:  LogFile
@@ -2130,6 +2448,106 @@ class System(object):
             self.host_name = socket.gethostname()
 
 
+class Mail2(object):
+
+    """Class:  Mail2
+
+    Description:  Improved version of the Mail class.  Much cleaner and uses
+        the email and smtplib modules for creating and sending the email.  Also
+        allows for attachments to the email.
+
+    Methods:
+        __init__
+        add_attachment
+        add_text
+        send_email
+
+    """
+
+    def __init__(self, subject, toaddrs, fromaddr=None):
+
+        """Method:  __init__
+
+        Description:  Initialization of an instance of the Mail2 class.
+
+        Arguments:
+            (input) subject -> Subject line of mail
+            (input) toaddrs -> To email addresses
+            (input) fromaddr -> From email address
+
+        """
+
+        # Dictionary of file types/extensions and their associated MIME types
+        self.ftypes = {
+            "plain": "plain", "text": "plain", "sh": "x-sh", "x-sh": "x-sh",
+            "tar": "x-tar", "x-tar": "x-tar", "pdf": "pdf", "json": "json",
+            "gz": "gzip", "gzip": "gzip"}
+        self.subj = " ".join(subject) if type(subject) is list else subject
+        self.toaddrs = ",".join(toaddrs) if type(toaddrs) is list else toaddrs
+        self.fromaddr = fromaddr if fromaddr else \
+            getpass.getuser() + "@" + socket.gethostname()
+
+        self.msg = MIMEMultipart()
+        self.msg["From"] = self.fromaddr
+        self.msg["To"] = self.toaddrs
+        self.msg["Subject"] = self.subj
+
+    def add_attachment(self, fname, ftype, data):
+
+        """Method:  add_attachment
+
+        Description:  Converts the file data into base64 format and attaches
+            the data and filename to the email.
+
+        Arguments:
+            (input) fname -> File name          # Include directory path?
+            (input) ftype -> File extension name
+            (input) data -> Data from the file (i.e. already read into python)
+
+        """
+
+        ftype = self.ftypes[ftype] if ftype in self.ftypes else None
+
+        if ftype:
+            attach = MIMEBase("application", ftype)
+            attach.set_payload(str(data))
+            encoders.encode_base64(attach)
+            attach.add_header(
+                "Content-Disposition", "attachment", filename=fname)
+            self.msg.attach(attach)
+
+    def add_text(self, data, ftype="plain"):
+
+        """Method:  add_text
+
+        Description:  Adds the data to the mail body.
+
+        Arguments:
+            (input) data -> Data in a string format
+            (input) ftype -> File extension name (e.g. plain, text)
+
+        """
+
+        self.msg.attach(MIMEText(data, ftype))
+
+    def send_email(self, host="localhost"):
+
+        """Method:  send_email
+
+        Description:  Converts the mail content to a string and mails out the
+            message using SMTP.sendmail.
+
+        Arguments:
+            (input) host -> Only set if the server cannot send emails
+
+        """
+
+        text = self.msg.as_string()
+        mail = smtplib.SMTP(host)
+        mail.sendmail(self.fromaddr, self.toaddrs, text)
+        mail.quit()
+
+
 class Mail(System):
 
     """Class:  Mail
@@ -2159,12 +2577,12 @@ class Mail(System):
         Description:  Initialization of an instance of the Mail class.
 
         Arguments:
-            (input) toaddr -> To email address.
-            (input) subj -> Subject line of mail.
-            (input) msg_type -> Type of email being sent.
-            (input) frm -> From email address.
-            (input) host -> 'localhost' or IP.
-            (input) host_name -> Host name of server.
+            (input) toaddr -> To email address
+            (input) subj -> Subject line of mail
+            (input) msg_type -> Type of email being sent
+            (input) frm -> From email address
+            (input) host -> 'localhost' or IP
+            (input) host_name -> Host name of server
 
         """
 
@@ -2197,8 +2615,8 @@ class Mail(System):
         Description:  Add text to text string if data is present.
 
         Arguments:
-            (input) txt_ln -> Line of text to add to message.
-            (input) new_line -> True | False - Add a newline between lines.
+            (input) txt_ln -> Line of text to add to message
+            (input) new_line -> True | False - Add a newline between lines
 
         """
 
@@ -2259,8 +2677,8 @@ class Mail(System):
         Description:  Creates or overwrites a subject to the email.
 
         Arguments:
-            (input) subj -> Subject line.
-            (input) delimiter -> Subject line delimiter if using a list.
+            (input) subj -> Subject line
+            (input) delimiter -> Subject line delimiter if using a list
 
         """
 
@@ -2283,7 +2701,7 @@ class Mail(System):
             send_mail to need only an argument option.
 
         Arguments:
-            (input) use_mailx -> True|False - To use mailx command.
+            (input) use_mailx -> True|False - To use mailx command
 
         """
 

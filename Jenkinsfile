@@ -33,8 +33,6 @@ pipeline {
                 /usr/bin/python2 ./test/unit/arg_parser/parse_multi.py
                 /usr/bin/python2 ./test/unit/arg_parser/parse_single.py
                 /usr/bin/python2 ./test/unit/arg_parser/file_create.py
-                /usr/bin/python2 ./test/unit/cmds_gen/add_cmd.py
-                /usr/bin/python2 ./test/unit/cmds_gen/is_add_cmd.py
                 /usr/bin/python2 ./test/unit/errors/emptyrowerror.py
                 /usr/bin/python2 ./test/unit/errors/error.py
                 /usr/bin/python2 ./test/unit/errors/nooptionerror.py
@@ -144,7 +142,6 @@ pipeline {
                 /usr/bin/python2 ./test/unit/gen_class/argparser_arg_cond_req_or.py
                 /usr/bin/python2 ./test/unit/gen_class/argparser_arg_default.py
                 /usr/bin/python2 ./test/unit/gen_class/argparser_arg_dir_chk.py
-                /usr/bin/python2 ./test/unit/gen_class/argparser_arg_dir_chk_crt.py
                 /usr/bin/python2 ./test/unit/gen_class/argparser_arg_dir_crt.py
                 /usr/bin/python2 ./test/unit/gen_class/argparser_arg_exist.py
                 /usr/bin/python2 ./test/unit/gen_class/argparser_arg_file_chk.py
