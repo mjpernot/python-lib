@@ -20,6 +20,7 @@
         ProgramLock
         System
             Mail
+        Mail2
         TimeFormat
         Logger
         Yum
@@ -38,6 +39,7 @@ import fcntl
 import tempfile
 import logging
 import socket
+import base64
 import time
 import atexit
 import signal
@@ -51,11 +53,11 @@ import gzip
 import json
 import re
 import smtplib
+import dnf
 from email import encoders
 from email.mime.base import MIMEBase
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-import dnf
 
 # Yum for Python 2.7 only
 if sys.version_info < (3, 0):
@@ -1566,7 +1568,6 @@ class Daemon2(object):
 
         """
 
-
 class Dnf(object):
     """Class:  Dnf
 
@@ -1581,7 +1582,7 @@ class Dnf(object):
         get_enabled_repos
         get_installed
         get_updates
-
+        
     """
 
     def __init__(self):
@@ -1608,7 +1609,8 @@ class Dnf(object):
         """
 
         self.base.fill_sack()
-        self.packages = self.base.sack.query()
+        self.packages = self.base.sack.query() 
+        
 
     def capture_repos(self):
 
@@ -1782,7 +1784,7 @@ class KeyCaseInsensitiveDict(dict):
         self._convert_keys()
 
     def __getitem__(self, key):
-
+ 
         """Method:  __getitem__
 
         Description:  Return the key's value.
@@ -1792,8 +1794,8 @@ class KeyCaseInsensitiveDict(dict):
         """
 
         return super(
-            KeyCaseInsensitiveDict, self).__getitem__(
-                self.__class__._keylower(key))
+           KeyCaseInsensitiveDict, self).__getitem__(
+               self.__class__._keylower(key))
 
     def __setitem__(self, key, value):
 
@@ -1843,21 +1845,13 @@ class KeyCaseInsensitiveDict(dict):
 
         Description:  Returns True or False if key is present.
 
-        Note: The dictionary's has_key method has been removed in Python 3.
-
         Arguments:
 
         """
 
-        if sys.version_info < (3, 0):
-            return super(
-                KeyCaseInsensitiveDict, self).has_key(
-                    self.__class__._keylower(key))
-
-        else:
-            return super(
-                KeyCaseInsensitiveDict, self).__contains__(
-                    self.__class__._keylower(key))
+        return super(
+            KeyCaseInsensitiveDict, self).has_key(
+                self.__class__._keylower(key))
 
     def pop(self, key, *args, **kwargs):
 
@@ -1902,7 +1896,7 @@ class KeyCaseInsensitiveDict(dict):
             KeyCaseInsensitiveDict, self).setdefault(
                 self.__class__._keylower(key), *args, **kwargs)
 
-    def update(self, updatedict=None, **keyword):
+    def update(self, updatedict={}, **keyword):
 
         """Method:  update
 
@@ -1911,8 +1905,6 @@ class KeyCaseInsensitiveDict(dict):
         Arguments:
 
         """
-
-        updatedict = dict() if updatedict is None else dict(updatedict)
 
         super(KeyCaseInsensitiveDict, self).update(self.__class__(updatedict))
         super(KeyCaseInsensitiveDict, self).update(self.__class__(**keyword))
@@ -2485,7 +2477,7 @@ class Mail2(object):
         self.subj = " ".join(subject) if type(subject) is list else subject
         self.toaddrs = ",".join(toaddrs) if type(toaddrs) is list else toaddrs
         self.fromaddr = fromaddr if fromaddr else \
-            getpass.getuser() + "@" + socket.gethostname()
+                        getpass.getuser() + "@" + socket.gethostname()
 
         self.msg = MIMEMultipart()
         self.msg["From"] = self.fromaddr

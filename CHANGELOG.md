@@ -7,6 +7,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 ## [3.0.0] - 2023-11-07
 Breaking Changes
 
+- Added new class: Dnf.
 - Added new class: Mail2.
 - Added new class: KeyCaseInsensitiveDict.
 - Removed cmds_gen module.
@@ -16,9 +17,10 @@ Breaking Changes
 - gen_libs.merge_data_types: Fixed to allow str and unicode strings to be merged in Python 2.7.
 
 ### Added
+- gen_class: Dnf: Is the replacement for Yum class in Python 3.
 - gen_class: KeyCaseInsensitiveDict: Is a key case-insensitive dictionary/
 - gen_libs: is_base64: Determine if data is base64.
-- gen_class: Mail2 along with methods: add_attachment, add_text, send_email.
+- gen_class: Mail2: Improved version of the Mail class using email and smtplib modules and allow for attaching files.
 
 ### Changed
 - gen_libs.make_dir: Changed checking error numbers to using the errno module.
