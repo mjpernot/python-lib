@@ -36,9 +36,20 @@ pip install -r requirements-python-lib.txt --target lib --trusted-host pypi.appd
 
 ##### Add the general python-lib requirements to the other program's requirements.txt file.  Remove any duplicates.
 
+Centos 7 (Running Python 2.7):
 Add/modify the following lines to the {Other_Python_Project}/requirements.txt file:
 
 ```
+chardet==4.0.0
+email==4.0.3
+simplejson==2.0.9
+```
+
+Redhat 8 (Running Python 3.6):
+Add/modify the following lines to the {Other_Python_Project}/requirements.txt file:
+
+```
+chardet==4.0.0
 simplejson==2.0.9
 ```
 
@@ -52,40 +63,55 @@ simplejson==2.0.9
 Install the project using git.
 
 ```
-cd {Python_Project}
 git clone git@sc.appdev.proj.coe.ic.gov:JAC-DSXD/python-lib.git
 ```
 
 Install/upgrade system modules.
 
+Centos 7 (Running Python 2.7):
+
 ```
-cd python-lib
-sudo bash
-umask 022
-pip install -r requirements.txt --upgrade --trusted-host pypi.appdev.proj.coe.ic.gov
-exit
+sudo pip install -r requirements.txt --upgrade --trusted-host pypi.appdev.proj.coe.ic.gov
+```
+
+Redhat 8 (Running Python 3.6):
+NOTE: Install as the user that will use the package.
+
+```
+python -m pip install --user -r requirements-python3.txt --upgrade --trusted-host pypi.appdev.proj.coe.ic.gov
 ```
 
 ### Testing:
 
+Centos 7 (Running Python 2.7):
+
 ```
-cd {Python_Project}/python-lib
+cd python-lib
 test/unit/gen_libs/unit_test_run.sh
 test/unit/arg_parser/unit_test_run.sh
 test/unit/gen_class/unit_test_run.sh
-test/unit/cmds_gen/unit_test_run.sh
 test/unit/errors/unit_test_run.sh
 test/unit/machine/unit_test_run.sh
+```
+
+Redhat 8 (Running Python 3.6):
+
+```
+cd python-lib
+test/unit/gen_libs/unit_test_run3.sh
+test/unit/arg_parser/unit_test_run3.sh
+test/unit/gen_class/unit_test_run3.sh
+test/unit/errors/unit_test_run3.sh
+test/unit/machine/unit_test_run3.sh
 ```
 
 ### Code Coverage:
 
 ```
-cd {Python_Project}/python-lib
+cd python-lib
 test/unit/gen_libs/code_coverage.sh
 test/unit/arg_parser/code_coverage.sh
 test/unit/gen_class/code_coverage.sh
-test/unit/cmds_gen/code_coverage.sh
 test/unit/errors/code_coverage.sh
 test/unit/machine/code_coverage.sh
 ```
@@ -97,9 +123,20 @@ test/unit/machine/code_coverage.sh
 Install the project using the procedures in the Installation section under Unit Testing.
 
 ### Testing:
+
+Centos 7 (Running Python 2.7):
+
 ```
-cd {Python_Project}/python-lib
+cd python-lib
 test/unit/arg_parser/integration_test_run.sh
 test/unit/gen_libs/integration_test_run.sh
+```
+
+Redhat 8 (Running Python 3.6):
+
+```
+cd python-lib
+test/unit/arg_parser/integration_test_run3.sh
+test/unit/gen_libs/integration_test_run3.sh
 ```
 

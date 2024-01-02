@@ -4,6 +4,34 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [3.0.0] - 2023-11-07
+Breaking Changes
+
+- Added new class: Mail2.
+- Added new class: KeyCaseInsensitiveDict.
+- Removed cmds_gen module.
+- Removed gen_class.ArgParser.arg_dir_chk_crt method.
+
+### Fixed
+- gen_libs.merge_data_types: Fixed to allow str and unicode strings to be merged in Python 2.7.
+
+### Added
+- gen_class: KeyCaseInsensitiveDict: Is a key case-insensitive dictionary/
+- gen_libs: is_base64: Determine if data is base64.
+- gen_class: Mail2 along with methods: add_attachment, add_text, send_email.
+
+### Changed
+- gen_libs.make_dir: Changed checking error numbers to using the errno module.
+- gen_libs: help_func, is_add_cmd: Removed references to args_array and use only gen_class.ArgsParser.
+- arg_parser.arg_valid_val: Cleaned up confusing if statement.
+- Updated support module versions.
+- Documentation changes.
+
+### Removed
+- gen_class.ArgParser.arg_dir_chk_crt
+- Removed cmds_gen module and all testing units for cmds_gen module.
+
+
 ## [2.10.1] - 2023-04-18
 ### Fixed
 - gen_class.ArgParser.arg_set_path: Fixed missing trailing slash on path.
