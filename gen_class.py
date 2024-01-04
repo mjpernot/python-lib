@@ -53,7 +53,6 @@ import gzip
 import json
 import re
 import smtplib
-import dnf
 from email import encoders
 from email.mime.base import MIMEBase
 from email.mime.multipart import MIMEMultipart
@@ -62,6 +61,12 @@ from email.mime.text import MIMEText
 # Yum for Python 2.7 only
 if sys.version_info < (3, 0):
     import yum
+
+# Dnf for Python 3 and for Linux 8 platforms
+#   NOTE:  There are some Linux 7 platforms that provide the Dnf module, but
+#       not looking that deep.
+if sys.version_info[0] >= 3 and platform.linux_distribution()[1] > '8':
+    import dnf
 
 # Local
 try:
@@ -1568,148 +1573,152 @@ class Daemon2(object):
 
         """
 
-class Dnf(object):
-    """Class:  Dnf
+# The package dnf for only Linux 8 platforms and Python 3
+if sys.version_info[0] >= 3 and platform.linux_distribution()[1] > '8':
+    class Dnf(object):
+        """Class:  Dnf
 
-    Description: Class which is a representation for python3-dnf class.  A dnf
-        object is used as a proxy for using the dnf command.
+        Description: Class which is a representation for python3-dnf class.  A
+            dnf object is used as a proxy for using the dnf command.
 
-    Methods:
-        __init__
-        capture_pkgs
-        capture_repos
-        get_all_repos
-        get_enabled_repos
-        get_installed
-        get_updates
-        
-    """
-
-    def __init__(self):
-
-        """Method:  __init__
-
-        Description:  Initialization of an instance of the Dnf class.
-
-        Arguments:
-
+        Methods:
+            __init__
+            capture_pkgs
+            capture_repos
+            get_all_repos
+            get_enabled_repos
+            get_installed
+            get_updates
+            
         """
 
-        self.base = dnf.Base()
-        self.packages = None
+        def __init__(self):
 
-    def capture_pkgs(self):
+            """Method:  __init__
 
-        """Method:  capture_pkgs
+            Description:  Initialization of an instance of the Dnf class.
 
-        Description:  Query for all installed packages on the system.
+            Arguments:
 
-        Arguments:
+            """
 
-        """
+            self.base = dnf.Base()
+            self.packages = None
 
-        self.base.fill_sack()
-        self.packages = self.base.sack.query() 
-        
+        def capture_pkgs(self):
 
-    def capture_repos(self):
+            """Method:  capture_pkgs
 
-        """Method:  capture_repos
+            Description:  Query for all installed packages on the system.
 
-        Description:  Query for all of the repos on the system.
+            Arguments:
 
-        Arguments:
+            """
 
-        """
+            self.base.fill_sack()
+            self.packages = self.base.sack.query() 
+            
 
-        self.base.read_all_repos()
-        self.base.fill_sack()
+        def capture_repos(self):
 
-    def get_all_repos(self, url=False):
+            """Method:  capture_repos
 
-        """Method:  get_all_repos
+            Description:  Query for all of the repos on the system.
 
-        Description:  Return a list of all the repos on the system.
+            Arguments:
 
-        Note: If including the url, then each item in the list will be a set:
-            Postition:
-                0: Repository Name
-                1: Reposirory Base URL
+            """
 
-        Arguments:
-            (input) url -> True|False - Include the repos base URL
-            (output) data -> List of repositories on the system
+            self.base.read_all_repos()
+            self.base.fill_sack()
 
-        """
+        def get_all_repos(self, url=False):
 
-        self.capture_repos()
+            """Method:  get_all_repos
 
-        if url:
-            data = [(rep.name, str(rep.baseurl))
-                    for rep in self.base.repos.all()]
+            Description:  Return a list of all the repos on the system.
 
-        else:
-            data = [rep.name for rep in self.base.repos.all()]
+            Note: If including the url, then each item in the list will be a
+                set.
+                Postition:
+                    0: Repository Name
+                    1: Reposirory Base URL
 
-        return data
+            Arguments:
+                (input) url -> True|False - Include the repos base URL
+                (output) data -> List of repositories on the system
 
-    def get_enabled_repos(self, url=False):
+            """
 
-        """Method:  get_enabled_repos
+            self.capture_repos()
 
-        Description:  Return a list of enabled repos on the system.
+            if url:
+                data = [(rep.name, str(rep.baseurl))
+                        for rep in self.base.repos.all()]
 
-        Note: If including the url, then each item in the list will be a set:
-            Postition:
-                0: Repository Name
-                1: Reposirory Base URL
+            else:
+                data = [rep.name for rep in self.base.repos.all()]
 
-        Arguments:
-            (input) url -> True|False - Include the repos base URL
-            (output) data -> List of enabled repositories on the system
+            return data
 
-        """
+        def get_enabled_repos(self, url=False):
 
-        self.capture_repos()
+            """Method:  get_enabled_repos
 
-        if url:
-            data = [(rep.name, str(rep.baseurl))
-                    for rep in self.base.repos.iter_enabled()]
+            Description:  Return a list of enabled repos on the system.
 
-        else:
-            data = [rep.name for rep in self.base.repos.iter_enabled()]
+            Note: If including the url, then each item in the list will be a
+                set.
+                Postition:
+                    0: Repository Name
+                    1: Reposirory Base URL
 
-        return data
+            Arguments:
+                (input) url -> True|False - Include the repos base URL
+                (output) data -> List of enabled repositories on the system
 
-    def get_installed(self):
+            """
 
-        """Method:  get_installed
+            self.capture_repos()
 
-        Description:  Return list of installed packages.
+            if url:
+                data = [(rep.name, str(rep.baseurl))
+                        for rep in self.base.repos.iter_enabled()]
 
-        Arguments:
+            else:
+                data = [rep.name for rep in self.base.repos.iter_enabled()]
 
-        """
+            return data
 
-        self.capture_pkgs()
-        ins_pkg = self.packages.installed()
+        def get_installed(self):
 
-        return [str(pkg) for pkg in ins_pkg]
+            """Method:  get_installed
 
-    def get_updates(self):
+            Description:  Return list of installed packages.
 
-        """Method:  get_updates
+            Arguments:
 
-        Description:  Return list of packages that have updates available.
+            """
 
-        Arguments:
+            self.capture_pkgs()
+            ins_pkg = self.packages.installed()
 
-        """
+            return [str(pkg) for pkg in ins_pkg]
 
-        self.capture_repos()
-        query = self.base.sack.query()
+        def get_updates(self):
 
-        return [str(pkg) for pkg in query.upgrades().latest(1)]
+            """Method:  get_updates
+
+            Description:  Return list of packages that have updates available.
+
+            Arguments:
+
+            """
+
+            self.capture_repos()
+            query = self.base.sack.query()
+
+            return [str(pkg) for pkg in query.upgrades().latest(1)]
 
 
 class KeyCaseInsensitiveDict(dict):

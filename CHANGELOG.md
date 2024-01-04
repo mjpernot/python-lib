@@ -5,6 +5,11 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 
 ## [3.0.1] - 2024-01-04
+### Fixed
+ - gen_class.Dnf:  Set up check to see it is only used with the Linux 8 platform and Python 3.
+
+### Changed
+- Documentation changes.
 
 
 ## [3.0.0] - 2023-11-07 (Pulled due to unable to work on CentOS 7 and Python 2.7))

@@ -46,13 +46,6 @@ echo "Unit test: gen_class module"
 /usr/bin/python2 ./test/unit/gen_class/daemon2_restart.py
 /usr/bin/python2 ./test/unit/gen_class/daemon2_start.py
 /usr/bin/python2 ./test/unit/gen_class/daemon2_stop.py
-/usr/bin/python2 ./test/unit/gen_class/dnf_init.py
-/usr/bin/python2 ./test/unit/gen_class/dnf_capture_pkgs.py
-/usr/bin/python2 ./test/unit/gen_class/dnf_capture_repos.py
-/usr/bin/python2 ./test/unit/gen_class/dnf_get_all_repos.py
-/usr/bin/python2 ./test/unit/gen_class/dnf_get_enabled_repos.py
-/usr/bin/python2 ./test/unit/gen_class/dnf_get_installed.py
-/usr/bin/python2 ./test/unit/gen_class/dnf_get_updates.py
 /usr/bin/python2 ./test/unit/gen_class/keycaseinsensitivedict_init.py
 /usr/bin/python2 ./test/unit/gen_class/keycaseinsensitivedict_contains.py
 /usr/bin/python2 ./test/unit/gen_class/keycaseinsensitivedict_delitem.py
