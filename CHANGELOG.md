@@ -4,7 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
-## [3.0.0] - 2023-11-07
+## [3.0.1] - 2024-01-04
+
+
+## [3.0.0] - 2023-11-07 (Pulled due to unable to work on CentOS 7 and Python 2.7))
 Breaking Changes
 
 - Added new class: Dnf.

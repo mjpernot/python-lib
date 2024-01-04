@@ -6,11 +6,17 @@
 
 
 ### This README file is broken down into the following sections:
+ *  Prerequisites
  *  Installation
     - Pip Installation
  *  Testing
     - Unit
     - Integration
+
+
+# Prerequisites
+ *  If the platform is Redhat 8 and above, list of Linux packages that need to be installed on the server.
+    - dnf==4.7.0
 
 
 # Installation
