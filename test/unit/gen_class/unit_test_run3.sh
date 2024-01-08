@@ -49,9 +49,14 @@ echo "Unit test: gen_class module"
 /usr/bin/python3 ./test/unit/gen_class/dnf_init.py
 /usr/bin/python3 ./test/unit/gen_class/dnf_capture_pkgs.py
 /usr/bin/python3 ./test/unit/gen_class/dnf_capture_repos.py
+/usr/bin/python3 ./test/unit/gen_class/dnf_fetch_repos.py
 /usr/bin/python3 ./test/unit/gen_class/dnf_get_all_repos.py
+/usr/bin/python3 ./test/unit/gen_class/dnf_get_distro.py
 /usr/bin/python3 ./test/unit/gen_class/dnf_get_enabled_repos.py
+/usr/bin/python3 ./test/unit/gen_class/dnf_get_hostname.py
 /usr/bin/python3 ./test/unit/gen_class/dnf_get_installed.py
+/usr/bin/python3 ./test/unit/gen_class/dnf_get_os.py
+/usr/bin/python3 ./test/unit/gen_class/dnf_get_release.py
 /usr/bin/python3 ./test/unit/gen_class/dnf_get_updates.py
 /usr/bin/python3 ./test/unit/gen_class/keycaseinsensitivedict_init.py
 /usr/bin/python3 ./test/unit/gen_class/keycaseinsensitivedict_contains.py

@@ -1586,8 +1586,12 @@ if sys.version_info[0] >= 3 and platform.linux_distribution()[1] > '8':
             capture_pkgs
             capture_repos
             get_all_repos
+            get_distro
             get_enabled_repos
+            get_hostname
             get_installed
+            get_os
+            get_release
             get_updates
             
         """
@@ -1604,6 +1608,10 @@ if sys.version_info[0] >= 3 and platform.linux_distribution()[1] > '8':
 
             self.base = dnf.Base()
             self.packages = None
+            self.host_name = socket.gethostname()
+            self.os_name = platform.system()
+            self.release = platform.release()
+            self.distro = platform.linux_distribution()
 
         def capture_pkgs(self):
 
@@ -1632,6 +1640,22 @@ if sys.version_info[0] >= 3 and platform.linux_distribution()[1] > '8':
             self.base.read_all_repos()
             self.base.fill_sack()
 
+        def fetch_repos(self):
+
+            """Method:  fetch_repos
+
+            Description:  Return a list of repos.
+
+            Note:  This is a wrapper function so it is backwards comptable
+                with programs that use the gen_class.Yum class.
+
+            Arguments:
+                (output) List of repositories
+
+            """
+
+            return self.base.get_all_repos()
+
         def get_all_repos(self, url=False):
 
             """Method:  get_all_repos
@@ -1653,13 +1677,26 @@ if sys.version_info[0] >= 3 and platform.linux_distribution()[1] > '8':
             self.capture_repos()
 
             if url:
-                data = [(rep.name, str(rep.baseurl))
+                data = [(rep.name, str(rep.bas.eurl))
                         for rep in self.base.repos.all()]
 
             else:
                 data = [rep.name for rep in self.base.repos.all()]
 
             return data
+
+        def get_distro(self):
+
+            """Method:  get_distro
+
+            Description:  Reuturn linux_distribution settings.
+
+            Arguments:
+                (output) self.distro -> Linux distribution as a tuple value
+
+            """
+
+            return self.distro
 
         def get_enabled_repos(self, url=False):
 
@@ -1690,6 +1727,19 @@ if sys.version_info[0] >= 3 and platform.linux_distribution()[1] > '8':
 
             return data
 
+        def get_hostname(self):
+
+            """Method:  get_hostname
+
+            Description:  Return the server's hostname.
+
+            Arguments:
+                (output) self.host_name -> Server host name
+
+            """
+
+            return self.host_name
+
         def get_installed(self):
 
             """Method:  get_installed
@@ -1704,6 +1754,32 @@ if sys.version_info[0] >= 3 and platform.linux_distribution()[1] > '8':
             ins_pkg = self.packages.installed()
 
             return [str(pkg) for pkg in ins_pkg]
+
+        def get_os(self):
+
+            """Method:  get_os
+
+            Description:  Return the operating system platform.
+
+            Arguments:
+                (output) self.os_name -> Server's Operating system name
+
+            """
+
+            return self.os_name
+
+        def get_release(self):
+
+            """Method:  get_release
+
+            Description:  Return the OS kernel release version.
+
+            Arguments:
+                (output) self.release -> Kernel release version
+
+            """
+
+            return self.release
 
         def get_updates(self):
 
@@ -3117,10 +3193,10 @@ if sys.version_info < (3, 0):
 
             """Method:  get_os
 
-            Description:  Return the class' OS platform
+            Description:  Return the class' OS platform.
 
             Arguments:
-                (output) self.os_name -> Server's Operating system name.
+                (output) self.os_name -> Server's Operating system name
 
             """
 

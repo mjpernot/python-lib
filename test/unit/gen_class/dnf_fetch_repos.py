@@ -1,11 +1,11 @@
 # Classification (U)
 
-"""Program:  dnf_capture_pkgs.py
+"""Program:  dnf_fetch_repos.py
 
-    Description:  Unit testing of Dnf.capture_pkgs in gen_class.py.
+    Description:  Unit testing of Dnf.fetch_repos in gen_class.py.
 
     Usage:
-        test/unit/gen_class/dnf_capture_pkgs.py
+        test/unit/gen_class/dnf_fetch_repos.py
 
     Arguments:
 
@@ -35,7 +35,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
-        test_packages
+        test_repos
 
     """
 
@@ -55,19 +55,17 @@ class UnitTest(unittest.TestCase):
 
         self.dnf = gen_class.Dnf()
 
-    def test_packages(self):
+    def test_repos(self):
 
-        """Function:  test_packages
+        """Function:  test_repos
 
-        Description:  Test capture_pkgs method.
+        Description:  Test get_all_repos method.
 
         Arguments:
 
         """
 
-        self.dnf.capture_pkgs()
-
-        self.assertTrue(self.dnf.packages)
+        self.assertTrue(isinstance(self.dnf.fetch_repos(), list))
 
 
 if __name__ == "__main__":

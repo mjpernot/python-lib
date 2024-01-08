@@ -8,6 +8,15 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 ### Fixed
  - gen_class.Dnf:  Set up check to see it is only used with the Linux 8 platform and Python 3.
 
+### Added
+- gen_class.Dnf.get_distro: Reuturn linux_distribution settings.
+- gen_class.Dnf.get_hostname: Return the servers hostname.
+- gen_class.Dnf.get_os: Return the operating system platform.
+- gen_class.Dnf.get_release: Return the OS kernel release version.
+- gen_class.Dnf.fetch_repos: Return a list of repos - backwards comptable for gen_class.Yum.fetch_repos.
+- gen_class.Dnf.fetch_install_pkgs:
+- gen_class.Dnf.fetch_update_pkgs:
+
 ### Changed
 - Documentation changes.
 

@@ -35,6 +35,8 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
+        test_linux2
+        test_linux
         test_base
         test_packages
 
@@ -50,11 +52,35 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        if sys.version_info[0] < 3 and platform.linux_distribution()[1] < '8':
-            print("Python 2 or Linux 8 platforms do not support dnf, skipping")
+        if sys.version_info[0] < 3 or platform.linux_distribution()[1] < '8':
+            print("Python 2 or Linux 7 platforms do not support dnf, skipping")
             self.skipTest("Pre-conditions not met.")
 
         self.dnf = gen_class.Dnf()
+
+    def test_linux2(self):
+
+        """Function:  test_linux2
+
+        Description:  Test __init__ method.
+
+        Arguments:
+
+        """
+
+        self.assertTrue(self.distro[1] >= "Linux")
+
+    def test_linux(self):
+
+        """Function:  test_linux
+
+        Description:  Test __init__ method.
+
+        Arguments:
+
+        """
+
+        self.assertTrue(self.distro[1] >= "8")
 
     def test_base(self):
 
