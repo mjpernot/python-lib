@@ -13,8 +13,8 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - gen_class.Dnf.get_hostname: Return the servers hostname.
 - gen_class.Dnf.get_os: Return the operating system platform.
 - gen_class.Dnf.get_release: Return the OS kernel release version.
-- gen_class.Dnf.fetch_repos: Return a list of repos - backwards comptable for gen_class.Yum.fetch_repos.
-- gen_class.Dnf.fetch_install_pkgs:
+- gen_class.Dnf.fetch_repos: Return a list of repos - backwards comptable for gen_class.Yum.
+- gen_class.Dnf.fetch_install_pkgs: Returns list of installed packages - - backwards comptable for gen_class.Yum.
 - gen_class.Dnf.fetch_update_pkgs:
 
 ### Changed

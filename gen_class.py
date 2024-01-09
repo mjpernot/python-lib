@@ -1585,13 +1585,18 @@ if sys.version_info[0] >= 3 and platform.linux_distribution()[1] > '8':
             __init__
             capture_pkgs
             capture_repos
+            fetch_install_pkgs
+            fetch_repos
+            fetch_update_pkgs
             get_all_repos
             get_distro
             get_enabled_repos
             get_hostname
+            get_install_pkgs
             get_installed
             get_os
             get_release
+            get_update_pkgs
             get_updates
             
         """
@@ -1640,14 +1645,33 @@ if sys.version_info[0] >= 3 and platform.linux_distribution()[1] > '8':
             self.base.read_all_repos()
             self.base.fill_sack()
 
+        def fetch_install_pkgs(self):
+
+            """Method:  fetch_install_pkgs
+
+            Description:  Return a dictionary of installed packages in a list.
+
+            Note:  This is a backwards comptable function for programs that use
+                the gen_class.Yum class.
+
+            Arguments:
+                (output) List of installed of packages in JSON format
+
+            """
+
+            pkgs = self.get_install_pkgs()
+
+            return [{"package": pkg.name, "ver": pkg.version, "arch": pkg.arch}
+                    for pkg in pkgs]
+
         def fetch_repos(self):
 
             """Method:  fetch_repos
 
             Description:  Return a list of repos.
 
-            Note:  This is a wrapper function so it is backwards comptable
-                with programs that use the gen_class.Yum class.
+            Note:  This is a backwards comptable function for programs that use
+                the gen_class.Yum class.
 
             Arguments:
                 (output) List of repositories
@@ -1656,6 +1680,29 @@ if sys.version_info[0] >= 3 and platform.linux_distribution()[1] > '8':
 
             return self.base.get_all_repos()
 
+        def fetch_update_pkgs(self):
+
+            """Method:  fetch_update_pkgs
+
+            Description:  Return a dictionary of packages to be updated in a
+                list.
+
+            Note:  This is a backwards comptable function for programs that use
+                the gen_class.Yum class.
+
+            Arguments:
+                (output) List of packages for installation in JSON format
+
+            """
+
+            query = self.get_update_pkgs()
+#STOPPED HERE
+
+            return [{"package": pkg.name, "ver": pkg.version, "arch": pkg.arch,
+                     "repo": str(getattr(pkg, "repo"))}
+                    for pkg in self.doPackageLists(pkgnarrow="updates",
+                                                   patterns="",
+                                                   ignore_case=True)]
         def get_all_repos(self, url=False):
 
             """Method:  get_all_repos
@@ -1740,6 +1787,21 @@ if sys.version_info[0] >= 3 and platform.linux_distribution()[1] > '8':
 
             return self.host_name
 
+        def get_install_pkgs(self):
+
+            """Method:  get_install_pkgs
+
+            Description:  Return installed packages.
+
+            Arguments:
+                (output) Class of installed packages
+
+            """
+
+            self.capture_pkgs()
+
+            return self.packages.installed()
+
         def get_installed(self):
 
             """Method:  get_installed
@@ -1750,8 +1812,7 @@ if sys.version_info[0] >= 3 and platform.linux_distribution()[1] > '8':
 
             """
 
-            self.capture_pkgs()
-            ins_pkg = self.packages.installed()
+            ins_pkg = self.get_install_pkgs()
 
             return [str(pkg) for pkg in ins_pkg]
 
@@ -1781,6 +1842,21 @@ if sys.version_info[0] >= 3 and platform.linux_distribution()[1] > '8':
 
             return self.release
 
+        def get_update_pkgs(self):
+
+            """Method:  get_update_pkgs
+
+            Description:  Return update packages.
+
+            Arguments:
+                (output) Class of update packages
+
+            """
+
+            self.capture_repos()
+
+            return self.base.sack.query()
+
         def get_updates(self):
 
             """Method:  get_updates
@@ -1791,8 +1867,7 @@ if sys.version_info[0] >= 3 and platform.linux_distribution()[1] > '8':
 
             """
 
-            self.capture_repos()
-            query = self.base.sack.query()
+            query = self.get_update_pkgs()
 
             return [str(pkg) for pkg in query.upgrades().latest(1)]
 
