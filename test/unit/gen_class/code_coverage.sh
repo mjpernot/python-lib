@@ -58,6 +58,7 @@ coverage run -a --source=gen_class test/unit/gen_class/dnf_init.py
 coverage run -a --source=gen_class test/unit/gen_class/dnf_capture_pkgs.py
 coverage run -a --source=gen_class test/unit/gen_class/dnf_capture_repos.py
 coverage run -a --source=gen_class test/unit/gen_class/dnf_fetch_install_pkgs.py
+coverage run -a --source=gen_class test/unit/gen_class/dnf_fetch_update_pkgs.py
 coverage run -a --source=gen_class test/unit/gen_class/dnf_fetch_repos.py
 coverage run -a --source=gen_class test/unit/gen_class/dnf_get_distro.py
 coverage run -a --source=gen_class test/unit/gen_class/dnf_get_all_repos.py
