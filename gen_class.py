@@ -1684,8 +1684,8 @@ if sys.version_info[0] >= 3 and platform.linux_distribution()[1] > '8':
 
             """Method:  fetch_update_pkgs
 
-            Description:  Return a dictionary of packages to be updated in a
-                list.
+            Description:  Return a list of dictionaries of packages that have
+                updates.
 
             Note:  This is a backwards comptable function for programs that use
                 the gen_class.Yum class.
@@ -1696,13 +1696,12 @@ if sys.version_info[0] >= 3 and platform.linux_distribution()[1] > '8':
             """
 
             query = self.get_update_pkgs()
-#STOPPED HERE
 
-            return [{"package": pkg.name, "ver": pkg.version, "arch": pkg.arch,
-                     "repo": str(getattr(pkg, "repo"))}
-                    for pkg in self.doPackageLists(pkgnarrow="updates",
-                                                   patterns="",
-                                                   ignore_case=True)]
+            return [
+                {"package": pkg.name, "ver": pkg.version, "arch": pkg.arch,
+                 "repo": pkg.reponame} for pkg in query.upgrades().latest(1)]
+
+
         def get_all_repos(self, url=False):
 
             """Method:  get_all_repos

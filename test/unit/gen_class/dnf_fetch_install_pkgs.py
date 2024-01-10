@@ -1,11 +1,11 @@
 # Classification (U)
 
-"""Program:  dnf_fetch_install_pkgs.py
+"""Program:  dnf_fetch_update_pkgs.py
 
-    Description:  Unit testing of Dnf.fetch_install_pkgs in gen_class.py.
+    Description:  Unit testing of Dnf.fetch_update_pkgs in gen_class.py.
 
     Usage:
-        test/unit/gen_class/dnf_fetch_install_pkgs.py
+        test/unit/gen_class/dnf_fetch_update_pkgs.py
 
     Arguments:
 
@@ -65,9 +65,13 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        data = self.dnf.fetch_install_pkgs()
+        data = self.dnf.fetch_update_pkgs()
 
-        self.assertTrue(isinstance(data, list) and isinstance(data[0], dict))
+        self.assertTrue(
+            isinstance(
+                data, list) and (
+                    (len(data) > 0 and isinstance(data[0], dict))
+                    or len(data) == 0))
 
 
 if __name__ == "__main__":
