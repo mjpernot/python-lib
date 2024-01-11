@@ -16,7 +16,7 @@
 # Standard
 import sys
 import os
-import platform
+import distro
 import unittest
 
 # Local
@@ -35,10 +35,10 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
-        test_linux2
-        test_linux
+        test_osname
+        test_release
         test_base
-        test_packages
+        test_distro
 
     """
 
@@ -52,27 +52,18 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        if sys.version_info[0] < 3 or platform.linux_distribution()[1] < '8':
+        if sys.version_info[0] < 3 or distro.linux_distribution()[1] < '8':
             print("Python 2 or Linux 7 platforms do not support dnf, skipping")
             self.skipTest("Pre-conditions not met.")
 
         self.dnf = gen_class.Dnf()
+        self.distro = distro.linux_distribution()
+        self.release = distro.version()
+        self.os_name = distro.linux_distribution()[0]
 
-    def test_linux2(self):
+    def test_osname(self):
 
-        """Function:  test_linux2
-
-        Description:  Test __init__ method.
-
-        Arguments:
-
-        """
-
-        self.assertTrue(self.distro[1] >= "Linux")
-
-    def test_linux(self):
-
-        """Function:  test_linux
+        """Function:  test_osname
 
         Description:  Test __init__ method.
 
@@ -80,7 +71,19 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertTrue(self.distro[1] >= "8")
+        self.assertEqual(self.dnf.os_name, self.distro)
+
+    def test_release(self):
+
+        """Function:  test_release
+
+        Description:  Test __init__ method.
+
+        Arguments:
+
+        """
+
+        self.assertEqual(self.dnf.release, self.release)
 
     def test_base(self):
 
@@ -94,9 +97,9 @@ class UnitTest(unittest.TestCase):
 
         self.assertTrue(isinstance(self.dnf, gen_class.Dnf))
 
-    def test_packages(self):
+    def test_distro(self):
 
-        """Function:  test_packages
+        """Function:  test_distro
 
         Description:  Test __init__ method.
 
@@ -104,7 +107,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertEqual(self.dnf.packages, None)
+        self.assertEqual(self.dnf.distro, self.distro)
 
 
 if __name__ == "__main__":

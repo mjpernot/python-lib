@@ -5,6 +5,9 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 
 ## [3.0.1] - 2024-01-04
+- Replacing platform module with the distro module for the Python 3 code.
+- Added distro==1.6.0 module.
+
 ### Fixed
  - gen_class.Dnf:  Set up check to see it is only used with the Linux 8 platform and Python 3.
 
@@ -18,6 +21,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - gen_class.Dnf.fetch_update_pkgs: Returns list of update packages - backwards comptable for gen_class.Yum.
 
 ### Changed
+- gen_class.Dnf.\_\_init\_\_: Replaced platform module with distro module.
 - Documentation changes.
 
 

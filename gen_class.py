@@ -43,7 +43,7 @@ import base64
 import time
 import atexit
 import signal
-import platform
+import distro
 import getpass
 import operator
 import glob
@@ -61,11 +61,12 @@ from email.mime.text import MIMEText
 # Yum for Python 2.7 only
 if sys.version_info < (3, 0):
     import yum
+    import platform
 
 # Dnf for Python 3 and for Linux 8 platforms
 #   NOTE:  There are some Linux 7 platforms that provide the Dnf module, but
 #       not looking that deep.
-if sys.version_info[0] >= 3 and platform.linux_distribution()[1] > '8':
+if sys.version_info[0] >= 3 and distro.linux_distribution()[1] >= '8':
     import dnf
 
 # Local
@@ -1574,7 +1575,7 @@ class Daemon2(object):
         """
 
 # The package dnf for only Linux 8 platforms and Python 3
-if sys.version_info[0] >= 3 and platform.linux_distribution()[1] > '8':
+if sys.version_info[0] >= 3 and distro.linux_distribution()[1] >= '8':
     class Dnf(object):
         """Class:  Dnf
 
@@ -1614,9 +1615,9 @@ if sys.version_info[0] >= 3 and platform.linux_distribution()[1] > '8':
             self.base = dnf.Base()
             self.packages = None
             self.host_name = socket.gethostname()
-            self.os_name = platform.system()
-            self.release = platform.release()
-            self.distro = platform.linux_distribution()
+            self.os_name = distro.linux_distribution()[0]
+            self.release = distro.version()
+            self.distro = distro.linux_distribution()
 
         def capture_pkgs(self):
 

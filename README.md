@@ -34,10 +34,18 @@ cp {Python_Project}/python-lib/requirements-python-lib.txt {Other_Python_Project
 
 ##### Modify the other program's README.md file to add the pip commands under the "Install supporting classes and libraries" section.
 
+Centos 7 (Running Python 2.7):
 Modify the {Other_Python_Project}/README.md file:
 
 ```
 pip install -r requirements-python-lib.txt --target lib --trusted-host pypi.appdev.proj.coe.ic.gov
+```
+
+Redhat 8 (Running Python 3.6):
+Modify the {Other_Python_Project}/README.md file:
+
+```
+python -m pip install -r requirements-python-lib.txt --target lib --trusted-host pypi.appdev.proj.coe.ic.gov
 ```
 
 ##### Add the general python-lib requirements to the other program's requirements.txt file.  Remove any duplicates.
@@ -47,6 +55,7 @@ Add/modify the following lines to the {Other_Python_Project}/requirements.txt fi
 
 ```
 chardet==4.0.0
+distro==1.6.0
 email==4.0.3
 simplejson==2.0.9
 ```
@@ -56,6 +65,7 @@ Add/modify the following lines to the {Other_Python_Project}/requirements.txt fi
 
 ```
 chardet==4.0.0
+distro==1.6.0
 simplejson==2.0.9
 ```
 
