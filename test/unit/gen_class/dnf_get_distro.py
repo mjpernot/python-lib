@@ -16,7 +16,7 @@
 # Standard
 import sys
 import os
-import platform
+import distro
 import unittest
 import mock
 
@@ -50,19 +50,13 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        if sys.version_info[0] < 3 or platform.linux_distribution()[1] < '8':
+        if sys.version_info[0] < 3 or distro.linux_distribution()[1] < '8':
             print("Python 2 or Linux 7 platforms do not support dnf, skipping")
             self.skipTest("Pre-conditions not met.")
 
-        self.host_name = "HOSTNAME"
-        self.osys = "Linux"
-        self.release = "4.18.0"
-        self.distro = ("Red Hat Enterprise Linux", "8.7", "Ootpa")
+        self.distro = distro.linux_distribution()
 
-    @mock.patch("platform.linux_distribution")
-    @mock.patch("platform.release")
-    @mock.patch("platform.system")
-    def test_get_distro(self, mock_system, mock_release, mock_distro):
+    def test_get_distro(self):
 
         """Function:  test_get_distro
 
@@ -72,11 +66,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_system.return_value = "Linux"
-        mock_release.return_value = "4.18.0"
-        self.distro = ("Red Hat Enterprise Linux", "8.7", "Ootpa")
-
-        dnf = gen_class.Dnf(self.host_name)
+        dnf = gen_class.Dnf()
 
         self.assertEqual(dnf.get_distro(), self.distro)
 
