@@ -1617,7 +1617,7 @@ if sys.version_info[0] >= 3 and distro.linux_distribution()[1] >= '8':
             self.host_name = socket.gethostname()
             self.os_name = distro.linux_distribution()[0]
             self.release = distro.version()
-            self.distro = distro.linux_distribution()
+            self.distro = (distro.name(), distro.version(), distro.codename())
 
         def capture_pkgs(self):
 
