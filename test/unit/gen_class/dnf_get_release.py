@@ -67,7 +67,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        dnf = gen_class.Dnf(self.host_name)
+        dnf = gen_class.Dnf()
 
         self.assertEqual(dnf.get_release(), self.release)
 

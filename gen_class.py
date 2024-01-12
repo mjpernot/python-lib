@@ -1615,7 +1615,7 @@ if sys.version_info[0] >= 3 and distro.linux_distribution()[1] >= '8':
             self.base = dnf.Base()
             self.packages = None
             self.host_name = socket.gethostname()
-            self.os_name = distro.linux_distribution()[0]
+            self.os_name = distro.name()
             self.release = distro.version()
             self.distro = (distro.name(), distro.version(), distro.codename())
 
@@ -1724,7 +1724,7 @@ if sys.version_info[0] >= 3 and distro.linux_distribution()[1] >= '8':
             self.capture_repos()
 
             if url:
-                data = [(rep.name, str(rep.base.url))
+                data = [(rep.name, str(rep.url))
                         for rep in self.base.repos.all()]
 
             else:

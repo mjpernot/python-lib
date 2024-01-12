@@ -71,6 +71,8 @@ class UnitTest(unittest.TestCase):
         pkgs = base.sack.query()
         pkgs2 = pkgs.installed()
 
+        print(self.dnf.get_install_pkgs()[0])
+        print(pkgs2[0])
         self.assertTrue(self.dnf.get_install_pkgs()[0], pkgs2[0])
 
 

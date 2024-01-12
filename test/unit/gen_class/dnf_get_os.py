@@ -55,7 +55,7 @@ class UnitTest(unittest.TestCase):
             self.skipTest("Pre-conditions not met.")
 
         self.host_name = "HOSTNAME"
-        self.osys = (distro.name(), distro.version(), distro.codename())
+        self.osys = distro.name()
 
     def test_get_os(self):
 

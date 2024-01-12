@@ -57,9 +57,9 @@ class UnitTest(unittest.TestCase):
             self.skipTest("Pre-conditions not met.")
 
         self.dnf = gen_class.Dnf()
-        self.distro = distro.linux_distribution()
+        self.distro = (distro.name(), distro.version(), distro.codename())
         self.release = distro.version()
-        self.os_name = distro.linux_distribution()[0]
+        self.os_name = distro.name()
 
     def test_osname(self):
 
