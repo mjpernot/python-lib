@@ -55,7 +55,7 @@ class UnitTest(unittest.TestCase):
             self.skipTest("Pre-conditions not met.")
 
         self.host_name = "HOSTNAME"
-        self.release = distro.linux_distribution()[0]
+        self.release = distro.version()
 
     def test_get_release(self):
 

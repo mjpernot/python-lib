@@ -55,7 +55,7 @@ class UnitTest(unittest.TestCase):
             self.skipTest("Pre-conditions not met.")
 
         self.host_name = "HOSTNAME"
-        self.osys = distro.linux_distribution()[0]
+        self.osys = (distro.name(), distro.version(), distro.codename())
 
     def test_get_os(self):
 
@@ -67,7 +67,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        dnf = gen_class.Dnf(self.host_name)
+        dnf = gen_class.Dnf()
 
         self.assertEqual(dnf.get_os(), self.osys)
 

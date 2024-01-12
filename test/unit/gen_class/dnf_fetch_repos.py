@@ -50,7 +50,7 @@ class UnitTest(unittest.TestCase):
         """
 
         if sys.version_info[0] < 3 or distro.version() < '8':
-            print("Python 2 or Linux 8 platforms do not support dnf, skipping")
+            print("Python 2 or Linux 7 platforms do not support dnf, skipping")
             self.skipTest("Pre-conditions not met.")
 
         self.dnf = gen_class.Dnf()

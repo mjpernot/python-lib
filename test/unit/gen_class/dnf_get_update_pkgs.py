@@ -67,7 +67,7 @@ class UnitTest(unittest.TestCase):
 
         pkgs = self.dnf.get_update_pkgs()
 
-        self.assertTrue(pkgs[0], dnf.package.Package)
+        self.assertTrue(pkgs[0], self.dnf.package.Package)
 
 
 if __name__ == "__main__":

@@ -54,7 +54,7 @@ class UnitTest(unittest.TestCase):
             print("Python 2 or Linux 7 platforms do not support dnf, skipping")
             self.skipTest("Pre-conditions not met.")
 
-        self.distro = distro.linux_distribution()
+        self.distro = (distro.name(), distro.version(), distro.codename())
 
     def test_get_distro(self):
 
