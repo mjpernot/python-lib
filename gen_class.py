@@ -1679,7 +1679,7 @@ if sys.version_info[0] >= 3 and distro.linux_distribution()[1] >= '8':
 
             """
 
-            return self.base.get_all_repos()
+            return self.get_all_repos()
 
         def fetch_update_pkgs(self):
 
