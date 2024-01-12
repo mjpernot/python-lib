@@ -16,6 +16,7 @@
 # Standard
 import sys
 import os
+import dnf
 import distro
 import unittest
 

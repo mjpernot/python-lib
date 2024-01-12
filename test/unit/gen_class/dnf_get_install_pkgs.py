@@ -66,7 +66,6 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        import dnf
         base = dnf.Base()
         base.fill_sack()
         pkgs = base.sack.query()
