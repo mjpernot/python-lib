@@ -16,7 +16,7 @@
 # Standard
 import sys
 import os
-import platform
+import distro
 import unittest
 import mock
 
