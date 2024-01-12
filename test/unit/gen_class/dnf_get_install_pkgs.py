@@ -54,7 +54,7 @@ class UnitTest(unittest.TestCase):
             print("Python 2 or Linux 7 platforms do not support dnf, skipping")
             self.skipTest("Pre-conditions not met.")
 
-        self.dnf = gen_class.Dnf()
+        self.base2 = gen_class.Dnf()
 
     def test_get_install_pkgs(self):
 
@@ -71,7 +71,7 @@ class UnitTest(unittest.TestCase):
         pkgs = base.sack.query()
         pkgs2 = pkgs.installed()
 
-        self.assertTrue(self.dnf.get_install_pkgs()[0], pkgs2[0])
+        self.assertTrue(self.base2.get_install_pkgs()[0], pkgs2[0])
 
 
 if __name__ == "__main__":
