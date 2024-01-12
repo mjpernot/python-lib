@@ -71,7 +71,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertEqual(self.dnf.os_name, self.distro)
+        self.assertEqual(self.dnf.os_name, self.os_name)
 
     def test_release(self):
 

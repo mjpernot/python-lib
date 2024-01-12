@@ -65,9 +65,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        pkgs = self.dnf.get_update_pkgs()
-
-        self.assertTrue(pkgs[0], self.dnf.package.Package)
+        base = dnf.Base()
+        base.fill_sack()
+        packages = base.sack.query()
+        
+        self.assertTrue(self.dnf.get_update_pkgs()[0], base.sack.query()[0])
 
 
 if __name__ == "__main__":

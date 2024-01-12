@@ -1724,7 +1724,7 @@ if sys.version_info[0] >= 3 and distro.linux_distribution()[1] >= '8':
             self.capture_repos()
 
             if url:
-                data = [(rep.name, str(rep.url))
+                data = [(rep.name, str(rep.baseurl))
                         for rep in self.base.repos.all()]
 
             else:
