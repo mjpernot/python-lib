@@ -278,7 +278,8 @@ class ArgParser(object):
         # For arg_parse2 and arg_default methods
         self.argv = list(argv)
         self.args_array = dict()
-        self.opt_val = list() if opt_val is None else list(opt_val)
+        self.opt_val = \
+                     list() if opt_val is None else list(opt_val)
         self.opt_def = dict() if opt_def is None else dict(opt_def)
         self.multi_val = list(kwargs.get("multi_val", []))
         self.opt_val_bin = list(kwargs.get("opt_val_bin", []))
