@@ -1999,20 +1999,6 @@ class KeyCaseInsensitiveDict(dict):
             KeyCaseInsensitiveDict, self).__contains__(
                 self.__class__._keylower(key))
 
-    def has_key(self, key):
-
-        """Method:  has_key
-
-        Description:  Returns True or False if key is present.
-
-        Arguments:
-
-        """
-
-        return super(
-            KeyCaseInsensitiveDict, self).has_key(
-                self.__class__._keylower(key))
-
     def pop(self, key, *args, **kwargs):
 
         """Method:  pop

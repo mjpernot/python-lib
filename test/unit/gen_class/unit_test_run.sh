@@ -51,7 +51,6 @@ echo "Unit test: gen_class module"
 /usr/bin/python2 ./test/unit/gen_class/keycaseinsensitivedict_delitem.py
 /usr/bin/python2 ./test/unit/gen_class/keycaseinsensitivedict_get.py
 /usr/bin/python2 ./test/unit/gen_class/keycaseinsensitivedict_getitem.py
-/usr/bin/python2 ./test/unit/gen_class/keycaseinsensitivedict_has_key.py
 /usr/bin/python2 ./test/unit/gen_class/keycaseinsensitivedict_keylower.py
 /usr/bin/python2 ./test/unit/gen_class/keycaseinsensitivedict_pop.py
 /usr/bin/python2 ./test/unit/gen_class/keycaseinsensitivedict_setdefault.py

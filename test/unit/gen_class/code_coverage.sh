@@ -75,7 +75,6 @@ coverage run -a --source=gen_class test/unit/gen_class/keycaseinsensitivedict_co
 coverage run -a --source=gen_class test/unit/gen_class/keycaseinsensitivedict_delitem.py
 coverage run -a --source=gen_class test/unit/gen_class/keycaseinsensitivedict_get.py
 coverage run -a --source=gen_class test/unit/gen_class/keycaseinsensitivedict_getitem.py
-coverage run -a --source=gen_class test/unit/gen_class/keycaseinsensitivedict_has_key.py
 coverage run -a --source=gen_class test/unit/gen_class/keycaseinsensitivedict_keylower.py
 coverage run -a --source=gen_class test/unit/gen_class/keycaseinsensitivedict_pop.py
 coverage run -a --source=gen_class test/unit/gen_class/keycaseinsensitivedict_setdefault.py
