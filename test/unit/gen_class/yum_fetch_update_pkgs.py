@@ -16,6 +16,8 @@
 # Standard
 import sys
 import os
+import socket
+import distro
 import unittest
 import collections
 import mock
@@ -72,18 +74,15 @@ class UnitTest(unittest.TestCase):
             print("Error: Python 3 does not support yum==3.4.3, skipping test")
             self.skipTest("Pre-conditions not met.")
 
-        self.host_name = "HOSTNAME"
-        self.osys = "Linux"
-        self.release = "2.6"
-        self.distro = ("Centos", "7.5.1804", "Core")
+        self.host_name = socket.gethostname()
+        self.osys = distro.name()
+        self.release = distro.version()
+        self.distro = (distro.name(), distro.version(), distro.codename())
         self.update_pkgs = [{"package": "Name", "ver": "1.0", "arch": "Linux",
                              "repo": "RepoName"}]
 
     @mock.patch("gen_class.Yum.doPackageLists", mock_get_update)
-    @mock.patch("platform.linux_distribution")
-    @mock.patch("platform.release")
-    @mock.patch("platform.system")
-    def test_fetch_update_pkgs(self, mock_system, mock_release, mock_distro):
+    def test_fetch_update_pkgs(self):
 
         """Function:  test_fetch_update_pkgs
 
@@ -92,10 +91,6 @@ class UnitTest(unittest.TestCase):
         Arguments:
 
         """
-
-        mock_system.return_value = "Linux"
-        mock_release.return_value = "2.6"
-        mock_distro.return_value = ("Centos", "7.5.1804", "Core")
 
         yum = gen_class.Yum(self.host_name)
 

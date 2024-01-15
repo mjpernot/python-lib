@@ -61,7 +61,6 @@ from email.mime.text import MIMEText
 # Yum for Python 2.7 only
 if sys.version_info < (3, 0):
     import yum
-    import platform
 
 # Dnf for Python 3 and for Linux 8 platforms
 #   NOTE:  There are some Linux 7 platforms that provide the Dnf module, but
@@ -3220,9 +3219,9 @@ if sys.version_info < (3, 0):
             else:
                 self.host_name = socket.gethostname()
 
-            self.os_name = platform.system()
-            self.release = platform.release()
-            self.distro = platform.linux_distribution()
+            self.os_name = distro.name()
+            self.release = distro.version()
+            self.distro = (distro.name(), distro.version(), distro.codename())
 
         def get_distro(self):
 
