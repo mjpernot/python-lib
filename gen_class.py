@@ -3179,7 +3179,7 @@ class Logger(object):
             self.log.removeHandler(handle)
 
 
-# The package yum==3.4.3 only works with Python 2.7
+# The yum package only works with Python 2.7
 if sys.version_info < (3, 0):
     class Yum(yum.YumBase):
 

@@ -1,4 +1,4 @@
-fetch_install_pkgs# Classification (U)
+# Classification (U)
 
 """Program:  dnf_fetch_install_pkgs.py
 
