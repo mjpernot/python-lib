@@ -39,11 +39,9 @@ import fcntl
 import tempfile
 import logging
 import socket
-import base64
 import time
 import atexit
 import signal
-import distro
 import getpass
 import operator
 import glob
@@ -57,6 +55,7 @@ from email import encoders
 from email.mime.base import MIMEBase
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+import distro
 
 # Yum for Python 2.7 only
 if sys.version_info < (3, 0):
@@ -1573,6 +1572,7 @@ class Daemon2(object):
 
         """
 
+
 # The package dnf for only Linux 8 platforms and Python 3
 if sys.version_info[0] >= 3 and distro.linux_distribution()[1] >= '8':
     class Dnf(object):
@@ -1598,7 +1598,7 @@ if sys.version_info[0] >= 3 and distro.linux_distribution()[1] >= '8':
             get_release
             get_update_pkgs
             get_updates
-            
+
         """
 
         def __init__(self):
@@ -1629,8 +1629,7 @@ if sys.version_info[0] >= 3 and distro.linux_distribution()[1] >= '8':
             """
 
             self.base.fill_sack()
-            self.packages = self.base.sack.query() 
-            
+            self.packages = self.base.sack.query()
 
         def capture_repos(self):
 
@@ -1700,7 +1699,6 @@ if sys.version_info[0] >= 3 and distro.linux_distribution()[1] >= '8':
             return [
                 {"package": pkg.name, "ver": pkg.version, "arch": pkg.arch,
                  "repo": pkg.reponame} for pkg in query.upgrades().latest(1)]
-
 
         def get_all_repos(self, url=False):
 
@@ -1943,7 +1941,7 @@ class KeyCaseInsensitiveDict(dict):
         self._convert_keys()
 
     def __getitem__(self, key):
- 
+
         """Method:  __getitem__
 
         Description:  Return the key's value.
@@ -1952,9 +1950,8 @@ class KeyCaseInsensitiveDict(dict):
 
         """
 
-        return super(
-           KeyCaseInsensitiveDict, self).__getitem__(
-               self.__class__._keylower(key))
+        return super(KeyCaseInsensitiveDict, self).__getitem__(
+            self.__class__._keylower(key))
 
     def __setitem__(self, key, value):
 
@@ -2041,7 +2038,7 @@ class KeyCaseInsensitiveDict(dict):
             KeyCaseInsensitiveDict, self).setdefault(
                 self.__class__._keylower(key), *args, **kwargs)
 
-    def update(self, updatedict={}, **keyword):
+    def update(self, updatedict=None, **keyword):
 
         """Method:  update
 
@@ -2050,6 +2047,9 @@ class KeyCaseInsensitiveDict(dict):
         Arguments:
 
         """
+
+        if updatedict is None:
+            updatedict = dict()
 
         super(KeyCaseInsensitiveDict, self).update(self.__class__(updatedict))
         super(KeyCaseInsensitiveDict, self).update(self.__class__(**keyword))
@@ -2622,7 +2622,7 @@ class Mail2(object):
         self.subj = " ".join(subject) if type(subject) is list else subject
         self.toaddrs = ",".join(toaddrs) if type(toaddrs) is list else toaddrs
         self.fromaddr = fromaddr if fromaddr else \
-                        getpass.getuser() + "@" + socket.gethostname()
+            getpass.getuser() + "@" + socket.gethostname()
 
         self.msg = MIMEMultipart()
         self.msg["From"] = self.fromaddr

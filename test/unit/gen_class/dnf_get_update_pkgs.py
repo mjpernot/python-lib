@@ -68,7 +68,7 @@ class UnitTest(unittest.TestCase):
 
         base = dnf.Base()
         base.fill_sack()
-        
+
         self.assertTrue(self.dnf.get_update_pkgs()[0], base.sack.query()[0])
 
 

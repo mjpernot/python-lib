@@ -68,10 +68,8 @@ class UnitTest(unittest.TestCase):
         data = self.dnf.fetch_update_pkgs()
 
         self.assertTrue(
-            isinstance(
-                data, list) and (
-                    (len(data) > 0 and isinstance(data[0], dict))
-                    or len(data) == 0))
+            isinstance(data, list) and
+            ((len(data) > 0 and isinstance(data[0], dict)) or len(data) == 0))
 
 
 if __name__ == "__main__":

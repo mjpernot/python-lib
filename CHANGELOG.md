@@ -21,6 +21,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - gen_class.Dnf.fetch_update_pkgs: Returns list of update packages - backwards comptable for gen_class.Yum.
 
 ### Changed
+- gen_class.KeyCaseInsensitiveDict.update: Moved default assignment from argument line to within method.
 - gen_class.Yum.\_\_init\_\_: Replaced platform module with distro module.
 - gen_class.Dnf.\_\_init\_\_: Replaced platform module with distro module.
 - Documentation changes.
