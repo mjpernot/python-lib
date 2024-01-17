@@ -1,11 +1,11 @@
 # Classification (U)
 
-"""Program:  dnf_get_updates.py
+"""Program:  dnf_fetch_install_pkgs.py
 
-    Description:  Unit testing of Dnf.get_updates in gen_class.py.
+    Description:  Unit testing of Dnf.fetch_install_pkgs in gen_class.py.
 
     Usage:
-        test/unit/gen_class/dnf_get_updates.py
+        test/unit/gen_class/dnf_fetch_install_pkgs.py
 
     Arguments:
 
@@ -16,8 +16,8 @@
 # Standard
 import sys
 import os
+import platform
 import unittest
-import distro
 
 # Local
 sys.path.append(os.getcwd())
@@ -35,7 +35,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
-        test_get_packages
+        test_fetch_install_pkgs
 
     """
 
@@ -49,23 +49,25 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        if sys.version_info[0] < 3 or distro.version() < '8':
+        if sys.version_info[0] < 3 or platform.linux_distribution()[1] < '8':
             print("Python 2 or Linux 7 platforms do not support dnf, skipping")
             self.skipTest("Pre-conditions not met.")
 
         self.dnf = gen_class.Dnf()
 
-    def test_get_packages(self):
+    def test_fetch_install_pkgs(self):
 
-        """Function:  test_get_packages
+        """Function:  test_fetch_install_pkgs
 
-        Description:  Test get_updates method.
+        Description:  Test returning installed packages.
 
         Arguments:
 
         """
 
-        self.assertTrue(isinstance(self.dnf.get_updates(), list))
+        data = self.dnf.fetch_install_pkgs()
+
+        self.assertTrue(isinstance(data, list) and isinstance(data[0], dict))
 
 
 if __name__ == "__main__":

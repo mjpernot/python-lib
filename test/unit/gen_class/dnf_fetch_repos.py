@@ -1,11 +1,11 @@
 # Classification (U)
 
-"""Program:  dnf_get_updates.py
+"""Program:  dnf_fetch_repos.py
 
-    Description:  Unit testing of Dnf.get_updates in gen_class.py.
+    Description:  Unit testing of Dnf.fetch_repos in gen_class.py.
 
     Usage:
-        test/unit/gen_class/dnf_get_updates.py
+        test/unit/gen_class/dnf_fetch_repos.py
 
     Arguments:
 
@@ -35,7 +35,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
-        test_get_packages
+        test_repos
 
     """
 
@@ -55,17 +55,17 @@ class UnitTest(unittest.TestCase):
 
         self.dnf = gen_class.Dnf()
 
-    def test_get_packages(self):
+    def test_repos(self):
 
-        """Function:  test_get_packages
+        """Function:  test_repos
 
-        Description:  Test get_updates method.
+        Description:  Test get_all_repos method.
 
         Arguments:
 
         """
 
-        self.assertTrue(isinstance(self.dnf.get_updates(), list))
+        self.assertTrue(isinstance(self.dnf.fetch_repos(), list))
 
 
 if __name__ == "__main__":

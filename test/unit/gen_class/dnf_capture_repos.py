@@ -17,6 +17,7 @@
 import sys
 import os
 import unittest
+import distro
 
 # Local
 sys.path.append(os.getcwd())
@@ -47,6 +48,10 @@ class UnitTest(unittest.TestCase):
         Arguments:
 
         """
+
+        if sys.version_info[0] < 3 or distro.version() < '8':
+            print("Python 2 or Linux 7 platforms do not support dnf, skipping")
+            self.skipTest("Pre-conditions not met.")
 
         self.dnf = gen_class.Dnf()
 

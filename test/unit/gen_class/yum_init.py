@@ -16,8 +16,9 @@
 # Standard
 import sys
 import os
+import socket
 import unittest
-import mock
+import distro
 
 # Local
 sys.path.append(os.getcwd())
@@ -54,15 +55,12 @@ class UnitTest(unittest.TestCase):
             print("Error: Python 3 does not support yum==3.4.3, skipping test")
             self.skipTest("Pre-conditions not met.")
 
-        self.host_name = "HOSTNAME"
-        self.osys = "Linux"
-        self.release = "2.6"
-        self.distro = ("Centos", "7.5.1804", "Core")
+        self.host_name = socket.gethostname()
+        self.osys = distro.name()
+        self.release = distro.version()
+        self.distro = (distro.name(), distro.version(), distro.codename())
 
-    @mock.patch("platform.linux_distribution")
-    @mock.patch("platform.release")
-    @mock.patch("platform.system")
-    def test_hostname(self, mock_system, mock_release, mock_distro):
+    def test_hostname(self):
 
         """Function:  test_hostname
 
@@ -72,22 +70,13 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        mock_system.return_value = "Linux"
-        mock_release.return_value = "2.6"
-        mock_distro.return_value = ("Centos", "7.5.1804", "Core")
-
         yum = gen_class.Yum(self.host_name)
 
         self.assertEqual(
             (yum.host_name, yum.os_name, yum.release, yum.distro),
             (self.host_name, self.osys, self.release, self.distro))
 
-    @mock.patch("platform.linux_distribution")
-    @mock.patch("socket.gethostname")
-    @mock.patch("platform.release")
-    @mock.patch("platform.system")
-    def test_no_hostname(self, mock_system, mock_release, mock_socket,
-                         mock_distro):
+    def test_no_hostname(self):
 
         """Function:  test_no_hostname
 
@@ -96,11 +85,6 @@ class UnitTest(unittest.TestCase):
         Arguments:
 
         """
-
-        mock_system.return_value = "Linux"
-        mock_release.return_value = "2.6"
-        mock_socket.return_value = "HOSTNAME"
-        mock_distro.return_value = ("Centos", "7.5.1804", "Core")
 
         yum = gen_class.Yum()
 
