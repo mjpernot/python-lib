@@ -1,11 +1,11 @@
 # Classification (U)
 
-"""Program:  yum_get_hostname.py
+"""Program:  dnf_get_release.py
 
-    Description:  Unit testing of Yum.get_hostname in gen_class.py.
+    Description:  Unit testing of Dnf.get_release in gen_class.py.
 
     Usage:
-        test/unit/gen_class/yum_get_hostname.py
+        test/unit/gen_class/dnf_get_release.py
 
     Arguments:
 
@@ -16,7 +16,6 @@
 # Standard
 import sys
 import os
-import socket
 import unittest
 import distro
 
@@ -36,7 +35,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
-        test_get_hostname
+        test_get_release
 
     """
 
@@ -50,28 +49,26 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        if sys.version_info > (2, 8):
-            print("Error: Python 3 does not support yum==3.4.3, skipping test")
+        if sys.version_info[0] < 3 or distro.version() < '8':
+            print("Python 2 or Linux 7 platforms do not support dnf, skipping")
             self.skipTest("Pre-conditions not met.")
 
-        self.host_name = socket.gethostname()
-        self.osys = distro.name()
+        self.host_name = "HOSTNAME"
         self.release = distro.version()
-        self.distro = (distro.name(), distro.version(), distro.codename())
 
-    def test_get_hostname(self):
+    def test_get_release(self):
 
-        """Function:  test_get_hostname
+        """Function:  test_get_release
 
-        Description:  Test get_hostname method.
+        Description:  Test get_release method.
 
         Arguments:
 
         """
 
-        yum = gen_class.Yum(self.host_name)
+        dnf = gen_class.Dnf()
 
-        self.assertEqual(yum.get_hostname(), self.host_name)
+        self.assertEqual(dnf.get_release(), self.release)
 
 
 if __name__ == "__main__":

@@ -1,11 +1,11 @@
 # Classification (U)
 
-"""Program:  dnf_get_updates.py
+"""Program:  dnf_get_update_pkgs.py
 
-    Description:  Unit testing of Dnf.get_updates in gen_class.py.
+    Description:  Unit testing of Dnf.get_update_pkgs in gen_class.py.
 
     Usage:
-        test/unit/gen_class/dnf_get_updates.py
+        test/unit/gen_class/dnf_get_update_pkgs.py
 
     Arguments:
 
@@ -17,6 +17,7 @@
 import sys
 import os
 import unittest
+import dnf
 import distro
 
 # Local
@@ -35,7 +36,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
-        test_get_packages
+        test_get_install_pkgs
 
     """
 
@@ -55,17 +56,20 @@ class UnitTest(unittest.TestCase):
 
         self.dnf = gen_class.Dnf()
 
-    def test_get_packages(self):
+    def test_get_install_pkgs(self):
 
-        """Function:  test_get_packages
+        """Function:  test_get_install_pkgs
 
-        Description:  Test get_updates method.
+        Description:  Test returning installed packages.
 
         Arguments:
 
         """
 
-        self.assertTrue(isinstance(self.dnf.get_updates(), list))
+        base = dnf.Base()
+        base.fill_sack()
+
+        self.assertTrue(self.dnf.get_update_pkgs()[0], base.sack.query()[0])
 
 
 if __name__ == "__main__":

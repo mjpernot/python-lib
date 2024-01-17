@@ -17,6 +17,7 @@
 import sys
 import os
 import unittest
+import distro
 
 # Local
 sys.path.append(os.getcwd())
@@ -34,8 +35,10 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
+        test_osname
+        test_release
         test_base
-        test_packages
+        test_distro
 
     """
 
@@ -49,7 +52,38 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        if sys.version_info[0] < 3 or distro.version() < '8':
+            print("Python 2 or Linux 7 platforms do not support dnf, skipping")
+            self.skipTest("Pre-conditions not met.")
+
         self.dnf = gen_class.Dnf()
+        self.distro = (distro.name(), distro.version(), distro.codename())
+        self.release = distro.version()
+        self.os_name = distro.name()
+
+    def test_osname(self):
+
+        """Function:  test_osname
+
+        Description:  Test __init__ method.
+
+        Arguments:
+
+        """
+
+        self.assertEqual(self.dnf.os_name, self.os_name)
+
+    def test_release(self):
+
+        """Function:  test_release
+
+        Description:  Test __init__ method.
+
+        Arguments:
+
+        """
+
+        self.assertEqual(self.dnf.release, self.release)
 
     def test_base(self):
 
@@ -63,9 +97,9 @@ class UnitTest(unittest.TestCase):
 
         self.assertTrue(isinstance(self.dnf, gen_class.Dnf))
 
-    def test_packages(self):
+    def test_distro(self):
 
-        """Function:  test_packages
+        """Function:  test_distro
 
         Description:  Test __init__ method.
 
@@ -73,7 +107,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertEqual(self.dnf.packages, None)
+        self.assertEqual(self.dnf.distro, self.distro)
 
 
 if __name__ == "__main__":
