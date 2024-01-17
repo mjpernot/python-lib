@@ -17,10 +17,10 @@
 import sys
 import os
 import socket
-import distro
 import unittest
 import collections
 import mock
+import distro
 
 # Local
 sys.path.append(os.getcwd())

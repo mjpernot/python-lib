@@ -16,10 +16,9 @@
 # Standard
 import sys
 import os
-import distro
 import socket
 import unittest
-import mock
+import distro
 
 # Local
 sys.path.append(os.getcwd())

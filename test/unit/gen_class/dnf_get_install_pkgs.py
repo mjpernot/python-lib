@@ -16,9 +16,9 @@
 # Standard
 import sys
 import os
-import distro
-import dnf
 import unittest
+import dnf
+import distro
 
 # Local
 sys.path.append(os.getcwd())
