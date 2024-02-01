@@ -64,17 +64,13 @@ Redhat 8 (Running Python 3.6):
 Add/modify the following lines to the {Other_Python_Project}/requirements.txt file:
 
 ```
-chardet==4.0.0
+chardet==3.0.4
 distro==1.6.0
 simplejson==2.0.9
 ```
 
 
-# Testing
-
-# Unit Testing:
-
-### Installation:
+### Git Installation:
 
 Install the project using git.
 
@@ -94,8 +90,16 @@ Redhat 8 (Running Python 3.6):
 NOTE: Install as the user that will use the package.
 
 ```
-python -m pip install --user -r requirements-python3.txt --upgrade --trusted-host pypi.appdev.proj.coe.ic.gov
+python -m pip install --user -r requirements3.txt --upgrade --trusted-host pypi.appdev.proj.coe.ic.gov
 ```
+
+# Testing
+
+# Unit Testing:
+
+### Installation:
+
+Install the project using the procedures in the Git Installation section.
 
 ### Testing:
 
