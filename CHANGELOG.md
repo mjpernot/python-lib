@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [3.0.2] - 2024-02-01
+### Fixed
+- gen_class.LogFile.load_loglist: Fixed decoding gzipped files in Python 3 correctly.
+
+### Changed
+- Documentation changes.
+
+
 ## [3.0.1] - 2024-01-04
 - Replacing platform module with the distro module for the Python 3 code.
 - Added distro==1.6.0 module.
