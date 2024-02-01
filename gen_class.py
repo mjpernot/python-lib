@@ -2275,11 +2275,19 @@ class LogFile(object):
 
         """
 
-        if (sys.version_info < (3, 0) and isinstance(
-                data, (file, gzip.GzipFile))) or (
-                    sys.version_info > (2, 8) and isinstance(
-                        data, (io.IOBase, gzip.GzipFile))):
+        if sys.version_info < (3, 0) and isinstance(
+                data, (file, gzip.GzipFile)):
             self.loglist.extend([x.rstrip().rstrip("\n") for x in data])
+
+        elif sys.version_info >= (3, 0) and isinstance(
+                data, (io.IOBase, gzip.GzipFile)):
+
+            if isinstance(data, gzip.GzipFile):
+                self.loglist.extend(
+                    [x.decode().rstrip().rstrip("\n") for x in data])
+
+            else:
+                self.loglist.extend([x.rstrip().rstrip("\n") for x in data])
 
         elif isinstance(data, list):
             data = list(data)
