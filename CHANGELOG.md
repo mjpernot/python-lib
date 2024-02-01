@@ -8,6 +8,9 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 ### Fixed
 - gen_class.LogFile.load_loglist: Fixed decoding gzipped files in Python 3 correctly.
 
+### Changed
+- Documentation changes.
+
 
 ## [3.0.1] - 2024-01-04
 - Replacing platform module with the distro module for the Python 3 code.
