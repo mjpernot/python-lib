@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [3.0.2] - 2024-02-21
+- Updated requirements for Python 3.
+
+### Changed
+- Set simplejson to 3.12.0 for Python 3.
+- Set chardet to 4.0.0 for Python 3.
+
+### Deprecated
+- gen_libs.get_inst function.
+- arg_parser module.
+
+
 ## [3.0.2] - 2024-02-01
 ### Fixed
 - gen_class.LogFile.load_loglist: Fixed decoding gzipped files in Python 3 correctly.
