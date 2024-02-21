@@ -64,9 +64,9 @@ Redhat 8 (Running Python 3.6):
 Add/modify the following lines to the {Other_Python_Project}/requirements.txt file:
 
 ```
-chardet==3.0.4
+chardet==4.0.0
 distro==1.6.0
-simplejson==2.0.9
+simplejson==3.12.0
 ```
 
 
