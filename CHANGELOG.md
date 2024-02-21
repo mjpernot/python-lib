@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [3.0.2] - 2024-02-21
+
+
 ## [3.0.2] - 2024-02-01
 ### Fixed
 - gen_class.LogFile.load_loglist: Fixed decoding gzipped files in Python 3 correctly.
