@@ -5,7 +5,6 @@
     Description:  Class that has class definitions for general use.
 
     Function:
-        get_inst
         setup_mail
 
     Classes:
@@ -80,23 +79,6 @@ __version__ = version.__version__
 
 # Global
 MASK = "0"
-
-
-def get_inst(cmd):
-
-    """Function:  get_inst
-
-    Description:  Returns the module instance header.
-
-    Arguments:
-        (input) cmd -> Module library.
-        (output) -> Return module instance.
-
-    """
-
-    sub = cmd
-
-    return sub
 
 
 def setup_mail(to_line, subj=None, frm_line=None):
@@ -1294,10 +1276,8 @@ class Daemon(object):
 
         # Try killing the daemon process
         try:
-            inst = get_inst(os)
-
             while 1:
-                inst.kill(pid, signal.SIGTERM)
+                os.kill(pid, signal.SIGTERM)
                 time.sleep(0.1)
 
         except OSError as msg:
@@ -1521,8 +1501,7 @@ class Daemon2(object):
         # Killing the daemon process
         try:
             while 1:
-                inst = get_inst(os)
-                inst.kill(pid, signal.SIGTERM)
+                os.kill(pid, signal.SIGTERM)
                 time.sleep(0.1)
 
         except OSError as err:
@@ -2794,9 +2773,7 @@ class Mail(System):
 
         """
 
-        inst = get_inst(sys)
-
-        for line in inst.stdin:
+        for line in sys.stdin:
             self.add_2_msg(line)
 
     def create_body(self):
@@ -2854,8 +2831,7 @@ class Mail(System):
             self.send_mailx()
 
         else:
-            inst = get_inst(smtplib)
-            server = inst.SMTP("localhost")
+            server = smtplib.SMTP("localhost")
             server.sendmail(self.frm, self.toaddr, self.create_body())
             server.quit()
 
@@ -2878,10 +2854,9 @@ class Mail(System):
         if isinstance(self.toaddr, list):
             self.toaddr = " ".join(str(item) for item in list(self.toaddr))
 
-        inst = get_inst(subprocess)
-        proc1 = inst.Popen(['echo', self.msg], stdout=inst.PIPE)
-        proc2 = inst.Popen(['mailx', '-s', self.subj, self.toaddr],
-                           stdin=proc1.stdout)
+        proc1 = subprocess.Popen(['echo', self.msg], stdout=subprocess.PIPE)
+        proc2 = subprocess.Popen(
+            ['mailx', '-s', self.subj, self.toaddr], stdin=proc1.stdout)
         proc2.wait()
 
     def print_email(self):

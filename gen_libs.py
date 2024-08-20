@@ -39,7 +39,6 @@
         get_base_dir
         get_data
         get_date
-        get_inst
         get_secs
         get_time
         has_whitespace
@@ -432,8 +431,7 @@ def compress(fname):
 
     """
 
-    inst = get_inst(subprocess)
-    proc1 = inst.Popen(["gzip", fname])
+    proc1 = subprocess.Popen(["gzip", fname])
     proc1.wait()
 
 
@@ -1114,21 +1112,6 @@ def get_date():
     return datetime.datetime.strftime(datetime.datetime.now(), "%Y-%m-%d")
 
 
-def get_inst(cmd):
-
-    """Function:  get_inst
-
-    Description:  Returns the module instance header.
-
-    Arguments:
-        (input) cmd -> Module library.
-        (output) cmd -> Return module instance.
-
-    """
-
-    return cmd
-
-
 def get_secs(tdd):
 
     """Function:  get_secs
@@ -1629,8 +1612,8 @@ def make_md5_hash(file_path, to_file=True):
 
     """
 
-    inst = get_inst(subprocess)
-    proc1 = inst.Popen(["/usr/bin/md5sum", file_path], stdout=inst.PIPE)
+    proc1 = subprocess.Popen(
+        ["/usr/bin/md5sum", file_path], stdout=subprocess.PIPE)
     hash_results, _ = proc1.communicate()
 
     if sys.version_info >= (3, 0):
