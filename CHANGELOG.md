@@ -4,7 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
-## [3.0.2] - 2024-02-21
+## [3.0.4] - 2024-08-20
+
+
+## [3.0.3] - 2024-02-21
 - Updated module requirements for Python.
 
 ### Changed
