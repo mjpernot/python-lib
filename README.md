@@ -95,7 +95,6 @@ Centos 7 (Running Python 2.7):
 ```
 cd python-lib
 test/unit/gen_libs/unit_test_run.sh
-test/unit/arg_parser/unit_test_run.sh
 test/unit/gen_class/unit_test_run.sh
 test/unit/errors/unit_test_run.sh
 test/unit/machine/unit_test_run.sh
@@ -106,7 +105,6 @@ Redhat 8 (Running Python 3.6):
 ```
 cd python-lib
 test/unit/gen_libs/unit_test_run3.sh
-test/unit/arg_parser/unit_test_run3.sh
 test/unit/gen_class/unit_test_run3.sh
 test/unit/errors/unit_test_run3.sh
 test/unit/machine/unit_test_run3.sh
@@ -117,7 +115,6 @@ test/unit/machine/unit_test_run3.sh
 ```
 cd python-lib
 test/unit/gen_libs/code_coverage.sh
-test/unit/arg_parser/code_coverage.sh
 test/unit/gen_class/code_coverage.sh
 test/unit/errors/code_coverage.sh
 test/unit/machine/code_coverage.sh
@@ -135,7 +132,6 @@ Centos 7 (Running Python 2.7):
 
 ```
 cd python-lib
-test/unit/arg_parser/integration_test_run.sh
 test/unit/gen_libs/integration_test_run.sh
 ```
 
@@ -143,7 +139,6 @@ Redhat 8 (Running Python 3.6):
 
 ```
 cd python-lib
-test/unit/arg_parser/integration_test_run3.sh
 test/unit/gen_libs/integration_test_run3.sh
 ```
 

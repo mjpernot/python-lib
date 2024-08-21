@@ -34,7 +34,6 @@ setuptools.setup(
     long_description=LONG_DESCRIPTION,
 
     py_modules=[
-        "arg_parser",
         "errors",
         "gen_class",
         "gen_libs",

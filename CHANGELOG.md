@@ -11,8 +11,9 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 - gen_class.Daemon.stop, gen_class.Daemon2.stop, gen_class.Mail.read_stdin, gen_Class.Mail.send_mail, gen_Class.Mail.send_mailx, gen_libs.make_md5_hash, gen_libs.compress: Removed get_inst call.
 
 ### Removed
-- gen_class.get_inst
-- gen_libs.get_inst
+- arg_parser module
+- gen_class.get_inst function
+- gen_libs.get_inst function
 
 
 ## [3.0.3] - 2024-02-21
