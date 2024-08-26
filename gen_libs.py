@@ -132,6 +132,7 @@ import calendar
 import base64
 import binascii
 import errno
+import pprint
 import chardet
 
 # Local
@@ -2044,17 +2045,17 @@ def perm_check(item, item_type, f_hdlr=sys.stdout, **kwargs):
         function.
 
     Arguments:
-        (input) item -> Name of item to be checked, include full path.
-        (input) item_type -> What is the item (e.g. file, directory, etc).
-        (input) f_hdlr -> File handler to write messages to or stdout.
+        (input) item -> Name of item to be checked, include full path
+        (input) item_type -> What is the item (e.g. file, directory, etc)
+        (input) f_hdlr -> File handler to write messages to or stdout
         (input) **kwargs:
-            status -> Current status from calling function.
-            err_msg -> Current error messages from calling function.
-            read -> True|False - Is Readable on file.
-            write -> True|False - Is Writeable on file.
-            exe -> True|False - Is Executable on file.
-        (output) status -> True|False - False if one of the checks fails.
-        (output) err_msg -> Error message of check(s) that fail.
+            status -> Current status from calling function
+            err_msg -> Current error messages from calling function
+            read -> True|False - Is Readable on file
+            write -> True|False - Is Writeable on file
+            exe -> True|False - Is Executable on file
+        (output) status -> True|False - False if one of the checks fails
+        (output) err_msg -> Error message of check(s) that fail
 
     """
 
@@ -2096,10 +2097,11 @@ def print_data(data, mode="w", **kwargs):
         (i.e. screen).
 
     Arguments:
-        (input) data -> Data to be printed.
-        (input) mode -> w|a => Write or append mode.
+        (input) data -> Data to be printed
+        (input) mode -> w|a => Write or append mode
         (input) **kwargs:
-            ofile -> Name of file to print to.
+            ofile -> Name of file to print to
+            use_pprint -> True|False - Use Pretty Print instead of print
 
     """
 
@@ -2109,7 +2111,11 @@ def print_data(data, mode="w", **kwargs):
     else:
         outfile = sys.stdout
 
-    print(data, file=outfile)
+    if kwargs.get("use_pprint", False):
+        pprint.pprint(data, stream=outfile)
+
+    else:
+        print(data, file=outfile)
 
     if "ofile" in kwargs and kwargs["ofile"]:
         outfile.close()
@@ -2124,15 +2130,15 @@ def print_dict(data, ofile=None, json_fmt=False, no_std=False, mode="w",
         instance and in either JSON or standard format.
 
     Arguments:
-        (input) data -> Dictionary document.
-        (input) ofile -> Name of output file name.
-        (input) json_fmt -> True|False - Print in JSON format.
-        (input) no_std -> True|False - Do not print to standard out.
-        (input) mode -> w|a => Write or append mode.
+        (input) data -> Dictionary document
+        (input) ofile -> Name of output file name
+        (input) json_fmt -> True|False - Print in JSON format
+        (input) no_std -> True|False - Do not print to standard out
+        (input) mode -> w|a => Write or append mode
         (input) kwargs:
-            mail -> Mail instance.
-        (output) err_flag -> True|False - If error has occurred.
-        (output) err_msg -> None or error message.
+            mail -> Mail instance
+        (output) err_flag -> True|False - If error has occurred
+        (output) err_msg -> None or error message
 
     """
 

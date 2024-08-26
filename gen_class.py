@@ -54,7 +54,9 @@ from email import encoders
 from email.mime.base import MIMEBase
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+import pprint
 import distro
+
 
 # Yum for Python 2.7 only
 if sys.version_info < (3, 0):
@@ -79,6 +81,70 @@ __version__ = version.__version__
 
 # Global
 MASK = "0"
+
+
+def dict_out(data, **kwargs):
+
+    """Function:  dict_out
+
+    Description:  Outputs the dictionary in a variety of formats and media.
+
+    Arguments:
+        (input) data -> JSON data document
+        (input) kwargs:
+            to_addr -> To email address
+            subj -> Email subject line
+            mailx -> True|False - Use mailx command
+            outfile -> Name of output file name
+            mode -> w|a => Write or append mode for file
+            indent int -> Indent the JSON document the stated value
+            suppress -> True|False - Suppress standard out
+            db_tbl -> database:table - Database name:Table name
+            use_pprint -> True|False - Use Pretty Print instead of JSON Dumps
+        (output) state -> True|False - Successful operation
+        (output) msg -> None or error message
+
+    """
+
+    state = True
+    msg = None
+
+    if not isinstance(data, dict):
+        state = False
+        msg = "Error: Is not a dictionary"
+        return state, msg
+
+    mail = None
+    data = dict(data)
+    cfg = {"indent": kwargs.get("indent", 4)} if kwargs.get("indent", False) \
+        else dict()
+
+    if kwargs.get("to_addr", False):
+        subj = kwargs.get("subj", "NoSubjectLineDetected")
+        mail = setup_mail(kwargs.get("to_addr"), subj=subj)
+        mail.add_2_msg(json.dumps(data, **cfg))
+        mail.send_mail(use_mailx=kwargs.get("mailx", False))
+
+    if kwargs.get("outfile", False):
+        mode = kwargs.get("mode", "w")
+
+        if kwargs.get("use_pprint", False):
+            outfile = open(kwargs.get("outfile"), mode)
+            pprint.pprint(data, stream=outfile, **cfg)
+
+        else:
+            gen_libs.print_data(
+                json.dumps(data, **cfg), ofile=kwargs.get("outfile"),
+                mode=mode)
+
+    if not kwargs.get("suppress", False):
+        if kwargs.get("use_pprint", False):
+            pprint.pprint(data, **cfg)
+
+        else:
+            print(json.dumps(data, **cfg))
+
+    return state, msg
 
 
 def setup_mail(to_line, subj=None, frm_line=None):
