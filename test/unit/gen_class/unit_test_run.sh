@@ -5,6 +5,7 @@
 #   is located at.
 
 echo "Unit test: gen_class module"  
+/usr/bin/python2 ./test/unit/gen_class/dict_out.py
 /usr/bin/python2 ./test/unit/gen_class/setup_mail.py
 /usr/bin/python2 ./test/unit/gen_class/argparser_arg_add_def.py
 /usr/bin/python2 ./test/unit/gen_class/argparser_arg_cond_req.py
