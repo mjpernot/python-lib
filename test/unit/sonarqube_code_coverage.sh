@@ -8,27 +8,6 @@ coverage erase
 
 echo ""
 echo "Running unit test modules in conjunction with coverage"
-coverage run -a --source=arg_parser test/unit/arg_parser/_make_dir.py
-coverage run -a --source=arg_parser test/unit/arg_parser/arg_add_def.py
-coverage run -a --source=arg_parser test/unit/arg_parser/arg_cond_req.py
-coverage run -a --source=arg_parser test/unit/arg_parser/arg_cond_req_or.py
-coverage run -a --source=arg_parser test/unit/arg_parser/arg_default.py
-coverage run -a --source=arg_parser test/unit/arg_parser/arg_dir_chk.py
-coverage run -a --source=arg_parser test/unit/arg_parser/arg_dir_chk_crt.py
-coverage run -a --source=arg_parser test/unit/arg_parser/arg_file_chk.py
-coverage run -a --source=arg_parser test/unit/arg_parser/arg_noreq_xor.py
-coverage run -a --source=arg_parser test/unit/arg_parser/arg_parse2.py
-coverage run -a --source=arg_parser test/unit/arg_parser/arg_require.py
-coverage run -a --source=arg_parser test/unit/arg_parser/arg_req_or_lst.py
-coverage run -a --source=arg_parser test/unit/arg_parser/arg_req_xor.py
-coverage run -a --source=arg_parser test/unit/arg_parser/arg_set_path.py
-coverage run -a --source=arg_parser test/unit/arg_parser/arg_validate.py
-coverage run -a --source=arg_parser test/unit/arg_parser/arg_valid_val.py
-coverage run -a --source=arg_parser test/unit/arg_parser/arg_wildcard.py
-coverage run -a --source=arg_parser test/unit/arg_parser/arg_xor_dict.py
-coverage run -a --source=arg_parser test/unit/arg_parser/parse_multi.py
-coverage run -a --source=arg_parser test/unit/arg_parser/parse_single.py
-coverage run -a --source=arg_parser test/unit/arg_parser/file_create.py
 coverage run -a --source=errors test/unit/errors/emptyrowerror.py
 coverage run -a --source=errors test/unit/errors/error.py
 coverage run -a --source=errors test/unit/errors/nooptionerror.py
@@ -69,7 +48,6 @@ coverage run -a --source=gen_libs test/unit/gen_libs/float_div.py
 coverage run -a --source=gen_libs test/unit/gen_libs/get_base_dir.py
 coverage run -a --source=gen_libs test/unit/gen_libs/get_data.py
 coverage run -a --source=gen_libs test/unit/gen_libs/get_date.py
-coverage run -a --source=gen_libs test/unit/gen_libs/get_inst.py
 coverage run -a --source=gen_libs test/unit/gen_libs/get_secs.py
 coverage run -a --source=gen_libs test/unit/gen_libs/get_time.py
 coverage run -a --source=gen_libs test/unit/gen_libs/has_whitespace.py
@@ -132,7 +110,7 @@ coverage run -a --source=gen_libs test/unit/gen_libs/validate_int.py
 coverage run -a --source=gen_libs test/unit/gen_libs/write_file2.py
 coverage run -a --source=gen_libs test/unit/gen_libs/write_file.py
 coverage run -a --source=gen_libs test/unit/gen_libs/write_to_log.py
-coverage run -a --source=gen_class test/unit/gen_class/get_inst.py
+coverage run -a --source=gen_class test/unit/gen_class/dict_out.py
 coverage run -a --source=gen_class test/unit/gen_class/setup_mail.py
 coverage run -a --source=gen_class test/unit/gen_class/argparser_arg_add_def.py
 coverage run -a --source=gen_class test/unit/gen_class/argparser_arg_cond_req.py

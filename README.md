@@ -51,23 +51,10 @@ python -m pip install -r requirements-python-lib.txt --target lib --trusted-host
 ##### Add the general python-lib requirements to the other program's requirements.txt file.  Remove any duplicates.
 
 Centos 7 (Running Python 2.7):
-Add/modify the following lines to the {Other_Python_Project}/requirements.txt file:
-
-```
-chardet==3.0.4
-distro==1.6.0
-email==4.0.3
-simplejson==2.0.9
-```
+{Python_Project}/requirements.txt
 
 Redhat 8 (Running Python 3.6):
-Add/modify the following lines to the {Other_Python_Project}/requirements.txt file:
-
-```
-chardet==3.0.4
-distro==1.6.0
-simplejson==3.12.0
-```
+{Python_Project}/requirements3.txt
 
 
 ### Git Installation:
@@ -108,7 +95,6 @@ Centos 7 (Running Python 2.7):
 ```
 cd python-lib
 test/unit/gen_libs/unit_test_run.sh
-test/unit/arg_parser/unit_test_run.sh
 test/unit/gen_class/unit_test_run.sh
 test/unit/errors/unit_test_run.sh
 test/unit/machine/unit_test_run.sh
@@ -119,7 +105,6 @@ Redhat 8 (Running Python 3.6):
 ```
 cd python-lib
 test/unit/gen_libs/unit_test_run3.sh
-test/unit/arg_parser/unit_test_run3.sh
 test/unit/gen_class/unit_test_run3.sh
 test/unit/errors/unit_test_run3.sh
 test/unit/machine/unit_test_run3.sh
@@ -130,7 +115,6 @@ test/unit/machine/unit_test_run3.sh
 ```
 cd python-lib
 test/unit/gen_libs/code_coverage.sh
-test/unit/arg_parser/code_coverage.sh
 test/unit/gen_class/code_coverage.sh
 test/unit/errors/code_coverage.sh
 test/unit/machine/code_coverage.sh
@@ -148,7 +132,6 @@ Centos 7 (Running Python 2.7):
 
 ```
 cd python-lib
-test/unit/arg_parser/integration_test_run.sh
 test/unit/gen_libs/integration_test_run.sh
 ```
 
@@ -156,7 +139,6 @@ Redhat 8 (Running Python 3.6):
 
 ```
 cd python-lib
-test/unit/arg_parser/integration_test_run3.sh
 test/unit/gen_libs/integration_test_run3.sh
 ```
 

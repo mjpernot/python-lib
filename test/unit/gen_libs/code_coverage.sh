@@ -41,7 +41,6 @@ coverage run -a --source=gen_libs test/unit/gen_libs/float_div.py
 coverage run -a --source=gen_libs test/unit/gen_libs/get_base_dir.py
 coverage run -a --source=gen_libs test/unit/gen_libs/get_data.py
 coverage run -a --source=gen_libs test/unit/gen_libs/get_date.py
-coverage run -a --source=gen_libs test/unit/gen_libs/get_inst.py
 coverage run -a --source=gen_libs test/unit/gen_libs/get_secs.py
 coverage run -a --source=gen_libs test/unit/gen_libs/get_time.py
 coverage run -a --source=gen_libs test/unit/gen_libs/has_whitespace.py
