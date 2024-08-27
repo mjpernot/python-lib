@@ -61,9 +61,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        cmdline = gen_libs.get_inst(sys)
-
-        self.assertEqual(gen_libs.get_base_dir(cmdline.argv[0]), self.cur_path)
+        self.assertEqual(gen_libs.get_base_dir(sys.argv[0]), self.cur_path)
 
 
 if __name__ == "__main__":

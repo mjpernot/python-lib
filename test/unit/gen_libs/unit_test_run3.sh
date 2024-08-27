@@ -38,7 +38,6 @@ echo "Unit test:  gen_libs.py"
 /usr/bin/python3 ./test/unit/gen_libs/float_div.py
 /usr/bin/python3 ./test/unit/gen_libs/get_base_dir.py
 /usr/bin/python3 ./test/unit/gen_libs/get_data.py
-/usr/bin/python3 ./test/unit/gen_libs/get_inst.py
 /usr/bin/python3 ./test/unit/gen_libs/get_date.py
 /usr/bin/python3 ./test/unit/gen_libs/get_secs.py
 /usr/bin/python3 ./test/unit/gen_libs/get_time.py

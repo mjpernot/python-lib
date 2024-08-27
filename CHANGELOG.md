@@ -4,7 +4,25 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
-## [3.0.2] - 2024-02-21
+## [3.0.4] - 2024-08-20
+- Removed the get_inst function.
+- Added dict_out function to gen_class module.
+- Added Pretty Print to gen_libs.print_data function.
+
+### Added
+- gen_class.dict_out: Outputs the dictionary in a variety of formats and media.
+
+### Changed
+- gen_libs.print_data:  Added Pretty Print cability to function.
+- gen_class.Daemon.stop, gen_class.Daemon2.stop, gen_class.Mail.read_stdin, gen_Class.Mail.send_mail, gen_Class.Mail.send_mailx, gen_libs.make_md5_hash, gen_libs.compress: Removed get_inst call.
+
+### Removed
+- arg_parser module
+- gen_class.get_inst function
+- gen_libs.get_inst function
+
+
+## [3.0.3] - 2024-02-21
 - Updated module requirements for Python.
 
 ### Changed

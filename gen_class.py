@@ -5,7 +5,6 @@
     Description:  Class that has class definitions for general use.
 
     Function:
-        get_inst
         setup_mail
 
     Classes:
@@ -55,7 +54,9 @@ from email import encoders
 from email.mime.base import MIMEBase
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+import pprint
 import distro
+
 
 # Yum for Python 2.7 only
 if sys.version_info < (3, 0):
@@ -82,21 +83,68 @@ __version__ = version.__version__
 MASK = "0"
 
 
-def get_inst(cmd):
+def dict_out(data, **kwargs):
 
-    """Function:  get_inst
+    """Function:  dict_out
 
-    Description:  Returns the module instance header.
+    Description:  Outputs the dictionary in a variety of formats and media.
 
     Arguments:
-        (input) cmd -> Module library.
-        (output) -> Return module instance.
+        (input) data -> JSON data document
+        (input) kwargs:
+            to_addr -> To email address
+            subj -> Email subject line
+            mailx -> True|False - Use mailx command
+            outfile -> Name of output file name
+            mode -> w|a => Write or append mode for file
+            indent int -> Indent the JSON document the stated value
+            suppress -> True|False - Suppress standard out
+            db_tbl -> database:table - Database name:Table name
+            use_pprint -> True|False - Use Pretty Print instead of JSON Dumps
+        (output) state -> True|False - Successful operation
+        (output) msg -> None or error message
 
     """
 
-    sub = cmd
+    state = True
+    msg = None
 
-    return sub
+    if not isinstance(data, dict):
+        state = False
+        msg = "Error: Is not a dictionary"
+        return state, msg
+
+    mail = None
+    data = dict(data)
+    cfg = {"indent": kwargs.get("indent", 4)} if kwargs.get("indent", False) \
+        else dict()
+
+    if kwargs.get("to_addr", False):
+        subj = kwargs.get("subj", "NoSubjectLineDetected")
+        mail = setup_mail(kwargs.get("to_addr"), subj=subj)
+        mail.add_2_msg(json.dumps(data, **cfg))
+        mail.send_mail(use_mailx=kwargs.get("mailx", False))
+
+    if kwargs.get("outfile", False):
+        mode = kwargs.get("mode", "w")
+
+        if kwargs.get("use_pprint", False):
+            outfile = open(kwargs.get("outfile"), mode)
+            pprint.pprint(data, stream=outfile, **cfg)
+
+        else:
+            gen_libs.print_data(
+                json.dumps(data, **cfg), ofile=kwargs.get("outfile"),
+                mode=mode)
+
+    if not kwargs.get("suppress", False):
+        if kwargs.get("use_pprint", False):
+            pprint.pprint(data, **cfg)
+
+        else:
+            print(json.dumps(data, **cfg))
+
+    return state, msg
 
 
 def setup_mail(to_line, subj=None, frm_line=None):
@@ -1294,10 +1342,8 @@ class Daemon(object):
 
         # Try killing the daemon process
         try:
-            inst = get_inst(os)
-
             while 1:
-                inst.kill(pid, signal.SIGTERM)
+                os.kill(pid, signal.SIGTERM)
                 time.sleep(0.1)
 
         except OSError as msg:
@@ -1521,8 +1567,7 @@ class Daemon2(object):
         # Killing the daemon process
         try:
             while 1:
-                inst = get_inst(os)
-                inst.kill(pid, signal.SIGTERM)
+                os.kill(pid, signal.SIGTERM)
                 time.sleep(0.1)
 
         except OSError as err:
@@ -2794,9 +2839,7 @@ class Mail(System):
 
         """
 
-        inst = get_inst(sys)
-
-        for line in inst.stdin:
+        for line in sys.stdin:
             self.add_2_msg(line)
 
     def create_body(self):
@@ -2854,8 +2897,7 @@ class Mail(System):
             self.send_mailx()
 
         else:
-            inst = get_inst(smtplib)
-            server = inst.SMTP("localhost")
+            server = smtplib.SMTP("localhost")
             server.sendmail(self.frm, self.toaddr, self.create_body())
             server.quit()
 
@@ -2878,10 +2920,9 @@ class Mail(System):
         if isinstance(self.toaddr, list):
             self.toaddr = " ".join(str(item) for item in list(self.toaddr))
 
-        inst = get_inst(subprocess)
-        proc1 = inst.Popen(['echo', self.msg], stdout=inst.PIPE)
-        proc2 = inst.Popen(['mailx', '-s', self.subj, self.toaddr],
-                           stdin=proc1.stdout)
+        proc1 = subprocess.Popen(['echo', self.msg], stdout=subprocess.PIPE)
+        proc2 = subprocess.Popen(
+            ['mailx', '-s', self.subj, self.toaddr], stdin=proc1.stdout)
         proc2.wait()
 
     def print_email(self):
