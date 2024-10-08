@@ -4,6 +4,105 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [3.0.5] - 2024-09-27
+- Updated simplejson=3.13.2 for Python 3
+
+
+## [3.0.4] - 2024-08-20
+- Removed the get_inst function.
+- Added dict_out function to gen_class module.
+- Added Pretty Print to gen_libs.print_data function.
+
+### Added
+- gen_class.dict_out: Outputs the dictionary in a variety of formats and media.
+
+### Changed
+- gen_libs.print_data:  Added Pretty Print cability to function.
+- gen_class.Daemon.stop, gen_class.Daemon2.stop, gen_class.Mail.read_stdin, gen_Class.Mail.send_mail, gen_Class.Mail.send_mailx, gen_libs.make_md5_hash, gen_libs.compress: Removed get_inst call.
+
+### Removed
+- arg_parser module
+- gen_class.get_inst function
+- gen_libs.get_inst function
+
+
+## [3.0.3] - 2024-02-21
+- Updated module requirements for Python.
+
+### Changed
+- Set simplejson to 3.12.0 for Python 3.
+- Set chardet to 3.0.4 for Python 2 and Python 3.
+
+### Deprecated
+- gen_libs.get_inst function.
+- arg_parser module.
+
+
+## [3.0.2] - 2024-02-01
+### Fixed
+- gen_class.LogFile.load_loglist: Fixed decoding gzipped files in Python 3 correctly.
+
+### Changed
+- Documentation changes.
+
+
+## [3.0.1] - 2024-01-04
+- Replacing platform module with the distro module for the Python 3 code.
+- Added distro==1.6.0 module.
+
+### Fixed
+ - gen_class.Dnf:  Set up check to see it is only used with the Linux 8 platform and Python 3.
+
+### Added
+- gen_class.Dnf.get_distro: Reuturn linux_distribution settings.
+- gen_class.Dnf.get_hostname: Return the servers hostname.
+- gen_class.Dnf.get_os: Return the operating system platform.
+- gen_class.Dnf.get_release: Return the OS kernel release version.
+- gen_class.Dnf.fetch_repos: Return a list of repos - backwards comptable for gen_class.Yum.
+- gen_class.Dnf.fetch_install_pkgs: Returns list of installed packages - backwards comptable for gen_class.Yum.
+- gen_class.Dnf.fetch_update_pkgs: Returns list of update packages - backwards comptable for gen_class.Yum.
+
+### Changed
+- gen_class.KeyCaseInsensitiveDict.update: Moved default assignment from argument line to within method.
+- gen_class.Yum.\_\_init\_\_: Replaced platform module with distro module.
+- gen_class.Dnf.\_\_init\_\_: Replaced platform module with distro module.
+- Documentation changes.
+
+### Removed
+- Removed platform module.
+- gen_class.KeyCaseInsensitiveDict.has_key: Dictionarys has_key has been removed in Python 3.
+
+
+## [3.0.0] - 2023-11-07 (Pulled due to unable to work on CentOS 7 and Python 2.7))
+Breaking Changes
+
+- Added new class: Dnf.
+- Added new class: Mail2.
+- Added new class: KeyCaseInsensitiveDict.
+- Removed cmds_gen module.
+- Removed gen_class.ArgParser.arg_dir_chk_crt method.
+
+### Fixed
+- gen_libs.merge_data_types: Fixed to allow str and unicode strings to be merged in Python 2.7.
+
+### Added
+- gen_class: Dnf: Is the replacement for Yum class in Python 3.
+- gen_class: KeyCaseInsensitiveDict: Is a key case-insensitive dictionary/
+- gen_libs: is_base64: Determine if data is base64.
+- gen_class: Mail2: Improved version of the Mail class using email and smtplib modules and allow for attaching files.
+
+### Changed
+- gen_libs.make_dir: Changed checking error numbers to using the errno module.
+- gen_libs: help_func, is_add_cmd: Removed references to args_array and use only gen_class.ArgsParser.
+- arg_parser.arg_valid_val: Cleaned up confusing if statement.
+- Updated support module versions.
+- Documentation changes.
+
+### Removed
+- gen_class.ArgParser.arg_dir_chk_crt
+- Removed cmds_gen module and all testing units for cmds_gen module.
+
+
 ## [2.10.1] - 2023-04-18
 ### Fixed
 - gen_class.ArgParser.arg_set_path: Fixed missing trailing slash on path.

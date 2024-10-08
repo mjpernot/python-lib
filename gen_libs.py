@@ -39,13 +39,13 @@
         get_base_dir
         get_data
         get_date
-        get_inst
         get_secs
         get_time
         has_whitespace
         help_func
         in_list
         is_add_cmd
+        is_base64
         is_empty_file
         is_file_text
         is_missing_lists
@@ -129,6 +129,10 @@ import json
 import ast
 import gzip
 import calendar
+import base64
+import binascii
+import errno
+import pprint
 import chardet
 
 # Local
@@ -428,8 +432,7 @@ def compress(fname):
 
     """
 
-    inst = get_inst(subprocess)
-    proc1 = inst.Popen(["gzip", fname])
+    proc1 = subprocess.Popen(["gzip", fname])
     proc1.wait()
 
 
@@ -1110,21 +1113,6 @@ def get_date():
     return datetime.datetime.strftime(datetime.datetime.now(), "%Y-%m-%d")
 
 
-def get_inst(cmd):
-
-    """Function:  get_inst
-
-    Description:  Returns the module instance header.
-
-    Arguments:
-        (input) cmd -> Module library.
-        (output) cmd -> Return module instance.
-
-    """
-
-    return cmd
-
-
 def get_secs(tdd):
 
     """Function:  get_secs
@@ -1173,7 +1161,7 @@ def has_whitespace(data):
     return False
 
 
-def help_func(args_array, ver, func_name=None):
+def help_func(args, ver, func_name=None):
 
     """Function:  help_func
 
@@ -1184,8 +1172,7 @@ def help_func(args_array, ver, func_name=None):
         options is detected.
 
     Arguments:
-        (input) args_array -> Array of command line options and values or an
-            gen_class.ArgParser class instance
+        (input) args -> A gen_class.ArgParser class instance
         (input) ver -> Version information on the calling program
         (input) func_name -> Function that will contain help message
         (output) status -> Returns success of operation
@@ -1193,14 +1180,12 @@ def help_func(args_array, ver, func_name=None):
     """
 
     status = False
-    args = dict(args_array) if isinstance(args_array, dict) \
-        else dict(args_array.args_array)
 
-    if "-h" in args:
+    if args.arg_exist("-h"):
         func_name()
         status = True
 
-    if "-v" in args:
+    if args.arg_exist("-v"):
         print(ver)
         status = True
 
@@ -1229,7 +1214,7 @@ def in_list(name, array_list):
     return []
 
 
-def is_add_cmd(args_array, cmd, opt_arg_list):
+def is_add_cmd(args, cmd, opt_arg_list):
 
     """Function:  is_add_cmd
 
@@ -1237,24 +1222,21 @@ def is_add_cmd(args_array, cmd, opt_arg_list):
         command line.
 
     Arguments:
-        (input) args_array -> Array of command line options and values or an
-            gen_class.ArgParser class instance
-        (input) cmd -> List array containing the program arguments.
-        (input) opt_arg_list -> Dictionary of additional options.
-        (output) cmd -> List array containing the program arguments.
+        (input) args -> A gen_class.ArgParser class instance
+        (input) cmd -> List array containing the program arguments
+        (input) opt_arg_list -> Dictionary of additional options
+        (output) cmd -> List array containing the program arguments
 
     """
 
     cmd = list(cmd)
-    args = dict(args_array) if isinstance(args_array, dict) \
-        else dict(args_array.args_array)
     opt_arg_list = dict(opt_arg_list)
 
     for opt in opt_arg_list:
 
-        # Is option in array and is set to True.
-        if opt in args and args[opt] \
-           and isinstance(args[opt], bool):
+        # Is option in array and is set to True
+        if args.arg_exist(opt) and args.get_val(opt) \
+           and isinstance(args.get_val(opt), bool):
 
             if isinstance(opt_arg_list[opt], list):
 
@@ -1264,10 +1246,55 @@ def is_add_cmd(args_array, cmd, opt_arg_list):
             else:
                 cmd = add_cmd(cmd, arg=opt_arg_list[opt])
 
-        elif opt in args:
-            cmd = add_cmd(cmd, arg=opt_arg_list[opt], val=args[opt])
+        elif args.arg_exist(opt):
+            cmd = add_cmd(cmd, arg=opt_arg_list[opt], val=args.get_val(opt))
 
     return cmd
+
+
+def is_base64(data):
+
+    """Function:  is_base64
+
+    Description:  Determines if the data is base64 encoded.
+
+    Warning:  Unicode strings in Python 3 will not be detected as a string.
+
+    Note: Python 3:  If data string has unicode in it, an exception will be
+        thrown and the function will return false.
+
+    Arguments:
+        (input) data -> Data string to be checked
+        (output) status -> True|False - Is base64 encoded
+
+    """
+
+    if sys.version_info[0] == 3:
+        try:
+            if isinstance(data, str):
+                data_bytes = bytes(data, 'ascii')
+
+            elif isinstance(data, bytes):
+                data_bytes = data
+
+            else:
+                raise binascii.Error
+
+            status = base64.b64encode(
+                base64.b64decode(data_bytes))[1:70] == data_bytes[1:70]
+
+        except binascii.Error:
+            status = False
+
+    else:
+        try:
+            status = base64.b64encode(
+                base64.b64decode(data))[1:70] == data[1:70]
+
+        except TypeError:
+            status = False
+
+    return status
 
 
 def is_empty_file(f_name):
@@ -1560,7 +1587,7 @@ def make_dir(dirname):
         status = True
 
     except OSError as err:
-        if err.args[0] == 13 or err.args[0] == 17:
+        if err.errno == errno.EEXIST or err.errno == errno.EACCES:
             print("Error:  {0} for {1}".format(err.args[1], dirname))
 
         else:
@@ -1586,8 +1613,8 @@ def make_md5_hash(file_path, to_file=True):
 
     """
 
-    inst = get_inst(subprocess)
-    proc1 = inst.Popen(["/usr/bin/md5sum", file_path], stdout=inst.PIPE)
+    proc1 = subprocess.Popen(
+        ["/usr/bin/md5sum", file_path], stdout=subprocess.PIPE)
     hash_results, _ = proc1.communicate()
 
     if sys.version_info >= (3, 0):
@@ -1640,7 +1667,7 @@ def make_zip(zip_file_path, cur_file_dir, files_to_zip, is_rel_path=False):
         newzip.close()
 
 
-def merge_data_types(data_1, data_2):
+def merge_data_types(data1, data2):
 
     """Function:  merge_data_types
 
@@ -1653,8 +1680,8 @@ def merge_data_types(data_1, data_2):
         by data_2 keys.
 
     Arguments:
-        (input) data_1 -> Data item.
-        (input) data_2 -> Data item.
+        (input) data1 -> Data item.
+        (input) data2 -> Data item.
         (output) data -> Merged data.
         (output) status -> True|False - Status of the merge.
         (output) err_msg -> Error message if merge fails.
@@ -1665,23 +1692,25 @@ def merge_data_types(data_1, data_2):
     err_msg = ""
     data = None
 
-    if type(data_1) == type(data_2):
+    if isinstance(data1, str_type()) \
+       and (isinstance(data1, str_type()) == isinstance(data2, str_type())):
+        data = data1 + data2
 
-        if isinstance(data_1, (str, list, tuple)):
-            data = data_1 + data_2
+    elif isinstance(data1, list) \
+       and (isinstance(data1, list) == isinstance(data2, list)):
+        data = list(data1) + list(data2)
 
-        elif isinstance(data_1, dict):
-            data_1 = dict(data_1)
-            data_2 = dict(data_2)
-            data, _, _ = merge_two_dicts(data_1, data_2)
+    elif isinstance(data1, tuple) \
+       and (isinstance(data1, tuple) == isinstance(data2, tuple)):
+        data = data1 + data2
 
-        else:
-            status = False
-            err_msg = "Not string, dictionary, list, or tuple data type"
+    elif isinstance(data1, dict) \
+       and (isinstance(data1, dict) == isinstance(data2, dict)):
+        data, _, _ = merge_two_dicts(dict(data1), dict(data2))
 
     else:
         status = False
-        err_msg = "Inconsistent data types"
+        err_msg = "Inconsistent data types or not correct data type"
 
     return data, status, err_msg
 
@@ -2016,17 +2045,17 @@ def perm_check(item, item_type, f_hdlr=sys.stdout, **kwargs):
         function.
 
     Arguments:
-        (input) item -> Name of item to be checked, include full path.
-        (input) item_type -> What is the item (e.g. file, directory, etc).
-        (input) f_hdlr -> File handler to write messages to or stdout.
+        (input) item -> Name of item to be checked, include full path
+        (input) item_type -> What is the item (e.g. file, directory, etc)
+        (input) f_hdlr -> File handler to write messages to or stdout
         (input) **kwargs:
-            status -> Current status from calling function.
-            err_msg -> Current error messages from calling function.
-            read -> True|False - Is Readable on file.
-            write -> True|False - Is Writeable on file.
-            exe -> True|False - Is Executable on file.
-        (output) status -> True|False - False if one of the checks fails.
-        (output) err_msg -> Error message of check(s) that fail.
+            status -> Current status from calling function
+            err_msg -> Current error messages from calling function
+            read -> True|False - Is Readable on file
+            write -> True|False - Is Writeable on file
+            exe -> True|False - Is Executable on file
+        (output) status -> True|False - False if one of the checks fails
+        (output) err_msg -> Error message of check(s) that fail
 
     """
 
@@ -2068,10 +2097,11 @@ def print_data(data, mode="w", **kwargs):
         (i.e. screen).
 
     Arguments:
-        (input) data -> Data to be printed.
-        (input) mode -> w|a => Write or append mode.
+        (input) data -> Data to be printed
+        (input) mode -> w|a => Write or append mode
         (input) **kwargs:
-            ofile -> Name of file to print to.
+            ofile -> Name of file to print to
+            use_pprint -> True|False - Use Pretty Print instead of print
 
     """
 
@@ -2081,7 +2111,11 @@ def print_data(data, mode="w", **kwargs):
     else:
         outfile = sys.stdout
 
-    print(data, file=outfile)
+    if kwargs.get("use_pprint", False):
+        pprint.pprint(data, stream=outfile)
+
+    else:
+        print(data, file=outfile)
 
     if "ofile" in kwargs and kwargs["ofile"]:
         outfile.close()
@@ -2096,15 +2130,15 @@ def print_dict(data, ofile=None, json_fmt=False, no_std=False, mode="w",
         instance and in either JSON or standard format.
 
     Arguments:
-        (input) data -> Dictionary document.
-        (input) ofile -> Name of output file name.
-        (input) json_fmt -> True|False - Print in JSON format.
-        (input) no_std -> True|False - Do not print to standard out.
-        (input) mode -> w|a => Write or append mode.
+        (input) data -> Dictionary document
+        (input) ofile -> Name of output file name
+        (input) json_fmt -> True|False - Print in JSON format
+        (input) no_std -> True|False - Do not print to standard out
+        (input) mode -> w|a => Write or append mode
         (input) kwargs:
-            mail -> Mail instance.
-        (output) err_flag -> True|False - If error has occurred.
-        (output) err_msg -> None or error message.
+            mail -> Mail instance
+        (output) err_flag -> True|False - If error has occurred
+        (output) err_msg -> None or error message
 
     """
 

@@ -34,8 +34,6 @@ setuptools.setup(
     long_description=LONG_DESCRIPTION,
 
     py_modules=[
-        "arg_parser",
-        "cmds_gen",
         "errors",
         "gen_class",
         "gen_libs",
@@ -54,7 +52,11 @@ setuptools.setup(
         "Development Status :: 5 - Production/Stable",
         "Operating System :: Linux",
         "Operating System :: Linux :: Centos",
-        "Operating System :: Linux :: Ubuntu",
+        "Operating System :: Linux :: Centos :: 7",
         "Programming Language :: Python",
         "Programming Language :: Python :: 2.7",
+        "Programming Language :: Python :: 3.6",
+        "Operating System :: Linux :: RedHat",
+        "Operating System :: Linux :: RedHat :: 8",
+        "Programming Language :: Python",
         "Programming Language :: Python :: 3.6"])

@@ -5,14 +5,13 @@
 #   is located at.
 
 echo "Unit test: gen_class module"  
-/usr/bin/python3 ./test/unit/gen_class/get_inst.py
+/usr/bin/python3 ./test/unit/gen_class/dict_out.py
 /usr/bin/python3 ./test/unit/gen_class/setup_mail.py
 /usr/bin/python3 ./test/unit/gen_class/argparser_arg_add_def.py
 /usr/bin/python3 ./test/unit/gen_class/argparser_arg_cond_req.py
 /usr/bin/python3 ./test/unit/gen_class/argparser_arg_cond_req_or.py
 /usr/bin/python3 ./test/unit/gen_class/argparser_arg_default.py
 /usr/bin/python3 ./test/unit/gen_class/argparser_arg_dir_chk.py
-/usr/bin/python3 ./test/unit/gen_class/argparser_arg_dir_chk_crt.py
 /usr/bin/python3 ./test/unit/gen_class/argparser_arg_dir_crt.py
 /usr/bin/python3 ./test/unit/gen_class/argparser_arg_exist.py
 /usr/bin/python3 ./test/unit/gen_class/argparser_arg_file_chk.py
@@ -47,6 +46,32 @@ echo "Unit test: gen_class module"
 /usr/bin/python3 ./test/unit/gen_class/daemon2_restart.py
 /usr/bin/python3 ./test/unit/gen_class/daemon2_start.py
 /usr/bin/python3 ./test/unit/gen_class/daemon2_stop.py
+/usr/bin/python3 ./test/unit/gen_class/dnf_init.py
+/usr/bin/python3 ./test/unit/gen_class/dnf_capture_pkgs.py
+/usr/bin/python3 ./test/unit/gen_class/dnf_capture_repos.py
+/usr/bin/python3 ./test/unit/gen_class/dnf_fetch_install_pkgs.py
+/usr/bin/python3 ./test/unit/gen_class/dnf_fetch_update_pkgs.py
+/usr/bin/python3 ./test/unit/gen_class/dnf_fetch_repos.py
+/usr/bin/python3 ./test/unit/gen_class/dnf_get_all_repos.py
+/usr/bin/python3 ./test/unit/gen_class/dnf_get_distro.py
+/usr/bin/python3 ./test/unit/gen_class/dnf_get_enabled_repos.py
+/usr/bin/python3 ./test/unit/gen_class/dnf_get_hostname.py
+/usr/bin/python3 ./test/unit/gen_class/dnf_get_install_pkgs.py
+/usr/bin/python3 ./test/unit/gen_class/dnf_get_installed.py
+/usr/bin/python3 ./test/unit/gen_class/dnf_get_os.py
+/usr/bin/python3 ./test/unit/gen_class/dnf_get_release.py
+/usr/bin/python3 ./test/unit/gen_class/dnf_get_update_pkgs.py
+/usr/bin/python3 ./test/unit/gen_class/dnf_get_updates.py
+/usr/bin/python3 ./test/unit/gen_class/keycaseinsensitivedict_init.py
+/usr/bin/python3 ./test/unit/gen_class/keycaseinsensitivedict_contains.py
+/usr/bin/python3 ./test/unit/gen_class/keycaseinsensitivedict_delitem.py
+/usr/bin/python3 ./test/unit/gen_class/keycaseinsensitivedict_get.py
+/usr/bin/python3 ./test/unit/gen_class/keycaseinsensitivedict_getitem.py
+/usr/bin/python3 ./test/unit/gen_class/keycaseinsensitivedict_keylower.py
+/usr/bin/python3 ./test/unit/gen_class/keycaseinsensitivedict_pop.py
+/usr/bin/python3 ./test/unit/gen_class/keycaseinsensitivedict_setdefault.py
+/usr/bin/python3 ./test/unit/gen_class/keycaseinsensitivedict_setitem.py
+/usr/bin/python3 ./test/unit/gen_class/keycaseinsensitivedict_update.py
 /usr/bin/python3 ./test/unit/gen_class/logfile_filter_ignore.py
 /usr/bin/python3 ./test/unit/gen_class/logfile_filter_keyword.py
 /usr/bin/python3 ./test/unit/gen_class/logfile_filter_regex.py
@@ -67,6 +92,10 @@ echo "Unit test: gen_class module"
 /usr/bin/python3 ./test/unit/gen_class/logger_log_err.py
 /usr/bin/python3 ./test/unit/gen_class/logger_log_info.py
 /usr/bin/python3 ./test/unit/gen_class/logger_log_warn.py
+/usr/bin/python3 ./test/unit/gen_class/mail2_init.py
+/usr/bin/python3 ./test/unit/gen_class/mail2_add_attachment.py
+/usr/bin/python3 ./test/unit/gen_class/mail2_add_text.py
+/usr/bin/python3 ./test/unit/gen_class/mail2_send_mail.py
 /usr/bin/python3 ./test/unit/gen_class/progressbar_init.py
 /usr/bin/python3 ./test/unit/gen_class/progressbar_update.py
 /usr/bin/python3 ./test/unit/gen_class/progressbar_calc_and_update.py

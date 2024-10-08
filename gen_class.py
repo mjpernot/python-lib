@@ -5,19 +5,21 @@
     Description:  Class that has class definitions for general use.
 
     Function:
-        get_inst
         setup_mail
 
     Classes:
         ArgParser
         Daemon
         Daemon2
+        Dnf
+        KeyCaseInsensitiveDict
         LogFile
         ProgressBar
         SingleInstanceException
         ProgramLock
         System
             Mail
+        Mail2
         TimeFormat
         Logger
         Yum
@@ -36,11 +38,9 @@ import fcntl
 import tempfile
 import logging
 import socket
-import smtplib
 import time
 import atexit
 import signal
-import platform
 import getpass
 import operator
 import glob
@@ -49,10 +49,24 @@ import io
 import gzip
 import json
 import re
+import smtplib
+from email import encoders
+from email.mime.base import MIMEBase
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+import pprint
+import distro
 
-# yum==3.4.3 does not work in Python 3
+
+# Yum for Python 2.7 only
 if sys.version_info < (3, 0):
     import yum
+
+# Dnf for Python 3 and for Linux 8 platforms
+#   NOTE:  There are some Linux 7 platforms that provide the Dnf module, but
+#       not looking that deep.
+if sys.version_info[0] >= 3 and distro.linux_distribution()[1] >= '8':
+    import dnf
 
 # Local
 try:
@@ -69,21 +83,68 @@ __version__ = version.__version__
 MASK = "0"
 
 
-def get_inst(cmd):
+def dict_out(data, **kwargs):
 
-    """Function:  get_inst
+    """Function:  dict_out
 
-    Description:  Returns the module instance header.
+    Description:  Outputs the dictionary in a variety of formats and media.
 
     Arguments:
-        (input) cmd -> Module library.
-        (output) -> Return module instance.
+        (input) data -> JSON data document
+        (input) kwargs:
+            to_addr -> To email address
+            subj -> Email subject line
+            mailx -> True|False - Use mailx command
+            outfile -> Name of output file name
+            mode -> w|a => Write or append mode for file
+            indent int -> Indent the JSON document the stated value
+            suppress -> True|False - Suppress standard out
+            db_tbl -> database:table - Database name:Table name
+            use_pprint -> True|False - Use Pretty Print instead of JSON Dumps
+        (output) state -> True|False - Successful operation
+        (output) msg -> None or error message
 
     """
 
-    sub = cmd
+    state = True
+    msg = None
 
-    return sub
+    if not isinstance(data, dict):
+        state = False
+        msg = "Error: Is not a dictionary"
+        return state, msg
+
+    mail = None
+    data = dict(data)
+    cfg = {"indent": kwargs.get("indent", 4)} if kwargs.get("indent", False) \
+        else dict()
+
+    if kwargs.get("to_addr", False):
+        subj = kwargs.get("subj", "NoSubjectLineDetected")
+        mail = setup_mail(kwargs.get("to_addr"), subj=subj)
+        mail.add_2_msg(json.dumps(data, **cfg))
+        mail.send_mail(use_mailx=kwargs.get("mailx", False))
+
+    if kwargs.get("outfile", False):
+        mode = kwargs.get("mode", "w")
+
+        if kwargs.get("use_pprint", False):
+            outfile = open(kwargs.get("outfile"), mode)
+            pprint.pprint(data, stream=outfile, **cfg)
+
+        else:
+            gen_libs.print_data(
+                json.dumps(data, **cfg), ofile=kwargs.get("outfile"),
+                mode=mode)
+
+    if not kwargs.get("suppress", False):
+        if kwargs.get("use_pprint", False):
+            pprint.pprint(data, **cfg)
+
+        else:
+            print(json.dumps(data, **cfg))
+
+    return state, msg
 
 
 def setup_mail(to_line, subj=None, frm_line=None):
@@ -154,10 +215,6 @@ class ArgParser(object):
         arg_dir_chk
             dir_perms_chk       -> dir_perms_chk
 
-        arg_dir_chk_crt
-            dir_chk_list        -> dir_chk
-            dir_crt_list        -> dir_crt
-
         arg_dir_crt
             dir_perms_crt       -> dir_perms_crt
 
@@ -197,7 +254,6 @@ class ArgParser(object):
         arg_cond_req_or
         arg_default
         arg_dir_chk
-        arg_dir_chk_crt
         arg_dir_crt
         arg_exist
         arg_file_chk
@@ -286,10 +342,6 @@ class ArgParser(object):
 
         # For arg_dir_chk method
         self.dir_perms_chk = dict(kwargs.get("dir_perms_chk", {}))
-
-        # For arg_dir_chk_crt method
-        self.dir_chk = list(kwargs.get("dir_chk", []))
-        self.dir_crt = list(kwargs.get("dir_crt", []))
 
         # For arg_dir_crt method
         self.dir_perms_crt = dict(kwargs.get("dir_perms_crt", {}))
@@ -471,51 +523,6 @@ class ArgParser(object):
             else:
                 status = status & gen_libs.chk_perm(
                     self.args_array[item], dir_perms_chk[item])
-
-        return status
-
-    def arg_dir_chk_crt(self, **kwargs):
-
-        """Method:  arg_dir_chk_crt
-
-        Description:  Checks to see if the directory options have access to the
-            directories and create directory if requested.
-
-        Arguments:
-            (input) **kwargs:
-                dir_chk -> Options which will have directories
-                dir_crt -> Options to create directories if not present
-            (output) status -> True|False - If directories are available
-
-        """
-
-        dir_chk = list(kwargs.get("dir_chk", self.dir_chk))
-        dir_crt = list(kwargs.get("dir_crt", self.dir_crt))
-        status = True
-
-        if set(dir_crt).issubset(set(dir_chk)):
-
-            for item in set(dir_chk) & set(self.args_array.keys()):
-
-                if not os.path.isdir(self.args_array[item]) and \
-                   item in dir_crt:
-
-                    status = gen_libs.make_dir(self.args_array[item])
-
-                elif not os.path.isdir(self.args_array[item]):
-                    print("Error: {0} does not exist.".
-                          format(self.args_array[item]))
-                    status = False
-
-                elif not os.access(self.args_array[item], os.W_OK):
-                    print("Error: {0} is not writable.".
-                          format(self.args_array[item]))
-                    status = False
-
-        else:
-            print("Error:  dir_crt_list: {0} is not a subset of dir_chk: {1}"
-                  .format(dir_crt, dir_chk))
-            status = False
 
         return status
 
@@ -1335,10 +1342,8 @@ class Daemon(object):
 
         # Try killing the daemon process
         try:
-            inst = get_inst(os)
-
             while 1:
-                inst.kill(pid, signal.SIGTERM)
+                os.kill(pid, signal.SIGTERM)
                 time.sleep(0.1)
 
         except OSError as msg:
@@ -1562,8 +1567,7 @@ class Daemon2(object):
         # Killing the daemon process
         try:
             while 1:
-                inst = get_inst(os)
-                inst.kill(pid, signal.SIGTERM)
+                os.kill(pid, signal.SIGTERM)
                 time.sleep(0.1)
 
         except OSError as err:
@@ -1612,6 +1616,502 @@ class Daemon2(object):
         Arguments:
 
         """
+
+
+# The package dnf for only Linux 8 platforms and Python 3
+if sys.version_info[0] >= 3 and distro.linux_distribution()[1] >= '8':
+    class Dnf(object):
+        """Class:  Dnf
+
+        Description: Class which is a representation for python3-dnf class.  A
+            dnf object is used as a proxy for using the dnf command.
+
+        Methods:
+            __init__
+            capture_pkgs
+            capture_repos
+            fetch_install_pkgs
+            fetch_repos
+            fetch_update_pkgs
+            get_all_repos
+            get_distro
+            get_enabled_repos
+            get_hostname
+            get_install_pkgs
+            get_installed
+            get_os
+            get_release
+            get_update_pkgs
+            get_updates
+
+        """
+
+        def __init__(self):
+
+            """Method:  __init__
+
+            Description:  Initialization of an instance of the Dnf class.
+
+            Arguments:
+
+            """
+
+            self.base = dnf.Base()
+            self.packages = None
+            self.host_name = socket.gethostname()
+            self.os_name = distro.name()
+            self.release = distro.version()
+            self.distro = (distro.name(), distro.version(), distro.codename())
+
+        def capture_pkgs(self):
+
+            """Method:  capture_pkgs
+
+            Description:  Query for all installed packages on the system.
+
+            Arguments:
+
+            """
+
+            self.base.fill_sack()
+            self.packages = self.base.sack.query()
+
+        def capture_repos(self):
+
+            """Method:  capture_repos
+
+            Description:  Query for all of the repos on the system.
+
+            Arguments:
+
+            """
+
+            self.base.read_all_repos()
+            self.base.fill_sack()
+
+        def fetch_install_pkgs(self):
+
+            """Method:  fetch_install_pkgs
+
+            Description:  Return a dictionary of installed packages in a list.
+
+            Note:  This is a backwards comptable function for programs that use
+                the gen_class.Yum class.
+
+            Arguments:
+                (output) List of installed of packages in JSON format
+
+            """
+
+            pkgs = self.get_install_pkgs()
+
+            return [{"package": pkg.name, "ver": pkg.version, "arch": pkg.arch}
+                    for pkg in pkgs]
+
+        def fetch_repos(self):
+
+            """Method:  fetch_repos
+
+            Description:  Return a list of repos.
+
+            Note:  This is a backwards comptable function for programs that use
+                the gen_class.Yum class.
+
+            Arguments:
+                (output) List of repositories
+
+            """
+
+            return self.get_all_repos()
+
+        def fetch_update_pkgs(self):
+
+            """Method:  fetch_update_pkgs
+
+            Description:  Return a list of dictionaries of packages that have
+                updates.
+
+            Note:  This is a backwards comptable function for programs that use
+                the gen_class.Yum class.
+
+            Arguments:
+                (output) List of packages for installation in JSON format
+
+            """
+
+            query = self.get_update_pkgs()
+
+            return [
+                {"package": pkg.name, "ver": pkg.version, "arch": pkg.arch,
+                 "repo": pkg.reponame} for pkg in query.upgrades().latest(1)]
+
+        def get_all_repos(self, url=False):
+
+            """Method:  get_all_repos
+
+            Description:  Return a list of all the repos on the system.
+
+            Note: If including the url, then each item in the list will be a
+                set.
+                Postition:
+                    0: Repository Name
+                    1: Reposirory Base URL
+
+            Arguments:
+                (input) url -> True|False - Include the repos base URL
+                (output) data -> List of repositories on the system
+
+            """
+
+            self.capture_repos()
+
+            if url:
+                data = [(rep.name, str(rep.baseurl))
+                        for rep in self.base.repos.all()]
+
+            else:
+                data = [rep.name for rep in self.base.repos.all()]
+
+            return data
+
+        def get_distro(self):
+
+            """Method:  get_distro
+
+            Description:  Reuturn linux_distribution settings.
+
+            Arguments:
+                (output) self.distro -> Linux distribution as a tuple value
+
+            """
+
+            return self.distro
+
+        def get_enabled_repos(self, url=False):
+
+            """Method:  get_enabled_repos
+
+            Description:  Return a list of enabled repos on the system.
+
+            Note: If including the url, then each item in the list will be a
+                set.
+                Postition:
+                    0: Repository Name
+                    1: Reposirory Base URL
+
+            Arguments:
+                (input) url -> True|False - Include the repos base URL
+                (output) data -> List of enabled repositories on the system
+
+            """
+
+            self.capture_repos()
+
+            if url:
+                data = [(rep.name, str(rep.baseurl))
+                        for rep in self.base.repos.iter_enabled()]
+
+            else:
+                data = [rep.name for rep in self.base.repos.iter_enabled()]
+
+            return data
+
+        def get_hostname(self):
+
+            """Method:  get_hostname
+
+            Description:  Return the server's hostname.
+
+            Arguments:
+                (output) self.host_name -> Server host name
+
+            """
+
+            return self.host_name
+
+        def get_install_pkgs(self):
+
+            """Method:  get_install_pkgs
+
+            Description:  Return installed packages.
+
+            Arguments:
+                (output) Class of installed packages
+
+            """
+
+            self.capture_pkgs()
+
+            return self.packages.installed()
+
+        def get_installed(self):
+
+            """Method:  get_installed
+
+            Description:  Return list of installed packages.
+
+            Arguments:
+
+            """
+
+            ins_pkg = self.get_install_pkgs()
+
+            return [str(pkg) for pkg in ins_pkg]
+
+        def get_os(self):
+
+            """Method:  get_os
+
+            Description:  Return the operating system platform.
+
+            Arguments:
+                (output) self.os_name -> Server's Operating system name
+
+            """
+
+            return self.os_name
+
+        def get_release(self):
+
+            """Method:  get_release
+
+            Description:  Return the OS kernel release version.
+
+            Arguments:
+                (output) self.release -> Kernel release version
+
+            """
+
+            return self.release
+
+        def get_update_pkgs(self):
+
+            """Method:  get_update_pkgs
+
+            Description:  Return update packages.
+
+            Arguments:
+                (output) Class of update packages
+
+            """
+
+            self.capture_repos()
+
+            return self.base.sack.query()
+
+        def get_updates(self):
+
+            """Method:  get_updates
+
+            Description:  Return list of packages that have updates available.
+
+            Arguments:
+
+            """
+
+            query = self.get_update_pkgs()
+
+            return [str(pkg) for pkg in query.upgrades().latest(1)]
+
+
+class KeyCaseInsensitiveDict(dict):
+
+    """Class:  KeyCaseInsensitiveDict
+
+    Description:  Is a key case insensitive dictionary.  Takes a dictionary and
+        converts all the keys to lower-case, then all further methods operate
+        on this lower-case mode.
+
+    Note: This class will only convert the base dictionary keys to lowercase,
+        any embedded dictionaries within the base dictionary will not be
+        converted.  You would need to create an instantation of the
+        KeyCaseInsensitiveDict class within the base class instantation.
+
+        Example:
+        # Base Instance:
+        data = {"THis": "Test", "AnD": "Line"}
+        data2 = {'Four': 'Fourth'}
+        mine = cidict.KeyCaseInsensitiveDict(data)
+        # Inner Instance:
+        mine['Five'] = cidict.KeyCaseInsensitiveDict(data2)
+        mine
+        {'this': 'Test', 'and': 'Line', 'five': {'four': 'Fourth'}}
+        # Adding to Inner Instance:
+        mine['Five']["Six"] = "Sixth"
+        mine
+        {'this': 'Test', 'and': 'Line', 'five': {
+            'four': 'Fourth', 'six': 'Sixth'}}
+
+    Methods:
+        _keylower
+        __init__
+        __getitem__
+        __setitem__
+        __delitem__
+        __contains__
+        has_key
+        pop
+        get
+        setdefault
+        update
+        _convert_keys
+
+    """
+
+    @classmethod
+    def _keylower(cls, key):
+
+        """Class Method:  _keylower
+
+        Description:  Converts the dictionary key to lower case.
+
+        Arguments:
+
+        """
+
+        return key.lower() if isinstance(key, gen_libs.str_type()) else key
+
+    def __init__(self, *args, **kwargs):
+
+        """Method:  __init__
+
+        Description:  Initialization of an instance of the
+            KeyCaseInsensitiveDict class.
+
+        Arguments:
+
+        """
+
+        super(KeyCaseInsensitiveDict, self).__init__(*args, **kwargs)
+        self._convert_keys()
+
+    def __getitem__(self, key):
+
+        """Method:  __getitem__
+
+        Description:  Return the key's value.
+
+        Arguments:
+
+        """
+
+        return super(KeyCaseInsensitiveDict, self).__getitem__(
+            self.__class__._keylower(key))
+
+    def __setitem__(self, key, value):
+
+        """Method:  __setitem__
+
+        Description:  Sets the value for a key.
+
+        Arguments:
+
+        """
+
+        super(
+            KeyCaseInsensitiveDict, self).__setitem__(
+                self.__class__._keylower(key), value)
+
+    def __delitem__(self, key):
+
+        """Method:  __delitem__
+
+        Description:  Deletes a key from the dictionary using the del command.
+
+        Arguments:
+
+        """
+
+        return super(
+            KeyCaseInsensitiveDict, self).__delitem__(
+                self.__class__._keylower(key))
+
+    def __contains__(self, key):
+
+        """Method:  __contains__
+
+        Description:  Returns True or False whether a key exist.
+
+        Arguments:
+
+        """
+
+        return super(
+            KeyCaseInsensitiveDict, self).__contains__(
+                self.__class__._keylower(key))
+
+    def pop(self, key, *args, **kwargs):
+
+        """Method:  pop
+
+        Description:  Deletes key from dictionary using the pop command.
+
+        Arguments:
+
+        """
+
+        return super(
+            KeyCaseInsensitiveDict, self).pop(
+                self.__class__._keylower(key), *args, **kwargs)
+
+    def get(self, key, *args, **kwargs):
+
+        """Method:  get
+
+        Description:  Returns the value for a key.
+
+        Arguments:
+
+        """
+
+        return super(
+            KeyCaseInsensitiveDict, self).get(
+                self.__class__._keylower(key), *args, **kwargs)
+
+    def setdefault(self, key, *args, **kwargs):
+
+        """Method:  setdefault
+
+        Description:  Sets the default value for a key which does not exist
+            in the dictionary.
+
+        Arguments:
+
+        """
+
+        return super(
+            KeyCaseInsensitiveDict, self).setdefault(
+                self.__class__._keylower(key), *args, **kwargs)
+
+    def update(self, updatedict=None, **keyword):
+
+        """Method:  update
+
+        Description:  Updates the value for key(s) passing a dictionary.
+
+        Arguments:
+
+        """
+
+        if updatedict is None:
+            updatedict = dict()
+
+        super(KeyCaseInsensitiveDict, self).update(self.__class__(updatedict))
+        super(KeyCaseInsensitiveDict, self).update(self.__class__(**keyword))
+
+    def _convert_keys(self):
+
+        """Method:  _convert_keys
+
+        Description:  Converts all of the keys in a dictionary to lower case.
+
+        Arguments:
+
+        """
+
+        for key in list(self.keys()):
+            val = super(KeyCaseInsensitiveDict, self).pop(key)
+            self.__setitem__(key, val)
 
 
 class LogFile(object):
@@ -1820,11 +2320,19 @@ class LogFile(object):
 
         """
 
-        if (sys.version_info < (3, 0) and isinstance(
-                data, (file, gzip.GzipFile))) or (
-                    sys.version_info > (2, 8) and isinstance(
-                        data, (io.IOBase, gzip.GzipFile))):
+        if sys.version_info < (3, 0) and isinstance(
+                data, (file, gzip.GzipFile)):
             self.loglist.extend([x.rstrip().rstrip("\n") for x in data])
+
+        elif sys.version_info >= (3, 0) and isinstance(
+                data, (io.IOBase, gzip.GzipFile)):
+
+            if isinstance(data, gzip.GzipFile):
+                self.loglist.extend(
+                    [x.decode().rstrip().rstrip("\n") for x in data])
+
+            else:
+                self.loglist.extend([x.rstrip().rstrip("\n") for x in data])
 
         elif isinstance(data, list):
             data = list(data)
@@ -2130,6 +2638,106 @@ class System(object):
             self.host_name = socket.gethostname()
 
 
+class Mail2(object):
+
+    """Class:  Mail2
+
+    Description:  Improved version of the Mail class.  Much cleaner and uses
+        the email and smtplib modules for creating and sending the email.  Also
+        allows for attachments to the email.
+
+    Methods:
+        __init__
+        add_attachment
+        add_text
+        send_email
+
+    """
+
+    def __init__(self, subject, toaddrs, fromaddr=None):
+
+        """Method:  __init__
+
+        Description:  Initialization of an instance of the Mail2 class.
+
+        Arguments:
+            (input) subject -> Subject line of mail
+            (input) toaddrs -> To email addresses
+            (input) fromaddr -> From email address
+
+        """
+
+        # Dictionary of file types/extensions and their associated MIME types
+        self.ftypes = {
+            "plain": "plain", "text": "plain", "sh": "x-sh", "x-sh": "x-sh",
+            "tar": "x-tar", "x-tar": "x-tar", "pdf": "pdf", "json": "json",
+            "gz": "gzip", "gzip": "gzip"}
+        self.subj = " ".join(subject) if type(subject) is list else subject
+        self.toaddrs = ",".join(toaddrs) if type(toaddrs) is list else toaddrs
+        self.fromaddr = fromaddr if fromaddr else \
+            getpass.getuser() + "@" + socket.gethostname()
+
+        self.msg = MIMEMultipart()
+        self.msg["From"] = self.fromaddr
+        self.msg["To"] = self.toaddrs
+        self.msg["Subject"] = self.subj
+
+    def add_attachment(self, fname, ftype, data):
+
+        """Method:  add_attachment
+
+        Description:  Converts the file data into base64 format and attaches
+            the data and filename to the email.
+
+        Arguments:
+            (input) fname -> File name          # Include directory path?
+            (input) ftype -> File extension name
+            (input) data -> Data from the file (i.e. already read into python)
+
+        """
+
+        ftype = self.ftypes[ftype] if ftype in self.ftypes else None
+
+        if ftype:
+            attach = MIMEBase("application", ftype)
+            attach.set_payload(str(data))
+            encoders.encode_base64(attach)
+            attach.add_header(
+                "Content-Disposition", "attachment", filename=fname)
+            self.msg.attach(attach)
+
+    def add_text(self, data, ftype="plain"):
+
+        """Method:  add_text
+
+        Description:  Adds the data to the mail body.
+
+        Arguments:
+            (input) data -> Data in a string format
+            (input) ftype -> File extension name (e.g. plain, text)
+
+        """
+
+        self.msg.attach(MIMEText(data, ftype))
+
+    def send_email(self, host="localhost"):
+
+        """Method:  send_email
+
+        Description:  Converts the mail content to a string and mails out the
+            message using SMTP.sendmail.
+
+        Arguments:
+            (input) host -> Only set if the server cannot send emails
+
+        """
+
+        text = self.msg.as_string()
+        mail = smtplib.SMTP(host)
+        mail.sendmail(self.fromaddr, self.toaddrs, text)
+        mail.quit()
+
+
 class Mail(System):
 
     """Class:  Mail
@@ -2159,12 +2767,12 @@ class Mail(System):
         Description:  Initialization of an instance of the Mail class.
 
         Arguments:
-            (input) toaddr -> To email address.
-            (input) subj -> Subject line of mail.
-            (input) msg_type -> Type of email being sent.
-            (input) frm -> From email address.
-            (input) host -> 'localhost' or IP.
-            (input) host_name -> Host name of server.
+            (input) toaddr -> To email address
+            (input) subj -> Subject line of mail
+            (input) msg_type -> Type of email being sent
+            (input) frm -> From email address
+            (input) host -> 'localhost' or IP
+            (input) host_name -> Host name of server
 
         """
 
@@ -2197,8 +2805,8 @@ class Mail(System):
         Description:  Add text to text string if data is present.
 
         Arguments:
-            (input) txt_ln -> Line of text to add to message.
-            (input) new_line -> True | False - Add a newline between lines.
+            (input) txt_ln -> Line of text to add to message
+            (input) new_line -> True | False - Add a newline between lines
 
         """
 
@@ -2231,9 +2839,7 @@ class Mail(System):
 
         """
 
-        inst = get_inst(sys)
-
-        for line in inst.stdin:
+        for line in sys.stdin:
             self.add_2_msg(line)
 
     def create_body(self):
@@ -2259,8 +2865,8 @@ class Mail(System):
         Description:  Creates or overwrites a subject to the email.
 
         Arguments:
-            (input) subj -> Subject line.
-            (input) delimiter -> Subject line delimiter if using a list.
+            (input) subj -> Subject line
+            (input) delimiter -> Subject line delimiter if using a list
 
         """
 
@@ -2283,7 +2889,7 @@ class Mail(System):
             send_mail to need only an argument option.
 
         Arguments:
-            (input) use_mailx -> True|False - To use mailx command.
+            (input) use_mailx -> True|False - To use mailx command
 
         """
 
@@ -2291,8 +2897,7 @@ class Mail(System):
             self.send_mailx()
 
         else:
-            inst = get_inst(smtplib)
-            server = inst.SMTP("localhost")
+            server = smtplib.SMTP("localhost")
             server.sendmail(self.frm, self.toaddr, self.create_body())
             server.quit()
 
@@ -2315,10 +2920,9 @@ class Mail(System):
         if isinstance(self.toaddr, list):
             self.toaddr = " ".join(str(item) for item in list(self.toaddr))
 
-        inst = get_inst(subprocess)
-        proc1 = inst.Popen(['echo', self.msg], stdout=inst.PIPE)
-        proc2 = inst.Popen(['mailx', '-s', self.subj, self.toaddr],
-                           stdin=proc1.stdout)
+        proc1 = subprocess.Popen(['echo', self.msg], stdout=subprocess.PIPE)
+        proc2 = subprocess.Popen(
+            ['mailx', '-s', self.subj, self.toaddr], stdin=proc1.stdout)
         proc2.wait()
 
     def print_email(self):
@@ -2624,7 +3228,7 @@ class Logger(object):
             self.log.removeHandler(handle)
 
 
-# The package yum==3.4.3 only works with Python 2.7
+# The yum package only works with Python 2.7
 if sys.version_info < (3, 0):
     class Yum(yum.YumBase):
 
@@ -2664,9 +3268,9 @@ if sys.version_info < (3, 0):
             else:
                 self.host_name = socket.gethostname()
 
-            self.os_name = platform.system()
-            self.release = platform.release()
-            self.distro = platform.linux_distribution()
+            self.os_name = distro.name()
+            self.release = distro.version()
+            self.distro = (distro.name(), distro.version(), distro.codename())
 
         def get_distro(self):
 
@@ -2698,10 +3302,10 @@ if sys.version_info < (3, 0):
 
             """Method:  get_os
 
-            Description:  Return the class' OS platform
+            Description:  Return the class' OS platform.
 
             Arguments:
-                (output) self.os_name -> Server's Operating system name.
+                (output) self.os_name -> Server's Operating system name
 
             """
 

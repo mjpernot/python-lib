@@ -38,7 +38,6 @@ echo "Unit test:  gen_libs.py"
 /usr/bin/python2 ./test/unit/gen_libs/float_div.py
 /usr/bin/python2 ./test/unit/gen_libs/get_base_dir.py
 /usr/bin/python2 ./test/unit/gen_libs/get_data.py
-/usr/bin/python2 ./test/unit/gen_libs/get_inst.py
 /usr/bin/python2 ./test/unit/gen_libs/get_date.py
 /usr/bin/python2 ./test/unit/gen_libs/get_secs.py
 /usr/bin/python2 ./test/unit/gen_libs/get_time.py
@@ -46,6 +45,7 @@ echo "Unit test:  gen_libs.py"
 /usr/bin/python2 ./test/unit/gen_libs/help_func.py
 /usr/bin/python2 ./test/unit/gen_libs/in_list.py
 /usr/bin/python2 ./test/unit/gen_libs/is_add_cmd.py
+/usr/bin/python2 ./test/unit/gen_libs/is_base64.py
 /usr/bin/python2 ./test/unit/gen_libs/is_empty_file.py
 /usr/bin/python2 ./test/unit/gen_libs/is_file_text.py
 /usr/bin/python2 ./test/unit/gen_libs/is_missing_lists.py

@@ -34,6 +34,8 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
+        test_print_stdout_pprint
+        test_print_file_pprint
         test_print_stdout
         test_print_file
         tearDown
@@ -52,6 +54,33 @@ class UnitTest(unittest.TestCase):
 
         self.data = "Print_Data"
         self.ofile = "test/unit/gen_libs/tmp/test_print_data.txt"
+
+    def test_print_stdout_pprint(self):
+
+        """Function:  test_print_stdout_pprint
+
+        Description:  Test with printing data to standard out with pprint.
+
+        Arguments:
+
+        """
+
+        with gen_libs.no_std_out():
+            self.assertFalse(gen_libs.print_data(self.data, use_pprint=True))
+
+    def test_print_file_pprint(self):
+
+        """Function:  test_print_file_pprint
+
+        Description:  Test with printing data to file with pprint.
+
+        Arguments:
+
+        """
+
+        gen_libs.print_data(self.data, ofile=self.ofile, use_pprint=True)
+
+        self.assertTrue(os.path.isfile(self.ofile))
 
     def test_print_stdout(self):
 
