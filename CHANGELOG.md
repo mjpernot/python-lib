@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [3.0.5] - 2024-09-27
+- Updated simplejson=3.13.2 for Python 3
+
+
 ## [3.0.4] - 2024-08-20
 - Removed the get_inst function.
 - Added dict_out function to gen_class module.
