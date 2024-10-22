@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [3.0.6] - 2024-10-18
+- gen_class: Added checks on importing dnf module depending on platform and version.
+
+
 ## [3.0.5] - 2024-09-27
 - Updated simplejson=3.13.2 for Python 3
 

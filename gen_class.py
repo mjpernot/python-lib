@@ -5,6 +5,7 @@
     Description:  Class that has class definitions for general use.
 
     Function:
+        dict_out
         setup_mail
 
     Classes:
@@ -62,10 +63,12 @@ import distro
 if sys.version_info < (3, 0):
     import yum
 
-# Dnf for Python 3 and for Linux 8 platforms
-#   NOTE:  There are some Linux 7 platforms that provide the Dnf module, but
-#       not looking that deep.
-if sys.version_info[0] >= 3 and distro.linux_distribution()[1] >= '8':
+# Dnf for Python 3
+#   NOTE:  There are some CentOS 7 platforms that provide the Dnf module, but
+#   not looking that deep.
+if sys.version_info[0] >= 3 \
+   and ((distro.id() == 'fedora' and distro.version() >= '40') or
+        (distro.id() == 'redhat' and distro.version() >= '8')):
     import dnf
 
 # Local
