@@ -5,7 +5,12 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 
 ## [3.0.6] - 2024-10-18
+- Updated chardet==4.0.0 for Python 3.
+- Uodated distro==1.9.0 for Python 3.
+
+### Changed
 - gen_class: Added checks on importing dnf module depending on platform and version.
+- Documentation updates.
 
 
 ## [3.0.5] - 2024-09-27
