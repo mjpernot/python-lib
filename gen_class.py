@@ -68,7 +68,7 @@ if sys.version_info < (3, 0):
 #   not looking that deep.
 if sys.version_info[0] >= 3 \
    and ((distro.id() == 'fedora' and distro.version() >= '40') or
-        (distro.id() == 'redhat' and distro.version() >= '8')):
+        (distro.id() == 'rhel' and distro.version() >= '8')):
     import dnf
 
 # Local
