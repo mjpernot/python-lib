@@ -1622,7 +1622,9 @@ class Daemon2(object):
 
 
 # The package dnf for only Linux 8 platforms and Python 3
-if sys.version_info[0] >= 3 and distro.linux_distribution()[1] >= '8':
+if sys.version_info[0] >= 3 \
+   and ((distro.id() == 'fedora' and distro.version() >= '40') or
+        (distro.id() == 'rhel' and distro.version() >= '8')):
     class Dnf(object):
         """Class:  Dnf
 

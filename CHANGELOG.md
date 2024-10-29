@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [3.0.7] - 2024-10-29
+
+### Fixed
+- gen_class.Dnf:  Added checks on importing dnf module depending on platform and version.
+
+
 ## [3.0.6] - 2024-10-18
 - Updated chardet==4.0.0 for Python 3.
 - Uodated distro==1.9.0 for Python 3.
