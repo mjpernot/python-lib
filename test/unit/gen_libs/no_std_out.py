@@ -20,8 +20,8 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import gen_libs
-import version
+import gen_libs                     # pylint:disable=R0402,E0401
+import version                      # pylint:disable=E0401
 
 __version__ = version.__version__
 

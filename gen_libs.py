@@ -108,8 +108,6 @@
 """
 
 # Libraries and Global Variables
-from __future__ import print_function
-from __future__ import absolute_import
 
 # Standard
 import subprocess
@@ -136,11 +134,7 @@ import pprint
 import chardet
 
 # Local
-try:
-    from . import version
-
-except (ValueError, ImportError) as err:
-    import version
+import version                      # pylint:disable=E0401
 
 __version__ = version.__version__
 
@@ -1269,30 +1263,21 @@ def is_base64(data):
 
     """
 
-    if sys.version_info[0] == 3:
-        try:
-            if isinstance(data, str):
-                data_bytes = bytes(data, 'ascii')
+    try:
+        if isinstance(data, str):
+            data_bytes = bytes(data, 'ascii')
 
-            elif isinstance(data, bytes):
-                data_bytes = data
+        elif isinstance(data, bytes):
+            data_bytes = data
 
-            else:
-                raise binascii.Error
+        else:
+            raise binascii.Error
 
-            status = base64.b64encode(
-                base64.b64decode(data_bytes))[1:70] == data_bytes[1:70]
+        status = base64.b64encode(
+            base64.b64decode(data_bytes))[1:70] == data_bytes[1:70]
 
-        except binascii.Error:
-            status = False
-
-    else:
-        try:
-            status = base64.b64encode(
-                base64.b64decode(data))[1:70] == data[1:70]
-
-        except TypeError:
-            status = False
+    except binascii.Error:
+        status = False
 
     return status
 
@@ -1616,11 +1601,8 @@ def make_md5_hash(file_path, to_file=True):
     proc1 = subprocess.Popen(
         ["/usr/bin/md5sum", file_path], stdout=subprocess.PIPE)
     hash_results, _ = proc1.communicate()
-
-    if sys.version_info >= (3, 0):
-        encoding = chardet.detect(hash_results)["encoding"]
-        hash_results = hash_results.decode(encoding)
-
+    encoding = chardet.detect(hash_results)["encoding"]
+    hash_results = hash_results.decode(encoding)
     hash_results = hash_results.split("  ")[0]
 
     if to_file:
@@ -1941,12 +1923,7 @@ def no_std_out():
     """
 
     save_stdout = sys.stdout
-
-    if sys.version_info < (3, 0):
-        sys.stdout = io.BytesIO()
-
-    else:
-        sys.stdout = io.StringIO()
+    sys.stdout = io.StringIO()
 
     yield
     sys.stdout = save_stdout

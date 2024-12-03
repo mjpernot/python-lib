@@ -20,8 +20,8 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import gen_libs
-import version
+import gen_libs                     # pylint:disable=R0402,E0401
+import version                      # pylint:disable=E0401
 
 __version__ = version.__version__
 
@@ -66,90 +66,84 @@ class UnitTest(unittest.TestCase):
         self.data5 = 'this is a testa over and over123'
         self.data6 = 'this is a testa over and over1234'
 
-        if sys.version_info[0] == 3:
-            self.bytes = bytes(self.data2, "utf-8")
-            self.bytes2 = bytes(self.data3, "utf-8")
-            self.bytes3 = bytes(self.data4, "utf-8")
-            self.bytes4 = bytes(self.data5, "utf-8")
-            self.bytes5 = bytes(self.data6, "utf-8")
-            self.bytes6 = 12345
+        self.bytes = bytes(self.data2, "utf-8")
+        self.bytes2 = bytes(self.data3, "utf-8")
+        self.bytes3 = bytes(self.data4, "utf-8")
+        self.bytes4 = bytes(self.data5, "utf-8")
+        self.bytes5 = bytes(self.data6, "utf-8")
+        self.bytes6 = 12345
 
-    if sys.version_info[0] == 3:
-        def test_with_int_data(self):
+    def test_with_int_data(self):
 
-            """Function:  test_with_int_data
+        """Function:  test_with_int_data
 
-            Description:  Test with integer data.
+        Description:  Test with integer data.
 
-            Arguments:
+        Arguments:
 
-            """
+        """
 
-            self.assertFalse(gen_libs.is_base64(self.bytes6))
+        self.assertFalse(gen_libs.is_base64(self.bytes6))
 
-        def test_with_bytes_data5(self):
+    def test_with_bytes_data5(self):
 
-            """Function:  test_with_bytes_data5
+        """Function:  test_with_bytes_data5
 
-            Description:  Test with bytes data of different lengths.
+        Description:  Test with bytes data of different lengths.
 
-            Arguments:
+        Arguments:
 
-            """
+        """
 
-            self.assertFalse(gen_libs.is_base64(self.bytes5))
+        self.assertFalse(gen_libs.is_base64(self.bytes5))
 
-    if sys.version_info[0] == 3:
-        def test_with_bytes_data4(self):
+    def test_with_bytes_data4(self):
 
-            """Function:  test_with_bytes_data4
+        """Function:  test_with_bytes_data4
 
-            Description:  Test with bytes data of different lengths.
+        Description:  Test with bytes data of different lengths.
 
-            Arguments:
+        Arguments:
 
-            """
+        """
 
-            self.assertFalse(gen_libs.is_base64(self.bytes4))
+        self.assertFalse(gen_libs.is_base64(self.bytes4))
 
-    if sys.version_info[0] == 3:
-        def test_with_bytes_data3(self):
+    def test_with_bytes_data3(self):
 
-            """Function:  test_with_bytes_data3
+        """Function:  test_with_bytes_data3
 
-            Description:  Test with bytes data of different lengths.
+        Description:  Test with bytes data of different lengths.
 
-            Arguments:
+        Arguments:
 
-            """
+        """
 
-            self.assertFalse(gen_libs.is_base64(self.bytes3))
+        self.assertFalse(gen_libs.is_base64(self.bytes3))
 
-    if sys.version_info[0] == 3:
-        def test_with_bytes_data2(self):
+    def test_with_bytes_data2(self):
 
-            """Function:  test_with_bytes_data2
+        """Function:  test_with_bytes_data2
 
-            Description:  Test with bytes data of different lengths.
+        Description:  Test with bytes data of different lengths.
 
-            Arguments:
+        Arguments:
 
-            """
+        """
 
-            self.assertFalse(gen_libs.is_base64(self.bytes2))
+        self.assertFalse(gen_libs.is_base64(self.bytes2))
 
-    if sys.version_info[0] == 3:
-        def test_with_bytes_data(self):
+    def test_with_bytes_data(self):
 
-            """Function:  test_with_bytes_data
+        """Function:  test_with_bytes_data
 
-            Description:  Test with bytes data of different lengths.
+        Description:  Test with bytes data of different lengths.
 
-            Arguments:
+        Arguments:
 
-            """
+        """
 
-            self.assertFalse(gen_libs.is_base64(self.bytes))
+        self.assertFalse(gen_libs.is_base64(self.bytes))
 
     def test_with_str_data5(self):
 

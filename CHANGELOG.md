@@ -4,6 +4,25 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [4.0.0] - 2024-12-03
+Breaking Changes
+
+- Removed support for Python 2.7.
+
+### Changed
+- gen_libs.make_md5_hash: Removed check for Python 3.
+- gen_libs: is_base64, no_std_out: Remove Python 2.7 code.
+- gen_class.Dnf: Removed check for Python version for the class.
+
+### Deprecated
+- gen_libs.str_type function.
+
+### Removed
+- gen_class.Yum class.
+- All modules: Removed "from \_\_future\_\_ import" library modules.
+- All modules: Removed the Python 2.7 local library imports.
+
+
 ## [3.0.8] - 2024-11-13
 
 ### Fixed

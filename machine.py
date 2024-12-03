@@ -13,21 +13,16 @@
 """
 
 # Libraries and Global Variables
-from __future__ import absolute_import
 
 # Standard
 
 # Local
-try:
-    from . import version
-
-except (ValueError, ImportError) as err:
-    import version
+import version                      # pylint:disable=E0401
 
 __version__ = version.__version__
 
 
-class Machine(object):
+class Machine():
 
     """Class:  Machine
 

@@ -23,13 +23,10 @@
         Mail2
         TimeFormat
         Logger
-        Yum
 
 """
 
 # Libraries and Global Variables
-from __future__ import print_function
-from __future__ import absolute_import
 
 # Standard
 import sys
@@ -57,28 +54,11 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import pprint
 import distro
-
-
-# Yum for Python 2.7 only
-if sys.version_info < (3, 0):
-    import yum
-
-# Dnf for Python 3
-#   NOTE:  There are some CentOS 7 platforms that provide the Dnf module, but
-#   not looking that deep.
-if sys.version_info[0] >= 3 \
-   and ((distro.id() == 'fedora' and distro.version() >= '40') or
-        (distro.id() == 'rhel' and distro.version() >= '8')):
-    import dnf
+import dnf
 
 # Local
-try:
-    from . import gen_libs
-    from . import version
-
-except (ValueError, ImportError) as err:
-    import gen_libs
-    import version
+import gen_libs                     # pylint:disable=R0402,E0401
+import version                      # pylint:disable=E0401
 
 __version__ = version.__version__
 
@@ -1621,302 +1601,298 @@ class Daemon2(object):
         """
 
 
-# The package dnf for only Linux 8 platforms and Python 3
-if sys.version_info[0] >= 3 \
-   and ((distro.id() == 'fedora' and distro.version() >= '40') or
-        (distro.id() == 'rhel' and distro.version() >= '8')):
-    class Dnf(object):
-        """Class:  Dnf
+class Dnf(object):
+    """Class:  Dnf
 
-        Description: Class which is a representation for python3-dnf class.  A
-            dnf object is used as a proxy for using the dnf command.
+    Description: Class which is a representation for python3-dnf class.  A
+        dnf object is used as a proxy for using the dnf command.
 
-        Methods:
-            __init__
-            capture_pkgs
-            capture_repos
-            fetch_install_pkgs
-            fetch_repos
-            fetch_update_pkgs
-            get_all_repos
-            get_distro
-            get_enabled_repos
-            get_hostname
-            get_install_pkgs
-            get_installed
-            get_os
-            get_release
-            get_update_pkgs
-            get_updates
+    Methods:
+        __init__
+        capture_pkgs
+        capture_repos
+        fetch_install_pkgs
+        fetch_repos
+        fetch_update_pkgs
+        get_all_repos
+        get_distro
+        get_enabled_repos
+        get_hostname
+        get_install_pkgs
+        get_installed
+        get_os
+        get_release
+        get_update_pkgs
+        get_updates
+
+    """
+
+    def __init__(self):
+
+        """Method:  __init__
+
+        Description:  Initialization of an instance of the Dnf class.
+
+        Arguments:
 
         """
 
-        def __init__(self):
+        self.base = dnf.Base()
+        self.packages = None
+        self.host_name = socket.gethostname()
+        self.os_name = distro.name()
+        self.release = distro.version()
+        self.distro = (distro.name(), distro.version(), distro.codename())
 
-            """Method:  __init__
+    def capture_pkgs(self):
 
-            Description:  Initialization of an instance of the Dnf class.
+        """Method:  capture_pkgs
 
-            Arguments:
+        Description:  Query for all installed packages on the system.
 
-            """
+        Arguments:
 
-            self.base = dnf.Base()
-            self.packages = None
-            self.host_name = socket.gethostname()
-            self.os_name = distro.name()
-            self.release = distro.version()
-            self.distro = (distro.name(), distro.version(), distro.codename())
+        """
 
-        def capture_pkgs(self):
+        self.base.fill_sack()
+        self.packages = self.base.sack.query()
 
-            """Method:  capture_pkgs
+    def capture_repos(self):
 
-            Description:  Query for all installed packages on the system.
+        """Method:  capture_repos
 
-            Arguments:
+        Description:  Query for all of the repos on the system.
 
-            """
+        Arguments:
 
-            self.base.fill_sack()
-            self.packages = self.base.sack.query()
+        """
 
-        def capture_repos(self):
+        self.base.read_all_repos()
+        self.base.fill_sack()
 
-            """Method:  capture_repos
+    def fetch_install_pkgs(self):
 
-            Description:  Query for all of the repos on the system.
+        """Method:  fetch_install_pkgs
 
-            Arguments:
+        Description:  Return a dictionary of installed packages in a list.
 
-            """
+        Note:  This is a backwards comptable function for programs that use
+            the gen_class.Yum class.
 
-            self.base.read_all_repos()
-            self.base.fill_sack()
+        Arguments:
+            (output) List of installed of packages in JSON format
 
-        def fetch_install_pkgs(self):
+        """
 
-            """Method:  fetch_install_pkgs
+        pkgs = self.get_install_pkgs()
 
-            Description:  Return a dictionary of installed packages in a list.
+        return [{"package": pkg.name, "ver": pkg.version, "arch": pkg.arch}
+                for pkg in pkgs]
 
-            Note:  This is a backwards comptable function for programs that use
-                the gen_class.Yum class.
+    def fetch_repos(self):
 
-            Arguments:
-                (output) List of installed of packages in JSON format
+        """Method:  fetch_repos
 
-            """
+        Description:  Return a list of repos.
 
-            pkgs = self.get_install_pkgs()
+        Note:  This is a backwards comptable function for programs that use
+            the gen_class.Yum class.
 
-            return [{"package": pkg.name, "ver": pkg.version, "arch": pkg.arch}
-                    for pkg in pkgs]
+        Arguments:
+            (output) List of repositories
 
-        def fetch_repos(self):
+        """
 
-            """Method:  fetch_repos
+        return self.get_all_repos()
 
-            Description:  Return a list of repos.
+    def fetch_update_pkgs(self):
 
-            Note:  This is a backwards comptable function for programs that use
-                the gen_class.Yum class.
+        """Method:  fetch_update_pkgs
 
-            Arguments:
-                (output) List of repositories
+        Description:  Return a list of dictionaries of packages that have
+            updates.
 
-            """
+        Note:  This is a backwards comptable function for programs that use
+            the gen_class.Yum class.
 
-            return self.get_all_repos()
+        Arguments:
+            (output) List of packages for installation in JSON format
 
-        def fetch_update_pkgs(self):
+        """
 
-            """Method:  fetch_update_pkgs
+        query = self.get_update_pkgs()
 
-            Description:  Return a list of dictionaries of packages that have
-                updates.
+        return [
+            {"package": pkg.name, "ver": pkg.version, "arch": pkg.arch,
+             "repo": pkg.reponame} for pkg in query.upgrades().latest(1)]
 
-            Note:  This is a backwards comptable function for programs that use
-                the gen_class.Yum class.
+    def get_all_repos(self, url=False):
 
-            Arguments:
-                (output) List of packages for installation in JSON format
+        """Method:  get_all_repos
 
-            """
+        Description:  Return a list of all the repos on the system.
 
-            query = self.get_update_pkgs()
+        Note: If including the url, then each item in the list will be a
+            set.
+            Postition:
+                0: Repository Name
+                1: Reposirory Base URL
 
-            return [
-                {"package": pkg.name, "ver": pkg.version, "arch": pkg.arch,
-                 "repo": pkg.reponame} for pkg in query.upgrades().latest(1)]
+        Arguments:
+            (input) url -> True|False - Include the repos base URL
+            (output) data -> List of repositories on the system
 
-        def get_all_repos(self, url=False):
+        """
 
-            """Method:  get_all_repos
+        self.capture_repos()
 
-            Description:  Return a list of all the repos on the system.
+        if url:
+            data = [(rep.name, str(rep.baseurl))
+                    for rep in self.base.repos.all()]
 
-            Note: If including the url, then each item in the list will be a
-                set.
-                Postition:
-                    0: Repository Name
-                    1: Reposirory Base URL
+        else:
+            data = [rep.name for rep in self.base.repos.all()]
 
-            Arguments:
-                (input) url -> True|False - Include the repos base URL
-                (output) data -> List of repositories on the system
+        return data
 
-            """
+    def get_distro(self):
 
-            self.capture_repos()
+        """Method:  get_distro
 
-            if url:
-                data = [(rep.name, str(rep.baseurl))
-                        for rep in self.base.repos.all()]
+        Description:  Reuturn linux_distribution settings.
 
-            else:
-                data = [rep.name for rep in self.base.repos.all()]
+        Arguments:
+            (output) self.distro -> Linux distribution as a tuple value
 
-            return data
+        """
 
-        def get_distro(self):
+        return self.distro
 
-            """Method:  get_distro
+    def get_enabled_repos(self, url=False):
 
-            Description:  Reuturn linux_distribution settings.
+        """Method:  get_enabled_repos
 
-            Arguments:
-                (output) self.distro -> Linux distribution as a tuple value
+        Description:  Return a list of enabled repos on the system.
 
-            """
+        Note: If including the url, then each item in the list will be a
+            set.
+            Postition:
+                0: Repository Name
+                1: Reposirory Base URL
 
-            return self.distro
+        Arguments:
+            (input) url -> True|False - Include the repos base URL
+            (output) data -> List of enabled repositories on the system
 
-        def get_enabled_repos(self, url=False):
+        """
 
-            """Method:  get_enabled_repos
+        self.capture_repos()
 
-            Description:  Return a list of enabled repos on the system.
+        if url:
+            data = [(rep.name, str(rep.baseurl))
+                    for rep in self.base.repos.iter_enabled()]
 
-            Note: If including the url, then each item in the list will be a
-                set.
-                Postition:
-                    0: Repository Name
-                    1: Reposirory Base URL
+        else:
+            data = [rep.name for rep in self.base.repos.iter_enabled()]
 
-            Arguments:
-                (input) url -> True|False - Include the repos base URL
-                (output) data -> List of enabled repositories on the system
+        return data
 
-            """
+    def get_hostname(self):
 
-            self.capture_repos()
+        """Method:  get_hostname
 
-            if url:
-                data = [(rep.name, str(rep.baseurl))
-                        for rep in self.base.repos.iter_enabled()]
+        Description:  Return the server's hostname.
 
-            else:
-                data = [rep.name for rep in self.base.repos.iter_enabled()]
+        Arguments:
+            (output) self.host_name -> Server host name
 
-            return data
+        """
 
-        def get_hostname(self):
+        return self.host_name
 
-            """Method:  get_hostname
+    def get_install_pkgs(self):
 
-            Description:  Return the server's hostname.
+        """Method:  get_install_pkgs
 
-            Arguments:
-                (output) self.host_name -> Server host name
+        Description:  Return installed packages.
 
-            """
+        Arguments:
+            (output) Class of installed packages
 
-            return self.host_name
+        """
 
-        def get_install_pkgs(self):
+        self.capture_pkgs()
 
-            """Method:  get_install_pkgs
+        return self.packages.installed()
 
-            Description:  Return installed packages.
+    def get_installed(self):
 
-            Arguments:
-                (output) Class of installed packages
+        """Method:  get_installed
 
-            """
+        Description:  Return list of installed packages.
 
-            self.capture_pkgs()
+        Arguments:
 
-            return self.packages.installed()
+        """
 
-        def get_installed(self):
+        ins_pkg = self.get_install_pkgs()
 
-            """Method:  get_installed
+        return [str(pkg) for pkg in ins_pkg]
 
-            Description:  Return list of installed packages.
+    def get_os(self):
 
-            Arguments:
+        """Method:  get_os
 
-            """
+        Description:  Return the operating system platform.
 
-            ins_pkg = self.get_install_pkgs()
+        Arguments:
+            (output) self.os_name -> Server's Operating system name
 
-            return [str(pkg) for pkg in ins_pkg]
+        """
 
-        def get_os(self):
+        return self.os_name
 
-            """Method:  get_os
+    def get_release(self):
 
-            Description:  Return the operating system platform.
+        """Method:  get_release
 
-            Arguments:
-                (output) self.os_name -> Server's Operating system name
+        Description:  Return the OS kernel release version.
 
-            """
+        Arguments:
+            (output) self.release -> Kernel release version
 
-            return self.os_name
+        """
 
-        def get_release(self):
+        return self.release
 
-            """Method:  get_release
+    def get_update_pkgs(self):
 
-            Description:  Return the OS kernel release version.
+        """Method:  get_update_pkgs
 
-            Arguments:
-                (output) self.release -> Kernel release version
+        Description:  Return update packages.
 
-            """
+        Arguments:
+            (output) Class of update packages
 
-            return self.release
+        """
 
-        def get_update_pkgs(self):
+        self.capture_repos()
 
-            """Method:  get_update_pkgs
+        return self.base.sack.query()
 
-            Description:  Return update packages.
+    def get_updates(self):
 
-            Arguments:
-                (output) Class of update packages
+        """Method:  get_updates
 
-            """
+        Description:  Return list of packages that have updates available.
 
-            self.capture_repos()
+        Arguments:
 
-            return self.base.sack.query()
+        """
 
-        def get_updates(self):
+        query = self.get_update_pkgs()
 
-            """Method:  get_updates
-
-            Description:  Return list of packages that have updates available.
-
-            Arguments:
-
-            """
-
-            query = self.get_update_pkgs()
-
-            return [str(pkg) for pkg in query.upgrades().latest(1)]
+        return [str(pkg) for pkg in query.upgrades().latest(1)]
 
 
 class KeyCaseInsensitiveDict(dict):
@@ -3231,147 +3207,3 @@ class Logger(object):
         for handle in self.log.handlers:
             handle.close()
             self.log.removeHandler(handle)
-
-
-# The yum package only works with Python 2.7
-if sys.version_info < (3, 0):
-    class Yum(yum.YumBase):
-
-        """Class:  Yum
-
-        Description:  Class which is a representation for YumBase system class.
-            A yum object is used as a proxy for using the yum command.
-
-        Methods:
-            __init__
-            get_hostname
-            get_os
-            get_release
-            get_distro
-            fetch_repos
-            fetch_install_pkgs
-            fetch_update_pkgs
-
-        """
-
-        def __init__(self, host_name=None):
-
-            """Method:  __init__
-
-            Description:  Initialization of an instance of the Yum class.
-
-            Arguments:
-                (input) host_name -> Host name of server
-
-            """
-
-            yum.YumBase.__init__(self)
-
-            if host_name:
-                self.host_name = host_name
-
-            else:
-                self.host_name = socket.gethostname()
-
-            self.os_name = distro.name()
-            self.release = distro.version()
-            self.distro = (distro.name(), distro.version(), distro.codename())
-
-        def get_distro(self):
-
-            """Method:  get_distro
-
-            Description:  Reuturn class' linux_distribution.
-
-            Arguments:
-                (output) self.distro -> Linux distribution tuple value
-
-            """
-
-            return self.distro
-
-        def get_hostname(self):
-
-            """Method:  get_hostname
-
-            Description:  Return the class' hostname.
-
-            Arguments:
-                (output) self.host_name -> Server's host name
-
-            """
-
-            return self.host_name
-
-        def get_os(self):
-
-            """Method:  get_os
-
-            Description:  Return the class' OS platform.
-
-            Arguments:
-                (output) self.os_name -> Server's Operating system name
-
-            """
-
-            return self.os_name
-
-        def get_release(self):
-
-            """Method:  get_release
-
-            Description:  Return the class' OS release version.
-
-            Arguments:
-                (output) self.release -> Kernel release version
-
-            """
-
-            return self.release
-
-        def fetch_repos(self):
-
-            """Method:  fetch_repos
-
-            Description:  Return a list of repos.
-
-            Arguments:
-                (output) List of repositories
-
-            """
-
-            self.doRepoSetup()
-
-            return [repo.name for repo in self.repos.listEnabled()]
-
-        def fetch_install_pkgs(self):
-
-            """Method:  fetch_install_pkgs
-
-            Description:  Return a dictionary of installed packages in a list.
-
-            Arguments:
-                (output) List of installed of packages in JSON format
-
-            """
-
-            return [{"package": pkg.name, "ver": pkg.version, "arch": pkg.arch}
-                    for pkg in self.rpmdb]
-
-        def fetch_update_pkgs(self):
-
-            """Method:  fetch_update_pkgs
-
-            Description:  Return a dictionary of packages to be updated in a
-                list.
-
-            Arguments:
-                (output) List of packages for installation in JSON format
-
-            """
-
-            return [{"package": pkg.name, "ver": pkg.version, "arch": pkg.arch,
-                     "repo": str(getattr(pkg, "repo"))}
-                    for pkg in self.doPackageLists(pkgnarrow="updates",
-                                                   patterns="",
-                                                   ignore_case=True)]
