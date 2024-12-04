@@ -1241,13 +1241,7 @@ class Daemon(object):
         sys.stderr.flush()
         sdi = open(self.stdin, "r")
         sdo = open(self.stdout, "a+")
-
-        # Cannot open unbuffered writes in Python 3
-        if sys.version_info < (3, 0):
-            sde = open(self.stderr, "a+", 0)
-
-        else:
-            sde = open(self.stderr, "a+")
+        sde = open(self.stderr, "a+")
 
         os.dup2(sdi.fileno(), sys.stdin.fileno())
         os.dup2(sdo.fileno(), sys.stdout.fileno())

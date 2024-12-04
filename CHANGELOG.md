@@ -13,6 +13,7 @@ Breaking Changes
 - gen_libs.make_md5_hash: Removed check for Python 3.
 - gen_libs: is_base64, no_std_out: Remove Python 2.7 code.
 - gen_class.Dnf: Removed check for Python version for the class.
+- gen_class.daemonize: Remove Python 2.7 code.
 
 ### Deprecated
 - gen_libs.str_type function.
