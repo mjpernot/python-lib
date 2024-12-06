@@ -8,6 +8,7 @@ echo ""
 echo "Unit test:  gen_libs.py"
 /usr/bin/python ./test/unit/gen_libs/add_cmd.py
 /usr/bin/python ./test/unit/gen_libs/and_is_true.py
+/usr/bin/python ./test/unit/gen_libs/binary_string.py
 /usr/bin/python ./test/unit/gen_libs/bytes_2_readable.py
 /usr/bin/python ./test/unit/gen_libs/chk_crt_dir.py
 /usr/bin/python ./test/unit/gen_libs/chk_crt_file.py

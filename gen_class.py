@@ -1455,27 +1455,15 @@ class Daemon2(object):
         # Exceptions raised after this point will be written to the log file
         sys.stderr.flush()
 
-        # Cannot open unbuffered writes in Python 3
-        if sys.version_info < (3, 0):
-            with open(self.stderr, "a+", 0) as stderr:
-                os.dup2(stderr.fileno(), sys.stderr.fileno())
-
-        else:
-            with open(self.stderr, "a+") as stderr:
-                os.dup2(stderr.fileno(), sys.stderr.fileno())
+        with open(self.stderr, "a+") as stderr:
+            os.dup2(stderr.fileno(), sys.stderr.fileno())
 
         # Stdout: Point standard out to a log file
         # Print statements after this will not work, use sys.stdout instead
         sys.stdout.flush()
 
-        # Cannot open unbuffered writes in Python 3
-        if sys.version_info < (3, 0):
-            with open(self.stdout, "a+", 0) as stdout:
-                os.dup2(stdout.fileno(), sys.stdout.fileno())
-
-        else:
-            with open(self.stdout, "a+") as stdout:
-                os.dup2(stdout.fileno(), sys.stdout.fileno())
+        with open(self.stdout, "a+") as stdout:
+            os.dup2(stdout.fileno(), sys.stdout.fileno())
 
         # Create pid file and before file creation, make sure to delete the pid
         #   file on exit
@@ -1944,7 +1932,7 @@ class KeyCaseInsensitiveDict(dict):
 
         """
 
-        return key.lower() if isinstance(key, gen_libs.str_type()) else key
+        return key.lower() if isinstance(key, str) else key
 
     def __init__(self, *args, **kwargs):
 
@@ -2244,8 +2232,7 @@ class LogFile(object):
 
         """
 
-        if (sys.version_info < (3, 0) and isinstance(data, file)) \
-           or (sys.version_info > (2, 8) and isinstance(data, io.IOBase)):
+        if isinstance(data, io.IOBase):
             self.ignore.extend(
                 [item.lower().rstrip().rstrip("\n") for item in data])
 
@@ -2269,8 +2256,7 @@ class LogFile(object):
 
         """
 
-        if (sys.version_info < (3, 0) and isinstance(data, file)) \
-           or (sys.version_info > (2, 8) and isinstance(data, io.IOBase)):
+        if isinstance(data, io.IOBase):
             self.keyword.extend([x.lower().rstrip().rstrip("\n")
                                  for x in data])
 
@@ -2295,13 +2281,7 @@ class LogFile(object):
 
         """
 
-        if sys.version_info < (3, 0) and isinstance(
-                data, (file, gzip.GzipFile)):
-            self.loglist.extend([x.rstrip().rstrip("\n") for x in data])
-
-        elif sys.version_info >= (3, 0) and isinstance(
-                data, (io.IOBase, gzip.GzipFile)):
-
+        if isinstance(data, (io.IOBase, gzip.GzipFile)):
             if isinstance(data, gzip.GzipFile):
                 self.loglist.extend(
                     [x.decode().rstrip().rstrip("\n") for x in data])
@@ -2335,8 +2315,7 @@ class LogFile(object):
 
         """
 
-        if (sys.version_info < (3, 0) and isinstance(data, file)) \
-           or (sys.version_info > (2, 8) and isinstance(data, io.IOBase)):
+        if isinstance(data, io.IOBase):
             self.marker = data.readline().rstrip().rstrip("\n")
 
         elif isinstance(data, str):
@@ -2348,16 +2327,19 @@ class LogFile(object):
 
         Description:  Load regext entries from object.
 
-        Note:  If passing in r"data_string" (raw strings) then any embedded
-            "\n" (newlines) will not be split upon in the string operation.
+        Warning: Passing in a string with "(backslash)d" will return an invalid
+            escape sequence, using a raw string.
+
+        Note:  If passing in raw strings then any embedded "\n" (newlines) will
+            not be split upon in the string operation, use a "|" (pipe)
+            instead.
 
         Arguments:
             (input) data -> Marker entry as a file handler, list, or string
 
         """
 
-        if (sys.version_info < (3, 0) and isinstance(data, file)) \
-           or (sys.version_info > (2, 8) and isinstance(data, io.IOBase)):
+        if isinstance(data, io.IOBase):
             self.regex = "|".join(str(x.strip().strip("\n")) for x in data)
 
         elif isinstance(data, list):

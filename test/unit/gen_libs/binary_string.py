@@ -1,11 +1,11 @@
 # Classification (U)
 
-"""Program:  is_file_text.py
+"""Program:  binary_string.py
 
-    Description:  Unit testing of is_file_text in gen_libs.py.
+    Description:  Unit testing of binary_string in gen_libs.py.
 
     Usage:
-        test/unit/gen_libs/is_file_text.py
+        test/unit/gen_libs/binary_string.py
 
     Arguments:
 
@@ -34,9 +34,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
-        test_null_file
         test_binary_file
-        test_empty_file
         test_text_file
 
     """
@@ -52,22 +50,8 @@ class UnitTest(unittest.TestCase):
         """
 
         base_path = "test/unit/gen_libs/testfiles"
-        self.file = os.path.join(os.getcwd(), base_path, "is_file_text")
-        self.file2 = os.path.join(os.getcwd(), base_path, "is_file_text2")
-        self.file3 = os.path.join(os.getcwd(), base_path, "is_file_text3")
-        self.file4 = os.path.join(os.getcwd(), base_path, "is_file_text4")
-
-    def test_null_file(self):
-
-        """Function:  test_null_file
-
-        Description:  Test with null byte in file.
-
-        Arguments:
-
-        """
-
-        self.assertFalse(gen_libs.is_file_text(self.file4))
+        self.file = os.path.join(os.getcwd(), base_path, "binary_text")
+        self.file2 = os.path.join(os.getcwd(), base_path, "binary_text2")
 
     def test_binary_file(self):
 
@@ -80,18 +64,6 @@ class UnitTest(unittest.TestCase):
         """
 
         self.assertFalse(gen_libs.is_file_text(self.file2))
-
-    def test_empty_file(self):
-
-        """Function:  test_empty_file
-
-        Description:  Test with empty file.
-
-        Arguments:
-
-        """
-
-        self.assertTrue(gen_libs.is_file_text(self.file3))
 
     def test_text_file(self):
 

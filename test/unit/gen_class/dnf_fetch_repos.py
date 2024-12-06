@@ -49,12 +49,6 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        if sys.version_info[0] < 3 \
-           and ((distro.id() == 'fedora' and distro.version() < '40') or
-                (distro.id() == 'rhel' and distro.version() < '8')):
-            print("Python 2 or Linux 7 platforms do not support dnf, skipping")
-            self.skipTest("Pre-conditions not met.")
-
         self.dnf = gen_class.Dnf()
 
     def test_repos(self):

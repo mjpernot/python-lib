@@ -17,6 +17,7 @@ coverage run -a --source=errors test/unit/errors/notyetimplementederror.py
 coverage run -a --source=errors test/unit/errors/slavenotrunningerror.py
 coverage run -a --source=gen_libs test/unit/gen_libs/add_cmd.py
 coverage run -a --source=gen_libs test/unit/gen_libs/and_is_true.py
+coverage run -a --source=gen_libs test/unit/gen_libs/binary_string.py
 coverage run -a --source=gen_libs test/unit/gen_libs/bytes_2_readable.py
 coverage run -a --source=gen_libs test/unit/gen_libs/chk_crt_dir.py
 coverage run -a --source=gen_libs test/unit/gen_libs/chk_crt_file.py

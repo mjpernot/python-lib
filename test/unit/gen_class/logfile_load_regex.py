@@ -59,16 +59,16 @@ class UnitTest(unittest.TestCase):
 
         self.regex = r"\d{4}\-\d{2}\-\d{2}"
         self.input_list = [self.regex]
-        self.input_list2 = [self.regex, r"d{2}:\d{2}:\d{2}"]
+        self.input_list2 = [self.regex, r"\d{2}:\d{2}:\d{2}"]
         self.input_str = self.regex
-        self.input_str2 = "\d{4}\-\d{2}\-\d{2}\nd{2}:\d{2}:\d{2}\n"
+        self.input_str2 = r"\d{4}\-\d{2}\-\d{2}|\d{2}:\d{2}:\d{2}"
         self.input_str3 = r"\d{4}\-\d{2}\-\d{2}\n\d{2}:\d{2}:\d{2}\n"
         self.input_file = "test/unit/gen_class/testfiles/load_regex_file.txt"
         self.input_file2 = "test/unit/gen_class/testfiles/empty_file.txt"
         self.input_file3 = "test/unit/gen_class/testfiles/load_regex_file2.txt"
 
         self.result_str = self.regex
-        self.result_str2 = r"\d{4}\-\d{2}\-\d{2}|d{2}:\d{2}:\d{2}"
+        self.result_str2 = r"\d{4}\-\d{2}\-\d{2}|\d{2}:\d{2}:\d{2}"
         self.result_str3 = r"\d{4}\-\d{2}\-\d{2}\n\d{2}:\d{2}:\d{2}\n"
 
     def test_load_str_multiple_raw(self):
@@ -88,7 +88,7 @@ class UnitTest(unittest.TestCase):
 
     def test_load_file_multiple(self):
 
-        """Function:  test_load_file
+        """Function:  test_load_file_multiple
 
         Description:  Test loading from a file multiple lines.
 
@@ -171,7 +171,7 @@ class UnitTest(unittest.TestCase):
 
         """Function:  test_load_str_single
 
-        Description:  Test loading from a single sting.
+        Description:  Test loading from a single sting using a pipe delimiter.
 
         Arguments:
 

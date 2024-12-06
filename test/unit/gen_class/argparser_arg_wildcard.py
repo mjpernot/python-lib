@@ -58,12 +58,12 @@ class UnitTest(unittest.TestCase):
 
         p_name = "program.py"
 
-        base_dir = "./test/unit/gen_class"
+        base_dir = "./test/unit/gen_class/testfiles"
         wild1 = os.path.join(base_dir, "argparser_arg_wild*")
-        wild2 = os.path.join(base_dir, "unit*")
-        file1 = os.path.join(base_dir, "argparser_arg_wildcard.py")
-        file2 = os.path.join(base_dir, "unit_test_run.sh")
-        file3 = os.path.join(base_dir, "unit_test_run3.sh")
+        wild2 = os.path.join(base_dir, "argparser_wild*")
+        file1 = os.path.join(base_dir, "argparser_arg_wildcard.txt")
+        file2 = os.path.join(base_dir, "argparser_wildcard.txt")
+        file3 = os.path.join(base_dir, "argparser_wildcard3.txt")
 
         self.argv = [p_name]
         self.argv2 = [p_name, "-a", [wild1]]

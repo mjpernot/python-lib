@@ -8,6 +8,7 @@
     Functions:
         add_cmd
         and_is_true
+        binary_string
         bytes_2_readable
         chk_crt_dir
         chk_crt_file
@@ -103,7 +104,7 @@
         write_to_log
 
     Tuple:
-        _ntuple_diskusage
+        NTupleDiskUsage
 
 """
 
@@ -140,7 +141,7 @@ __version__ = version.__version__
 
 
 # Tuples
-_ntuple_diskusage = collections.namedtuple("usage", "total used free")
+NTupleDiskUsage = collections.namedtuple("usage", "total used free")
 
 
 def add_cmd(cmd, **kwargs):
@@ -190,6 +191,23 @@ def and_is_true(itemx, itemy):
     return truth_tbl[itemx] and truth_tbl[itemy]
 
 
+def binary_string():
+
+    """Function:  binary_string
+
+    Description:  Returns lamdba as a function to check if data is binary.
+
+    Arguments:
+        (output) lamdba function
+
+    """
+
+    textchars = bytearray(
+        {7, 8, 9, 10, 12, 13, 27} | set(range(0x20, 0x100)) - {0x7f})
+
+    return lambda bytes: bool(bytes.translate(None, textchars))
+
+
 def bytes_2_readable(size, precision=2):
 
     """Function:  bytes_2_readable
@@ -210,7 +228,7 @@ def bytes_2_readable(size, precision=2):
         suf_index += 1
         size = size / 1024.0
 
-    return "%.*f%s" % (precision, size, suffix[suf_index])
+    return f"{size:.{precision}f}"f"{suffix[suf_index]}"
 
 
 def chk_crt_dir(dir_name=None, create=False, write=False, read=False,
@@ -243,7 +261,8 @@ def chk_crt_dir(dir_name=None, create=False, write=False, read=False,
 
     # Redirect print to /dev/null.
     if no_print:
-        f_hdlr = open(os.devnull, "w")
+        f_hdlr = open(                              # pylint:disable=R1732
+            os.devnull, mode="w", encoding="UTF-8")
 
     if not dir_name.strip():
         err_msg = "Error:  No value passed for directory name"
@@ -257,13 +276,13 @@ def chk_crt_dir(dir_name=None, create=False, write=False, read=False,
                 os.makedirs(dir_name)
 
             except OSError:
-                err_msg = "Error: Unable to create directory %s" % (dir_name)
+                err_msg = f"Error: Unable to create directory {dir_name}"
                 print(err_msg, file=f_hdlr)
                 status = False
 
         # Directory does not exist.
         elif not os.path.isdir(dir_name):
-            err_msg = "Error: Directory: %s does not exist." % (dir_name)
+            err_msg = f"Error: Directory: {dir_name} does not exist."
             print(err_msg, file=f_hdlr)
             status = False
 
@@ -313,7 +332,8 @@ def chk_crt_file(f_name=None, create=False, write=False, read=False,
 
     # Redirect print to /dev/null
     if no_print:
-        f_hdlr = open(os.devnull, "w")
+        f_hdlr = open(                              # pylint:disable=R1732
+            os.devnull, mode="w", encoding="UTF-8")
 
     if not f_name.strip():
         err_msg = "Error:  No value passed for filename."
@@ -325,7 +345,7 @@ def chk_crt_file(f_name=None, create=False, write=False, read=False,
             touch(f_name)
 
         elif not os.path.isfile(f_name):
-            err_msg = "Error:  File %s does not exist." % (f_name)
+            err_msg = f"Error:  File {f_name} does not exist."
             print(err_msg, file=f_hdlr)
             status = False
 
@@ -386,15 +406,15 @@ def chk_perm(item, oct_perm):
     status = True
 
     if octal_to_str(oct_perm)[2] == "x" and not os.access(item, os.X_OK):
-        print("Error: {0} is not executable.".format(item))
+        print(f"Error: {item} is not executable.")
         status = False
 
     if octal_to_str(oct_perm)[0] == "r" and not os.access(item, os.R_OK):
-        print("Error: {0} is not readable.".format(item))
+        print(f"Error: {item} is not readable.")
         status = False
 
     if octal_to_str(oct_perm)[1] == "w" and not os.access(item, os.W_OK):
-        print("Error: {0} is not writable.".format(item))
+        print(f"Error: {item} is not writable.")
         status = False
 
     return status
@@ -411,7 +431,7 @@ def clear_file(f_name):
 
     """
 
-    open(f_name, "w").close()
+    open(f_name, mode="w", encoding="UTF-8").close()    # pylint:disable=R1732
 
 
 def compress(fname):
@@ -426,7 +446,7 @@ def compress(fname):
 
     """
 
-    proc1 = subprocess.Popen(["gzip", fname])
+    proc1 = subprocess.Popen(["gzip", fname])           # pylint:disable=R1732
     proc1.wait()
 
 
@@ -452,12 +472,12 @@ def cp_dir(src_dir, dest_dir):
 
     # Directory permission error.
     except shutil.Error as err:
-        err_msg = "Directory not copied.  Perms Error Message: %s" % (err)
+        err_msg = f"Directory not copied.  Perms Error Message: {err}"
         status = False
 
     # Directory does not exist.
     except OSError as err:
-        err_msg = "Directory not copied.  Exist Error Message: %s" % (err)
+        err_msg = f"Directory not copied.  Exist Error Message: {err}"
         status = False
 
     return status, err_msg
@@ -566,10 +586,11 @@ def create_cfg_array(cfg_file, **kwargs):
 
     # Does config file exists in current location.
     if os.path.isfile(cfg_file):
-        fname = open(cfg_file, "r")
+        fname = open(cfg_file, mode="r", encoding="UTF-8")
 
     else:
-        fname = open(os.path.join(cfg_path, cfg_file), "r")
+        fname = open(                                   # pylint:disable=R1732
+            os.path.join(cfg_path, cfg_file), mode="r", encoding="UTF-8")
 
     for line in fname:
 
@@ -587,7 +608,7 @@ def create_cfg_array(cfg_file, **kwargs):
 
     # Execute after 'for' loop.
     else:
-        # Add last dict to config array.
+        # Add last dict to config array.                # pylint:disable=W0120
         cfg_array.append(cfg_dict)
 
     fname.close()
@@ -655,7 +676,7 @@ def date_range(start_dt, end_dt):
 
         else:
             _tmp_dt = sdt.replace(day=1) - datetime.timedelta(days=1)
-            sdt = (_tmp_dt.replace(day=sdt.day))
+            sdt = _tmp_dt.replace(day=sdt.day)
             finish = sdt < end_dt
 
 
@@ -740,7 +761,8 @@ def dict_2_std(data, ofile=False, mode="w", **kwargs):
     data = dict(data)
 
     if ofile:
-        outfile = open(ofile, mode)
+        outfile = open(                                 # pylint:disable=R1732
+            ofile, mode=mode, encoding="UTF-8")
 
     else:
         outfile = sys.stdout
@@ -791,7 +813,7 @@ def dict_out(data, **kwargs):
 
     else:
         err_flag = True
-        err_msg = "Error: Is not a dictionary: %s" % (data)
+        err_msg = f"Error: Is not a dictionary: {data}"
 
     return err_flag, err_msg
 
@@ -829,7 +851,7 @@ def disk_usage(path):
 
     Arguments:
         (input) path -> Directory path of the partition
-        (output) _ntuple_diskusage (named tuple):
+        (output) NTupleDiskUsage (named tuple):
             total -> Total space in bytes
             used -> Used space in bytes
             free -> Free space in bytes
@@ -841,7 +863,7 @@ def disk_usage(path):
     total = stv.f_blocks * stv.f_frsize
     used = (stv.f_blocks - stv.f_bfree) * stv.f_frsize
 
-    return _ntuple_diskusage(total, used, free)
+    return NTupleDiskUsage(total, used, free)
 
 
 def display_data(data, level=0, f_hdlr=sys.stdout):
@@ -872,7 +894,7 @@ def display_data(data, level=0, f_hdlr=sys.stdout):
 
         cnt = 0
 
-        while (cnt < level):
+        while cnt < level:
             print("\t", end="", file=f_hdlr)
             cnt += 1
 
@@ -885,14 +907,14 @@ def display_data(data, level=0, f_hdlr=sys.stdout):
             if isinstance(data[item], (dict, list)):
                 print_level(level, f_hdlr)
 
-                print("%s =>" % item, file=f_hdlr)
+                print(f"{item} =>", file=f_hdlr)
 
                 display_data(data[item], level + 1, f_hdlr=f_hdlr)
 
             else:
                 print_level(level, f_hdlr)
 
-                print("%s :  %s" % (item, data[item]), file=f_hdlr)
+                print(f"{item} :  {data[item]}", file=f_hdlr)
 
     # Recursive call for specific data types.
     elif isinstance(data, list):
@@ -904,7 +926,7 @@ def display_data(data, level=0, f_hdlr=sys.stdout):
     else:
         print_level(level, f_hdlr)
 
-        print("%s" % data, file=f_hdlr)
+        print(f"{data}", file=f_hdlr)
 
 
 def file_cleanup(dir_path, days):
@@ -949,7 +971,7 @@ def file_search(f_name, data_str):
 
     line = None
 
-    with open(f_name, "r") as s_file:
+    with open(f_name, mode="r", encoding="UTF-8") as s_file:
         for item in s_file:
             if data_str in item:
                 line = item
@@ -972,7 +994,7 @@ def file_search_cnt(f_name, pattern):
 
     """
 
-    with open(f_name) as f_hdlr:
+    with open(f_name, mode="r", encoding="UTF-8") as f_hdlr:
         cnt = f_hdlr.read().count(pattern)
 
     return cnt
@@ -991,7 +1013,7 @@ def file_2_list(filename):
 
     """
 
-    with open(filename, "r") as f_hdlr:
+    with open(filename, mode="r", encoding="UTF-8") as f_hdlr:
         lines = [item.rstrip("\n") for item in f_hdlr.readlines()]
 
     return lines
@@ -1295,11 +1317,10 @@ def is_empty_file(f_name):
 
     """
 
-    if os.path.isfile(f_name):
-        status = True if os.stat(f_name).st_size == 0 else False
+    status = None
 
-    else:
-        status = None
+    if os.path.isfile(f_name):
+        status = os.stat(f_name).st_size == 0
 
     return status
 
@@ -1322,11 +1343,9 @@ def is_file_text(f_name):
     with io.open(f_name, "rb") as f_hldr:
         f_head = f_hldr.read(512)
 
-    textchars = bytearray(
-        {7, 8, 9, 10, 12, 13, 27} | set(range(0x20, 0x100)) - {0x7f})
-    is_binary_string = lambda bytes: bool(bytes.translate(None, textchars))
+    is_binary_string = binary_string()
 
-    return not(is_binary_string(f_head))
+    return not is_binary_string(f_head)
 
 
 def is_missing_lists(list1, list2):
@@ -1412,7 +1431,7 @@ def key_cleaner(data, char, repl):
             if "." in key:
                 # Change key name and add new value.
                 data[key.replace(char, repl)] = value
-                del(data[key])
+                del data[key]
 
             return data
 
@@ -1674,20 +1693,20 @@ def merge_data_types(data1, data2):
     err_msg = ""
     data = None
 
-    if isinstance(data1, str_type()) \
-       and (isinstance(data1, str_type()) == isinstance(data2, str_type())):
+    if isinstance(data1, str) \
+       and (isinstance(data1, str) == isinstance(data2, str)):
         data = data1 + data2
 
-    elif isinstance(data1, list) \
-       and (isinstance(data1, list) == isinstance(data2, list)):
+    elif isinstance(data1, list) and (
+       isinstance(data1, list) == isinstance(data2, list)):
         data = list(data1) + list(data2)
 
-    elif isinstance(data1, tuple) \
-       and (isinstance(data1, tuple) == isinstance(data2, tuple)):
+    elif isinstance(data1, tuple) and (
+       isinstance(data1, tuple) == isinstance(data2, tuple)):
         data = data1 + data2
 
-    elif isinstance(data1, dict) \
-       and (isinstance(data1, dict) == isinstance(data2, dict)):
+    elif isinstance(data1, dict) and (
+       isinstance(data1, dict) == isinstance(data2, dict)):
         data, _, _ = merge_two_dicts(dict(data1), dict(data2))
 
     else:
@@ -1719,7 +1738,7 @@ def merge_two_dicts(data_1, data_2):
     err_msg = ""
     data = None
 
-    if isinstance(data_1, dict) and type(data_1) == type(data_2):
+    if isinstance(data_1, dict) and isinstance(data_2, dict):
         data_1 = dict(data_1)
         data_2 = dict(data_2)
         data = data_1.copy()
@@ -2223,7 +2242,7 @@ def prt_lvl(lvl=1):
 
     cnt = 0
 
-    while (cnt < lvl):
+    while cnt < lvl:
         print("\t", end="")
         cnt += 1
 
