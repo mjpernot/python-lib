@@ -21,13 +21,13 @@ import mock
 
 # Local
 sys.path.append(os.getcwd())
-import gen_libs                     # pylint:disable=R0402,E0401
-import version                      # pylint:disable=E0401
+import gen_libs                     # pylint:disable=E0401,R0402,C0413
+import version                      # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
 
-class SubProcess3():
+class SubProcess3():                                    # pylint:disable=R0903
 
     """Class:  SubProcess3
 
@@ -49,8 +49,6 @@ class SubProcess3():
 
         """
 
-        pass
-
     def communicate(self):
 
         """Method:  communicate
@@ -64,7 +62,7 @@ class SubProcess3():
         return b"Hash_Results", True
 
 
-class SubProcess():
+class SubProcess():                                     # pylint:disable=R0903
 
     """Class:  SubProcess
 
@@ -85,8 +83,6 @@ class SubProcess():
         Arguments:
 
         """
-
-        pass
 
     def communicate(self):
 

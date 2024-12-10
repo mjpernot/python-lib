@@ -21,14 +21,12 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import gen_libs
-import version
+import gen_libs                     # pylint:disable=E0401,R0402,C0413
+import version                      # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
 # Global
-PERM1 = "755"
-PERM2 = "444"
 
 
 class UnitTest(unittest.TestCase):
@@ -82,7 +80,7 @@ class UnitTest(unittest.TestCase):
         """
 
         status, msg = gen_libs.touch(self.file_name)
-        f_status = True if os.stat(self.file_name).st_size == 0 else False
+        f_status = os.stat(self.file_name).st_size == 0
         self.assertEqual((status, msg, f_status), (True, None, True))
 
     def test_existing_file(self):
@@ -96,7 +94,7 @@ class UnitTest(unittest.TestCase):
         """
 
         status, msg = gen_libs.touch(self.exist_file)
-        f_status = True if os.stat(self.exist_file).st_size > 0 else False
+        f_status = os.stat(self.exist_file).st_size > 0
         self.assertEqual((status, msg, f_status), (True, None, True))
 
     def test_create_path(self):
@@ -121,10 +119,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        global PERM2
-
         os.makedirs(self.dir_path)
-        os.chmod(self.dir_path, int(PERM2, 8))
+        os.chmod(self.dir_path, int("444", 8))
 
         self.assertEqual((gen_libs.touch(self.dir_fail)),
                          (False, self.dir_msg))
@@ -139,10 +135,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        global PERM2
-
         os.makedirs(self.dir_path)
-        os.chmod(self.dir_path, int(PERM2, 8))
+        os.chmod(self.dir_path, int("444", 8))
 
         self.assertEqual((gen_libs.touch(self.file_fail)),
                          (False, self.file_msg))
@@ -157,8 +151,6 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        global PERM1
-
         if os.path.isfile(self.file_name):
             os.remove(self.file_name)
 
@@ -166,7 +158,7 @@ class UnitTest(unittest.TestCase):
             shutil.rmtree(os.path.join(self.base_path, "touch"))
 
         if os.path.isdir(self.dir_path):
-            os.chmod(self.dir_path, int(PERM1, 8))
+            os.chmod(self.dir_path, int("755", 8))
             shutil.rmtree(self.dir_path)
 
 

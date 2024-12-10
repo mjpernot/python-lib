@@ -21,8 +21,8 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import gen_libs
-import version
+import gen_libs                     # pylint:disable=E0401,R0402,C0413
+import version                      # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -56,7 +56,7 @@ class UnitTest(unittest.TestCase):
         self.fname2 = os.path.join(self.mod_path, self.mod_name + ".pyc")
         data = "entry=True"
 
-        with open(self.fname, "w") as f_hdlr:
+        with open(self.fname, "w", encoding="UTF-8") as f_hdlr:
             print(data, file=f_hdlr)
 
     def test_load_module(self):

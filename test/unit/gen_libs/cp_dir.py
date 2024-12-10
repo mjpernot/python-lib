@@ -21,14 +21,12 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import gen_libs
-import version
+import gen_libs                     # pylint:disable=E0401,R0402,C0413
+import version                      # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
 # Global
-PERM1 = "755"
-PERM2 = "000"
 
 
 class UnitTest(unittest.TestCase):
@@ -90,8 +88,9 @@ class UnitTest(unittest.TestCase):
         os.makedirs(self.cp_dir_dir)
 
         self.assertEqual((gen_libs.cp_dir(self.cp_dir_dir, self.cp_dir_dir)), (
-            False, "Directory not copied.  Exist Error Message: [Errno 17] "
-            "File exists: '%s'" % (self.cp_dir_dir)))
+            False,
+            f"Directory not copied.  Exist Error Message: [Errno 17] "
+            f"File exists: '{self.cp_dir_dir}'"))
 
     def test_fail_src_dir(self):
 
@@ -105,8 +104,9 @@ class UnitTest(unittest.TestCase):
 
         self.assertEqual((gen_libs.cp_dir(
             self.cp_dir_dir, self.cp_dir_dir2)), (
-                False, "Directory not copied.  Exist Error Message: [Errno 2] "
-                "No such file or directory: '%s'" % (self.cp_dir_dir)))
+                False,
+                f"Directory not copied.  Exist Error Message: [Errno 2] "
+                f"No such file or directory: '{self.cp_dir_dir}'"))
 
     def test_fail_dest_dir(self):
 
@@ -124,8 +124,8 @@ class UnitTest(unittest.TestCase):
         self.assertEqual((gen_libs.cp_dir(
             self.cp_dir_dir, self.cp_dir_dir2)), (
                 False,
-                "Directory not copied.  Exist Error Message: [Errno 17] "
-                "File exists: '%s'" % (self.cp_dir_dir2)))
+                f"Directory not copied.  Exist Error Message: [Errno 17] "
+                f"File exists: '{self.cp_dir_dir2}'"))
 
     def test_fail_dest_perm(self):
 
@@ -137,16 +137,14 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        global PERM2
-
         os.makedirs(self.cp_dir_dir)
-        os.chmod(self.cp_dir_dir, int(PERM2, 8))
+        os.chmod(self.cp_dir_dir, int("000", 8))
 
         self.assertEqual((gen_libs.cp_dir(
             self.cp_dir_dir, self.cp_dir_dir2)), (
                 False,
-                "Directory not copied.  Exist Error Message: [Errno 13] "
-                "Permission denied: '%s'" % (self.cp_dir_dir)))
+                f"Directory not copied.  Exist Error Message: [Errno 13] "
+                f"Permission denied: '{self.cp_dir_dir}'"))
 
     def tearDown(self):
 
@@ -158,10 +156,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        global PERM1
-
         if os.path.isdir(self.cp_dir_dir):
-            os.chmod(self.cp_dir_dir, int(PERM1, 8))
+            os.chmod(self.cp_dir_dir, int("755", 8))
             shutil.rmtree(self.cp_dir_dir)
 
         if os.path.isdir(self.cp_dir_dir2):

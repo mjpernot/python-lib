@@ -21,8 +21,8 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import gen_libs
-import version
+import gen_libs                     # pylint:disable=E0401,R0402,C0413
+import version                      # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -56,12 +56,11 @@ class UnitTest(unittest.TestCase):
         self.f_name = "test/unit/gen_libs/tmp/file_search_cnt_test.txt"
         self.f_name2 = "test/unit/gen_libs/tmp/file_search_cnt_test2.txt"
         self.pattern = "quack"
-        f_hdlr = open(self.f_name, "w")
-        print("This is a test file", file=f_hdlr)
-        print("This is a quick brown fox file", file=f_hdlr)
-        f_hdlr.close()
-        f_hdlr2 = open(self.f_name2, "w")
-        f_hdlr2.close()
+        with open(self.f_name, "w", encoding="UTF-8") as f_hdlr:
+            print("This is a test file", file=f_hdlr)
+            print("This is a quick brown fox file", file=f_hdlr)
+        open(                                           # pylint:disable=R1732
+            self.f_name2, "w", encoding="UTF-8").close()
 
     def test_file_search_cnt(self):
 

@@ -1413,14 +1413,14 @@ def key_cleaner(data, char, repl):
         in the key of a document.
 
     Arguments:
-        (input) data -> A dictionary object.
+        (input) data -> A data object.
         (input) char -> Character to be replaced.
         (input) repl -> Replacement character.
         (output) data -> Modified dictionary object.
 
     """
 
-    if type(data) is dict:
+    if isinstance(data, dict):
         data = dict(data)
 
         for key, value in list(data.items()):
@@ -1435,11 +1435,11 @@ def key_cleaner(data, char, repl):
 
             return data
 
-    if type(data) is list:
+    if isinstance(data, list):
         data = list(data)
         return list(map(key_cleaner, data, char, repl))
 
-    if type(data) is tuple:
+    if isinstance(data, tuple):
         return tuple(list(map(key_cleaner, data, char, repl)))
 
     return data
@@ -1591,12 +1591,12 @@ def make_dir(dirname):
         status = True
 
     except OSError as err:
-        if err.errno == errno.EEXIST or err.errno == errno.EACCES:
-            print("Error:  {0} for {1}".format(err.args[1], dirname))
+        if err.errno in (errno.EEXIST, errno.EACCES):
+            print(f"Error:  {err.args[1]} for {dirname}")
 
         else:
-            print("Error {0}:  Message:  {1} for {2}".format(
-                err.args[0], err.args[1], dirname))
+            print(
+                f"Error {err.args[0]}:  Message:  {err.args[1]} for {dirname}")
 
     return status
 
@@ -1617,12 +1617,12 @@ def make_md5_hash(file_path, to_file=True):
 
     """
 
-    proc1 = subprocess.Popen(
+    proc1 = subprocess.Popen(                           # pylint:disable=R1732
         ["/usr/bin/md5sum", file_path], stdout=subprocess.PIPE)
     hash_results, _ = proc1.communicate()
     encoding = chardet.detect(hash_results)["encoding"]
     hash_results = hash_results.decode(encoding)
-    hash_results = hash_results.split("  ")[0]
+    hash_results = hash_results.split("  ", maxsplit=1)[0]
 
     if to_file:
         hash_file = file_path + ".md5.txt"
@@ -1654,7 +1654,8 @@ def make_zip(zip_file_path, cur_file_dir, files_to_zip, is_rel_path=False):
         cur_file_dir = cur_file_dir + os.path.sep
 
     try:
-        newzip = zipfile.ZipFile(zip_file_path, "w", zipfile.ZIP_DEFLATED)
+        newzip = zipfile.ZipFile(                   # pylint:disable=R1732
+            zip_file_path, "w", zipfile.ZIP_DEFLATED)
 
         if is_rel_path:
             for fname in files_to_zip:
@@ -1772,8 +1773,7 @@ def milli_2_readadble(msecs):
     data //= 24
     days = data
 
-    return "%d days %d hours %d minutes %d seconds" \
-           % (days, hours, minutes, seconds)
+    return f"{days} days {hours} hours {minutes} minutes {seconds} seconds"
 
 
 def month_days(dtg):
@@ -1994,7 +1994,7 @@ def openfile(filename, mode="r"):
     if filename.endswith(".gz"):
         return gzip.open(filename, mode)
 
-    return open(filename, mode)
+    return open(filename, mode, encoding="UTF-8")
 
 
 def pascalize(data_str):
@@ -2063,21 +2063,21 @@ def perm_check(item, item_type, f_hdlr=sys.stdout, **kwargs):
 
     # Object writeable
     if write and not os.access(item, os.W_OK):
-        tmp_msg = "Error: %s %s is not writeable." % (item_type, item)
+        tmp_msg = f"Error: {item_type} {item} is not writeable."
         print(tmp_msg, file=f_hdlr)
         err_msg = "\n".join([err_msg, tmp_msg])
         status = False
 
     # Object readable
     if read and not os.access(item, os.R_OK):
-        tmp_msg = "Error: %s %s is not readable." % (item_type, item)
+        tmp_msg = f"Error: {item_type} {item} is not readable."
         print(tmp_msg, file=f_hdlr)
         err_msg = "\n".join([err_msg, tmp_msg])
         status = False
 
     # Object executable
     if exe and not os.access(item, os.X_OK):
-        tmp_msg = "Error: %s %s is not executable." % (item_type, item)
+        tmp_msg = f"Error: {item_type} {item} is not executable."
         print(tmp_msg, file=f_hdlr)
         err_msg = "\n".join([err_msg, tmp_msg])
         status = False
@@ -2102,7 +2102,8 @@ def print_data(data, mode="w", **kwargs):
     """
 
     if "ofile" in kwargs and kwargs["ofile"]:
-        outfile = open(kwargs.get("ofile"), mode)
+        outfile = open(                                 # pylint:disable=R1732
+            kwargs.get("ofile"), mode, encoding="UTF-8")
 
     else:
         outfile = sys.stdout
@@ -2164,7 +2165,7 @@ def print_dict(data, ofile=None, json_fmt=False, no_std=False, mode="w",
 
     else:
         err_flag = True
-        err_msg = "Error: %s -> Is not a dictionary" % (data)
+        err_msg = f"Error: {data} -> Is not a dictionary"
 
     return err_flag, err_msg
 
@@ -2190,7 +2191,7 @@ def print_list(data, **kwargs):
     outfile = sys.stdout
 
     if ofile:
-        outfile = open(ofile, mode)
+        outfile = open(ofile, mode, encoding="UTF-8")   # pylint:disable=R1732
 
     for line in data:
         print(line, file=outfile)
@@ -2221,11 +2222,11 @@ def prt_dict(data, fhandler=sys.stdout, **kwargs):
     for key, val in list(data.items()):
 
         if isinstance(val, dict):
-            print("{0}{1}:".format(spc * indent, key), file=fhandler)
+            print(f"{spc * indent}{key}:", file=fhandler)
             prt_dict(val, fhandler, indent=indent + 4)
 
         else:
-            print("{0}{1}:  {2}".format(spc * indent, key, val), file=fhandler)
+            print(f"{spc * indent}{key}:  {val}", file=fhandler)
 
 
 def prt_lvl(lvl=1):
@@ -2262,7 +2263,7 @@ def prt_msg(hdr, msg, lvl=0):
     """
 
     prt_lvl(lvl)
-    print("{0}:  {1}".format(hdr, msg))
+    print(f"{hdr}:  {msg}")
 
 
 def rename_file(fname, new_fname, dir_path):
@@ -2319,7 +2320,7 @@ def rm_file(file_path):
 
     except OSError as err:
         err_flag = True
-        err_msg = "Error: %s - %s" % (err.filename, err.strerror)
+        err_msg = f"Error: {err.filename} - {err.strerror}"
 
     return err_flag, err_msg
 
@@ -2442,11 +2443,11 @@ def str_type():
 
     """
 
-    if sys.version_info[0] == 3:
+    if sys.version_info[0] == 3:                # pylint:disable=R1705
         return str
 
     else:
-        return basestring
+        return basestring                       # pylint:disable=E0602
 
 
 def str_2_list(del_str, fld_del):
@@ -2505,17 +2506,16 @@ def touch(f_name):
 
         except OSError as err:
             status = False
-            err_msg = "ERROR: Directory create failure. Reason: %s" \
-                      % (err.args[1])
+            err_msg = f"ERROR: Directory create failure. Reason: {err.args[1]}"
 
     if status:
         try:
-            with open(f_name, "a"):
+            with open(f_name, "a", encoding="UTF-8"):
                 os.utime(f_name, None)
 
         except IOError as err:
             status = False
-            err_msg = "ERROR: File create failure. Reason: %s" % (err.args[1])
+            err_msg = f"ERROR: File create failure. Reason: {err.args[1]}"
 
     return status, err_msg
 
@@ -2536,7 +2536,7 @@ def transpose_dict(data, data_key):
 
     data = list(data)
     data_key = dict(data_key)
-    mod_data = list()
+    mod_data = []
     literal_list = ["bool", "list"]
 
     for list_item in data:
@@ -2616,7 +2616,7 @@ def write_file(fname=None, mode="a", data=None):
     """
 
     if data and fname:
-        with open(fname, mode) as f_hdlr:
+        with open(fname, mode, encoding="UTF-8") as f_hdlr:
             print(data, file=f_hdlr)
 
 

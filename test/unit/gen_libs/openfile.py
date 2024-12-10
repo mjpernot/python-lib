@@ -22,8 +22,8 @@ import subprocess
 
 # Local
 sys.path.append(os.getcwd())
-import gen_libs
-import version
+import gen_libs                     # pylint:disable=E0401,R0402,C0413
+import version                      # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -55,15 +55,13 @@ class UnitTest(unittest.TestCase):
         self.f_name = "test/unit/gen_libs/tmp/openfile_test"
         self.f_name2 = "test/unit/gen_libs/tmp/openfile_test2"
 
-        f_hdlr = open(self.f_name, "w")
-        print("This is a test file", file=f_hdlr)
-        f_hdlr.close()
+        with open(self.f_name, "w", encoding="UTF-8") as f_hdlr:
+            print("This is a test file", file=f_hdlr)
 
-        f_hdlr2 = open(self.f_name2, "w")
-        print("This is a test file", file=f_hdlr2)
-        f_hdlr2.close()
+        with open(self.f_name2, "w", encoding="UTF-8") as f_hdlr2:
+            print("This is a test file", file=f_hdlr2)
 
-        proc1 = subprocess.Popen(["gzip", self.f_name2])
+        proc1 = subprocess.Popen(["gzip", self.f_name2]) # pylint:disable=R1732
         proc1.wait()
 
         self.f_name2 = self.f_name2 + ".gz"

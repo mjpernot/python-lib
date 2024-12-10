@@ -17,12 +17,12 @@
 # Standard
 
 # Local
-import version                      # pylint:disable=E0401
+import version                                      # pylint:disable=E0401
 
 __version__ = version.__version__
 
 
-class Machine():
+class Machine():                                    # pylint:disable=R0903
 
     """Class:  Machine
 
@@ -33,10 +33,10 @@ class Machine():
 
     """
 
-    pass
+    pass                                            # pylint:disable=W0107
 
 
-class Linux(Machine):
+class Linux(Machine):                               # pylint:disable=R0903
 
     """Class:  Linux
 
@@ -59,4 +59,4 @@ class Linux(Machine):
 
         """
 
-        pass
+        pass                                        # pylint:disable=W0107

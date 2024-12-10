@@ -22,15 +22,13 @@ import mock
 
 # Local
 sys.path.append(os.getcwd())
-import gen_libs
-import version
+import gen_libs                     # pylint:disable=E0401,R0402,C0413
+import version                      # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
 
 # Global
-PERM1 = "755"
-PERM2 = "444"
 
 
 class UnitTest(unittest.TestCase):
@@ -185,10 +183,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        global PERM2
-
         gen_libs.touch(os.path.join(self.cp_file_dir2, self.src_file))
-        os.chmod(self.cp_file_dir2, int(PERM2, 8))
+        os.chmod(self.cp_file_dir2, int("444", 8))
 
         self.assertEqual((gen_libs.cp_file(self.src_file, self.cp_file_dir,
                                            self.cp_file_dir2, self.dest_file)),
@@ -220,12 +216,10 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        global PERM1
-
         shutil.rmtree(self.cp_file_dir)
 
         if os.path.isdir(self.cp_file_dir2):
-            os.chmod(self.cp_file_dir2, int(PERM1, 8))
+            os.chmod(self.cp_file_dir2, int("755", 8))
             shutil.rmtree(self.cp_file_dir2)
 
 

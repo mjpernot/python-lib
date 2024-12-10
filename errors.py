@@ -20,7 +20,7 @@
 # Standard
 
 # Local
-import version                      # pylint:disable=E0401
+import version                                      # pylint:disable=E0401
 
 __version__ = version.__version__
 
@@ -35,7 +35,7 @@ class Error(Exception):
 
     """
 
-    pass
+    pass                                            # pylint:disable=W0107
 
 
 class EmptyRowError(Exception):
@@ -49,7 +49,7 @@ class EmptyRowError(Exception):
 
     """
 
-    pass
+    pass                                            # pylint:disable=W0107
 
 
 class NoOptionError(Exception):
@@ -62,7 +62,7 @@ class NoOptionError(Exception):
 
     """
 
-    pass
+    pass                                            # pylint:disable=W0107
 
 
 class SlaveNotRunningError(Exception):
@@ -76,7 +76,7 @@ class SlaveNotRunningError(Exception):
 
     """
 
-    pass
+    pass                                            # pylint:disable=W0107
 
 
 class NotMasterError(Exception):
@@ -90,7 +90,7 @@ class NotMasterError(Exception):
 
     """
 
-    pass
+    pass                                            # pylint:disable=W0107
 
 
 class NotSlaveError(Exception):
@@ -104,7 +104,7 @@ class NotSlaveError(Exception):
 
     """
 
-    pass
+    pass                                            # pylint:disable=W0107
 
 
 class NotYetImplementedError(Exception):
@@ -118,4 +118,4 @@ class NotYetImplementedError(Exception):
 
     """
 
-    pass
+    pass                                            # pylint:disable=W0107
