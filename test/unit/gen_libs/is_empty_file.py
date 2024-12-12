@@ -64,7 +64,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertEqual(gen_libs.is_empty_file(self.no_file), None)
+        self.assertIsNone(gen_libs.is_empty_file(self.no_file))
 
     def test_data_file(self):
 
@@ -76,7 +76,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertEqual(gen_libs.is_empty_file(self.data_file), False)
+        self.assertFalse(gen_libs.is_empty_file(self.data_file))
 
     def test_empty_file(self):
 
@@ -88,7 +88,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertEqual(gen_libs.is_empty_file(self.empty_file), True)
+        self.assertTrue(gen_libs.is_empty_file(self.empty_file))
 
 
 if __name__ == "__main__":

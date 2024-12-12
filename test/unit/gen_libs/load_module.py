@@ -71,7 +71,7 @@ class UnitTest(unittest.TestCase):
 
         cfg = gen_libs.load_module(self.mod_name, self.mod_path)
 
-        self.assertEqual(cfg.entry, True)
+        self.assertTrue(cfg.entry)
 
     def tearDown(self):
 

@@ -90,11 +90,10 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        file_list = gen_libs.list_filter_files(self.dir_path,
-                                               self.file_filter3)
+        file_list = gen_libs.list_filter_files(
+            self.dir_path, self.file_filter3)
 
-        self.assertTrue(
-            file_list in (self.results3, self.results4))
+        self.assertIn(file_list, (self.results3, self.results4))
 
     def test_one_file_select(self):
 

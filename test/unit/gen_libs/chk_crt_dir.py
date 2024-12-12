@@ -403,7 +403,7 @@ class UnitTest(unittest.TestCase):
         with open(self.f_name, mode="r", encoding="UTF-8") as f_hdlr:
             contents = f_hdlr.read()
 
-        self.assertFalse(err_msg_chk in contents)
+        self.assertNotIn(err_msg_chk, contents)
 
     def test_print_file(self):
 

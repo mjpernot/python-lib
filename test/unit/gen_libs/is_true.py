@@ -67,7 +67,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertEqual(gen_libs.is_true(self.is4), False)
+        self.assertFalse(gen_libs.is_true(self.is4))
 
     def test_is_true_on(self):
 
@@ -79,7 +79,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertEqual(gen_libs.is_true(self.is3), True)
+        self.assertTrue(gen_libs.is_true(self.is3))
 
     def test_is_true_no(self):
 
@@ -91,7 +91,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertEqual(gen_libs.is_true(self.is2), False)
+        self.assertFalse(gen_libs.is_true(self.is2))
 
     def test_is_true_yes(self):
 
@@ -103,7 +103,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertEqual(gen_libs.is_true(self.is1), True)
+        self.assertTrue(gen_libs.is_true(self.is1))
 
 
 if __name__ == "__main__":

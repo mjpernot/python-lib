@@ -75,7 +75,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertEqual(gen_libs.file_search(self.f_name, self.no_str), None)
+        self.assertIsNone(gen_libs.file_search(self.f_name, self.no_str))
 
     def test_str_found_first_line(self):
 

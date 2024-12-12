@@ -20,8 +20,8 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import gen_class
-import version
+import gen_class                    # pylint:disable=E0401,R0402,C0413
+import version                      # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -67,9 +67,9 @@ class UnitTest(unittest.TestCase):
         email.create_subject(subj=self.subj)
         email.add_2_msg(txt_ln=self.body)
 
-        self.assertEqual(email.print_email(),
-                         "To: %s\nFrom: %s\n%s" % (self.toaddr, self.frm,
-                                                   email.create_body()))
+        self.assertEqual(
+            email.print_email(),
+            f"To: {self.toaddr}\nFrom: {self.frm}\n{email.create_body()}")
 
 
 if __name__ == "__main__":

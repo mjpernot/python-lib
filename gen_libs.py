@@ -228,7 +228,7 @@ def bytes_2_readable(size, precision=2):
         suf_index += 1
         size = size / 1024.0
 
-    return f"{size:.{precision}f}"f"{suffix[suf_index]}"
+    return f"{size:.{precision}f}" + f"{suffix[suf_index]}"
 
 
 def chk_crt_dir(dir_name=None, create=False, write=False, read=False,

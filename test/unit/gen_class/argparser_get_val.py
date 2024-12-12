@@ -20,8 +20,8 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import gen_class
-import version
+import gen_class                    # pylint:disable=E0401,R0402,C0413
+import version                      # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -174,7 +174,7 @@ class UnitTest(unittest.TestCase):
         args_array = gen_class.ArgParser(
             self.argv, opt_val=self.opt_val, do_parse=True)
 
-        self.assertEqual(args_array.get_val(self.key2), None)
+        self.assertIsNone(args_array.get_val(self.key2))
 
     def test_arg_not_exist(self):
 
@@ -189,7 +189,7 @@ class UnitTest(unittest.TestCase):
         args_array = gen_class.ArgParser(
             self.argv, opt_val=self.opt_val, do_parse=True)
 
-        self.assertEqual(args_array.get_val(self.key2), None)
+        self.assertIsNone(args_array.get_val(self.key2))
 
     def test_get_val2(self):
 
@@ -204,7 +204,7 @@ class UnitTest(unittest.TestCase):
         args_array = gen_class.ArgParser(
             self.argv, opt_val=self.opt_val, do_parse=True)
 
-        self.assertEqual(args_array.get_val(self.key3), True)
+        self.assertTrue(args_array.get_val(self.key3))
 
     def test_get_val(self):
 

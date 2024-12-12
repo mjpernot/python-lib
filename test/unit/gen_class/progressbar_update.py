@@ -20,9 +20,9 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import gen_class
-import gen_libs
-import version
+import gen_class                    # pylint:disable=E0401,R0402,C0413
+import gen_libs                     # pylint:disable=E0401,R0402,C0413
+import version                      # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -67,11 +67,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        bar = gen_class.ProgressBar(None, self.width, self.progress_sym,
+        bar1 = gen_class.ProgressBar(None, self.width, self.progress_sym,
                                     self.empty_sym)
 
         with gen_libs.no_std_out():
-            self.assertFalse(bar.update(50))
+            self.assertFalse(bar1.update(50))
 
     def test_zero_percent(self):
 
@@ -83,11 +83,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        bar = gen_class.ProgressBar(self.msg, self.width, self.progress_sym,
+        bar1 = gen_class.ProgressBar(self.msg, self.width, self.progress_sym,
                                     self.empty_sym)
 
         with gen_libs.no_std_out():
-            self.assertFalse(bar.update(0))
+            self.assertFalse(bar1.update(0))
 
     def test_fifty_percent(self):
 
@@ -99,11 +99,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        bar = gen_class.ProgressBar(self.msg, self.width, self.progress_sym,
+        bar1 = gen_class.ProgressBar(self.msg, self.width, self.progress_sym,
                                     self.empty_sym)
 
         with gen_libs.no_std_out():
-            self.assertFalse(bar.update(50))
+            self.assertFalse(bar1.update(50))
 
     def test_hundred_percent(self):
 
@@ -115,11 +115,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        bar = gen_class.ProgressBar(self.msg, self.width, self.progress_sym,
+        bar1 = gen_class.ProgressBar(self.msg, self.width, self.progress_sym,
                                     self.empty_sym)
 
         with gen_libs.no_std_out():
-            self.assertFalse(bar.update(100))
+            self.assertFalse(bar1.update(100))
 
 
 if __name__ == "__main__":

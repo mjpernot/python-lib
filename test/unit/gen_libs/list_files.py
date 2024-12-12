@@ -84,8 +84,7 @@ class UnitTest(unittest.TestCase):
 
         file_list = gen_libs.list_files(self.dir_path, include_path=True)
 
-        self.assertTrue(
-            file_list in (self.results3, self.results4))
+        self.assertIn(file_list, (self.results3, self.results4))
 
     def test_list_files(self):
 
@@ -99,8 +98,7 @@ class UnitTest(unittest.TestCase):
 
         file_list = gen_libs.list_files(self.dir_path)
 
-        self.assertTrue(
-            file_list in (self.results1, self.results2))
+        self.assertIn(file_list, (self.results1, self.results2))
 
     def tearDown(self):
 

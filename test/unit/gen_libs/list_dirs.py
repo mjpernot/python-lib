@@ -92,9 +92,9 @@ class UnitTest(unittest.TestCase):
         if "__pycache__" in data_list:
             data_list.remove("__pycache__")
 
-        self.assertTrue(
-            data_list in (
-                ['list_dir_1', 'list_dir_2'], ['list_dir_2', 'list_dir_1']))
+        self.assertIn(
+            data_list,
+            (['list_dir_1', 'list_dir_2'], ['list_dir_2', 'list_dir_1']))
 
     def test_no_dirs(self):
 

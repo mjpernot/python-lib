@@ -17,12 +17,11 @@
 import sys
 import os
 import unittest
-import distro
 
 # Local
 sys.path.append(os.getcwd())
-import gen_class
-import version
+import gen_class                    # pylint:disable=E0401,R0402,C0413
+import version                      # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -62,8 +61,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertTrue(
-            isinstance(self.dnf.get_enabled_repos(url=True)[0], tuple))
+        self.assertIsInstance(self.dnf.get_enabled_repos(url=True)[0], tuple)
 
     def test_repos(self):
 
@@ -75,7 +73,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertTrue(isinstance(self.dnf.get_enabled_repos(), list))
+        self.assertIsInstance(self.dnf.get_enabled_repos(), list)
 
 
 if __name__ == "__main__":

@@ -21,8 +21,8 @@ import filecmp
 
 # Local
 sys.path.append(os.getcwd())
-import gen_libs
-import version
+import gen_libs                     # pylint:disable=E0401,R0402,C0413
+import version                      # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -72,7 +72,8 @@ class UnitTest(unittest.TestCase):
         self.basefile5 = "test/integration/gen_libs/basefiles/prt_dict5.txt"
         self.basefile53 = "test/integration/gen_libs/basefiles/prt_dict5-3.txt"
         self.basefile6 = "test/integration/gen_libs/basefiles/prt_dict6.txt"
-        self.fname = open(self.ofile, "w")
+        self.fname = open(                          # pylint:disable=R1732
+            self.ofile, "w", encoding="UTF-8")
 
     def test_indent_multi_lvl(self):
 

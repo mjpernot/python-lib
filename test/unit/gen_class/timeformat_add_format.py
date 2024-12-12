@@ -20,8 +20,8 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import gen_class
-import version
+import gen_class                    # pylint:disable=E0401,R0402,C0413
+import version                      # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -71,7 +71,7 @@ class UnitTest(unittest.TestCase):
 
         self.tform.add_format(self.name, self.texpr, micro=True)
 
-        self.assertEqual(self.tform.tformats[self.name]["micro"], True)
+        self.assertTrue(self.tform.tformats[self.name]["micro"])
 
     def test_micro_default(self):
 
@@ -85,7 +85,7 @@ class UnitTest(unittest.TestCase):
 
         self.tform.add_format(self.name, self.texpr)
 
-        self.assertEqual(self.tform.tformats[self.name]["micro"], False)
+        self.assertFalse(self.tform.tformats[self.name]["micro"])
 
     def test_delimit(self):
 
@@ -141,7 +141,7 @@ class UnitTest(unittest.TestCase):
 
         self.tform.add_format(self.name, self.texpr)
 
-        self.assertTrue(self.name in self.tform.tformats)
+        self.assertIn(self.name, self.tform.tformats)
 
 
 if __name__ == "__main__":

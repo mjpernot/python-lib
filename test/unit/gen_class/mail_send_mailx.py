@@ -21,13 +21,13 @@ import mock
 
 # Local
 sys.path.append(os.getcwd())
-import gen_class
-import version
+import gen_class                    # pylint:disable=E0401,R0402,C0413
+import version                      # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
 
-class SubProcess(object):
+class SubProcess():
 
     """Class:  SubProcess
 
@@ -50,12 +50,11 @@ class SubProcess(object):
 
         """
 
-        self.PIPE = "Pipe Redirect"
         self.stdout = None
         self.stdin = None
         self.cmd = None
 
-    def Popen(self, cmd, stdout=None, stdin=None):
+    def Popen(self, cmd, stdout=None, stdin=None):      # pylint:disable=C0103
 
         """Method:  Popen
 
@@ -80,8 +79,6 @@ class SubProcess(object):
         Arguments:
 
         """
-
-        pass
 
 
 class UnitTest(unittest.TestCase):
