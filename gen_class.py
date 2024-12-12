@@ -868,8 +868,8 @@ class ArgParser():                              # pylint:disable=R0904,R0902
                 self.args_array[opt] = [
                     item1 for item2 in t_list for item1 in item2]
 
-            elif opt in list(self.args_array.keys()) and \
-               isinstance(self.args_array[opt], str):   # pylint:disable=C0201
+            elif opt in list(self.args_array.keys()) and isinstance(
+                    self.args_array[opt], str):         # pylint:disable=C0201
 
                 self.args_array[opt] = glob.glob(self.args_array[opt])
 
