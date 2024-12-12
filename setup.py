@@ -7,7 +7,6 @@
 """
 
 # Libraries and Global Variables
-from __future__ import absolute_import
 
 # Standard
 import os
