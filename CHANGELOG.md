@@ -16,6 +16,7 @@ Breaking Changes
 - gen_libs.binary_string: Returns lamdba as a function to check if data is binary.
 
 ### Changed
+- gen_class.ProgramLock.\_\_init\_\_:  Refactored raising the exception.
 - gen_class.Daemon2.daemonize:  Removed MASK variable replaced with hard-coded value.
 - gen_class.Daemon.daemonize:  Removed MASK variable replaced with hard-coded value.
 - gen_class.ArgParser.parse_multi:  Refactored "if" statement within the "while" loop.

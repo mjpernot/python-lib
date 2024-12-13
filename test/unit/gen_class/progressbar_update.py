@@ -67,8 +67,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        bar1 = gen_class.ProgressBar(None, self.width, self.progress_sym,
-                                    self.empty_sym)
+        bar1 = gen_class.ProgressBar(
+            None, self.width, self.progress_sym, self.empty_sym)
 
         with gen_libs.no_std_out():
             self.assertFalse(bar1.update(50))
@@ -83,8 +83,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        bar1 = gen_class.ProgressBar(self.msg, self.width, self.progress_sym,
-                                    self.empty_sym)
+        bar1 = gen_class.ProgressBar(
+            self.msg, self.width, self.progress_sym, self.empty_sym)
 
         with gen_libs.no_std_out():
             self.assertFalse(bar1.update(0))
@@ -99,8 +99,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        bar1 = gen_class.ProgressBar(self.msg, self.width, self.progress_sym,
-                                    self.empty_sym)
+        bar1 = gen_class.ProgressBar(
+            self.msg, self.width, self.progress_sym, self.empty_sym)
 
         with gen_libs.no_std_out():
             self.assertFalse(bar1.update(50))
@@ -115,8 +115,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        bar1 = gen_class.ProgressBar(self.msg, self.width, self.progress_sym,
-                                    self.empty_sym)
+        bar1 = gen_class.ProgressBar(
+            self.msg, self.width, self.progress_sym, self.empty_sym)
 
         with gen_libs.no_std_out():
             self.assertFalse(bar1.update(100))

@@ -82,7 +82,8 @@ class UnitTest(unittest.TestCase):
         """
 
         err_msg_chk = ""
-        open(self.f_name, "a", encoding="UTF-8").close() # pylint:disable=R1732
+        open(                                       # pylint:disable=R1732
+            self.f_name, "a", encoding="UTF-8").close()
         os.chmod(self.f_name, int("777", 8))
         with open(os.devnull, "w", encoding="UTF-8") as f_hdlr:
             status, err_msg = gen_libs.perm_check(
@@ -102,7 +103,8 @@ class UnitTest(unittest.TestCase):
         """
 
         err_msg_chk = self.prt_template4 % (self.f_name)
-        open(self.f_name, "a", encoding="UTF-8").close() # pylint:disable=R1732
+        open(                                       # pylint:disable=R1732
+            self.f_name, "a", encoding="UTF-8").close()
         os.chmod(self.f_name, int("000", 8))
         with open(os.devnull, "w", encoding="UTF-8") as f_hdlr:
             status, err_msg = gen_libs.perm_check(
@@ -124,7 +126,8 @@ class UnitTest(unittest.TestCase):
         err_msg_chk = self.prt_template2 % (self.f_name)
         err_msg_chk2 = self.prt_template4 % (self.f_name)
         err_msg_chk = "".join([err_msg_chk, err_msg_chk2])
-        open(self.f_name, "a", encoding="UTF-8").close() # pylint:disable=R1732
+        open(                                       # pylint:disable=R1732
+            self.f_name, "a", encoding="UTF-8").close()
         os.chmod(self.f_name, int("444", 8))
         with open(os.devnull, "w", encoding="UTF-8") as f_hdlr:
             status, err_msg = gen_libs.perm_check(
@@ -146,7 +149,8 @@ class UnitTest(unittest.TestCase):
         err_msg_chk = self.prt_template3 % (self.f_name)
         err_msg_chk2 = self.prt_template4 % (self.f_name)
         err_msg_chk = "".join([err_msg_chk, err_msg_chk2])
-        open(self.f_name, "a", encoding="UTF-8").close() # pylint:disable=R1732
+        open(                                       # pylint:disable=R1732
+            self.f_name, "a", encoding="UTF-8").close()
         os.chmod(self.f_name, int("222", 8))
         with open(os.devnull, "w", encoding="UTF-8") as f_hdlr:
             status, err_msg = gen_libs.perm_check(
@@ -168,7 +172,8 @@ class UnitTest(unittest.TestCase):
         err_msg_chk = self.prt_template2 % (self.f_name)
         err_msg_chk2 = self.prt_template3 % (self.f_name)
         err_msg_chk = "".join([err_msg_chk, err_msg_chk2])
-        open(self.f_name, "a", encoding="UTF-8").close() # pylint:disable=R1732
+        open(                                       # pylint:disable=R1732
+            self.f_name, "a", encoding="UTF-8").close()
         os.chmod(self.f_name, int("111", 8))
         with open(os.devnull, "w", encoding="UTF-8") as f_hdlr:
             status, err_msg = gen_libs.perm_check(
@@ -188,7 +193,8 @@ class UnitTest(unittest.TestCase):
         """
 
         err_msg_chk = ""
-        open(self.f_name, "a", encoding="UTF-8").close() # pylint:disable=R1732
+        open(                                       # pylint:disable=R1732
+            self.f_name, "a", encoding="UTF-8").close()
         with open(os.devnull, "w", encoding="UTF-8") as f_hdlr:
             status, err_msg = gen_libs.perm_check(
                 self.f_name, "File", f_hdlr, write=True)
@@ -207,7 +213,8 @@ class UnitTest(unittest.TestCase):
         """
 
         err_msg_chk = self.prt_template2 % (self.f_name)
-        open(self.f_name, "a", encoding="UTF-8").close() # pylint:disable=R1732
+        open(                                       # pylint:disable=R1732
+            self.f_name, "a", encoding="UTF-8").close()
         os.chmod(self.f_name, int("444", 8))
         with open(os.devnull, "w", encoding="UTF-8") as f_hdlr:
             status, err_msg = gen_libs.perm_check(
@@ -227,7 +234,8 @@ class UnitTest(unittest.TestCase):
         """
 
         err_msg_chk = ""
-        open(self.f_name, "a", encoding="UTF-8").close() # pylint:disable=R1732
+        open(                                       # pylint:disable=R1732
+            self.f_name, "a", encoding="UTF-8").close()
         with open(os.devnull, "w", encoding="UTF-8") as f_hdlr:
             status, err_msg = gen_libs.perm_check(
                 self.f_name, "File", f_hdlr, read=True)
@@ -246,7 +254,8 @@ class UnitTest(unittest.TestCase):
         """
 
         err_msg_chk = self.prt_template3 % (self.f_name)
-        open(self.f_name, "a", encoding="UTF-8").close() # pylint:disable=R1732
+        open(                                       # pylint:disable=R1732
+            self.f_name, "a", encoding="UTF-8").close()
         os.chmod(self.f_name, int("333", 8))
         with open(os.devnull, "w", encoding="UTF-8") as f_hdlr:
             status, err_msg = gen_libs.perm_check(

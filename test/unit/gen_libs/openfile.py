@@ -60,7 +60,8 @@ class UnitTest(unittest.TestCase):
         with open(self.f_name2, "w", encoding="UTF-8") as f_hdlr2:
             print("This is a test file", file=f_hdlr2)
 
-        proc1 = subprocess.Popen(["gzip", self.f_name2]) # pylint:disable=R1732
+        proc1 = subprocess.Popen(                       # pylint:disable=R1732
+            ["gzip", self.f_name2])
         proc1.wait()
 
         self.f_name2 = self.f_name2 + ".gz"

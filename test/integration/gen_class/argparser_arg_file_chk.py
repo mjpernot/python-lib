@@ -103,7 +103,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        open(self.file, "w", encoding="UTF-8").close() # pylint:disable=R1732
+        open(self.file, "w", encoding="UTF-8").close()  # pylint:disable=R1732
         args_array = gen_class.ArgParser(
             self.argv, opt_val=self.opt_val, file_perm_chk=self.file_chk4,
             do_parse=True)
@@ -236,7 +236,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        open(self.file, "w", encoding="UTF-8").close() # pylint:disable=R1732
+        open(self.file, "w", encoding="UTF-8").close()  # pylint:disable=R1732
         args_array = gen_class.ArgParser(
             self.argv, opt_val=self.opt_val, file_perm_chk=self.file_chk,
             do_parse=True)
@@ -270,8 +270,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        open(self.file, "w", encoding="UTF-8").close()  # pylint:disable=R1732
-        open(self.file3, "w", encoding="UTF-8").close() # pylint:disable=R1732
+        open(self.file, "w", encoding="UTF-8").close()   # pylint:disable=R1732
+        open(self.file3, "w", encoding="UTF-8").close()  # pylint:disable=R1732
         args_array = gen_class.ArgParser(
             self.argv5, opt_val=self.opt_val, file_perm_chk=self.file_chk,
             do_parse=True)
@@ -288,7 +288,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        open(self.file, "w", encoding="UTF-8").close() # pylint:disable=R1732
+        open(self.file, "w", encoding="UTF-8").close()  # pylint:disable=R1732
         args_array = gen_class.ArgParser(
             self.argv, opt_val=self.opt_val, file_perm_chk=self.file_chk,
             do_parse=True)
@@ -305,7 +305,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        open(self.file, "w", encoding="UTF-8").close() # pylint:disable=R1732
+        open(self.file, "w", encoding="UTF-8").close()  # pylint:disable=R1732
         args_array = gen_class.ArgParser(
             self.argv4, opt_val=self.opt_val, file_perm_chk=self.file_chk,
             do_parse=True)
@@ -322,7 +322,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        open(self.file, "w", encoding="UTF-8").close() # pylint:disable=R1732
+        open(self.file, "w", encoding="UTF-8").close()  # pylint:disable=R1732
         args_array = gen_class.ArgParser(
             self.argv3, opt_val=self.opt_val, file_perm_chk=self.file_chk,
             do_parse=True)
@@ -339,7 +339,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        open(self.file, "w", encoding="UTF-8").close() # pylint:disable=R1732
+        open(self.file, "w", encoding="UTF-8").close()  # pylint:disable=R1732
         args_array = gen_class.ArgParser(
             self.argv, opt_val=self.opt_val, file_perm_chk=self.file_chk,
             do_parse=True)
@@ -356,8 +356,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        open(self.file, "w", encoding="UTF-8").close()  # pylint:disable=R1732
-        open(self.file2, "w", encoding="UTF-8").close() # pylint:disable=R1732
+        open(self.file, "w", encoding="UTF-8").close()   # pylint:disable=R1732
+        open(self.file2, "w", encoding="UTF-8").close()  # pylint:disable=R1732
         args_array = gen_class.ArgParser(
             self.argv2, opt_val=self.opt_val, file_perm_chk=self.file_chk3,
             do_parse=True)
@@ -374,7 +374,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        open(self.file, "w", encoding="UTF-8").close() # pylint:disable=R1732
+        open(self.file, "w", encoding="UTF-8").close()  # pylint:disable=R1732
         args_array = gen_class.ArgParser(
             self.argv, opt_val=self.opt_val, file_perm_chk=self.file_chk,
             do_parse=True)

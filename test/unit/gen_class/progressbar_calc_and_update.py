@@ -70,8 +70,8 @@ class UnitTest(unittest.TestCase):
 
         mock_bar.return_value = True
 
-        bar1 = gen_class.ProgressBar(self.msg, self.width, self.progress_sym,
-                                    self.empty_sym)
+        bar1 = gen_class.ProgressBar(
+            self.msg, self.width, self.progress_sym, self.empty_sym)
 
         self.assertFalse(bar1.calc_and_update(0, 1))
 
@@ -88,8 +88,8 @@ class UnitTest(unittest.TestCase):
 
         mock_bar.return_value = True
 
-        bar1 = gen_class.ProgressBar(self.msg, self.width, self.progress_sym,
-                                    self.empty_sym)
+        bar1 = gen_class.ProgressBar(
+            self.msg, self.width, self.progress_sym, self.empty_sym)
 
         self.assertFalse(bar1.calc_and_update(0, 100))
 
@@ -106,8 +106,8 @@ class UnitTest(unittest.TestCase):
 
         mock_bar.return_value = True
 
-        bar1 = gen_class.ProgressBar(self.msg, self.width, self.progress_sym,
-                                    self.empty_sym)
+        bar1 = gen_class.ProgressBar(
+            self.msg, self.width, self.progress_sym, self.empty_sym)
 
         self.assertFalse(bar1.calc_and_update(50, 100))
 
@@ -124,8 +124,8 @@ class UnitTest(unittest.TestCase):
 
         mock_bar.return_value = True
 
-        bar1 = gen_class.ProgressBar(self.msg, self.width, self.progress_sym,
-                                    self.empty_sym)
+        bar1 = gen_class.ProgressBar(
+            self.msg, self.width, self.progress_sym, self.empty_sym)
 
         self.assertFalse(bar1.calc_and_update(100, 100))
 

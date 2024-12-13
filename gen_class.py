@@ -868,8 +868,8 @@ class ArgParser():                              # pylint:disable=R0904,R0902
                 self.args_array[opt] = [
                     item1 for item2 in t_list for item1 in item2]
 
-            elif opt in list(self.args_array.keys()) and isinstance(
-                    self.args_array[opt], str):         # pylint:disable=C0201
+            elif opt in list(self.args_array.keys()) and \
+               isinstance(self.args_array[opt], str):   # pylint:disable=C0201
 
                 self.args_array[opt] = glob.glob(self.args_array[opt])
 
@@ -1154,8 +1154,8 @@ class Daemon():
     DEV_NULL = "/dev/null"
 
     def __init__(                                       # pylint:disable=R0913
-        self, pidfile, stdin=DEV_NULL, stdout=DEV_NULL, stderr=DEV_NULL,
-        argv_list=None):
+          self, pidfile, stdin=DEV_NULL, stdout=DEV_NULL, stderr=DEV_NULL,
+          argv_list=None):
 
         """Method:  __init__
 
@@ -1227,9 +1227,9 @@ class Daemon():
         # Redirect standard file descriptors
         sys.stdout.flush()
         sys.stderr.flush()
-        sdi = open(self.stdin, "r", encoding="UTF-8")   # pylint:disable=R1732
-        sdo = open(self.stdout, "a+", encoding="UTF-8") # pylint:disable=R1732
-        sde = open(self.stderr, "a+", encoding="UTF-8") # pylint:disable=R1732
+        sdi = open(self.stdin, "r", encoding="UTF-8")    # pylint:disable=R1732
+        sdo = open(self.stdout, "a+", encoding="UTF-8")  # pylint:disable=R1732
+        sde = open(self.stderr, "a+", encoding="UTF-8")  # pylint:disable=R1732
 
         os.dup2(sdi.fileno(), sys.stdin.fileno())
         os.dup2(sdo.fileno(), sys.stdout.fileno())
@@ -2516,8 +2516,8 @@ class ProgramLock():                                # pylint:disable=R0903
         try:
             fcntl.lockf(self.f_ptr, fcntl.LOCK_EX | fcntl.LOCK_NB)
 
-        except IOError:
-            raise SingleInstanceException()
+        except IOError as err:
+            raise SingleInstanceException() from err
 
         self.lock_created = True
 
@@ -2713,8 +2713,8 @@ class Mail(System):
     """
 
     def __init__(                                   # pylint:disable=R0913
-        self, toaddr, subj=None, frm=None, msg_type=None, host_name=None,
-        host=None):
+          self, toaddr, subj=None, frm=None, msg_type=None, host_name=None,
+          host=None):
 
         """Method:  __init__
 
@@ -3057,8 +3057,8 @@ class Logger():
     """
 
     def __init__(                                   # pylint:disable=R0913
-        self, name, log_file, level="INFO", msg_fmt=None, date_fmt=None,
-        **kwargs):
+          self, name, log_file, level="INFO", msg_fmt=None, date_fmt=None,
+          **kwargs):
 
         """Method:  __init__
 
@@ -3075,8 +3075,8 @@ class Logger():
 
         """
 
-        self.handler = logging.FileHandler(log_file,
-                                           mode=kwargs.get("mode", "a"))
+        self.handler = logging.FileHandler(
+            log_file, mode=kwargs.get("mode", "a"))
 
         if not msg_fmt:
             msg_fmt = "%(asctime)s %(levelname)s %(message)s"

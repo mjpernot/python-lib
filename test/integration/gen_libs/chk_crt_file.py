@@ -126,7 +126,8 @@ class UnitTest(unittest.TestCase):
         """
 
         err_msg_chk = None
-        open(self.f_name, "a", encoding="UTF-8").close() # pylint:disable=R1732
+        open(                                       # pylint:disable=R1732
+            self.f_name, "a", encoding="UTF-8").close()
         status, err_msg = gen_libs.chk_crt_file(
             self.f_name, write=True, no_print=True)
 
@@ -144,7 +145,8 @@ class UnitTest(unittest.TestCase):
         """
 
         err_msg_chk = f"Error: File {self.f_name} is not writeable."
-        open(self.f_name, "a", encoding="UTF-8").close() # pylint:disable=R1732
+        open(                                       # pylint:disable=R1732
+            self.f_name, "a", encoding="UTF-8").close()
         os.chmod(self.f_name, int("444", 8))
         status, err_msg = gen_libs.chk_crt_file(self.f_name, write=True,
                                                 no_print=True)
@@ -163,7 +165,8 @@ class UnitTest(unittest.TestCase):
         """
 
         err_msg_chk = None
-        open(self.f_name, "a", encoding="UTF-8").close() # pylint:disable=R1732
+        open(                                       # pylint:disable=R1732
+            self.f_name, "a", encoding="UTF-8").close()
         status, err_msg = gen_libs.chk_crt_file(self.f_name, read=True,
                                                 no_print=True)
 
@@ -181,7 +184,8 @@ class UnitTest(unittest.TestCase):
         """
 
         err_msg_chk = f"Error: File {self.f_name} is not readable."
-        open(self.f_name, "a", encoding="UTF-8").close() # pylint:disable=R1732
+        open(                                       # pylint:disable=R1732
+            self.f_name, "a", encoding="UTF-8").close()
         os.chmod(self.f_name, int("333", 8))
         status, err_msg = gen_libs.chk_crt_file(self.f_name, read=True,
                                                 no_print=True)
