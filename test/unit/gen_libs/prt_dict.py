@@ -20,8 +20,8 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import gen_libs
-import version
+import gen_libs                     # pylint:disable=E0401,R0402,C0413
+import version                      # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -60,7 +60,8 @@ class UnitTest(unittest.TestCase):
         self.data2 = {"key1": "value1"}
         self.data3 = {"key1": "value1", "key2": "value2"}
         self.data4 = {"key1": {"key2": "value2"}}
-        self.f_hldr = open("/dev/null", "w")
+        self.f_hldr = open(                             # pylint:disable=R1732
+            "/dev/null", "w", encoding="UTF-8")
         self.indent = 0
         self.indent2 = 1
 

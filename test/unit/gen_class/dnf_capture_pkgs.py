@@ -17,12 +17,11 @@
 import sys
 import os
 import unittest
-import distro
 
 # Local
 sys.path.append(os.getcwd())
-import gen_class
-import version
+import gen_class                    # pylint:disable=E0401,R0402,C0413
+import version                      # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -48,12 +47,6 @@ class UnitTest(unittest.TestCase):
         Arguments:
 
         """
-
-        if sys.version_info[0] < 3 \
-           and ((distro.id() == 'fedora' and distro.version() < '40') or
-                (distro.id() == 'rhel' and distro.version() < '8')):
-            print("Python 2 or Linux 7 platforms do not support dnf, skipping")
-            self.skipTest("Pre-conditions not met.")
 
         self.dnf = gen_class.Dnf()
 

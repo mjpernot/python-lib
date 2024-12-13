@@ -20,8 +20,8 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import gen_class
-import version
+import gen_class                    # pylint:disable=E0401,R0402,C0413
+import version                      # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -66,11 +66,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        bar = gen_class.ProgressBar(self.msg)
+        bar1 = gen_class.ProgressBar(self.msg)
 
-        self.assertEqual((bar.msg, bar.width, bar.progress_sym, bar.empty_sym),
-                         (self.msg, self.width, self.progress_sym,
-                          self.empty_sym))
+        self.assertEqual(
+            (bar1.msg, bar1.width, bar1.progress_sym, bar1.empty_sym),
+            (self.msg, self.width, self.progress_sym, self.empty_sym))
 
     def test_user_values(self):
 
@@ -82,10 +82,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        bar = gen_class.ProgressBar(self.msg, 30, "@", "#")
+        bar1 = gen_class.ProgressBar(self.msg, 30, "@", "#")
 
-        self.assertEqual((bar.msg, bar.width, bar.progress_sym, bar.empty_sym),
-                         (self.msg, 30, "@", "#"))
+        self.assertEqual(
+            (bar1.msg, bar1.width, bar1.progress_sym, bar1.empty_sym),
+            (self.msg, 30, "@", "#"))
 
     def test_width_zero(self):
 
@@ -97,10 +98,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        bar = gen_class.ProgressBar(self.msg, 0)
+        bar1 = gen_class.ProgressBar(self.msg, 0)
 
-        self.assertEqual((bar.msg, bar.width, bar.progress_sym, bar.empty_sym),
-                         (self.msg, 20, self.progress_sym, self.empty_sym))
+        self.assertEqual(
+            (bar1.msg, bar1.width, bar1.progress_sym, bar1.empty_sym),
+            (self.msg, 20, self.progress_sym, self.empty_sym))
 
     def test_width_less_zero(self):
 
@@ -112,10 +114,11 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        bar = gen_class.ProgressBar(self.msg, -10)
+        bar1 = gen_class.ProgressBar(self.msg, -10)
 
-        self.assertEqual((bar.msg, bar.width, bar.progress_sym, bar.empty_sym),
-                         (self.msg, 20, self.progress_sym, self.empty_sym))
+        self.assertEqual(
+            (bar1.msg, bar1.width, bar1.progress_sym, bar1.empty_sym),
+            (self.msg, 20, self.progress_sym, self.empty_sym))
 
 
 if __name__ == "__main__":

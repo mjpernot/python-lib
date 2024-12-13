@@ -20,8 +20,8 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import gen_class
-import version
+import gen_class                    # pylint:disable=E0401,R0402,C0413
+import version                      # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -66,7 +66,7 @@ class UnitTest(unittest.TestCase):
         log_file = gen_class.Logger(self.name, self.f_name, level="WARN")
         log_file.log_warn("TEST")
 
-        with open(self.f_name, 'r') as fhdr:
+        with open(self.f_name, "r", encoding="UTF-8") as fhdr:
             cnt = fhdr.read().count('WARNING TEST')
 
         self.assertEqual(cnt, 1)

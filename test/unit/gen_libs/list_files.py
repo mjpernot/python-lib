@@ -14,15 +14,14 @@
 # Libraries and Global Variables
 
 # Standard
-from __future__ import print_function
 import sys
 import os
 import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import gen_libs
-import version
+import gen_libs                     # pylint:disable=E0401,R0402,C0413
+import version                      # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -59,10 +58,10 @@ class UnitTest(unittest.TestCase):
         self.fname2 = os.path.join(self.dir_path, self.filet)
         self.dname = os.path.join(self.dir_path, "dir1")
 
-        with open(self.fname1, "a"):
+        with open(self.fname1, "a", encoding="UTF-8"):
             os.utime(self.fname1, None)
 
-        with open(self.fname2, "a"):
+        with open(self.fname2, "a", encoding="UTF-8"):
             os.utime(self.fname2, None)
 
         os.makedirs(self.dname)
@@ -84,8 +83,7 @@ class UnitTest(unittest.TestCase):
 
         file_list = gen_libs.list_files(self.dir_path, include_path=True)
 
-        self.assertTrue(
-            file_list == self.results3 or file_list == self.results4)
+        self.assertIn(file_list, (self.results3, self.results4))
 
     def test_list_files(self):
 
@@ -99,8 +97,7 @@ class UnitTest(unittest.TestCase):
 
         file_list = gen_libs.list_files(self.dir_path)
 
-        self.assertTrue(
-            file_list == self.results1 or file_list == self.results2)
+        self.assertIn(file_list, (self.results1, self.results2))
 
     def tearDown(self):
 

@@ -21,8 +21,8 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import gen_class
-import version
+import gen_class                    # pylint:disable=E0401,R0402,C0413
+import version                      # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -67,7 +67,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertFalse("that" in self.cidict)
+        self.assertNotIn("that", self.cidict)
 
     def test_lowercase(self):
 
@@ -79,7 +79,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertTrue("this" in self.cidict)
+        self.assertIn("this", self.cidict)
 
     def test_uppercase2(self):
 
@@ -91,7 +91,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertFalse("THAT" in self.cidict)
+        self.assertNotIn("THAT", self.cidict)
 
     def test_uppercase(self):
 
@@ -103,7 +103,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertTrue("THIS" in self.cidict)
+        self.assertIn("THIS", self.cidict)
 
     def test_numeric2(self):
 
@@ -115,7 +115,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertFalse(5 in self.cidict)
+        self.assertNotIn(5, self.cidict)
 
     def test_numeric(self):
 
@@ -127,7 +127,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertTrue(4 in self.cidict)
+        self.assertIn(4, self.cidict)
 
 
 if __name__ == "__main__":

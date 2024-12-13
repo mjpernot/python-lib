@@ -14,15 +14,14 @@
 # Libraries and Global Variables
 
 # Standard
-from __future__ import print_function
 import sys
 import os
 import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import gen_libs
-import version
+import gen_libs                     # pylint:disable=E0401,R0402,C0413
+import version                      # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -67,7 +66,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertEqual(gen_libs.is_true(self.is4), False)
+        self.assertFalse(gen_libs.is_true(self.is4))
 
     def test_is_true_on(self):
 
@@ -79,7 +78,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertEqual(gen_libs.is_true(self.is3), True)
+        self.assertTrue(gen_libs.is_true(self.is3))
 
     def test_is_true_no(self):
 
@@ -91,7 +90,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertEqual(gen_libs.is_true(self.is2), False)
+        self.assertFalse(gen_libs.is_true(self.is2))
 
     def test_is_true_yes(self):
 
@@ -103,7 +102,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertEqual(gen_libs.is_true(self.is1), True)
+        self.assertTrue(gen_libs.is_true(self.is1))
 
 
 if __name__ == "__main__":

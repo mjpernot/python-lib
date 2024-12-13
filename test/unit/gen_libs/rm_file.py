@@ -20,8 +20,8 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import gen_libs
-import version
+import gen_libs                     # pylint:disable=E0401,R0402,C0413
+import version                      # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -63,7 +63,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        with open(self.f_name, "a"):
+        with open(self.f_name, "a", encoding="UTF-8"):
             os.utime(self.f_name, None)
 
         self.assertEqual(gen_libs.rm_file(self.f_name), (False, None))

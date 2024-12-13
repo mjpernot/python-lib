@@ -21,18 +21,13 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import gen_class
-import gen_libs
-import version
+import gen_class                    # pylint:disable=E0401,R0402,C0413
+import gen_libs                     # pylint:disable=E0401,R0402,C0413
+import version                      # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
 # Global
-PERM1 = "111"
-PERM3 = "333"
-PERM4 = "444"
-PERM5 = "555"
-PERM7 = "777"
 
 
 class UnitTest(unittest.TestCase):
@@ -179,10 +174,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        global PERM3
-
         os.mkdir(self.dir1)
-        os.chmod(self.dir1, int(PERM3, 8))
+        os.chmod(self.dir1, int("333", 8))
         args_array = gen_class.ArgParser(
             self.argv2, opt_val=self.opt_val,
             dir_perms_crt=self.dir_perms_crt3, do_parse=True)
@@ -200,12 +193,10 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        global PERM1
-
         os.mkdir(self.dir1)
-        os.chmod(self.dir1, int(PERM1, 8))
+        os.chmod(self.dir1, int("111", 8))
         os.mkdir(self.dir2)
-        os.chmod(self.dir2, int(PERM1, 8))
+        os.chmod(self.dir2, int("111", 8))
         args_array = gen_class.ArgParser(
             self.argv3, opt_val=self.opt_val,
             dir_perms_crt=self.dir_perms_crt6, do_parse=True)
@@ -223,11 +214,9 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        global PERM1
-
         os.mkdir(self.dir1)
         os.mkdir(self.dir2)
-        os.chmod(self.dir2, int(PERM1, 8))
+        os.chmod(self.dir2, int("111", 8))
         args_array = gen_class.ArgParser(
             self.argv3, opt_val=self.opt_val,
             dir_perms_crt=self.dir_perms_crt6, do_parse=True)
@@ -245,10 +234,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        global PERM1
-
         os.mkdir(self.dir1)
-        os.chmod(self.dir1, int(PERM1, 8))
+        os.chmod(self.dir1, int("111", 8))
         os.mkdir(self.dir2)
         args_array = gen_class.ArgParser(
             self.argv3, opt_val=self.opt_val,
@@ -285,10 +272,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        global PERM1
-
         os.mkdir(self.dir1)
-        os.chmod(self.dir1, int(PERM1, 8))
+        os.chmod(self.dir1, int("111", 8))
         args_array = gen_class.ArgParser(
             self.argv2, opt_val=self.opt_val,
             dir_perms_crt=self.dir_perms_crt7, do_parse=True)
@@ -306,10 +291,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        global PERM5
-
         os.mkdir(self.dir1)
-        os.chmod(self.dir1, int(PERM5, 8))
+        os.chmod(self.dir1, int("555", 8))
         args_array = gen_class.ArgParser(
             self.argv2, opt_val=self.opt_val,
             dir_perms_crt=self.dir_perms_crt4, do_parse=True)
@@ -327,10 +310,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        global PERM3
-
         os.mkdir(self.dir1)
-        os.chmod(self.dir1, int(PERM3, 8))
+        os.chmod(self.dir1, int("333", 8))
         args_array = gen_class.ArgParser(
             self.argv2, opt_val=self.opt_val,
             dir_perms_crt=self.dir_perms_crt3, do_parse=True)
@@ -348,10 +329,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        global PERM7
-
         os.mkdir(self.dir1)
-        os.chmod(self.dir1, int(PERM7, 8))
+        os.chmod(self.dir1, int("777", 8))
         args_array = gen_class.ArgParser(
             self.argv2, opt_val=self.opt_val,
             dir_perms_crt=self.dir_perms_crt7, do_parse=True)
@@ -368,10 +347,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        global PERM5
-
         os.mkdir(self.dir1)
-        os.chmod(self.dir1, int(PERM5, 8))
+        os.chmod(self.dir1, int("555", 8))
         args_array = gen_class.ArgParser(
             self.argv2, opt_val=self.opt_val,
             dir_perms_crt=self.dir_perms_crt4, do_parse=True)
@@ -423,10 +400,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        global PERM4
-
         os.mkdir(self.dir1)
-        os.chmod(self.dir1, int(PERM4, 8))
+        os.chmod(self.dir1, int("444", 8))
         args_array = gen_class.ArgParser(
             self.argv2, opt_val=self.opt_val,
             dir_perms_crt=self.dir_perms_crt2, do_parse=True)

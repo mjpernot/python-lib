@@ -21,8 +21,8 @@ import mock
 
 # Local
 sys.path.append(os.getcwd())
-import gen_libs
-import version
+import gen_libs                     # pylint:disable=E0401,R0402,C0413
+import version                      # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -37,7 +37,7 @@ def raise_oserror(dirname):
 
     """
 
-    if dirname == "/dir/path/dirname":
+    if dirname == "/dir/path/dirname":              # pylint:disable=R1720
         raise OSError(21, "Other Error")
 
     elif dirname == "/dir/path/dirname13":

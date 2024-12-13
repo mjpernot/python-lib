@@ -20,8 +20,8 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import gen_class
-import version
+import gen_class                    # pylint:disable=E0401,R0402,C0413
+import version                      # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -72,9 +72,8 @@ class UnitTest(unittest.TestCase):
         """
 
         log = gen_class.LogFile()
-        finst = open(self.input_file2)
-        log.load_ignore(finst)
-        finst.close()
+        with open(self.input_file2, "r", encoding="UTF-8") as finst:
+            log.load_ignore(finst)
 
         self.assertEqual(log.ignore, [])
 
@@ -119,9 +118,8 @@ class UnitTest(unittest.TestCase):
         """
 
         log = gen_class.LogFile()
-        finst = open(self.input_file)
-        log.load_ignore(finst)
-        finst.close()
+        with open(self.input_file, "r", encoding="UTF-8") as finst:
+            log.load_ignore(finst)
 
         self.assertEqual(log.ignore, self.result_file)
 

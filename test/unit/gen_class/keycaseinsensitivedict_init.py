@@ -21,8 +21,8 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import gen_class
-import version
+import gen_class                    # pylint:disable=E0401,R0402,C0413
+import version                      # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -63,8 +63,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertTrue(
-            isinstance(self.cidict, gen_class.KeyCaseInsensitiveDict))
+        self.assertIsInstance(self.cidict, gen_class.KeyCaseInsensitiveDict)
 
     def test_empty_dict(self):
 
@@ -76,7 +75,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertEqual(self.cidict, dict())
+        self.assertEqual(self.cidict, {})
 
     def test_data_dict(self):
 

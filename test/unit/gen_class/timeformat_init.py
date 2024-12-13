@@ -20,8 +20,8 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import gen_class
-import version
+import gen_class                    # pylint:disable=E0401,R0402,C0413
+import version                      # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -54,7 +54,7 @@ class UnitTest(unittest.TestCase):
         self.tform = gen_class.TimeFormat()
         self.delimit = "."
         self.micro = False
-        self.thacks = dict()
+        self.thacks = {}
         self.tformats = {
             "ymd": {"format": "%Y%m%d", "del": "", "micro": False},
             "dmy": {"format": "%d%m%Y", "del": "", "micro": False},

@@ -21,9 +21,9 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import gen_class
-import gen_libs
-import version
+import gen_class                    # pylint:disable=E0401,R0402,C0413
+import gen_libs                     # pylint:disable=E0401,R0402,C0413
+import version                      # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -103,8 +103,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        fname = open(self.file, "w")
-        fname.close()
+        open(self.file, "w", encoding="UTF-8").close()  # pylint:disable=R1732
         args_array = gen_class.ArgParser(
             self.argv, opt_val=self.opt_val, file_perm_chk=self.file_chk4,
             do_parse=True)
@@ -237,8 +236,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        fname = open(self.file, "w")
-        fname.close()
+        open(self.file, "w", encoding="UTF-8").close()  # pylint:disable=R1732
         args_array = gen_class.ArgParser(
             self.argv, opt_val=self.opt_val, file_perm_chk=self.file_chk,
             do_parse=True)
@@ -272,10 +270,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        fname = open(self.file, "w")
-        fname.close()
-        fname3 = open(self.file3, "w")
-        fname3.close()
+        open(self.file, "w", encoding="UTF-8").close()   # pylint:disable=R1732
+        open(self.file3, "w", encoding="UTF-8").close()  # pylint:disable=R1732
         args_array = gen_class.ArgParser(
             self.argv5, opt_val=self.opt_val, file_perm_chk=self.file_chk,
             do_parse=True)
@@ -292,8 +288,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        fname = open(self.file, "w")
-        fname.close()
+        open(self.file, "w", encoding="UTF-8").close()  # pylint:disable=R1732
         args_array = gen_class.ArgParser(
             self.argv, opt_val=self.opt_val, file_perm_chk=self.file_chk,
             do_parse=True)
@@ -310,8 +305,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        fname = open(self.file, "w")
-        fname.close()
+        open(self.file, "w", encoding="UTF-8").close()  # pylint:disable=R1732
         args_array = gen_class.ArgParser(
             self.argv4, opt_val=self.opt_val, file_perm_chk=self.file_chk,
             do_parse=True)
@@ -328,8 +322,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        fname = open(self.file, "w")
-        fname.close()
+        open(self.file, "w", encoding="UTF-8").close()  # pylint:disable=R1732
         args_array = gen_class.ArgParser(
             self.argv3, opt_val=self.opt_val, file_perm_chk=self.file_chk,
             do_parse=True)
@@ -346,8 +339,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        fname = open(self.file, "w")
-        fname.close()
+        open(self.file, "w", encoding="UTF-8").close()  # pylint:disable=R1732
         args_array = gen_class.ArgParser(
             self.argv, opt_val=self.opt_val, file_perm_chk=self.file_chk,
             do_parse=True)
@@ -364,10 +356,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        fname = open(self.file, "w")
-        fname.close()
-        fname2 = open(self.file2, "w")
-        fname2.close()
+        open(self.file, "w", encoding="UTF-8").close()   # pylint:disable=R1732
+        open(self.file2, "w", encoding="UTF-8").close()  # pylint:disable=R1732
         args_array = gen_class.ArgParser(
             self.argv2, opt_val=self.opt_val, file_perm_chk=self.file_chk3,
             do_parse=True)
@@ -384,8 +374,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        fname = open(self.file, "w")
-        fname.close()
+        open(self.file, "w", encoding="UTF-8").close()  # pylint:disable=R1732
         args_array = gen_class.ArgParser(
             self.argv, opt_val=self.opt_val, file_perm_chk=self.file_chk,
             do_parse=True)
