@@ -14,16 +14,15 @@
 # Libraries and Global Variables
 
 # Standard
-from __future__ import print_function
 import sys
 import os
 import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import gen_libs
-import gen_class
-import version
+import gen_libs                     # pylint:disable=E0401,R0402,C0413
+import gen_class                    # pylint:disable=E0401,R0402,C0413
+import version                      # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -37,8 +36,6 @@ def holder():
     Arguments:
 
     """
-
-    pass
 
 
 class UnitTest(unittest.TestCase):

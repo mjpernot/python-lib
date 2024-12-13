@@ -20,8 +20,8 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import gen_libs
-import version
+import gen_libs                     # pylint:disable=E0401,R0402,C0413
+import version                      # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -58,7 +58,7 @@ def write_file(f_name, mode):
     """
 
     gen_libs.write_file(f_name, mode, "TEST")
-    with open(f_name) as f_hdlr:
+    with open(f_name, mode="r", encoding="UTF-8") as f_hdlr:
         contents = f_hdlr.read()
 
     return os.path.isfile(f_name) and "TEST" in contents

@@ -20,8 +20,8 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import gen_libs
-import version
+import gen_libs                     # pylint:disable=E0401,R0402,C0413
+import version                      # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -92,10 +92,9 @@ class UnitTest(unittest.TestCase):
         if "__pycache__" in data_list:
             data_list.remove("__pycache__")
 
-        self.assertTrue(
-            data_list == [
-                "list_dir_1", "list_dir_2"] or data_list == [
-                    "list_dir_2", "list_dir_1"])
+        self.assertIn(
+            data_list,
+            (['list_dir_1', 'list_dir_2'], ['list_dir_2', 'list_dir_1']))
 
     def test_no_dirs(self):
 

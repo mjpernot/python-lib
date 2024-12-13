@@ -20,8 +20,8 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import gen_libs
-import version
+import gen_libs                     # pylint:disable=E0401,R0402,C0413
+import version                      # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -81,7 +81,7 @@ class UnitTest(unittest.TestCase):
 
         self.assertTrue(os.path.isfile(self.file_path))
 
-        with open(self.md5_file) as fname:
+        with open(self.md5_file, "r", encoding="UTF-8") as fname:
             fcontent = fname.readlines()
 
         self.assertEqual(len(fcontent), 1)

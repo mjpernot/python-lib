@@ -8,6 +8,7 @@
     Functions:
         add_cmd
         and_is_true
+        binary_string
         bytes_2_readable
         chk_crt_dir
         chk_crt_file
@@ -103,13 +104,11 @@
         write_to_log
 
     Tuple:
-        _ntuple_diskusage
+        NTupleDiskUsage
 
 """
 
 # Libraries and Global Variables
-from __future__ import print_function
-from __future__ import absolute_import
 
 # Standard
 import subprocess
@@ -136,17 +135,13 @@ import pprint
 import chardet
 
 # Local
-try:
-    from . import version
-
-except (ValueError, ImportError) as err:
-    import version
+import version                      # pylint:disable=E0401
 
 __version__ = version.__version__
 
 
 # Tuples
-_ntuple_diskusage = collections.namedtuple("usage", "total used free")
+NTupleDiskUsage = collections.namedtuple("usage", "total used free")
 
 
 def add_cmd(cmd, **kwargs):
@@ -196,6 +191,23 @@ def and_is_true(itemx, itemy):
     return truth_tbl[itemx] and truth_tbl[itemy]
 
 
+def binary_string():
+
+    """Function:  binary_string
+
+    Description:  Returns lamdba as a function to check if data is binary.
+
+    Arguments:
+        (output) lamdba function
+
+    """
+
+    textchars = bytearray(
+        {7, 8, 9, 10, 12, 13, 27} | set(range(0x20, 0x100)) - {0x7f})
+
+    return lambda bytes: bool(bytes.translate(None, textchars))
+
+
 def bytes_2_readable(size, precision=2):
 
     """Function:  bytes_2_readable
@@ -216,7 +228,7 @@ def bytes_2_readable(size, precision=2):
         suf_index += 1
         size = size / 1024.0
 
-    return "%.*f%s" % (precision, size, suffix[suf_index])
+    return f"{size:.{precision}f}" + f"{suffix[suf_index]}"
 
 
 def chk_crt_dir(dir_name=None, create=False, write=False, read=False,
@@ -249,7 +261,8 @@ def chk_crt_dir(dir_name=None, create=False, write=False, read=False,
 
     # Redirect print to /dev/null.
     if no_print:
-        f_hdlr = open(os.devnull, "w")
+        f_hdlr = open(                              # pylint:disable=R1732
+            os.devnull, mode="w", encoding="UTF-8")
 
     if not dir_name.strip():
         err_msg = "Error:  No value passed for directory name"
@@ -263,13 +276,13 @@ def chk_crt_dir(dir_name=None, create=False, write=False, read=False,
                 os.makedirs(dir_name)
 
             except OSError:
-                err_msg = "Error: Unable to create directory %s" % (dir_name)
+                err_msg = f"Error: Unable to create directory {dir_name}"
                 print(err_msg, file=f_hdlr)
                 status = False
 
         # Directory does not exist.
         elif not os.path.isdir(dir_name):
-            err_msg = "Error: Directory: %s does not exist." % (dir_name)
+            err_msg = f"Error: Directory: {dir_name} does not exist."
             print(err_msg, file=f_hdlr)
             status = False
 
@@ -319,7 +332,8 @@ def chk_crt_file(f_name=None, create=False, write=False, read=False,
 
     # Redirect print to /dev/null
     if no_print:
-        f_hdlr = open(os.devnull, "w")
+        f_hdlr = open(                              # pylint:disable=R1732
+            os.devnull, mode="w", encoding="UTF-8")
 
     if not f_name.strip():
         err_msg = "Error:  No value passed for filename."
@@ -331,7 +345,7 @@ def chk_crt_file(f_name=None, create=False, write=False, read=False,
             touch(f_name)
 
         elif not os.path.isfile(f_name):
-            err_msg = "Error:  File %s does not exist." % (f_name)
+            err_msg = f"Error:  File {f_name} does not exist."
             print(err_msg, file=f_hdlr)
             status = False
 
@@ -392,15 +406,15 @@ def chk_perm(item, oct_perm):
     status = True
 
     if octal_to_str(oct_perm)[2] == "x" and not os.access(item, os.X_OK):
-        print("Error: {0} is not executable.".format(item))
+        print(f"Error: {item} is not executable.")
         status = False
 
     if octal_to_str(oct_perm)[0] == "r" and not os.access(item, os.R_OK):
-        print("Error: {0} is not readable.".format(item))
+        print(f"Error: {item} is not readable.")
         status = False
 
     if octal_to_str(oct_perm)[1] == "w" and not os.access(item, os.W_OK):
-        print("Error: {0} is not writable.".format(item))
+        print(f"Error: {item} is not writable.")
         status = False
 
     return status
@@ -417,7 +431,7 @@ def clear_file(f_name):
 
     """
 
-    open(f_name, "w").close()
+    open(f_name, mode="w", encoding="UTF-8").close()    # pylint:disable=R1732
 
 
 def compress(fname):
@@ -432,7 +446,7 @@ def compress(fname):
 
     """
 
-    proc1 = subprocess.Popen(["gzip", fname])
+    proc1 = subprocess.Popen(["gzip", fname])           # pylint:disable=R1732
     proc1.wait()
 
 
@@ -458,12 +472,12 @@ def cp_dir(src_dir, dest_dir):
 
     # Directory permission error.
     except shutil.Error as err:
-        err_msg = "Directory not copied.  Perms Error Message: %s" % (err)
+        err_msg = f"Directory not copied.  Perms Error Message: {err}"
         status = False
 
     # Directory does not exist.
     except OSError as err:
-        err_msg = "Directory not copied.  Exist Error Message: %s" % (err)
+        err_msg = f"Directory not copied.  Exist Error Message: {err}"
         status = False
 
     return status, err_msg
@@ -572,10 +586,11 @@ def create_cfg_array(cfg_file, **kwargs):
 
     # Does config file exists in current location.
     if os.path.isfile(cfg_file):
-        fname = open(cfg_file, "r")
+        fname = open(cfg_file, mode="r", encoding="UTF-8")
 
     else:
-        fname = open(os.path.join(cfg_path, cfg_file), "r")
+        fname = open(                                   # pylint:disable=R1732
+            os.path.join(cfg_path, cfg_file), mode="r", encoding="UTF-8")
 
     for line in fname:
 
@@ -593,7 +608,7 @@ def create_cfg_array(cfg_file, **kwargs):
 
     # Execute after 'for' loop.
     else:
-        # Add last dict to config array.
+        # Add last dict to config array.                # pylint:disable=W0120
         cfg_array.append(cfg_dict)
 
     fname.close()
@@ -661,7 +676,7 @@ def date_range(start_dt, end_dt):
 
         else:
             _tmp_dt = sdt.replace(day=1) - datetime.timedelta(days=1)
-            sdt = (_tmp_dt.replace(day=sdt.day))
+            sdt = _tmp_dt.replace(day=sdt.day)
             finish = sdt < end_dt
 
 
@@ -746,7 +761,8 @@ def dict_2_std(data, ofile=False, mode="w", **kwargs):
     data = dict(data)
 
     if ofile:
-        outfile = open(ofile, mode)
+        outfile = open(                                 # pylint:disable=R1732
+            ofile, mode=mode, encoding="UTF-8")
 
     else:
         outfile = sys.stdout
@@ -797,7 +813,7 @@ def dict_out(data, **kwargs):
 
     else:
         err_flag = True
-        err_msg = "Error: Is not a dictionary: %s" % (data)
+        err_msg = f"Error: Is not a dictionary: {data}"
 
     return err_flag, err_msg
 
@@ -835,7 +851,7 @@ def disk_usage(path):
 
     Arguments:
         (input) path -> Directory path of the partition
-        (output) _ntuple_diskusage (named tuple):
+        (output) NTupleDiskUsage (named tuple):
             total -> Total space in bytes
             used -> Used space in bytes
             free -> Free space in bytes
@@ -847,7 +863,7 @@ def disk_usage(path):
     total = stv.f_blocks * stv.f_frsize
     used = (stv.f_blocks - stv.f_bfree) * stv.f_frsize
 
-    return _ntuple_diskusage(total, used, free)
+    return NTupleDiskUsage(total, used, free)
 
 
 def display_data(data, level=0, f_hdlr=sys.stdout):
@@ -878,7 +894,7 @@ def display_data(data, level=0, f_hdlr=sys.stdout):
 
         cnt = 0
 
-        while (cnt < level):
+        while cnt < level:
             print("\t", end="", file=f_hdlr)
             cnt += 1
 
@@ -891,14 +907,14 @@ def display_data(data, level=0, f_hdlr=sys.stdout):
             if isinstance(data[item], (dict, list)):
                 print_level(level, f_hdlr)
 
-                print("%s =>" % item, file=f_hdlr)
+                print(f"{item} =>", file=f_hdlr)
 
                 display_data(data[item], level + 1, f_hdlr=f_hdlr)
 
             else:
                 print_level(level, f_hdlr)
 
-                print("%s :  %s" % (item, data[item]), file=f_hdlr)
+                print(f"{item} :  {data[item]}", file=f_hdlr)
 
     # Recursive call for specific data types.
     elif isinstance(data, list):
@@ -910,7 +926,7 @@ def display_data(data, level=0, f_hdlr=sys.stdout):
     else:
         print_level(level, f_hdlr)
 
-        print("%s" % data, file=f_hdlr)
+        print(f"{data}", file=f_hdlr)
 
 
 def file_cleanup(dir_path, days):
@@ -955,7 +971,7 @@ def file_search(f_name, data_str):
 
     line = None
 
-    with open(f_name, "r") as s_file:
+    with open(f_name, mode="r", encoding="UTF-8") as s_file:
         for item in s_file:
             if data_str in item:
                 line = item
@@ -978,7 +994,7 @@ def file_search_cnt(f_name, pattern):
 
     """
 
-    with open(f_name) as f_hdlr:
+    with open(f_name, mode="r", encoding="UTF-8") as f_hdlr:
         cnt = f_hdlr.read().count(pattern)
 
     return cnt
@@ -997,7 +1013,7 @@ def file_2_list(filename):
 
     """
 
-    with open(filename, "r") as f_hdlr:
+    with open(filename, mode="r", encoding="UTF-8") as f_hdlr:
         lines = [item.rstrip("\n") for item in f_hdlr.readlines()]
 
     return lines
@@ -1269,30 +1285,21 @@ def is_base64(data):
 
     """
 
-    if sys.version_info[0] == 3:
-        try:
-            if isinstance(data, str):
-                data_bytes = bytes(data, 'ascii')
+    try:
+        if isinstance(data, str):
+            data_bytes = bytes(data, 'ascii')
 
-            elif isinstance(data, bytes):
-                data_bytes = data
+        elif isinstance(data, bytes):
+            data_bytes = data
 
-            else:
-                raise binascii.Error
+        else:
+            raise binascii.Error
 
-            status = base64.b64encode(
-                base64.b64decode(data_bytes))[1:70] == data_bytes[1:70]
+        status = base64.b64encode(
+            base64.b64decode(data_bytes))[1:70] == data_bytes[1:70]
 
-        except binascii.Error:
-            status = False
-
-    else:
-        try:
-            status = base64.b64encode(
-                base64.b64decode(data))[1:70] == data[1:70]
-
-        except TypeError:
-            status = False
+    except binascii.Error:
+        status = False
 
     return status
 
@@ -1310,11 +1317,10 @@ def is_empty_file(f_name):
 
     """
 
-    if os.path.isfile(f_name):
-        status = True if os.stat(f_name).st_size == 0 else False
+    status = None
 
-    else:
-        status = None
+    if os.path.isfile(f_name):
+        status = os.stat(f_name).st_size == 0
 
     return status
 
@@ -1337,11 +1343,9 @@ def is_file_text(f_name):
     with io.open(f_name, "rb") as f_hldr:
         f_head = f_hldr.read(512)
 
-    textchars = bytearray(
-        {7, 8, 9, 10, 12, 13, 27} | set(range(0x20, 0x100)) - {0x7f})
-    is_binary_string = lambda bytes: bool(bytes.translate(None, textchars))
+    is_binary_string = binary_string()
 
-    return not(is_binary_string(f_head))
+    return not is_binary_string(f_head)
 
 
 def is_missing_lists(list1, list2):
@@ -1409,14 +1413,14 @@ def key_cleaner(data, char, repl):
         in the key of a document.
 
     Arguments:
-        (input) data -> A dictionary object.
+        (input) data -> A data object.
         (input) char -> Character to be replaced.
         (input) repl -> Replacement character.
         (output) data -> Modified dictionary object.
 
     """
 
-    if type(data) is dict:
+    if isinstance(data, dict):
         data = dict(data)
 
         for key, value in list(data.items()):
@@ -1427,15 +1431,15 @@ def key_cleaner(data, char, repl):
             if "." in key:
                 # Change key name and add new value.
                 data[key.replace(char, repl)] = value
-                del(data[key])
+                del data[key]
 
             return data
 
-    if type(data) is list:
+    if isinstance(data, list):
         data = list(data)
         return list(map(key_cleaner, data, char, repl))
 
-    if type(data) is tuple:
+    if isinstance(data, tuple):
         return tuple(list(map(key_cleaner, data, char, repl)))
 
     return data
@@ -1587,12 +1591,12 @@ def make_dir(dirname):
         status = True
 
     except OSError as err:
-        if err.errno == errno.EEXIST or err.errno == errno.EACCES:
-            print("Error:  {0} for {1}".format(err.args[1], dirname))
+        if err.errno in (errno.EEXIST, errno.EACCES):
+            print(f"Error:  {err.args[1]} for {dirname}")
 
         else:
-            print("Error {0}:  Message:  {1} for {2}".format(
-                err.args[0], err.args[1], dirname))
+            print(
+                f"Error {err.args[0]}:  Message:  {err.args[1]} for {dirname}")
 
     return status
 
@@ -1613,15 +1617,12 @@ def make_md5_hash(file_path, to_file=True):
 
     """
 
-    proc1 = subprocess.Popen(
+    proc1 = subprocess.Popen(                           # pylint:disable=R1732
         ["/usr/bin/md5sum", file_path], stdout=subprocess.PIPE)
     hash_results, _ = proc1.communicate()
-
-    if sys.version_info >= (3, 0):
-        encoding = chardet.detect(hash_results)["encoding"]
-        hash_results = hash_results.decode(encoding)
-
-    hash_results = hash_results.split("  ")[0]
+    encoding = chardet.detect(hash_results)["encoding"]
+    hash_results = hash_results.decode(encoding)
+    hash_results = hash_results.split("  ", maxsplit=1)[0]
 
     if to_file:
         hash_file = file_path + ".md5.txt"
@@ -1653,7 +1654,8 @@ def make_zip(zip_file_path, cur_file_dir, files_to_zip, is_rel_path=False):
         cur_file_dir = cur_file_dir + os.path.sep
 
     try:
-        newzip = zipfile.ZipFile(zip_file_path, "w", zipfile.ZIP_DEFLATED)
+        newzip = zipfile.ZipFile(                   # pylint:disable=R1732
+            zip_file_path, "w", zipfile.ZIP_DEFLATED)
 
         if is_rel_path:
             for fname in files_to_zip:
@@ -1692,20 +1694,20 @@ def merge_data_types(data1, data2):
     err_msg = ""
     data = None
 
-    if isinstance(data1, str_type()) \
-       and (isinstance(data1, str_type()) == isinstance(data2, str_type())):
+    if isinstance(data1, str) \
+       and (isinstance(data1, str) == isinstance(data2, str)):
         data = data1 + data2
 
-    elif isinstance(data1, list) \
-       and (isinstance(data1, list) == isinstance(data2, list)):
+    elif isinstance(data1, list) and (
+       isinstance(data1, list) == isinstance(data2, list)):
         data = list(data1) + list(data2)
 
-    elif isinstance(data1, tuple) \
-       and (isinstance(data1, tuple) == isinstance(data2, tuple)):
+    elif isinstance(data1, tuple) and (
+       isinstance(data1, tuple) == isinstance(data2, tuple)):
         data = data1 + data2
 
-    elif isinstance(data1, dict) \
-       and (isinstance(data1, dict) == isinstance(data2, dict)):
+    elif isinstance(data1, dict) and (
+       isinstance(data1, dict) == isinstance(data2, dict)):
         data, _, _ = merge_two_dicts(dict(data1), dict(data2))
 
     else:
@@ -1737,7 +1739,7 @@ def merge_two_dicts(data_1, data_2):
     err_msg = ""
     data = None
 
-    if isinstance(data_1, dict) and type(data_1) == type(data_2):
+    if isinstance(data_1, dict) and isinstance(data_2, dict):
         data_1 = dict(data_1)
         data_2 = dict(data_2)
         data = data_1.copy()
@@ -1771,8 +1773,7 @@ def milli_2_readadble(msecs):
     data //= 24
     days = data
 
-    return "%d days %d hours %d minutes %d seconds" \
-           % (days, hours, minutes, seconds)
+    return f"{days} days {hours} hours {minutes} minutes {seconds} seconds"
 
 
 def month_days(dtg):
@@ -1941,12 +1942,7 @@ def no_std_out():
     """
 
     save_stdout = sys.stdout
-
-    if sys.version_info < (3, 0):
-        sys.stdout = io.BytesIO()
-
-    else:
-        sys.stdout = io.StringIO()
+    sys.stdout = io.StringIO()
 
     yield
     sys.stdout = save_stdout
@@ -1998,7 +1994,7 @@ def openfile(filename, mode="r"):
     if filename.endswith(".gz"):
         return gzip.open(filename, mode)
 
-    return open(filename, mode)
+    return open(filename, mode, encoding="UTF-8")
 
 
 def pascalize(data_str):
@@ -2067,21 +2063,21 @@ def perm_check(item, item_type, f_hdlr=sys.stdout, **kwargs):
 
     # Object writeable
     if write and not os.access(item, os.W_OK):
-        tmp_msg = "Error: %s %s is not writeable." % (item_type, item)
+        tmp_msg = f"Error: {item_type} {item} is not writeable."
         print(tmp_msg, file=f_hdlr)
         err_msg = "\n".join([err_msg, tmp_msg])
         status = False
 
     # Object readable
     if read and not os.access(item, os.R_OK):
-        tmp_msg = "Error: %s %s is not readable." % (item_type, item)
+        tmp_msg = f"Error: {item_type} {item} is not readable."
         print(tmp_msg, file=f_hdlr)
         err_msg = "\n".join([err_msg, tmp_msg])
         status = False
 
     # Object executable
     if exe and not os.access(item, os.X_OK):
-        tmp_msg = "Error: %s %s is not executable." % (item_type, item)
+        tmp_msg = f"Error: {item_type} {item} is not executable."
         print(tmp_msg, file=f_hdlr)
         err_msg = "\n".join([err_msg, tmp_msg])
         status = False
@@ -2106,7 +2102,8 @@ def print_data(data, mode="w", **kwargs):
     """
 
     if "ofile" in kwargs and kwargs["ofile"]:
-        outfile = open(kwargs.get("ofile"), mode)
+        outfile = open(                                 # pylint:disable=R1732
+            kwargs.get("ofile"), mode, encoding="UTF-8")
 
     else:
         outfile = sys.stdout
@@ -2168,7 +2165,7 @@ def print_dict(data, ofile=None, json_fmt=False, no_std=False, mode="w",
 
     else:
         err_flag = True
-        err_msg = "Error: %s -> Is not a dictionary" % (data)
+        err_msg = f"Error: {data} -> Is not a dictionary"
 
     return err_flag, err_msg
 
@@ -2194,7 +2191,7 @@ def print_list(data, **kwargs):
     outfile = sys.stdout
 
     if ofile:
-        outfile = open(ofile, mode)
+        outfile = open(ofile, mode, encoding="UTF-8")   # pylint:disable=R1732
 
     for line in data:
         print(line, file=outfile)
@@ -2225,11 +2222,11 @@ def prt_dict(data, fhandler=sys.stdout, **kwargs):
     for key, val in list(data.items()):
 
         if isinstance(val, dict):
-            print("{0}{1}:".format(spc * indent, key), file=fhandler)
+            print(f"{spc * indent}{key}:", file=fhandler)
             prt_dict(val, fhandler, indent=indent + 4)
 
         else:
-            print("{0}{1}:  {2}".format(spc * indent, key, val), file=fhandler)
+            print(f"{spc * indent}{key}:  {val}", file=fhandler)
 
 
 def prt_lvl(lvl=1):
@@ -2246,7 +2243,7 @@ def prt_lvl(lvl=1):
 
     cnt = 0
 
-    while (cnt < lvl):
+    while cnt < lvl:
         print("\t", end="")
         cnt += 1
 
@@ -2266,7 +2263,7 @@ def prt_msg(hdr, msg, lvl=0):
     """
 
     prt_lvl(lvl)
-    print("{0}:  {1}".format(hdr, msg))
+    print(f"{hdr}:  {msg}")
 
 
 def rename_file(fname, new_fname, dir_path):
@@ -2323,7 +2320,7 @@ def rm_file(file_path):
 
     except OSError as err:
         err_flag = True
-        err_msg = "Error: %s - %s" % (err.filename, err.strerror)
+        err_msg = f"Error: {err.filename} - {err.strerror}"
 
     return err_flag, err_msg
 
@@ -2446,11 +2443,11 @@ def str_type():
 
     """
 
-    if sys.version_info[0] == 3:
+    if sys.version_info[0] == 3:                # pylint:disable=R1705
         return str
 
     else:
-        return basestring
+        return basestring                       # pylint:disable=E0602
 
 
 def str_2_list(del_str, fld_del):
@@ -2509,17 +2506,16 @@ def touch(f_name):
 
         except OSError as err:
             status = False
-            err_msg = "ERROR: Directory create failure. Reason: %s" \
-                      % (err.args[1])
+            err_msg = f"ERROR: Directory create failure. Reason: {err.args[1]}"
 
     if status:
         try:
-            with open(f_name, "a"):
+            with open(f_name, "a", encoding="UTF-8"):
                 os.utime(f_name, None)
 
         except IOError as err:
             status = False
-            err_msg = "ERROR: File create failure. Reason: %s" % (err.args[1])
+            err_msg = f"ERROR: File create failure. Reason: {err.args[1]}"
 
     return status, err_msg
 
@@ -2540,7 +2536,7 @@ def transpose_dict(data, data_key):
 
     data = list(data)
     data_key = dict(data_key)
-    mod_data = list()
+    mod_data = []
     literal_list = ["bool", "list"]
 
     for list_item in data:
@@ -2620,7 +2616,7 @@ def write_file(fname=None, mode="a", data=None):
     """
 
     if data and fname:
-        with open(fname, mode) as f_hdlr:
+        with open(fname, mode, encoding="UTF-8") as f_hdlr:
             print(data, file=f_hdlr)
 
 

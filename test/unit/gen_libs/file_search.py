@@ -20,8 +20,8 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import gen_libs
-import version
+import gen_libs                     # pylint:disable=E0401,R0402,C0413
+import version                      # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -75,7 +75,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertEqual(gen_libs.file_search(self.f_name, self.no_str), None)
+        self.assertIsNone(gen_libs.file_search(self.f_name, self.no_str))
 
     def test_str_found_first_line(self):
 

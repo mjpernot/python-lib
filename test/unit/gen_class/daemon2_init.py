@@ -20,8 +20,8 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import gen_class
-import version
+import gen_class                    # pylint:disable=E0401,R0402,C0413
+import version                      # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -53,7 +53,7 @@ class UnitTest(unittest.TestCase):
 
         self.pid_file = "Pid_File"
         self.argv_list = ["program", "arg1", "arg2"]
-        self.argv_list2 = list()
+        self.argv_list2 = []
         self.stdout = "/path/file2"
         self.stderr = "/path/file3"
 

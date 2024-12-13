@@ -23,13 +23,10 @@
         Mail2
         TimeFormat
         Logger
-        Yum
 
 """
 
 # Libraries and Global Variables
-from __future__ import print_function
-from __future__ import absolute_import
 
 # Standard
 import sys
@@ -57,28 +54,11 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import pprint
 import distro
-
-
-# Yum for Python 2.7 only
-if sys.version_info < (3, 0):
-    import yum
-
-# Dnf for Python 3
-#   NOTE:  There are some CentOS 7 platforms that provide the Dnf module, but
-#   not looking that deep.
-if sys.version_info[0] >= 3 \
-   and ((distro.id() == 'fedora' and distro.version() >= '40') or
-        (distro.id() == 'rhel' and distro.version() >= '8')):
-    import dnf
+import dnf
 
 # Local
-try:
-    from . import gen_libs
-    from . import version
-
-except (ValueError, ImportError) as err:
-    import gen_libs
-    import version
+import gen_libs                     # pylint:disable=R0402,E0401
+import version                      # pylint:disable=E0401
 
 __version__ = version.__version__
 
@@ -120,7 +100,7 @@ def dict_out(data, **kwargs):
     mail = None
     data = dict(data)
     cfg = {"indent": kwargs.get("indent", 4)} if kwargs.get("indent", False) \
-        else dict()
+        else {}
 
     if kwargs.get("to_addr", False):
         subj = kwargs.get("subj", "NoSubjectLineDetected")
@@ -132,7 +112,8 @@ def dict_out(data, **kwargs):
         mode = kwargs.get("mode", "w")
 
         if kwargs.get("use_pprint", False):
-            outfile = open(kwargs.get("outfile"), mode)
+            outfile = open(                             # pylint:disable=R1732
+                kwargs.get("outfile"), mode, encoding="UTF-8")
             pprint.pprint(data, stream=outfile, **cfg)
 
         else:
@@ -177,7 +158,7 @@ def setup_mail(to_line, subj=None, frm_line=None):
     return Mail(to_line, subj, frm_line)
 
 
-class ArgParser(object):
+class ArgParser():                              # pylint:disable=R0904,R0902
 
     """Class:  ArgParser
 
@@ -327,9 +308,9 @@ class ArgParser(object):
 
         # For arg_parse2 and arg_default methods
         self.argv = list(argv)
-        self.args_array = dict()
-        self.opt_val = list() if opt_val is None else list(opt_val)
-        self.opt_def = dict() if opt_def is None else dict(opt_def)
+        self.args_array = {}
+        self.opt_val = [] if opt_val is None else list(opt_val)
+        self.opt_def = {} if opt_def is None else dict(opt_def)
         self.multi_val = list(kwargs.get("multi_val", []))
         self.opt_val_bin = list(kwargs.get("opt_val_bin", []))
 
@@ -434,8 +415,7 @@ class ArgParser(object):
 
             for _ in set(opt_con_req[item]) - set(self.args_array.keys()):
                 status = False
-                print("Error:  Option {0} requires options {1}.".
-                      format(item, opt_con_req[item]))
+                print(f"Error: {item} requires option {opt_con_req[item]}.")
                 break
 
         return status
@@ -465,8 +445,7 @@ class ArgParser(object):
                 break
 
             if not tmp_flag:
-                print("Error: Option {0} requires one of these options {1}".
-                      format(item, opt_con_or[item]))
+                print(f"Error: {item} require one of these {opt_con_or[item]}")
                 status = tmp_flag
 
         return status
@@ -493,7 +472,7 @@ class ArgParser(object):
             self.args_array[arg] = opt_def[arg]
 
         elif arg not in opt_def:
-            print("Warning: Arg {0} missing default value".format(arg))
+            print(f"Warning: Arg {arg} missing default value")
             status = False
 
         return status
@@ -519,8 +498,7 @@ class ArgParser(object):
         for item in set(dir_perms_chk) & set(self.args_array):
 
             if not os.path.isdir(self.args_array[item]):
-                print("Error: {0} does not exist.".
-                      format(self.args_array[item]))
+                print(f"Error: {self.args_array[item]} does not exist.")
                 status = False
 
             else:
@@ -562,8 +540,7 @@ class ArgParser(object):
 
             else:
                 status = status & tmp_status
-                print("Error: {0} was not created.".
-                      format(self.args_array[item]))
+                print(f"Error: {self.args_array[item]} was not created.")
 
         return status
 
@@ -579,7 +556,7 @@ class ArgParser(object):
 
         """
 
-        return True if arg in self.args_array else False
+        return arg in self.args_array
 
     def arg_file_chk(self, **kwargs):
 
@@ -612,18 +589,18 @@ class ArgParser(object):
 
                 elif option in file_crt:
                     try:
-                        fhldr = open(fname, "w")
+                        fhldr = open(                   # pylint:disable=R1732
+                            fname, "w", encoding="UTF-8")
                         fhldr.close()
 
                     except IOError as err_msg:
-                        print("I/O Error: ({0}): {1}".format(
-                            err_msg.args[0], err_msg.args[1]))
-                        print("Option: '{0}' File: '{1}'".format(option,
-                                                                 fname))
+                        print(
+                            f"I/O Error: {err_msg.args[0]}: {err_msg.args[1]}")
+                        print(f"Option: {option} File: {fname}")
                         status = status & False
 
                 else:
-                    print("Error - File: '{0}' is missing.".format(fname))
+                    print(f"Error - File: {fname} is missing.")
                     status = status & False
 
         return status
@@ -654,8 +631,7 @@ class ArgParser(object):
                     (opt not in self.args_array and
                      xor_noreq[opt] not in self.args_array)):
 
-                print("Options: {0} or {1}, not both.".
-                      format(opt, xor_noreq[opt]))
+                print(f"Options: {opt} or {xor_noreq[opt]}, not both.")
                 status = False
 
         return status
@@ -722,7 +698,7 @@ class ArgParser(object):
         status = True
 
         for item in set(opt_req) - set(self.args_array.keys()):
-            print("Error:  The '{0}' option is required".format(item))
+            print(f"Error:  The {item} option is required")
             status = False
 
         return status
@@ -754,8 +730,7 @@ class ArgParser(object):
                 break
 
             if not tmp_flag:
-                print("Error:  Option: {0} or one of these: {1} is required.".
-                      format(option, opt_or[option]))
+                print(f"Error: {option} or one of: {opt_or[option]} is needed")
                 status = tmp_flag
 
         return status
@@ -784,8 +759,7 @@ class ArgParser(object):
             if not operator.xor((option in self.args_array),
                                 (opt_xor[option] in self.args_array)):
 
-                print("Option {0} or {1}, but not both.".
-                      format(option, opt_xor[option]))
+                print(f"Option {option} or {opt_xor[option]}, but not both.")
                 status = False
 
         return status
@@ -830,8 +804,7 @@ class ArgParser(object):
 
             # Call function from function list.
             if not valid_func[opt](self.args_array[opt]):
-                print("Error:  Invalid format: {0} '{1}'"
-                      .format(opt, self.args_array[opt]))
+                print(f"Error:  Invalid format: {opt} {self.args_array[opt]}")
                 status = False
 
         return status
@@ -856,8 +829,8 @@ class ArgParser(object):
 
             # If passed value is invalid for this option.
             if self.args_array[option] not in opt_valid_val[option]:
-                print("Error:  Incorrect value ({0}) for option: {1}".
-                      format(self.args_array[option], option))
+                print(f"Error: Incorrect value {self.args_array[option]} "
+                      f"for {option}")
                 status = False
 
         return status
@@ -889,14 +862,14 @@ class ArgParser(object):
 
         for opt in opt_wildcard:
             if opt in list(self.args_array.keys()) and \
-               isinstance(self.args_array[opt], list):
+               isinstance(self.args_array[opt], list):  # pylint:disable=C0201
 
                 t_list = [glob.glob(item) for item in self.args_array[opt]]
                 self.args_array[opt] = [
                     item1 for item2 in t_list for item1 in item2]
 
-            elif opt in list(self.args_array.keys()) and isinstance(
-                    self.args_array[opt], str):
+            elif opt in list(self.args_array.keys()) and \
+               isinstance(self.args_array[opt], str):   # pylint:disable=C0201
 
                 self.args_array[opt] = glob.glob(self.args_array[opt])
 
@@ -923,7 +896,7 @@ class ArgParser(object):
         for opt in set(opt_xor_val.keys()) & set(self.args_array.keys()):
 
             for item in set(opt_xor_val[opt]) & set(self.args_array.keys()):
-                print("Option {0} or {1}, but not both.".format(opt, item))
+                print(f"Option {opt} or {item}, but not both.")
                 status = False
                 break
 
@@ -1064,7 +1037,7 @@ class ArgParser(object):
 
         else:
             # Handle multiple values for argument.
-            self.args_array[self.argv[0]] = list()
+            self.args_array[self.argv[0]] = []
             cnt = 0
             tmp_argv = self.argv[1:]
 
@@ -1073,9 +1046,7 @@ class ArgParser(object):
                 if tmp_argv[0][0] == "-":
                     break
 
-                else:
-                    self.args_array[self.argv[0]].append(tmp_argv[0])
-
+                self.args_array[self.argv[0]].append(tmp_argv[0])
                 cnt += 1
                 tmp_argv = tmp_argv[1:]
 
@@ -1154,7 +1125,7 @@ class ArgParser(object):
         return status, errmsg
 
 
-class Daemon(object):
+class Daemon():
 
     """Class:  Daemon
 
@@ -1182,8 +1153,9 @@ class Daemon(object):
 
     DEV_NULL = "/dev/null"
 
-    def __init__(self, pidfile, stdin=DEV_NULL, stdout=DEV_NULL,
-                 stderr=DEV_NULL, argv_list=None):
+    def __init__(                                       # pylint:disable=R0913
+          self, pidfile, stdin=DEV_NULL, stdout=DEV_NULL, stderr=DEV_NULL,
+          argv_list=None):
 
         """Method:  __init__
 
@@ -1223,8 +1195,6 @@ class Daemon(object):
 
         """
 
-        global MASK
-
         # Do first fork
         try:
             pid = os.fork()
@@ -1234,14 +1204,13 @@ class Daemon(object):
                 sys.exit(0)
 
         except OSError as err:
-            sys.stderr.write("Fork #1 failed: %d (%s)\n" %
-                             (err.errno, err.strerror))
+            sys.stderr.write(f"Fork #1 failed: {err.errno} {err.strerror}\n")
             sys.exit(1)
 
         # Decouple from parent environment
         os.chdir("/")
         os.setsid()
-        os.umask(int(MASK))
+        os.umask(0)
 
         # Do second fork
         try:
@@ -1252,22 +1221,15 @@ class Daemon(object):
                 sys.exit(0)
 
         except OSError as err:
-            sys.stderr.write("Fork #2 failed: %d (%s)\n" %
-                             (err.errno, err.strerror))
+            sys.stderr.write(f"Fork #2 failed: {err.errno} {err.strerror}\n")
             sys.exit(1)
 
         # Redirect standard file descriptors
         sys.stdout.flush()
         sys.stderr.flush()
-        sdi = open(self.stdin, "r")
-        sdo = open(self.stdout, "a+")
-
-        # Cannot open unbuffered writes in Python 3
-        if sys.version_info < (3, 0):
-            sde = open(self.stderr, "a+", 0)
-
-        else:
-            sde = open(self.stderr, "a+")
+        sdi = open(self.stdin, "r", encoding="UTF-8")    # pylint:disable=R1732
+        sdo = open(self.stdout, "a+", encoding="UTF-8")  # pylint:disable=R1732
+        sde = open(self.stderr, "a+", encoding="UTF-8")  # pylint:disable=R1732
 
         os.dup2(sdi.fileno(), sys.stdin.fileno())
         os.dup2(sdo.fileno(), sys.stdout.fileno())
@@ -1276,7 +1238,7 @@ class Daemon(object):
         # Write pidfile
         atexit.register(self.delpid)
         pid = str(os.getpid())
-        with open(self.pidfile, "w+") as fhdr:
+        with open(self.pidfile, "w+", encoding="UTF-8") as fhdr:
             fhdr.write(pid + "\n")
 
     def delpid(self):
@@ -1303,7 +1265,7 @@ class Daemon(object):
 
         # Check for a pidfile to see if the daemon already runs.
         try:
-            with open(self.pidfile, "r") as pfile:
+            with open(self.pidfile, "r", encoding="UTF-8") as pfile:
                 pid = int(pfile.read().strip())
 
         except IOError:
@@ -1330,7 +1292,7 @@ class Daemon(object):
 
         # Get the pid from the pidfile
         try:
-            with open(self.pidfile, "r") as pfile:
+            with open(self.pidfile, "r", encoding="UTF-8") as pfile:
                 pid = int(pfile.read().strip())
 
         except IOError:
@@ -1385,7 +1347,7 @@ class Daemon(object):
         """
 
 
-class Daemon2(object):
+class Daemon2():
 
     """Class:  Daemon2
 
@@ -1424,7 +1386,7 @@ class Daemon2(object):
         self.stdout = stdout
         self.stderr = stderr
         self.pid_file = pid_file
-        self.argv_list = list() if argv_list is None else list(argv_list)
+        self.argv_list = [] if argv_list is None else list(argv_list)
 
     def del_pid(self):
 
@@ -1452,8 +1414,6 @@ class Daemon2(object):
 
         """
 
-        global MASK
-
         # Fork 1: Spin off the child that will spawn the deamon
         if os.fork():
             sys.exit()
@@ -1464,7 +1424,7 @@ class Daemon2(object):
         #   Set the umask so we have access to all files created by the daemon
         os.chdir("/")
         os.setsid()
-        os.umask(MASK)
+        os.umask(0)
 
         # Fork 2: Ensures we cannot get a controlling ttd
         #   This is a child that cannot ever have a controlling TTY
@@ -1472,7 +1432,7 @@ class Daemon2(object):
             sys.exit()
 
         # Stdin: Shutdown standard in
-        with open("/dev/null", "r") as dev_null:
+        with open("/dev/null", "r", encoding="UTF-8") as dev_null:
             os.dup2(dev_null.fileno(), sys.stdin.fileno())
 
         # Stderr: Point standard error to a log file
@@ -1481,35 +1441,23 @@ class Daemon2(object):
         # Exceptions raised after this point will be written to the log file
         sys.stderr.flush()
 
-        # Cannot open unbuffered writes in Python 3
-        if sys.version_info < (3, 0):
-            with open(self.stderr, "a+", 0) as stderr:
-                os.dup2(stderr.fileno(), sys.stderr.fileno())
-
-        else:
-            with open(self.stderr, "a+") as stderr:
-                os.dup2(stderr.fileno(), sys.stderr.fileno())
+        with open(self.stderr, "a+", encoding="UTF-8") as stderr:
+            os.dup2(stderr.fileno(), sys.stderr.fileno())
 
         # Stdout: Point standard out to a log file
         # Print statements after this will not work, use sys.stdout instead
         sys.stdout.flush()
 
-        # Cannot open unbuffered writes in Python 3
-        if sys.version_info < (3, 0):
-            with open(self.stdout, "a+", 0) as stdout:
-                os.dup2(stdout.fileno(), sys.stdout.fileno())
-
-        else:
-            with open(self.stdout, "a+") as stdout:
-                os.dup2(stdout.fileno(), sys.stdout.fileno())
+        with open(self.stdout, "a+", encoding="UTF-8") as stdout:
+            os.dup2(stdout.fileno(), sys.stdout.fileno())
 
         # Create pid file and before file creation, make sure to delete the pid
         #   file on exit
         atexit.register(self.del_pid)
         pid = str(os.getpid())
 
-        with open(self.pid_file, "w+") as pid_file:
-            pid_file.write("{0}".format(pid))
+        with open(self.pid_file, "w+", encoding="UTF-8") as pid_file:
+            pid_file.write(f"{pid}")
 
     def get_pid_by_file(self):
 
@@ -1522,12 +1470,12 @@ class Daemon2(object):
         """
 
         try:
-            with open(self.pid_file, "r") as pid_file:
+            with open(self.pid_file, "r", encoding="UTF-8") as pid_file:
                 pid = int(pid_file.read().strip())
             return pid
 
         except IOError:
-            return
+            return None
 
     def start(self):
 
@@ -1542,8 +1490,8 @@ class Daemon2(object):
         print("Starting...")
 
         if self.get_pid_by_file():
-            print("PID file {0} exists. Is the deamon already running?"
-                  .format(self.pid_file))
+            print(
+                f"PID file {self.pid_file} exists. Is deamon already running?")
             sys.exit(1)
 
         self.daemonize()
@@ -1563,8 +1511,9 @@ class Daemon2(object):
         pid = self.get_pid_by_file()
 
         if not pid:
-            print("PID file {0} doesn't exist. Is the daemon not running?"
-                  .format(self.pid_file))
+            print(
+                f"PID file {self.pid_file} does not exist. "
+                f"Is daemon not running?")
             return
 
         # Killing the daemon process
@@ -1621,302 +1570,298 @@ class Daemon2(object):
         """
 
 
-# The package dnf for only Linux 8 platforms and Python 3
-if sys.version_info[0] >= 3 \
-   and ((distro.id() == 'fedora' and distro.version() >= '40') or
-        (distro.id() == 'rhel' and distro.version() >= '8')):
-    class Dnf(object):
-        """Class:  Dnf
+class Dnf():
+    """Class:  Dnf
 
-        Description: Class which is a representation for python3-dnf class.  A
-            dnf object is used as a proxy for using the dnf command.
+    Description: Class which is a representation for python3-dnf class.  A
+        dnf object is used as a proxy for using the dnf command.
 
-        Methods:
-            __init__
-            capture_pkgs
-            capture_repos
-            fetch_install_pkgs
-            fetch_repos
-            fetch_update_pkgs
-            get_all_repos
-            get_distro
-            get_enabled_repos
-            get_hostname
-            get_install_pkgs
-            get_installed
-            get_os
-            get_release
-            get_update_pkgs
-            get_updates
+    Methods:
+        __init__
+        capture_pkgs
+        capture_repos
+        fetch_install_pkgs
+        fetch_repos
+        fetch_update_pkgs
+        get_all_repos
+        get_distro
+        get_enabled_repos
+        get_hostname
+        get_install_pkgs
+        get_installed
+        get_os
+        get_release
+        get_update_pkgs
+        get_updates
+
+    """
+
+    def __init__(self):
+
+        """Method:  __init__
+
+        Description:  Initialization of an instance of the Dnf class.
+
+        Arguments:
 
         """
 
-        def __init__(self):
+        self.base = dnf.Base()
+        self.packages = None
+        self.host_name = socket.gethostname()
+        self.os_name = distro.name()
+        self.release = distro.version()
+        self.distro = (distro.name(), distro.version(), distro.codename())
 
-            """Method:  __init__
+    def capture_pkgs(self):
 
-            Description:  Initialization of an instance of the Dnf class.
+        """Method:  capture_pkgs
 
-            Arguments:
+        Description:  Query for all installed packages on the system.
 
-            """
+        Arguments:
 
-            self.base = dnf.Base()
-            self.packages = None
-            self.host_name = socket.gethostname()
-            self.os_name = distro.name()
-            self.release = distro.version()
-            self.distro = (distro.name(), distro.version(), distro.codename())
+        """
 
-        def capture_pkgs(self):
+        self.base.fill_sack()
+        self.packages = self.base.sack.query()
 
-            """Method:  capture_pkgs
+    def capture_repos(self):
 
-            Description:  Query for all installed packages on the system.
+        """Method:  capture_repos
 
-            Arguments:
+        Description:  Query for all of the repos on the system.
 
-            """
+        Arguments:
 
-            self.base.fill_sack()
-            self.packages = self.base.sack.query()
+        """
 
-        def capture_repos(self):
+        self.base.read_all_repos()
+        self.base.fill_sack()
 
-            """Method:  capture_repos
+    def fetch_install_pkgs(self):
 
-            Description:  Query for all of the repos on the system.
+        """Method:  fetch_install_pkgs
 
-            Arguments:
+        Description:  Return a dictionary of installed packages in a list.
 
-            """
+        Note:  This is a backwards comptable function for programs that use
+            the gen_class.Yum class.
 
-            self.base.read_all_repos()
-            self.base.fill_sack()
+        Arguments:
+            (output) List of installed of packages in JSON format
 
-        def fetch_install_pkgs(self):
+        """
 
-            """Method:  fetch_install_pkgs
+        pkgs = self.get_install_pkgs()
 
-            Description:  Return a dictionary of installed packages in a list.
+        return [{"package": pkg.name, "ver": pkg.version, "arch": pkg.arch}
+                for pkg in pkgs]
 
-            Note:  This is a backwards comptable function for programs that use
-                the gen_class.Yum class.
+    def fetch_repos(self):
 
-            Arguments:
-                (output) List of installed of packages in JSON format
+        """Method:  fetch_repos
 
-            """
+        Description:  Return a list of repos.
 
-            pkgs = self.get_install_pkgs()
+        Note:  This is a backwards comptable function for programs that use
+            the gen_class.Yum class.
 
-            return [{"package": pkg.name, "ver": pkg.version, "arch": pkg.arch}
-                    for pkg in pkgs]
+        Arguments:
+            (output) List of repositories
 
-        def fetch_repos(self):
+        """
 
-            """Method:  fetch_repos
+        return self.get_all_repos()
 
-            Description:  Return a list of repos.
+    def fetch_update_pkgs(self):
 
-            Note:  This is a backwards comptable function for programs that use
-                the gen_class.Yum class.
+        """Method:  fetch_update_pkgs
 
-            Arguments:
-                (output) List of repositories
+        Description:  Return a list of dictionaries of packages that have
+            updates.
 
-            """
+        Note:  This is a backwards comptable function for programs that use
+            the gen_class.Yum class.
 
-            return self.get_all_repos()
+        Arguments:
+            (output) List of packages for installation in JSON format
 
-        def fetch_update_pkgs(self):
+        """
 
-            """Method:  fetch_update_pkgs
+        query = self.get_update_pkgs()
 
-            Description:  Return a list of dictionaries of packages that have
-                updates.
+        return [
+            {"package": pkg.name, "ver": pkg.version, "arch": pkg.arch,
+             "repo": pkg.reponame} for pkg in query.upgrades().latest(1)]
 
-            Note:  This is a backwards comptable function for programs that use
-                the gen_class.Yum class.
+    def get_all_repos(self, url=False):
 
-            Arguments:
-                (output) List of packages for installation in JSON format
+        """Method:  get_all_repos
 
-            """
+        Description:  Return a list of all the repos on the system.
 
-            query = self.get_update_pkgs()
+        Note: If including the url, then each item in the list will be a
+            set.
+            Postition:
+                0: Repository Name
+                1: Reposirory Base URL
 
-            return [
-                {"package": pkg.name, "ver": pkg.version, "arch": pkg.arch,
-                 "repo": pkg.reponame} for pkg in query.upgrades().latest(1)]
+        Arguments:
+            (input) url -> True|False - Include the repos base URL
+            (output) data -> List of repositories on the system
 
-        def get_all_repos(self, url=False):
+        """
 
-            """Method:  get_all_repos
+        self.capture_repos()
 
-            Description:  Return a list of all the repos on the system.
+        if url:
+            data = [(rep.name, str(rep.baseurl))
+                    for rep in self.base.repos.all()]
 
-            Note: If including the url, then each item in the list will be a
-                set.
-                Postition:
-                    0: Repository Name
-                    1: Reposirory Base URL
+        else:
+            data = [rep.name for rep in self.base.repos.all()]
 
-            Arguments:
-                (input) url -> True|False - Include the repos base URL
-                (output) data -> List of repositories on the system
+        return data
 
-            """
+    def get_distro(self):
 
-            self.capture_repos()
+        """Method:  get_distro
 
-            if url:
-                data = [(rep.name, str(rep.baseurl))
-                        for rep in self.base.repos.all()]
+        Description:  Reuturn linux_distribution settings.
 
-            else:
-                data = [rep.name for rep in self.base.repos.all()]
+        Arguments:
+            (output) self.distro -> Linux distribution as a tuple value
 
-            return data
+        """
 
-        def get_distro(self):
+        return self.distro
 
-            """Method:  get_distro
+    def get_enabled_repos(self, url=False):
 
-            Description:  Reuturn linux_distribution settings.
+        """Method:  get_enabled_repos
 
-            Arguments:
-                (output) self.distro -> Linux distribution as a tuple value
+        Description:  Return a list of enabled repos on the system.
 
-            """
+        Note: If including the url, then each item in the list will be a
+            set.
+            Postition:
+                0: Repository Name
+                1: Reposirory Base URL
 
-            return self.distro
+        Arguments:
+            (input) url -> True|False - Include the repos base URL
+            (output) data -> List of enabled repositories on the system
 
-        def get_enabled_repos(self, url=False):
+        """
 
-            """Method:  get_enabled_repos
+        self.capture_repos()
 
-            Description:  Return a list of enabled repos on the system.
+        if url:
+            data = [(rep.name, str(rep.baseurl))
+                    for rep in self.base.repos.iter_enabled()]
 
-            Note: If including the url, then each item in the list will be a
-                set.
-                Postition:
-                    0: Repository Name
-                    1: Reposirory Base URL
+        else:
+            data = [rep.name for rep in self.base.repos.iter_enabled()]
 
-            Arguments:
-                (input) url -> True|False - Include the repos base URL
-                (output) data -> List of enabled repositories on the system
+        return data
 
-            """
+    def get_hostname(self):
 
-            self.capture_repos()
+        """Method:  get_hostname
 
-            if url:
-                data = [(rep.name, str(rep.baseurl))
-                        for rep in self.base.repos.iter_enabled()]
+        Description:  Return the server's hostname.
 
-            else:
-                data = [rep.name for rep in self.base.repos.iter_enabled()]
+        Arguments:
+            (output) self.host_name -> Server host name
 
-            return data
+        """
 
-        def get_hostname(self):
+        return self.host_name
 
-            """Method:  get_hostname
+    def get_install_pkgs(self):
 
-            Description:  Return the server's hostname.
+        """Method:  get_install_pkgs
 
-            Arguments:
-                (output) self.host_name -> Server host name
+        Description:  Return installed packages.
 
-            """
+        Arguments:
+            (output) Class of installed packages
 
-            return self.host_name
+        """
 
-        def get_install_pkgs(self):
+        self.capture_pkgs()
 
-            """Method:  get_install_pkgs
+        return self.packages.installed()
 
-            Description:  Return installed packages.
+    def get_installed(self):
 
-            Arguments:
-                (output) Class of installed packages
+        """Method:  get_installed
 
-            """
+        Description:  Return list of installed packages.
 
-            self.capture_pkgs()
+        Arguments:
 
-            return self.packages.installed()
+        """
 
-        def get_installed(self):
+        ins_pkg = self.get_install_pkgs()
 
-            """Method:  get_installed
+        return [str(pkg) for pkg in ins_pkg]
 
-            Description:  Return list of installed packages.
+    def get_os(self):
 
-            Arguments:
+        """Method:  get_os
 
-            """
+        Description:  Return the operating system platform.
 
-            ins_pkg = self.get_install_pkgs()
+        Arguments:
+            (output) self.os_name -> Server's Operating system name
 
-            return [str(pkg) for pkg in ins_pkg]
+        """
 
-        def get_os(self):
+        return self.os_name
 
-            """Method:  get_os
+    def get_release(self):
 
-            Description:  Return the operating system platform.
+        """Method:  get_release
 
-            Arguments:
-                (output) self.os_name -> Server's Operating system name
+        Description:  Return the OS kernel release version.
 
-            """
+        Arguments:
+            (output) self.release -> Kernel release version
 
-            return self.os_name
+        """
 
-        def get_release(self):
+        return self.release
 
-            """Method:  get_release
+    def get_update_pkgs(self):
 
-            Description:  Return the OS kernel release version.
+        """Method:  get_update_pkgs
 
-            Arguments:
-                (output) self.release -> Kernel release version
+        Description:  Return update packages.
 
-            """
+        Arguments:
+            (output) Class of update packages
 
-            return self.release
+        """
 
-        def get_update_pkgs(self):
+        self.capture_repos()
 
-            """Method:  get_update_pkgs
+        return self.base.sack.query()
 
-            Description:  Return update packages.
+    def get_updates(self):
 
-            Arguments:
-                (output) Class of update packages
+        """Method:  get_updates
 
-            """
+        Description:  Return list of packages that have updates available.
 
-            self.capture_repos()
+        Arguments:
 
-            return self.base.sack.query()
+        """
 
-        def get_updates(self):
+        query = self.get_update_pkgs()
 
-            """Method:  get_updates
-
-            Description:  Return list of packages that have updates available.
-
-            Arguments:
-
-            """
-
-            query = self.get_update_pkgs()
-
-            return [str(pkg) for pkg in query.upgrades().latest(1)]
+        return [str(pkg) for pkg in query.upgrades().latest(1)]
 
 
 class KeyCaseInsensitiveDict(dict):
@@ -1974,7 +1919,7 @@ class KeyCaseInsensitiveDict(dict):
 
         """
 
-        return key.lower() if isinstance(key, gen_libs.str_type()) else key
+        return key.lower() if isinstance(key, str) else key
 
     def __init__(self, *args, **kwargs):
 
@@ -1987,7 +1932,8 @@ class KeyCaseInsensitiveDict(dict):
 
         """
 
-        super(KeyCaseInsensitiveDict, self).__init__(*args, **kwargs)
+        super(                                      # pylint:disable=R1725
+            KeyCaseInsensitiveDict, self).__init__(*args, **kwargs)
         self._convert_keys()
 
     def __getitem__(self, key):
@@ -2000,8 +1946,9 @@ class KeyCaseInsensitiveDict(dict):
 
         """
 
-        return super(KeyCaseInsensitiveDict, self).__getitem__(
-            self.__class__._keylower(key))
+        return super(                               # pylint:disable=R1725
+            KeyCaseInsensitiveDict, self).__getitem__(
+                self.__class__._keylower(key))
 
     def __setitem__(self, key, value):
 
@@ -2013,7 +1960,7 @@ class KeyCaseInsensitiveDict(dict):
 
         """
 
-        super(
+        super(                                      # pylint:disable=R1725
             KeyCaseInsensitiveDict, self).__setitem__(
                 self.__class__._keylower(key), value)
 
@@ -2027,7 +1974,7 @@ class KeyCaseInsensitiveDict(dict):
 
         """
 
-        return super(
+        return super(                               # pylint:disable=R1725
             KeyCaseInsensitiveDict, self).__delitem__(
                 self.__class__._keylower(key))
 
@@ -2041,7 +1988,7 @@ class KeyCaseInsensitiveDict(dict):
 
         """
 
-        return super(
+        return super(                               # pylint:disable=R1725
             KeyCaseInsensitiveDict, self).__contains__(
                 self.__class__._keylower(key))
 
@@ -2055,9 +2002,10 @@ class KeyCaseInsensitiveDict(dict):
 
         """
 
-        return super(
+        return super(                               # pylint:disable=R1725
             KeyCaseInsensitiveDict, self).pop(
-                self.__class__._keylower(key), *args, **kwargs)
+                self.__class__._keylower(           # pylint:disable=W0212
+                    key), *args, **kwargs)
 
     def get(self, key, *args, **kwargs):
 
@@ -2069,9 +2017,10 @@ class KeyCaseInsensitiveDict(dict):
 
         """
 
-        return super(
+        return super(                               # pylint:disable=R1725
             KeyCaseInsensitiveDict, self).get(
-                self.__class__._keylower(key), *args, **kwargs)
+                self.__class__._keylower(           # pylint:disable=W0212
+                    key), *args, **kwargs)
 
     def setdefault(self, key, *args, **kwargs):
 
@@ -2084,9 +2033,10 @@ class KeyCaseInsensitiveDict(dict):
 
         """
 
-        return super(
+        return super(                               # pylint:disable=R1725
             KeyCaseInsensitiveDict, self).setdefault(
-                self.__class__._keylower(key), *args, **kwargs)
+                self.__class__._keylower(           # pylint:disable=W0212
+                    key), *args, **kwargs)
 
     def update(self, updatedict=None, **keyword):
 
@@ -2099,10 +2049,12 @@ class KeyCaseInsensitiveDict(dict):
         """
 
         if updatedict is None:
-            updatedict = dict()
+            updatedict = {}
 
-        super(KeyCaseInsensitiveDict, self).update(self.__class__(updatedict))
-        super(KeyCaseInsensitiveDict, self).update(self.__class__(**keyword))
+        super(                                      # pylint:disable=R1725
+            KeyCaseInsensitiveDict, self).update(self.__class__(updatedict))
+        super(                                      # pylint:disable=R1725
+            KeyCaseInsensitiveDict, self).update(self.__class__(**keyword))
 
     def _convert_keys(self):
 
@@ -2115,11 +2067,12 @@ class KeyCaseInsensitiveDict(dict):
         """
 
         for key in list(self.keys()):
-            val = super(KeyCaseInsensitiveDict, self).pop(key)
-            self.__setitem__(key, val)
+            val = super(                            # pylint:disable=R1725
+                KeyCaseInsensitiveDict, self).pop(key)
+            self.__setitem__(key, val)              # pylint:disable=C2801
 
 
-class LogFile(object):
+class LogFile():                                    # pylint:disable=R0902
 
     """Class:  LogFile
 
@@ -2274,8 +2227,7 @@ class LogFile(object):
 
         """
 
-        if (sys.version_info < (3, 0) and isinstance(data, file)) \
-           or (sys.version_info > (2, 8) and isinstance(data, io.IOBase)):
+        if isinstance(data, io.IOBase):
             self.ignore.extend(
                 [item.lower().rstrip().rstrip("\n") for item in data])
 
@@ -2299,8 +2251,7 @@ class LogFile(object):
 
         """
 
-        if (sys.version_info < (3, 0) and isinstance(data, file)) \
-           or (sys.version_info > (2, 8) and isinstance(data, io.IOBase)):
+        if isinstance(data, io.IOBase):
             self.keyword.extend([x.lower().rstrip().rstrip("\n")
                                  for x in data])
 
@@ -2325,13 +2276,7 @@ class LogFile(object):
 
         """
 
-        if sys.version_info < (3, 0) and isinstance(
-                data, (file, gzip.GzipFile)):
-            self.loglist.extend([x.rstrip().rstrip("\n") for x in data])
-
-        elif sys.version_info >= (3, 0) and isinstance(
-                data, (io.IOBase, gzip.GzipFile)):
-
+        if isinstance(data, (io.IOBase, gzip.GzipFile)):
             if isinstance(data, gzip.GzipFile):
                 self.loglist.extend(
                     [x.decode().rstrip().rstrip("\n") for x in data])
@@ -2365,8 +2310,7 @@ class LogFile(object):
 
         """
 
-        if (sys.version_info < (3, 0) and isinstance(data, file)) \
-           or (sys.version_info > (2, 8) and isinstance(data, io.IOBase)):
+        if isinstance(data, io.IOBase):
             self.marker = data.readline().rstrip().rstrip("\n")
 
         elif isinstance(data, str):
@@ -2378,16 +2322,19 @@ class LogFile(object):
 
         Description:  Load regext entries from object.
 
-        Note:  If passing in r"data_string" (raw strings) then any embedded
-            "\n" (newlines) will not be split upon in the string operation.
+        Warning: Passing in a string with "(backslash)d" will return an invalid
+            escape sequence, using a raw string.
+
+        Note:  If passing in raw strings then any embedded "\n" (newlines) will
+            not be split upon in the string operation, use a "|" (pipe)
+            instead.
 
         Arguments:
             (input) data -> Marker entry as a file handler, list, or string
 
         """
 
-        if (sys.version_info < (3, 0) and isinstance(data, file)) \
-           or (sys.version_info > (2, 8) and isinstance(data, io.IOBase)):
+        if isinstance(data, io.IOBase):
             self.regex = "|".join(str(x.strip().strip("\n")) for x in data)
 
         elif isinstance(data, list):
@@ -2428,7 +2375,7 @@ class LogFile(object):
             self.predicate = any
 
 
-class ProgressBar(object):
+class ProgressBar():
 
     """Class:  ProgressBar
 
@@ -2488,8 +2435,7 @@ class ProgressBar(object):
         if not self.msg:
             self.msg = ""
 
-        progress_msg = "\r{0} {1} {2}%".format(self.msg, progress_bar,
-                                               progress)
+        progress_msg = f"\r{self.msg} {progress_bar} {progress}%"
 
         # Overwrite the existing progress bar with the updated progress bar.
         sys.stdout.write(progress_msg)
@@ -2522,10 +2468,10 @@ class SingleInstanceException(Exception):
 
     """
 
-    pass
+    pass                                            # pylint:disable=W0107
 
 
-class ProgramLock(object):
+class ProgramLock():                                # pylint:disable=R0903
 
     """Class:  ProgramLock
 
@@ -2539,7 +2485,7 @@ class ProgramLock(object):
 
     """
 
-    def __init__(self, argv, flavor_id=""):
+    def __init__(self, argv, flavor_id=""):             # pylint:disable=W0613
 
         """Method:  __init__
 
@@ -2556,21 +2502,22 @@ class ProgramLock(object):
 
         # Creates filename based on the full path to the program file.
         basename = os.path.splitext(os.path.abspath(argv[0]))[0].replace(
-            "/", "-").replace(":", "-").replace("\\", "-") + "-%s" \
-            % flavor_id + ".lock"
+            "/", "-").replace(":", "-").replace("\\", "-") + \
+            f"-{flavor_id}" + ".lock"
 
         self.lock_file = os.path.normpath(tempfile.gettempdir()) + "/" \
             + basename
 
-        self.f_ptr = open(self.lock_file, "w")
+        self.f_ptr = open(                          # pylint:disable=R1732
+            self.lock_file, "w", encoding="UTF-8")
         self.f_ptr.flush()
 
         # Creates a lock on the file, will fail if one is already present.
         try:
             fcntl.lockf(self.f_ptr, fcntl.LOCK_EX | fcntl.LOCK_NB)
 
-        except IOError:
-            raise SingleInstanceException()
+        except IOError as err:
+            raise SingleInstanceException() from err
 
         self.lock_created = True
 
@@ -2594,7 +2541,7 @@ class ProgramLock(object):
             os.unlink(self.lock_file)
 
 
-class System(object):
+class System():                                     # pylint:disable=R0903
 
     """Class:  System
 
@@ -2643,7 +2590,7 @@ class System(object):
             self.host_name = socket.gethostname()
 
 
-class Mail2(object):
+class Mail2():
 
     """Class:  Mail2
 
@@ -2677,8 +2624,9 @@ class Mail2(object):
             "plain": "plain", "text": "plain", "sh": "x-sh", "x-sh": "x-sh",
             "tar": "x-tar", "x-tar": "x-tar", "pdf": "pdf", "json": "json",
             "gz": "gzip", "gzip": "gzip"}
-        self.subj = " ".join(subject) if type(subject) is list else subject
-        self.toaddrs = ",".join(toaddrs) if type(toaddrs) is list else toaddrs
+        self.subj = " ".join(subject) if isinstance(subject, list) else subject
+        self.toaddrs = ",".join(
+            toaddrs) if isinstance(toaddrs, list) else toaddrs
         self.fromaddr = fromaddr if fromaddr else \
             getpass.getuser() + "@" + socket.gethostname()
 
@@ -2764,8 +2712,9 @@ class Mail(System):
 
     """
 
-    def __init__(self, toaddr, subj=None, frm=None, msg_type=None,
-                 host_name=None, host=None):
+    def __init__(                                   # pylint:disable=R0913
+          self, toaddr, subj=None, frm=None, msg_type=None, host_name=None,
+          host=None):
 
         """Method:  __init__
 
@@ -2781,7 +2730,7 @@ class Mail(System):
 
         """
 
-        super(Mail, self).__init__(host, host_name)
+        super(Mail, self).__init__(host, host_name)  # pylint:disable=R1725
 
         if isinstance(subj, list):
             subj = list(subj)
@@ -2861,7 +2810,7 @@ class Mail(System):
         if not self.subj:
             self.subj = self.msg[:30]
 
-        return "Subject: %s\n\n%s" % (self.subj, self.msg)
+        return f"Subject: {self.subj}\n\n{self.msg}"
 
     def create_subject(self, subj=None, delimiter=" "):
 
@@ -2925,8 +2874,9 @@ class Mail(System):
         if isinstance(self.toaddr, list):
             self.toaddr = " ".join(str(item) for item in list(self.toaddr))
 
-        proc1 = subprocess.Popen(['echo', self.msg], stdout=subprocess.PIPE)
-        proc2 = subprocess.Popen(
+        proc1 = subprocess.Popen(                   # pylint:disable=R1732
+            ['echo', self.msg], stdout=subprocess.PIPE)
+        proc2 = subprocess.Popen(                   # pylint:disable=R1732
             ['mailx', '-s', self.subj, self.toaddr], stdin=proc1.stdout)
         proc2.wait()
 
@@ -2940,11 +2890,10 @@ class Mail(System):
 
         """
 
-        return "To: %s\nFrom: %s\n%s" % (
-            self.toaddr, self.frm, self.create_body())
+        return f"To: {self.toaddr}\nFrom: {self.frm}\n{self.create_body()}"
 
 
-class TimeFormat(object):
+class TimeFormat():
 
     """Class:  TimeFormat
 
@@ -3088,7 +3037,7 @@ class TimeFormat(object):
         return self.thacks[tformat] if tformat in self.thacks else None
 
 
-class Logger(object):
+class Logger():
 
     """Class:  Logger
 
@@ -3107,8 +3056,9 @@ class Logger(object):
 
     """
 
-    def __init__(self, name, log_file, level="INFO", msg_fmt=None,
-                 date_fmt=None, **kwargs):
+    def __init__(                                   # pylint:disable=R0913
+          self, name, log_file, level="INFO", msg_fmt=None, date_fmt=None,
+          **kwargs):
 
         """Method:  __init__
 
@@ -3125,8 +3075,8 @@ class Logger(object):
 
         """
 
-        self.handler = logging.FileHandler(log_file,
-                                           mode=kwargs.get("mode", "a"))
+        self.handler = logging.FileHandler(
+            log_file, mode=kwargs.get("mode", "a"))
 
         if not msg_fmt:
             msg_fmt = "%(asctime)s %(levelname)s %(message)s"
@@ -3231,147 +3181,3 @@ class Logger(object):
         for handle in self.log.handlers:
             handle.close()
             self.log.removeHandler(handle)
-
-
-# The yum package only works with Python 2.7
-if sys.version_info < (3, 0):
-    class Yum(yum.YumBase):
-
-        """Class:  Yum
-
-        Description:  Class which is a representation for YumBase system class.
-            A yum object is used as a proxy for using the yum command.
-
-        Methods:
-            __init__
-            get_hostname
-            get_os
-            get_release
-            get_distro
-            fetch_repos
-            fetch_install_pkgs
-            fetch_update_pkgs
-
-        """
-
-        def __init__(self, host_name=None):
-
-            """Method:  __init__
-
-            Description:  Initialization of an instance of the Yum class.
-
-            Arguments:
-                (input) host_name -> Host name of server
-
-            """
-
-            yum.YumBase.__init__(self)
-
-            if host_name:
-                self.host_name = host_name
-
-            else:
-                self.host_name = socket.gethostname()
-
-            self.os_name = distro.name()
-            self.release = distro.version()
-            self.distro = (distro.name(), distro.version(), distro.codename())
-
-        def get_distro(self):
-
-            """Method:  get_distro
-
-            Description:  Reuturn class' linux_distribution.
-
-            Arguments:
-                (output) self.distro -> Linux distribution tuple value
-
-            """
-
-            return self.distro
-
-        def get_hostname(self):
-
-            """Method:  get_hostname
-
-            Description:  Return the class' hostname.
-
-            Arguments:
-                (output) self.host_name -> Server's host name
-
-            """
-
-            return self.host_name
-
-        def get_os(self):
-
-            """Method:  get_os
-
-            Description:  Return the class' OS platform.
-
-            Arguments:
-                (output) self.os_name -> Server's Operating system name
-
-            """
-
-            return self.os_name
-
-        def get_release(self):
-
-            """Method:  get_release
-
-            Description:  Return the class' OS release version.
-
-            Arguments:
-                (output) self.release -> Kernel release version
-
-            """
-
-            return self.release
-
-        def fetch_repos(self):
-
-            """Method:  fetch_repos
-
-            Description:  Return a list of repos.
-
-            Arguments:
-                (output) List of repositories
-
-            """
-
-            self.doRepoSetup()
-
-            return [repo.name for repo in self.repos.listEnabled()]
-
-        def fetch_install_pkgs(self):
-
-            """Method:  fetch_install_pkgs
-
-            Description:  Return a dictionary of installed packages in a list.
-
-            Arguments:
-                (output) List of installed of packages in JSON format
-
-            """
-
-            return [{"package": pkg.name, "ver": pkg.version, "arch": pkg.arch}
-                    for pkg in self.rpmdb]
-
-        def fetch_update_pkgs(self):
-
-            """Method:  fetch_update_pkgs
-
-            Description:  Return a dictionary of packages to be updated in a
-                list.
-
-            Arguments:
-                (output) List of packages for installation in JSON format
-
-            """
-
-            return [{"package": pkg.name, "ver": pkg.version, "arch": pkg.arch,
-                     "repo": str(getattr(pkg, "repo"))}
-                    for pkg in self.doPackageLists(pkgnarrow="updates",
-                                                   patterns="",
-                                                   ignore_case=True)]

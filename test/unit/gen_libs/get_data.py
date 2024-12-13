@@ -20,8 +20,8 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import gen_libs
-import version
+import gen_libs                     # pylint:disable=E0401,R0402,C0413
+import version                      # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -38,12 +38,11 @@ def compare_list_check(f_name):
 
     """
 
-    with open(f_name, "r") as f_hdlr:
+    with open(f_name, "r", encoding="UTF-8") as f_hdlr:
         base_list = [x.strip() for x in f_hdlr]
 
-    f_hdlr = open(f_name, "r")
-    test_list = gen_libs.get_data(f_hdlr)
-    f_hdlr.close()
+    with open(f_name, "r", encoding="UTF-8") as f_hdlr:
+        test_list = gen_libs.get_data(f_hdlr)
 
     return base_list == test_list
 

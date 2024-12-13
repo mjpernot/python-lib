@@ -20,8 +20,8 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import gen_class
-import version
+import gen_class                    # pylint:disable=E0401,R0402,C0413
+import version                      # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -69,7 +69,7 @@ class UnitTest(unittest.TestCase):
         email = gen_class.Mail2(self.subj, self.toaddr, fromaddr=self.frm)
         email.add_attachment(self.fname, None, self.data)
 
-        self.assertFalse(self.fname in email.msg.as_string())
+        self.assertNotIn(self.fname, email.msg.as_string())
 
     def test_json_ftype(self):
 
@@ -84,7 +84,7 @@ class UnitTest(unittest.TestCase):
         email = gen_class.Mail2(self.subj, self.toaddr, fromaddr=self.frm)
         email.add_attachment(self.fname, self.ftype, self.data)
 
-        self.assertTrue(self.fname in email.msg.as_string())
+        self.assertIn(self.fname, email.msg.as_string())
 
 
 if __name__ == "__main__":

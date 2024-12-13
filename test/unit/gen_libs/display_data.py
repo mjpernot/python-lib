@@ -21,8 +21,8 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import gen_libs
-import version
+import gen_libs                     # pylint:disable=E0401,R0402,C0413
+import version                      # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -43,7 +43,7 @@ def display_data_check(b_name, f_name, data, level=0):
 
     """
 
-    with open(f_name, "w") as f_hdlr:
+    with open(f_name, "w", encoding="UTF-8") as f_hdlr:
         gen_libs.display_data(data, level, f_hdlr)
 
     return filecmp.cmp(b_name, f_name)

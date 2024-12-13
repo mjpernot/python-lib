@@ -21,8 +21,8 @@ import mock
 
 # Local
 sys.path.append(os.getcwd())
-import gen_class
-import version
+import gen_class                    # pylint:disable=E0401,R0402,C0413
+import version                      # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -54,7 +54,8 @@ class UnitTest(unittest.TestCase):
 
         self.test_path = os.path.join(os.getcwd(), "test/unit/gen_class")
         self.test_file = os.path.join(self.test_path, "test_file.txt")
-        self.f_ptr = open(self.test_file, "w")
+        self.f_ptr = open(                          # pylint:disable=R1732
+            self.test_file, "w", encoding="UTF-8")
         self.tmp_path = os.path.join("/", "tmp")
         self.argv = ["/opt/local/python/ProgramLock_init.py"]
         self.flavor_id = "TEST"
@@ -66,8 +67,9 @@ class UnitTest(unittest.TestCase):
     @mock.patch("gen_class.fcntl.lockf")
     @mock.patch("gen_class.open")
     @mock.patch("gen_class.os.path.abspath")
-    def test_unlock(self, mock_path, mock_open, mock_lock, mock_tmp, mock_file,
-                    mock_link):
+    def test_unlock(                                    # pylint:disable=R0913
+           self, mock_path, mock_open, mock_lock, mock_tmp, mock_file,
+           mock_link):
 
         """Function:  test_unlock
 
@@ -94,8 +96,8 @@ class UnitTest(unittest.TestCase):
     @mock.patch("gen_class.fcntl.lockf")
     @mock.patch("gen_class.open")
     @mock.patch("gen_class.os.path.abspath")
-    def test_no_file(self, mock_path, mock_open, mock_lock, mock_tmp,
-                     mock_file):
+    def test_no_file(                                   # pylint:disable=R0913
+          self, mock_path, mock_open, mock_lock, mock_tmp, mock_file):
 
         """Function:  test_no_file
 

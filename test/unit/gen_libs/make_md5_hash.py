@@ -21,13 +21,13 @@ import mock
 
 # Local
 sys.path.append(os.getcwd())
-import gen_libs
-import version
+import gen_libs                     # pylint:disable=E0401,R0402,C0413
+import version                      # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
 
-class SubProcess3(object):
+class SubProcess3():                                    # pylint:disable=R0903
 
     """Class:  SubProcess3
 
@@ -49,8 +49,6 @@ class SubProcess3(object):
 
         """
 
-        pass
-
     def communicate(self):
 
         """Method:  communicate
@@ -64,7 +62,7 @@ class SubProcess3(object):
         return b"Hash_Results", True
 
 
-class SubProcess(object):
+class SubProcess():                                     # pylint:disable=R0903
 
     """Class:  SubProcess
 
@@ -85,8 +83,6 @@ class SubProcess(object):
         Arguments:
 
         """
-
-        pass
 
     def communicate(self):
 
@@ -142,12 +138,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        if sys.version_info >= (3, 0):
-            mock_popen.return_value = SubProcess3()
-
-        else:
-            mock_popen.return_value = SubProcess()
-
+        mock_popen.return_value = SubProcess3()
         mock_pipe.return_value = "Pipe_to_process"
         mock_write.return_value = True
 
@@ -167,12 +158,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        if sys.version_info >= (3, 0):
-            mock_popen.return_value = SubProcess3()
-
-        else:
-            mock_popen.return_value = SubProcess()
-
+        mock_popen.return_value = SubProcess3()
         mock_pipe.return_value = "Pipe_to_process"
         mock_write.return_value = True
 

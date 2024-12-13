@@ -20,14 +20,12 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import gen_libs
-import version
+import gen_libs                     # pylint:disable=E0401,R0402,C0413
+import version                      # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
 # Global
-PERM1 = "444"
-PERM2 = "333"
 
 
 class UnitTest(unittest.TestCase):
@@ -147,11 +145,9 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        global PERM1
-
-        err_msg_chk = "Error: Directory %s is not writeable." % (self.d_name)
+        err_msg_chk = f"Error: Directory {self.d_name} is not writeable."
         os.makedirs(self.d_name)
-        os.chmod(self.d_name, int(PERM1, 8))
+        os.chmod(self.d_name, int("444", 8))
         status, err_msg = gen_libs.chk_crt_dir(self.d_name, write=True,
                                                no_print=True)
 
@@ -186,11 +182,9 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        global PERM2
-
-        err_msg_chk = "Error: Directory %s is not readable." % (self.d_name)
+        err_msg_chk = f"Error: Directory {self.d_name} is not readable."
         os.makedirs(self.d_name)
-        os.chmod(self.d_name, int(PERM2, 8))
+        os.chmod(self.d_name, int("333", 8))
         status, err_msg = gen_libs.chk_crt_dir(self.d_name, read=True,
                                                no_print=True)
 
@@ -224,14 +218,14 @@ class UnitTest(unittest.TestCase):
         """
 
         err_msg_chk = self.err_mask % (self.d_name)
-        f_hdlr = open(self.f_name, "w")
-        _, _ = gen_libs.chk_crt_dir(self.d_name, f_hdlr=f_hdlr, no_print=True)
-        f_hdlr.close()
+        with open(self.f_name, "w", encoding="UTF-8") as f_hdlr:
+            _, _ = gen_libs.chk_crt_dir(
+                self.d_name, f_hdlr=f_hdlr, no_print=True)
 
-        with open(self.f_name) as f_hdlr:
+        with open(self.f_name, "r", encoding="UTF-8") as f_hdlr:
             contents = f_hdlr.read()
 
-        self.assertFalse(err_msg_chk in contents)
+        self.assertNotIn(err_msg_chk, contents)
 
     def test_print_file(self):
 
@@ -244,10 +238,9 @@ class UnitTest(unittest.TestCase):
         """
 
         err_msg_chk = self.err_mask % (self.d_name)
-        f_hdlr = open(self.f_name, "w")
-        status, err_msg = gen_libs.chk_crt_dir(self.d_name, f_hdlr=f_hdlr,
-                                               no_print=True)
-        f_hdlr.close()
+        with open(self.f_name, "w", encoding="UTF-8") as f_hdlr:
+            status, err_msg = gen_libs.chk_crt_dir(
+                self.d_name, f_hdlr=f_hdlr, no_print=True)
 
         self.assertFalse(status)
         self.assertEqual(err_msg, err_msg_chk)

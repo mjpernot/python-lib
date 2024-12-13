@@ -4,6 +4,58 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [4.0.0] - 2024-12-03
+Breaking Changes
+
+- Removed support for Python 2.7.
+
+### Fixed
+- gen_class.Daemon2.get_pid_by_file:  Returned None if an exception is raised.
+
+### Added
+- gen_libs.binary_string: Returns lamdba as a function to check if data is binary.
+
+### Changed
+- gen_class.ProgramLock.\_\_init\_\_:  Refactored raising the exception.
+- gen_class.Daemon2.daemonize:  Removed MASK variable replaced with hard-coded value.
+- gen_class.Daemon.daemonize:  Removed MASK variable replaced with hard-coded value.
+- gen_class.ArgParser.parse_multi:  Refactored "if" statement within the "while" loop.
+- gen_class.Mail2.\_\_init\_\_:  Replaced type calls with isinstance calls.
+- gen_class.ArgParser.arg_exist:  Refactored method.
+- gen_class.Dnf: Removed check for Python version for the class.
+- gen_class.Daemonize: Remove Python 2.7 code.
+- gen_class.Daemonize2: Remove Python 2.7 code.
+- gen_class.LogFile: Remove Python 2.7 code and check for Python 2.7 version.
+- gen_class.KeyCaseInsensitiveDict.\_keylower: Replaced gen_libs.str_type with str.
+- gen_class: Added "encoding" argument to open() commands.
+- gen_class: Converted strings to f-strings.
+- gen_libs.make_md5_hash: Added maxsplit argument to split call.
+- gen_libs.make_dir: Refactored "if" statement.
+- gen_libs.key_cleaner:  Replaced type call with isinstance call.
+- gen_libs.is_empty_file: Refactored the function.
+- gen_libs.file_search_cnt: Added "encoding" argument to open() command and set the "mode" to read to open() command.
+- gen_libs: Added "encoding" argument to open() commands.
+- gen_libs: Converted strings to f-strings.
+- gen_libs.disk_usage: Changed from \_ntuple_diskusage to NTupleDiskUsage.
+- Renamed Tuple from \_ntuple_diskusage to ntuple_diskusage.
+- gen_libs: date_range, print_level, key_cleaner, prt_lvl: Cleaned up code.
+- gen_libs.merge_two_dicts: Replaced type() call with isinstance() call.
+- gen_libs.is_file_text: Moved lamdba statement to a binary_string function.
+- gen_libs.make_md5_hash: Removed check for Python 3.
+- gen_libs: is_base64, no_std_out: Remove Python 2.7 code.
+- gen_libs.merge_data_types: Replaced str_type() with str.
+- Documentation update.
+
+### Deprecated
+- gen_libs.str_type function.
+
+### Removed
+- Removed global variable MASK.
+- gen_class.Yum class.
+- All modules: Removed "from \_\_future\_\_ import" library modules.
+- All modules: Removed the Python 2.7 local library imports.
+
+
 ## [3.0.8] - 2024-11-13
 
 ### Fixed

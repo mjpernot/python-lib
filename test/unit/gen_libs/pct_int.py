@@ -21,8 +21,8 @@ import mock
 
 # Local
 sys.path.append(os.getcwd())
-import gen_libs
-import version
+import gen_libs                     # pylint:disable=E0401,R0402,C0413
+import version                      # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -53,8 +53,6 @@ class UnitTest(unittest.TestCase):
         Arguments:
 
         """
-
-        pass
 
     @mock.patch("gen_libs.float_div")
     def test_pct_int6(self, mock_div):

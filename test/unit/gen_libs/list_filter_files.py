@@ -14,15 +14,14 @@
 # Libraries and Global Variables
 
 # Standard
-from __future__ import print_function
 import sys
 import os
 import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import gen_libs
-import version
+import gen_libs                     # pylint:disable=E0401,R0402,C0413
+import version                      # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
 
@@ -61,16 +60,16 @@ class UnitTest(unittest.TestCase):
         self.fname3 = os.path.join(self.dir_path, "file3.txt")
         self.fname4 = os.path.join(self.dir_path, "file4.cfg")
 
-        with open(self.fname1, "a"):
+        with open(self.fname1, "a", encoding="UTF-8"):
             os.utime(self.fname1, None)
 
-        with open(self.fname2, "a"):
+        with open(self.fname2, "a", encoding="UTF-8"):
             os.utime(self.fname2, None)
 
-        with open(self.fname3, "a"):
+        with open(self.fname3, "a", encoding="UTF-8"):
             os.utime(self.fname3, None)
 
-        with open(self.fname4, "a"):
+        with open(self.fname4, "a", encoding="UTF-8"):
             os.utime(self.fname4, None)
 
         self.results1 = []
@@ -90,11 +89,10 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        file_list = gen_libs.list_filter_files(self.dir_path,
-                                               self.file_filter3)
+        file_list = gen_libs.list_filter_files(
+            self.dir_path, self.file_filter3)
 
-        self.assertTrue(
-            file_list == self.results3 or file_list == self.results4)
+        self.assertIn(file_list, (self.results3, self.results4))
 
     def test_one_file_select(self):
 
