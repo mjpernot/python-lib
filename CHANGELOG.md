@@ -53,7 +53,6 @@ Breaking Changes
 - Removed global variable MASK.
 - gen_class.Yum class.
 - All modules: Removed "from \_\_future\_\_ import" library modules.
-- All modules: Removed the Python 2.7 local library imports.
 
 
 ## [3.0.8] - 2024-11-13

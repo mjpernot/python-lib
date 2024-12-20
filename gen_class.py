@@ -57,13 +57,17 @@ import distro
 import dnf
 
 # Local
-import gen_libs                     # pylint:disable=R0402,E0401
-import version                      # pylint:disable=E0401
+try:
+    from . import gen_libs
+    from . import version
+
+except (ValueError, ImportError) as err:
+    import gen_libs
+    import version
 
 __version__ = version.__version__
 
 # Global
-MASK = "0"
 
 
 def dict_out(data, **kwargs):
@@ -868,8 +872,10 @@ class ArgParser():                              # pylint:disable=R0904,R0902
                 self.args_array[opt] = [
                     item1 for item2 in t_list for item1 in item2]
 
-            elif opt in list(self.args_array.keys()) and \
-               isinstance(self.args_array[opt], str):   # pylint:disable=C0201
+            elif opt in list(
+                    self.args_array.keys()) and \
+                    isinstance(                         # pylint:disable=C0201
+                        self.args_array[opt], str):
 
                 self.args_array[opt] = glob.glob(self.args_array[opt])
 
