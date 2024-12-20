@@ -45,7 +45,12 @@ import glob
 import datetime
 import io
 import gzip
-import json
+
+try:
+    import simplejson as json
+except ImportError:
+    import json
+
 import re
 import smtplib
 from email import encoders

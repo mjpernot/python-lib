@@ -16,8 +16,13 @@
 # Standard
 import sys
 import os
+
+try:
+    import simplejson as json
+except ImportError:
+    import json
+
 import unittest
-import json
 import mock
 
 # Local
