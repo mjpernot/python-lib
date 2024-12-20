@@ -124,7 +124,12 @@ import collections
 import contextlib
 import io
 import string
-import json
+
+try:
+    import simplejson as json
+except ImportError:
+    import json
+
 import ast
 import gzip
 import calendar

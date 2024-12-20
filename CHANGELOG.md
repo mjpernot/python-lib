@@ -16,6 +16,8 @@ Breaking Changes
 - gen_libs.binary_string: Returns lamdba as a function to check if data is binary.
 
 ### Changed
+- gen_libs: Import simplejson in place of json, if installed.
+- gen_class: Import simplejson in place of json, if installed.
 - gen_class.ProgramLock.\_\_init\_\_:  Refactored raising the exception.
 - gen_class.Daemon2.daemonize:  Removed MASK variable replaced with hard-coded value.
 - gen_class.Daemon.daemonize:  Removed MASK variable replaced with hard-coded value.
