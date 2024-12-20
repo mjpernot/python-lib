@@ -68,8 +68,8 @@ class UnitTest(unittest.TestCase):
     @mock.patch("gen_class.open")
     @mock.patch("gen_class.os.path.abspath")
     def test_unlock(                                    # pylint:disable=R0913
-           self, mock_path, mock_open, mock_lock, mock_tmp, mock_file,
-           mock_link):
+            self, mock_path, mock_open, mock_lock, mock_tmp, mock_file,
+            mock_link):
 
         """Function:  test_unlock
 
@@ -97,7 +97,7 @@ class UnitTest(unittest.TestCase):
     @mock.patch("gen_class.open")
     @mock.patch("gen_class.os.path.abspath")
     def test_no_file(                                   # pylint:disable=R0913
-          self, mock_path, mock_open, mock_lock, mock_tmp, mock_file):
+            self, mock_path, mock_open, mock_lock, mock_tmp, mock_file):
 
         """Function:  test_no_file
 

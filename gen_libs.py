@@ -135,7 +135,11 @@ import pprint
 import chardet
 
 # Local
-import version                      # pylint:disable=E0401
+try:
+    from . import version
+
+except (ValueError, ImportError) as err:
+    import version
 
 __version__ = version.__version__
 
