@@ -1,11 +1,11 @@
 # Classification (U)
 
-"""Program:  dnf_get_installed.py
+"""Program:  dnf_get_install_pkgs.py
 
-    Description:  Unit testing of Dnf.get_installed in gen_class.py.
+    Description:  Unit testing of Dnf.get_install_pkgs in gen_class.py.
 
     Usage:
-        test/unit/gen_class/dnf_get_installed.py
+        test/unit/gen_class/dnf_get_install_pkgs.py
 
     Arguments:
 
@@ -17,10 +17,11 @@
 import sys
 import os
 import unittest
+import dnf
 
 # Local
 sys.path.append(os.getcwd())
-import gen_class                    # pylint:disable=E0401,R0402,C0413
+import gen_dnf                      # pylint:disable=E0401,R0402,C0413
 import version                      # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
@@ -34,7 +35,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
-        test_get_packages
+        test_get_install_pkgs
 
     """
 
@@ -48,19 +49,24 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.dnf = gen_class.Dnf()
+        self.base2 = gen_dnf.Dnf()
 
-    def test_get_packages(self):
+    def test_get_install_pkgs(self):
 
-        """Function:  test_get_packages
+        """Function:  test_get_install_pkgs
 
-        Description:  Test get_installed method.
+        Description:  Test returning installed packages.
 
         Arguments:
 
         """
 
-        self.assertIsInstance(self.dnf.get_installed(), list)
+        base = dnf.Base()
+        base.fill_sack()
+        pkgs = base.sack.query()
+        pkgs2 = pkgs.installed()
+
+        self.assertTrue(self.base2.get_install_pkgs()[0], pkgs2[0])
 
 
 if __name__ == "__main__":

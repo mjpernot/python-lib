@@ -8,11 +8,15 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 Breaking Changes
 
 - Removed support for Python 2.7.
+- Moved Dnf class to its own module file.
+  -> Currently the RedHat 8 servers (python 3.6) has dnf installed, but python 3.12 cannot access the dnf module as the module is a python3 platform module.
 
 ### Fixed
 - gen_class.Daemon2.get_pid_by_file:  Returned None if an exception is raised.
 
 ### Added
+- gen_dnf module.
+- gen_dnf.Dnf: Class that has class definitions for dnf use.
 - gen_libs.binary_string: Returns lamdba as a function to check if data is binary.
 
 ### Changed
@@ -52,6 +56,7 @@ Breaking Changes
 - gen_libs.str_type function.
 
 ### Removed
+- gen_class.Dnf class.
 - Removed global variable MASK.
 - gen_class.Yum class.
 - All modules: Removed "from \_\_future\_\_ import" library modules.

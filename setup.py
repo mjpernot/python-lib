@@ -35,6 +35,7 @@ setuptools.setup(
     py_modules=[
         "errors",
         "gen_class",
+        "gen_dnf",
         "gen_libs",
         "machine",
         "system",

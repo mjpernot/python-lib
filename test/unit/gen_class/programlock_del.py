@@ -153,6 +153,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
+        self.f_ptr.close()
         os.remove(self.test_file)
 
 
