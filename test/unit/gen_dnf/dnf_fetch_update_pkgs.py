@@ -1,11 +1,11 @@
 # Classification (U)
 
-"""Program:  dnf_capture_repos.py
+"""Program:  dnf_fetch_update_pkgs.py
 
-    Description:  Unit testing of Dnf.capture_repos in gen_class.py.
+    Description:  Unit testing of Dnf.fetch_update_pkgs in gen_class.py.
 
     Usage:
-        test/unit/gen_class/dnf_capture_repos.py
+        test/unit/gen_class/dnf_fetch_update_pkgs.py
 
     Arguments:
 
@@ -20,7 +20,7 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import gen_class                    # pylint:disable=E0401,R0402,C0413
+import gen_dnf                      # pylint:disable=E0401,R0402,C0413
 import version                      # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
@@ -34,7 +34,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
-        test_repos
+        test_fetch_install_pkgs
 
     """
 
@@ -48,21 +48,23 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.dnf = gen_class.Dnf()
+        self.dnf = gen_dnf.Dnf()
 
-    def test_repos(self):
+    def test_fetch_install_pkgs(self):
 
-        """Function:  test_repos
+        """Function:  test_fetch_install_pkgs
 
-        Description:  Test capture_repos method.
+        Description:  Test returning installed packages.
 
         Arguments:
 
         """
 
-        self.dnf.capture_repos()
+        data = self.dnf.fetch_update_pkgs()
 
-        self.assertTrue(self.dnf.base.sack)
+        self.assertTrue(
+            isinstance(data, list) and
+            ((len(data) > 0 and isinstance(data[0], dict)) or len(data) == 0))
 
 
 if __name__ == "__main__":

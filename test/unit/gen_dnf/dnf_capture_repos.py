@@ -1,11 +1,11 @@
 # Classification (U)
 
-"""Program:  dnf_capture_pkgs.py
+"""Program:  dnf_capture_repos.py
 
-    Description:  Unit testing of Dnf.capture_pkgs in gen_class.py.
+    Description:  Unit testing of Dnf.capture_repos in gen_class.py.
 
     Usage:
-        test/unit/gen_class/dnf_capture_pkgs.py
+        test/unit/gen_class/dnf_capture_repos.py
 
     Arguments:
 
@@ -20,7 +20,7 @@ import unittest
 
 # Local
 sys.path.append(os.getcwd())
-import gen_class                    # pylint:disable=E0401,R0402,C0413
+import gen_dnf                      # pylint:disable=E0401,R0402,C0413
 import version                      # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
@@ -34,7 +34,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
-        test_packages
+        test_repos
 
     """
 
@@ -48,21 +48,21 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.dnf = gen_class.Dnf()
+        self.dnf = gen_dnf.Dnf()
 
-    def test_packages(self):
+    def test_repos(self):
 
-        """Function:  test_packages
+        """Function:  test_repos
 
-        Description:  Test capture_pkgs method.
+        Description:  Test capture_repos method.
 
         Arguments:
 
         """
 
-        self.dnf.capture_pkgs()
+        self.dnf.capture_repos()
 
-        self.assertTrue(self.dnf.packages)
+        self.assertTrue(self.dnf.base.sack)
 
 
 if __name__ == "__main__":
