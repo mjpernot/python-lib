@@ -1,11 +1,11 @@
 # Classification (U)
 
-"""Program:  dnf_fetch_update_pkgs.py
+"""Program:  dnf_get_release.py
 
-    Description:  Unit testing of Dnf.fetch_update_pkgs in gen_class.py.
+    Description:  Unit testing of Dnf.get_release in gen_class.py.
 
     Usage:
-        test/unit/gen_class/dnf_fetch_update_pkgs.py
+        test/unit/gen_class/dnf_get_release.py
 
     Arguments:
 
@@ -17,10 +17,11 @@
 import sys
 import os
 import unittest
+import distro
 
 # Local
 sys.path.append(os.getcwd())
-import gen_class                    # pylint:disable=E0401,R0402,C0413
+import gen_dnf                      # pylint:disable=E0401,R0402,C0413
 import version                      # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
@@ -34,7 +35,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
-        test_fetch_install_pkgs
+        test_get_release
 
     """
 
@@ -48,23 +49,22 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.dnf = gen_class.Dnf()
+        self.host_name = "HOSTNAME"
+        self.release = distro.version()
 
-    def test_fetch_install_pkgs(self):
+    def test_get_release(self):
 
-        """Function:  test_fetch_install_pkgs
+        """Function:  test_get_release
 
-        Description:  Test returning installed packages.
+        Description:  Test get_release method.
 
         Arguments:
 
         """
 
-        data = self.dnf.fetch_update_pkgs()
+        dnf = gen_dnf.Dnf()
 
-        self.assertTrue(
-            isinstance(data, list) and
-            ((len(data) > 0 and isinstance(data[0], dict)) or len(data) == 0))
+        self.assertEqual(dnf.get_release(), self.release)
 
 
 if __name__ == "__main__":

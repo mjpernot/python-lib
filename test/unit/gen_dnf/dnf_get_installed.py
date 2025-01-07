@@ -1,11 +1,11 @@
 # Classification (U)
 
-"""Program:  dnf_get_os.py
+"""Program:  dnf_get_installed.py
 
-    Description:  Unit testing of Dnf.get_os in gen_class.py.
+    Description:  Unit testing of Dnf.get_installed in gen_class.py.
 
     Usage:
-        test/unit/gen_class/dnf_get_os.py
+        test/unit/gen_class/dnf_get_installed.py
 
     Arguments:
 
@@ -17,11 +17,10 @@
 import sys
 import os
 import unittest
-import distro
 
 # Local
 sys.path.append(os.getcwd())
-import gen_class                    # pylint:disable=E0401,R0402,C0413
+import gen_dnf                      # pylint:disable=E0401,R0402,C0413
 import version                      # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
@@ -35,7 +34,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
-        test_get_os
+        test_get_packages
 
     """
 
@@ -49,22 +48,19 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.host_name = "HOSTNAME"
-        self.osys = distro.name()
+        self.dnf = gen_dnf.Dnf()
 
-    def test_get_os(self):
+    def test_get_packages(self):
 
-        """Function:  test_get_os
+        """Function:  test_get_packages
 
-        Description:  Test get_os method.
+        Description:  Test get_installed method.
 
         Arguments:
 
         """
 
-        dnf = gen_class.Dnf()
-
-        self.assertEqual(dnf.get_os(), self.osys)
+        self.assertIsInstance(self.dnf.get_installed(), list)
 
 
 if __name__ == "__main__":

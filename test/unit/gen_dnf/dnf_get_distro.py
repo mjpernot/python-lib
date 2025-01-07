@@ -1,11 +1,11 @@
 # Classification (U)
 
-"""Program:  dnf_get_update_pkgs.py
+"""Program:  dnf_get_distro.py
 
-    Description:  Unit testing of Dnf.get_update_pkgs in gen_class.py.
+    Description:  Unit testing of Dnf.get_distro in gen_class.py.
 
     Usage:
-        test/unit/gen_class/dnf_get_update_pkgs.py
+        test/unit/gen_class/dnf_get_distro.py
 
     Arguments:
 
@@ -17,11 +17,11 @@
 import sys
 import os
 import unittest
-import dnf
+import distro
 
 # Local
 sys.path.append(os.getcwd())
-import gen_class                    # pylint:disable=E0401,R0402,C0413
+import gen_dnf                      # pylint:disable=E0401,R0402,C0413
 import version                      # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
@@ -35,7 +35,7 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
-        test_get_install_pkgs
+        test_get_distro
 
     """
 
@@ -49,22 +49,21 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.dnf = gen_class.Dnf()
+        self.distro = (distro.name(), distro.version(), distro.codename())
 
-    def test_get_install_pkgs(self):
+    def test_get_distro(self):
 
-        """Function:  test_get_install_pkgs
+        """Function:  test_get_distro
 
-        Description:  Test returning installed packages.
+        Description:  Test get_distro method.
 
         Arguments:
 
         """
 
-        base = dnf.Base()
-        base.fill_sack()
+        dnf = gen_dnf.Dnf()
 
-        self.assertTrue(self.dnf.get_update_pkgs()[0], base.sack.query()[0])
+        self.assertEqual(dnf.get_distro(), self.distro)
 
 
 if __name__ == "__main__":

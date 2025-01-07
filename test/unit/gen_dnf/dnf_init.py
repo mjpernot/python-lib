@@ -21,7 +21,7 @@ import distro
 
 # Local
 sys.path.append(os.getcwd())
-import gen_class                    # pylint:disable=E0401,R0402,C0413
+import gen_dnf                      # pylint:disable=E0401,R0402,C0413
 import version                      # pylint:disable=E0401,C0413
 
 __version__ = version.__version__
@@ -52,7 +52,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.dnf = gen_class.Dnf()
+        self.dnf = gen_dnf.Dnf()
         self.distro = (distro.name(), distro.version(), distro.codename())
         self.release = distro.version()
         self.os_name = distro.name()
@@ -91,7 +91,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertIsInstance(self.dnf, gen_class.Dnf)
+        self.assertIsInstance(self.dnf, gen_dnf.Dnf)
 
     def test_distro(self):
 
