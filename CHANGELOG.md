@@ -6,7 +6,15 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 ## [4.0.1] - 2025-03-25
 
+### Fixed
+- gen_libs.key_cleaner: Fixed the replacement value checking in the dictionary key, returned the correct dictionary level during the replacement section.
+
+### Changed
+- gen_libs.key_cleaner: Under list code section replaced the map function with a loop.
+- Documentation changes.
+
 ### Removed
+- gen_libs.key_cleaner: Removed the tuple code section.
 - gen_libs.str_type function.
 
 
