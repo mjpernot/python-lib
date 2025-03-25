@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [4.0.1] - 2025-03-25
+
+### Removed
+- gen_libs.str_type function.
+
+
 ## [4.0.0] - 2024-12-03
 Breaking Changes
 

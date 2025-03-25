@@ -94,7 +94,6 @@ coverage run -a --source=gen_libs test/unit/gen_libs/rm_whitespace.py
 coverage run -a --source=gen_libs test/unit/gen_libs/root_run.py
 coverage run -a --source=gen_libs test/unit/gen_libs/rotate_files.py
 coverage run -a --source=gen_libs test/unit/gen_libs/sec_2_hr.py
-coverage run -a --source=gen_libs test/unit/gen_libs/str_type.py
 coverage run -a --source=gen_libs test/unit/gen_libs/str_2_list.py
 coverage run -a --source=gen_libs test/unit/gen_libs/str_2_type.py
 coverage run -a --source=gen_libs test/unit/gen_libs/touch.py

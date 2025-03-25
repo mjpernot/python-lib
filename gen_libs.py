@@ -92,7 +92,6 @@
         root_run
         rotate_files
         sec_2_hr
-        str_type
         str_2_list
         str_2_type
         touch
@@ -2440,23 +2439,6 @@ def sec_2_hr(sec):
     """
 
     return (sec // 36) / float(100)
-
-
-def str_type():
-
-    """Function:  str_type
-
-    Description:  Returns basestring if pre-Python 3 or string if Python 3.
-
-    Arguments:
-
-    """
-
-    if sys.version_info[0] == 3:                # pylint:disable=R1705
-        return str
-
-    else:
-        return basestring                       # pylint:disable=E0602
 
 
 def str_2_list(del_str, fld_del):
