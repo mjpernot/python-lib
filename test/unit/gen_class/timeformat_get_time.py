@@ -55,6 +55,18 @@ class UnitTest(unittest.TestCase):
         self.tform.create_time()
         self.newform = "%Y%m%d_%H%M"
 
+    def test_no_timeform(self):
+
+        """Function:  test_no_timeform
+
+        Description:  Test with no time format passed.
+
+        Arguments:
+
+        """
+
+        self.assertIsNone(self.tform.get_time())
+
     def test_new_timeform2(self):
 
         """Function:  test_new_timeform2
