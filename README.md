@@ -74,11 +74,6 @@ test/unit/gen_libs/unit_test_run.sh
 test/unit/gen_class/unit_test_run.sh
 test/unit/errors/unit_test_run.sh
 test/unit/machine/unit_test_run.sh
-```
-
-### Code Coverage:
-
-```
 test/unit/gen_libs/code_coverage.sh
 test/unit/gen_class/code_coverage.sh
 test/unit/errors/code_coverage.sh
