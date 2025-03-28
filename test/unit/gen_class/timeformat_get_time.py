@@ -65,8 +65,8 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertTrue(
-            len(self.tform.get_time(newform=self.newform, micro=True)) == 18)
+        self.assertEqual(
+            len(self.tform.get_time(newform=self.newform, micro=True)), 18)
 
     def test_new_timeform(self):
 
@@ -78,7 +78,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertTrue(len(self.tform.get_time(newform=self.newform)) == 13)
+        self.assertEqual(len(self.tform.get_time(newform=self.newform)), 13)
 
     def test_exist_timeform2(self):
 
@@ -90,7 +90,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertTrue(len(self.tform.get_time("ymd", micro=True)) == 13)
+        self.assertEqual(len(self.tform.get_time("ymd", micro=True)), 13)
 
     def test_exist_timeform(self):
 
@@ -102,7 +102,7 @@ class UnitTest(unittest.TestCase):
 
         """
 
-        self.assertTrue(len(self.tform.get_time("ymd")) == 8)
+        self.assertEqual(len(self.tform.get_time("ymd")), 8)
 
 
 if __name__ == "__main__":
