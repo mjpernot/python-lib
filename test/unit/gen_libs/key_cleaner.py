@@ -34,7 +34,8 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
-        test_key_cleaner_tuple
+        test_key_single_level
+        test_key_multi_level
         test_key_cleaner_multi_list
         test_key_cleaner_single_list
         test_key_cleaner_dict
@@ -56,31 +57,43 @@ class UnitTest(unittest.TestCase):
         self.data = {self.pre_value: "value2"}
         self.data2 = [{self.pre_value: "value2"}]
         self.data3 = [{self.pre_value: "value2"}, {self.pre_value: "value2"}]
-        self.data4 = ({self.pre_value: "value2"}, {self.pre_value: "value2"})
+        self.data4 = {'heya': 'A', 'heyb': 'B', 'keyc': 'C', 'heyd': 'D'}
+        self.data5 = {'heya': [{'heyb': 'B'}, {'keyc': 'C'}, {'heyd': 'D'}]}
         self.char = "e"
         self.repl = "a"
         self.results = {self.post_value: "value2"}
         self.results2 = [{self.post_value: "value2"}]
-        self.results3 = [{self.post_value: "value2"},
-                         {self.post_value: "value2"}]
-        self.results4 = ({self.pre_value: "value2"},
-                         {self.pre_value: "value2"})
+        self.results3 = [
+            {self.post_value: "value2"}, {self.post_value: "value2"}]
+        self.results4 = {'HEYa': 'A', 'HEYb': 'B', 'keyc': 'C', 'HEYd': 'D'}
+        self.results5 = {'HEYa': [{'HEYb': 'B'}, {'keyc': 'C'}, {'HEYd': 'D'}]}
 
-    @unittest.skip("Error:  Unable to handle tuple.")
-    def test_key_cleaner_tuple(self):
+    def test_key_single_level(self):
 
-        """Function:  test_key_cleaner_tuple
+        """Function:  test_key_single_level
 
-        Description:  Test with tuple passed.
+        Description:  Test with dictionaries at single level.
 
         Arguments:
 
         """
 
-        self.assertEqual(gen_libs.key_cleaner(self.data4, self.char,
-                                              self.repl), self.results4)
+        self.assertEqual(
+            gen_libs.key_cleaner(self.data4, "hey", "HEY"), self.results4)
 
-    @unittest.skip("Error:  Unable to handle multiple item list.")
+    def test_key_multi_level(self):
+
+        """Function:  test_key_multi_level
+
+        Description:  Test with dictionaries at multiple levels.
+
+        Arguments:
+
+        """
+
+        self.assertEqual(
+            gen_libs.key_cleaner(self.data5, "hey", "HEY"), self.results5)
+
     def test_key_cleaner_multi_list(self):
 
         """Function:  test_key_cleaner_multi_list

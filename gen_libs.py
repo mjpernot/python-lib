@@ -92,7 +92,6 @@
         root_run
         rotate_files
         sec_2_hr
-        str_type
         str_2_list
         str_2_type
         touch
@@ -1349,7 +1348,7 @@ def is_file_text(f_name):
 
     """
 
-    with io.open(f_name, "rb") as f_hldr:
+    with io.open(f_name, "rb") as f_hldr:               # pylint:disable=R1732
         f_head = f_hldr.read(512)
 
     is_binary_string = binary_string()
@@ -1412,20 +1411,19 @@ def is_true(item):
 
 def key_cleaner(data, char, repl):
 
-    """Function:     key_cleaner
+    """Function: key_cleaner
 
-    Description:  Replace single character in dictionary key with a different
-        character.  Recursive func call to parse through all levels of
-        dictionary.
+    Description: Replace one or more characters in a dictionary key with one
+        or more other characters.  Recursive function call to parse through all
+        levels of dictionary.
 
-    Note:  Use for Mongodb as it does not allow . (periods) or $ (dollar signs)
-        in the key of a document.
+    Warning: Duplicate keys will be removed during the replacement process.
 
     Arguments:
-        (input) data -> A data object.
-        (input) char -> Character to be replaced.
-        (input) repl -> Replacement character.
-        (output) data -> Modified dictionary object.
+        (input) data -> A data object
+        (input) char -> One or more characters to search for
+        (input) repl -> One or more characters to replace with
+        (output) data -> Modified data object
 
     """
 
@@ -1434,22 +1432,25 @@ def key_cleaner(data, char, repl):
 
         for key, value in list(data.items()):
 
-            # Recursive call on dictionary's value.
+            # Recursive call on dictionary's value
             data[key] = key_cleaner(value, char, repl)
 
-            if "." in key:
-                # Change key name and add new value.
-                data[key.replace(char, repl)] = value
+            if char in key:
+                tvalue = data[key]
+                # Change key name and add new value
+                data[key.replace(char, repl)] = tvalue
                 del data[key]
 
-            return data
+        return data
 
     if isinstance(data, list):
         data = list(data)
-        return list(map(key_cleaner, data, char, repl))
+        tdata = []
 
-    if isinstance(data, tuple):
-        return tuple(list(map(key_cleaner, data, char, repl)))
+        for item in data:
+            tdata.append(key_cleaner(item, char, repl))
+
+        return tdata
 
     return data
 
@@ -2440,23 +2441,6 @@ def sec_2_hr(sec):
     """
 
     return (sec // 36) / float(100)
-
-
-def str_type():
-
-    """Function:  str_type
-
-    Description:  Returns basestring if pre-Python 3 or string if Python 3.
-
-    Arguments:
-
-    """
-
-    if sys.version_info[0] == 3:                # pylint:disable=R1705
-        return str
-
-    else:
-        return basestring                       # pylint:disable=E0602
 
 
 def str_2_list(del_str, fld_del):

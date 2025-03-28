@@ -2638,6 +2638,8 @@ class TimeFormat():
 
     Methods:
         __init__
+        create_time
+        get_time
         add_format
         create_adhoc_hack
         create_hack
@@ -2664,6 +2666,50 @@ class TimeFormat():
             "zulu": {
                 "format": "%Y-%m-%dT%H:%M:%SZ", "del": "", "micro": False},
             "dtg": {"format": "%Y%m%d_%H%M%S", "del": "", "micro": False}}
+        self.rdtg = None
+        self.msecs = None
+
+    def create_time(self):
+
+        """Method:  create_time
+
+        Description:  Capture raw datetime group and microseconds.
+
+        Arguments:
+
+        """
+
+        self.rdtg = datetime.datetime.now()
+        self.msecs = str(self.rdtg.microsecond // 100)
+
+    def get_time(self, timeform=None, newform=None, **kwargs):
+
+        """Method:  get_time
+
+        Description:  Convert the Datetime expression captured from the
+            create_time method to an exiting time format or a new time format
+            along with an option to include microseconds in the format.
+
+        Arguments:
+            (input) timeform -> Name of the time format from existing formats
+            (input) newform -> New time format expression
+            (input) **kwargs:
+                micro -> True|False -> Include microseconds
+                delimit -> Delimiter between time and microseconds
+
+        """
+
+        ext = kwargs.get("delimit", self.delimit) + self.msecs \
+            if kwargs.get("micro", self.micro) else ""
+
+        if timeform and timeform in self.tformats:
+            return datetime.datetime.strftime(
+                self.rdtg, self.tformats[timeform]["format"]) + ext
+
+        if newform:
+            return datetime.datetime.strftime(self.rdtg, newform) + ext
+
+        return None
 
     def add_format(self, tformat, texpr, **kwargs):
 
