@@ -5,9 +5,14 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 
 ## [4.0.1] - 2025-03-25
+- Added ability in TimeFormat class to use a single datetime value for multiple time format expressions.
 
 ### Fixed
 - gen_libs.key_cleaner: Fixed the replacement value checking in the dictionary key, returned the correct dictionary level during the replacement section.
+
+### Added
+- gen_class.TimeFormat.create_time: Capture raw datetime group and microseconds.
+- gen_class.TimeFormat.get_time: Convert the Datetime expression captured from the create_time method to time format.
 
 ### Changed
 - gen_libs.key_cleaner: Under list code section replaced the map function with a loop.
