@@ -2700,13 +2700,13 @@ class TimeFormat():
         """
 
         ext = kwargs.get("delimit", self.delimit) + self.msecs \
-              if kwargs.get("micro", self.micro) else ""
+            if kwargs.get("micro", self.micro) else ""
 
         if timeform and timeform in self.tformats:
             return datetime.datetime.strftime(
                 self.rdtg, self.tformats[timeform]["format"]) + ext
 
-        elif newform:
+        if newform:
             return datetime.datetime.strftime(self.rdtg, newform) + ext
 
         return None
