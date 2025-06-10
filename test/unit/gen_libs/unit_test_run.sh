@@ -48,6 +48,7 @@ echo "Unit test:  gen_libs.py"
 /usr/bin/python ./test/unit/gen_libs/is_add_cmd.py
 /usr/bin/python ./test/unit/gen_libs/is_base64.py
 /usr/bin/python ./test/unit/gen_libs/is_empty_file.py
+/usr/bin/python ./test/unit/gen_libs/is_file_deletable.py
 /usr/bin/python ./test/unit/gen_libs/is_file_text.py
 /usr/bin/python ./test/unit/gen_libs/is_missing_lists.py
 /usr/bin/python ./test/unit/gen_libs/is_pos_int.py
