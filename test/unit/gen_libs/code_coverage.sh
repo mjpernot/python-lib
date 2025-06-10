@@ -50,6 +50,7 @@ coverage run -a --source=gen_libs test/unit/gen_libs/in_list.py
 coverage run -a --source=gen_libs test/unit/gen_libs/is_add_cmd.py
 coverage run -a --source=gen_libs test/unit/gen_libs/is_base64.py
 coverage run -a --source=gen_libs test/unit/gen_libs/is_empty_file.py
+coverage run -a --source=gen_libs test/unit/gen_libs/is_file_deletable.py
 coverage run -a --source=gen_libs test/unit/gen_libs/is_file_text.py
 coverage run -a --source=gen_libs test/unit/gen_libs/is_missing_lists.py
 coverage run -a --source=gen_libs test/unit/gen_libs/is_pos_int.py

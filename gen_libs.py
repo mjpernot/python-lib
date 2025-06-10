@@ -48,6 +48,7 @@
         is_add_cmd
         is_base64
         is_empty_file
+        is_file_deletable
         is_file_text
         is_missing_lists
         is_pos_int
@@ -1329,6 +1330,30 @@ def is_empty_file(f_name):
 
     if os.path.isfile(f_name):
         status = os.stat(f_name).st_size == 0
+
+    return status
+
+
+def is_file_deletable(fname):
+
+    """Function:  is_file_deletable
+
+    Description:  Determine if a file can be removed.
+
+    Arguments:
+        (input) fname -> Filename and full path
+        (output) status -> True|False - File can be removed
+
+    """
+
+    status = False
+    f_dirname = os.path.dirname(fname)
+
+    # Ensure object is a file and writable and the directory has correct perms
+    if os.path.isfile(fname):
+        if os.access(fname, os.W_OK):
+            if os.access(f_dirname, os.W_OK | os.X_OK):
+                status = True
 
     return status
 

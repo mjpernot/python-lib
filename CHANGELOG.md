@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [4.0.2] - 2025-06-10
+
+### Added
+- gen_libs.is_file_deletable: Determine if a file can be removed.
+
+
 ## [4.0.1] - 2025-03-25
 - Added ability in TimeFormat class to use a single datetime value for multiple time format expressions.
 
