@@ -34,6 +34,11 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
+        test_msg_format_include_pid
+        test_msg_format
+        test_msg_format_default
+        test_date_format
+        test_date_format_default
         test_mode_write
         test_mode_append
         test_mode_default
@@ -60,6 +65,40 @@ class UnitTest(unittest.TestCase):
         self.name = "Logger_init_test"
         self.f_name = os.path.join(
             os.getcwd(), "test/unit/gen_class/tmp/Logger_init_test.txt")
+        self.date_fmt = "%Y-%m-%dT%H:%M:%SZ"
+        self.msg_fmt = "%(asctime)s %(levelname)s %(message)s"
+
+### STOPPED HERE
+# Need test_msg_format_default, test_msg_format, test_msg_format_include_pid
+
+    def test_date_format(self):
+
+        """Function:  test_date_format
+
+        Description:  Test with specified date formatting.
+
+        Arguments:
+
+        """
+
+        log_file = gen_class.Logger(
+            self.name, self.f_name, date_fmt=self.date_fmt)
+
+        self.assertEqual(log_file.formatter.datefmt, self.date_fmt)
+
+    def test_date_format_default(self):
+
+        """Function:  test_date_format_default
+
+        Description:  Test with default date formatting.
+
+        Arguments:
+
+        """
+
+        log_file = gen_class.Logger(self.name, self.f_name)
+
+        self.assertIsNone(log_file.formatter.datefmt)
 
     def test_mode_write(self):
 

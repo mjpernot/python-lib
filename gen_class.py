@@ -2825,20 +2825,28 @@ class Logger():
         Description:  Initialization of an instance of the Logger class.
 
         Arguments:
-            (input) name -> Name of log handler.
-            (input) log_file -> Name of log file to write to.
-            (input) level -> Level of message to accept to the log file.
-            (input) msg_fmt -> Format of a log file entry.
-            (input) date_fmt -> Format of date and time for a log file entry.
+            (input) name -> Name of log handler
+            (input) log_file -> Name of log file to write to
+            (input) level -> Level of message to accept to the log file
+            (input) msg_fmt -> Format of a log file entry
+                Default: "%(asctime)s %(levelname)s %(message)s"
+            (input) date_fmt -> Format of date and time for a log file entry
+                Default: "%Y-%m-%d %H:%M:%S, Msecs"
             (input) **kwargs:
-                mode -> a|w - Filemode to log file.
+                mode -> a|w - Append|Write - File mode to log file
+                    Default: a
+                include_pid -> True|False - Add process ID to default log entry
+                    Default: False
 
         """
 
         self.handler = logging.FileHandler(
             log_file, mode=kwargs.get("mode", "a"))
 
-        if not msg_fmt:
+        if not msg_fmt and kwargs.get("include_pid", False):
+            msg_fmt = "%(asctime)s %(process)s %(levelname)s %(message)s"
+
+        elif not msg_fmt:
             msg_fmt = "%(asctime)s %(levelname)s %(message)s"
 
         self.formatter = logging.Formatter(msg_fmt, date_fmt)
@@ -2869,7 +2877,7 @@ class Logger():
         Description:  Writes message to log file at DEBUG level.
 
         Arguments:
-            (input) msg -> Message to be written to log.
+            (input) msg -> Message to be written to log
 
         """
 
@@ -2882,7 +2890,7 @@ class Logger():
         Description:  Writes message to log file at INFO level.
 
         Arguments:
-            (input) msg -> Message to be written to log.
+            (input) msg -> Message to be written to log
 
         """
 
@@ -2895,7 +2903,7 @@ class Logger():
         Description:  Writes message to log file at WARNING level.
 
         Arguments:
-            (input) msg -> Message to be written to log.
+            (input) msg -> Message to be written to log
 
         """
 
@@ -2908,7 +2916,7 @@ class Logger():
         Description:  Writes message to log file at ERROR level.
 
         Arguments:
-            (input) msg -> Message to be written to log.
+            (input) msg -> Message to be written to log
 
         """
 
@@ -2921,7 +2929,7 @@ class Logger():
         Description:  Writes message to log file at CRITICAL level.
 
         Arguments:
-            (input) msg -> Message to be written to log.
+            (input) msg -> Message to be written to log
 
         """
 
@@ -2934,7 +2942,7 @@ class Logger():
         Description:  Closes the log file and removes the log handler.
 
         Arguments:
-            (input) msg -> Message to be written to log.
+            (input) msg -> Message to be written to log
 
         """
 
