@@ -82,7 +82,8 @@ class UnitTest(unittest.TestCase):
 
         log_file = gen_class.Logger(self.name, self.f_name, include_pid=True)
 
-        self.assertEqual(log_file.formatter._fmt, self.msg_fmt3)
+        self.assertEqual(
+            log_file.formatter._fmt, self.msg_fmt3)     # pylint:disable=W0212
 
     def test_msg_format(self):
 
@@ -97,7 +98,8 @@ class UnitTest(unittest.TestCase):
         log_file = gen_class.Logger(
             self.name, self.f_name, msg_fmt=self.msg_fmt2)
 
-        self.assertEqual(log_file.formatter._fmt, self.msg_fmt2)
+        self.assertEqual(
+            log_file.formatter._fmt, self.msg_fmt2)     # pylint:disable=W0212
 
     def test_msg_format_default(self):
 
@@ -111,7 +113,8 @@ class UnitTest(unittest.TestCase):
 
         log_file = gen_class.Logger(self.name, self.f_name)
 
-        self.assertEqual(log_file.formatter._fmt, self.msg_fmt)
+        self.assertEqual(
+            log_file.formatter._fmt, self.msg_fmt)      # pylint:disable=W0212
 
     def test_date_format(self):
 

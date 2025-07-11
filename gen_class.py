@@ -1161,7 +1161,7 @@ class Daemon():
 
     DEV_NULL = "/dev/null"
 
-    def __init__(                                       # pylint:disable=R0913
+    def __init__(                               # pylint:disable=R0913,R0917
           self, pidfile, stdin=DEV_NULL, stdout=DEV_NULL, stderr=DEV_NULL,
           argv_list=None):
 
@@ -2426,7 +2426,7 @@ class Mail(System):
 
     """
 
-    def __init__(                                   # pylint:disable=R0913
+    def __init__(                               # pylint:disable=R0913,R0917
           self, toaddr, subj=None, frm=None, msg_type=None, host_name=None,
           host=None):
 
@@ -2816,7 +2816,7 @@ class Logger():
 
     """
 
-    def __init__(                                   # pylint:disable=R0913
+    def __init__(                               # pylint:disable=R0913,R0917
           self, name, log_file, level="INFO", msg_fmt=None, date_fmt=None,
           **kwargs):
 
