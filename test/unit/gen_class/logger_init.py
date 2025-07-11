@@ -34,6 +34,11 @@ class UnitTest(unittest.TestCase):
 
     Methods:
         setUp
+        test_msg_format_include_pid
+        test_msg_format
+        test_msg_format_default
+        test_date_format
+        test_date_format_default
         test_mode_write
         test_mode_append
         test_mode_default
@@ -60,6 +65,85 @@ class UnitTest(unittest.TestCase):
         self.name = "Logger_init_test"
         self.f_name = os.path.join(
             os.getcwd(), "test/unit/gen_class/tmp/Logger_init_test.txt")
+        self.date_fmt = "%Y-%m-%dT%H:%M:%SZ"
+        self.msg_fmt = "%(asctime)s %(levelname)s %(message)s"
+        self.msg_fmt2 = "%(asctime)s %(message)s %(levelname)s"
+        self.msg_fmt3 = "%(asctime)s %(process)s %(levelname)s %(message)s"
+
+    def test_msg_format_include_pid(self):
+
+        """Function:  test_msg_format_include_pid
+
+        Description:  Test with include_pid argument.
+
+        Arguments:
+
+        """
+
+        log_file = gen_class.Logger(self.name, self.f_name, include_pid=True)
+
+        self.assertEqual(
+            log_file.formatter._fmt, self.msg_fmt3)     # pylint:disable=W0212
+
+    def test_msg_format(self):
+
+        """Function:  test_msg_format
+
+        Description:  Test with specified message formatting.
+
+        Arguments:
+
+        """
+
+        log_file = gen_class.Logger(
+            self.name, self.f_name, msg_fmt=self.msg_fmt2)
+
+        self.assertEqual(
+            log_file.formatter._fmt, self.msg_fmt2)     # pylint:disable=W0212
+
+    def test_msg_format_default(self):
+
+        """Function:  test_msg_format_default
+
+        Description:  Test with default message formatting.
+
+        Arguments:
+
+        """
+
+        log_file = gen_class.Logger(self.name, self.f_name)
+
+        self.assertEqual(
+            log_file.formatter._fmt, self.msg_fmt)      # pylint:disable=W0212
+
+    def test_date_format(self):
+
+        """Function:  test_date_format
+
+        Description:  Test with specified date formatting.
+
+        Arguments:
+
+        """
+
+        log_file = gen_class.Logger(
+            self.name, self.f_name, date_fmt=self.date_fmt)
+
+        self.assertEqual(log_file.formatter.datefmt, self.date_fmt)
+
+    def test_date_format_default(self):
+
+        """Function:  test_date_format_default
+
+        Description:  Test with default date formatting.
+
+        Arguments:
+
+        """
+
+        log_file = gen_class.Logger(self.name, self.f_name)
+
+        self.assertIsNone(log_file.formatter.datefmt)
 
     def test_mode_write(self):
 

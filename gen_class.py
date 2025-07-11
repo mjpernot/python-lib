@@ -145,10 +145,10 @@ def setup_mail(to_line, subj=None, frm_line=None):
         not passed.
 
     Arguments:
-        (input) to_line -> Mail to line.  Either a string or list.
-        (input) subj -> Mail subject line.  Either a string or list.
-        (input) frm_line -> Mail from line.
-        (output) Mail instance.
+        (input) to_line -> Mail to line.  Either a string or list
+        (input) subj -> Mail subject line.  Either a string or list
+        (input) frm_line -> Mail from line
+        (output) Mail instance
 
     """
 
@@ -658,7 +658,7 @@ class ArgParser():                              # pylint:disable=R0904,R0902
                 multi_val - List of options that may contain multiple values
                 opt_val_bin - List of options that allow zero values or one
                     value for the option
-            (output) status -> True|False - If successfully parse argv.
+            (output) status -> True|False - If successfully parse argv
 
         """
 
@@ -1029,7 +1029,7 @@ class ArgParser():                              # pylint:disable=R0904,R0902
         Arguments:
             (input) **kwargs:
                 opt_def -> Dictionary with options and default values
-            (output) status -> True|False - If successfully parse argv.
+            (output) status -> True|False - If successfully parse argv
 
         """
 
@@ -1161,7 +1161,7 @@ class Daemon():
 
     DEV_NULL = "/dev/null"
 
-    def __init__(                                       # pylint:disable=R0913
+    def __init__(                               # pylint:disable=R0913,R0917
           self, pidfile, stdin=DEV_NULL, stdout=DEV_NULL, stderr=DEV_NULL,
           argv_list=None):
 
@@ -1873,7 +1873,7 @@ class LogFile():                                    # pylint:disable=R0902
         Description:  Removed ignore entries from loglist array.
 
         Arguments:
-            (input) use_marker -> True|False: Start check from marker.
+            (input) use_marker -> True|False: Start check from marker
 
         """
 
@@ -1895,7 +1895,7 @@ class LogFile():                                    # pylint:disable=R0902
         Description:  Keep only keyword entries in loglist array.
 
         Arguments:
-            (input) use_marker -> True|False: Start check from marker.
+            (input) use_marker -> True|False: Start check from marker
 
         """
 
@@ -1917,7 +1917,7 @@ class LogFile():                                    # pylint:disable=R0902
         Description:  Keep only regex entries that match in loglist array.
 
         Arguments:
-            (input) use_marker -> True|False: Start check from marker.
+            (input) use_marker -> True|False: Start check from marker
 
         """
 
@@ -1937,7 +1937,7 @@ class LogFile():                                    # pylint:disable=R0902
         Description:  Load ignore list from object.
 
         Arguments:
-            (input) data -> Holds ignore list as a file, list or string.
+            (input) data -> Holds ignore list as a file, list or string
 
         """
 
@@ -1960,8 +1960,8 @@ class LogFile():                                    # pylint:disable=R0902
         Description:  Load keyword list from object.
 
         Arguments:
-            (input) data -> Holds keyword list as a file, list or string.
-            (input) fld_delimit -> Field delimiter for a string object.
+            (input) data -> Holds keyword list as a file, list or string
+            (input) fld_delimit -> Field delimiter for a string object
 
         """
 
@@ -1985,8 +1985,8 @@ class LogFile():                                    # pylint:disable=R0902
         Description:  Load log entries into loglist array from object.
 
         Arguments:
-            (input) data -> Holds log entries as a file, list, string, or dict.
-            (input) dictkey -> Dictionary key value for dictionary object.
+            (input) data -> Holds log entries as a file, list, string, or dict
+            (input) dictkey -> Dictionary key value for dictionary object
 
         """
 
@@ -2110,10 +2110,10 @@ class ProgressBar():
         Description:  Initialization of an instance of the ProgressBar class.
 
         Arguments:
-            (input) msg -> General message describing the operation.
-            (input) width -> Width of the progress bar.
-            (input) progress_sym -> Character displaying completed.
-            (input) empty_sym -> Character displaying uncompleted.
+            (input) msg -> General message describing the operation
+            (input) width -> Width of the progress bar
+            (input) progress_sym -> Character displaying completed
+            (input) empty_sym -> Character displaying uncompleted
 
         """
 
@@ -2134,7 +2134,7 @@ class ProgressBar():
             progress bar and displays the progress bar.
 
         Arguments:
-            (input) progress -> Precentage completed in whole numbers.
+            (input) progress -> Precentage completed in whole numbers
 
         """
 
@@ -2162,8 +2162,8 @@ class ProgressBar():
         Description:  Calculate the percentage completed.
 
         Arguments:
-            (input) done -> Number of items completed.
-            (input) total -> Total number of items to complete.
+            (input) done -> Number of items completed
+            (input) total -> Total number of items to complete
 
         """
 
@@ -2206,8 +2206,8 @@ class ProgramLock():                                # pylint:disable=R0903
         Description:  Initialization of an instance of the ProgramLock class.
 
         Arguments:
-            (input) argv -> Arguments from the command line.
-            (input) flavor_id -> Unique identifier for an instance.
+            (input) argv -> Arguments from the command line
+            (input) flavor_id -> Unique identifier for an instance
 
         """
 
@@ -2277,8 +2277,8 @@ class System():                                     # pylint:disable=R0903
         Description:  Initialization of an instance of the System class.
 
         Arguments:
-            (input) host -> 'localhost' or IP.
-            (input) host_name -> Host name of server.
+            (input) host -> 'localhost' or IP
+            (input) host_name -> Host name of server
 
         """
 
@@ -2293,7 +2293,7 @@ class System():                                     # pylint:disable=R0903
             from the server.
 
         Arguments:
-            (input) host_name -> Host name of server.
+            (input) host_name -> Host name of server
 
         """
 
@@ -2426,7 +2426,7 @@ class Mail(System):
 
     """
 
-    def __init__(                                   # pylint:disable=R0913
+    def __init__(                               # pylint:disable=R0913,R0917
           self, toaddr, subj=None, frm=None, msg_type=None, host_name=None,
           host=None):
 
@@ -2816,7 +2816,7 @@ class Logger():
 
     """
 
-    def __init__(                                   # pylint:disable=R0913
+    def __init__(                               # pylint:disable=R0913,R0917
           self, name, log_file, level="INFO", msg_fmt=None, date_fmt=None,
           **kwargs):
 
@@ -2825,20 +2825,28 @@ class Logger():
         Description:  Initialization of an instance of the Logger class.
 
         Arguments:
-            (input) name -> Name of log handler.
-            (input) log_file -> Name of log file to write to.
-            (input) level -> Level of message to accept to the log file.
-            (input) msg_fmt -> Format of a log file entry.
-            (input) date_fmt -> Format of date and time for a log file entry.
+            (input) name -> Name of log handler
+            (input) log_file -> Name of log file to write to
+            (input) level -> Level of message to accept to the log file
+            (input) msg_fmt -> Format of a log file entry
+                Default: "%(asctime)s %(levelname)s %(message)s"
+            (input) date_fmt -> Format of date and time for a log file entry
+                Default: "%Y-%m-%d %H:%M:%S, Msecs"
             (input) **kwargs:
-                mode -> a|w - Filemode to log file.
+                mode -> a|w - Append|Write - File mode to log file
+                    Default: a
+                include_pid -> True|False - Add process ID to default log entry
+                    Default: False
 
         """
 
         self.handler = logging.FileHandler(
             log_file, mode=kwargs.get("mode", "a"))
 
-        if not msg_fmt:
+        if not msg_fmt and kwargs.get("include_pid", False):
+            msg_fmt = "%(asctime)s %(process)s %(levelname)s %(message)s"
+
+        elif not msg_fmt:
             msg_fmt = "%(asctime)s %(levelname)s %(message)s"
 
         self.formatter = logging.Formatter(msg_fmt, date_fmt)
@@ -2869,7 +2877,7 @@ class Logger():
         Description:  Writes message to log file at DEBUG level.
 
         Arguments:
-            (input) msg -> Message to be written to log.
+            (input) msg -> Message to be written to log
 
         """
 
@@ -2882,7 +2890,7 @@ class Logger():
         Description:  Writes message to log file at INFO level.
 
         Arguments:
-            (input) msg -> Message to be written to log.
+            (input) msg -> Message to be written to log
 
         """
 
@@ -2895,7 +2903,7 @@ class Logger():
         Description:  Writes message to log file at WARNING level.
 
         Arguments:
-            (input) msg -> Message to be written to log.
+            (input) msg -> Message to be written to log
 
         """
 
@@ -2908,7 +2916,7 @@ class Logger():
         Description:  Writes message to log file at ERROR level.
 
         Arguments:
-            (input) msg -> Message to be written to log.
+            (input) msg -> Message to be written to log
 
         """
 
@@ -2921,7 +2929,7 @@ class Logger():
         Description:  Writes message to log file at CRITICAL level.
 
         Arguments:
-            (input) msg -> Message to be written to log.
+            (input) msg -> Message to be written to log
 
         """
 
@@ -2934,7 +2942,7 @@ class Logger():
         Description:  Closes the log file and removes the log handler.
 
         Arguments:
-            (input) msg -> Message to be written to log.
+            (input) msg -> Message to be written to log
 
         """
 
