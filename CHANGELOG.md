@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [4.0.3] - 2025-07-10
+
+### Changed
+- gen_class.Logger.\_\_init\_\_: Added parameter to allow for the adding process ID to each log entry.
+- Documentation changes.
+
+
 ## [4.0.2] - 2025-06-10
 
 ### Added
