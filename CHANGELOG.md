@@ -8,6 +8,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 ### Changed
 - gen_class.Logger.\_\_init\_\_: Added parameter to allow for the adding process ID to each log entry.
+- Documentation changes.
 
 
 ## [4.0.2] - 2025-06-10
