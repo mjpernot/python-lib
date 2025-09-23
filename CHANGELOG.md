@@ -18,6 +18,7 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 ### Changed
 - gen_class.TimeFormat.get_time: Added new argument to return the current time instead of the stored time, will return different time for each call.
+- Documentation changes.
 
 
 ## [4.0.3] - 2025-07-10
