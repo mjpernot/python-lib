@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [4.1.0] - 2025-09-23
+
+### Added
+- du_cmd: Is a recursive calling function to find the total size (in bytes) of a directory and all sub-directories.
+- convert_bytes: Converts a string to bytes, otherwise returns None.
+
+
 ## [4.0.3] - 2025-07-10
 
 ### Changed

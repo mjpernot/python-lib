@@ -16,6 +16,7 @@ echo "Unit test:  gen_libs.py"
 /usr/bin/python ./test/unit/gen_libs/chk_perm.py
 /usr/bin/python ./test/unit/gen_libs/clear_file.py
 /usr/bin/python ./test/unit/gen_libs/compress.py
+/usr/bin/python ./test/unit/gen_libs/convert_bytes.py
 /usr/bin/python ./test/unit/gen_libs/cp_dir.py
 /usr/bin/python ./test/unit/gen_libs/cp_file2.py
 /usr/bin/python ./test/unit/gen_libs/cp_file.py
@@ -30,6 +31,7 @@ echo "Unit test:  gen_libs.py"
 /usr/bin/python ./test/unit/gen_libs/dir_file_match.py
 /usr/bin/python ./test/unit/gen_libs/disk_usage.py
 /usr/bin/python ./test/unit/gen_libs/display_data.py
+/usr/bin/python ./test/unit/gen_libs/du_cmd.py
 /usr/bin/python ./test/unit/gen_libs/file_2_list.py
 /usr/bin/python ./test/unit/gen_libs/file_cleanup.py
 /usr/bin/python ./test/unit/gen_libs/file_search_cnt.py
