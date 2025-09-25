@@ -6,8 +6,9 @@ The format is based on "Keep a Changelog".  This project adheres to Semantic Ver
 
 ## [4.1.0] - 2025-09-23
 - Updated simplejson==3.19.2
-- Added support for Python 3.13
+- Updated chardet==5.0.0
 - Updated mock==5.2.0
+- Added support for Python 3.13
 
 ### Fixed
 - gen_class.TimeFormat.get_time: Returns None if called, but no previous call for get_time was called.
