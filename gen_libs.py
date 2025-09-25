@@ -976,13 +976,13 @@ def du_cmd(directory=None):
     dsize = 0
 
     if directory is None:
-        directory="."
+        directory = "."
 
     with os.scandir(directory) as entries:
         for entry in entries:
             if entry.is_file():
                 dsize += entry.stat().st_size
-               
+
             elif entry.is_dir():
                 dsize += du_cmd(os.path.join(directory, entry.name))
 
