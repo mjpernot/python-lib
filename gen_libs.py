@@ -16,6 +16,7 @@
         chk_perm
         clear_file
         compress
+        convert_bytes
         cp_dir
         cp_file
         cp_file2
@@ -457,6 +458,27 @@ def compress(fname):
 
     proc1 = subprocess.Popen(["gzip", fname])           # pylint:disable=R1732
     proc1.wait()
+
+
+def convert_bytes(data):
+
+    """Function:  convert_bytes
+
+    Description:  Converts a string to bytes, otherwise returns None.
+
+    Arguments:
+        (input) data -> Data string
+        (output) -> Bytes data or None
+
+    """
+
+    if isinstance(data, bytes):
+        return data
+
+    if isinstance(data, str):
+        return data.encode()
+
+    return None
 
 
 def cp_dir(src_dir, dest_dir):
@@ -936,6 +958,35 @@ def display_data(data, level=0, f_hdlr=sys.stdout):
         print_level(level, f_hdlr)
 
         print(f"{data}", file=f_hdlr)
+
+
+def du_cmd(directory=None):
+
+    """Function:  du_cmd
+
+    Description:  Is a recursive calling function to find the total size
+        (in bytes) of a directory and all sub-directories.
+
+    Arguments:
+        (input) directory -> Directory path
+        (output) dsize -> Size in bytes
+
+    """
+
+    dsize = 0
+
+    if directory is None:
+        directory = "."
+
+    with os.scandir(directory) as entries:
+        for entry in entries:
+            if entry.is_file():
+                dsize += entry.stat().st_size
+
+            elif entry.is_dir():
+                dsize += du_cmd(os.path.join(directory, entry.name))
+
+    return dsize
 
 
 def file_cleanup(dir_path, days):

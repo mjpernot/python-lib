@@ -2696,11 +2696,26 @@ class TimeFormat():
             (input) **kwargs:
                 micro -> True|False -> Include microseconds
                 delimit -> Delimiter between time and microseconds
+                current -> True|False -> Return the current time instead of the
+                    stored time (e.g. will return different time for each call)
 
         """
 
         ext = kwargs.get("delimit", self.delimit) + self.msecs \
             if kwargs.get("micro", self.micro) else ""
+
+        if kwargs.get("current", False):
+            if timeform and timeform in self.tformats:
+                return datetime.datetime.strftime(
+                    datetime.datetime.now(),
+                    self.tformats[timeform]["format"]) + ext
+
+            if newform:
+                return datetime.datetime.strftime(
+                    datetime.datetime.now(), newform) + ext
+
+        if self.rdtg is None:
+            return None
 
         if timeform and timeform in self.tformats:
             return datetime.datetime.strftime(
