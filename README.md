@@ -89,6 +89,6 @@ Install the project using the procedures in the Installation section under Unit 
 ### Testing:
 
 ```
-test/unit/gen_libs/integration_test_run.sh
+test/integration/gen_libs/integration_test_run.sh
 ```
 

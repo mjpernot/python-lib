@@ -4,6 +4,24 @@ All notable changes to this project will be documented in this file.
 The format is based on "Keep a Changelog".  This project adheres to Semantic Versioning.
 
 
+## [4.1.0] - 2025-09-23
+- Updated simplejson==3.19.2
+- Updated chardet==5.0.0
+- Updated mock==5.2.0
+- Added support for Python 3.13
+
+### Fixed
+- gen_class.TimeFormat.get_time: Returns None if called, but no previous call for get_time was called.
+
+### Added
+- gen_libs.du_cmd: Is a recursive calling function to find the total size (in bytes) of a directory and all sub-directories.
+- gen_libs.convert_bytes: Converts a string to bytes, otherwise returns None.
+
+### Changed
+- gen_class.TimeFormat.get_time: Added new argument to return the current time instead of the stored time, will return different time for each call.
+- Documentation changes.
+
+
 ## [4.0.3] - 2025-07-10
 
 ### Changed
